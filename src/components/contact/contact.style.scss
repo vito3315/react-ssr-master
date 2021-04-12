@@ -1,0 +1,52 @@
+.Contact{
+    
+}
+.Contact > div:first-child{
+    text-align: center;
+}
+.Contact > div > h1{
+    font-size: 2rem;
+    font-family: futuris!important;
+}
+.Contact h2{
+    font-size: 1.3rem;
+    font-family: futuris!important;
+}
+.Contact span{
+    font-family: ubuntu!important;
+    font-size: 0.9rem;
+}
+.Contact > div:not(:first-child):not(:last-child){
+    display: flex;
+    flex-direction: column;
+}
+.Contact .p20{
+    padding-bottom: 20;
+}
+.Accordion > div{
+    box-shadow: none!important;
+}
+.Accordion > div > div{
+    padding: 0;
+}
+.Accordion .AccordionDesc b, .Accordion .AccordionDesc span{
+    font-family: ubuntu!important;
+    font-size: 0.8rem;
+}
+#ForMap{
+    min-height: 400px;
+    height: 40%;
+    width: 100%;
+}
+.my-hint{
+    //height: 100px;
+    width: 220px;
+    font-family: ubuntu!important;
+    font-size: 0.9rem;
+    display: inline-block;
+    position: relative;
+    color: #fff;
+    background-color: #000;
+    border-radius: 5px;
+    padding: 16px;
+}

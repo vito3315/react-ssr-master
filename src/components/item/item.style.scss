@@ -1,0 +1,98 @@
+.MainItem{
+    margin-bottom: 50px!important;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.MainItem > div:first-child{
+    text-align: center;
+}
+.MainItem > div:last-child{
+    display: flex; 
+    flex-direction: column;
+}
+.MainItem > div:not(:last-child):not(:first-child){
+    display: flex; 
+    justify-content: flex-end;
+}
+.MainItem > div > h1, .MainItem_mobile h1{
+    font-size: 2rem;
+    font-family: futuris!important;
+}
+.MainItem img, .MainItem_mobile img{
+    max-width: 400;
+}
+.MainItem .ItemDesc, .MainItem_mobile .ItemDesc{
+    font-size: 1.2rem;
+    font-family: ubuntu!important;
+    padding-bottom: 5px;
+}
+.MainItem .ItemPrice, .MainItem_mobile .ItemPrice{
+    display: flex;
+    align-items: flex-end;
+}
+.MainItem .ItemPrice > svg{
+    padding-bottom: 1px;
+}
+.MainItem .CardInCardItem, .MainItem_mobile .CardInCardItem{
+    width: 100%;
+    text-align: center;
+    font-family: ubuntu!important;
+    font-size: 0.8rem;
+}
+.MainItem .CardCountItem{
+    font-family: ubuntu!important;
+}
+.MainItemPopoverLot{
+    height: calc(200px - 32px);
+    width: 260px;
+    background-color: #000;
+}
+.MainItemPopoverOne{
+    height: calc(170px - 32px);
+    width: 260px;
+    background-color: #000;
+    overflow: hidden;
+}
+.MainItemPopover > table{
+    padding: 16px;
+    background-color: #000;
+    width: 100%;
+}
+.MainItemPopover > table td{
+    padding-bottom: 10px;
+}
+.MainItemPopover span{
+    color: #fff;
+    font-family: ubuntu!important;
+    font-size: 0.9rem;
+}
+.MainItemPopover .OtherMiniPopover{
+    font-size: 0.7rem;
+}
+.MainItemPopover .NamePopover{
+    text-align: center;
+}
+.MainItemPopover .OtherPopover{
+    display: flex;
+    justify-content: space-between;
+}
+.MainItem .ItemOther{
+    display: flex;
+    align-items: center;
+}
+.MainItem .ItemOther > div{
+    padding-left: 30px;
+}
+
+.MainItem_mobile .MainLine, .MainItem_mobile .SecondLine{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.MainItem_mobile .SecondLine svg{
+    font-size: 1.8rem;
+}
+.MainItem_mobile .BtnLine{
+    display: flex;
+    justify-content: flex-end;
+}

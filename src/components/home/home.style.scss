@@ -1,0 +1,84 @@
+.MainItems{
+    //margin-bottom: 50px!important;
+    //padding-left: 10%;
+    //padding-right: 10%;
+}
+.CardItem{
+    max-width: 345; 
+    height: 100%;
+    position: relative;
+}
+.CardItem > div:first-child{
+    padding: 0;
+    padding-bottom: 67;
+}
+.CardItem img{
+    width: 100%;
+    min-height: 177;
+}
+.CardItem_mobile img{
+    margin-right: 10px;
+    width: calc(100% - 10px);
+}
+.CardItem_mobile .SecondBox{
+    display: flex;
+    flex-direction: column;
+}
+.CardItem_mobile .SecondBox > div{
+    margin-top: auto;
+    display: flex;
+    flex-direction: row; 
+    align-items: baseline;
+    justify-content: space-between;
+}
+.CardItem .CardInfoItem{
+    font-size: 0.7rem!important;
+    font-family: ubuntu!important;
+}
+.CardItem_mobile .CardInfoItem{
+    font-size: 0.8rem!important;
+    font-family: ubuntu!important;
+}
+.CardItem .CardNameItem, .CardItem_mobile .CardNameItem{
+    font-size: 1.2rem!important;
+    font-family: ubuntu!important;
+}
+.CardItem .CardInfoWeiItem, .CardItem_mobile .CardInfoWeiItem{
+    font-size: 0.8rem!important;
+    font-family: ubuntu!important;
+}
+.CardItem .CardPriceItem, .CardItem_mobile .CardPriceItem{
+    font-size: 1.5rem!important;
+    font-family: ubuntu!important;
+    display: flex;
+    align-items: flex-end;
+}
+.CardItem .CardPriceItem > svg, .CardItem_mobile .CardPriceItem > svg{
+    padding-bottom: 4px;
+}
+.CardItem .CardInCardItem, .CardItem_mobile .CardInCardItem{
+    width: 100%;
+    text-align: center;
+    font-family: ubuntu!important;
+    font-size: 0.8rem;
+}
+.CardItem .CardCountItem{
+    font-family: ubuntu!important;
+}
+
+.CardItem_mobile .CardInfoItem{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-clamp: 3;
+    box-orient: vertical;
+}
+.CardItem_mobile > div:first-child{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
