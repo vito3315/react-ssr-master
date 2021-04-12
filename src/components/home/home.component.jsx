@@ -323,6 +323,7 @@ export class Home extends React.Component {
                     </Grid>
                 ))}
                 
+                
                 {this.state.openItem ?
                     <Dialog fullScreen open={this.state.openModal} onClose={this.handleClose.bind(this)} TransitionComponent={Transition}>
                         <AppBar style={{ position: 'relative', backgroundColor: '#fff' }}>
