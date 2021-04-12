@@ -26,6 +26,22 @@ import { observer } from 'mobx-react';
 import itemsStore from '../../stores/items-store';
 import { trace, autorun } from "mobx"
 
+import { makeStyles } from '@material-ui/core/styles';
+
+import Dialog from '@material-ui/core/Dialog';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItem from '@material-ui/core/ListItem';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+
+import CloseIcon from '@material-ui/icons/Close';
+import Slide from '@material-ui/core/Slide';
+
+import { Item } from '../item';
+
 class CardItem extends React.Component {
     _isMounted = false;
     
@@ -132,7 +148,7 @@ class CardItem extends React.Component {
                 </Card>
                 
                 <Grid item container xs={12} className="CardItem_mobile">
-                    <Grid item xs={5} sm={5} md={5} xl={5}>
+                    <Grid item xs={5} sm={5} md={5} xl={5} onClick={ () => this.props.openItem(this.state.item.id)}>
                         <CardMedia
                             component="img"
                             alt={this.state.item.name}
@@ -164,13 +180,31 @@ class CardItem extends React.Component {
                             }
                         </div>
                     </Grid>
+                    
                 </Grid>
+                
                 
                 
             </div>
         );
     }
 }
+
+const useStyles = makeStyles((theme) => ({
+  appBar: {
+    position: 'relative',
+  },
+  title: {
+    marginLeft: theme.spacing(2),
+    flex: 1,
+  },
+}));
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
+
+//const classes = useStyles();
 
 export class Home extends React.Component {
     constructor() {
@@ -179,7 +213,9 @@ export class Home extends React.Component {
         this.state = {      
             allItems: [],  
             is_load: false,
-            testData: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+            testData: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+            openItem: null,
+            openModal: false
         };
     }
 
@@ -229,6 +265,34 @@ export class Home extends React.Component {
         this.load();
     }
 
+    openItem(id){
+        console.log( id )
+        
+        let allItems = itemsStore.getAllItems();
+            
+        let item = allItems.filter( (item) => item.id == id )[0];
+        
+        console.log( item )
+        
+        this.setState({
+            openItem: item,
+            openModal: true
+        })
+    }
+
+    openModal(){
+        this.setState({
+            openModal: true
+        })
+    }
+    
+    handleClose(){
+        this.setState({
+            openModal: false,
+            openItem: null
+        })
+    }
+
     render() {
         if( !this.state.is_load ){
             return (
@@ -248,15 +312,36 @@ export class Home extends React.Component {
         
         return (
             <Element name="myScrollToElement">
+                
                 {this.state.allItems.map((cat, key) => (
                     <Grid container spacing={2} md={10} sm={12} xs={12} xl={10} className="MainItems mainContainer" key={key} name={"cat"+cat.id} id={"cat"+cat.id}>
                         {cat.items.map((it, k) => (
                             <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '16px 8px'}}>
-                                <CardItem data={it} />
+                                <CardItem data={it} openItem={this.openItem.bind(this)} />
                             </Grid>
                         ))}
                     </Grid>
                 ))}
+                
+                {this.state.openItem ?
+                    <Dialog fullScreen open={this.state.openModal} onClose={this.handleClose.bind(this)} TransitionComponent={Transition}>
+                        <AppBar style={{ position: 'relative', backgroundColor: '#fff' }}>
+                            <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <img alt="Жако доставка роллов и пиццы" src="https://newjacofood.ru/src/img/other/Logotip.png" style={{ height: 40 }} />
+                            
+                                <Button autoFocus color="inherit" onClick={this.handleClose.bind(this)}>
+                                    <CloseIcon style={{ fill: '#000', fontSize: '2.2rem' }} />
+                                </Button>
+                            </Toolbar>
+                        </AppBar>
+                        <div style={{ padding: 20 }}>
+                            <Item itemId={this.state.openItem.id} item={this.state.openItem} />
+                        </div>
+                    </Dialog>
+                        :
+                    null
+                }
+                
             </Element>
         );
     }

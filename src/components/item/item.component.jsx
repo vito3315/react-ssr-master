@@ -24,8 +24,14 @@ import itemsStore from '../../stores/items-store';
 
 const queryString = require('query-string');
 
-export function Item() {
+export function Item(props = 0) {
     let { itemId } = useParams();
+  
+    if( props != 0 ){
+        return (
+            <RenderItem itemId={props.itemId} item={props.item} />
+        );
+    }
   
     return (
         <RenderItem itemId={itemId} />
@@ -116,7 +122,7 @@ class RenderItem extends React.Component {
         super(props);
         
         this.state = {      
-            item: [],  
+            item: this.props.item ? this.props.item : [],  
             is_load: false,
             count: 0
         };
@@ -127,41 +133,66 @@ class RenderItem extends React.Component {
     }
     
     componentDidMount(){
-        fetch('https://jacofood.ru/src/php/test_app.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/x-www-form-urlencoded'},
-            body: queryString.stringify({
-                type: 'get_item', 
-                item_id: this.props.itemId,
-                city_id: 1
-            })
-        }).then(res => res.json()).then(json => {
-            if( json.item.items.length == 0 && (parseInt(json.item.type) !== 3 && parseInt(json.item.type) !== 4) ){
+        if( this.props.item ){
+            if( this.state.item.items.length == 0 && (parseInt(this.state.item.type) !== 3 && parseInt(this.state.item.type) !== 4) ){
                 json.item.items.push({
-                    kkal: json.item.kkal,
-                    protein: json.item.protein,
-                    fat: json.item.fat,
-                    carbohydrates: json.item.carbohydrates,
+                    kkal: this.state.item.kkal,
+                    protein: this.state.item.protein,
+                    fat: this.state.item.fat,
+                    carbohydrates: this.state.item.carbohydrates,
                     name: ''
                 })
             }
             
             this.setState({ 
-                item: json.item, 
                 is_load: true,
             });
             
             
             let my_cart = itemsStore.getItems();
             
-            let item = my_cart.filter( (item) => item.item_id == json.item['id'] )[0];
+            let item = my_cart.filter( (item) => item.item_id == this.state.item['id'] )[0];
       
             this.setState({ 
               count: item.count,
             })
-        })
-        .catch(err => { });
+        }else{
+            fetch('https://jacofood.ru/src/php/test_app.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/x-www-form-urlencoded'},
+                body: queryString.stringify({
+                    type: 'get_item', 
+                    item_id: this.props.itemId,
+                    city_id: 1
+                })
+            }).then(res => res.json()).then(json => {
+                if( json.item.items.length == 0 && (parseInt(json.item.type) !== 3 && parseInt(json.item.type) !== 4) ){
+                    json.item.items.push({
+                        kkal: json.item.kkal,
+                        protein: json.item.protein,
+                        fat: json.item.fat,
+                        carbohydrates: json.item.carbohydrates,
+                        name: ''
+                    })
+                }
+                
+                this.setState({ 
+                    item: json.item, 
+                    is_load: true,
+                });
+                
+                
+                let my_cart = itemsStore.getItems();
+                
+                let item = my_cart.filter( (item) => item.item_id == json.item['id'] )[0];
+          
+                this.setState({ 
+                  count: item.count,
+                })
+            })
+            .catch(err => { });
+        }
     }
     
     add(){
