@@ -85,7 +85,6 @@ body{
         padding-right: 8;
     }
     & .cat{
-        color: #000;
         font-size: 1.1em;
         font-family: ubuntu!important;
         cursor: pointer;
@@ -145,7 +144,19 @@ body{
     fill: #BB0025;
 }
 .activeCat{
-    border-bottom: 2px solid #BB0025;
+    background-color: #BB0025;
+    padding: 3px 8px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    color: #fff;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+}
+.proximity{
+    scroll-snap-type: none;
+}
+.mandatory{
+    scroll-snap-type: x mandatory;
 }
 .TableMini{
     width: inherit;
@@ -304,4 +315,8 @@ body{
     background-color: transparent;
     -webkit-appearance: none;
     -webkit-tap-highlight-color: transparent;
+}
+
+.scrollCat::-webkit-scrollbar{
+	display: none;
 }

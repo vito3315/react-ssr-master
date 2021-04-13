@@ -753,8 +753,53 @@ export class App extends React.Component {
                                 <Typography variant="h5" component="span" style={{ color: '#000', fontSize: '1.2rem' }}>Тольятти</Typography>
                             </Hidden>
                         </Toolbar>
+                        
+                        
                     </AppBar>
-                
+                        <Grid className="proximity scrollCat" style={{ paddingTop: 51, display: 'flex', flexDirection: 'row', overflow: 'scroll', position: 'fixed', backgroundColor: '#fff', zIndex: 1, width: '100%' }}>
+                            <Hidden smUp>
+                                {is_cat ?
+                                    this.state.categoryItems.map((item, key) => 
+                                        
+                                            <ScrollLink 
+                                                
+                                                key={key}
+                                                to={"cat"+item.id} 
+                                                spy={true} 
+                                                onSetActive={(el) => { 
+                                                    if( document.querySelector('.activeCat') ){
+                                                        document.querySelector('.activeCat').classList.remove('activeCat');
+                                                    }
+                                                    document.querySelector('#link_'+item.id).classList.add('activeCat');
+                                                    
+                                                    document.querySelector('.scrollCat').classList.add('mandatory');
+                                                    setTimeout(()=>{
+                                                        document.querySelector('.scrollCat').classList.remove('mandatory');//.add('proximity');
+                                                        document.querySelector('.scrollCat').classList.add('proximity');
+                                                    }, 300)
+                                                    
+                                                }} 
+                                                smooth={true} 
+                                                offset={-100} 
+                                                activeClass="activeCat" 
+                                                id={'link_'+item.id} 
+                                                style={{ width: 'max-content', display: 'flex', padding: '5px 10px', whiteSpace: 'nowrap' }}
+                                            >
+                                                <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
+                                            </ScrollLink>    
+                                        
+                                    )
+                                        :
+                                    this.state.categoryItems.map((item, key) => 
+                                        <Grid item key={key}>
+                                            <Link to={"/home"} className="catLink" onClick={() => { localStorage.setItem('goTo', item.id) }}>
+                                                <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
+                                            </Link>    
+                                        </Grid>
+                                    )
+                                }
+                            </Hidden>
+                        </Grid>
                 
                 
                 
