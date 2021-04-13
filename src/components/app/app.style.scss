@@ -110,10 +110,12 @@ body{
     font-family: ubuntu!important;
 }
 .CardAction{
-    justify-content: space-between; 
-    padding: 16px!important;
+    flex-direction: column;
+    align-items: end!important;
+    /*justify-content: space-between;*/
+    padding: 1.2vw!important;
     position: absolute;
-    width: calc(100% - 32px);
+    width: calc(100% - 2.4vw);
     bottom: 0;
 }
 .BtnCardMain:hover{
