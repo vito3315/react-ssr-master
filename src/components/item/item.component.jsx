@@ -27,7 +27,7 @@ const queryString = require('query-string');
 export function Item(props = 0) {
     let { itemId } = useParams();
   
-    if( props != 0 ){
+    if( props.item ){
         return (
             <RenderItem itemId={props.itemId} item={props.item} />
         );
