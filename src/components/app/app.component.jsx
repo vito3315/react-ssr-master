@@ -96,14 +96,49 @@ function SimpleBottomNavigation() {
       onChange={(event, newValue) => {
         setValue(newValue);
       }}
-      showLabels
+      
       className={classes.root}
     >
-      <BottomNavigationAction icon={<RestaurantMenuSharpIcon />} />
-      <BottomNavigationAction icon={<CardGiftcardIcon />} />
-      <BottomNavigationAction icon={<ShoppingCartOutlinedIcon />} />
-      <BottomNavigationAction icon={<LocationOnIcon />} />
-      <BottomNavigationAction icon={<PersonIcon />} />
+        <Link
+            to='/home'
+            exact={ true }
+            className="MuiButtonBase-root MuiBottomNavigationAction-root"
+            style={{ flex: 1 }}
+        >
+            <RestaurantMenuSharpIcon />
+        </Link>
+        <Link
+            to='/actii'
+            exact={ true }
+            className="MuiButtonBase-root MuiBottomNavigationAction-root"
+            style={{ flex: 1 }}
+        >
+            <CardGiftcardIcon />
+        </Link>
+        <Link
+            to='/'
+            exact={ true }
+            className="MuiButtonBase-root MuiBottomNavigationAction-root"
+            style={{ flex: 1 }}
+        >
+            <ShoppingCartOutlinedIcon />
+        </Link>
+        <Link
+            to='/'
+            exact={ true }
+            className="MuiButtonBase-root MuiBottomNavigationAction-root"
+            style={{ flex: 1 }}
+        >
+            <LocationOnIcon />
+        </Link>
+        <Link
+            to='/'
+            exact={ true }
+            className="MuiButtonBase-root MuiBottomNavigationAction-root"
+            style={{ flex: 1 }}
+        >
+            <PersonIcon />
+        </Link>
     </BottomNavigation>
   );
 }
