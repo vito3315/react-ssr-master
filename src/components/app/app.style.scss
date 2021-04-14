@@ -47,10 +47,6 @@ body{
     margin-top: auto;
     background-color: #BB0025;
 }
-.footer > div{
-    //display: flex;
-    //justify-content: space-around;
-}
 .footer p{
     font-family: ubuntu!important;
     color: #fff;
@@ -85,9 +81,10 @@ body{
         padding-right: 8;
     }
     & .cat{
-        font-size: 1.1em;
+        font-size: 1em;
         font-family: ubuntu!important;
         cursor: pointer;
+        color: #000;
     }
     & .catLink{
         text-decoration: none;
@@ -145,12 +142,14 @@ body{
 }
 .activeCat{
     background-color: #BB0025;
-    padding: 3px 8px;
-    padding-bottom: 5px;
+    padding: 4px 8px;
     border-radius: 5px;
     color: #fff;
     scroll-snap-align: center;
     scroll-snap-stop: always;
+}
+.activeCat > span{
+    color: #fff!important;
 }
 .proximity{
     scroll-snap-type: none;
