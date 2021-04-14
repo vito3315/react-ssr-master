@@ -82,3 +82,42 @@
     justify-content: center;
     align-items: center;
 }
+.alice-carousel__stage-item img{
+    width: 100%;
+}
+.alice-carousel__prev-btn, .alice-carousel__next-btn{
+    position: absolute;
+    top: 0;
+    width: 20%!important;
+    height: calc(100% - 38px);
+}
+.alice-carousel__prev-btn-wrapper, .alice-carousel__next-btn-wrapper{
+    width: 100%;
+    height: 100%;
+}
+.alice-carousel__prev-btn-item, .alice-carousel__next-btn-item{
+    font-size: 2rem;
+    color: #fff!important;
+    width: 100%;
+    height: 100%;
+    display: flex!important;
+    justify-content: center;
+    align-items: center;
+}
+.alice-carousel__prev-btn-item > span, .alice-carousel__next-btn-item > span{
+    opacity: 0;
+}
+.alice-carousel__next-btn{
+    right: 0;
+}
+.alice-carousel__dots{
+    margin: 15px 3px 5px!important;    
+}
+.alice-carousel__dots-item:not(.__custom):hover, .alice-carousel__dots-item:not(.__custom).__active {
+    background-color: #BB0025!important;
+    opacity: 1;
+}
+.alice-carousel__dots-item:not(.__custom) {
+    background-color: #BB0025!important;
+    opacity: 0.5;
+}

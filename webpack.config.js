@@ -37,6 +37,10 @@ module.exports = {
                 use: [ MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader' ]
             },
             {
+                test: /\.css$/,
+                use: [ MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader' ]
+            },
+            {
                 test: /\.(jpg|png|svg|ttf|otf)$/,
                 use: {
                     loader: 'url-loader',
@@ -79,7 +83,7 @@ module.exports = {
     resolve: {
         
         // file extensions
-        extensions: [ '.js', '.jsx', '.scss' ],
+        extensions: [ '.js', '.jsx', '.scss', '.css' ],
     },
 
     // webpack optimizations
@@ -100,7 +104,7 @@ module.exports = {
 
     // development server configuration
     devServer: {
-        port: 4018,
+        port: 4021,
         historyApiFallback: true,
     },
 

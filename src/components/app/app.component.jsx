@@ -728,7 +728,29 @@ export class App extends React.Component {
                                         {is_cat ?
                                             this.state.categoryItems.map((item, key) => 
                                                 <Grid item key={key}>
-                                                    <ScrollLink to={"cat"+item.id} spy={true} smooth={true} offset={0} activeClass="activeCat" id={'link_'+item.id} >
+                                                    <ScrollLink 
+                                                        key={key}
+                                                        to={"cat"+item.id} 
+                                                        spy={true} 
+                                                        onSetActive={(el) => { 
+                                                            if( document.querySelector('.activeCat') ){
+                                                                document.querySelector('.activeCat').classList.remove('activeCat');
+                                                            }
+                                                            document.querySelector('#link_'+item.id).classList.add('activeCat');
+                                                            
+                                                            document.querySelector('.scrollCat').classList.add('mandatory');
+                                                            setTimeout(()=>{
+                                                                document.querySelector('.scrollCat').classList.remove('mandatory');//.add('proximity');
+                                                                document.querySelector('.scrollCat').classList.add('proximity');
+                                                            }, 300)
+                                                            
+                                                        }} 
+                                                        smooth={true} 
+                                                        offset={-100} 
+                                                        activeClass="activeCat" 
+                                                        id={'link_'+item.id} 
+                                                        style={{ width: 'max-content', display: 'flex', whiteSpace: 'nowrap' }}
+                                                    >
                                                         <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
                                                     </ScrollLink>    
                                                 </Grid>
@@ -762,7 +784,6 @@ export class App extends React.Component {
                                     this.state.categoryItems.map((item, key) => 
                                         
                                             <ScrollLink 
-                                                
                                                 key={key}
                                                 to={"cat"+item.id} 
                                                 spy={true} 

@@ -42,6 +42,16 @@ import Slide from '@material-ui/core/Slide';
 
 import Hidden from '@material-ui/core/Hidden';
 
+import AliceCarousel from 'react-alice-carousel';
+import 'react-alice-carousel/lib/alice-carousel.css';
+
+const handleDragStart = (e) => e.preventDefault();
+const items = [
+  <img src="https://jacofood.ru/src/img/banners/Feeriia_Toliatti_2_opt_max.jpg?date=2021_03_12_13_56_39" onDragStart={handleDragStart} />,
+  <img src="https://jacofood.ru/src/img/banners/Tehasskaia_Toliatti_opt_max.jpg?date=2021_03_12_13_11_04" onDragStart={handleDragStart} />,
+  <img src="https://jacofood.ru/src/img/banners/Den_rozhdeniia_opt_max.jpg?date=2021_03_12_15_09_22" onDragStart={handleDragStart} />,
+];
+
 import { Item } from '../item';
 
 class CardItem extends React.Component {
@@ -209,8 +219,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-//const classes = useStyles();
-
 export class Home extends React.Component {
     constructor() {
         super();
@@ -317,6 +325,14 @@ export class Home extends React.Component {
         
         return (
             <Element name="myScrollToElement">
+                
+                <AliceCarousel 
+                    mouseTracking 
+                    //autoPlay={true}
+                    //autoPlayInterval={3000}
+                    infinite={true}
+                    items={items} 
+                />
                 
                 {this.state.allItems.map((cat, key) => (
                     <Grid container spacing={2} md={10} sm={12} xs={12} xl={10} className="MainItems mainContainer" key={key} name={"cat"+cat.id} id={"cat"+cat.id}>
