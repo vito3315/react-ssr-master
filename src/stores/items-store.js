@@ -9,6 +9,16 @@ class ItemsStore {
   promo = null;
   userToken = null;
 
+  activePage = '';
+
+  setPage = (activePage) => {
+    this.activePage = activePage;
+  };
+  
+  getPage(){
+    return this.activePage;
+  };
+
   setToken = (userToken) => {
     this.userToken = userToken;
     localStorage.setItem('token', userToken);

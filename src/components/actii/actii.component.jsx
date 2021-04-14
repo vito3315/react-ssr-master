@@ -24,6 +24,8 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 
+import itemsStore from '../../stores/items-store';
+
 const queryString = require('query-string');
 
 import { withStyles } from '@material-ui/core/styles';
@@ -115,6 +117,12 @@ export class Actii extends React.Component {
     }
     
     componentDidMount = () => {
+        if( document.querySelector('.activeCat') ){
+            document.querySelector('.activeCat').classList.remove('activeCat');
+        }
+        
+        itemsStore.setPage('actii');
+        
         fetch('https://jacofood.ru/src/php/test_app.php', {
             method: 'POST',
             headers: {

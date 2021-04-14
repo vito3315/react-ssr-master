@@ -24,6 +24,8 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+import itemsStore from '../../stores/items-store';
+
 const queryString = require('query-string');
 
 const useStyles = makeStyles((theme) => ({
@@ -100,6 +102,12 @@ export class Contact extends React.Component {
     }
     
     componentDidMount = () => {
+        if( document.querySelector('.activeCat') ){
+            document.querySelector('.activeCat').classList.remove('activeCat');
+        }
+        
+        itemsStore.setPage('contact');
+        
         fetch('https://jacofood.ru/src/php/test_app.php', {
             method: 'POST',
             headers: {

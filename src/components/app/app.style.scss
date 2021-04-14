@@ -148,7 +148,7 @@ body{
     scroll-snap-align: center;
     scroll-snap-stop: always;
 }
-.activeCat > span{
+.activeCat span, .activeCat a{
     color: #fff!important;
 }
 .proximity{

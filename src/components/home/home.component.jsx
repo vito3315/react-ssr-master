@@ -220,8 +220,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export class Home extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         
         this.state = {      
             allItems: [],  
@@ -276,6 +276,7 @@ export class Home extends React.Component {
     
     componentDidMount = () => {
         this.load();
+        itemsStore.setPage('home');
     }
 
     openItem(id){

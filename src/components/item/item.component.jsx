@@ -133,6 +133,12 @@ class RenderItem extends React.Component {
     }
     
     componentDidMount(){
+        if( document.querySelector('.activeCat') ){
+            document.querySelector('.activeCat').classList.remove('activeCat');
+        }
+        
+        itemsStore.setPage('item');
+        
         if( this.props.item ){
             if( this.state.item.items.length == 0 && (parseInt(this.state.item.type) !== 3 && parseInt(this.state.item.type) !== 4) ){
                 json.item.items.push({

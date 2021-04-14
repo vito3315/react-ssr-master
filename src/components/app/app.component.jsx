@@ -655,12 +655,13 @@ class SimplePopover extends React.Component{
 }
 
 export class App extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         
         this.state = {      
             categoryItems: [],  
             cartItems: [],
+            activePage: '',
             is_load: false,
             testData: [1, 2, 3, 4, 5, 6, 7, 8, 9]
         };
@@ -694,14 +695,21 @@ export class App extends React.Component {
             this.setState({
                 cartItems: itemsStore.getItems()
             })
+            
+            this.setState({
+                activePage: itemsStore.getPage()
+            })
+            
             //console.log('autorun11', itemsStore.items)
             //trace()
         })
     }
 
     render() {
-        const pathname = window.location.pathname;
-        const is_cat = pathname == '/home' ? true : false;
+        let pathname = window.location.pathname;
+        let is_cat = pathname == '/home' ? true : false;
+        
+        console.log( 'render ', is_cat )
         
         return (
             <Provider { ...stores }>
@@ -725,45 +733,64 @@ export class App extends React.Component {
                                         <img alt="Жако доставка роллов и пиццы" src="https://newjacofood.ru/src/img/other/Logotip.png" />
                                     </Grid>
                                     <Hidden xsDown>
-                                        {is_cat ?
+                                        {
                                             this.state.categoryItems.map((item, key) => 
                                                 <Grid item key={key}>
-                                                    <ScrollLink 
-                                                        key={key}
-                                                        to={"cat"+item.id} 
-                                                        spy={true} 
-                                                        onSetActive={(el) => { 
-                                                            if( document.querySelector('.activeCat') ){
-                                                                document.querySelector('.activeCat').classList.remove('activeCat');
-                                                            }
-                                                            document.querySelector('#link_'+item.id).classList.add('activeCat');
-                                                            
-                                                            document.querySelector('.scrollCat').classList.add('mandatory');
-                                                            setTimeout(()=>{
-                                                                document.querySelector('.scrollCat').classList.remove('mandatory');//.add('proximity');
-                                                                document.querySelector('.scrollCat').classList.add('proximity');
-                                                            }, 300)
-                                                            
-                                                        }} 
-                                                        smooth={true} 
-                                                        offset={-100} 
-                                                        activeClass="activeCat" 
-                                                        id={'link_'+item.id} 
-                                                        style={{ width: 'max-content', display: 'flex', whiteSpace: 'nowrap' }}
-                                                    >
-                                                        <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
-                                                    </ScrollLink>    
+                                                    {this.state.activePage == 'home' ?
+                                                        <ScrollLink 
+                                                            key={key}
+                                                            to={"cat"+item.id} 
+                                                            spy={true} 
+                                                            isDynamic={true}
+                                                            onSetActive={(el) => { 
+                                                                console.log( 'onSetActive' )
+                                                                if( document.querySelector('.activeCat') ){
+                                                                    document.querySelector('.activeCat').classList.remove('activeCat');
+                                                                }
+                                                                document.querySelector('#link_'+item.id).classList.add('activeCat');
+                                                                
+                                                                document.querySelector('.scrollCat').classList.add('mandatory');
+                                                                setTimeout(()=>{
+                                                                    document.querySelector('.scrollCat').classList.remove('mandatory');//.add('proximity');
+                                                                    document.querySelector('.scrollCat').classList.add('proximity');
+                                                                }, 300)
+                                                                
+                                                            }} 
+                                                            smooth={true} 
+                                                            offset={-100} 
+                                                            activeClass="activeCat" 
+                                                            id={'link_'+item.id} 
+                                                            style={{ width: 'max-content', display: 'flex', whiteSpace: 'nowrap' }}
+                                                        >
+                                                            <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
+                                                        </ScrollLink> 
+                                                            :
+                                                        <Link to={"/home"} className="catLink" onClick={() => { localStorage.setItem('goTo', item.id) }}>
+                                                            <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
+                                                        </Link> 
+                                                    }
                                                 </Grid>
                                             )
-                                                :
-                                            this.state.categoryItems.map((item, key) => 
-                                                <Grid item key={key}>
-                                                    <Link to={"/home"} className="catLink" onClick={() => { localStorage.setItem('goTo', item.id) }}>
-                                                        <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
-                                                    </Link>    
-                                                </Grid>
-                                            )
+                                                
                                         }
+                                        
+                                        <Grid item>
+                                            <Link 
+                                                to={"/actii"} 
+                                                className="catLink"
+                                            >
+                                                <Typography className="cat" variant="h5" component="span">Акции</Typography>
+                                            </Link>    
+                                        </Grid>
+                                        <Grid item>
+                                            <Link 
+                                                to={"/contact"} 
+                                                className="catLink"
+                                            >
+                                                <Typography className="cat" variant="h5" component="span">Контакты</Typography>
+                                            </Link>    
+                                        </Grid>
+                                        
                                     </Hidden>
                                 </Grid>
                             }
