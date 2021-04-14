@@ -120,7 +120,7 @@ export class Actii extends React.Component {
         if( document.querySelector('.activeCat') ){
             document.querySelector('.activeCat').classList.remove('activeCat');
         }
-        
+        window.scrollTo(0, 0);
         itemsStore.setPage('actii');
         
         fetch('https://jacofood.ru/src/php/test_app.php', {

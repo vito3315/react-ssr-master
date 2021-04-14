@@ -136,7 +136,7 @@ class RenderItem extends React.Component {
         if( document.querySelector('.activeCat') ){
             document.querySelector('.activeCat').classList.remove('activeCat');
         }
-        
+        window.scrollTo(0, 0);
         itemsStore.setPage('item');
         
         if( this.props.item ){

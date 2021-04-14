@@ -706,11 +706,6 @@ export class App extends React.Component {
     }
 
     render() {
-        let pathname = window.location.pathname;
-        let is_cat = pathname == '/home' ? true : false;
-        
-        console.log( 'render ', is_cat )
-        
         return (
             <Provider { ...stores }>
                 <div className="home">
@@ -807,7 +802,7 @@ export class App extends React.Component {
                     </AppBar>
                         <Grid className="proximity scrollCat" style={{ marginTop: 50, display: 'flex', flexDirection: 'row', overflow: 'scroll', position: 'fixed', backgroundColor: '#fff', zIndex: 1, width: '100%' }}>
                             <Hidden smUp>
-                                {is_cat ?
+                                {
                                     this.state.categoryItems.map((item, key) => 
                                         
                                             <ScrollLink 
@@ -837,14 +832,7 @@ export class App extends React.Component {
                                             </ScrollLink>    
                                         
                                     )
-                                        :
-                                    this.state.categoryItems.map((item, key) => 
-                                        <Grid item key={key}>
-                                            <Link to={"/home"} className="catLink" onClick={() => { localStorage.setItem('goTo', item.id) }}>
-                                                <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
-                                            </Link>    
-                                        </Grid>
-                                    )
+                                        
                                 }
                                 
                                 

@@ -276,6 +276,7 @@ export class Home extends React.Component {
     
     componentDidMount = () => {
         this.load();
+        window.scrollTo(0, 0);
         itemsStore.setPage('home');
     }
 

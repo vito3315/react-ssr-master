@@ -105,7 +105,7 @@ export class Contact extends React.Component {
         if( document.querySelector('.activeCat') ){
             document.querySelector('.activeCat').classList.remove('activeCat');
         }
-        
+        window.scrollTo(0, 0);
         itemsStore.setPage('contact');
         
         fetch('https://jacofood.ru/src/php/test_app.php', {
