@@ -320,3 +320,9 @@ body{
 .scrollCat::-webkit-scrollbar{
 	display: none;
 }
+.scrollCat > a:first-child{
+    margin-left: 10;
+}
+.scrollCat > a:last-child > span{
+    margin-right: 10;
+}

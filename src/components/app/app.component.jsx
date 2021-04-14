@@ -706,7 +706,7 @@ export class App extends React.Component {
         return (
             <Provider { ...stores }>
                 <div className="home">
-                    <AppBar position="fixed" className="header">
+                    <AppBar position="fixed" className="header" style={{ zIndex: 1 }}>
                         <Toolbar className="sub_header" style={{ display: 'flex', justifyContent: 'space-between' }}>
                             {!this.state.is_load ?
                                 <Grid>
@@ -756,7 +756,7 @@ export class App extends React.Component {
                         
                         
                     </AppBar>
-                        <Grid className="proximity scrollCat" style={{ paddingTop: 51, display: 'flex', flexDirection: 'row', overflow: 'scroll', position: 'fixed', backgroundColor: '#fff', zIndex: 1, width: '100%' }}>
+                        <Grid className="proximity scrollCat" style={{ marginTop: 50, display: 'flex', flexDirection: 'row', overflow: 'scroll', position: 'fixed', backgroundColor: '#fff', zIndex: 1, width: '100%' }}>
                             <Hidden smUp>
                                 {is_cat ?
                                     this.state.categoryItems.map((item, key) => 
@@ -783,7 +783,7 @@ export class App extends React.Component {
                                                 offset={-100} 
                                                 activeClass="activeCat" 
                                                 id={'link_'+item.id} 
-                                                style={{ width: 'max-content', display: 'flex', padding: '5px 10px', whiteSpace: 'nowrap' }}
+                                                style={{ width: 'max-content', display: 'flex', padding: '6px 10px', whiteSpace: 'nowrap' }}
                                             >
                                                 <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
                                             </ScrollLink>    
@@ -798,10 +798,23 @@ export class App extends React.Component {
                                         </Grid>
                                     )
                                 }
+                                
+                                
                             </Hidden>
+                            
                         </Grid>
-                
-                
+                        <Hidden smUp>
+                            <div style={{ width: '100%', height: 3, position: 'fixed', top: 85, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', top: 88, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', top: 91, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', top: 94, zIndex: 0, backgroundColor: '#bababa', opacity: 0.07 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', top: 97, zIndex: 0, backgroundColor: '#bababa', opacity: 0.06 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', top: 100, zIndex: 0, backgroundColor: '#bababa', opacity: 0.05 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', top: 103, zIndex: 0, backgroundColor: '#bababa', opacity: 0.04 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', top: 106, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', top: 109, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', top: 112, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
+                        </Hidden>
                 
                     <div className='ui-app'>
                         {/* navigation */}
@@ -832,8 +845,7 @@ export class App extends React.Component {
                                 path='/post'
                                 exact={ true }
                                 component={ Post }
-                            />
-                            
+                            />                           
                             <Route
                                 path='/contact'
                                 exact={ true }
