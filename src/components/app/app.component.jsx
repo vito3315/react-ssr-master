@@ -786,47 +786,46 @@ export class App extends React.Component {
                             </Hidden>
                         </Toolbar>
                         
-                        
+                        {this.state.activePage == 'home' ?
+                            <Grid className="scrollCat" style={{ marginTop: 50, display: 'flex', flexDirection: 'row', overflow: 'scroll', position: 'fixed', backgroundColor: '#fff', zIndex: 1, width: '100%' }}>
+                                <Hidden smUp>
+                                    {this.state.categoryItems.map((item, key) => 
+                                        <ScrollLink 
+                                            key={key}
+                                            to={"cat"+item.id} 
+                                            spy={true} 
+                                            onSetActive={(el) => { 
+                                                if( document.querySelector('.activeCat') ){
+                                                    document.querySelector('.activeCat').classList.remove('activeCat');
+                                                }
+                                                document.querySelector('#link_'+item.id).classList.add('activeCat');
+                                                
+                                                document.querySelector('.scrollCat').classList.add('mandatory');
+                                                document.querySelector('.activeCat').classList.add('activeCatTest');
+                                                setTimeout(()=>{
+                                                    if( document.querySelector('.scrollCat') ){
+                                                        document.querySelector('.scrollCat').classList.remove('mandatory');//.add('proximity');
+                                                        document.querySelector('.activeCat').classList.remove('activeCatTest');
+                                                    }
+                                                }, 300)
+                                            }} 
+                                            smooth={true} 
+                                            offset={-100} 
+                                            activeClass="activeCat" 
+                                            id={'link_'+item.id} 
+                                            style={{ width: 'max-content', display: 'flex', padding: '6px 10px', whiteSpace: 'nowrap' }}
+                                        >
+                                            <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
+                                        </ScrollLink>    
+                                            
+                                    )}
+                                </Hidden>
+                            </Grid>
+                                :
+                            null
+                        }
                     </AppBar>
-                    {this.state.activePage == 'home' ?
-                        <Grid className="scrollCat" style={{ marginTop: 50, display: 'flex', flexDirection: 'row', overflow: 'scroll', position: 'fixed', backgroundColor: '#fff', zIndex: 1, width: '100%' }}>
-                            <Hidden smUp>
-                                {this.state.categoryItems.map((item, key) => 
-                                    <ScrollLink 
-                                        key={key}
-                                        to={"cat"+item.id} 
-                                        spy={true} 
-                                        onSetActive={(el) => { 
-                                            if( document.querySelector('.activeCat') ){
-                                                document.querySelector('.activeCat').classList.remove('activeCat');
-                                                //document.querySelector('.scrollCat').classList.remove('proximity');
-                                            }
-                                            document.querySelector('#link_'+item.id).classList.add('activeCat');
-                                            
-                                            document.querySelector('.scrollCat').classList.add('mandatory');
-                                            document.querySelector('.activeCat').classList.add('activeCatTest');
-                                            setTimeout(()=>{
-                                                document.querySelector('.scrollCat').classList.remove('mandatory');//.add('proximity');
-                                                //document.querySelector('.scrollCat').classList.add('proximity');
-                                                document.querySelector('.activeCat').classList.remove('activeCatTest');
-                                            }, 300)
-                                            
-                                        }} 
-                                        smooth={true} 
-                                        offset={-100} 
-                                        activeClass="activeCat" 
-                                        id={'link_'+item.id} 
-                                        style={{ width: 'max-content', display: 'flex', padding: '6px 10px', whiteSpace: 'nowrap' }}
-                                    >
-                                        <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
-                                    </ScrollLink>    
-                                        
-                                )}
-                            </Hidden>
-                        </Grid>
-                            :
-                        null
-                    }
+                    
                     
                     {this.state.activePage == 'home' ?
                         <Hidden smUp>

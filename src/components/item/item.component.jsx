@@ -133,12 +133,6 @@ class RenderItem extends React.Component {
     }
     
     componentDidMount(){
-        if( document.querySelector('.activeCat') ){
-            document.querySelector('.activeCat').classList.remove('activeCat');
-        }
-        window.scrollTo(0, 0);
-        itemsStore.setPage('item');
-        
         if( this.props.item ){
             if( this.state.item.items.length == 0 && (parseInt(this.state.item.type) !== 3 && parseInt(this.state.item.type) !== 4) ){
                 this.state.item.items.push({
@@ -163,6 +157,12 @@ class RenderItem extends React.Component {
                 count: item ? item.count : 0,
             })
         }else{
+            if( document.querySelector('.activeCat') ){
+                document.querySelector('.activeCat').classList.remove('activeCat');
+            }
+            window.scrollTo(0, 0);
+            itemsStore.setPage('item');
+            
             fetch('https://jacofood.ru/src/php/test_app.php', {
                 method: 'POST',
                 headers: {
