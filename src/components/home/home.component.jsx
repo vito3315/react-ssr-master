@@ -228,7 +228,9 @@ export class Home extends React.Component {
             is_load: false,
             testData: [1, 2, 3, 4, 5, 6, 7, 8, 9],
             openItem: null,
-            openModal: false
+            openModal: false,
+            banners_pc: [],
+            banners_mobile: []
         };
     }
 
@@ -242,11 +244,29 @@ export class Home extends React.Component {
                 city_id: 1
             })
         }).then(res => res.json()).then(json => {
+            
+            console.log( json )
+            
             let test_arr = [];
             test_arr.push(json.arr[0]);
             
+            let banners_pc = [],
+                banners_mobile = [];
+            
+            json.baners.map((item, key) => {
+                banners_pc.push(
+                    <img src={"https://jacofood.ru/src/img/banners/"+item.b_img_full+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
+                )
+                
+                banners_mobile.push(
+                    <img src={"https://jacofood.ru/src/img/banners/"+item.img_app+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
+                )
+            })
+            
             this.setState({ 
                 allItems: test_arr, 
+                banners_pc: banners_pc,
+                banners_mobile: banners_mobile,
                 is_load: true,
             });
             
@@ -278,8 +298,12 @@ export class Home extends React.Component {
     
     componentDidMount = () => {
         this.load();
-        window.scrollTo(0, 0);
+        
         itemsStore.setPage('home');
+        
+        setTimeout(()=>{
+            window.scrollTo(0, 0);
+        }, 500)
     }
 
     openItem(id){
@@ -330,13 +354,24 @@ export class Home extends React.Component {
         return (
             <Element name="myScrollToElement">
                 
-                <AliceCarousel 
-                    mouseTracking 
-                    //autoPlay={true}
-                    //autoPlayInterval={3000}
-                    infinite={true}
-                    items={items} 
-                />
+                <Hidden xsDown>
+                    <AliceCarousel 
+                        mouseTracking 
+                        //autoPlay={true}
+                        //autoPlayInterval={3000}
+                        infinite={true}
+                        items={this.state.banners_pc} 
+                    />
+                </Hidden>
+                <Hidden smUp>
+                    <AliceCarousel 
+                        mouseTracking 
+                        //autoPlay={true}
+                        //autoPlayInterval={3000}
+                        infinite={true}
+                        items={this.state.banners_mobile} 
+                    />
+                </Hidden>
                 
                 {this.state.allItems.map((cat, key) => (
                     <Grid container spacing={2} md={10} sm={12} xs={12} xl={10} style={{ margin: 0, padding: '0px 10px' }} className="MainItems mainContainer" key={key} name={"cat"+cat.id} id={"cat"+cat.id}>

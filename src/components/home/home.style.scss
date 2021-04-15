@@ -121,3 +121,15 @@
     background-color: #BB0025!important;
     opacity: 0.5;
 }
+
+.alice-carousel{
+    margin-top: 50px!important;
+}
+@media (max-width: 600px){
+    .alice-carousel{
+        margin-top: 83px!important;
+    }
+}
+.alice-carousel__prev-btn-item, .alice-carousel__next-btn-item{
+    padding: 0px!important;
+}
