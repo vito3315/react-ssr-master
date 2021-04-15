@@ -145,6 +145,8 @@ body{
     padding: 4px 8px;
     border-radius: 5px;
     color: #fff;
+}
+.activeCatTest{
     scroll-snap-align: center;
     scroll-snap-stop: always;
 }
@@ -324,4 +326,10 @@ body{
 }
 .scrollCat > a:last-child > span{
     margin-right: 10;
+}
+.alice-carousel{
+    margin-top: 80px!important;
+}
+.alice-carousel__prev-btn-item, .alice-carousel__next-btn-item{
+    padding: 0px!important;
 }

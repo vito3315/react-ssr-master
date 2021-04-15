@@ -79,68 +79,56 @@ var cart = {
     allItems: []
 }
 
-const useStyles = makeStyles({
-  root: {
-    width: 500,
-  },
-});
+class CustomBottomNavigation extends React.Component{
 
-function SimpleBottomNavigation() {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-
-  return (
-    <BottomNavigation
-        style={{ position: 'fixed', bottom: 0, width: '100%' }}
-      value={value}
-      onChange={(event, newValue) => {
-        setValue(newValue);
-      }}
-      
-      className={classes.root}
-    >
-        <Link
-            to='/home'
-            exact={ true }
-            className="MuiButtonBase-root MuiBottomNavigationAction-root"
-            style={{ flex: 1 }}
-        >
-            <RestaurantMenuSharpIcon />
-        </Link>
-        <Link
-            to='/actii'
-            exact={ true }
-            className="MuiButtonBase-root MuiBottomNavigationAction-root"
-            style={{ flex: 1 }}
-        >
-            <CardGiftcardIcon />
-        </Link>
-        <Link
-            to='/'
-            exact={ true }
-            className="MuiButtonBase-root MuiBottomNavigationAction-root"
-            style={{ flex: 1 }}
-        >
-            <ShoppingCartOutlinedIcon />
-        </Link>
-        <Link
-            to='/'
-            exact={ true }
-            className="MuiButtonBase-root MuiBottomNavigationAction-root"
-            style={{ flex: 1 }}
-        >
-            <LocationOnIcon />
-        </Link>
-        <Link
-            to='/'
-            exact={ true }
-            className="MuiButtonBase-root MuiBottomNavigationAction-root"
-            style={{ flex: 1 }}
-        >
-            <PersonIcon />
-        </Link>
-    </BottomNavigation>
-  );
+    render(){
+        return(
+            <BottomNavigation
+                style={{ position: 'fixed', bottom: 0, width: '100%' }}
+            >
+                <Link
+                    to='/home'
+                    exact={ true }
+                    className="MuiButtonBase-root MuiBottomNavigationAction-root"
+                    style={{ flex: 1 }}
+                >
+                    <RestaurantMenuSharpIcon />
+                </Link>
+                <Link
+                    to='/actii'
+                    exact={ true }
+                    className="MuiButtonBase-root MuiBottomNavigationAction-root"
+                    style={{ flex: 1 }}
+                >
+                    <CardGiftcardIcon />
+                </Link>
+                <Link
+                    to='/'
+                    exact={ true }
+                    className="MuiButtonBase-root MuiBottomNavigationAction-root"
+                    style={{ flex: 1 }}
+                >
+                    <ShoppingCartOutlinedIcon />
+                </Link>
+                <Link
+                    to='/contact'
+                    exact={ true }
+                    className="MuiButtonBase-root MuiBottomNavigationAction-root"
+                    style={{ flex: 1 }}
+                >
+                    <LocationOnIcon />
+                </Link>
+                <Link
+                    to='/'
+                    exact={ true }
+                    className="MuiButtonBase-root MuiBottomNavigationAction-root"
+                    style={{ flex: 1 }}
+                >
+                    <PersonIcon />
+                </Link>
+            </BottomNavigation>
+        )
+    }
 }
 
 function StickyFooter() {
@@ -800,7 +788,8 @@ export class App extends React.Component {
                         
                         
                     </AppBar>
-                        <Grid className="proximity scrollCat" style={{ marginTop: 50, display: 'flex', flexDirection: 'row', overflow: 'scroll', position: 'fixed', backgroundColor: '#fff', zIndex: 1, width: '100%' }}>
+                    {this.state.activePage == 'home' ?
+                        <Grid className="scrollCat" style={{ marginTop: 50, display: 'flex', flexDirection: 'row', overflow: 'scroll', position: 'fixed', backgroundColor: '#fff', zIndex: 1, width: '100%' }}>
                             <Hidden smUp>
                                 {this.state.categoryItems.map((item, key) => 
                                     <ScrollLink 
@@ -810,13 +799,16 @@ export class App extends React.Component {
                                         onSetActive={(el) => { 
                                             if( document.querySelector('.activeCat') ){
                                                 document.querySelector('.activeCat').classList.remove('activeCat');
+                                                //document.querySelector('.scrollCat').classList.remove('proximity');
                                             }
                                             document.querySelector('#link_'+item.id).classList.add('activeCat');
                                             
                                             document.querySelector('.scrollCat').classList.add('mandatory');
+                                            document.querySelector('.activeCat').classList.add('activeCatTest');
                                             setTimeout(()=>{
                                                 document.querySelector('.scrollCat').classList.remove('mandatory');//.add('proximity');
-                                                document.querySelector('.scrollCat').classList.add('proximity');
+                                                //document.querySelector('.scrollCat').classList.add('proximity');
+                                                document.querySelector('.activeCat').classList.remove('activeCatTest');
                                             }, 300)
                                             
                                         }} 
@@ -832,6 +824,11 @@ export class App extends React.Component {
                                 )}
                             </Hidden>
                         </Grid>
+                            :
+                        null
+                    }
+                    
+                    {this.state.activePage == 'home' ?
                         <Hidden smUp>
                             <div style={{ width: '100%', height: 3, position: 'fixed', top: 85, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
                             <div style={{ width: '100%', height: 3, position: 'fixed', top: 88, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
@@ -844,62 +841,47 @@ export class App extends React.Component {
                             <div style={{ width: '100%', height: 3, position: 'fixed', top: 109, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
                             <div style={{ width: '100%', height: 3, position: 'fixed', top: 112, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
                         </Hidden>
-                
-                    <div className='ui-app'>
-                        {/* navigation */}
-                        <div className='ui-app__navigation'>
-                            <Link
-                                className='ui-app__navigation__link'
-                                activeClassName='ui-app__navigation__link--active'
-                                to='/'
-                                exact={ true }
-                            >Counter</Link>
+                            :
+                        null
+                    }
+                    
+                    <Switch>
+                        <Route
+                            path='/'
+                            exact={ true }
+                            render={ () => <Counter name='Monica Geller'/> }
+                        />
 
-                            <Link
-                                className='ui-app__navigation__link'
-                                activeClassName='ui-app__navigation__link--active'
-                                to='/post'
-                                exact={ true }
-                            >Post</Link>
-                        </div>
-
-                        <Switch>
-                            <Route
-                                path='/'
-                                exact={ true }
-                                render={ () => <Counter name='Monica Geller'/> }
-                            />
-
-                            <Route
-                                path='/post'
-                                exact={ true }
-                                component={ Post }
-                            />                           
-                            <Route
-                                path='/contact'
-                                exact={ true }
-                                component={ Contact }
-                            />
-                            <Route
-                                path='/actii'
-                                exact={ true }
-                                component={ Actii }
-                            />
-                            <Route
-                                path='/home'
-                                exact={ true }
-                                component={ Home }
-                            />
-                            <Route
-                                path='/item/:itemId'
-                                component={ Item }
-                            />
-                        </Switch>
+                        <Route
+                            path='/post'
+                            exact={ true }
+                            component={ Post }
+                        />                           
+                        <Route
+                            path='/contact'
+                            exact={ true }
+                            component={ Contact }
+                        />
+                        <Route
+                            path='/actii'
+                            exact={ true }
+                            component={ Actii }
+                        />
+                        <Route
+                            path='/home'
+                            exact={ true }
+                            component={ Home }
+                        />
+                        <Route
+                            path='/item/:itemId'
+                            component={ Item }
+                        />
+                    </Switch>
                         
-                    </div>
+                    
                 
                     <Hidden smUp>
-                        <SimpleBottomNavigation />
+                        <CustomBottomNavigation />
                     </Hidden>
                     <StickyFooter />
                 </div>

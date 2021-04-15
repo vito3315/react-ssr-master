@@ -28,84 +28,6 @@ import itemsStore from '../../stores/items-store';
 
 const queryString = require('query-string');
 
-import { withStyles } from '@material-ui/core/styles';
-
-const styles = (theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(1),
-  },
-  closeButton: {
-    position: 'absolute',
-    right: theme.spacing(1),
-    top: theme.spacing(1),
-    color: theme.palette.grey[500],
-  },
-});
-
-const DialogContent = withStyles((theme) => ({
-  root: {
-    padding: theme.spacing(3),
-    
-  },
-}))(MuiDialogContent);
-
-const DialogActions = withStyles((theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(1),
-  },
-}))(MuiDialogActions);
-
-const DialogTitle = withStyles(styles)((props) => {
-  const { children, classes, onClose, ...other } = props;
-  return (
-    <MuiDialogTitle disableTypography className={classes.root} {...other}>
-      <Typography variant="h6">{children}</Typography>
-      {onClose ? (
-        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-          <CloseIcon />
-        </IconButton>
-      ) : null}
-    </MuiDialogTitle>
-  );
-});
-
-function ActiiItem(props) {
-    const [open, setOpen] = React.useState(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-    const handleClose = () => {
-        setOpen(false);
-    };
-
-    const item = props.item;
-
-    return (
-        <div>
-            <img src={"https://newjacofood.ru/src/img/aktii/"+item.img_min} alt={item.promo_title} style={{ width: '100%' }} onClick={handleClickOpen} />
-      
-            <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" className="modalActii" open={open}>
-                <DialogTitle id="customized-dialog-title" onClose={handleClose}>{item.promo_title}</DialogTitle>
-                <DialogContent dividers className="modalActiiContent">
-                    <div dangerouslySetInnerHTML={{__html: item.text}} />
-                </DialogContent>
-                {item.promo.length > 0 ?
-                    <DialogActions style={{ justifyContent: 'center' }}>
-                        <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderOther">
-                            <Button variant="contained" className="BtnCardMain CardInCardItem">Применить промокод</Button>
-                        </ButtonGroup>
-                    </DialogActions>
-                        :
-                    null
-                }
-            </Dialog>
-        </div>
-    );
-}
-
 export class Actii extends React.Component {
     constructor(props) {
         super(props);
@@ -113,6 +35,8 @@ export class Actii extends React.Component {
         this.state = {      
             actii: [],  
             is_load: false,
+            showItem: null,
+            openDialog: false
         };
     }
     
@@ -142,6 +66,20 @@ export class Actii extends React.Component {
         .catch(err => { });
     }
     
+    closeDialog(){
+        this.setState({
+            showItem: null,
+            openDialog: false
+        })
+    }
+    
+    openDialog(item){
+        this.setState({
+            showItem: item,
+            openDialog: true
+        })
+    }
+    
     render() {
         if(!this.state.is_load){
             return (
@@ -162,17 +100,44 @@ export class Actii extends React.Component {
         }
         
         return (
-            <Grid container spacing={3} className="Actii">
-                <Grid item xs={12}>
+            <Grid container className="Actii" style={{ marginTop: 60 }}>
+                <Grid item xs={12} style={{ paddingBottom: 0 }}>
                     <Typography variant="h5" component="h1">Акции</Typography>
                 </Grid>
-                <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer">
+                <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer" style={{ paddingTop: 0 }}>
                     {this.state.actii.map((item, key) =>
                         <Grid item xs={12} sm={6} md={4} xl={3} key={key}>
-                            <ActiiItem item={item} />
+                            <img src={"https://newjacofood.ru/src/img/aktii/"+item.img_min} alt={item.promo_title} style={{ width: '100%' }} onClick={this.openDialog.bind(this, item)} />
                         </Grid>
                     )}
                 </Grid>
+                
+                { this.state.showItem ?
+                    <Dialog onClose={this.closeDialog.bind(this)} aria-labelledby="customized-dialog-title" className="modalActii" open={this.state.openDialog}>
+                        <MuiDialogTitle disableTypography style={{ margin: 0, padding: 8 }}>
+                            <Typography variant="h6">{this.state.showItem.promo_title}</Typography>
+                          
+                            <IconButton aria-label="close" style={{ position: 'absolute', top: 0, right: 0, color: '#000' }} onClick={this.closeDialog.bind(this)}>
+                                <CloseIcon />
+                            </IconButton>
+                        </MuiDialogTitle>
+                        
+                        <MuiDialogContent dividers className="modalActiiContent">
+                            <div dangerouslySetInnerHTML={{__html: this.state.showItem.text}} />
+                        </MuiDialogContent>
+                        {this.state.showItem.promo.length > 0 ?
+                            <MuiDialogActions style={{ justifyContent: 'center' }}>
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderOther">
+                                    <Button variant="contained" className="BtnCardMain CardInCardItem">Применить промокод</Button>
+                                </ButtonGroup>
+                            </MuiDialogActions>
+                                :
+                            null
+                        }
+                    </Dialog>
+                        :
+                    null
+                }
             </Grid>
         )
     }
