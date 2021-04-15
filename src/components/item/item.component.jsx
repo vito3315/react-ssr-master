@@ -141,7 +141,7 @@ class RenderItem extends React.Component {
         
         if( this.props.item ){
             if( this.state.item.items.length == 0 && (parseInt(this.state.item.type) !== 3 && parseInt(this.state.item.type) !== 4) ){
-                json.item.items.push({
+                this.state.item.items.push({
                     kkal: this.state.item.kkal,
                     protein: this.state.item.protein,
                     fat: this.state.item.fat,
@@ -160,7 +160,7 @@ class RenderItem extends React.Component {
             let item = my_cart.filter( (item) => item.item_id == this.state.item['id'] )[0];
       
             this.setState({ 
-              count: item.count,
+                count: item ? item.count : 0,
             })
         }else{
             fetch('https://jacofood.ru/src/php/test_app.php', {
@@ -194,7 +194,7 @@ class RenderItem extends React.Component {
                 let item = my_cart.filter( (item) => item.item_id == json.item['id'] )[0];
           
                 this.setState({ 
-                  count: item.count,
+                    count: item ? item.count : 0,
                 })
             })
             .catch(err => { });
