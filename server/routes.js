@@ -1,5 +1,9 @@
 const { Counter } = require( '../src/components/counter' );
 const { Post } = require( '../src/components/post' );
+const { Home } = require( '../src/components/home' );
+const { Item } = require( '../src/components/item' );
+const { Contact } = require( '../src/components/contact' );
+const { Actii } = require( '../src/components/actii' );
 
 module.exports = [
     {
@@ -16,6 +20,16 @@ module.exports = [
         path: '/home',
         exact: true,
         component: Home,
+    },
+    {
+        path: '/contact',
+        exact: true,
+        component: Contact,
+    },
+    {
+        path: '/actii',
+        exact: true,
+        component: Actii,
     },
     {
         path: '/item/:id',

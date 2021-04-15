@@ -256,20 +256,22 @@ export class Home extends React.Component {
                 });
             }, 250)
             
-            setTimeout(() => {
-                if( localStorage.getItem('goTo') ){
-                    let hash = localStorage.getItem('goTo')
-                    
-                    localStorage.removeItem('goTo');
-                    
-                    scroller.scrollTo("myScrollToElement", {
-                        duration: 800,
-                        delay: 0,
-                        smooth: "easeInOutQuart",
-                        offset: document.getElementById('cat'+hash).getBoundingClientRect()['y'] - 150
-                    });
-                }
-            }, 700);
+            if (typeof window !== 'undefined') {
+                setTimeout(() => {
+                    if( localStorage.getItem('goTo') ){
+                        let hash = localStorage.getItem('goTo')
+                        
+                        localStorage.removeItem('goTo');
+                        
+                        scroller.scrollTo("myScrollToElement", {
+                            duration: 800,
+                            delay: 0,
+                            smooth: "easeInOutQuart",
+                            offset: document.getElementById('cat'+hash).getBoundingClientRect()['y'] - 150
+                        });
+                    }
+                }, 700);
+            }
         })
         .catch(err => { });
     }  

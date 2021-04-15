@@ -21,7 +21,9 @@ class ItemsStore {
 
   setToken = (userToken) => {
     this.userToken = userToken;
-    localStorage.setItem('token', userToken);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('token', userToken);
+    }
   };
   
   getToken(){
@@ -373,7 +375,9 @@ class ItemsStore {
 
   setItems = (items) => {
     this.items = JSON.stringify(items);
-    localStorage.setItem('my_cart', this.items);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('my_cart', this.items);
+    }
   };
   
   setAllItems = (items) => {
@@ -466,12 +470,16 @@ class ItemsStore {
   }
 
   constructor() {
-    if( localStorage.getItem('my_cart') ){
-      this.setItems( JSON.parse(localStorage.getItem('my_cart')));
+    if (typeof window !== 'undefined') {
+      if( localStorage.getItem('my_cart') ){
+        this.setItems( JSON.parse(localStorage.getItem('my_cart')));
+      }
     }
     
-    if( localStorage.getItem('token') ){
-      this.setToken( localStorage.getItem('token'));
+    if (typeof window !== 'undefined') {
+      if( localStorage.getItem('token') ){
+        this.setToken( localStorage.getItem('token'));
+      }
     }
     
     makeAutoObservable (this);

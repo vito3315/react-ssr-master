@@ -760,7 +760,7 @@ export class App extends React.Component {
                                                             <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
                                                         </ScrollLink> 
                                                             :
-                                                        <Link to={"/home"} className="catLink" onClick={() => { localStorage.setItem('goTo', item.id) }}>
+                                                        <Link to={"/home"} className="catLink" onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
                                                             <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
                                                         </Link> 
                                                     }
