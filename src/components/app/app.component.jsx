@@ -734,8 +734,7 @@ export class App extends React.Component {
                                                                 
                                                                 document.querySelector('.scrollCat').classList.add('mandatory');
                                                                 setTimeout(()=>{
-                                                                    document.querySelector('.scrollCat').classList.remove('mandatory');//.add('proximity');
-                                                                    document.querySelector('.scrollCat').classList.add('proximity');
+                                                                    document.querySelector('.scrollCat').classList.remove('mandatory');
                                                                 }, 300)
                                                                 
                                                             }} 
@@ -804,7 +803,7 @@ export class App extends React.Component {
                                                 document.querySelector('.activeCat').classList.add('activeCatTest');
                                                 setTimeout(()=>{
                                                     if( document.querySelector('.scrollCat') ){
-                                                        document.querySelector('.scrollCat').classList.remove('mandatory');//.add('proximity');
+                                                        document.querySelector('.scrollCat').classList.remove('mandatory');
                                                         document.querySelector('.activeCat').classList.remove('activeCatTest');
                                                     }
                                                 }, 300)
