@@ -2,7 +2,8 @@ const path = require( 'path' );
 const HTMLWebpackPlugin = require( 'html-webpack-plugin' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const CopyWebpackPlugin = require( 'copy-webpack-plugin' );
-//const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+var CompressionPlugin = require("compression-webpack-plugin");
 
 /*-------------------------------------------------*/
 
@@ -55,8 +56,11 @@ module.exports = {
 
     // webpack plugins
     plugins: [
-        //new BundleAnalyzerPlugin(),
-
+        new BundleAnalyzerPlugin({
+            analyzerMode: 'disabled',
+            generateStatsFile: true,
+            statsOptions: { source: false }
+        }),
 
         // extract css to external stylesheet file
         new MiniCssExtractPlugin( {
@@ -107,7 +111,7 @@ module.exports = {
 
     // development server configuration
     devServer: {
-        port: 4028,
+        port: 4029,
         historyApiFallback: true,
     },
 
