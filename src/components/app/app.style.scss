@@ -76,10 +76,6 @@ body{
         align-items: center;
         justify-content: center;
     }
-    & .sub_header > div > div{
-        padding-left: 8;
-        padding-right: 8;
-    }
     & .cat{
         font-size: 1em;
         font-family: ubuntu!important;
@@ -222,7 +218,7 @@ body{
     text-align: center;
     font-family: ubuntu !important;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
 }
 .TableMini .TableMiniFullName{
     font-family: ubuntu!important;
@@ -323,9 +319,6 @@ body{
 }
 .scrollCat > a:first-child{
     margin-left: 10;
-}
-.scrollCat > a:last-child > span{
-    margin-right: 10;
 }
 .MuiBadge-colorPrimary{
     background-color: #BB0025!important;

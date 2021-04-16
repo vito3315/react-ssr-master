@@ -41,8 +41,6 @@ import PersonIcon from '@material-ui/icons/Person';
 
 import Hidden from '@material-ui/core/Hidden';
 
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import RestoreIcon from '@material-ui/icons/Restore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
@@ -84,8 +82,8 @@ var cart = {
 class CustomBottomNavigation extends React.Component{
     render(){
         return(
-            <BottomNavigation
-                style={{ position: 'fixed', bottom: 0, width: '100%' }}
+            <div
+                style={{ position: 'fixed', bottom: 0, width: '100%', height: 56, display: 'flex', justifyContent: 'center', backgroundColor: '#fff' }}
             >
                 <Link
                     to='/home'
@@ -129,7 +127,7 @@ class CustomBottomNavigation extends React.Component{
                 >
                     <PersonIcon />
                 </Link>
-            </BottomNavigation>
+            </div>
         )
     }
 }
@@ -189,33 +187,19 @@ class SimplePopover extends React.Component{
     }
     
     componentDidMount = () => {
-        let tmp = 0,
-            cartItems = itemsStore.getItems();
+        let cartItems = itemsStore.getItems();
         
         if( cartItems.length > 0 ){
-            let allPrice = cartItems.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
-            
             this.setState({
-                cartItems: cartItems,
-                allPrice: allPrice
+                cartItems: cartItems
             })
         }
         
         autorun(() => {
-            let tmp = 0,
-                cartItems = itemsStore.getItems();
-            
-            console.log( '1235' )    
-            console.log( cartItems )    
-                
-            //if( cartItems.length > 0 ){
-                let allPrice = cartItems.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
-                
-                this.setState({
-                    cartItems: cartItems,
-                    allPrice: allPrice
-                })
-            //}
+            let cartItems = itemsStore.getItems();
+            this.setState({
+                cartItems: cartItems
+            })
         })
     }
     
@@ -478,10 +462,12 @@ class SimplePopover extends React.Component{
         const id = open ? 'simple-popover' : undefined;
         return(
             <div>
-                <IconButton className="ShopIconBTN" aria-describedby={id} edge="start" color="inherit" aria-label="menu" onClick={this.handleClick.bind(this)}>
-                    <ShoppingCartOutlinedIcon />
+                <IconButton className="ShopIconBTN" aria-describedby={id} color="inherit" aria-label="menu" onClick={this.handleClick.bind(this)}>
+                    <Badge badgeContent={itemsStore.getAllPrice()} max={500000} color="primary">
+                        <ShoppingCartOutlinedIcon />
+                    </Badge>
                 </IconButton>
-          
+                
                 <Dialog
                     open={this.state.openLogin}
                     fullWidth={true}
@@ -601,8 +587,8 @@ class SimplePopover extends React.Component{
                                 <tr style={{height: 35}}>
                                     <td className="TableMiniFullName">Сумма:</td>
                                     <td className="" style={{width: '30%', textAlign: 'center'}}>
-                                        <div className="TableMiniPrice">
-                                            {this.state.allPrice} <AttachMoneyIcon fontSize="small" />
+                                        <div className="TableMiniPrice" style={{ marginRight: 21 }}>
+                                            {itemsStore.getAllPrice()} <AttachMoneyIcon fontSize="small" />
                                         </div>
                                     </td>
                                 </tr>
@@ -745,12 +731,12 @@ export class App extends React.Component {
                                                             offset={-100} 
                                                             activeClass="activeCat" 
                                                             id={'link_'+item.id} 
-                                                            style={{ width: 'max-content', display: 'flex', whiteSpace: 'nowrap' }}
+                                                            style={{ width: 'max-content', display: 'flex', whiteSpace: 'nowrap', padding: '4px 8px' }}
                                                         >
                                                             <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
                                                         </ScrollLink> 
                                                             :
-                                                        <Link to={"/home"} className="catLink" onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
+                                                        <Link to={"/home"} className="catLink" style={{ padding: '4px 8px' }} onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
                                                             <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
                                                         </Link> 
                                                     }
@@ -761,6 +747,7 @@ export class App extends React.Component {
                                         
                                         <Grid item>
                                             <Link 
+                                                style={{ padding: '4px 8px' }}
                                                 to={"/actii"} 
                                                 className="catLink"
                                             >
@@ -769,20 +756,21 @@ export class App extends React.Component {
                                         </Grid>
                                         <Grid item>
                                             <Link 
+                                                style={{ padding: '4px 8px' }}
                                                 to={"/contact"} 
                                                 className="catLink"
                                             >
                                                 <Typography className="cat" variant="h5" component="span">Контакты</Typography>
                                             </Link>    
                                         </Grid>
-                                        
+                                        <Grid item>
+                                            <SimplePopover />
+                                        </Grid>
                                     </Hidden>
                                 </Grid>
                             }
                             
-                            <Hidden xsDown>
-                                <SimplePopover />
-                            </Hidden>
+                            
                             <Hidden smUp>
                                 <Typography variant="h5" component="span" style={{ color: '#000', fontSize: '1.2rem' }}>Тольятти</Typography>
                             </Hidden>
