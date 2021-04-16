@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import moment from "moment";
+//import moment from "moment";
 
 class ItemsStore {
   // Don't need decorators now
@@ -81,7 +81,7 @@ class ItemsStore {
         point_id_dev = 1,
         point_id_pic = 1;
     
-    let this_date = moment(by_time).format("YYYY-MM-DD"),
+    /*let this_date = moment(by_time).format("YYYY-MM-DD"),
         this_time = moment(by_time).format("H:mm"),
         this_dow = parseInt(moment(by_time).format("E"));
     
@@ -93,7 +93,7 @@ class ItemsStore {
       this_date = moment(by_time).format("YYYY-MM-DD");
       this_time = moment(by_time).format("H:mm");
       this_dow = parseInt(moment(by_time).format("E"));
-    }
+    }*/
     
     if( promo_info ){
       console.log( promo_info )

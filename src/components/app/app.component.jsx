@@ -1,9 +1,6 @@
 import React from 'react';
 import { NavLink as Link, Switch, Route, useParams } from 'react-router-dom';
 
-// import child components
-import { Counter } from '../counter';
-import { Post } from '../post';
 import { Home } from '../home';
 import { Item } from '../item';
 import { Contact } from '../contact';
@@ -701,8 +698,10 @@ export class App extends React.Component {
                                 </Grid>
                             :
                                 <Grid>
-                                    <Grid item>
-                                        <img alt="Жако доставка роллов и пиццы" src="https://newjacofood.ru/src/img/other/Logotip.png" />
+                                    <Grid item style={{ marginRight: 15 }}>
+                                        <Link to={"/"}>
+                                            <img alt="Жако доставка роллов и пиццы" src="https://newjacofood.ru/src/img/other/Logotip.png" />
+                                        </Link> 
                                     </Grid>
                                     <Hidden xsDown>
                                         {
@@ -836,17 +835,6 @@ export class App extends React.Component {
                     
                     <Switch>
                         <Route
-                            path='/'
-                            exact={ true }
-                            render={ () => <Counter name='Monica Geller'/> }
-                        />
-
-                        <Route
-                            path='/post'
-                            exact={ true }
-                            component={ Post }
-                        />                           
-                        <Route
                             path='/contact'
                             exact={ true }
                             component={ Contact }
@@ -858,6 +846,11 @@ export class App extends React.Component {
                         />
                         <Route
                             path='/home'
+                            exact={ true }
+                            component={ Home }
+                        />
+                        <Route
+                            path='/'
                             exact={ true }
                             component={ Home }
                         />

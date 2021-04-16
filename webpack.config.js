@@ -2,6 +2,7 @@ const path = require( 'path' );
 const HTMLWebpackPlugin = require( 'html-webpack-plugin' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const CopyWebpackPlugin = require( 'copy-webpack-plugin' );
+//const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 /*-------------------------------------------------*/
 
@@ -54,6 +55,8 @@ module.exports = {
 
     // webpack plugins
     plugins: [
+        //new BundleAnalyzerPlugin(),
+
 
         // extract css to external stylesheet file
         new MiniCssExtractPlugin( {
@@ -104,11 +107,12 @@ module.exports = {
 
     // development server configuration
     devServer: {
-        port: 4022,
+        port: 4028,
         historyApiFallback: true,
     },
 
     // generate source map
-    devtool: 'source-map'
+    devtool: ( 'development' === process.env.NODE_ENV ? 'eval-source-map' : 'eval' ),
+    //devtool: 'source-map'
 
 };
