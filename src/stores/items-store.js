@@ -5,11 +5,20 @@ class ItemsStore {
   // Don't need decorators now
   items = '';
   allItems = '';
-
+  AllPrice = 0;
+  
   promo = null;
   userToken = null;
 
   activePage = '';
+
+  setAllPrice = (price) => {
+    this.AllPrice = price;
+  };
+  
+  getAllPrice(){
+    return this.AllPrice;
+  };
 
   setPage = (activePage) => {
     this.activePage = activePage;
@@ -374,6 +383,15 @@ class ItemsStore {
   }
 
   setItems = (items) => {
+    console.log( items )
+    
+    let tmp = 0,
+        allPrice = 0;
+    
+    allPrice = items.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
+    
+    this.setAllPrice(allPrice);
+    
     this.items = JSON.stringify(items);
     if (typeof window !== 'undefined') {
       localStorage.setItem('my_cart', this.items);

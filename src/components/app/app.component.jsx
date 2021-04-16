@@ -66,6 +66,8 @@ import TextField from '@material-ui/core/TextField';
 
 import InputMask from "react-input-mask";
 
+import Badge from '@material-ui/core/Badge';
+
 import { Provider } from 'mobx-react';
 import { useStrict } from 'mobx';
 
@@ -80,7 +82,6 @@ var cart = {
 }
 
 class CustomBottomNavigation extends React.Component{
-
     render(){
         return(
             <BottomNavigation
@@ -108,7 +109,9 @@ class CustomBottomNavigation extends React.Component{
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                     style={{ flex: 1 }}
                 >
-                    <ShoppingCartOutlinedIcon />
+                    <Badge badgeContent={itemsStore.getAllPrice()} max={500000} color="primary">
+                        <ShoppingCartOutlinedIcon />
+                    </Badge>
                 </Link>
                 <Link
                     to='/contact'
@@ -878,6 +881,18 @@ export class App extends React.Component {
                         
                     
                 
+                    <Hidden smUp>
+                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 83, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
+                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 80, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
+                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 77, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
+                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 74, zIndex: 0, backgroundColor: '#bababa', opacity: 0.04 }} />
+                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 71, zIndex: 0, backgroundColor: '#bababa', opacity: 0.05 }} />
+                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 68, zIndex: 0, backgroundColor: '#bababa', opacity: 0.06 }} />
+                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 65, zIndex: 0, backgroundColor: '#bababa', opacity: 0.07 }} />
+                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 62, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
+                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 59, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
+                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 56, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
+                    </Hidden>
                     <Hidden smUp>
                         <CustomBottomNavigation />
                     </Hidden>
