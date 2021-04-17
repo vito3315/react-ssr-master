@@ -7,8 +7,8 @@
 }
 @font-face {
 	font-family: ubuntu; /* Гарнитура шрифта */
-	src: url('/src/assets/fonts/ubuntu_allfont_ru.ttf'); /* Для IE5-8 */
-	src: local(ubuntu_allfont_ru), url('/src/assets/fonts/ubuntu_allfont_ru.ttf'); /* Для остальных браузеров */
+	src: url('/src/assets/fonts/Ubuntu-Regular.ttf'); /* Для IE5-8 */
+	src: local(Ubuntu-Regular), url('/src/assets/fonts/Ubuntu-Regular.ttf'); /* Для остальных браузеров */
 }
 
 body{
