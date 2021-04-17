@@ -43,22 +43,14 @@ module.exports = {
                 use: [ MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader' ]
             },
             {
-              test: /\.(ttf|eot|woff|svg|woff2)$/,
-              use: {
-                loader: "file-loader",
-                
-              }
+                test: /\.(jpg|png|svg|ttf|otf)$/,
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        limit: 25000
+                    }
+                }
             }
-            //{
-            //    test: /\.(jpg|png|svg|ttf|otf)$/,
-            //    use: {
-            //        loader: 'url-loader',
-            //        options: {
-            //            limit: false,
-            //            outputPath: 'assets/fonts/'
-            //        }
-            //    }
-            //}
         ]
     },
 

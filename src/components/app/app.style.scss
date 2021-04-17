@@ -5,11 +5,9 @@
 	src: url('/src/assets/fonts/FuturaFuturisC-Bold.ttf'); /* Для IE5-8 */
 	src: local(FuturaFuturisC-Bold), url('/src/assets/fonts/FuturaFuturisC-Bold.ttf'); /* Для остальных браузеров */
 }
-@font-face {
-	font-family: ubuntu; /* Гарнитура шрифта */
-	src: url('/src/assets/fonts/Ubuntu-Regular.ttf'); /* Для IE5-8 */
-	src: local(Ubuntu-Regular), url('/src/assets/fonts/Ubuntu-Regular.ttf'); /* Для остальных браузеров */
-}
+
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
 
 body{
     margin: 0px!important;
@@ -20,7 +18,7 @@ body{
     background-color: #BB0025;
 }
 .footer p{
-    font-family: ubuntu!important;
+    font-family: Ubuntu, sans-serif!important;
     color: #fff;
 }
 .footer svg{
@@ -50,7 +48,7 @@ body{
     }
     & .cat{
         font-size: 1em;
-        font-family: ubuntu!important;
+        font-family: Ubuntu, sans-serif!important;
         cursor: pointer;
         color: #000;
     }
@@ -71,7 +69,7 @@ body{
     min-height: 30px!important;
 }
 .BtnCardMain .CardCountItem{
-    font-family: ubuntu!important;
+    font-family: Ubuntu, sans-serif!important;
 }
 .CardAction{
     flex-direction: column;
@@ -160,7 +158,7 @@ body{
     fill: #BB0025;
 }
 .SpacePromo input{
-    font-family: ubuntu!important;
+    font-family: Ubuntu, sans-serif!important;
 }
 .DescPromo{
     width: 393;
@@ -168,7 +166,7 @@ body{
 }
 .DescPromo span{
     font-size: 0.8rem;
-    font-family: ubuntu!important;
+    font-family: Ubuntu, sans-serif!important;
 }
 .InCart{
     width: 393; 
@@ -177,27 +175,27 @@ body{
     justify-content: flex-end;
 }
 .InCart span{
-    font-family: ubuntu!important;
+    font-family: Ubuntu, sans-serif!important;
 }
 .InCart button{
     width: 100%;
 }
 .TableMini .TableMiniName{
     width: 40%;
-    font-family: ubuntu!important;
+    font-family: Ubuntu, sans-serif!important;
 }
 .TableMini .TableMiniPrice{
     text-align: center;
-    font-family: ubuntu !important;
+    font-family: Ubuntu, sans-serif !important;
     display: flex;
     justify-content: flex-end;
 }
 .TableMini .TableMiniFullName{
-    font-family: ubuntu!important;
+    font-family: Ubuntu, sans-serif!important;
     width: 70%;
 }
 .TableMini .TableMiniFullPrice{
-    font-family: ubuntu!important;
+    font-family: Ubuntu, sans-serif!important;
     width: 40%;
     text-align: center;
 }
@@ -235,7 +233,7 @@ body{
     border: 1px solid #000;
     border-radius: 4px;
     font-size: 1.1rem;
-    font-family: ubuntu !important;
+    font-family: Ubuntu, sans-serif !important;
     letter-spacing: 0.6px;
     padding: 9px 15px 9px 15px;
 }
@@ -248,7 +246,7 @@ body{
 }
 .ModalAuth .MuiDialogTitle-root h2{
     font-size: 1.8rem;
-    font-family: ubuntu !important;
+    font-family: Ubuntu, sans-serif !important;
 }
 .ModalAuth .ModalContent_1_1, .ModalAuth .ModalContent_1_2{
     display: flex;
@@ -262,7 +260,7 @@ body{
 .ModalAuth .ModalLabel{
     font-size: 1.1rem; 
     margin-bottom: 5;
-    font-family: ubuntu !important;
+    font-family: Ubuntu, sans-serif !important;
 }
 
 .MuiButtonBase-root {
@@ -301,5 +299,5 @@ body{
 .thisCity{
     color: #000;
     font-size: 1.2rem;
-    font-family: ubuntu !important;
+    font-family: Ubuntu, sans-serif !important;
 }

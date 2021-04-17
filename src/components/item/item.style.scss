@@ -24,7 +24,7 @@
 }
 .MainItem .ItemDesc, .MainItem_mobile .ItemDesc{
     font-size: 1.2rem;
-    font-family: ubuntu!important;
+    font-family: Ubuntu, sans-serif!important;
     padding-bottom: 5px;
 }
 .MainItem .ItemPrice, .MainItem_mobile .ItemPrice{
@@ -37,11 +37,11 @@
 .MainItem .CardInCardItem, .MainItem_mobile .CardInCardItem{
     width: 100%;
     text-align: center;
-    font-family: ubuntu!important;
+    font-family: Ubuntu, sans-serif!important;
     font-size: 0.8rem;
 }
 .MainItem .CardCountItem{
-    font-family: ubuntu!important;
+    font-family: Ubuntu, sans-serif!important;
 }
 .MainItemPopoverLot{
     height: calc(200px - 32px);
@@ -64,7 +64,7 @@
 }
 .MainItemPopover span{
     color: #fff;
-    font-family: ubuntu!important;
+    font-family: Ubuntu, sans-serif!important;
     font-size: 0.9rem;
 }
 .MainItemPopover .OtherMiniPopover{
