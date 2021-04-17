@@ -239,9 +239,10 @@ class RenderItem extends React.Component {
                         </Grid>
                         <Grid item xs={6}>
                             <img src={"https://newjacofood.ru/src/img/items/"+this.state.item.img_full} alt={this.state.item.name} />
+                            <Typography gutterBottom variant="h5" component="span" className="ItemDesc">{'Состав: '+this.state.item.tmp_desc}</Typography>
                         </Grid>
                         <Grid item xs={6}>
-                            <Typography gutterBottom variant="h5" component="span" className="ItemDesc">{'Состав: '+this.state.item.tmp_desc}</Typography>
+                            
                             { this.state.item.info_weight.length > 0 ?
                                 <Typography gutterBottom variant="h5" component="span" className="ItemDesc ItemOther">{'Вес: '+this.state.item.info_weight} <ItemInfoPopover items={this.state.item.items} /></Typography>
                                 :

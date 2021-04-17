@@ -771,7 +771,7 @@ export class App extends React.Component {
                             
                             
                             <Hidden smUp>
-                                <Typography variant="h5" component="span" style={{ color: '#000', fontSize: '1.2rem' }}>Тольятти</Typography>
+                                <Typography variant="h5" component="span" className="thisCity">Тольятти</Typography>
                             </Hidden>
                         </Toolbar>
                         
