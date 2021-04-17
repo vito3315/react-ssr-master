@@ -233,16 +233,15 @@ class RenderItem extends React.Component {
         return (
             <div>
                 <Hidden xsDown>
-                    <Grid container spacing={3} className="MainItem">
-                        <Grid item xs={12}>
+                    <Grid container className="MainItem mainContainer" style={{ marginTop: 64 }}>
+                        <Grid item xs={12} style={{ paddingBottom: 15 }}>
                             <Typography variant="h5" component="h1">{this.state.item.name}</Typography>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={6} style={{ paddingRight: 12 }}>
                             <img src={"https://newjacofood.ru/src/img/items/"+this.state.item.img_full} alt={this.state.item.name} />
-                            <Typography gutterBottom variant="h5" component="span" className="ItemDesc">{'Состав: '+this.state.item.tmp_desc}</Typography>
                         </Grid>
-                        <Grid item xs={6}>
-                            
+                        <Grid item xs={6} style={{ paddingLeft: 12 }}>
+                            <Typography gutterBottom variant="h5" component="span" className="ItemDesc">{'Состав: '+this.state.item.tmp_desc}</Typography>
                             { this.state.item.info_weight.length > 0 ?
                                 <Typography gutterBottom variant="h5" component="span" className="ItemDesc ItemOther">{'Вес: '+this.state.item.info_weight} <ItemInfoPopover items={this.state.item.items} /></Typography>
                                 :

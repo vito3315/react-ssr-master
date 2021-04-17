@@ -21,6 +21,7 @@
 .MainItem img, .MainItem_mobile img{
     max-width: 400;
     width: 100%;
+    height: intrinsic;
 }
 .MainItem .ItemDesc, .MainItem_mobile .ItemDesc{
     font-size: 1.2rem;
