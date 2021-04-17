@@ -1,44 +1,16 @@
-.ui-app {
-    padding: 20px;
-    font-family: sans-serif;
-
-    // navigation
-    &__navigation {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-
-        &__link {
-            flex: 0 0 auto;
-            margin-right: 20px;
-            font-size: 14px;
-            text-transform: uppercase;
-            text-decoration: none;
-            color: #000;
-
-            &--active {
-                color: #673AB7;
-                font-weight: bold;
-            }
-        }
-    }
-}
+@charset "utf-8"; 
 
 @font-face {
-    font-family: 'ubuntu';
-    font-style: normal;
-    font-weight: 700;
-    src: local('ubuntu'), local('ubuntu'),
-         url('/src/assets/fonts/ubuntu_allfont_ru.ttf') format('truetype');
+	font-family: Futuris Bold; /* Гарнитура шрифта */
+	src: url('/src/assets/fonts/FTX85.otf'); /* Для IE5-8 */
+	src: local(FTX85), url('/src/assets/fonts/FTX85.otf'); /* Для остальных браузеров */
+}
+@font-face {
+	font-family: ubuntu; /* Гарнитура шрифта */
+	src: url('/src/assets/fonts/ubuntu_allfont_ru.ttf'); /* Для IE5-8 */
+	src: local(ubuntu_allfont_ru), url('/src/assets/fonts/ubuntu_allfont_ru.ttf'); /* Для остальных браузеров */
 }
 
-@font-face {
-    font-family: 'futuris';
-    font-style: normal;
-    font-weight: 700;
-    src: local('futuris'), local('futuris'),
-         url('/src/assets/fonts/FTX85.otf') format('truetype');
-}
 body{
     margin: 0px!important;
 }
