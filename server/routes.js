@@ -1,5 +1,3 @@
-const { Counter } = require( '../src/components/counter' );
-const { Post } = require( '../src/components/post' );
 const { Home } = require( '../src/components/home' );
 const { Item } = require( '../src/components/item' );
 const { Contact } = require( '../src/components/contact' );
@@ -9,12 +7,7 @@ module.exports = [
     {
         path: '/',
         exact: true,
-        component: Counter,
-    },
-    {
-        path: '/post',
-        exact: true,
-        component: Post,
+        component: Home,
     },
     {
         path: '/home',
