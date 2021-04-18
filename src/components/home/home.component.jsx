@@ -46,11 +46,6 @@ import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 
 const handleDragStart = (e) => e.preventDefault();
-const items = [
-  <img src="https://jacofood.ru/src/img/banners/Feeriia_Toliatti_2_opt_max.jpg?date=2021_03_12_13_56_39" onDragStart={handleDragStart} />,
-  <img src="https://jacofood.ru/src/img/banners/Tehasskaia_Toliatti_opt_max.jpg?date=2021_03_12_13_11_04" onDragStart={handleDragStart} />,
-  <img src="https://jacofood.ru/src/img/banners/Den_rozhdeniia_opt_max.jpg?date=2021_03_12_15_09_22" onDragStart={handleDragStart} />,
-];
 
 import { Item } from '../item';
 
@@ -111,29 +106,27 @@ class CardItem extends React.Component {
         }
     }
     
-    goTo(){
-        if(this._isMounted){
-            window.location.pathname = "/item/"+this.state.item.id;
-        }
-    }
-    
     render() {
         
         if( this.props.type == 'pc' ){
             return (
                 <Card elevation={0} className="CardItem">
-                    <CardContent onClick={this.goTo.bind(this)}>
-                        <CardMedia
-                            component="img"
-                            alt={this.state.item.name}
-                            image={"https://newjacofood.ru/src/img/items/"+this.state.item.img_full+'?'+this.state.item.img_full_date_update}
-                            title={this.state.item.name}
-                        />
-                        <CardContent style={{ padding: '1.2vw' }}>
-                            <Typography className="CardNameItem" gutterBottom variant="h5" component="span">{this.state.item.name}</Typography>
-                            <Typography className="CardInfoItem" component="p">{this.state.item.tmp_desc}</Typography>
+                    
+                        <CardContent>
+                            <Link to={"/item/"+this.state.item.id} >
+                                <CardMedia
+                                    component="img"
+                                    alt={this.state.item.name}
+                                    image={"https://newjacofood.ru/src/img/items/"+this.state.item.img_full+'?'+this.state.item.img_full_date_update}
+                                    title={this.state.item.name}
+                                />
+                                <CardContent style={{ padding: '1.2vw' }}>
+                                    <Typography className="CardNameItem" gutterBottom variant="h5" component="span">{this.state.item.name}</Typography>
+                                    <Typography className="CardInfoItem" component="p">{this.state.item.tmp_desc}</Typography>
+                                </CardContent>
+                            </Link>
                         </CardContent>
-                    </CardContent>
+                    
                     <CardActions className="CardAction">
                         <Typography gutterBottom className="CardInfoWeiItem" component="span">{this.state.item.info_weight}</Typography>
                         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginLeft: 0, width: '100%' }}>
@@ -226,7 +219,7 @@ export class Home extends React.Component {
         
         this.state = {      
             allItems: [],  
-            is_load: false,
+            is_load: true,
             testData: [1, 2, 3, 4, 5, 6, 7, 8, 9],
             openItem: null,
             openModal: false,
@@ -235,24 +228,35 @@ export class Home extends React.Component {
         };
     }
 
-    load(){
-        fetch('https://jacofood.ru/src/php/test_app.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/x-www-form-urlencoded'},
-            body: queryString.stringify({
-                type: 'get_cat', 
-                city_id: 1
+    componentDidMount = () => {
+        if (typeof window !== 'undefined') {
+            setTimeout(() => {
+                if( localStorage.getItem('goTo') ){
+                    let hash = localStorage.getItem('goTo')
+                    
+                    localStorage.removeItem('goTo');
+                    
+                    scroller.scrollTo("myScrollToElement", {
+                        duration: 800,
+                        delay: 0,
+                        smooth: "easeInOutQuart",
+                        offset: document.getElementById('cat'+hash).getBoundingClientRect()['y'] - 150
+                    });
+                }
+            }, 700);
+        }
+        
+        itemsStore.setPage('home');
+        
+        autorun(() => {
+            this.setState({
+                allItems: itemsStore.getAllItemsCat()
             })
-        }).then(res => res.json()).then(json => {
-            
-            let test_arr = [];
-            test_arr.push(json.arr[0]);
             
             let banners_pc = [],
                 banners_mobile = [];
             
-            json.baners.map((item, key) => {
+            itemsStore.getBanners().map((item, key) => {
                 banners_pc.push(
                     <img src={"https://jacofood.ru/src/img/banners/"+item.b_img_full+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
                 )
@@ -263,42 +267,10 @@ export class Home extends React.Component {
             })
             
             this.setState({ 
-                allItems: test_arr, 
                 banners_pc: banners_pc,
-                banners_mobile: banners_mobile,
-                is_load: true,
+                banners_mobile: banners_mobile
             });
-            
-            setTimeout(() => {
-                this.setState({ 
-                    allItems: json.arr,
-                });
-            }, 250)
-            
-            if (typeof window !== 'undefined') {
-                setTimeout(() => {
-                    if( localStorage.getItem('goTo') ){
-                        let hash = localStorage.getItem('goTo')
-                        
-                        localStorage.removeItem('goTo');
-                        
-                        scroller.scrollTo("myScrollToElement", {
-                            duration: 800,
-                            delay: 0,
-                            smooth: "easeInOutQuart",
-                            offset: document.getElementById('cat'+hash).getBoundingClientRect()['y'] - 150
-                        });
-                    }
-                }, 700);
-            }
         })
-        .catch(err => { });
-    }  
-    
-    componentDidMount = () => {
-        this.load();
-        
-        itemsStore.setPage('home');
         
         setTimeout(()=>{
             window.scrollTo(0, 0);
@@ -350,8 +322,6 @@ export class Home extends React.Component {
             );
         }
         
-        //<CardItem data={it} openItem={this.openItem.bind(this)} />
-        
         return (
             <Element name="myScrollToElement">
                 
@@ -374,7 +344,7 @@ export class Home extends React.Component {
                     />
                 </Hidden>
                 
-                {this.state.allItems.map((cat, key) => (
+                {itemsStore.getAllItemsCat().map((cat, key) => (
                     <Grid container spacing={2} md={10} sm={12} xs={12} xl={10} style={{ margin: 0, padding: '0px 10px', flexWrap: 'wrap' }} className="MainItems mainContainer" key={key} name={"cat"+cat.id} id={"cat"+cat.id}>
                         {cat.items.map((it, k) => (
                             <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '16px 8px', display: 'flex'}}>

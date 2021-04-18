@@ -5,6 +5,8 @@ class ItemsStore {
   // Don't need decorators now
   items = '';
   allItems = '';
+  allItemsCat = '';
+  banners = '';
   AllPrice = 0;
   
   promo = null;
@@ -381,6 +383,22 @@ class ItemsStore {
       }
     }
   }
+
+  setBanners = (items) => {
+    this.banners = JSON.stringify(items);
+  };
+
+  getBanners(){
+    return this.banners.length == 0 ? [] : JSON.parse(this.banners, true);
+  };
+
+  setAllItemsCat = (items) => {
+    this.allItemsCat = JSON.stringify(items);
+  };
+
+  getAllItemsCat(){
+    return this.allItemsCat.length == 0 ? [] : JSON.parse(this.allItemsCat, true);
+  };
 
   setItems = (items) => {
     console.log( items )
