@@ -83,28 +83,31 @@ export class Actii extends React.Component {
     render() {
         if(!this.state.is_load){
             return (
-                <Grid container spacing={3} className="MainItem">
-                    <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
+                <Grid container className="Actii" style={{ marginTop: 64 }}>
+                    <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', paddingBottom: 15 }}>
                         <Skeleton variant="text" width={200} height={30} />
                     </Grid>
-                    <Grid item xs={6}>
-                        <Skeleton variant="rect" width={400} height={400} />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Skeleton variant="text" width={500} height={60} />
-                        <Skeleton variant="text" width={500} height={30} />
-                        <Skeleton variant="text" width={500} height={30} />
-                    </Grid>
+                    <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer" style={{ paddingTop: 0, paddingBottom: 50 }}>
+                        <Grid item  xs={12} sm={6} md={4} xl={3}>
+                            <Skeleton variant="rect" width={'100%'} height={400} />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={4} xl={3}>
+                            <Skeleton variant="rect" width={'100%'} height={400} />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={4} xl={3}>
+                            <Skeleton variant="rect" width={'100%'} height={400} />
+                        </Grid>
+                    </Grid>    
                 </Grid>
             )
         }
         
         return (
-            <Grid container className="Actii" style={{ marginTop: 60 }}>
+            <Grid container className="Actii" style={{ marginTop: 64 }}>
                 <Grid item xs={12} style={{ paddingBottom: 0 }}>
                     <Typography variant="h5" component="h1">Акции</Typography>
                 </Grid>
-                <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer" style={{ paddingTop: 0 }}>
+                <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer" style={{ paddingTop: 0, paddingBottom: 50 }}>
                     {this.state.actii.map((item, key) =>
                         <Grid item xs={12} sm={6} md={4} xl={3} key={key}>
                             <img src={"https://newjacofood.ru/src/img/aktii/"+item.img_min} alt={item.promo_title} style={{ width: '100%' }} onClick={this.openDialog.bind(this, item)} />
@@ -122,7 +125,7 @@ export class Actii extends React.Component {
                             </IconButton>
                         </MuiDialogTitle>
                         
-                        <MuiDialogContent dividers className="modalActiiContent">
+                        <MuiDialogContent className="modalActiiContent">
                             <div dangerouslySetInnerHTML={{__html: this.state.showItem.text}} />
                         </MuiDialogContent>
                         {this.state.showItem.promo.length > 0 ?
