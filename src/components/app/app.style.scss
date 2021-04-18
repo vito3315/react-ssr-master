@@ -1,14 +1,10 @@
 @charset "utf-8"; 
-
 @font-face {
 	font-family: Futuris Bold; /* Гарнитура шрифта */
 	src: url('/src/assets/fonts/FuturaFuturisC-Bold.ttf'); /* Для IE5-8 */
 	src: local(FuturaFuturisC-Bold), url('/src/assets/fonts/FuturaFuturisC-Bold.ttf'); /* Для остальных браузеров */
 }
-
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
-
-
 body{
     margin: 0px!important;
 }
@@ -25,8 +21,6 @@ body{
     color: #fff;
     font-size: 2rem;
 }
-
-
 .home{
     display: flex;
     flex-direction: column;
@@ -74,11 +68,8 @@ body{
 .CardAction{
     flex-direction: column;
     align-items: end!important;
-    /*justify-content: space-between;*/
     padding: 1.2vw!important;
-    
     width: calc(100% - 2.4vw);
-    
 }
 .BtnCardMain:hover{
     background-color: #fff!important;
@@ -199,7 +190,6 @@ body{
     width: 40%;
     text-align: center;
 }
-
 @media (min-width: 1280px){
     .mainContainer.MuiGrid-grid-lg-10, .mainContainer.MuiGrid-grid-xs-10 {
         margin-left: 8.35%!important;
@@ -210,7 +200,6 @@ body{
         margin-left: 8.35%!important;
     }
 }
-
 .socIcons{
     display: flex;
     justify-content: flex-end;
@@ -220,12 +209,9 @@ body{
         display: block;
     }
 }
-
-
 .mainContainer.MuiGrid-spacing-xs-3{
     margin: 0;
 }
-
 .dis_none{
     display: none!important;
 }
@@ -239,7 +225,6 @@ body{
 }
 .InputMask:focus{
     outline: inherit!important;
-    //border: 1px solid #BB0025;
 }
 .ModalAuth .MuiDialogTitle-root {
     text-align: center;
@@ -262,7 +247,6 @@ body{
     margin-bottom: 5;
     font-family: Ubuntu, sans-serif !important;
 }
-
 .MuiButtonBase-root {
     color: inherit;
     border: 0;
@@ -283,7 +267,6 @@ body{
     -webkit-appearance: none;
     -webkit-tap-highlight-color: transparent;
 }
-
 .scrollCat::-webkit-scrollbar{
 	display: none;
 }
