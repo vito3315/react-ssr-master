@@ -118,90 +118,91 @@ class CardItem extends React.Component {
     }
     
     render() {
-        return (
-            <div>
-                <Hidden xsDown>
-                    <Card elevation={0} className="CardItem">
-                        <CardContent onClick={this.goTo.bind(this)}>
-                            <CardMedia
-                                component="img"
-                                alt={this.state.item.name}
-                                image={"https://newjacofood.ru/src/img/items/"+this.state.item.img_full+'?'+this.state.item.img_full_date_update}
-                                title={this.state.item.name}
-                            />
-                            <CardContent style={{ padding: '1.2vw' }}>
-                                <Typography className="CardNameItem" gutterBottom variant="h5" component="span">{this.state.item.name}</Typography>
-                                <Typography className="CardInfoItem" component="p">{this.state.item.tmp_desc}</Typography>
-                            </CardContent>
-                        </CardContent>
-                        <CardActions className="CardAction">
-                            <Typography gutterBottom className="CardInfoWeiItem" component="span">{this.state.item.info_weight}</Typography>
-                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginLeft: 0, width: '100%' }}>
-                                <div><Typography className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <AttachMoneyIcon fontSize="small" /></Typography></div>
-                                {this.state.count == 0 ?
-                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
-                                        <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={this.add.bind(this)}>В корзину</Button>
-                                    </ButtonGroup>
-                                :
-                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder count">
-                                        <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this)}>
-                                            <RemoveIcon fontSize="small" />
-                                        </Button>
-                                        <Button variant="contained" className="BtnCardMain" >
-                                            <Typography className="CardCountItem" component="span">{this.state.count}</Typography>
-                                        </Button>
-                                        <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this)}> 
-                                            <AddIcon fontSize="small" />
-                                        </Button>
-                                    </ButtonGroup>
-                                }
-                            
-                            </div>
-                    
-                            
-                        </CardActions>
-                    </Card>
-                </Hidden>
-                    
-                <Hidden smUp>
-                    <Grid item container xs={12} className="CardItem_mobile">
-                        <Grid item xs={5} sm={5} md={5} xl={5} onClick={ () => this.props.openItem(this.state.item.id)}>
-                            <CardMedia
-                                component="img"
-                                alt={this.state.item.name}
-                                image={"https://newjacofood.ru/src/img_app/"+this.state.item.img_app+'?'+this.state.item.img_full_date_update}
-                                title={this.state.item.name}
-                            />
-                        </Grid>
-                        <Grid item xs={7} sm={7} md={7} xl={7} className="SecondBox">
+        
+        if( this.props.type == 'pc' ){
+            return (
+                <Card elevation={0} className="CardItem">
+                    <CardContent onClick={this.goTo.bind(this)}>
+                        <CardMedia
+                            component="img"
+                            alt={this.state.item.name}
+                            image={"https://newjacofood.ru/src/img/items/"+this.state.item.img_full+'?'+this.state.item.img_full_date_update}
+                            title={this.state.item.name}
+                        />
+                        <CardContent style={{ padding: '1.2vw' }}>
                             <Typography className="CardNameItem" gutterBottom variant="h5" component="span">{this.state.item.name}</Typography>
                             <Typography className="CardInfoItem" component="p">{this.state.item.tmp_desc}</Typography>
-                            <div>
-                                <Typography gutterBottom className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <AttachMoneyIcon fontSize="small" /></Typography>
-                                {this.state.count == 0 ?
-                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
-                                        <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={this.add.bind(this)}>В корзину</Button>
-                                    </ButtonGroup>
-                                        :
-                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder count">
-                                        <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this)}>
-                                            <RemoveIcon fontSize="small" />
-                                        </Button>
-                                        <Button variant="contained" className="BtnCardMain" >
-                                            <Typography className="CardCountItem" component="span">{this.state.count}</Typography>
-                                        </Button>
-                                        <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this)}> 
-                                            <AddIcon fontSize="small" />
-                                        </Button>
-                                    </ButtonGroup>
-                                }
-                            </div>
-                        </Grid>
+                        </CardContent>
+                    </CardContent>
+                    <CardActions className="CardAction">
+                        <Typography gutterBottom className="CardInfoWeiItem" component="span">{this.state.item.info_weight}</Typography>
+                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginLeft: 0, width: '100%' }}>
+                            <div><Typography className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <AttachMoneyIcon fontSize="small" /></Typography></div>
+                            {this.state.count == 0 ?
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
+                                    <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={this.add.bind(this)}>В корзину</Button>
+                                </ButtonGroup>
+                            :
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder count">
+                                    <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this)}>
+                                        <RemoveIcon fontSize="small" />
+                                    </Button>
+                                    <Button variant="contained" className="BtnCardMain" >
+                                        <Typography className="CardCountItem" component="span">{this.state.count}</Typography>
+                                    </Button>
+                                    <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this)}> 
+                                        <AddIcon fontSize="small" />
+                                    </Button>
+                                </ButtonGroup>
+                            }
                         
+                        </div>
+                
+                        
+                    </CardActions>
+                </Card>
+            )
+        }
+        
+        if( this.props.type == 'mobile' ){
+            return (
+                <Grid item container xs={12} className="CardItem_mobile">
+                    <Grid item xs={5} sm={5} md={5} xl={5} onClick={ () => this.props.openItem(this.state.item.id)}>
+                        <CardMedia
+                            component="img"
+                            alt={this.state.item.name}
+                            image={"https://newjacofood.ru/src/img_app/"+this.state.item.img_app+'?'+this.state.item.img_full_date_update}
+                            title={this.state.item.name}
+                        />
                     </Grid>
-                </Hidden>
-            </div>
-        );
+                    <Grid item xs={7} sm={7} md={7} xl={7} className="SecondBox">
+                        <Typography className="CardNameItem" gutterBottom variant="h5" component="span">{this.state.item.name}</Typography>
+                        <Typography className="CardInfoItem" component="p">{this.state.item.tmp_desc}</Typography>
+                        <div>
+                            <Typography gutterBottom className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <AttachMoneyIcon fontSize="small" /></Typography>
+                            {this.state.count == 0 ?
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
+                                    <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={this.add.bind(this)}>В корзину</Button>
+                                </ButtonGroup>
+                                    :
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder count">
+                                    <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this)}>
+                                        <RemoveIcon fontSize="small" />
+                                    </Button>
+                                    <Button variant="contained" className="BtnCardMain" >
+                                        <Typography className="CardCountItem" component="span">{this.state.count}</Typography>
+                                    </Button>
+                                    <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this)}> 
+                                        <AddIcon fontSize="small" />
+                                    </Button>
+                                </ButtonGroup>
+                            }
+                        </div>
+                    </Grid>
+                    
+                </Grid>
+            )
+        }
     }
 }
 
@@ -351,6 +352,8 @@ export class Home extends React.Component {
             );
         }
         
+        //<CardItem data={it} openItem={this.openItem.bind(this)} />
+        
         return (
             <Element name="myScrollToElement">
                 
@@ -374,10 +377,15 @@ export class Home extends React.Component {
                 </Hidden>
                 
                 {this.state.allItems.map((cat, key) => (
-                    <Grid container spacing={2} md={10} sm={12} xs={12} xl={10} style={{ margin: 0, padding: '0px 10px', alignItems: 'flex-end' }} className="MainItems mainContainer" key={key} name={"cat"+cat.id} id={"cat"+cat.id}>
+                    <Grid container spacing={2} md={10} sm={12} xs={12} xl={10} style={{ margin: 0, padding: '0px 10px', flexWrap: 'wrap' }} className="MainItems mainContainer" key={key} name={"cat"+cat.id} id={"cat"+cat.id}>
                         {cat.items.map((it, k) => (
-                            <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '16px 8px'}}>
-                                <CardItem data={it} openItem={this.openItem.bind(this)} />
+                            <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '16px 8px', display: 'flex'}}>
+                                <Hidden xsDown>
+                                    <CardItem data={it} type={'pc'} openItem={this.openItem.bind(this)} />
+                                </Hidden>
+                                <Hidden smUp>
+                                    <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
+                                </Hidden>
                             </Grid>
                         ))}
                     </Grid>

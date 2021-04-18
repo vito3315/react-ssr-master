@@ -5,12 +5,14 @@
 }
 .CardItem{
     max-width: 345; 
-    height: 100%;
-    position: relative;
+    min-height: 300px;
+    display: flex; 
+    flex-direction: column; 
+    align-items: stretch;
+    justify-content: space-between;
 }
 .CardItem > div:first-child{
     padding: 0;
-    padding-bottom: 67;
 }
 .CardItem img{
     width: 100%;
@@ -132,4 +134,8 @@
 }
 .alice-carousel__prev-btn-item, .alice-carousel__next-btn-item{
     padding: 0px!important;
+}
+.MainItems.mainContainer > div{
+    max-height: auto;
+    
 }
