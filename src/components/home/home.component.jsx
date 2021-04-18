@@ -271,10 +271,6 @@ export class Home extends React.Component {
                 banners_mobile: banners_mobile
             });
         })
-        
-        setTimeout(()=>{
-            window.scrollTo(0, 0);
-        }, 500)
     }
 
     openItem(id){
@@ -306,19 +302,21 @@ export class Home extends React.Component {
     }
 
     render() {
-        if( !this.state.is_load ){
+        if( itemsStore.getAllItemsCat().length == 0 ){
             return (
-                <Grid container spacing={2} md={10} sm={12} xs={12} xl={10} style={{ margin: 0, padding: '0px 10px', paddingTop: 56, flexWrap: 'wrap' }} className="MainItems mainContainer">
-                    {this.state.testData.map((cat, key) => (
-                        <Grid item xs={12} sm={4} md={3} xl={3} key={key} style={{ padding: '16px 8px'}}>
-                            <Skeleton variant="rect" width={260} height={170} />
-                            <Skeleton variant="text" width={120} height={26} />
-                            <Skeleton variant="text" width={260} />
-                            <Skeleton variant="text" width={260} />
-                            <Skeleton variant="text" width={260} />
-                        </Grid>
-                    ))}
-                </Grid>
+                <Element name="myScrollToElement">
+                    <Grid container spacing={2} md={10} sm={12} xs={12} xl={10} style={{ margin: 0, padding: '0px 10px', paddingTop: 56, flexWrap: 'wrap' }} className="MainItems mainContainer">
+                        {this.state.testData.map((cat, key) => (
+                            <Grid item xs={12} sm={4} md={3} xl={3} key={key} style={{ padding: '16px 8px'}}>
+                                <Skeleton variant="rect" width={260} height={170} />
+                                <Skeleton variant="text" width={120} height={26} />
+                                <Skeleton variant="text" width={260} />
+                                <Skeleton variant="text" width={260} />
+                                <Skeleton variant="text" width={260} />
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Element>
             );
         }
         

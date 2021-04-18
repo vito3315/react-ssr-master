@@ -651,7 +651,6 @@ export class App extends React.Component {
                 city_id: 1
             })
         }).then(res => res.json()).then(json => {
-            cart.allItems = json.all_items;
             itemsStore.setAllItems(json.all_items);
             itemsStore.setAllItemsCat(json.arr);
             itemsStore.setBanners(json.baners)
@@ -690,7 +689,7 @@ export class App extends React.Component {
                                         <img alt="Жако доставка роллов и пиццы" src="https://newjacofood.ru/src/img/other/Logotip.png" />
                                     </Grid>
                                     {this.state.testData.map((item, key) => 
-                                        <Grid item key={key}>
+                                        <Grid item key={key} style={{ padding: '8px 16px' }}>
                                             <Skeleton variant="rect" width={100} height={20} />
                                         </Grid>
                                     )}

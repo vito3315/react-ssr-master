@@ -29,12 +29,14 @@ export function Item(props = 0) {
   
     if( props.item ){
         return (
-            <RenderItem itemId={props.itemId} item={props.item} />
+            <RenderItem itemId={props.itemId} item={props.item} type={"props"} />
         );
     }
   
+    let item = itemsStore.getAllItems().filter( (item) => item.id == itemId )[0];
+  
     return (
-        <RenderItem itemId={itemId} />
+        <RenderItem itemId={itemId} item={item} type={"render"} />
     );
 }
 
@@ -199,6 +201,14 @@ class RenderItem extends React.Component {
             })
             .catch(err => { });
         }
+        
+        if( this.props.type == 'render' ){
+            if( document.querySelector('.activeCat') ){
+                document.querySelector('.activeCat').classList.remove('activeCat');
+            }
+            window.scrollTo(0, 0);
+            itemsStore.setPage('item');
+        }
     }
     
     add(){
@@ -214,7 +224,7 @@ class RenderItem extends React.Component {
     render() {
         if(!this.state.is_load){
             return (
-                <Grid container spacing={3} className="MainItem">
+                <Grid container spacing={3} className="MainItem mainContainer" style={{ marginTop: 64 }}>
                     <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
                         <Skeleton variant="text" width={200} height={30} />
                     </Grid>
