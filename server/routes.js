@@ -5,27 +5,27 @@ const { Actii } = require( '../src/components/actii' );
 
 module.exports = [
     {
-        path: '/',
+        path: '/:cityName/',
         exact: true,
         component: Home,
     },
     {
-        path: '/home',
+        path: '/:cityName/home',
         exact: true,
         component: Home,
     },
     {
-        path: '/contact',
+        path: '/:cityName/contact',
         exact: true,
         component: Contact,
     },
     {
-        path: '/actii',
+        path: '/:cityName/actii',
         exact: true,
         component: Actii,
     },
     {
-        path: '/item/:id',
+        path: '/:cityName/item/:itemId',
         component: Item,
     },
 ];
