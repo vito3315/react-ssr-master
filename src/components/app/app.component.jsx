@@ -83,7 +83,7 @@ class CustomBottomNavigation extends React.Component{
                 style={{ position: 'fixed', bottom: 0, width: '100%', height: 56, display: 'flex', justifyContent: 'center', backgroundColor: '#fff' }}
             >
                 <Link
-                    to='/home'
+                    to={'/'+itemsStore.getCity()+'/'}
                     exact={ true }
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                     style={{ flex: 1 }}
@@ -91,7 +91,7 @@ class CustomBottomNavigation extends React.Component{
                     <RestaurantMenuSharpIcon />
                 </Link>
                 <Link
-                    to='/actii'
+                    to={'/'+itemsStore.getCity()+'actii'}
                     exact={ true }
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                     style={{ flex: 1 }}
@@ -99,7 +99,7 @@ class CustomBottomNavigation extends React.Component{
                     <CardGiftcardIcon />
                 </Link>
                 <Link
-                    to='/'
+                    to={'/'+itemsStore.getCity()+'/'}
                     exact={ true }
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                     style={{ flex: 1 }}
@@ -109,7 +109,7 @@ class CustomBottomNavigation extends React.Component{
                     </Badge>
                 </Link>
                 <Link
-                    to='/contact'
+                    to={'/'+itemsStore.getCity()+'/contact'}
                     exact={ true }
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                     style={{ flex: 1 }}
@@ -117,7 +117,7 @@ class CustomBottomNavigation extends React.Component{
                     <LocationOnIcon />
                 </Link>
                 <Link
-                    to='/'
+                    to={'/'+itemsStore.getCity()+'/'}
                     exact={ true }
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                     style={{ flex: 1 }}
@@ -637,30 +637,42 @@ export class App extends React.Component {
             cartItems: [],
             activePage: '',
             is_load: false,
+            cityName: '',
             testData: [1, 2, 3, 4, 5, 6, 7, 8, 9]
         };
     }
 
     load(){
-        fetch('https://jacofood.ru/src/php/test_app.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/x-www-form-urlencoded'},
-            body: queryString.stringify({
-                type: 'get_cat', 
-                city_id: 1
+        if( itemsStore.getCity() ){
+            fetch('https://jacofood.ru/src/php/test_app.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/x-www-form-urlencoded'},
+                body: queryString.stringify({
+                    type: 'get_cat_web', 
+                    city_id: itemsStore.getCity()
+                })
+            }).then(res => res.json()).then(json => {
+                
+                console.log( itemsStore.getCity() )
+                console.log( json )
+                
+                itemsStore.setAllItems(json.all_items);
+                itemsStore.setAllItemsCat(json.arr);
+                itemsStore.setBanners(json.baners)
+                
+                this.setState({ 
+                    categoryItems: json.arr, 
+                    is_load: true,
+                });
             })
-        }).then(res => res.json()).then(json => {
-            itemsStore.setAllItems(json.all_items);
-            itemsStore.setAllItemsCat(json.arr);
-            itemsStore.setBanners(json.baners)
-            
-            this.setState({ 
-                categoryItems: json.arr, 
-                is_load: true,
-            });
-        })
-        .catch(err => { });
+            .catch(err => { });
+        }else{
+            console.log( window.location.pathname )
+            if( window.location.pathname == '/' ){
+                window.location.pathname = '/samara/';
+            }
+        }
     }  
     
     componentDidMount = () => {
@@ -674,6 +686,13 @@ export class App extends React.Component {
             this.setState({
                 activePage: itemsStore.getPage()
             })
+            
+            this.setState({
+                cityName: itemsStore.getCity()
+            })
+            
+            this.load();
+            console.log( itemsStore.getCity() )
         })
     }
 
@@ -686,7 +705,7 @@ export class App extends React.Component {
                             {!this.state.is_load ?
                                 <Grid>
                                     <Grid item style={{ marginRight: 15 }}>
-                                        <Link to={"/"}>
+                                        <Link to={"/"+itemsStore.getCity()+"/"}>
                                             <img alt="Жако доставка роллов и пиццы" src="https://newjacofood.ru/src/img/other/Logotip.png" />
                                         </Link> 
                                     </Grid>
@@ -701,7 +720,7 @@ export class App extends React.Component {
                                     :
                                 <Grid>
                                     <Grid item style={{ marginRight: 15 }}>
-                                        <Link to={"/"}>
+                                        <Link to={"/"+itemsStore.getCity()+"/"}>
                                             <img alt="Жако доставка роллов и пиццы" src="https://newjacofood.ru/src/img/other/Logotip.png" />
                                         </Link> 
                                     </Grid>
@@ -734,7 +753,7 @@ export class App extends React.Component {
                                                         <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
                                                     </ScrollLink> 
                                                         :
-                                                    <Link to={"/home"} className="catLink" style={{ padding: '4px 8px' }} onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
+                                                    <Link to={"/"+itemsStore.getCity()+"/"} className="catLink" style={{ padding: '4px 8px' }} onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
                                                         <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
                                                     </Link> 
                                                 }
@@ -744,7 +763,7 @@ export class App extends React.Component {
                                         <Grid item>
                                             <Link 
                                                 style={{ padding: '4px 8px' }}
-                                                to={"/actii"} 
+                                                to={"/"+itemsStore.getCity()+"/actii"} 
                                                 className="catLink"
                                             >
                                                 <Typography className="cat" variant="h5" component="span">Акции</Typography>
@@ -753,7 +772,7 @@ export class App extends React.Component {
                                         <Grid item>
                                             <Link 
                                                 style={{ padding: '4px 8px' }}
-                                                to={"/contact"} 
+                                                to={"/"+itemsStore.getCity()+"/contact"} 
                                                 className="catLink"
                                             >
                                                 <Typography className="cat" variant="h5" component="span">Контакты</Typography>
@@ -836,27 +855,27 @@ export class App extends React.Component {
                     
                     <Switch>
                         <Route
-                            path='/contact'
+                            path='/:cityName/contact'
                             exact={ true }
                             component={ Contact }
                         />
                         <Route
-                            path='/actii'
+                            path='/:cityName/actii'
                             exact={ true }
                             component={ Actii }
                         />
                         <Route
-                            path='/home'
+                            path='/:cityName/home'
                             exact={ true }
                             component={ Home }
                         />
                         <Route
-                            path='/'
+                            path='/:cityName/'
                             exact={ true }
                             component={ Home }
                         />
                         <Route
-                            path='/item/:itemId'
+                            path='/:cityName/item/:itemId'
                             component={ Item }
                         />
                     </Switch>

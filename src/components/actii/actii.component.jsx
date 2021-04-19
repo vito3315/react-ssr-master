@@ -14,7 +14,6 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import InfoIcon from '@material-ui/icons/Info';
 
-
 import CloseIcon from '@material-ui/icons/Close';
 
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -28,7 +27,17 @@ import itemsStore from '../../stores/items-store';
 
 const queryString = require('query-string');
 
-export class Actii extends React.Component {
+export function Actii() {
+    let { cityName } = useParams();
+  
+    itemsStore.setCity(cityName);
+  
+    return (
+        <RenderActii cityName={cityName} />
+    );
+}
+
+class RenderActii extends React.Component {
     constructor(props) {
         super(props);
         
@@ -36,7 +45,8 @@ export class Actii extends React.Component {
             actii: [],  
             is_load: false,
             showItem: null,
-            openDialog: false
+            openDialog: false,
+            city_name: this.props.cityName,
         };
     }
     
@@ -52,12 +62,10 @@ export class Actii extends React.Component {
             headers: {
                 'Content-Type':'application/x-www-form-urlencoded'},
             body: queryString.stringify({
-                type: 'get_my_actii', 
-                city_id: 1
+                type: 'get_my_actii_web', 
+                city_id: this.state.city_name
             })
         }).then(res => res.json()).then(json => {
-            console.log( json )
-            
             this.setState({ 
                 actii: json.actii, 
                 is_load: true,

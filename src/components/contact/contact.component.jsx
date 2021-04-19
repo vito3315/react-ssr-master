@@ -29,17 +29,10 @@ import itemsStore from '../../stores/items-store';
 const queryString = require('query-string');
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-  },
   heading: {
     fontSize: theme.typography.pxToRem(15),
     flexShrink: 0,
-  },
-  secondaryHeading: {
-    fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary,
-  },
+  }
 }));
 
 function ControlledAccordions(props) {
@@ -66,23 +59,23 @@ function ControlledAccordions(props) {
                     <AccordionDetails className="AccordionDesc" style={{ flexDirection: 'column', padding: 0 }}>
                         <div>
                             <Typography variant="h5" component="b">Название организации: </Typography>
-                            <Typography variant="h5" component="span">ООО Мистер Жако</Typography>
+                            <Typography variant="h5" component="span">{item.organization}</Typography>
                         </div>
                         <div>
                             <Typography variant="h5" component="b">ИНН / КПП: </Typography>
-                            <Typography variant="h5" component="span">6321390811 / 632401001</Typography>
+                            <Typography variant="h5" component="span">{item.inn} / {item.kpp}</Typography>
                         </div>
                         <div>
                             <Typography variant="h5" component="b">ОГРН: </Typography>
-                            <Typography variant="h5" component="span">1156313042621</Typography>
+                            <Typography variant="h5" component="span">{item.ogrn}</Typography>
                         </div>
                         <div>
                             <Typography variant="h5" component="b">Фактический адрес: </Typography>
-                            <Typography variant="h5" component="span">445021, РФ, Самарская обл., г. Тольятти, ул. Ленинградская, д. 47, комната 47</Typography>
+                            <Typography variant="h5" component="span">{item.full_addr}</Typography>
                         </div>
                         <div>
                             <Typography variant="h5" component="b">Телефон: </Typography>
-                            <Typography variant="h5" component="span">8 (8482) 90-30-52</Typography>
+                            <Typography variant="h5" component="span">{item.phone}</Typography>
                         </div>
                     </AccordionDetails>
                 </Accordion>
@@ -91,12 +84,23 @@ function ControlledAccordions(props) {
     );
 }
 
-export class Contact extends React.Component {
+export function Contact() {
+    let { cityName } = useParams();
+  
+    itemsStore.setCity(cityName);
+  
+    return (
+        <RenderContact cityName={cityName} />
+    );
+}
+
+class RenderContact extends React.Component {
     constructor(props) {
         super(props);
         
         this.state = {      
             points: [],  
+            city_name: this.props.cityName,
             is_load: false,
         };
     }
@@ -113,8 +117,8 @@ export class Contact extends React.Component {
             headers: {
                 'Content-Type':'application/x-www-form-urlencoded'},
             body: queryString.stringify({
-                type: 'get_addr_zone', 
-                city_id: 1
+                type: 'get_addr_zone_web', 
+                city_id: this.state.city_name
             })
         }).then(res => res.json()).then(json => {
             let points_zone = [];
@@ -188,11 +192,19 @@ export class Contact extends React.Component {
                     <Typography variant="h5" component="h1">Контакты</Typography>
                 </Grid>
                 <Grid item lg={4} md={4} xl={4} sm={12} xs={12} >
-                    <Typography variant="h5" component="span" className="p20">Стоимость доставки: 100 руб.</Typography>
+                    {this.state.points[0] ?
+                        <Typography variant="h5" component="span" className="p20">Стоимость доставки: {this.state.points[0].sum_div} руб.</Typography>
+                            :
+                        null
+                    }
                     <Typography variant="h5" component="h2">Режим работы</Typography>
                     <Typography variant="h5" component="span" className="p20">Работаем ежедневно с 10:00 до 21:30</Typography>
                     <Typography variant="h5" component="h2">Телефон контакт-центра:</Typography>
-                    <Typography variant="h5" component="span" className="p20">8 (8482) 90-30-52</Typography>
+                    {this.state.points[0] ?
+                        <Typography variant="h5" component="a" className="p20" href={'tel:'+this.state.points[0].phone_new}>{this.state.points[0].phone}</Typography>
+                            :
+                        null
+                    }
                     <Typography variant="h5" component="h2">Адреса кафе:</Typography>
                     <ControlledAccordions points={this.state.points}/>
                 </Grid>

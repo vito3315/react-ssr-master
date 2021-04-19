@@ -9,10 +9,20 @@ class ItemsStore {
   banners = '';
   AllPrice = 0;
   
+  cityName = '';
+  
   promo = null;
   userToken = null;
 
   activePage = '';
+
+  setCity = (city) => {
+    this.cityName = city;
+  };
+  
+  getCity(){
+    return this.cityName;
+  };
 
   setAllPrice = (price) => {
     this.AllPrice = price;

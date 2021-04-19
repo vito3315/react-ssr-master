@@ -111,12 +111,12 @@ module.exports = {
 
     // development server configuration
     devServer: {
-        port: 4031,
+        port: 4032,
         historyApiFallback: true,
     },
 
     // generate source map
-    devtool: ( 'development' === process.env.NODE_ENV ? 'eval-source-map' : 'eval' ),
-    //devtool: 'source-map'
+    //devtool: ( 'development' === process.env.NODE_ENV ? 'eval-source-map' : 'eval' ),
+    devtool: 'source-map'
 
 };

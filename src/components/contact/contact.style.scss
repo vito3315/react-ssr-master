@@ -12,9 +12,12 @@
     font-size: 1.3rem;
     font-family: Futuris Bold!important;
 }
-.Contact span{
+.Contact span, .Contact a{
     font-family: Ubuntu, sans-serif!important;
     font-size: 0.9rem;
+    width: max-content;
+    color: #000;
+    text-decoration: none;
 }
 .Contact > div:not(:first-child):not(:last-child){
     display: flex;

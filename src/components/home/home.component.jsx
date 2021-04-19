@@ -213,7 +213,17 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export class Home extends React.Component {
+export function Home() {
+    let { cityName } = useParams();
+  
+    itemsStore.setCity(cityName);
+  
+    return (
+        <RenderHome />
+    );
+}
+
+class RenderHome extends React.Component {
     constructor(props) {
         super(props);
         
