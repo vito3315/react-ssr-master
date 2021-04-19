@@ -685,14 +685,18 @@ export class App extends React.Component {
                         <Toolbar className="sub_header" style={{ display: 'flex', justifyContent: 'space-between' }}>
                             {!this.state.is_load ?
                                 <Grid>
-                                    <Grid item>
-                                        <img alt="Жако доставка роллов и пиццы" src="https://newjacofood.ru/src/img/other/Logotip.png" />
+                                    <Grid item style={{ marginRight: 15 }}>
+                                        <Link to={"/"}>
+                                            <img alt="Жако доставка роллов и пиццы" src="https://newjacofood.ru/src/img/other/Logotip.png" />
+                                        </Link> 
                                     </Grid>
-                                    {this.state.testData.map((item, key) => 
-                                        <Grid item key={key} style={{ padding: '8px 16px' }}>
-                                            <Skeleton variant="rect" width={100} height={20} />
-                                        </Grid>
-                                    )}
+                                    <Hidden xsDown>
+                                        {this.state.testData.map((item, key) => 
+                                            <Grid item key={key} style={{ padding: '8px 16px' }}>
+                                                <Skeleton variant="rect" width={100} height={20} />
+                                            </Grid>
+                                        )}
+                                    </Hidden>
                                 </Grid>
                                     :
                                 <Grid>
@@ -763,9 +767,13 @@ export class App extends React.Component {
                             }
                             
                             
-                            <Hidden smUp>
-                                <Typography variant="h5" component="span" className="thisCity">Тольятти</Typography>
-                            </Hidden>
+                            {this.state.is_load === true ?
+                                <Hidden smUp>
+                                    <Typography variant="h5" component="span" className="thisCity">Тольятти</Typography>
+                                </Hidden>
+                                    :
+                                null
+                            }
                         </Toolbar>
                         
                         {this.state.activePage == 'home' ?

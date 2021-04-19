@@ -248,6 +248,10 @@ export class Home extends React.Component {
         
         itemsStore.setPage('home');
         
+        //if( itemsStore.getAllItemsCat().length == 0 ){
+            window.scrollTo(0, 0);
+        //}
+        
         autorun(() => {
             this.setState({
                 allItems: itemsStore.getAllItemsCat()
@@ -305,16 +309,33 @@ export class Home extends React.Component {
         if( itemsStore.getAllItemsCat().length == 0 ){
             return (
                 <Element name="myScrollToElement">
-                    <Grid container spacing={2} md={10} sm={12} xs={12} xl={10} style={{ margin: 0, padding: '0px 10px', paddingTop: 56, flexWrap: 'wrap' }} className="MainItems mainContainer">
-                        {this.state.testData.map((cat, key) => (
-                            <Grid item xs={12} sm={4} md={3} xl={3} key={key} style={{ padding: '16px 8px'}}>
-                                <Skeleton variant="rect" width={260} height={170} />
-                                <Skeleton variant="text" width={120} height={26} />
-                                <Skeleton variant="text" width={260} />
-                                <Skeleton variant="text" width={260} />
-                                <Skeleton variant="text" width={260} />
-                            </Grid>
-                        ))}
+                    <Grid container spacing={2} md={10} sm={12} xs={12} xl={10} style={{ margin: 0, padding: '0px 10px', paddingTop: 64, flexWrap: 'wrap' }} className="MainItems mainContainer">
+                        {this.state.testData.map((cat, key) => [
+                            <div key={key}>
+                                <Hidden xsDown>
+                                    <Grid item xs={12} sm={4} md={3} xl={3} style={{ padding: '16px 8px'}}>
+                                        <Skeleton variant="rect" width={260} height={170} />
+                                        <Skeleton variant="text" width={120} height={26} />
+                                        <Skeleton variant="text" width={260} />
+                                        <Skeleton variant="text" width={260} />
+                                        <Skeleton variant="text" width={260} />
+                                    </Grid>
+                                </Hidden>
+                                <Hidden smUp>
+                                    <Grid item xs={12} sm={4} md={3} xl={3} style={{ padding: '16px 8px', display: 'flex', flexDirection: 'row'}}>
+                                        <Skeleton variant="rect" width={200} height={170} />
+                                        <div style={{ marginLeft: 15}}>
+                                            <Skeleton variant="text" width={100} height={26} />
+                                            <Skeleton variant="text" width={150} />
+                                            <Skeleton variant="text" width={150} />
+                                            <Skeleton variant="text" width={150} />
+                                        </div>
+                                    </Grid>
+                                </Hidden>
+                            </div>    
+                                
+                            
+                        ])}
                     </Grid>
                 </Element>
             );

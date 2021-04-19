@@ -107,7 +107,7 @@ export class Actii extends React.Component {
                 <Grid item xs={12} style={{ paddingBottom: 0 }}>
                     <Typography variant="h5" component="h1">Акции</Typography>
                 </Grid>
-                <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer" style={{ paddingTop: 0, paddingBottom: 50 }}>
+                <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer" style={{ paddingTop: 0 }}>
                     {this.state.actii.map((item, key) =>
                         <Grid item xs={12} sm={6} md={4} xl={3} key={key}>
                             <img src={"https://newjacofood.ru/src/img/aktii/"+item.img_min} alt={item.promo_title} style={{ width: '100%' }} onClick={this.openDialog.bind(this, item)} />
