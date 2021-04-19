@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink as Link, Switch, Route, useParams } from 'react-router-dom';
+import { NavLink as Link, Switch, Route, useParams, Redirect } from 'react-router-dom';
 
 import { Home } from '../home';
 import { Item } from '../item';
@@ -263,7 +263,7 @@ class SimplePopover extends React.Component{
             body: queryString.stringify({
               type: 'get_promo', 
               point_id: point_id,
-              city_id: 1,
+              city_id: itemsStore.getCity(),
               promo_name: promoName
             })
           }).then(res => res.json()).then(json => {
@@ -653,10 +653,6 @@ export class App extends React.Component {
                     city_id: itemsStore.getCity()
                 })
             }).then(res => res.json()).then(json => {
-                
-                console.log( itemsStore.getCity() )
-                console.log( json )
-                
                 itemsStore.setAllItems(json.all_items);
                 itemsStore.setAllItemsCat(json.arr);
                 itemsStore.setBanners(json.baners)
@@ -668,10 +664,7 @@ export class App extends React.Component {
             })
             .catch(err => { });
         }else{
-            console.log( window.location.pathname )
-            if( window.location.pathname == '/' ){
-                window.location.pathname = '/samara/';
-            }
+            
         }
     }  
     
@@ -878,6 +871,14 @@ export class App extends React.Component {
                             path='/:cityName/item/:itemId'
                             component={ Item }
                         />
+                        
+                        
+                        <Route path="/">
+                            <Redirect to="/samara/" />
+                        </Route>
+                        <Route path="*">
+                            <Redirect to="/samara/" />
+                        </Route>
                     </Switch>
                         
                     

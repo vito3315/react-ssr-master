@@ -113,7 +113,7 @@ class CardItem extends React.Component {
                 <Card elevation={0} className="CardItem">
                     
                         <CardContent>
-                            <Link to={"/item/"+this.state.item.id} >
+                            <Link to={"/"+itemsStore.getCity()+"/item/"+this.state.item.id} >
                                 <CardMedia
                                     component="img"
                                     alt={this.state.item.name}
