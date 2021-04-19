@@ -16,8 +16,6 @@ import InfoIcon from '@material-ui/icons/Info';
 
 import CloseIcon from '@material-ui/icons/Close';
 
-import Skeleton from '@material-ui/lab/Skeleton';
-
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
@@ -93,17 +91,17 @@ class RenderActii extends React.Component {
             return (
                 <Grid container className="Actii" style={{ marginTop: 64 }}>
                     <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', paddingBottom: 15 }}>
-                        <Skeleton variant="text" width={200} height={30} />
+                        <div style={{ width: 200, height: 30, backgroundColor: '#e5e5e5' }} />
                     </Grid>
                     <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer" style={{ paddingTop: 0, paddingBottom: 50 }}>
                         <Grid item  xs={12} sm={6} md={4} xl={3}>
-                            <Skeleton variant="rect" width={'100%'} height={400} />
+                            <div style={{ width: '100%', height: 400, backgroundColor: '#e5e5e5' }} />
                         </Grid>
                         <Grid item xs={12} sm={6} md={4} xl={3}>
-                            <Skeleton variant="rect" width={'100%'} height={400} />
+                            <div style={{ width: '100%', height: 400, backgroundColor: '#e5e5e5' }} />
                         </Grid>
                         <Grid item xs={12} sm={6} md={4} xl={3}>
-                            <Skeleton variant="rect" width={'100%'} height={400} />
+                            <div style={{ width: '100%', height: 400, backgroundColor: '#e5e5e5' }} />
                         </Grid>
                     </Grid>    
                 </Grid>

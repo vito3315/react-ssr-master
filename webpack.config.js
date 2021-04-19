@@ -2,8 +2,12 @@ const path = require( 'path' );
 const HTMLWebpackPlugin = require( 'html-webpack-plugin' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const CopyWebpackPlugin = require( 'copy-webpack-plugin' );
-var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-var CompressionPlugin = require("compression-webpack-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CompressionPlugin = require("compression-webpack-plugin");
+
+
+
+const webpack = require('webpack');
 
 /*-------------------------------------------------*/
 
@@ -56,11 +60,17 @@ module.exports = {
 
     // webpack plugins
     plugins: [
+        new CompressionPlugin(),
+        
+        new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /ru/),
+        
         new BundleAnalyzerPlugin({
             analyzerMode: 'disabled',
             generateStatsFile: true,
             statsOptions: { source: false }
         }),
+
+        
 
         // extract css to external stylesheet file
         new MiniCssExtractPlugin( {
@@ -95,6 +105,7 @@ module.exports = {
 
     // webpack optimizations
     optimization: {
+        runtimeChunk: true,
         splitChunks: {
             cacheGroups: {
                 default: false,
@@ -111,12 +122,12 @@ module.exports = {
 
     // development server configuration
     devServer: {
-        port: 4032,
+        port: 4038,
         historyApiFallback: true,
     },
 
     // generate source map
-    //devtool: ( 'development' === process.env.NODE_ENV ? 'eval-source-map' : 'eval' ),
-    devtool: 'source-map'
+    devtool: ( 'development' === process.env.NODE_ENV ? 'eval-source-map' : 'eval' ),
+    //devtool: 'source-map'
 
 };

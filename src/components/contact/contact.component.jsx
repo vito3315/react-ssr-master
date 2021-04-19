@@ -15,7 +15,6 @@ import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import InfoIcon from '@material-ui/icons/Info';
 
 import Popover from '@material-ui/core/Popover';
-import Skeleton from '@material-ui/lab/Skeleton';
 
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -105,12 +104,21 @@ class RenderContact extends React.Component {
         };
     }
     
+    dynamicallyLoadScript() {
+        var script = document.createElement("script");  // create a script DOM node
+        script.src = 'https://api-maps.yandex.ru/2.1/?apikey=ae2bad1f-486e-442b-a9f7-d84fff6296db&lang=ru_RU';  // set its src to the provided URL
+
+        document.head.appendChild(script);  // add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
+    }
+    
     componentDidMount = () => {
         if( document.querySelector('.activeCat') ){
             document.querySelector('.activeCat').classList.remove('activeCat');
         }
         window.scrollTo(0, 0);
         itemsStore.setPage('contact');
+        
+        this.dynamicallyLoadScript();
         
         fetch('https://jacofood.ru/src/php/test_app.php', {
             method: 'POST',
@@ -133,7 +141,10 @@ class RenderContact extends React.Component {
                 points: json,
             })
             
-            this.loadMap(json, points_zone);
+            setTimeout(() => {
+                this.loadMap(json, points_zone);
+            }, 500);
+            
         })
         .catch(err => { });
     }

@@ -10,11 +10,20 @@ class ItemsStore {
   AllPrice = 0;
   
   cityName = '';
+  cityNameRU = '';
   
   promo = null;
   userToken = null;
 
   activePage = '';
+
+  setCityRU = (city) => {
+    this.cityNameRU = city;
+  };
+  
+  getCityRU(){
+    return this.cityNameRU;
+  };
 
   setCity = (city) => {
     this.cityName = city;

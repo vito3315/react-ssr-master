@@ -43,7 +43,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 import Popover from '@material-ui/core/Popover';
-import Skeleton from '@material-ui/lab/Skeleton';
 import * as Scroll from 'react-scroll';
 import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
 
@@ -637,8 +636,10 @@ export class App extends React.Component {
             cartItems: [],
             activePage: '',
             is_load: false,
+            openCity: false,
             cityName: '',
-            testData: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+            testData: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+            cityList: [],
         };
     }
 
@@ -656,8 +657,11 @@ export class App extends React.Component {
                 itemsStore.setAllItems(json.all_items);
                 itemsStore.setAllItemsCat(json.arr);
                 itemsStore.setBanners(json.baners)
+                itemsStore.setCityRU(json.this_city_name_ru);
+                //this_city_name_ru
                 
-                this.setState({ 
+                this.setState({
+                    cityList: json.city_list,
                     categoryItems: json.arr, 
                     is_load: true,
                 });
@@ -669,7 +673,7 @@ export class App extends React.Component {
     }  
     
     componentDidMount = () => {
-        this.load();
+        //this.load();
         
         autorun(() => {
             this.setState({
@@ -689,6 +693,23 @@ export class App extends React.Component {
         })
     }
 
+    openCity(){
+        this.setState({
+            openCity: true
+        })
+    }
+    
+    closeCity(){
+        this.setState({
+            openCity: false
+        })
+    }
+
+    chooseCity(city){
+        let this_addr = window.location.href;
+        window.location.href = this_addr.replace(itemsStore.getCity(), city);
+    }
+
     render() {
         return (
             <Provider { ...stores }>
@@ -705,7 +726,7 @@ export class App extends React.Component {
                                     <Hidden xsDown>
                                         {this.state.testData.map((item, key) => 
                                             <Grid item key={key} style={{ padding: '8px 16px' }}>
-                                                <Skeleton variant="rect" width={100} height={20} />
+                                                <div style={{ width: 100, height: 20, backgroundColor: '#e5e5e5' }} />
                                             </Grid>
                                         )}
                                     </Hidden>
@@ -718,6 +739,12 @@ export class App extends React.Component {
                                         </Link> 
                                     </Grid>
                                     <Hidden xsDown>
+                                        
+                                        <Grid item className="CityProfileNav">
+                                            <Typography className="cat" variant="h5" component="span" onClick={this.openCity.bind(this)}>{itemsStore.getCityRU()}</Typography>
+                                            <Typography className="cat" variant="h5" component="span">Контакты</Typography>
+                                        </Grid>
+                                        
                                         {this.state.categoryItems.map((item, key) => 
                                             <Grid item key={key}>
                                                 {this.state.activePage == 'home' ?
@@ -781,7 +808,7 @@ export class App extends React.Component {
                             
                             {this.state.is_load === true ?
                                 <Hidden smUp>
-                                    <Typography variant="h5" component="span" className="thisCity">Тольятти</Typography>
+                                    <Typography variant="h5" component="span" className="thisCity" onClick={this.openCity.bind(this)}>{itemsStore.getCityRU()}</Typography>
                                 </Hidden>
                                     :
                                 null
@@ -828,6 +855,22 @@ export class App extends React.Component {
                         }
                     </AppBar>
                     
+                    <Dialog
+                        open={this.state.openCity}
+                        fullWidth={true}
+                        maxWidth={'xs'}
+                        onClose={this.closeCity.bind(this)}
+                        aria-labelledby="alert-dialog-title"
+                        aria-describedby="alert-dialog-description"
+                        className="ModalCity"
+                    >
+                        <DialogTitle id="alert-dialog-title">Выберите город</DialogTitle>
+                        <DialogContent className="ModalContent_1_1" style={{ paddingBottom: 24, paddingTop: 0 }}>
+                            {this.state.cityList.map((item, key) => 
+                                <Typography key={key} variant="h5" component="span" className={"ModalLabel "+( itemsStore.getCity() == item.link ? 'active' : '' )} onClick={this.chooseCity.bind(this, item.link)}>{item.name}</Typography>
+                            )}
+                        </DialogContent>
+                    </Dialog>
                     
                     {this.state.activePage == 'home' ?
                         <Hidden smUp>

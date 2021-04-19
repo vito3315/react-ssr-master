@@ -10,7 +10,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Typography from '@material-ui/core/Typography';
-import Skeleton from '@material-ui/lab/Skeleton';
 
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
@@ -324,21 +323,21 @@ class RenderHome extends React.Component {
                             <div key={key}>
                                 <Hidden xsDown>
                                     <Grid item xs={12} sm={4} md={3} xl={3} style={{ padding: '16px 8px'}}>
-                                        <Skeleton variant="rect" width={260} height={170} />
-                                        <Skeleton variant="text" width={120} height={26} />
-                                        <Skeleton variant="text" width={260} />
-                                        <Skeleton variant="text" width={260} />
-                                        <Skeleton variant="text" width={260} />
+                                        <div style={{ width: 260, height: 170, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
+                                        <div style={{ width: 120, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
+                                        <div style={{ width: 260, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
+                                        <div style={{ width: 260, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
+                                        <div style={{ width: 260, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
                                     </Grid>
                                 </Hidden>
                                 <Hidden smUp>
                                     <Grid item xs={12} sm={4} md={3} xl={3} style={{ padding: '16px 8px', display: 'flex', flexDirection: 'row'}}>
-                                        <Skeleton variant="rect" width={200} height={170} />
+                                        <div style={{ width: 200, height: 170, backgroundColor: '#e5e5e5' }} />
                                         <div style={{ marginLeft: 15}}>
-                                            <Skeleton variant="text" width={100} height={26} />
-                                            <Skeleton variant="text" width={150} />
-                                            <Skeleton variant="text" width={150} />
-                                            <Skeleton variant="text" width={150} />
+                                            <div style={{ width: 100, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
+                                            <div style={{ width: 150, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
+                                            <div style={{ width: 150, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
+                                            <div style={{ width: 150, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
                                         </div>
                                     </Grid>
                                 </Hidden>

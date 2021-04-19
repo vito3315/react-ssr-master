@@ -15,7 +15,6 @@ import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import InfoIcon from '@material-ui/icons/Info';
 
 import Popover from '@material-ui/core/Popover';
-import Skeleton from '@material-ui/lab/Skeleton';
 import Hidden from '@material-ui/core/Hidden';
 
 import { observer } from 'mobx-react';
@@ -226,15 +225,15 @@ class RenderItem extends React.Component {
             return (
                 <Grid container spacing={3} className="MainItem mainContainer" style={{ marginTop: 64 }}>
                     <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
-                        <Skeleton variant="text" width={200} height={30} />
+                        <div style={{ width: 200, height: 30, backgroundColor: '#e5e5e5' }} />
                     </Grid>
                     <Grid item xs={6}>
-                        <Skeleton variant="rect" width={400} height={400} />
+                        <div style={{ width: 400, height: 400, backgroundColor: '#e5e5e5' }} />
                     </Grid>
                     <Grid item xs={6}>
-                        <Skeleton variant="text" width={500} height={60} />
-                        <Skeleton variant="text" width={500} height={30} />
-                        <Skeleton variant="text" width={500} height={30} />
+                        <div style={{ width: 500, height: 60, backgroundColor: '#e5e5e5' }} />
+                        <div style={{ width: 500, height: 30, backgroundColor: '#e5e5e5' }} />
+                        <div style={{ width: 500, height: 30, backgroundColor: '#e5e5e5' }} />
                     </Grid>
                 </Grid>
             )
