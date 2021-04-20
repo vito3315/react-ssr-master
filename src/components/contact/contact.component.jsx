@@ -186,7 +186,7 @@ class RenderContact extends React.Component {
                     }, {
                         hintLayout: HintLayout,
     					iconLayout: 'default#image',
-    					iconImageHref: '/src/assets/img_other/Favikon.png',
+    					iconImageHref: 'https://jacofood.ru/src/img/other/Favikon.png',
     					iconImageSize: [30, 30],
     					iconImageOffset: [-12, -24],
     					iconContentOffset: [15, 15],
