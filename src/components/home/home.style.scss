@@ -11,7 +11,7 @@
 }
 .CardItem img{
     width: 100%;
-    min-height: max-content;
+    min-height: initial;
 }
 .CardItem_mobile img{
     margin-right: 10px;
@@ -121,11 +121,12 @@
     margin-top: 50px!important;
     height: max-content;
 }
-@media (max-width: 800px){
+@media (max-width: 1280px){
     .alice-carousel{
         margin-top: 83px!important;
     }
 }
+
 .alice-carousel__prev-btn-item, .alice-carousel__next-btn-item{
     padding: 0px!important;
 }
@@ -141,8 +142,15 @@
         margin-left: 8.35% !important; 
     } 
 }
-
-@media (min-width: 960px) {
+@media (min-width: 960px){
+    .MainItems.mainContainer {
+        margin-left: 0;
+        flex-grow: 0;
+        max-width: 100%;
+        flex-basis: 100%;
+    }
+}
+@media (min-width: 1280px) {
     .MainItems.mainContainer {
         margin-left: 8.35% !important; 
         flex-grow: 0;

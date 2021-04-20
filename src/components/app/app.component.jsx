@@ -738,7 +738,7 @@ export class App extends React.Component {
                                             <img alt="Жако доставка роллов и пиццы" src="https://newjacofood.ru/src/img/other/Logotip.png" />
                                         </Link> 
                                     </Grid>
-                                    <Hidden lgDown>
+                                    <Hidden mdDown>
                                         
                                         <Grid item className="CityProfileNav">
                                             <Typography className="cat" variant="h5" component="span" onClick={this.openCity.bind(this)}>{itemsStore.getCityRU()}</Typography>
