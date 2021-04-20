@@ -914,14 +914,6 @@ export class App extends React.Component {
                             path='/:cityName/item/:itemId'
                             component={ Item }
                         />
-                        
-                        
-                        <Route path="/">
-                            <Redirect to="/samara/" />
-                        </Route>
-                        <Route path="*">
-                            <Redirect to="/samara/" />
-                        </Route>
                     </Switch>
                         
                     

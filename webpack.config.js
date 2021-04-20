@@ -105,7 +105,7 @@ module.exports = {
 
     // webpack optimizations
     optimization: {
-        runtimeChunk: true,
+        runtimeChunk: false,
         splitChunks: {
             cacheGroups: {
                 default: false,
