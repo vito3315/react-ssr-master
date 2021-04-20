@@ -135,7 +135,7 @@ class RenderActii extends React.Component {
                             <div dangerouslySetInnerHTML={{__html: this.state.showItem.text}} />
                         </MuiDialogContent>
                         {this.state.showItem.promo.length > 0 ?
-                            <MuiDialogActions style={{ justifyContent: 'center' }}>
+                            <MuiDialogActions style={{ justifyContent: 'center', padding: '15px 0px' }}>
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderOther">
                                     <Button variant="contained" className="BtnCardMain CardInCardItem">Применить промокод</Button>
                                 </ButtonGroup>
