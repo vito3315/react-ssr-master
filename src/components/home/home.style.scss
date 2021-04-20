@@ -11,7 +11,7 @@
 }
 .CardItem img{
     width: 100%;
-    min-height: 177;
+    min-height: max-content;
 }
 .CardItem_mobile img{
     margin-right: 10px;
@@ -121,7 +121,7 @@
     margin-top: 50px!important;
     height: max-content;
 }
-@media (max-width: 600px){
+@media (max-width: 800px){
     .alice-carousel{
         margin-top: 83px!important;
     }

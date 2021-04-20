@@ -738,7 +738,7 @@ export class App extends React.Component {
                                             <img alt="Жако доставка роллов и пиццы" src="https://newjacofood.ru/src/img/other/Logotip.png" />
                                         </Link> 
                                     </Grid>
-                                    <Hidden xsDown>
+                                    <Hidden lgDown>
                                         
                                         <Grid item className="CityProfileNav">
                                             <Typography className="cat" variant="h5" component="span" onClick={this.openCity.bind(this)}>{itemsStore.getCityRU()}</Typography>
@@ -807,7 +807,7 @@ export class App extends React.Component {
                             
                             
                             {this.state.is_load === true ?
-                                <Hidden smUp>
+                                <Hidden lgUp>
                                     <Typography variant="h5" component="span" className="thisCity" onClick={this.openCity.bind(this)}>{itemsStore.getCityRU()}</Typography>
                                 </Hidden>
                                     :
@@ -817,7 +817,7 @@ export class App extends React.Component {
                         
                         {this.state.activePage == 'home' ?
                             <Grid className="scrollCat" style={{ marginTop: 50, display: 'flex', flexDirection: 'row', overflow: 'scroll', position: 'fixed', backgroundColor: '#fff', zIndex: 1, width: '100%' }}>
-                                <Hidden smUp>
+                                <Hidden lgUp>
                                     {this.state.categoryItems.map((item, key) => 
                                         <ScrollLink 
                                             key={key}
@@ -873,7 +873,7 @@ export class App extends React.Component {
                     </Dialog>
                     
                     {this.state.activePage == 'home' ?
-                        <Hidden smUp>
+                        <Hidden lgUp>
                             <div style={{ width: '100%', height: 3, position: 'fixed', top: 85, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
                             <div style={{ width: '100%', height: 3, position: 'fixed', top: 88, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
                             <div style={{ width: '100%', height: 3, position: 'fixed', top: 91, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
@@ -922,7 +922,7 @@ export class App extends React.Component {
                     </Switch>
                     
                 
-                    <Hidden smUp>
+                    <Hidden lgUp>
                         <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 83, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
                         <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 80, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
                         <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 77, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
@@ -934,7 +934,7 @@ export class App extends React.Component {
                         <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 59, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
                         <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 56, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
                     </Hidden>
-                    <Hidden smUp>
+                    <Hidden lgUp>
                         <CustomBottomNavigation />
                     </Hidden>
                     <StickyFooter />
