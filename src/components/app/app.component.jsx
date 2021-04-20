@@ -90,7 +90,7 @@ class CustomBottomNavigation extends React.Component{
                     <RestaurantMenuSharpIcon />
                 </Link>
                 <Link
-                    to={'/'+itemsStore.getCity()+'actii'}
+                    to={'/'+itemsStore.getCity()+'/actii'}
                     exact={ true }
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                     style={{ flex: 1 }}
