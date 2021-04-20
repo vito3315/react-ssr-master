@@ -342,8 +342,6 @@ class RenderHome extends React.Component {
                                     </Grid>
                                 </Hidden>
                             </div>    
-                                
-                            
                         ])}
                     </Grid>
                 </Element>
