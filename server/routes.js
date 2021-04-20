@@ -28,4 +28,9 @@ module.exports = [
         path: '/:cityName/item/:itemId',
         component: Item,
     },
+    {
+        path: '/',
+        exact: true,
+        component: Contact,
+    },
 ];
