@@ -131,7 +131,7 @@ class CustomBottomNavigation extends React.Component{
 function StickyFooter() {
     return (
         <footer className="footer">
-            <Grid container md={10} sm={12} xs={10} xl={10} className="mainContainer">
+            <Grid container className="mainContainer">
                 <Grid item lg={3} md={3} sm={3} xl={3} xs={12}>
                     <Typography variant="body1">Жако роллы и пицца — сеть кафе</Typography>
                     <Typography variant="body1">© Жако 2017 - {new Date().getFullYear()}</Typography>
@@ -889,6 +889,7 @@ export class App extends React.Component {
                         null
                     }
                     
+                    
                     <Switch>
                         <Route
                             path='/:cityName/contact'
@@ -919,7 +920,6 @@ export class App extends React.Component {
                             component={ Contact }
                         />
                     </Switch>
-                        
                     
                 
                     <Hidden smUp>

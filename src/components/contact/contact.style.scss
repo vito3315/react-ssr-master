@@ -53,3 +53,16 @@
     border-radius: 5px;
     padding: 16px;
 }
+@media (min-width: 1280px) {
+    .Contact.mainContainer {
+        margin-left: 8.35% !important; 
+    } 
+}
+@media (min-width: 960px) {
+    .Contact.mainContainer {
+        margin-left: 8.35% !important; 
+        flex-grow: 0;
+        max-width: 83.333333%;
+        flex-basis: 83.333333%;
+    } 
+}

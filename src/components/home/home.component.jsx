@@ -318,7 +318,7 @@ class RenderHome extends React.Component {
         if( itemsStore.getAllItemsCat().length == 0 ){
             return (
                 <Element name="myScrollToElement">
-                    <Grid container spacing={2} md={10} sm={12} xs={12} xl={10} style={{ margin: 0, padding: '0px 10px', paddingTop: 64, flexWrap: 'wrap' }} className="MainItems mainContainer">
+                    <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingTop: 64, flexWrap: 'wrap' }} className="MainItems mainContainer">
                         {this.state.testData.map((cat, key) => [
                             <div key={key}>
                                 <Hidden xsDown>
@@ -371,7 +371,7 @@ class RenderHome extends React.Component {
                 </Hidden>
                 
                 {itemsStore.getAllItemsCat().map((cat, key) => (
-                    <Grid container spacing={2} md={10} sm={12} xs={12} xl={10} style={{ margin: 0, padding: '0px 10px', flexWrap: 'wrap' }} className="MainItems mainContainer" key={key} name={"cat"+cat.id} id={"cat"+cat.id}>
+                    <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', flexWrap: 'wrap' }} className="MainItems mainContainer" key={key} name={"cat"+cat.id} id={"cat"+cat.id}>
                         {cat.items.map((it, k) => (
                             <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '16px 8px', display: 'flex'}}>
                                 <Hidden xsDown>
