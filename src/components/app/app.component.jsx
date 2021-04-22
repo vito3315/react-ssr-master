@@ -5,6 +5,7 @@ import { Home } from '../home';
 import { Item } from '../item';
 import { Contact } from '../contact';
 import { Actii } from '../actii';
+import { Profile } from '../profile';
 
 
 import Grid from '@material-ui/core/Grid';
@@ -910,6 +911,11 @@ export class App extends React.Component {
                             path='/:cityName/'
                             exact={ true }
                             component={ Home }
+                        />
+                        <Route
+                            path='/:cityName/profile/'
+                            exact={ true }
+                            component={ Profile }
                         />
                         <Route
                             path='/:cityName/item/:itemId'

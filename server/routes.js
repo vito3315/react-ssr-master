@@ -2,6 +2,7 @@ const { Home } = require( '../src/components/home' );
 const { Item } = require( '../src/components/item' );
 const { Contact } = require( '../src/components/contact' );
 const { Actii } = require( '../src/components/actii' );
+const { Profile } = require( '../src/components/profile' );
 
 module.exports = [
     {
@@ -32,5 +33,10 @@ module.exports = [
         path: '/',
         exact: true,
         component: Contact,
+    },
+    {
+        path: '/:cityName/profile',
+        exact: true,
+        component: Profile,
     },
 ];

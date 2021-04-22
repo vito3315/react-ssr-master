@@ -1,0 +1,126 @@
+.Actii{
+    
+}
+.Actii h1{
+    font-size: 2rem;
+    font-family: Futuris Bold!important;
+    text-align: center;
+}
+.modalActii h6{
+    text-align: center;
+    font-family: Futuris Bold!important;
+    font-size: 1.6rem;
+}
+.modalActiiContent{
+    padding-top: 0!important;
+}
+.modalActiiContent span, .modalActiiContent p, .modalActiiContent b{
+    font-family: Ubuntu, sans-serif!important;
+    font-size: 1rem;
+}
+
+.MuiTabs-scroller.MuiTabs-fixed > div{
+    justify-content: center;
+}
+.TablePromo .TEXT, .TableOrders .TEXT{
+    font-family: Ubuntu, sans-serif!important;
+    font-size: 1.1rem;
+}
+.TablePromo td, .TableOrders td{
+    text-align: center;
+}
+.TablePromo, .TableOrders{
+    width: 100%;
+    border-collapse: collapse;
+}
+.TablePromo thead, .TableOrders thead{
+    border-bottom: 2px solid #e5e5e5;
+}
+.TablePromo tbody tr, .TableOrders tbody tr{
+    border-bottom: 1px solid #e5e5e5;
+}
+.TablePromo td, .TableOrders td{
+    padding: 15px 5px;
+}
+.TableInfo{
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+    margin: 40px 0;
+    
+    & .input{
+        margin: 0px 40px;
+        width: calc(100% - 80px);
+    }
+    & .input.checkbox{
+        -ms-user-select: none;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        width: calc(70% - 80px);
+    }
+    & form{
+        display: flex;
+        width: 70%;
+    }
+    & *{
+        font-family: Ubuntu, sans-serif!important;
+        font-size: 1.1rem!important;
+    }
+    & .ChangeDay{
+        width: calc(40% - 5px);
+        margin-right: 5px;
+    }
+    & .ChangeM{
+        width: calc(60% - 5px);
+        margin-left: 5px;
+    }
+}
+.menuItem{
+    font-family: Ubuntu, sans-serif!important;
+    font-size: 1.1rem!important;
+}
+@media (max-width: 960px) {
+    .TableInfo{
+        display: flex; 
+        flex-direction: column;
+        align-items: center; 
+        margin: 40px 0;
+        
+        & .input{
+            margin: 20px 40px;
+            width: calc(100% - 80px);
+        }
+        & .input.checkbox{
+            -ms-user-select: none;
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            width: calc(100% - 80px);
+        }
+        & form{
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            margin-bottom: 0;
+        }
+    }
+}
+.MuiFormLabel-root.Mui-focused{
+    color: #BB0025!important;
+}
+.MuiInput-underline:after{
+    border-bottom: 2px solid #BB0025!important;
+}
+.MuiCheckbox-colorSecondary.Mui-checked{
+    color: #BB0025!important;
+}
+.MuiSelect-select:focus{
+    background-color: #fff!important;
+}
+.MuiSnackbarContent-root{
+    background-color: inherit!important;
+}
+.otherLabel{
+    font-size: 0.8rem!important;
+}

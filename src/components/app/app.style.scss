@@ -207,10 +207,16 @@ body{
     .mainContainer.MuiGrid-grid-lg-10, .mainContainer.MuiGrid-grid-xs-10 {
         margin-left: 8.35%!important;
     }
+    .mainContainer.MuiGrid-grid-xl-10, .mainContainer.MuiGrid-grid-md-8 {
+        margin-left: 16.66665%!important;
+    }
 }
 @media (min-width: 960px){
     .mainContainer.MuiGrid-grid-lg-10, .mainContainer.MuiGrid-grid-xs-10, .mainContainer.MuiGrid-grid-md-10 {
         margin-left: 8.35%!important;
+    }
+    .mainContainer.MuiGrid-grid-xl-10, .mainContainer.MuiGrid-grid-md-8 {
+        margin-left: 16.66665%!important;
     }
 }
 
