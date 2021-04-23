@@ -36,6 +36,7 @@ import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import RestaurantMenuSharpIcon from '@material-ui/icons/RestaurantMenuSharp';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
 import PersonIcon from '@material-ui/icons/Person';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 import Hidden from '@material-ui/core/Hidden';
 
@@ -168,18 +169,6 @@ class SimplePopover extends React.Component{
             allPrice: 0,
             promoName: '',
             promoText: '',
-            
-            openLogin: false,
-            userLogin: '',
-            userLoginFormat: '',
-            userCode: '',
-            
-            stage_1: true,
-            stage_2: false,
-            
-            timerSMS: 59,
-            errPhone: '',
-            errSMS: ''
         };
     }
     
@@ -311,6 +300,205 @@ class SimplePopover extends React.Component{
         }
     }
     
+    render(){
+        const open = Boolean(this.state.anchorEl);
+        const id = open ? 'simple-popover' : undefined;
+        return(
+            <div>
+                <IconButton className="ShopIconBTN" aria-describedby={id} color="inherit" aria-label="menu" onClick={this.handleClick.bind(this)}>
+                    <Badge badgeContent={itemsStore.getAllPrice()} max={500000} color="primary">
+                        <ShoppingCartOutlinedIcon />
+                    </Badge>
+                </IconButton>
+                
+                <Popover
+                    id={id}
+                    open={open}
+                    anchorEl={this.state.anchorEl}
+                    onClose={this.handleClose.bind(this)}
+                    
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'right',
+                    }}
+                    transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                    }}
+                >
+                    <div style={{ width: 400, padding: 16 }}>
+                        <table className="TableMini">
+                            <tbody>
+                                {this.state.cartItems.map((item, key) => 
+                                    <tr key={key}>
+                                        <td className="TableMiniName">{item.name}</td>
+                                        <td>
+                                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderWOBorder">
+                                                <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this, item.item_id)}>
+                                                    <RemoveIcon fontSize="small" />
+                                                </Button>
+                                                <Button variant="contained" className="BtnCardMain" >
+                                                    <Typography component="span" className="CardCountItem">{item.count}</Typography>
+                                                </Button>
+                                                <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this, item.item_id)}> 
+                                                    <AddIcon fontSize="small" />
+                                                </Button>
+                                            </ButtonGroup>
+                                        </td>
+                                        <td style={{ width: '30%' }}> 
+                                            <div className="TableMiniPrice">
+                                                {item.all_price} <AttachMoneyIcon fontSize="small" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )}
+                            </tbody>
+                            <tfoot>
+                                <tr style={{height: 35}}>
+                                    <td className="TableMiniFullName">Сумма:</td>
+                                    <td className="" style={{width: '30%', textAlign: 'center'}}>
+                                        <div className="TableMiniPrice" style={{ marginRight: 21 }}>
+                                            {itemsStore.getAllPrice()} <AttachMoneyIcon fontSize="small" />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>      
+                        </table>
+                        <Paper component="div" className="SpacePromo">
+                            <InputBase
+                                onBlur={this.checkPromo.bind(this)}
+                                value={this.state.promoName}
+                                onChange={ event => this.setState({ promoName: event.target.value }) }
+                                placeholder="Промокод"
+                            />
+                            <Divider orientation="vertical" />
+                            <IconButton color="primary" aria-label="directions" onClick={this.checkPromo.bind(this)}>
+                                <CheckOutlinedIcon />
+                            </IconButton>
+                        </Paper>
+                        {this.state.promoText.length > 0 ?
+                            <div className="DescPromo">
+                                <Typography className="cat" variant="h5" component="span">Промокод дает: {this.state.promoText}</Typography>
+                            </div>
+                                :
+                            null
+                        }
+                        <div className="InCart">
+                            {itemsStore.getToken() !== null ?
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
+                                    <Button variant="contained" className="BtnCardMain CardInCardItem">В корзину</Button>
+                                </ButtonGroup>
+                                    :
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
+                                    <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={this.props.openLogin}>Войти</Button>
+                                </ButtonGroup>
+                            }
+                        </div>
+                    </div>
+                </Popover>
+            </div>
+        );
+    }
+}
+
+export class App extends React.Component {
+    constructor(props) {
+        super(props);
+        
+        this.state = {      
+            categoryItems: [],  
+            cartItems: [],
+            activePage: '',
+            is_load: false,
+            openCity: false,
+            cityName: '',
+            testData: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+            cityList: [],
+            
+            openLogin: false,
+            userLogin: '',
+            userLoginFormat: '',
+            userCode: '',
+            
+            stage_1: true,
+            stage_2: false,
+            
+            timerSMS: 59,
+            errPhone: '',
+            errSMS: ''
+        };
+    }
+
+    load(){
+        if( itemsStore.getCity() ){
+            fetch('https://jacofood.ru/src/php/test_app.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/x-www-form-urlencoded'},
+                body: queryString.stringify({
+                    type: 'get_cat_web', 
+                    city_id: itemsStore.getCity(),
+                    user_id: itemsStore.getToken()
+                })
+            }).then(res => res.json()).then(json => {
+                console.log( json )
+                
+                itemsStore.userName = json.user_name;
+                
+                itemsStore.setAllItems(json.all_items);
+                itemsStore.setAllItemsCat(json.arr);
+                itemsStore.setBanners(json.baners)
+                itemsStore.setCityRU(json.this_city_name_ru);
+                
+                this.setState({
+                    cityList: json.city_list,
+                    categoryItems: json.arr, 
+                    is_load: true,
+                });
+                
+                console.log( itemsStore.userName )
+            })
+            .catch(err => { });
+        }else{
+            
+        }
+    }  
+    
+    componentDidMount = () => {
+        autorun(() => {
+            this.setState({
+                cartItems: itemsStore.getItems()
+            })
+            
+            this.setState({
+                activePage: itemsStore.getPage()
+            })
+            
+            this.setState({
+                cityName: itemsStore.getCity()
+            })
+            
+            this.load();
+        })
+    }
+
+    openCity(){
+        this.setState({
+            openCity: true
+        })
+    }
+    
+    closeCity(){
+        this.setState({
+            openCity: false
+        })
+    }
+
+    chooseCity(city){
+        let this_addr = window.location.href;
+        window.location.href = this_addr.replace(itemsStore.getCity(), city);
+    }
+
     openLogin(){
         this.setState({
             openLogin: true
@@ -444,265 +632,6 @@ class SimplePopover extends React.Component{
             }
         });
     }
-    
-    render(){
-        const open = Boolean(this.state.anchorEl);
-        const id = open ? 'simple-popover' : undefined;
-        return(
-            <div>
-                <IconButton className="ShopIconBTN" aria-describedby={id} color="inherit" aria-label="menu" onClick={this.handleClick.bind(this)}>
-                    <Badge badgeContent={itemsStore.getAllPrice()} max={500000} color="primary">
-                        <ShoppingCartOutlinedIcon />
-                    </Badge>
-                </IconButton>
-                
-                <Dialog
-                    open={this.state.openLogin}
-                    fullWidth={true}
-                    maxWidth={'xs'}
-                    onClose={this.closeLogin.bind(this)}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                    className="ModalAuth"
-                >
-                    <DialogTitle id="alert-dialog-title">Вход на сайт</DialogTitle>
-                    <DialogContent className="ModalContent_1_1">
-                        <div className="ModalContent_1_2">
-                            <Typography variant="h5" component="span" className="ModalLabel">Номер телефона</Typography>
-                            <InputMask 
-                                className="InputMask"
-                                mask="8 (999) 999-99-99" 
-                                placeholder="8 (999) 999-99-99" 
-                                disabled={!this.state.stage_1}
-                                value={this.state.userLogin}
-                                onChange={ event => this.state.stage_1 ? this.setState({ userLogin: event.target.value }) : {} }
-                            />
-                            {this.state.errPhone.length > 0 ?
-                                <div style={{ marginTop: 10, padding: 16, backgroundColor: '#BB0025', borderRadius: 4 }}>
-                                    <Typography variant="h5" component="span" style={{ fontSize: '1.1rem', color: '#fff' }}>{this.state.errPhone}</Typography>
-                                </div>
-                                    :
-                                null
-                            }
-                        </div>
-                        {this.state.stage_2 ?
-                            <div className="ModalContent_1_3">
-                                <Typography variant="h5" component="span" className="ModalLabel">Код из смс</Typography>
-                                <div className="ModalContent_1_2">
-                                    <InputMask 
-                                        className="InputMask"
-                                        mask="9999" 
-                                        value={this.state.userCode}
-                                        onChange={ event => this.setState({ userCode: event.target.value }) }
-                                    />
-                                    {this.state.timerSMS > 0 ?
-                                        <Typography variant="h5" component="span" style={{ fontSize: '0.8rem', paddingTop: 10 }}>{'Новое смс доступно через '+this.state.timerSMS+' сек.'}</Typography>
-                                            :
-                                        <Typography variant="h5" component="span" style={{ fontSize: '0.8rem', paddingTop: 10, cursor: 'pointer', width: 'fit-content' }} onClick={this.repeatSMS.bind(this)}>Получить новый код</Typography>
-                                    }
-                                </div>
-                                {this.state.errSMS.length > 0 ?
-                                    <div style={{ marginTop: 10, padding: 16, backgroundColor: '#BB0025', borderRadius: 4 }}>
-                                        <Typography variant="h5" component="span" style={{ fontSize: '1.1rem', color: '#fff' }}>{this.state.errSMS}</Typography>
-                                    </div>
-                                        :
-                                    null
-                                }
-                            </div>
-                                :
-                            null
-                        }
-                    </DialogContent>
-                    {this.state.stage_1 ?
-                        <DialogActions style={{ padding: '12px 24px' }}>
-                            <Button onClick={this.sendSMS.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Выслать код</Button>
-                        </DialogActions>
-                            :
-                        null
-                    }
-                    {this.state.stage_2 ?
-                        <DialogActions style={{ padding: '12px 24px' }}>
-                            <Button onClick={this.checkCode.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Подтвердить код</Button>
-                        </DialogActions>
-                            :
-                        null
-                    }
-                </Dialog>
-          
-                <Popover
-                    id={id}
-                    open={open}
-                    anchorEl={this.state.anchorEl}
-                    onClose={this.handleClose.bind(this)}
-                    
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'right',
-                    }}
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
-                >
-                    <div style={{ width: 400, padding: 16 }}>
-                        <table className="TableMini">
-                            <tbody>
-                                {this.state.cartItems.map((item, key) => 
-                                    <tr key={key}>
-                                        <td className="TableMiniName">{item.name}</td>
-                                        <td>
-                                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderWOBorder">
-                                                <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this, item.item_id)}>
-                                                    <RemoveIcon fontSize="small" />
-                                                </Button>
-                                                <Button variant="contained" className="BtnCardMain" >
-                                                    <Typography component="span" className="CardCountItem">{item.count}</Typography>
-                                                </Button>
-                                                <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this, item.item_id)}> 
-                                                    <AddIcon fontSize="small" />
-                                                </Button>
-                                            </ButtonGroup>
-                                        </td>
-                                        <td style={{ width: '30%' }}> 
-                                            <div className="TableMiniPrice">
-                                                {item.all_price} <AttachMoneyIcon fontSize="small" />
-                                            </div>
-                                        </td>
-                                    </tr>
-                                )}
-                            </tbody>
-                            <tfoot>
-                                <tr style={{height: 35}}>
-                                    <td className="TableMiniFullName">Сумма:</td>
-                                    <td className="" style={{width: '30%', textAlign: 'center'}}>
-                                        <div className="TableMiniPrice" style={{ marginRight: 21 }}>
-                                            {itemsStore.getAllPrice()} <AttachMoneyIcon fontSize="small" />
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tfoot>      
-                        </table>
-                        <Paper component="div" className="SpacePromo">
-                            <InputBase
-                                onBlur={this.checkPromo.bind(this)}
-                                value={this.state.promoName}
-                                onChange={ event => this.setState({ promoName: event.target.value }) }
-                                placeholder="Промокод"
-                            />
-                            <Divider orientation="vertical" />
-                            <IconButton color="primary" aria-label="directions" onClick={this.checkPromo.bind(this)}>
-                                <CheckOutlinedIcon />
-                            </IconButton>
-                        </Paper>
-                        {this.state.promoText.length > 0 ?
-                            <div className="DescPromo">
-                                <Typography className="cat" variant="h5" component="span">Промокод дает: {this.state.promoText}</Typography>
-                            </div>
-                                :
-                            null
-                        }
-                        <div className="InCart">
-                            {itemsStore.getToken() !== null ?
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
-                                    <Button variant="contained" className="BtnCardMain CardInCardItem">В корзину</Button>
-                                </ButtonGroup>
-                                    :
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
-                                    <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={this.openLogin.bind(this)}>Войти</Button>
-                                </ButtonGroup>
-                            }
-                        </div>
-                    </div>
-                </Popover>
-            </div>
-        );
-    }
-}
-
-export class App extends React.Component {
-    constructor(props) {
-        super(props);
-        
-        this.state = {      
-            categoryItems: [],  
-            cartItems: [],
-            activePage: '',
-            is_load: false,
-            openCity: false,
-            cityName: '',
-            testData: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-            cityList: [],
-        };
-    }
-
-    load(){
-        if( itemsStore.getCity() ){
-            fetch('https://jacofood.ru/src/php/test_app.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type':'application/x-www-form-urlencoded'},
-                body: queryString.stringify({
-                    type: 'get_cat_web', 
-                    city_id: itemsStore.getCity(),
-                    user_id: itemsStore.getToken()
-                })
-            }).then(res => res.json()).then(json => {
-                console.log( json )
-                
-                itemsStore.setAllItems(json.all_items);
-                itemsStore.setAllItemsCat(json.arr);
-                itemsStore.setBanners(json.baners)
-                itemsStore.setCityRU(json.this_city_name_ru);
-                
-                this.setState({
-                    cityList: json.city_list,
-                    categoryItems: json.arr, 
-                    is_load: true,
-                });
-            })
-            .catch(err => { });
-        }else{
-            
-        }
-    }  
-    
-    componentDidMount = () => {
-        //this.load();
-        
-        autorun(() => {
-            this.setState({
-                cartItems: itemsStore.getItems()
-            })
-            
-            this.setState({
-                activePage: itemsStore.getPage()
-            })
-            
-            this.setState({
-                cityName: itemsStore.getCity()
-            })
-            
-            this.load();
-            console.log( itemsStore.getCity() )
-        })
-    }
-
-    openCity(){
-        this.setState({
-            openCity: true
-        })
-    }
-    
-    closeCity(){
-        this.setState({
-            openCity: false
-        })
-    }
-
-    chooseCity(city){
-        let this_addr = window.location.href;
-        window.location.href = this_addr.replace(itemsStore.getCity(), city);
-    }
 
     render() {
         return (
@@ -735,8 +664,18 @@ export class App extends React.Component {
                                     <Hidden mdDown>
                                         
                                         <Grid item className="CityProfileNav">
-                                            <Typography className="cat" variant="h5" component="span" onClick={this.openCity.bind(this)}>{itemsStore.getCityRU()}</Typography>
-                                            <Typography className="cat" variant="h5" component="span">Контакты</Typography>
+                                            <Typography className="cat" variant="h5" component="span" onClick={this.openCity.bind(this)} style={{ display: 'flex', flexDirection: 'row' }}>{itemsStore.getCityRU()} <ArrowDropDownIcon /></Typography>
+                                            
+                                            {itemsStore.getToken() ?
+                                                itemsStore.userName.length > 0 ?
+                                                    <Link to={"/"+itemsStore.getCity()+"/profile"} className="cat">{itemsStore.userName}</Link> 
+                                                        :
+                                                    <Link to={"/"+itemsStore.getCity()+"/profile"}>
+                                                        <Typography className="cat" variant="h5" component="span">Профиль</Typography>
+                                                    </Link>
+                                                    :
+                                                <Typography className="cat" variant="h5" component="span" onClick={this.openLogin.bind(this)}>Войти</Typography>
+                                            }
                                         </Grid>
                                         
                                         {this.state.categoryItems.map((item, key) => 
@@ -793,7 +732,7 @@ export class App extends React.Component {
                                             </Link>    
                                         </Grid>
                                         <Grid item>
-                                            <SimplePopover />
+                                            <SimplePopover openLogin={this.openLogin.bind(this)} />
                                         </Grid>
                                     </Hidden>
                                 </Grid>
@@ -864,6 +803,79 @@ export class App extends React.Component {
                                 <Typography key={key} variant="h5" component="span" className={"ModalLabel "+( itemsStore.getCity() == item.link ? 'active' : '' )} onClick={this.chooseCity.bind(this, item.link)}>{item.name}</Typography>
                             )}
                         </DialogContent>
+                    </Dialog>
+                    
+                    <Dialog
+                        open={this.state.openLogin}
+                        fullWidth={true}
+                        maxWidth={'xs'}
+                        onClose={this.closeLogin.bind(this)}
+                        aria-labelledby="alert-dialog-title"
+                        aria-describedby="alert-dialog-description"
+                        className="ModalAuth"
+                    >
+                        <DialogTitle id="alert-dialog-title">Вход на сайт</DialogTitle>
+                        <DialogContent className="ModalContent_1_1">
+                            <div className="ModalContent_1_2">
+                                <Typography variant="h5" component="span" className="ModalLabel">Номер телефона</Typography>
+                                <InputMask 
+                                    className="InputMask"
+                                    mask="8 (999) 999-99-99" 
+                                    placeholder="8 (999) 999-99-99" 
+                                    disabled={!this.state.stage_1}
+                                    value={this.state.userLogin}
+                                    onChange={ event => this.state.stage_1 ? this.setState({ userLogin: event.target.value }) : {} }
+                                />
+                                {this.state.errPhone.length > 0 ?
+                                    <div style={{ marginTop: 10, padding: 16, backgroundColor: '#BB0025', borderRadius: 4 }}>
+                                        <Typography variant="h5" component="span" style={{ fontSize: '1.1rem', color: '#fff' }}>{this.state.errPhone}</Typography>
+                                    </div>
+                                        :
+                                    null
+                                }
+                            </div>
+                            {this.state.stage_2 ?
+                                <div className="ModalContent_1_3">
+                                    <Typography variant="h5" component="span" className="ModalLabel">Код из смс</Typography>
+                                    <div className="ModalContent_1_2">
+                                        <InputMask 
+                                            className="InputMask"
+                                            mask="9999" 
+                                            value={this.state.userCode}
+                                            onChange={ event => this.setState({ userCode: event.target.value }) }
+                                        />
+                                        {this.state.timerSMS > 0 ?
+                                            <Typography variant="h5" component="span" style={{ fontSize: '0.8rem', paddingTop: 10 }}>{'Новое смс доступно через '+this.state.timerSMS+' сек.'}</Typography>
+                                                :
+                                            <Typography variant="h5" component="span" style={{ fontSize: '0.8rem', paddingTop: 10, cursor: 'pointer', width: 'fit-content' }} onClick={this.repeatSMS.bind(this)}>Получить новый код</Typography>
+                                        }
+                                    </div>
+                                    {this.state.errSMS.length > 0 ?
+                                        <div style={{ marginTop: 10, padding: 16, backgroundColor: '#BB0025', borderRadius: 4 }}>
+                                            <Typography variant="h5" component="span" style={{ fontSize: '1.1rem', color: '#fff' }}>{this.state.errSMS}</Typography>
+                                        </div>
+                                            :
+                                        null
+                                    }
+                                </div>
+                                    :
+                                null
+                            }
+                        </DialogContent>
+                        {this.state.stage_1 ?
+                            <DialogActions style={{ padding: '12px 24px' }}>
+                                <Button onClick={this.sendSMS.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Выслать код</Button>
+                            </DialogActions>
+                                :
+                            null
+                        }
+                        {this.state.stage_2 ?
+                            <DialogActions style={{ padding: '12px 24px' }}>
+                                <Button onClick={this.checkCode.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Подтвердить код</Button>
+                            </DialogActions>
+                                :
+                            null
+                        }
                     </Dialog>
                     
                     {this.state.activePage == 'home' ?
