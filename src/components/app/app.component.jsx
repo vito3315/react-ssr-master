@@ -117,7 +117,7 @@ class CustomBottomNavigation extends React.Component{
                     <LocationOnIcon />
                 </Link>
                 <Link
-                    to={'/'+itemsStore.getCity()+'/'}
+                    to={'/'+itemsStore.getCity()+'/profile'}
                     exact={ true }
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                     style={{ flex: 1 }}
@@ -657,8 +657,6 @@ export class App extends React.Component {
     }
 
     render() {
-        console.log( itemsStore.getCity() )
-        
         return (
             <Provider { ...stores }>
                 <div className="home">
