@@ -272,7 +272,7 @@ class RenderHome extends React.Component {
             
             itemsStore.getBanners().map((item, key) => {
                 banners_pc.push(
-                    <img src={"https://jacofood.ru/src/img/banners/"+item.b_img_full+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
+                    <img style={{ minHeight: 380 }} src={"https://jacofood.ru/src/img/banners/"+item.b_img_full+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
                 )
                 
                 banners_mobile.push(

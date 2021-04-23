@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink as Link, Switch, Route, useParams, Redirect } from 'react-router-dom';
+import { NavLink as Link, Switch, Route, useParams, Redirect, StaticRouter } from 'react-router-dom';
 
 import { Home } from '../home';
 import { Item } from '../item';
@@ -67,7 +67,6 @@ import Badge from '@material-ui/core/Badge';
 import { Provider } from 'mobx-react';
 import { useStrict } from 'mobx';
 
-/* stores */
 import itemsStore from '../../stores/items-store';
 const stores = { itemsStore };
 
@@ -128,6 +127,30 @@ class CustomBottomNavigation extends React.Component{
             </div>
         )
     }
+}
+
+function Status({ code, children }) {
+  return (
+    <Route
+      render={({ staticContext }) => {
+        if (staticContext) staticContext.status = code;
+        return children;
+      }}
+    />
+  );
+}
+
+export function NotFound() {
+  return (
+    <Status code={404}>
+        <Grid container className="Contact mainContainer MuiGrid-spacing-xs-3" style={{ marginTop: 64 }}>
+            <Grid item xs={12}>
+                <Typography variant="h5" component="h1">404 Страница не найдена</Typography>
+            </Grid>
+            
+        </Grid>
+    </Status>
+  );
 }
 
 function StickyFooter() {
@@ -634,6 +657,8 @@ export class App extends React.Component {
     }
 
     render() {
+        console.log( itemsStore.getCity() )
+        
         return (
             <Provider { ...stores }>
                 <div className="home">
@@ -741,7 +766,7 @@ export class App extends React.Component {
                             
                             {this.state.is_load === true ?
                                 <Hidden lgUp>
-                                    <Typography variant="h5" component="span" className="thisCity" onClick={this.openCity.bind(this)}>{itemsStore.getCityRU()}</Typography>
+                                    <Typography variant="h5" component="span" className="thisCity" onClick={this.openCity.bind(this)}><LocationOnIcon /> {itemsStore.getCityRU()}</Typography>
                                 </Hidden>
                                     :
                                 null
@@ -917,19 +942,21 @@ export class App extends React.Component {
                             exact={ true }
                             component={ Home }
                         />
-                        <Route
-                            path='/:cityName/profile/'
-                            exact={ true }
-                            component={ Profile }
-                        />
+                        <Route exact path='/:cityName/profile/'>
+                            {!itemsStore.getToken() && itemsStore.getCity() ? <Redirect push to={"/"+itemsStore.getCity()+"/"} /> : <Profile />}
+                        </Route>
+
+                        
                         <Route
                             path='/:cityName/item/:itemId'
+                            exact={ true }
                             component={ Item }
                         />
                         <Route
-                            path='/'
-                            component={ Contact }
+                            component={ NotFound }
                         />
+                        
+                        
                     </Switch>
                     
                 

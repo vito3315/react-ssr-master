@@ -25,6 +25,9 @@ const queryString = require('query-string');
 
 export function Item(props = 0) {
     let { itemId } = useParams();
+    let { cityName } = useParams();
+    
+    itemsStore.setCity(cityName);
   
     if( props.item ){
         return (
@@ -220,6 +223,21 @@ class RenderItem extends React.Component {
         this.setState({ count: count })
     }
     
+    /*
+        <div itemscope itemtype="https://schema.org/Product"> 
+			<meta itemprop="name" content={this.state.item.name} /> 
+			<link itemprop="url" href={'https://jacofood.ru/'} /> 
+			<link itemprop="image" href="https://jacofood.ru/src/img/items/<?=$site->data['page']['item']['img']?>" /> 
+			<meta itemprop="category" content="<?=$site->data['page']['item']['cat_name']?>" /> 
+			<div itemprop="offers" itemscope itemtype="https://schema.org/Offer"> 
+				<meta itemprop="priceCurrency" content="RUB" /> 
+				<meta itemprop="price" content="<?=$site->data['page']['item']['price']?>" /> 
+				<link itemprop="availability" href="https://schema.org/InStock" /> 
+			</div> 
+			<meta itemprop="description" content="<?=$site->data['page']['item']['tmp_desc']?>" /> 
+		</div>
+    */
+    
     render() {
         if(!this.state.is_load){
             return (
@@ -316,6 +334,9 @@ class RenderItem extends React.Component {
                         </Grid>
                     </Grid>
                 </Hidden>
+                
+                
+                
             </div>
         )
     }

@@ -331,9 +331,11 @@ body{
     right: -10px!important;
 }
 .thisCity{
-    color: #000;
-    font-size: 1.2rem;
+    color: #878787;
+    font-size: 1.3rem!important;
     font-family: Ubuntu, sans-serif !important;
+    display: flex;
+    align-items: center;
 }
 .CityProfileNav{
     display: flex;
