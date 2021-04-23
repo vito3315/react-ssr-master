@@ -116,14 +116,18 @@ class CustomBottomNavigation extends React.Component{
                 >
                     <LocationOnIcon />
                 </Link>
-                <Link
-                    to={'/'+itemsStore.getCity()+'/profile'}
-                    exact={ true }
-                    className="MuiButtonBase-root MuiBottomNavigationAction-root"
-                    style={{ flex: 1 }}
-                >
-                    <PersonIcon />
-                </Link>
+                {itemsStore.getToken() ?
+                    <Link
+                        to={'/'+itemsStore.getCity()+'/profile'}
+                        exact={ true }
+                        className="MuiButtonBase-root MuiBottomNavigationAction-root"
+                        style={{ flex: 1 }}
+                    >
+                        <PersonIcon />
+                    </Link>
+                        :
+                    <Typography className="MuiButtonBase-root MuiBottomNavigationAction-root" style={{ flex: 1 }} onClick={this.props.login}><PersonIcon /></Typography>
+                }
             </div>
         )
     }
@@ -971,7 +975,7 @@ export class App extends React.Component {
                         <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 56, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
                     </Hidden>
                     <Hidden lgUp>
-                        <CustomBottomNavigation />
+                        <CustomBottomNavigation login={this.openLogin.bind(this)} />
                     </Hidden>
                     <StickyFooter />
                 </div>
