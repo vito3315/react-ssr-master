@@ -118,6 +118,7 @@ class CardItem extends React.Component {
                                     alt={this.state.item.name}
                                     image={"https://newjacofood.ru/src/img/items/"+this.state.item.img_full+'?'+this.state.item.img_full_date_update}
                                     title={this.state.item.name}
+                                    style={{ minHeight: 150 }}
                                 />
                                 <CardContent style={{ padding: '1.2vw' }}>
                                     <Typography className="CardNameItem" gutterBottom variant="h5" component="span">{this.state.item.name}</Typography>
@@ -247,12 +248,12 @@ class RenderHome extends React.Component {
                     
                     scroller.scrollTo("myScrollToElement", {
                         duration: 800,
-                        delay: 0,
+                        delay: 500,
                         smooth: "easeInOutQuart",
                         offset: document.getElementById('cat'+hash).getBoundingClientRect()['y'] - 150
                     });
                 }
-            }, 700);
+            }, 2000);
         }
         
         itemsStore.setPage('home');
@@ -353,6 +354,7 @@ class RenderHome extends React.Component {
                 
                 <Hidden xsDown>
                     <AliceCarousel 
+                        style={{ minHeight: 350 }}
                         mouseTracking 
                         //autoPlay={true}
                         //autoPlayInterval={3000}
