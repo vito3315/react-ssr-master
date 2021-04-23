@@ -244,44 +244,35 @@ class SimplePopover extends React.Component{
           
           //BadgePrice.set('price', allPrice);
         }else{
-          let point_id = 0;
+            let point_id = 0;
           //let type_order = cart.typeOrder;
-          let type_order = 1;
+            let type_order = 1;
           
-          if( type_order == 0 ){
+            if( type_order == 0 ){
             //point_id = cart.point_id_dev ?? 0;
-            point_id = 1;
-          }else{
-              point_id = 1;
+                point_id = 1;
+            }else{
+                point_id = 1;
             //point_id = cart.point_id_pic ?? 0;
-          }
+            }
           
-          fetch('https://jacofood.ru/src/php/test_app.php', {
-            method: 'POST',
-            headers: {
-              'Content-Type':'application/x-www-form-urlencoded'},
-            body: queryString.stringify({
-              type: 'get_promo', 
-              point_id: point_id,
-              city_id: itemsStore.getCity(),
-              promo_name: promoName
-            })
-          }).then(res => res.json()).then(json => {
-              console.log( json )
+            fetch('https://jacofood.ru/src/php/test_app.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/x-www-form-urlencoded'},
+                body: queryString.stringify({
+                    type: 'get_promo', 
+                    point_id: point_id,
+                    city_id: itemsStore.getCity(),
+                    promo_name: promoName
+                })
+            }).then(res => res.json()).then(json => {
+                itemsStore.setPromo( JSON.stringify(json) );
+                let check_promo = itemsStore.checkPromo();
               
-              
-              
-              itemsStore.setPromo( JSON.stringify(json) );
-              
-              //temsStore.promo = json;
-              
-              console.log( itemsStore.getPromo() )
-              
-              let check_promo = itemsStore.checkPromo();
-              
-              this.setState({
-                  promoText: check_promo.text
-              })
+                this.setState({
+                    promoText: check_promo.text
+                })
               
             /*cart.promo_info = json;
             
@@ -316,7 +307,7 @@ class SimplePopover extends React.Component{
             }
             
             this.setState({ textPromoShow: true })*/
-          });
+            });
         }
     }
     
@@ -444,7 +435,7 @@ class SimplePopover extends React.Component{
             })
         }).then(res => res.json()).then(json => {
             if( json['st'] ){
-                itemsStore.setToken(json.token);
+                itemsStore.setToken(json.token, json.name);
                 this.closeLogin();
             }else{
                 this.setState({
@@ -652,14 +643,16 @@ export class App extends React.Component {
                     'Content-Type':'application/x-www-form-urlencoded'},
                 body: queryString.stringify({
                     type: 'get_cat_web', 
-                    city_id: itemsStore.getCity()
+                    city_id: itemsStore.getCity(),
+                    user_id: itemsStore.getToken()
                 })
             }).then(res => res.json()).then(json => {
+                console.log( json )
+                
                 itemsStore.setAllItems(json.all_items);
                 itemsStore.setAllItemsCat(json.arr);
                 itemsStore.setBanners(json.baners)
                 itemsStore.setCityRU(json.this_city_name_ru);
-                //this_city_name_ru
                 
                 this.setState({
                     cityList: json.city_list,

@@ -1,11 +1,3 @@
-.Actii{
-    
-}
-.Actii h1{
-    font-size: 2rem;
-    font-family: Futuris Bold!important;
-    text-align: center;
-}
 .modalActii h6{
     text-align: center;
     font-family: Futuris Bold!important;
@@ -29,17 +21,17 @@
 .TablePromo td, .TableOrders td{
     text-align: center;
 }
-.TablePromo, .TableOrders{
+.TablePromo, .TableOrders, .TablePromoMobile{
     width: 100%;
     border-collapse: collapse;
 }
 .TablePromo thead, .TableOrders thead{
     border-bottom: 2px solid #e5e5e5;
 }
-.TablePromo tbody tr, .TableOrders tbody tr{
+.TablePromo tbody tr, .TableOrders tbody tr, .TablePromoMobile tbody tr{
     border-bottom: 1px solid #e5e5e5;
 }
-.TablePromo td, .TableOrders td{
+.TablePromo td, .TableOrders td, .TablePromoMobile td{
     padding: 15px 5px;
 }
 .TableInfo{
@@ -81,12 +73,15 @@
     font-size: 1.1rem!important;
 }
 @media (max-width: 960px) {
+    .TableOrders{
+        width: calc(100% - 40px);
+        margin-left: 20px;
+    }
     .TableInfo{
         display: flex; 
         flex-direction: column;
         align-items: center; 
-        margin: 40px 0;
-        
+        margin: 0;
         & .input{
             margin: 20px 40px;
             width: calc(100% - 80px);
@@ -123,4 +118,26 @@
 }
 .otherLabel{
     font-size: 0.8rem!important;
+}
+.textName{
+    font-family: Futuris Bold!important;
+    font-size: 1.1rem!important;
+}
+.textDesc{
+    font-family: Ubuntu, sans-serif!important;
+    font-size: 1.1rem!important;
+}
+.TableOrders .CardPriceItem{
+    font-size: 1.1rem!important;
+    font-family: Ubuntu, sans-serif!important;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+.PrivateTabIndicator-colorSecondary-3{
+    background-color: #BB0025!important;
+}
+.TEXT.promoName{
+    color: #BB0025!important;
+    cursor: pointer;
 }

@@ -14,6 +14,7 @@ class ItemsStore {
   
   promo = null;
   userToken = null;
+  userName = '';
 
   activePage = '';
 
@@ -49,8 +50,9 @@ class ItemsStore {
     return this.activePage;
   };
 
-  setToken = (userToken) => {
+  setToken = (userToken, userName) => {
     this.userToken = userToken;
+    this.userName = userName;
     if (typeof window !== 'undefined') {
       localStorage.setItem('token', userToken);
     }
@@ -117,8 +119,6 @@ class ItemsStore {
     }
     
     if( promo_info ){
-      console.log( promo_info )
-      
       if( !promo_info.status_promo ){
         return {
           st: false,
@@ -255,7 +255,7 @@ class ItemsStore {
         if( parseInt(promo_info.sale.cat_sale) == 2 ){
           count_sale = parseInt(promo_info.sale.count_sale);
           
-          cart.cart_new.forEach( (el_cart, key_cart) => {
+          my_cart.forEach( (el_cart, key_cart) => {
             this_item = cart.allItems[ el_cart.item_id ];
             
             if( parseInt(this_item.type) != 3 && parseInt(this_item.type) != 4 ){
@@ -274,12 +274,12 @@ class ItemsStore {
                       
                       count_sale -= (parseInt(el_cart.one_price) * parseInt(el_cart.count));
                       
-                      cart.cart_new[ key_cart ].all_price = all_price;
+                      my_cart[ key_cart ].all_price = all_price;
                     }
                   }else{
                     //проценты  
                     all_price = parseInt(el_cart.all_price) - ((parseInt(el_cart.all_price) / 100) * parseInt(count_sale));
-                    cart.cart_new[ key_cart ].all_price = parseInt(all_price);
+                    my_cart[ key_cart ].all_price = parseInt(all_price);
                   }
                 }
               })
@@ -291,7 +291,7 @@ class ItemsStore {
         if( parseInt(promo_info.sale.cat_sale) == 3 ){
           count_sale = parseInt(promo_info.sale.count_sale);
           
-          cart.cart_new.forEach( (el_cart, key_cart) => {
+          my_cart.forEach( (el_cart, key_cart) => {
             this_item = cart.allItems[ el_cart.item_id ];
             
             if( parseInt(this_item.type) != 3 && parseInt(this_item.type) != 4 ){
@@ -307,12 +307,12 @@ class ItemsStore {
                   
                   count_sale -= (parseInt(el_cart.one_price) * parseInt(el_cart.count));
                   
-                  cart.cart_new[ key_cart ].all_price = all_price;
+                  my_cart[ key_cart ].all_price = all_price;
                 }
               }else{
                 //проценты  
                 all_price = parseInt(el_cart.all_price) - ((parseInt(el_cart.all_price) / 100) * parseInt(count_sale));
-                cart.cart_new[ key_cart ].all_price = parseInt(all_price);
+                my_cart[ key_cart ].all_price = parseInt(all_price);
               }
             }
           })
@@ -321,11 +321,11 @@ class ItemsStore {
         tmp = 0;
         allPrice = 0;
         
-        allPrice = cart.cart_new.reduce( (sum, item) => sum + item['all_price'], tmp );
+        allPrice = my_cart.reduce( (sum, item) => sum + item['all_price'], tmp );
         
-        allPrice += parseInt(cart.summ_div);
+        //allPrice += parseInt(cart.summ_div);
         
-        BadgePrice.set('price', allPrice);
+        //BadgePrice.set('price', allPrice);
         
         return {
           st: true,
@@ -349,13 +349,13 @@ class ItemsStore {
         allPrice = 0;
         
         allPrice = my_cart.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
-        //allPrice = cart.cart_new.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
+        //allPrice = my_cart.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
         
         tmp = 0;
-        //allPrice += cart.cart_new_promo.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
+        //allPrice += my_cart_promo.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
         allPrice = cart_new_promo.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
         
-        allPrice += parseInt(cart.summ_div);
+        //allPrice += parseInt(cart.summ_div);
         
         //BadgePrice.set('price', allPrice);
       }
@@ -376,7 +376,7 @@ class ItemsStore {
           allPrice = 0;
           
           allPrice = my_cart.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
-          //allPrice = cart.cart_new.reduce( (sum, item) => sum + item['all_price'], tmp );
+          //allPrice = my_cart.reduce( (sum, item) => sum + item['all_price'], tmp );
           
           //allPrice += parseInt(cart.summ_div);
           

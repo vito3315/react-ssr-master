@@ -47,6 +47,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
 
 import Snackbar from '@material-ui/core/Snackbar';
+import Hidden from '@material-ui/core/Hidden';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -152,6 +153,8 @@ class RenderProfile extends React.Component {
                 user_id: itemsStore.getToken()
             })
         }).then(res => res.json()).then(json => {
+            console.log( json )
+            
             this.setState({ 
                 info: json, 
                 is_load: true,
@@ -321,9 +324,34 @@ class RenderProfile extends React.Component {
         }
     }
     
+    activePromo(promo){
+        itemsStore.setPromo(JSON.stringify(promo))
+        let res = itemsStore.checkPromo();
+        
+        setTimeout(() => {
+            if( res['st'] ){
+                this.setState({
+                    openMSG: true,
+                    statusMSG: true,
+                    textMSG: "Промокод применен"
+                })
+            }else{
+                this.setState({
+                    openMSG: true,
+                    statusMSG: false,
+                    textMSG: res['text']
+                })
+            }
+        }, 300);
+    }
+    
     render() {
         return (
             <Grid container className="Actii" style={{ marginTop: 64 }}>
+                <Grid item xs={12} style={{ paddingBottom: 0 }}>
+                    <Typography variant="h5" component="h1">Личный кабинет</Typography>
+                </Grid>
+                
                 
                 <Snackbar
                     anchorOrigin={{
@@ -346,45 +374,82 @@ class RenderProfile extends React.Component {
                 
                 <Grid item container spacing={3} md={8} sm={12} xs={12} xl={8} className="mainContainer" style={{ paddingTop: 0 }}>
                     <AppBar position="static" style={{ backgroundColor: '#fff', color: '#000', zIndex: 0 }} elevation={0}>
-                        <Tabs value={this.state.valueTab} onChange={this.changeTab.bind(this)} aria-label="simple tabs example" style={{ justifyContent: 'center' }}>
-                            <Tab label="Промокоды" {...a11yProps(0)} />
-                            <Tab label="Заказы" {...a11yProps(1)} />
-                            <Tab label="Редактирование" {...a11yProps(2)} />
+                        <Tabs value={this.state.valueTab} onChange={this.changeTab.bind(this)} aria-label="simple tabs example"  style={{ justifyContent: 'center' }}>
+                            <Tab label="Промокоды" {...a11yProps(0)} disableRipple={true} />
+                            <Tab label="Заказы" {...a11yProps(1)} disableRipple={true} />
+                            <Tab label="Редактирование" {...a11yProps(2)} disableRipple={true} />
                         </Tabs>
                     </AppBar>
                     <TabPanel value={this.state.valueTab} index={0} style={{ width: '100%' }}>
-                        {this.state.info.promo ?
-                            <table style={{ width: '100%' }} className="TablePromo">
-                                <thead>
-                                    <tr>
-                                        <td><Typography variant="h5" component="span" className="TEXT">Промокод</Typography></td>
-                                        <td><Typography variant="h5" component="span" className="TEXT">Промокод дает:</Typography></td>
-                                        <td><Typography variant="h5" component="span" className="TEXT">Действует до</Typography></td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {this.state.info.promo.promo.map((item, key) => 
-                                        <tr key={key}>
-                                            <td><Typography variant="h5" component="span" className="TEXT">{item.promo_name}</Typography></td>
-                                            <td><Typography variant="h5" component="span" className="TEXT">{item.promo_text}</Typography></td>
-                                            <td><Typography variant="h5" component="span" className="TEXT">{item.date_end}</Typography></td>
-                                        </tr>
-                                    )}
-                                </tbody>
-                            </table>
-                                :
-                            null
-                        }
+                        <div>
+                            {this.state.info.promo ?
+                                <Hidden xsDown>
+                                    <table style={{ width: '100%' }} className="TablePromo">
+                                        <thead>
+                                            <tr>
+                                                <td><Typography variant="h5" component="span" className="TEXT">Промокод</Typography></td>
+                                                <td><Typography variant="h5" component="span" className="TEXT">Промокод дает:</Typography></td>
+                                                <td><Typography variant="h5" component="span" className="TEXT">Действует до</Typography></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {this.state.info.promo.promo.map((item, key) => 
+                                                <tr key={key}>
+                                                    <td><Typography variant="h5" component="span" className="TEXT promoName" onClick={this.activePromo.bind(this, item.info)}>{item.promo_name}</Typography></td>
+                                                    <td><Typography variant="h5" component="span" className="TEXT">{item.promo_text}</Typography></td>
+                                                    <td><Typography variant="h5" component="span" className="TEXT">{item.date_end}</Typography></td>
+                                                </tr>
+                                            )}
+                                        </tbody>
+                                    </table>
+                                </Hidden>
+                                    :
+                                null
+                            }
+                            {this.state.info.promo ?
+                                <Hidden lgUp>
+                                    <table style={{ width: '100%' }} className="TablePromoMobile">
+                                        <tbody>
+                                            {this.state.info.promo.promo.map((item, key) => 
+                                                <tr key={key}>
+                                                    <td style={{ padding: '10px 20px' }}>
+                                                        <div>
+                                                            <Typography variant="h5" component="span" className="textName">Промокод: </Typography>
+                                                            <Typography variant="h5" component="span" className="textDesc">{item.promo_name}</Typography>
+                                                        </div>
+                                                        <div style={{ width: '100%', paddingTop: 10 }}>
+                                                            <Typography variant="h5" component="span" className="textName">Действует до: </Typography>
+                                                            <Typography variant="h5" component="span" className="textDesc">{item.date_end}</Typography>
+                                                        </div>
+                                                        <div style={{ width: '100%', paddingTop: 10, textAlign: 'justify' }}>
+                                                            <Typography variant="h5" component="span" className="textName">Промокод дает: </Typography>
+                                                            <Typography variant="h5" component="span" className="textDesc">{item.promo_text}</Typography>
+                                                        </div>
+                                                        <div style={{ width: '100%', paddingTop: 10 }}>
+                                                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" style={{ width: '100%' }}>
+                                                                <Button variant="contained" className="BtnCardMain CardInCardItem" style={{ width: '100%' }}>Активирывать промокод</Button>
+                                                            </ButtonGroup>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            )}
+                                        </tbody>
+                                    </table>
+                                </Hidden>
+                                    :
+                                null
+                            }
+                        </div>
                     </TabPanel>
                     <TabPanel value={this.state.valueTab} index={1} style={{ width: '100%' }}>
                         {this.state.info.orders ?
                             <table className="TableOrders">
                                 <thead>
                                     <tr>
-                                        <td><Typography variant="h5" component="span" className="TEXT">№</Typography></td>
-                                        <td><Typography variant="h5" component="span" className="TEXT">Дата</Typography></td>
-                                        <td><Typography variant="h5" component="span" className="TEXT">Сумма</Typography></td>
-                                        <td><Typography variant="h5" component="span" className="TEXT">Статус</Typography></td>
+                                        <td><Typography variant="h5" component="span" className="textName">№</Typography></td>
+                                        <td><Typography variant="h5" component="span" className="textName">Дата</Typography></td>
+                                        <td><Typography variant="h5" component="span" className="textName">Сумма</Typography></td>
+                                        <td></td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -392,7 +457,9 @@ class RenderProfile extends React.Component {
                                         <tr key={key}>
                                             <td><Typography variant="h5" component="span" className="TEXT">{item.order_id}</Typography></td>
                                             <td><Typography variant="h5" component="span" className="TEXT">{item.date_time_new}</Typography></td>
-                                            <td><Typography variant="h5" component="span" className="TEXT">{item.sum}</Typography></td>
+                                            <td>
+                                                <Typography className="CardPriceItem" variant="h5" component="span">{item.sum} <AttachMoneyIcon fontSize="small" /></Typography>
+                                            </td>
                                             <td><Typography variant="h5" component="span" className="TEXT">{parseInt(item.is_delete) == 1 ? <CloseIcon /> : <CheckIcon />}</Typography></td>
                                         </tr>
                                     )}
