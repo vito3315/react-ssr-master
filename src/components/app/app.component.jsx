@@ -88,7 +88,7 @@ class CustomBottomNavigation extends React.Component{
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                     style={{ flex: 1 }}
                 >
-                    <RestaurantMenuSharpIcon style={{ fontSize: '1.7rem' }} />
+                    <RestaurantMenuSharpIcon style={{ fontSize: '1.7rem', fill: itemsStore.getPage() == 'home' ? 'black' : 'gray' }} />
                 </Link>
                 <Link
                     to={'/'+itemsStore.getCity()+'/actii'}
@@ -96,7 +96,7 @@ class CustomBottomNavigation extends React.Component{
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                     style={{ flex: 1 }}
                 >
-                    <CardGiftcardIcon style={{ fontSize: '1.7rem' }} />
+                    <CardGiftcardIcon style={{ fontSize: '1.7rem', fill: itemsStore.getPage() == 'actii' ? 'black' : 'gray' }} />
                 </Link>
                 <Link
                     to={'/'+itemsStore.getCity()+'/'}
@@ -105,7 +105,7 @@ class CustomBottomNavigation extends React.Component{
                     style={{ flex: 1 }}
                 >
                     <Badge badgeContent={itemsStore.getAllPrice()} max={500000} color="primary">
-                        <ShoppingCartOutlinedIcon style={{ fontSize: '1.7rem' }} />
+                        <ShoppingCartOutlinedIcon style={{ fontSize: '1.7rem', fill: itemsStore.getPage() == 'cart' ? 'black' : 'gray' }} />
                     </Badge>
                 </Link>
                 <Link
@@ -114,7 +114,7 @@ class CustomBottomNavigation extends React.Component{
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                     style={{ flex: 1 }}
                 >
-                    <LocationOnIcon style={{ fontSize: '1.7rem' }} />
+                    <LocationOnIcon style={{ fontSize: '1.7rem', fill: itemsStore.getPage() == 'contact' ? 'black' : 'gray' }} />
                 </Link>
                 {itemsStore.getToken() ?
                     <Link
@@ -123,10 +123,15 @@ class CustomBottomNavigation extends React.Component{
                         className="MuiButtonBase-root MuiBottomNavigationAction-root"
                         style={{ flex: 1 }}
                     >
-                        <PersonIcon style={{ fontSize: '1.7rem' }} />
+                        <PersonIcon style={{ fontSize: '1.7rem', fill: itemsStore.getPage() == 'profile' ? 'black' : 'gray' }} />
                     </Link>
                         :
-                    <Typography className="MuiButtonBase-root MuiBottomNavigationAction-root" style={{ flex: 1 }} onClick={this.props.login}><PersonIcon /></Typography>
+                    <Typography 
+                        className="MuiButtonBase-root MuiBottomNavigationAction-root" 
+                        style={{ flex: 1 }} 
+                        onClick={this.props.login}>
+                            <PersonIcon style={{ fontSize: '1.7rem', fill: itemsStore.getPage() == 'profile' ? 'black' : 'gray' }} />
+                    </Typography>
                 }
             </div>
         )
