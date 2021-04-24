@@ -89,19 +89,19 @@ class RenderActii extends React.Component {
     render() {
         if(!this.state.is_load){
             return (
-                <Grid container className="Actii" style={{ marginTop: 64 }}>
-                    <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', paddingBottom: 15 }}>
-                        <div style={{ width: 200, height: 30, backgroundColor: '#e5e5e5' }} />
+                <Grid container className="Actii">
+                    <Grid item xs={12} className="skelet">
+                        <div />
                     </Grid>
-                    <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer" style={{ paddingTop: 0, paddingBottom: 50 }}>
+                    <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer">
                         <Grid item  xs={12} sm={6} md={4} xl={3}>
-                            <div style={{ width: '100%', height: 400, backgroundColor: '#e5e5e5' }} />
+                            <div className="skeleton" />
                         </Grid>
                         <Grid item xs={12} sm={6} md={4} xl={3}>
-                            <div style={{ width: '100%', height: 400, backgroundColor: '#e5e5e5' }} />
+                            <div className="skeleton" />
                         </Grid>
                         <Grid item xs={12} sm={6} md={4} xl={3}>
-                            <div style={{ width: '100%', height: 400, backgroundColor: '#e5e5e5' }} />
+                            <div className="skeleton" />
                         </Grid>
                     </Grid>    
                 </Grid>
@@ -109,11 +109,11 @@ class RenderActii extends React.Component {
         }
         
         return (
-            <Grid container className="Actii" style={{ marginTop: 64 }}>
+            <Grid container className="Actii">
                 <Grid item xs={12} style={{ paddingBottom: 0 }}>
                     <Typography variant="h5" component="h1">Акции</Typography>
                 </Grid>
-                <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer" style={{ paddingTop: 0 }}>
+                <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer">
                     {this.state.actii.map((item, key) =>
                         <Grid item xs={12} sm={6} md={4} xl={3} key={key}>
                             <img src={"https://newjacofood.ru/src/img/aktii/"+item.img_min} alt={item.promo_title} style={{ width: '100%' }} onClick={this.openDialog.bind(this, item)} />

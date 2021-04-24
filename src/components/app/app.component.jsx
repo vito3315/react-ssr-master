@@ -79,58 +79,50 @@ var cart = {
 class CustomBottomNavigation extends React.Component{
     render(){
         return(
-            <div
-                style={{ position: 'fixed', bottom: 0, width: '100%', height: 45, display: 'flex', justifyContent: 'center', backgroundColor: '#fff' }}
-            >
+            <div className="bottomNavigate">
                 <Link
                     to={'/'+itemsStore.getCity()+'/'}
                     exact={ true }
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
-                    style={{ flex: 1 }}
                 >
-                    <RestaurantMenuSharpIcon style={{ fontSize: '1.7rem', fill: itemsStore.getPage() == 'home' ? 'black' : 'gray' }} />
+                    <RestaurantMenuSharpIcon style={{ fill: itemsStore.getPage() == 'home' ? 'black' : 'gray' }} />
                 </Link>
                 <Link
                     to={'/'+itemsStore.getCity()+'/actii'}
                     exact={ true }
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
-                    style={{ flex: 1 }}
                 >
-                    <CardGiftcardIcon style={{ fontSize: '1.7rem', fill: itemsStore.getPage() == 'actii' ? 'black' : 'gray' }} />
+                    <CardGiftcardIcon style={{ fill: itemsStore.getPage() == 'actii' ? 'black' : 'gray' }} />
                 </Link>
                 <Link
                     to={'/'+itemsStore.getCity()+'/'}
                     exact={ true }
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
-                    style={{ flex: 1 }}
                 >
                     <Badge badgeContent={itemsStore.getAllPrice()} max={500000} color="primary">
-                        <ShoppingCartOutlinedIcon style={{ fontSize: '1.7rem', fill: itemsStore.getPage() == 'cart' ? 'black' : 'gray' }} />
+                        <ShoppingCartOutlinedIcon style={{ fill: itemsStore.getPage() == 'cart' ? 'black' : 'gray' }} />
                     </Badge>
                 </Link>
                 <Link
                     to={'/'+itemsStore.getCity()+'/contact'}
                     exact={ true }
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
-                    style={{ flex: 1 }}
                 >
-                    <LocationOnIcon style={{ fontSize: '1.7rem', fill: itemsStore.getPage() == 'contact' ? 'black' : 'gray' }} />
+                    <LocationOnIcon style={{ fill: itemsStore.getPage() == 'contact' ? 'black' : 'gray' }} />
                 </Link>
                 {itemsStore.getToken() ?
                     <Link
                         to={'/'+itemsStore.getCity()+'/profile'}
                         exact={ true }
                         className="MuiButtonBase-root MuiBottomNavigationAction-root"
-                        style={{ flex: 1 }}
                     >
-                        <PersonIcon style={{ fontSize: '1.7rem', fill: itemsStore.getPage() == 'profile' ? 'black' : 'gray' }} />
+                        <PersonIcon style={{ fill: itemsStore.getPage() == 'profile' ? 'black' : 'gray' }} />
                     </Link>
                         :
                     <Typography 
                         className="MuiButtonBase-root MuiBottomNavigationAction-root" 
-                        style={{ flex: 1 }} 
                         onClick={this.props.login}>
-                            <PersonIcon style={{ fontSize: '1.7rem', fill: itemsStore.getPage() == 'profile' ? 'black' : 'gray' }} />
+                            <PersonIcon style={{ fill: itemsStore.getPage() == 'profile' ? 'black' : 'gray' }} />
                     </Typography>
                 }
             </div>
@@ -811,7 +803,7 @@ export class App extends React.Component {
                         </Toolbar>
                         
                         {this.state.activePage == 'home' ?
-                            <Grid className="scrollCat" style={{ marginTop: 50, display: 'flex', flexDirection: 'row', overflow: 'scroll', position: 'fixed', backgroundColor: '#fff', zIndex: 1, width: '100%' }}>
+                            <Grid className="scrollCat">
                                 <Hidden lgUp>
                                     {this.state.categoryItems.map((item, key) => 
                                         <ScrollLink 
@@ -837,7 +829,6 @@ export class App extends React.Component {
                                             offset={-100} 
                                             activeClass="activeCat" 
                                             id={'link_'+item.id} 
-                                            style={{ width: 'max-content', display: 'flex', padding: '6px 10px', whiteSpace: 'nowrap' }}
                                         >
                                             <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
                                         </ScrollLink>    

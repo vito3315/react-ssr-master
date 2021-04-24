@@ -48,6 +48,12 @@ $colorMain: #BB0025;
         text-align: center;
         @include fons(0.8rem, $Ubuntu);
     }
+    & .CardAction{
+        flex-direction: column;
+        align-items: end!important;
+        padding: 1.2vw!important;
+        width: calc(100% - 2.4vw);
+    }
 }
 .CardItem_mobile{
     & img{
@@ -169,10 +175,5 @@ $colorMain: #BB0025;
         flex-grow: 0;
         max-width: 83.333333%;
         flex-basis: 83.333333%;
-    }
-} 
-@media (min-width: 1280px) {
-    .home .cat{
-        font-size: 1.05vw!important;
     }
 }

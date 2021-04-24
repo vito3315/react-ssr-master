@@ -4,9 +4,31 @@ $Futuris: 'Futuris Bold';
     font-size: $size;
     font-family: $family !important;
 }
-.Actii h1{
-    @include fons(2rem, $Futuris);
-    text-align: center;
+.Actii{
+    margin-top: 64;
+    & h1{
+        @include fons(2rem, $Futuris);
+        text-align: center;
+    }
+    & .mainContainer{
+        padding-top: 0; 
+        padding-bottom: 50;
+        & .skeleton{
+            width: 100%;
+            height: 400;
+            background-color: #e5e5e5;
+        }
+    }
+    & .skelet{
+        display: flex; 
+        justify-content: center; 
+        padding-bottom: 15;
+        & > div{
+            width: 200; 
+            height: 30; 
+            background-color: #e5e5e5;
+        }
+    }
 }
 .modalActii{
     & h6{
