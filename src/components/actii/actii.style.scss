@@ -3,15 +3,17 @@
     font-family: Futuris Bold!important;
     text-align: center;
 }
-.modalActii h6{
-    text-align: center;
-    font-family: Futuris Bold!important;
-    font-size: 1.6rem;
-}
-.modalActiiContent{
-    padding-top: 0!important;
-}
-.modalActiiContent span, .modalActiiContent p, .modalActiiContent b{
-    font-family: Ubuntu, sans-serif!important;
-    font-size: 1rem;
+.modalActii{
+    & h6{
+        text-align: center;
+        font-family: Futuris Bold!important;
+        font-size: 1.6rem;
+    }
+    & .modalActiiContent{
+        padding-top: 0!important;
+        & span, p, b{
+            font-family: Ubuntu, sans-serif!important;
+            font-size: 1rem;
+        }
+    }
 }
