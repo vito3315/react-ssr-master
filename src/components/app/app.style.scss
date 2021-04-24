@@ -37,7 +37,6 @@ body{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    
     & .header{
         background-color: #fff;
         margin-bottom: 50;
@@ -220,14 +219,11 @@ body{
         margin-left: 16.66665%!important;
     }
 }
-
-
 @media (min-width: 1280px) {
     .footer .mainContainer {
         margin-left: 8.35% !important; 
     } 
 }
-
 @media (min-width: 960px) {
     .footer .mainContainer {
         margin-left: 8.35% !important; 
@@ -236,7 +232,6 @@ body{
         flex-basis: 83.333333%;
     } 
 }
-
 .socIcons{
     display: flex;
     justify-content: flex-end;
@@ -284,7 +279,6 @@ body{
     margin-bottom: 5;
     font-family: Ubuntu, sans-serif !important;
 }
-
 .ModalAuth .changeNumber{
     font-size: 0.8rem;
     font-family: Ubuntu, sans-serif !important;
@@ -294,7 +288,6 @@ body{
     color: #BB0025;
     border-bottom: 1px dotted #BB0025;
 }
-
 .ModalCity .ModalLabel{
     font-size: 1.5rem;
     font-family: Ubuntu, sans-serif !important;
