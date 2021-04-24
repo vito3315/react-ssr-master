@@ -1,19 +1,22 @@
+$Ubuntu: 'Ubuntu';
+$Futuris: 'Futuris Bold';
+@mixin fons($size: 1rem, $family: $Ubuntu) {
+    font-size: $size;
+    font-family: $family !important;
+}
 .Actii h1{
-    font-size: 2rem;
-    font-family: Futuris Bold!important;
+    @include fons(2rem, $Futuris);
     text-align: center;
 }
 .modalActii{
     & h6{
         text-align: center;
-        font-family: Futuris Bold!important;
-        font-size: 1.6rem;
+        @include fons(1.6rem, $Futuris);
     }
     & .modalActiiContent{
         padding-top: 0!important;
         & span, p, b{
-            font-family: Ubuntu, sans-serif!important;
-            font-size: 1rem;
+            @include fons(1rem, $Ubuntu);
         }
     }
 }

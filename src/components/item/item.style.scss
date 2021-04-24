@@ -1,48 +1,81 @@
+$Ubuntu: 'Ubuntu';
+$Futuris: 'Futuris Bold';
+@mixin fons($size: 1rem, $family: $Ubuntu) {
+    font-size: $size;
+    font-family: $family !important;
+}
 .MainItem{
     margin-bottom: 50px!important;
     padding-left: 10%;
     padding-right: 10%;
+    & h1{
+        @include fons(2rem, $Futuris);
+    }
+    & > div:first-child{
+        text-align: center;
+    }
+    & > div:last-child{
+        display: flex; 
+        flex-direction: column;
+    }
+    & > div:not(:last-child):not(:first-child){
+        display: flex; 
+        justify-content: flex-end;
+    }
+    & img{
+        max-width: 400;
+        width: 100%;
+        height: intrinsic;
+    }
+    & .ItemDesc{
+        @include fons(1.2rem, $Ubuntu);
+        padding-bottom: 5px;
+    }
+    & .ItemPrice{
+        display: flex;
+        align-items: flex-end;
+        & svg{
+            padding-bottom: 1px;
+        }
+    }
+    & .CardInCardItem{
+        width: 100%;
+        text-align: center;
+        @include fons(0.8rem, $Ubuntu);
+    }
+    & .CardCountItem{
+        @include fons(1rem, $Ubuntu);
+    }
+    & .ItemOther{
+        display: flex;
+        align-items: center;
+    }
+    & .ItemOther > div{
+        padding-left: 30px;
+    }
 }
-.MainItem > div:first-child{
-    text-align: center;
-}
-.MainItem > div:last-child{
-    display: flex; 
-    flex-direction: column;
-}
-.MainItem > div:not(:last-child):not(:first-child){
-    display: flex; 
-    justify-content: flex-end;
-}
-.MainItem > div > h1, .MainItem_mobile h1{
-    font-size: 2rem;
-    font-family: Futuris Bold!important;
-}
-.MainItem img, .MainItem_mobile img{
-    max-width: 400;
-    width: 100%;
-    height: intrinsic;
-}
-.MainItem .ItemDesc, .MainItem_mobile .ItemDesc{
-    font-size: 1.2rem;
-    font-family: Ubuntu, sans-serif!important;
-    padding-bottom: 5px;
-}
-.MainItem .ItemPrice, .MainItem_mobile .ItemPrice{
-    display: flex;
-    align-items: flex-end;
-}
-.MainItem .ItemPrice > svg{
-    padding-bottom: 1px;
-}
-.MainItem .CardInCardItem, .MainItem_mobile .CardInCardItem{
-    width: 100%;
-    text-align: center;
-    font-family: Ubuntu, sans-serif!important;
-    font-size: 0.8rem;
-}
-.MainItem .CardCountItem{
-    font-family: Ubuntu, sans-serif!important;
+.MainItem_mobile{
+    & h1{
+        @include fons(2rem, $Futuris);
+    }
+    & img{
+        max-width: 400;
+        width: 100%;
+        height: intrinsic;
+    }
+    & .ItemDesc{
+        @include fons(1.2rem, $Ubuntu);
+        padding-bottom: 5px;
+    }
+    & .ItemPrice{
+        display: flex;
+        align-items: flex-end;
+    }
+    & .CardInCardItem{
+        width: 100%;
+        text-align: center;
+        @include fons(0.8rem, $Ubuntu);
+    }
 }
 .MainItemPopoverLot{
     height: calc(200px - 32px);
@@ -65,11 +98,10 @@
 }
 .MainItemPopover span{
     color: #fff;
-    font-family: Ubuntu, sans-serif!important;
-    font-size: 0.9rem;
+    @include fons(0.9rem, $Ubuntu);
 }
 .MainItemPopover .OtherMiniPopover{
-    font-size: 0.7rem;
+    @include fons(0.7rem, $Ubuntu);
 }
 .MainItemPopover .NamePopover{
     text-align: center;
@@ -78,20 +110,13 @@
     display: flex;
     justify-content: space-between;
 }
-.MainItem .ItemOther{
-    display: flex;
-    align-items: center;
-}
-.MainItem .ItemOther > div{
-    padding-left: 30px;
-}
 .MainItem_mobile .MainLine, .MainItem_mobile .SecondLine{
     display: flex;
     justify-content: space-between;
     align-items: baseline;
 }
 .MainItem_mobile .SecondLine svg{
-    font-size: 1.8rem;
+    @include fons(1.8rem, $Ubuntu);
 }
 .MainItem_mobile .BtnLine{
     display: flex;

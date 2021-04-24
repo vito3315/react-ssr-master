@@ -5,6 +5,13 @@
 	src: local(FuturaFuturisC-Bold), url('/src/assets/fonts/FuturaFuturisC-Bold.ttf'); /* Для остальных браузеров */
 }
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+$Ubuntu: 'Ubuntu';
+$Futuris: 'Futuris Bold';
+@mixin fons($size: 1rem, $family: $Ubuntu) {
+    font-size: $size;
+    font-family: $family !important;
+}
+
 body{
     margin: 0px!important;
 }
