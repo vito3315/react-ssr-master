@@ -126,7 +126,8 @@ class RenderProfile extends React.Component {
             openMSG: false,
             statusMSG: false,
             textMSG: '',
-            spam: 0
+            spam: 0,
+            userName: ''
         };
     }
     
@@ -161,6 +162,7 @@ class RenderProfile extends React.Component {
                 arr_day: arr_day,
                 userMail: json.user.mail,
                 spam: json.user.spam,
+                userName: json.user.name
             });
         })
         .catch(err => { });
@@ -345,6 +347,41 @@ class RenderProfile extends React.Component {
         }, 300);
     }
     
+    changeName = (event) => {
+        this.setState({
+            userName: event.target.value
+        })
+    }
+    
+    saveName(){
+        fetch('https://jacofood.ru/src/php/test_app.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'},
+            body: queryString.stringify({
+                type: 'save_profile_name', 
+                my_name: this.state.userName,
+                user_id: itemsStore.getToken(),
+            })
+        }).then(res => res.json()).then(json => {
+            setTimeout(() => {
+                if( json['st'] ){
+                    this.setState({
+                        openMSG: true,
+                        statusMSG: true,
+                        textMSG: "Данные успешно обновлены"
+                    })
+                }else{
+                    this.setState({
+                        openMSG: true,
+                        statusMSG: false,
+                        textMSG: json['text']
+                    })
+                }
+            }, 300);
+        });
+    }
+    
     render() {
         return (
             <Grid container className="Actii" style={{ marginTop: 64 }}>
@@ -473,7 +510,13 @@ class RenderProfile extends React.Component {
                         {this.state.info.user ?
                             <div className="TableInfo">
                                 <form noValidate autoComplete="off">
-                                    <TextField InputProps={{ readOnly: true }} label="Имя" value={this.state.info.user.name} className="input" />
+                                    <TextField 
+                                        label="Имя" 
+                                        value={this.state.userName} 
+                                        className="input" 
+                                        onChange={this.changeName.bind(this)}
+                                        onBlur={this.saveName.bind(this)}
+                                    />
                                     <TextField InputProps={{ readOnly: true }} label="Номер телефона" value={this.state.info.user.login} className="input" />
                                 </form>
                                 <form noValidate autoComplete="off">
