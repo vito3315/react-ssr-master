@@ -198,7 +198,7 @@ class RenderContact extends React.Component {
     
     render() {
         return (
-            <Grid container className="Contact mainContainer MuiGrid-spacing-xs-3" style={{ marginTop: 64 }}>
+            <Grid container className="Contact mainContainer MuiGrid-spacing-xs-3">
                 <Grid item xs={12}>
                     <Typography variant="h5" component="h1">Контакты</Typography>
                 </Grid>

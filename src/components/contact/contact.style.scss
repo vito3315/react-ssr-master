@@ -39,7 +39,7 @@
 #ForMap{
     min-height: 400px;
     height: 40%;
-    width: 100%;
+    width: calc(100% - 104px);
 }
 .my-hint{
     //height: 100px;
@@ -65,4 +65,19 @@
         max-width: 83.333333%;
         flex-basis: 83.333333%;
     } 
+    .Contact.mainContainer.MuiGrid-spacing-xs-3{
+        margin-top: 64px!important;
+    }
+}
+@media (max-width: 960px) {
+    .Contact.mainContainer.MuiGrid-spacing-xs-3{
+        margin: -24px!important;
+        margin-top: 64px!important;
+    }
+    .Contact.mainContainer.MuiGrid-spacing-xs-3 > div{
+        padding-left: 34px;
+    }
+    #ForMap{
+        padding-bottom: 40px;
+    }
 }
