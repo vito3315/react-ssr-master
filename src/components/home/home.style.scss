@@ -5,6 +5,11 @@ $colorMain: #BB0025;
     font-size: $size;
     font-family: $family !important;
 }
+.ItemDialog{
+    & .MainItem_mobile{
+        margin-top: 30px!important;
+    }   
+}
 .CardItem{
     max-width: 345; 
     min-height: 300px;
@@ -31,6 +36,7 @@ $colorMain: #BB0025;
     }
     & .CardNameItem{
         @include fons(1.2rem, $Ubuntu);
+        font-weight: bold;
     }
     & .CardInfoWeiItem{
         @include fons(0.8rem, $Ubuntu);
@@ -73,6 +79,7 @@ $colorMain: #BB0025;
     }
     & .CardNameItem{
         @include fons(1.2rem, $Ubuntu);
+        font-weight: bold;
     }
     & .CardInfoWeiItem{
         @include fons(0.8rem, $Ubuntu);

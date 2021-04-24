@@ -62,15 +62,6 @@ body{
         background-color: #fff;
         margin-bottom: 50;
         height: 50;
-        & .activeCat{
-            background-color: $colorMain;
-            padding: 4px 8px;
-            border-radius: 5px;
-            color: #fff;
-            & span, a{
-                color: #fff!important;
-            }
-        }
     }
     & .sub_header{
         min-height: 50;
@@ -188,6 +179,15 @@ body{
         display: flex;
         padding: 6px 10px; 
         white-space: nowrap;
+    }
+}
+.activeCat{
+    background-color: $colorMain;
+    padding: 4px 8px;
+    border-radius: 5px;
+    color: #fff;
+    & span, a{
+        color: #fff!important;
     }
 }
 #simple-popover{
