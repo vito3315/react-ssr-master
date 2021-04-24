@@ -365,6 +365,7 @@ class RenderHome extends React.Component {
                 <Hidden smUp>
                     <AliceCarousel 
                         mouseTracking 
+                        disableButtonsControls={true}
                         //autoPlay={true}
                         //autoPlayInterval={3000}
                         infinite={true}
