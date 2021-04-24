@@ -80,7 +80,7 @@ class CustomBottomNavigation extends React.Component{
     render(){
         return(
             <div
-                style={{ position: 'fixed', bottom: 0, width: '100%', height: 56, display: 'flex', justifyContent: 'center', backgroundColor: '#fff' }}
+                style={{ position: 'fixed', bottom: 0, width: '100%', height: 45, display: 'flex', justifyContent: 'center', backgroundColor: '#fff' }}
             >
                 <Link
                     to={'/'+itemsStore.getCity()+'/'}
@@ -88,7 +88,7 @@ class CustomBottomNavigation extends React.Component{
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                     style={{ flex: 1 }}
                 >
-                    <RestaurantMenuSharpIcon />
+                    <RestaurantMenuSharpIcon style={{ fontSize: '1.7rem' }} />
                 </Link>
                 <Link
                     to={'/'+itemsStore.getCity()+'/actii'}
@@ -96,7 +96,7 @@ class CustomBottomNavigation extends React.Component{
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                     style={{ flex: 1 }}
                 >
-                    <CardGiftcardIcon />
+                    <CardGiftcardIcon style={{ fontSize: '1.7rem' }} />
                 </Link>
                 <Link
                     to={'/'+itemsStore.getCity()+'/'}
@@ -105,7 +105,7 @@ class CustomBottomNavigation extends React.Component{
                     style={{ flex: 1 }}
                 >
                     <Badge badgeContent={itemsStore.getAllPrice()} max={500000} color="primary">
-                        <ShoppingCartOutlinedIcon />
+                        <ShoppingCartOutlinedIcon style={{ fontSize: '1.7rem' }} />
                     </Badge>
                 </Link>
                 <Link
@@ -114,7 +114,7 @@ class CustomBottomNavigation extends React.Component{
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                     style={{ flex: 1 }}
                 >
-                    <LocationOnIcon />
+                    <LocationOnIcon style={{ fontSize: '1.7rem' }} />
                 </Link>
                 {itemsStore.getToken() ?
                     <Link
@@ -123,7 +123,7 @@ class CustomBottomNavigation extends React.Component{
                         className="MuiButtonBase-root MuiBottomNavigationAction-root"
                         style={{ flex: 1 }}
                     >
-                        <PersonIcon />
+                        <PersonIcon style={{ fontSize: '1.7rem' }} />
                     </Link>
                         :
                     <Typography className="MuiButtonBase-root MuiBottomNavigationAction-root" style={{ flex: 1 }} onClick={this.props.login}><PersonIcon /></Typography>
@@ -963,16 +963,16 @@ export class App extends React.Component {
                     
                 
                     <Hidden lgUp>
-                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 83, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
-                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 80, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
-                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 77, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
-                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 74, zIndex: 0, backgroundColor: '#bababa', opacity: 0.04 }} />
-                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 71, zIndex: 0, backgroundColor: '#bababa', opacity: 0.05 }} />
-                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 68, zIndex: 0, backgroundColor: '#bababa', opacity: 0.06 }} />
-                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 65, zIndex: 0, backgroundColor: '#bababa', opacity: 0.07 }} />
-                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 62, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
-                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 59, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
-                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 56, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
+                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 72, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
+                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 69, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
+                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 66, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
+                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 63, zIndex: 0, backgroundColor: '#bababa', opacity: 0.04 }} />
+                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 60, zIndex: 0, backgroundColor: '#bababa', opacity: 0.05 }} />
+                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 57, zIndex: 0, backgroundColor: '#bababa', opacity: 0.06 }} />
+                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 54, zIndex: 0, backgroundColor: '#bababa', opacity: 0.07 }} />
+                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 51, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
+                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 48, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
+                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 45, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
                     </Hidden>
                     <Hidden lgUp>
                         <CustomBottomNavigation login={this.openLogin.bind(this)} />
