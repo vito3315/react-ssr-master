@@ -284,6 +284,17 @@ body{
     margin-bottom: 5;
     font-family: Ubuntu, sans-serif !important;
 }
+
+.ModalAuth .changeNumber{
+    font-size: 0.8rem;
+    font-family: Ubuntu, sans-serif !important;
+    padding-top: 10; 
+    cursor: pointer;
+    width: fit-content;
+    color: #BB0025;
+    border-bottom: 1px dotted #BB0025;
+}
+
 .ModalCity .ModalLabel{
     font-size: 1.5rem;
     font-family: Ubuntu, sans-serif !important;

@@ -664,6 +664,16 @@ export class App extends React.Component {
             }
         });
     }
+    
+    changeNumber(){
+        this.setState({
+            stage_1: true,
+            stage_2: false,
+            
+            errPhone: '',
+            errSMS: ''
+        })
+    }
 
     render() {
         return (
@@ -858,6 +868,11 @@ export class App extends React.Component {
                                     value={this.state.userLogin}
                                     onChange={ event => this.state.stage_1 ? this.setState({ userLogin: event.target.value }) : {} }
                                 />
+                                {this.state.stage_2 ?
+                                    <Typography variant="h5" component="span" className="changeNumber" onClick={this.changeNumber.bind(this)}>Изменеить номер</Typography>
+                                        :
+                                    null
+                                }
                                 {this.state.errPhone.length > 0 ?
                                     <div style={{ marginTop: 10, padding: 16, backgroundColor: '#BB0025', borderRadius: 4 }}>
                                         <Typography variant="h5" component="span" style={{ fontSize: '1.1rem', color: '#fff' }}>{this.state.errPhone}</Typography>
@@ -952,8 +967,6 @@ export class App extends React.Component {
                         <Route exact path='/:cityName/profile/'>
                             {!itemsStore.getToken() && itemsStore.getCity() ? <Redirect push to={"/"+itemsStore.getCity()+"/"} /> : <Profile />}
                         </Route>
-
-                        
                         <Route
                             path='/:cityName/menu/:itemLink'
                             exact={ true }
@@ -962,8 +975,6 @@ export class App extends React.Component {
                         <Route
                             component={ NotFound }
                         />
-                        
-                        
                     </Switch>
                     
                 
