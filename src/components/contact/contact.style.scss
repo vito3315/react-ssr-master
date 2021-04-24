@@ -1,15 +1,18 @@
+$Ubuntu: 'Ubuntu';
+$Futuris: 'Futuris Bold';
+@mixin fons($size: 1rem, $family: $Ubuntu) {
+    font-size: $size;
+    font-family: $family !important;
+}
 .Contact{
     & h1{
-        font-size: 2rem;
-        font-family: Futuris Bold!important;
+        @include fons(2rem, $Futuris);
     }
     & h2{
-        font-size: 1.3rem;
-        font-family: Futuris Bold!important;
+        @include fons(1.3rem, $Futuris);
     }
     & span, a{
-        font-family: Ubuntu, sans-serif!important;
-        font-size: 0.9rem;
+        @include fons(0.9rem, $Ubuntu);
         width: max-content;
         color: #000;
         text-decoration: none;
@@ -49,8 +52,7 @@
     }
     & .AccordionDesc{
         & b, span{
-            font-family: Ubuntu, sans-serif!important;
-            font-size: 0.8rem;
+            @include fons(0.8rem, $Ubuntu);
         }
     }
 }
@@ -64,8 +66,7 @@
 }
 .my-hint{
     width: 220px;
-    font-family: Ubuntu, sans-serif!important;
-    font-size: 0.9rem;
+    @include fons(0.9rem, $Ubuntu);
     display: inline-block;
     position: relative;
     color: #fff;

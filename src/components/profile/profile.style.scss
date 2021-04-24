@@ -1,22 +1,27 @@
-.modalActii h6{
-    text-align: center;
-    font-family: Futuris Bold!important;
-    font-size: 1.6rem;
+$Ubuntu: 'Ubuntu';
+$Futuris: 'Futuris Bold';
+$mainColor: #BB0025;
+@mixin fons($size: 1rem, $family: $Ubuntu) {
+    font-size: $size !important;
+    font-family: $family !important;
 }
-.modalActiiContent{
-    padding-top: 0!important;
-}
-.modalActiiContent span, .modalActiiContent p, .modalActiiContent b{
-    font-family: Ubuntu, sans-serif!important;
-    font-size: 1rem;
-}
-
+.modalActii{
+    & h6{
+        text-align: center;
+        @include fons(1.6rem, $Futuris);
+    }
+    & .modalActiiContent{
+        padding-top: 0!important;
+        & span, p, b{
+            @include fons(1rem, $Ubuntu);
+        }
+    }
+} 
 .MuiTabs-scroller.MuiTabs-fixed > div{
     justify-content: center;
 }
 .TablePromo .TEXT, .TableOrders .TEXT{
-    font-family: Ubuntu, sans-serif!important;
-    font-size: 1.1rem;
+    @include fons(1.1rem, $Ubuntu);
 }
 .TablePromo td, .TableOrders td{
     text-align: center;
@@ -39,7 +44,6 @@
     flex-direction: column;
     align-items: center; 
     margin: 40px 0;
-    
     & .input{
         margin: 0px 40px;
         width: calc(100% - 80px);
@@ -56,8 +60,7 @@
         width: 70%;
     }
     & *{
-        font-family: Ubuntu, sans-serif!important;
-        font-size: 1.1rem!important;
+        @include fons(1.1rem, $Ubuntu);
     }
     & .ChangeDay{
         width: calc(40% - 5px);
@@ -69,8 +72,7 @@
     }
 }
 .menuItem{
-    font-family: Ubuntu, sans-serif!important;
-    font-size: 1.1rem!important;
+    @include fons(1.1rem, $Ubuntu);
 }
 @media (max-width: 960px) {
     .TableOrders{
@@ -102,13 +104,13 @@
     }
 }
 .MuiFormLabel-root.Mui-focused{
-    color: #BB0025!important;
+    color: $mainColor!important;
 }
 .MuiInput-underline:after{
-    border-bottom: 2px solid #BB0025!important;
+    border-bottom: 2px solid $mainColor!important;
 }
 .MuiCheckbox-colorSecondary.Mui-checked{
-    color: #BB0025!important;
+    color: $mainColor!important;
 }
 .MuiSelect-select:focus{
     background-color: #fff!important;
@@ -117,27 +119,24 @@
     background-color: inherit!important;
 }
 .otherLabel{
-    font-size: 0.8rem!important;
+    @include fons(0.8rem, $Ubuntu);
 }
 .textName{
-    font-family: Futuris Bold!important;
-    font-size: 1.1rem!important;
+    @include fons(1.1rem, $Futuris);
 }
 .textDesc{
-    font-family: Ubuntu, sans-serif!important;
-    font-size: 1.1rem!important;
+    @include fons(1.1rem, $Ubuntu);
 }
 .TableOrders .CardPriceItem{
-    font-size: 1.1rem!important;
-    font-family: Ubuntu, sans-serif!important;
+    @include fons(1.1rem, $Ubuntu);
     display: flex;
     align-items: flex-end;
     justify-content: center;
 }
 .PrivateTabIndicator-colorSecondary-3{
-    background-color: #BB0025!important;
+    background-color: $mainColor!important;
 }
 .TEXT.promoName{
-    color: #BB0025!important;
+    color: $mainColor!important;
     cursor: pointer;
 }

@@ -354,7 +354,6 @@ class RenderHome extends React.Component {
                 
                 <Hidden xsDown>
                     <AliceCarousel 
-                        style={{ minHeight: 350 }}
                         mouseTracking 
                         //autoPlay={true}
                         //autoPlayInterval={3000}
@@ -400,7 +399,7 @@ class RenderHome extends React.Component {
                                 </Button>
                             </Toolbar>
                         </AppBar>
-                        <div style={{ padding: 20 }}>
+                        <div>
                             <Item itemId={this.state.openItem.id} item={this.state.openItem} />
                         </div>
                     </Dialog>

@@ -55,6 +55,9 @@ $Futuris: 'Futuris Bold';
     }
 }
 .MainItem_mobile{
+    margin-top: 75px;
+    padding: 0 20px;
+    padding-bottom: 20px;
     & h1{
         @include fons(2rem, $Futuris);
     }
@@ -76,49 +79,52 @@ $Futuris: 'Futuris Bold';
         text-align: center;
         @include fons(0.8rem, $Ubuntu);
     }
+    & .MainLine, .SecondLine{
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        & svg{
+            @include fons(1.4rem, $Ubuntu);
+        }
+    }
+    & .BtnLine{
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
+    }
 }
-.MainItemPopoverLot{
-    height: calc(200px - 32px);
-    width: 260px;
-    background-color: #000;
-}
-.MainItemPopoverOne{
-    height: calc(170px - 32px);
-    width: 260px;
-    background-color: #000;
-    overflow: hidden;
-}
-.MainItemPopover > table{
-    padding: 16px;
-    background-color: #000;
-    width: 100%;
-}
-.MainItemPopover > table td{
-    padding-bottom: 10px;
-}
-.MainItemPopover span{
-    color: #fff;
-    @include fons(0.9rem, $Ubuntu);
-}
-.MainItemPopover .OtherMiniPopover{
-    @include fons(0.7rem, $Ubuntu);
-}
-.MainItemPopover .NamePopover{
-    text-align: center;
-}
-.MainItemPopover .OtherPopover{
-    display: flex;
-    justify-content: space-between;
-}
-.MainItem_mobile .MainLine, .MainItem_mobile .SecondLine{
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-}
-.MainItem_mobile .SecondLine svg{
-    @include fons(1.8rem, $Ubuntu);
-}
-.MainItem_mobile .BtnLine{
-    display: flex;
-    justify-content: flex-end;
+.MainItemPopover{
+    & > table{
+        padding: 16px;
+        background-color: #000;
+        width: 100%;
+        & td{
+            padding-bottom: 10px;
+        }
+    }
+    & span{
+        color: #fff;
+        @include fons(0.9rem, $Ubuntu);
+    }
+    & .OtherMiniPopover{
+        @include fons(0.7rem, $Ubuntu);
+    }
+    & .NamePopover{
+        text-align: center;
+    }
+    & .OtherPopover{
+        display: flex;
+        justify-content: space-between;
+    }
+    &.MainItemPopoverLot{
+        height: calc(200px - 32px);
+        width: 260px;
+        background-color: #000;
+    }
+    &.MainItemPopoverOne{
+        height: calc(170px - 32px);
+        width: 260px;
+        background-color: #000;
+        overflow: hidden;
+    }
 }

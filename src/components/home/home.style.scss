@@ -1,3 +1,10 @@
+$Ubuntu: 'Ubuntu';
+$Futuris: 'Futuris Bold';
+$colorMain: #BB0025;
+@mixin fons($size: 1rem, $family: $Ubuntu) {
+    font-size: $size;
+    font-family: $family !important;
+}
 .CardItem{
     max-width: 345; 
     min-height: 300px;
@@ -5,158 +12,167 @@
     flex-direction: column; 
     align-items: stretch;
     justify-content: space-between;
+    & > div:first-child{
+        padding: 0;
+    }
+    & img{
+        width: 100%;
+        min-height: initial;
+    }
+    & .CardInfoItem{
+        @include fons(0.7rem, $Ubuntu);
+    }
+    & .CardCountItem{
+        @include fons(1rem, $Ubuntu);
+    }
+    & a{
+        color: #000;
+        text-decoration: none;
+    }
+    & .CardNameItem{
+        @include fons(1.2rem, $Ubuntu);
+    }
+    & .CardInfoWeiItem{
+        @include fons(0.8rem, $Ubuntu);
+    }
+    & .CardPriceItem{
+        @include fons(1.5rem, $Ubuntu);
+        display: flex;
+        align-items: flex-end;
+        & > svg{
+            padding-bottom: 4px;
+        }
+    }
+    & .CardInCardItem{
+        width: 100%;
+        text-align: center;
+        @include fons(0.8rem, $Ubuntu);
+    }
 }
-.CardItem > div:first-child{
-    padding: 0;
-}
-.CardItem img{
-    width: 100%;
-    min-height: initial;
-}
-.CardItem_mobile img{
-    margin-right: 10px;
-    width: calc(100% - 10px);
-}
-.CardItem_mobile .SecondBox{
-    display: flex;
-    flex-direction: column;
-}
-.CardItem_mobile .SecondBox > div{
-    margin-top: auto;
-    display: flex;
-    flex-direction: row; 
-    align-items: end;
-    justify-content: space-between;
-}
-.CardItem .CardInfoItem{
-    font-size: 0.7rem!important;
-    font-family: Ubuntu, sans-serif!important;
-}
-.CardItem_mobile .CardInfoItem{
-    font-size: 0.8rem!important;
-    font-family: Ubuntu, sans-serif!important;
-}
-.CardItem .CardNameItem, .CardItem_mobile .CardNameItem{
-    font-size: 1.2rem!important;
-    font-family: Ubuntu, sans-serif!important;
-}
-.CardItem .CardInfoWeiItem, .CardItem_mobile .CardInfoWeiItem{
-    font-size: 0.8rem!important;
-    font-family: Ubuntu, sans-serif!important;
-}
-.CardItem .CardPriceItem, .CardItem_mobile .CardPriceItem{
-    font-size: 1.5rem!important;
-    font-family: Ubuntu, sans-serif!important;
-    display: flex;
-    align-items: flex-end;
-}
-.CardItem .CardPriceItem > svg, .CardItem_mobile .CardPriceItem > svg{
-    padding-bottom: 4px;
-}
-.CardItem .CardInCardItem, .CardItem_mobile .CardInCardItem{
-    width: 100%;
-    text-align: center;
-    font-family: Ubuntu, sans-serif!important;
-    font-size: 0.8rem;
-}
-.CardItem .CardCountItem{
-    font-family: Ubuntu, sans-serif!important;
-}
-.CardItem_mobile .CardInfoItem{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -moz-box;
-    -moz-box-orient: vertical;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    line-clamp: 3;
-    box-orient: vertical;
-}
-.CardItem_mobile > div:first-child{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.alice-carousel__stage-item img{
-    width: 100%;
-}
-.alice-carousel__prev-btn, .alice-carousel__next-btn{
-    position: absolute;
-    top: 0;
-    width: 20%!important;
-    height: calc(100% - 38px);
-}
-.alice-carousel__prev-btn-wrapper, .alice-carousel__next-btn-wrapper{
-    width: 100%;
-    height: 100%;
-}
-.alice-carousel__prev-btn-item, .alice-carousel__next-btn-item{
-    font-size: 2rem;
-    color: #fff!important;
-    width: 100%;
-    height: 100%;
-    display: flex!important;
-    justify-content: center;
-    align-items: center;
-}
-.alice-carousel__prev-btn-item > span, .alice-carousel__next-btn-item > span{
-    opacity: 0;
-}
-.alice-carousel__next-btn{
-    right: 0;
-}
-.alice-carousel__dots{
-    margin: 15px 3px 5px!important;    
-}
-.alice-carousel__dots-item:not(.__custom):hover, .alice-carousel__dots-item:not(.__custom).__active {
-    background-color: #BB0025!important;
-    opacity: 1;
-}
-.alice-carousel__dots-item:not(.__custom) {
-    background-color: #BB0025!important;
-    opacity: 0.5;
-}
+.CardItem_mobile{
+    & img{
+        margin-right: 10px;
+        width: calc(100% - 10px);
+    }
+    & .SecondBox{
+        display: flex;
+        flex-direction: column;
+        & > div{
+            margin-top: auto;
+            display: flex;
+            flex-direction: row; 
+            align-items: end;
+            justify-content: space-between;
+        }
+    }
+    & .CardInfoItem{
+        @include fons(0.8rem, $Ubuntu);
+    }
+    & .CardNameItem{
+        @include fons(1.2rem, $Ubuntu);
+    }
+    & .CardInfoWeiItem{
+        @include fons(0.8rem, $Ubuntu);
+    }
+    & .CardPriceItem{
+        @include fons(1.5rem, $Ubuntu);
+        display: flex;
+        align-items: flex-end;
+        & > svg{
+            padding-bottom: 4px;
+        }
+    }
+    & .CardInCardItem{
+        width: 100%;
+        text-align: center;
+        @include fons(0.8rem, $Ubuntu);
+    }
+    & .CardInfoItem{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -moz-box;
+        -moz-box-orient: vertical;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        line-clamp: 3;
+        box-orient: vertical;
+    }
+    & > div:first-child{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+} 
 .alice-carousel{
     margin-top: 50px!important;
     height: max-content;
-}
-@media (max-width: 1280px){
-    .alice-carousel{
+    @media (max-width: 1280px){
         margin-top: 83px!important;
     }
-}
-.alice-carousel__prev-btn-item, .alice-carousel__next-btn-item{
-    padding: 0px!important;
-}
-.MainItems.mainContainer > div{
-    max-height: auto;
-}
-.CardItem a{
-    color: #000;
-    text-decoration: none;
-}
-@media (min-width: 1280px) {
-    .MainItems.mainContainer {
-        margin-left: 8.35% !important; 
-    } 
-    .home .cat{
-        font-size: 1.05vw!important;
+    & .alice-carousel__stage-item img{
+        width: 100%;
+    }
+    & .alice-carousel__prev-btn, .alice-carousel__next-btn{
+        position: absolute;
+        top: 0;
+        width: 20%!important;
+        height: calc(100% - 38px);
+    }
+    & .alice-carousel__prev-btn-wrapper, .alice-carousel__next-btn-wrapper{
+        width: 100%;
+        height: 100%;
+    }
+    & .alice-carousel__prev-btn-item, .alice-carousel__next-btn-item{
+        font-size: 2rem;
+        color: #fff!important;
+        width: 100%;
+        height: 100%;
+        display: flex!important;
+        justify-content: center;
+        align-items: center;
+        padding: 0px!important;
+        & > span{
+            opacity: 0;
+        }
+    }
+    & .alice-carousel__next-btn{
+        right: 0;
+    }
+    & .alice-carousel__dots{
+        margin: 15px 3px 5px!important;    
+    }
+    & .alice-carousel__dots-item:not(.__custom):hover, .alice-carousel__dots-item:not(.__custom).__active {
+        background-color: $colorMain!important;
+        opacity: 1;
+    }
+    & .alice-carousel__dots-item:not(.__custom) {
+        background-color: $colorMain!important;
+        opacity: 0.5;
     }
 }
-@media (min-width: 960px){
-    .MainItems.mainContainer {
+.MainItems.mainContainer{
+    & > div{
+        max-height: auto;
+    }
+    @media (min-width: 1280px) {
+        margin-left: 8.35% !important; 
+    }
+    @media (min-width: 960px){
         margin-left: 0;
         flex-grow: 0;
         max-width: 100%;
         flex-basis: 100%;
     }
-}
-@media (min-width: 1280px) {
-    .MainItems.mainContainer {
+    @media (min-width: 1280px) {
         margin-left: 8.35% !important; 
         flex-grow: 0;
         max-width: 83.333333%;
         flex-basis: 83.333333%;
-    } 
+    }
+} 
+@media (min-width: 1280px) {
+    .home .cat{
+        font-size: 1.05vw!important;
+    }
 }
