@@ -675,6 +675,26 @@ export class App extends React.Component {
         })
     }
 
+    changeCode(code){
+        code = code.target.value
+        
+        this.setState({
+            userCode: code
+        })
+        
+        if( (parseInt(code)+'').length == 4 ){ 
+            setTimeout(()=>{
+                this.checkCode() 
+            }, 500)
+        }
+    }
+
+    handleKeyPress = (event) => {
+        if(event.key === 'Enter'){
+            this.sendSMS()
+        }
+    }
+
     render() {
         return (
             <Provider { ...stores }>
@@ -866,6 +886,7 @@ export class App extends React.Component {
                                     placeholder="8 (999) 999-99-99" 
                                     disabled={!this.state.stage_1}
                                     value={this.state.userLogin}
+                                    onKeyPress={this.handleKeyPress}
                                     onChange={ event => this.state.stage_1 ? this.setState({ userLogin: event.target.value }) : {} }
                                 />
                                 {this.state.stage_2 ?
@@ -889,7 +910,8 @@ export class App extends React.Component {
                                             className="InputMask"
                                             mask="9999" 
                                             value={this.state.userCode}
-                                            onChange={ event => this.setState({ userCode: event.target.value }) }
+                                            //onChange={ (event) => { this.changeCode.bind(this, event.target.value) } }
+                                            onChange={ this.changeCode.bind(this) }
                                         />
                                         {this.state.timerSMS > 0 ?
                                             <Typography variant="h5" component="span" style={{ fontSize: '0.8rem', paddingTop: 10 }}>{'Новое смс доступно через '+this.state.timerSMS+' сек.'}</Typography>
