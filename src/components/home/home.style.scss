@@ -20,7 +20,7 @@ $colorMain: #BB0025;
         min-height: initial;
     }
     & .CardInfoItem{
-        @include fons(0.7rem, $Ubuntu);
+        @include fons(0.8rem, $Ubuntu);
     }
     & .CardCountItem{
         @include fons(1rem, $Ubuntu);
@@ -71,9 +71,6 @@ $colorMain: #BB0025;
             justify-content: space-between;
         }
     }
-    & .CardInfoItem{
-        @include fons(0.8rem, $Ubuntu);
-    }
     & .CardNameItem{
         @include fons(1.2rem, $Ubuntu);
     }
@@ -94,6 +91,7 @@ $colorMain: #BB0025;
         @include fons(0.8rem, $Ubuntu);
     }
     & .CardInfoItem{
+        @include fons(0.8rem, $Ubuntu);
         overflow: hidden;
         text-overflow: ellipsis;
         display: -moz-box;

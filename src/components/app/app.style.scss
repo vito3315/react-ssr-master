@@ -71,32 +71,6 @@ body{
                 color: #fff!important;
             }
         }
-        & .activeCatTest{
-            scroll-snap-align: center;
-            scroll-snap-stop: always;
-        }
-        & .scrollCat{
-            margin-top: 50; 
-            display: flex;
-            flex-direction: row;
-            overflow: scroll;
-            position: fixed;
-            background-color: #fff;
-            z-index: 1;
-            width: 100%;
-            &::-webkit-scrollbar{
-            	display: none;
-            }
-            & > a:first-child{
-                margin-left: 10;
-            }
-            & a{
-                width: max-content;
-                display: flex;
-                padding: 6px 10px; 
-                white-space: nowrap;
-            }
-        }
     }
     & .sub_header{
         min-height: 50;
@@ -189,6 +163,32 @@ body{
 }
 .mandatory{
     scroll-snap-type: x mandatory;
+}
+.activeCatTest{
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+}
+.scrollCat{
+    margin-top: 50; 
+    display: flex;
+    flex-direction: row;
+    overflow: scroll;
+    position: fixed;
+    background-color: #fff;
+    z-index: 1;
+    width: 100%;
+    &::-webkit-scrollbar{
+    	display: none;
+    }
+    & > a:first-child{
+        margin-left: 10;
+    }
+    & a{
+        width: max-content;
+        display: flex;
+        padding: 6px 10px; 
+        white-space: nowrap;
+    }
 }
 #simple-popover{
     & .DescPromo{

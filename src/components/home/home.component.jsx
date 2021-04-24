@@ -389,7 +389,7 @@ class RenderHome extends React.Component {
                 
                 
                 {this.state.openItem ?
-                    <Dialog fullScreen open={this.state.openModal} onClose={this.handleClose.bind(this)} TransitionComponent={Transition}>
+                    <Dialog fullScreen open={this.state.openModal} className="ItemDialog" onClose={this.handleClose.bind(this)} TransitionComponent={Transition}>
                         <AppBar style={{ position: 'relative', backgroundColor: '#fff' }}>
                             <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
                                 <img alt="Жако доставка роллов и пиццы" src="https://newjacofood.ru/src/img/other/Logotip.png" style={{ height: 40 }} />

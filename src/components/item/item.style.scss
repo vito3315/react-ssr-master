@@ -59,7 +59,7 @@ $Futuris: 'Futuris Bold';
     padding: 0 20px;
     padding-bottom: 20px;
     & h1{
-        @include fons(2rem, $Futuris);
+        @include fons(1.7rem, $Futuris);
     }
     & img{
         max-width: 400;
@@ -67,7 +67,7 @@ $Futuris: 'Futuris Bold';
         height: intrinsic;
     }
     & .ItemDesc{
-        @include fons(1.2rem, $Ubuntu);
+        @include fons(0.9rem, $Ubuntu);
         padding-bottom: 5px;
     }
     & .ItemPrice{
