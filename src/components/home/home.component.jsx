@@ -112,7 +112,7 @@ class CardItem extends React.Component {
                 <Card elevation={0} className="CardItem">
                     
                         <CardContent>
-                            <Link to={"/"+itemsStore.getCity()+"/item/"+this.state.item.id} >
+                            <Link to={"/"+itemsStore.getCity()+"/menu/"+this.state.item.link} >
                                 <CardMedia
                                     component="img"
                                     alt={this.state.item.name}
@@ -169,8 +169,8 @@ class CardItem extends React.Component {
                         />
                     </Grid>
                     <Grid item xs={7} sm={7} md={7} xl={7} className="SecondBox">
-                        <Typography className="CardNameItem" gutterBottom variant="h5" component="span">{this.state.item.name}</Typography>
-                        <Typography className="CardInfoItem" component="p">{this.state.item.tmp_desc}</Typography>
+                        <Typography className="CardNameItem" gutterBottom variant="h5" component="span" onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>
+                        <Typography className="CardInfoItem" component="p" onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.tmp_desc}</Typography>
                         <div>
                             <Typography gutterBottom className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <AttachMoneyIcon fontSize="small" /></Typography>
                             {this.state.count == 0 ?

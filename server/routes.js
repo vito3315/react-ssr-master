@@ -20,6 +20,12 @@ module.exports = [
         code: 200
     },
     {
+        path: '/:cityName/menu',
+        exact: true,
+        component: Home,
+        code: 200
+    },
+    {
         path: '/:cityName/contact',
         exact: true,
         component: Contact,
@@ -32,7 +38,7 @@ module.exports = [
         code: 200
     },
     {
-        path: '/:cityName/item/:itemId',
+        path: '/:cityName/menu/:itemLink',
         component: Item,
         code: 200
     },

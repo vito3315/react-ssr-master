@@ -18,27 +18,26 @@ import Popover from '@material-ui/core/Popover';
 import Hidden from '@material-ui/core/Hidden';
 
 import { observer } from 'mobx-react';
+import { trace, autorun } from "mobx"
 
 import itemsStore from '../../stores/items-store';
 
 const queryString = require('query-string');
 
 export function Item(props = 0) {
-    let { itemId } = useParams();
+    let { itemLink } = useParams();
     let { cityName } = useParams();
     
     itemsStore.setCity(cityName);
   
     if( props.item ){
         return (
-            <RenderItem itemId={props.itemId} item={props.item} type={"props"} />
+            <RenderItem itemLink={itemLink} item={props.item} type={"props"} />
         );
     }
   
-    let item = itemsStore.getAllItems().filter( (item) => item.id == itemId )[0];
-  
     return (
-        <RenderItem itemId={itemId} item={item} type={"render"} />
+        <RenderItem itemLink={itemLink} type={"render"} />
     );
 }
 
@@ -122,6 +121,8 @@ function ItemInfoPopover(props) {
 }
 
 class RenderItem extends React.Component {
+    _isMounted = false;
+    
     constructor(props) {
         super(props);
         
@@ -133,10 +134,46 @@ class RenderItem extends React.Component {
     }
     
     componentWillUnmount(){
-        
+        this._isMounted = false; 
     }
     
     componentDidMount(){
+        this._isMounted = true; 
+        
+        autorun(() => {
+            if( this._isMounted ){
+                let item = itemsStore.getAllItems().filter( (item) => item.link == this.props.itemLink )[0];
+                
+                if( item ){
+                    this.setState({
+                        item: item
+                    })
+                    
+                    if( item.items.length == 0 && (parseInt(item.type) !== 3 && parseInt(item.type) !== 4) ){
+                        item.items.push({
+                            kkal: item.kkal,
+                            protein: item.protein,
+                            fat: item.fat,
+                            carbohydrates: item.carbohydrates,
+                            name: ''
+                        })
+                    }
+                    
+                    this.setState({ 
+                        is_load: true,
+                    });
+                    
+                    let my_cart = itemsStore.getItems();
+                    
+                    let item_cart = my_cart.filter( (item) => item.item_id == item['id'] )[0];
+              
+                    this.setState({ 
+                        count: item_cart ? item_cart.count : 0,
+                    })
+                }
+            }
+        })
+        
         if( this.props.item ){
             if( this.state.item.items.length == 0 && (parseInt(this.state.item.type) !== 3 && parseInt(this.state.item.type) !== 4) ){
                 this.state.item.items.push({
@@ -152,56 +189,12 @@ class RenderItem extends React.Component {
                 is_load: true,
             });
             
-            
             let my_cart = itemsStore.getItems();
-            
             let item = my_cart.filter( (item) => item.item_id == this.state.item['id'] )[0];
       
             this.setState({ 
                 count: item ? item.count : 0,
             })
-        }else{
-            if( document.querySelector('.activeCat') ){
-                document.querySelector('.activeCat').classList.remove('activeCat');
-            }
-            window.scrollTo(0, 0);
-            itemsStore.setPage('item');
-            
-            fetch('https://jacofood.ru/src/php/test_app.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type':'application/x-www-form-urlencoded'},
-                body: queryString.stringify({
-                    type: 'get_item', 
-                    item_id: this.props.itemId,
-                    city_id: 1
-                })
-            }).then(res => res.json()).then(json => {
-                if( json.item.items.length == 0 && (parseInt(json.item.type) !== 3 && parseInt(json.item.type) !== 4) ){
-                    json.item.items.push({
-                        kkal: json.item.kkal,
-                        protein: json.item.protein,
-                        fat: json.item.fat,
-                        carbohydrates: json.item.carbohydrates,
-                        name: ''
-                    })
-                }
-                
-                this.setState({ 
-                    item: json.item, 
-                    is_load: true,
-                });
-                
-                
-                let my_cart = itemsStore.getItems();
-                
-                let item = my_cart.filter( (item) => item.item_id == json.item['id'] )[0];
-          
-                this.setState({ 
-                    count: item ? item.count : 0,
-                })
-            })
-            .catch(err => { });
         }
         
         if( this.props.type == 'render' ){

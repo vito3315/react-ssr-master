@@ -940,12 +940,12 @@ export class App extends React.Component {
                             component={ Actii }
                         />
                         <Route
-                            path='/:cityName/home'
+                            path='/:cityName/menu'
                             exact={ true }
                             component={ Home }
                         />
                         <Route
-                            path='/:cityName/'
+                            path='/:cityName'
                             exact={ true }
                             component={ Home }
                         />
@@ -955,7 +955,7 @@ export class App extends React.Component {
 
                         
                         <Route
-                            path='/:cityName/item/:itemId'
+                            path='/:cityName/menu/:itemLink'
                             exact={ true }
                             component={ Item }
                         />
