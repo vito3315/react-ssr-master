@@ -1,42 +1,66 @@
-.Contact > div:first-child{
-    text-align: center;
+.Contact{
+    & h1{
+        font-size: 2rem;
+        font-family: Futuris Bold!important;
+    }
+    & h2{
+        font-size: 1.3rem;
+        font-family: Futuris Bold!important;
+    }
+    & span, a{
+        font-family: Ubuntu, sans-serif!important;
+        font-size: 0.9rem;
+        width: max-content;
+        color: #000;
+        text-decoration: none;
+    }
+    & .p20{
+        padding-bottom: 20;
+    }
+    & > div:first-child{
+        text-align: center;
+    }
+    & > div:not(:first-child):not(:last-child){
+        display: flex;
+        flex-direction: column;
+    }
+    @media (min-width: 960px) {
+        margin-left: 8.35% !important; 
+        flex-grow: 0;
+        max-width: 83.333333%;
+        flex-basis: 83.333333%;
+        margin-top: 64px!important;
+    }
+    @media (max-width: 960px) {
+        margin: -24px!important;
+        margin-top: 64px!important;
+        
+        & > div{
+            padding-left: 34px!important;
+        }
+    }
 }
-.Contact > div > h1{
-    font-size: 2rem;
-    font-family: Futuris Bold!important;
-}
-.Contact h2{
-    font-size: 1.3rem;
-    font-family: Futuris Bold!important;
-}
-.Contact span, .Contact a{
-    font-family: Ubuntu, sans-serif!important;
-    font-size: 0.9rem;
-    width: max-content;
-    color: #000;
-    text-decoration: none;
-}
-.Contact > div:not(:first-child):not(:last-child){
-    display: flex;
-    flex-direction: column;
-}
-.Contact .p20{
-    padding-bottom: 20;
-}
-.Accordion > div{
-    box-shadow: none!important;
-}
-.Accordion > div > div{
-    padding: 0;
-}
-.Accordion .AccordionDesc b, .Accordion .AccordionDesc span{
-    font-family: Ubuntu, sans-serif!important;
-    font-size: 0.8rem;
+.Accordion{
+    & > div{
+        box-shadow: none!important;
+        & > div{
+            padding: 0;
+        }
+    }
+    & .AccordionDesc{
+        & b, span{
+            font-family: Ubuntu, sans-serif!important;
+            font-size: 0.8rem;
+        }
+    }
 }
 #ForMap{
     min-height: 400px;
     height: 40%;
     width: calc(100% - 104px);
+    @media (max-width: 960px) {
+        padding-bottom: 40px;
+    }
 }
 .my-hint{
     width: 220px;
@@ -48,32 +72,4 @@
     background-color: #000;
     border-radius: 5px;
     padding: 16px;
-}
-@media (min-width: 1280px) {
-    .Contact.mainContainer {
-        margin-left: 8.35% !important; 
-    } 
-}
-@media (min-width: 960px) {
-    .Contact.mainContainer {
-        margin-left: 8.35% !important; 
-        flex-grow: 0;
-        max-width: 83.333333%;
-        flex-basis: 83.333333%;
-    } 
-    .Contact.mainContainer.MuiGrid-spacing-xs-3{
-        margin-top: 64px!important;
-    }
-}
-@media (max-width: 960px) {
-    .Contact.mainContainer.MuiGrid-spacing-xs-3{
-        margin: -24px!important;
-        margin-top: 64px!important;
-    }
-    .Contact.mainContainer.MuiGrid-spacing-xs-3 > div{
-        padding-left: 34px;
-    }
-    #ForMap{
-        padding-bottom: 40px;
-    }
 }
