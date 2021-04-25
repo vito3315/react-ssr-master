@@ -817,7 +817,7 @@ export class App extends React.Component {
                         </Toolbar>
                         
                         {this.state.activePage == 'home' ?
-                            <Grid className="scrollCat mandatory" style={{ backgroundColor: 'red' }}>
+                            <Grid className="scrollCat" id="scrollCat" style={{ backgroundColor: 'red' }}>
                                 <Hidden lgUp>
                                     {this.state.categoryItems.map((item, key) => 
                                         <ScrollLink 
@@ -830,6 +830,17 @@ export class App extends React.Component {
                                                 }
                                                 document.querySelector('#link_'+item.id).classList.add('activeCat');
                                                 
+                                                
+                                                var element = document.getElementById('link_'+item.id);
+                                                  var headerOffset = 45;
+                                                	var elementPosition = element.getBoundingClientRect().right;
+                                                  var offsetPosition = elementPosition - headerOffset;
+                                                  
+                                                  document.getElementById('scrollCat').scrollTo({
+                                                      right: offsetPosition,
+                                                      behavior: "smooth"
+                                                  });   
+                                                
                                                 //document.querySelector('.scrollCat').classList.add('mandatory');
                                                 //document.querySelector('.activeCat').classList.add('activeCatTest');
                                                 setTimeout(()=>{
@@ -841,7 +852,7 @@ export class App extends React.Component {
                                             }} 
                                             smooth={true} 
                                             offset={-100} 
-                                            activeClass="activeCat activeCatTest" 
+                                            activeClass="activeCat" 
                                             id={'link_'+item.id} 
                                         >
                                             <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
