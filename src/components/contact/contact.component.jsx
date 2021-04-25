@@ -90,12 +90,17 @@ export function Contact() {
   
     return (
         <div class="section">
-  <div class="section__item bg-1">Item 1</div>
-  <div class="section__item bg-2">Item 2</div>
-  <div class="section__item bg-3">Item 3</div>
-  <div class="section__item bg-4">Item 4</div>
-  <div class="section__item bg-5">Item 5</div>
-</div>
+          <div class="section__item bg-1">Item 1</div>
+          <div class="section__item bg-2">Item 2</div>
+          <div class="section__item bg-3">Item 3</div>
+          <div class="section__item bg-4">Item 4</div>
+          <div class="section__item bg-5">Item 5</div>
+          <div class="section__item bg-1">Item 6</div>
+          <div class="section__item bg-2">Item 7</div>
+          <div class="section__item bg-3">Item 8</div>
+          <div class="section__item bg-4">Item 9</div>
+          <div class="section__item bg-5">Item 10</div>
+        </div>
     )
   
     /*return (
