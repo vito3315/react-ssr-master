@@ -692,7 +692,7 @@ export class App extends React.Component {
             <Provider { ...stores }>
                 <div className="home">
                     <AppBar position="fixed" className="header" style={{ zIndex: 1 }}>
-                        <Toolbar className="sub_header" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Toolbar className="sub_header">
                             {!this.state.is_load ?
                                 <Grid>
                                     <Grid item style={{ marginRight: 15 }}>
@@ -749,7 +749,7 @@ export class App extends React.Component {
                                                             document.querySelector('.scrollCat').classList.add('mandatory');
                                                             setTimeout(()=>{
                                                                 document.querySelector('.scrollCat').classList.remove('mandatory');
-                                                            }, 300)
+                                                            }, 1000)
                                                         }} 
                                                         smooth={true} 
                                                         offset={-100} 
@@ -823,7 +823,7 @@ export class App extends React.Component {
                                                         document.querySelector('.scrollCat').classList.remove('mandatory');
                                                         document.querySelector('.activeCat').classList.remove('activeCatTest');
                                                     }
-                                                }, 300)
+                                                }, 1000)
                                             }} 
                                             smooth={true} 
                                             offset={-100} 

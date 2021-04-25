@@ -66,6 +66,8 @@ body{
     & .sub_header{
         min-height: 50;
         height: 50;
+        display: flex;
+        justify-content: space-between;
         & .thisCity{
             color: #878787;
             @include fons(1.3rem, $Ubuntu);
