@@ -13,6 +13,10 @@ $Futuris: 'Futuris Bold';
     & .mainContainer{
         padding-top: 0!important; 
         padding-bottom: 50;
+        & > div{
+            padding-left: 0!important;
+            padding-right: 0!important;
+        }
     }
     @media (min-width: 960px) {
         margin-left: 8.35% !important; 
