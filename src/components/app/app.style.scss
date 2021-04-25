@@ -147,29 +147,40 @@ body{
 }
 .BtnBorderWOBorder{
     width: 109px;
-}
-.BtnBorderWOBorder svg{
-    fill: $colorMain;
+    & svg{
+        fill: $colorMain;
+    }
 }
 .MuiBadge-colorPrimary{
     background-color: $colorMain!important;
 }
-.mandatory{
+.mandatory_{
     scroll-snap-type: x mandatory;
 }
-.activeCatTest{
+.activeCatTest_{
     scroll-snap-align: center;
     scroll-snap-stop: always;
 }
 .scrollCat{
-    margin-top: 50; 
+    /*margin-top: 50; 
     display: flex;
     flex-direction: row;
     overflow: scroll;
-    position: fixed;
+    
+    
+    width: 100%;*/
+    
+    
     background-color: #fff;
     z-index: 1;
+    position: fixed;
+    margin-top: 50; 
+    display: flex;
     width: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    
     &::-webkit-scrollbar{
     	display: none;
     }
@@ -188,6 +199,19 @@ body{
     padding: 4px 8px;
     border-radius: 5px;
     color: #fff;
+    
+    
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 content;
+    height: 150px;
+    scroll-snap-align: center;
+    
+    
+    width: max-content;
+    display: flex;
+    white-space: nowrap;
+    
     & span, a{
         color: #fff!important;
     }
