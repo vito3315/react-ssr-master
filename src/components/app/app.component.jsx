@@ -817,7 +817,7 @@ export class App extends React.Component {
                         </Toolbar>
                         
                         {this.state.activePage == 'home' ?
-                            <Grid className="scrollCat" id="scrollCat" style={{ backgroundColor: 'red' }}>
+                            <Grid className="scrollCat">
                                 <Hidden lgUp>
                                     {this.state.categoryItems.map((item, key) => 
                                         <ScrollLink 
@@ -830,18 +830,12 @@ export class App extends React.Component {
                                                 }
                                                 document.querySelector('#link_'+item.id).classList.add('activeCat');
                                                 
-                                                
-                                                document.querySelector('#link_'+item.id).scrollIntoView({
-                                                    behavior: 'smooth',
-                                                    block: 'start'
-                                                }); 
-                                                
-                                                //document.querySelector('.scrollCat').classList.add('mandatory');
-                                                //document.querySelector('.activeCat').classList.add('activeCatTest');
+                                                document.querySelector('.scrollCat').classList.add('mandatory');
+                                                document.querySelector('.activeCat').classList.add('activeCatTest');
                                                 setTimeout(()=>{
                                                     if( document.querySelector('.scrollCat') ){
-                                                        //document.querySelector('.scrollCat').classList.remove('mandatory');
-                                                        //document.querySelector('.activeCat').classList.remove('activeCatTest');
+                                                        document.querySelector('.scrollCat').classList.remove('mandatory');
+                                                        document.querySelector('.activeCat').classList.remove('activeCatTest');
                                                     }
                                                 }, 1000)
                                             }} 
