@@ -93,8 +93,7 @@ $mainColor: #BB0025;
         }
     }
     & td{
-        text-align: center;
-        padding: 15px 5px;
+        padding: 12px 5px;
     }
 }
 
@@ -133,7 +132,7 @@ $mainColor: #BB0025;
         -webkit-user-select: none;
         width: calc(70% - 80px);
         & svg{
-            font-size: 2rem
+            font-size: 1.7rem
         }
     }
     & form{
