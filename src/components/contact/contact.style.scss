@@ -14,10 +14,10 @@ $Futuris: 'Futuris Bold';
 
 .parent {
   overflow: scroll;
-  width: 100%;
+  width: 100vw;
   height: 100px;
   scroll-snap-type: mandatory;
-  scroll-snap-points-x: repeat(100vh);
+  scroll-snap-points-x: repeat(100vw);
   scroll-snap-type: x mandatory;
 }
 
