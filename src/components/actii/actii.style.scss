@@ -41,4 +41,7 @@ $Futuris: 'Futuris Bold';
             @include fons(1rem, $Ubuntu);
         }
     }
+    & .MuiDialog-paper{
+        margin: 12px!important;
+    }
 }
