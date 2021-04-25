@@ -420,7 +420,7 @@ class RenderProfile extends React.Component {
                     <TabPanel value={this.state.valueTab} index={0} style={{ width: '100%' }}>
                         <div>
                             {this.state.info.promo ?
-                                <Hidden xsDown>
+                                <Hidden mdDown>
                                     <table style={{ width: '100%' }} className="TablePromo">
                                         <thead>
                                             <tr>
