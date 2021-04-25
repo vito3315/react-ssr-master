@@ -202,7 +202,7 @@ class RenderContact extends React.Component {
                 <Grid item xs={12}>
                     <Typography variant="h5" component="h1">Контакты</Typography>
                 </Grid>
-                <Grid item lg={4} md={4} xl={4} sm={12} xs={12} >
+                <Grid item lg={4} md={4} xl={4} sm={12} xs={12} className="mainContainer">
                     {this.state.points[0] ?
                         <Typography variant="h5" component="span" className="p20">Стоимость доставки: {this.state.points[0].sum_div} руб.</Typography>
                             :
