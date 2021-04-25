@@ -5,27 +5,15 @@ $Futuris: 'Futuris Bold';
     font-family: $family !important;
 }
 
-.parent-container {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x proximity;
+.section {
+    margin-top: 200px;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
 }
 
-.children {
-    scroll-snap-align: start;
-}
-
-.one {
-  background-color: red;
-}
-.two {
-  background-color: blue;
-}
-.three {
-  background-color: grey;
-}
-.four {
-  background-color: green;
+.section__item {
+  scroll-snap-align: start;
 }
 
 

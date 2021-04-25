@@ -89,11 +89,12 @@ export function Contact() {
     itemsStore.setCity(cityName);
   
     return (
-        <div className="parent-container">
-            <div className="children"></div>
-            <div className="children"></div>
-            <div className="children"></div>
-            <div className="children"></div>
+        <div class="section">
+          <div class="section__item">Item 1</div>
+          <div class="section__item">Item 2</div>
+          <div class="section__item">Item 3</div>
+          <div class="section__item">Item 4</div>
+          <div class="section__item">Item 5</div>
         </div>
     )
   
