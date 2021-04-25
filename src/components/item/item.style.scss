@@ -8,6 +8,7 @@ $Futuris: 'Futuris Bold';
     margin-bottom: 50px!important;
     padding-left: 10%;
     padding-right: 10%;
+    margin-top: 64px;
     & h1{
         @include fons(2rem, $Futuris);
     }

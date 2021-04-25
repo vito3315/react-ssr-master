@@ -5,12 +5,15 @@ $mainColor: #BB0025;
     font-size: $size !important;
     font-family: $family !important;
 }
-.modalActii{
+.Profile{
+    margin-top: 64px;
+}
+.modalProfile{
     & h6{
         text-align: center;
         @include fons(1.6rem, $Futuris);
     }
-    & .modalActiiContent{
+    & .modalProfileContent{
         padding-top: 0!important;
         & span, p, b{
             @include fons(1rem, $Ubuntu);

@@ -384,7 +384,7 @@ class RenderProfile extends React.Component {
     
     render() {
         return (
-            <Grid container className="Actii" style={{ marginTop: 64 }}>
+            <Grid container className="Profile">
                 <Grid item xs={12} style={{ paddingBottom: 0 }}>
                     <Typography variant="h5" component="h1">Личный кабинет</Typography>
                 </Grid>
@@ -591,7 +591,7 @@ class RenderProfile extends React.Component {
                 
                 
                 { this.state.showItem ?
-                    <Dialog onClose={this.closeDialog.bind(this)} aria-labelledby="customized-dialog-title" className="modalActii" open={this.state.openDialog}>
+                    <Dialog onClose={this.closeDialog.bind(this)} aria-labelledby="customized-dialog-title" className="modalProfile" open={this.state.openDialog}>
                         <MuiDialogTitle disableTypography style={{ margin: 0, padding: 8 }}>
                             <Typography variant="h6">{this.state.showItem.promo_title}</Typography>
                           
@@ -600,7 +600,7 @@ class RenderProfile extends React.Component {
                             </IconButton>
                         </MuiDialogTitle>
                         
-                        <MuiDialogContent className="modalActiiContent">
+                        <MuiDialogContent className="modalProfileContent">
                             <div dangerouslySetInnerHTML={{__html: this.state.showItem.text}} />
                         </MuiDialogContent>
                         {this.state.showItem.promo.length > 0 ?

@@ -5,6 +5,7 @@ $Futuris: 'Futuris Bold';
     font-family: $family !important;
 }
 .Contact{
+    margin-top: 64px!important;
     & h1{
         @include fons(2rem, $Futuris);
     }
@@ -32,12 +33,9 @@ $Futuris: 'Futuris Bold';
         flex-grow: 0;
         max-width: 83.333333%;
         flex-basis: 83.333333%;
-        margin-top: 64px!important;
     }
     @media (max-width: 960px) {
         margin: -24px!important;
-        margin-top: 64px!important;
-        
         & > div{
             padding-left: 34px!important;
         }

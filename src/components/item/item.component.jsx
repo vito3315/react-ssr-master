@@ -234,7 +234,7 @@ class RenderItem extends React.Component {
     render() {
         if(!this.state.is_load){
             return (
-                <Grid container spacing={3} className="MainItem mainContainer" style={{ marginTop: 64 }}>
+                <Grid container spacing={3} className="MainItem mainContainer">
                     <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
                         <div style={{ width: 200, height: 30, backgroundColor: '#e5e5e5' }} />
                     </Grid>
@@ -253,7 +253,7 @@ class RenderItem extends React.Component {
         return (
             <div>
                 <Hidden xsDown>
-                    <Grid container className="MainItem mainContainer" style={{ marginTop: 64 }}>
+                    <Grid container className="MainItem mainContainer">
                         <Grid item xs={12} style={{ paddingBottom: 15 }}>
                             <Typography variant="h5" component="h1">{this.state.item.name}</Typography>
                         </Grid>
