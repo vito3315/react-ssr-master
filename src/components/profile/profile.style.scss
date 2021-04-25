@@ -2,7 +2,7 @@ $Ubuntu: 'Ubuntu';
 $Futuris: 'Futuris Bold';
 $mainColor: #BB0025;
 @mixin fons($size: 1rem, $family: $Ubuntu) {
-    font-size: $size !important;
+    font-size: $size;
     font-family: $family !important;
 }
 .Profile{
@@ -26,6 +26,10 @@ $mainColor: #BB0025;
         margin-top: 64px!important;
         & > div{
             padding-left: 34px!important;
+        }
+        & h1{
+            @include fons(1.7rem, $Futuris);
+            text-align: center;
         }
     }
 }

@@ -40,6 +40,10 @@ $Futuris: 'Futuris Bold';
         & > div{
             padding-left: 34px!important;
         }
+        & h1{
+            @include fons(1.7rem, $Futuris);
+            text-align: center;
+        }
     }
 }
 .Accordion{
