@@ -21,15 +21,17 @@ $Futuris: 'Futuris Bold';
 }
 
 .section__item {
-  display: flex;
   justify-content: center;
-  align-items: center;
-  flex: 0 0 300px;
-  width: 30px;
-  height: 150px;
-  scroll-snap-align: start;
-  background-color: #ccc;
-  font-size: 1.5rem;
+    align-items: center;
+    flex: 0 0 content;
+    height: 150px;
+    scroll-snap-align: center;
+    background-color: #ccc;
+    font-size: 1.5rem;
+    width: max-content;
+    display: flex;
+    padding: 6px 10px;
+    white-space: nowrap;
 }
 
 /* Other styles */
