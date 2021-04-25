@@ -197,6 +197,24 @@ class RenderContact extends React.Component {
     }
     
     render() {
+        
+        return (
+            <div className="body">
+                <div className="parent row">
+
+                    <section className="one" />
+                
+                    <section className="two" />
+                
+                    <section className="three" />
+                
+                    <section className="four" />
+                
+
+                </div>  
+            </div>  
+        );
+        
         return (
             <Grid container className="Contact mainContainer MuiGrid-spacing-xs-3">
                 <Grid item xs={12}>

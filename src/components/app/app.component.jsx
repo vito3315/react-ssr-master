@@ -79,58 +79,50 @@ var cart = {
 class CustomBottomNavigation extends React.Component{
     render(){
         return(
-            <div
-                style={{ position: 'fixed', bottom: 0, width: '100%', height: 45, display: 'flex', justifyContent: 'center', backgroundColor: '#fff' }}
-            >
+            <div className="bottomNavigate">
                 <Link
                     to={'/'+itemsStore.getCity()+'/'}
                     exact={ true }
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
-                    style={{ flex: 1 }}
                 >
-                    <RestaurantMenuSharpIcon style={{ fontSize: '1.7rem', fill: itemsStore.getPage() == 'home' ? 'black' : 'gray' }} />
+                    <RestaurantMenuSharpIcon style={{ fill: itemsStore.getPage() == 'home' ? 'black' : 'gray' }} />
                 </Link>
                 <Link
                     to={'/'+itemsStore.getCity()+'/actii'}
                     exact={ true }
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
-                    style={{ flex: 1 }}
                 >
-                    <CardGiftcardIcon style={{ fontSize: '1.7rem', fill: itemsStore.getPage() == 'actii' ? 'black' : 'gray' }} />
+                    <CardGiftcardIcon style={{ fill: itemsStore.getPage() == 'actii' ? 'black' : 'gray' }} />
                 </Link>
                 <Link
                     to={'/'+itemsStore.getCity()+'/'}
                     exact={ true }
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
-                    style={{ flex: 1 }}
                 >
                     <Badge badgeContent={itemsStore.getAllPrice()} max={500000} color="primary">
-                        <ShoppingCartOutlinedIcon style={{ fontSize: '1.7rem', fill: itemsStore.getPage() == 'cart' ? 'black' : 'gray' }} />
+                        <ShoppingCartOutlinedIcon style={{ fill: itemsStore.getPage() == 'cart' ? 'black' : 'gray' }} />
                     </Badge>
                 </Link>
                 <Link
                     to={'/'+itemsStore.getCity()+'/contact'}
                     exact={ true }
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
-                    style={{ flex: 1 }}
                 >
-                    <LocationOnIcon style={{ fontSize: '1.7rem', fill: itemsStore.getPage() == 'contact' ? 'black' : 'gray' }} />
+                    <LocationOnIcon style={{ fill: itemsStore.getPage() == 'contact' ? 'black' : 'gray' }} />
                 </Link>
                 {itemsStore.getToken() ?
                     <Link
                         to={'/'+itemsStore.getCity()+'/profile'}
                         exact={ true }
                         className="MuiButtonBase-root MuiBottomNavigationAction-root"
-                        style={{ flex: 1 }}
                     >
-                        <PersonIcon style={{ fontSize: '1.7rem', fill: itemsStore.getPage() == 'profile' ? 'black' : 'gray' }} />
+                        <PersonIcon style={{ fill: itemsStore.getPage() == 'profile' ? 'black' : 'gray' }} />
                     </Link>
                         :
                     <Typography 
                         className="MuiButtonBase-root MuiBottomNavigationAction-root" 
-                        style={{ flex: 1 }} 
                         onClick={this.props.login}>
-                            <PersonIcon style={{ fontSize: '1.7rem', fill: itemsStore.getPage() == 'profile' ? 'black' : 'gray' }} />
+                            <PersonIcon style={{ fill: itemsStore.getPage() == 'profile' ? 'black' : 'gray' }} />
                     </Typography>
                 }
             </div>
@@ -675,12 +667,32 @@ export class App extends React.Component {
         })
     }
 
+    changeCode(code){
+        code = code.target.value
+        
+        this.setState({
+            userCode: code
+        })
+        
+        if( (parseInt(code)+'').length == 4 ){ 
+            setTimeout(()=>{
+                this.checkCode() 
+            }, 500)
+        }
+    }
+
+    handleKeyPress = (event) => {
+        if(event.key === 'Enter'){
+            this.sendSMS()
+        }
+    }
+
     render() {
         return (
             <Provider { ...stores }>
                 <div className="home">
                     <AppBar position="fixed" className="header" style={{ zIndex: 1 }}>
-                        <Toolbar className="sub_header" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Toolbar className="sub_header">
                             {!this.state.is_load ?
                                 <Grid>
                                     <Grid item style={{ marginRight: 15 }}>
@@ -729,7 +741,7 @@ export class App extends React.Component {
                                                         spy={true} 
                                                         isDynamic={true}
                                                         onSetActive={(el) => { 
-                                                            if( document.querySelector('.activeCat') ){
+                                                            /*if( document.querySelector('.activeCat') ){
                                                                 document.querySelector('.activeCat').classList.remove('activeCat');
                                                             }
                                                             document.querySelector('#link_'+item.id).classList.add('activeCat');
@@ -737,7 +749,21 @@ export class App extends React.Component {
                                                             document.querySelector('.scrollCat').classList.add('mandatory');
                                                             setTimeout(()=>{
                                                                 document.querySelector('.scrollCat').classList.remove('mandatory');
-                                                            }, 300)
+                                                            }, 1000)*/
+                                                            
+                                                            if( document.querySelector('.activeCat') ){
+                                                                document.querySelector('.activeCat').classList.remove('activeCat');
+                                                            }
+                                                            document.querySelector('#link_'+item.id).classList.add('activeCat');
+                                                            
+                                                            document.querySelector('.scrollCat').classList.add('mandatory');
+                                                            document.querySelector('.activeCat').classList.add('activeCatTest');
+                                                            setTimeout(()=>{
+                                                                if( document.querySelector('.scrollCat') ){
+                                                                    document.querySelector('.scrollCat').classList.remove('mandatory');
+                                                                    document.querySelector('.activeCat').classList.remove('activeCatTest');
+                                                                }
+                                                            }, 1000)
                                                         }} 
                                                         smooth={true} 
                                                         offset={-100} 
@@ -791,7 +817,7 @@ export class App extends React.Component {
                         </Toolbar>
                         
                         {this.state.activePage == 'home' ?
-                            <Grid className="scrollCat" style={{ marginTop: 50, display: 'flex', flexDirection: 'row', overflow: 'scroll', position: 'fixed', backgroundColor: '#fff', zIndex: 1, width: '100%' }}>
+                            <Grid className="scrollCat">
                                 <Hidden lgUp>
                                     {this.state.categoryItems.map((item, key) => 
                                         <ScrollLink 
@@ -811,13 +837,12 @@ export class App extends React.Component {
                                                         document.querySelector('.scrollCat').classList.remove('mandatory');
                                                         document.querySelector('.activeCat').classList.remove('activeCatTest');
                                                     }
-                                                }, 300)
+                                                }, 1000)
                                             }} 
                                             smooth={true} 
                                             offset={-100} 
                                             activeClass="activeCat" 
                                             id={'link_'+item.id} 
-                                            style={{ width: 'max-content', display: 'flex', padding: '6px 10px', whiteSpace: 'nowrap' }}
                                         >
                                             <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
                                         </ScrollLink>    
@@ -866,6 +891,7 @@ export class App extends React.Component {
                                     placeholder="8 (999) 999-99-99" 
                                     disabled={!this.state.stage_1}
                                     value={this.state.userLogin}
+                                    onKeyPress={this.handleKeyPress}
                                     onChange={ event => this.state.stage_1 ? this.setState({ userLogin: event.target.value }) : {} }
                                 />
                                 {this.state.stage_2 ?
@@ -889,7 +915,8 @@ export class App extends React.Component {
                                             className="InputMask"
                                             mask="9999" 
                                             value={this.state.userCode}
-                                            onChange={ event => this.setState({ userCode: event.target.value }) }
+                                            //onChange={ (event) => { this.changeCode.bind(this, event.target.value) } }
+                                            onChange={ this.changeCode.bind(this) }
                                         />
                                         {this.state.timerSMS > 0 ?
                                             <Typography variant="h5" component="span" style={{ fontSize: '0.8rem', paddingTop: 10 }}>{'Новое смс доступно через '+this.state.timerSMS+' сек.'}</Typography>

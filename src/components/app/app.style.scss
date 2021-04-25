@@ -5,39 +5,59 @@
 	src: local(FuturaFuturisC-Bold), url('/src/assets/fonts/FuturaFuturisC-Bold.ttf'); /* Для остальных браузеров */
 }
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+$Ubuntu: 'Ubuntu';
+$Futuris: 'Futuris Bold';
+$colorMain: #BB0025;
+@mixin fons($size: 1rem, $family: $Ubuntu) {
+    font-size: $size;
+    font-family: $family !important;
+}
 body{
     margin: 0px!important;
 }
 .footer{
     padding: 24px 16px;
     margin-top: auto;
-    background-color: #BB0025;
-}
-@media (max-width: 1024px){
-    footer{
-        padding-bottom: 56px!important;
-        margin-bottom: 20px!important;
-    }
-}
-.footer p{
-    font-family: Ubuntu, sans-serif!important;
-    color: #fff;
-}
-.footer svg{
-    color: #fff;
-    font-size: 2rem;
-}
-.footer{
+    background-color: $colorMain;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     box-sizing: border-box;
+    & p{
+        @include fons(1rem, $Ubuntu);
+        color: #fff;
+    }
+    & svg{
+        color: #fff;
+        @include fons(2rem, $Ubuntu);
+    }
+    @media (max-width: 1024px){
+        padding-bottom: 56px!important;
+        margin-bottom: 20px!important;
+    }
+    & .mainContainer {
+        @media (min-width: 1280px) {
+            margin-left: 8.35% !important; 
+        }
+        @media (min-width: 960px) {
+            margin-left: 8.35% !important; 
+            flex-grow: 0;
+            max-width: 83.333333%;
+            flex-basis: 83.333333%;
+        }
+    }
+    & .socIcons{
+        display: flex;
+        justify-content: flex-end;
+        @media (max-width: 800px){
+            display: block;
+        }
+    }
 }
 .home{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    
     & .header{
         background-color: #fff;
         margin-bottom: 50;
@@ -46,25 +66,51 @@ body{
     & .sub_header{
         min-height: 50;
         height: 50;
-    }
-    & .sub_header > div{
         display: flex;
-        align-items: center;
-        justify-content: center;
+        justify-content: space-between;
+        & .thisCity{
+            color: #878787;
+            @include fons(1.3rem, $Ubuntu);
+            display: flex;
+            align-items: center;
+        }
+        & .CityProfileNav{
+            display: flex;
+            flex-direction: column;
+            margin-right: 15px!important;
+            & > span{
+                @include fons(1rem, $Ubuntu);
+            }
+        }
+        & > div{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        & img{
+            height: 40px;
+        }
+        & .ShopIconBTN{
+            & .MuiBadge-anchorOriginTopRightRectangle{
+                right: -10px!important;
+            }
+            & svg{
+                fill: $colorMain;
+            }
+        } 
     }
     & .cat{
-        font-size: 1em;
-        font-family: Ubuntu, sans-serif!important;
+        @include fons(1rem, $Ubuntu);
         cursor: pointer;
         color: #000;
         text-decoration: none;
+        @media (min-width: 1280px) {
+            font-size: 1.05vw!important;
+        }
     }
     & .catLink{
         text-decoration: none;
         white-space: nowrap;
-    }
-    & .sub_header img{
-        height: 40px;
     }
 }
 .MuiButtonGroup-groupedContainedHorizontal:not(:last-child){
@@ -75,135 +121,151 @@ body{
     background-color: #fff!important;
     min-width: 35px!important;
     min-height: 30px!important;
-}
-.BtnCardMain .CardCountItem{
-    font-family: Ubuntu, sans-serif!important;
-}
-.CardAction{
-    flex-direction: column;
-    align-items: end!important;
-    padding: 1.2vw!important;
-    width: calc(100% - 2.4vw);
-}
-.BtnCardMain:hover{
-    background-color: #fff!important;
+    & .CardCountItem{
+        @include fons(1rem, $Ubuntu);
+    }
+    &:hover{
+        background-color: #fff!important;
+    }
 }
 .BtnBorder{
-    border: 2px solid #BB0025;
+    border: 2px solid $colorMain;
     width: 109px;
 }
 .BtnBorderOther{
-    border: 2px solid #BB0025;
+    border: 2px solid $colorMain;
 }
 .BtnBorder:not(.count) span{
-    color: #BB0025;
+    color: $colorMain;
 }
 .BtnBorderOther:not(.count) span{
-    color: #BB0025;
+    color: $colorMain;
     padding: 1px 25px;
 }
 .BtnBorder.count svg{
-    fill: #BB0025
+    fill: $colorMain
 }
 .BtnBorderWOBorder{
     width: 109px;
 }
 .BtnBorderWOBorder svg{
-    fill: #BB0025;
+    fill: $colorMain;
 }
-.activeCat{
-    background-color: #BB0025;
-    padding: 4px 8px;
-    border-radius: 5px;
-    color: #fff;
+.MuiBadge-colorPrimary{
+    background-color: $colorMain!important;
+}
+.mandatory{
+    scroll-snap-type: x mandatory;
 }
 .activeCatTest{
     scroll-snap-align: center;
     scroll-snap-stop: always;
 }
-.activeCat span, .activeCat a{
-    color: #fff!important;
-}
-.proximity{
-    scroll-snap-type: none;
-}
-.mandatory{
-    scroll-snap-type: x mandatory;
-}
-.TableMini{
-    width: inherit;
-}
-.TableMini tbody{
-    overflow-y: scroll;
-    overflow-x: hidden;
-    height: 200px;
-    display: table-caption;
+.scrollCat{
+    margin-top: 50; 
+    display: flex;
+    flex-direction: row;
+    overflow: scroll;
+    position: fixed;
+    background-color: #fff;
+    z-index: 1;
     width: 100%;
-    border-bottom: 1px solid #e5e5e5;
+    &::-webkit-scrollbar{
+    	display: none;
+    }
+    & > a:first-child{
+        margin-left: 10;
+    }
+    & a{
+        width: max-content;
+        display: flex;
+        padding: 6px 10px; 
+        white-space: nowrap;
+    }
 }
-.ShopIconBTN svg{
-    fill: #BB0025;
+.activeCat{
+    background-color: $colorMain;
+    padding: 4px 8px;
+    border-radius: 5px;
+    color: #fff;
+    & span, a{
+        color: #fff!important;
+    }
 }
-.SpacePromo{
-    padding: 2px 4px;
-    display: flex;
-    align-items: center;
-    height: 34;
-    width: 390;
+#simple-popover{
+    & .DescPromo{
+        width: 393;
+        padding-top: 15;
+        & span{
+            @include fons(0.8rem, $Ubuntu);
+        }
+    }
+    & .InCart{
+        width: 393; 
+        padding-top: 15; 
+        display: flex;
+        justify-content: flex-end;
+        & span{
+            @include fons(0.875rem, $Ubuntu);
+        }
+        & button{
+            width: 100%;
+        }
+    }
+    & .TableMini{
+        width: inherit;
+        & tbody{
+            overflow-y: scroll;
+            overflow-x: hidden;
+            height: 200px;
+            display: table-caption;
+            width: 100%;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        & .TableMiniName{
+            width: 40%;
+            @include fons(1rem, $Ubuntu);
+        }
+        & .TableMiniPrice{
+            text-align: center;
+            @include fons(1rem, $Ubuntu);
+            display: flex;
+            justify-content: flex-end;
+        }
+        & .TableMiniFullName{
+            @include fons(1rem, $Ubuntu);
+            width: 70%;
+        }
+        & .TableMiniFullPrice{
+            @include fons(1rem, $Ubuntu);
+            width: 40%;
+            text-align: center;
+        }
+    }
+    & .SpacePromo{
+        padding: 2px 4px;
+        display: flex;
+        align-items: center;
+        height: 34;
+        width: 390;
+        & > div{
+            margin-left: 8;
+            flex: 1;
+        }
+        & hr{
+            height: 28;
+            margin: 4;
+        }
+        & svg{
+            fill: $colorMain;
+        }
+        & input{
+            @include fons(1rem, $Ubuntu);
+        }
+    }
 }
-.SpacePromo > div{
-    margin-left: 8;
-    flex: 1;
-}
-.SpacePromo hr{
-    height: 28;
-    margin: 4;
-}
-.SpacePromo svg{
-    fill: #BB0025;
-}
-.SpacePromo input{
-    font-family: Ubuntu, sans-serif!important;
-}
-.DescPromo{
-    width: 393;
-    padding-top: 15;
-}
-.DescPromo span{
-    font-size: 0.8rem;
-    font-family: Ubuntu, sans-serif!important;
-}
-.InCart{
-    width: 393; 
-    padding-top: 15; 
-    display: flex;
-    justify-content: flex-end;
-}
-.InCart span{
-    font-family: Ubuntu, sans-serif!important;
-}
-.InCart button{
-    width: 100%;
-}
-.TableMini .TableMiniName{
-    width: 40%;
-    font-family: Ubuntu, sans-serif!important;
-}
-.TableMini .TableMiniPrice{
-    text-align: center;
-    font-family: Ubuntu, sans-serif !important;
-    display: flex;
-    justify-content: flex-end;
-}
-.TableMini .TableMiniFullName{
-    font-family: Ubuntu, sans-serif!important;
-    width: 70%;
-}
-.TableMini .TableMiniFullPrice{
-    font-family: Ubuntu, sans-serif!important;
-    width: 40%;
-    text-align: center;
-}
+
+ 
 @media (min-width: 1280px){
     .mainContainer.MuiGrid-grid-lg-10, .mainContainer.MuiGrid-grid-xs-10 {
         margin-left: 8.35%!important;
@@ -221,139 +283,106 @@ body{
     }
 }
 
-
-@media (min-width: 1280px) {
-    .footer .mainContainer {
-        margin-left: 8.35% !important; 
-    } 
-}
-
-@media (min-width: 960px) {
-    .footer .mainContainer {
-        margin-left: 8.35% !important; 
-        flex-grow: 0;
-        max-width: 83.333333%;
-        flex-basis: 83.333333%;
-    } 
-}
-
-.socIcons{
-    display: flex;
-    justify-content: flex-end;
-}
-@media (max-width: 800px){
-    .socIcons{
-        display: block;
-    }
-}
 .mainContainer.MuiGrid-spacing-xs-3{
     margin: 0;
 }
 .dis_none{
     display: none!important;
 }
-.InputMask{
-    border: 1px solid #000;
-    border-radius: 4px;
-    font-size: 1.1rem;
-    font-family: Ubuntu, sans-serif !important;
-    letter-spacing: 0.6px;
-    padding: 9px 15px 9px 15px;
+.ModalAuth{
+    & .ModalContent_1_1, .ModalContent_1_2{
+        display: flex;
+        flex-direction: column;
+    }
+    & .ModalContent_1_3{
+        margin-top: 30;
+        display: flex; 
+        flex-direction: column;
+    }
+    & .ModalLabel{
+        margin-bottom: 5;
+        @include fons(1.1rem, $Ubuntu);
+    }
+    & .changeNumber{
+        @include fons(0.8rem, $Ubuntu);
+        padding-top: 10; 
+        cursor: pointer;
+        width: fit-content;
+        color: $colorMain;
+        border-bottom: 1px dotted $colorMain;
+    }
+    & .InputMask{
+        border: 1px solid #000;
+        border-radius: 4px;
+        @include fons(1.1rem, $Ubuntu);
+        letter-spacing: 0.6px;
+        padding: 9px 15px 9px 15px;
+        &:focus{
+            outline: inherit!important;
+        }
+    }
+    & .MuiDialogTitle-root{
+        text-align: center;
+        & h2{
+            @include fons(1.8rem, $Ubuntu);
+        }
+    }
 }
-.InputMask:focus{
-    outline: inherit!important;
+.ModalCity{
+    & .ModalLabel{
+        @include fons(1.5rem, $Ubuntu);
+        margin: 6px 6px;
+        text-align: center;
+        background-color: #e5e5e5;
+        border-radius: 4px;
+        padding: 5px;
+        cursor: pointer;
+        &.active{
+            background-color: $colorMain!important;
+            color: #fff;
+        }
+    }
+    & .MuiDialogTitle-root {
+        text-align: center;
+        & h2{
+            @include fons(1.8rem, $Ubuntu);
+        }
+    }
+    & .ModalContent_1_1{
+        display: flex;
+        flex-direction: column;
+    }
 }
-.ModalAuth .MuiDialogTitle-root, .ModalCity .MuiDialogTitle-root {
-    text-align: center;
-}
-.ModalAuth .MuiDialogTitle-root h2, .ModalCity .MuiDialogTitle-root h2{
-    font-size: 1.8rem;
-    font-family: Ubuntu, sans-serif !important;
-}
-.ModalAuth .ModalContent_1_1, .ModalAuth .ModalContent_1_2, .ModalCity .ModalContent_1_1{
+.bottomNavigate{
+    position: fixed;
+    bottom: 0; 
+    width: 100%;
+    height: 45; 
     display: flex;
-    flex-direction: column;
-}
-.ModalAuth .ModalContent_1_3{
-    margin-top: 30;
-    display: flex; 
-    flex-direction: column;
-}
-.ModalAuth .ModalLabel{
-    font-size: 1.1rem; 
-    margin-bottom: 5;
-    font-family: Ubuntu, sans-serif !important;
-}
-
-.ModalAuth .changeNumber{
-    font-size: 0.8rem;
-    font-family: Ubuntu, sans-serif !important;
-    padding-top: 10; 
-    cursor: pointer;
-    width: fit-content;
-    color: #BB0025;
-    border-bottom: 1px dotted #BB0025;
-}
-
-.ModalCity .ModalLabel{
-    font-size: 1.5rem;
-    font-family: Ubuntu, sans-serif !important;
-    margin: 6px 6px;
-    text-align: center;
-    background-color: #e5e5e5;
-    border-radius: 4px;
-    padding: 5px;
-    cursor: pointer;
-}
-.ModalCity .ModalLabel.active{
-    background-color: #BB0025!important;
-    color: #fff;
-}
-.MuiButtonBase-root {
-    color: inherit;
-    border: 0;
-    cursor: pointer;
-    margin: 0;
-    display: inline-flex;
-    outline: 0;
-    padding: 0;
-    position: relative;
-    align-items: center;
-    user-select: none;
-    border-radius: 0;
-    vertical-align: middle;
-    -moz-appearance: none;
     justify-content: center;
-    text-decoration: none;
-    background-color: transparent;
-    -webkit-appearance: none;
-    -webkit-tap-highlight-color: transparent;
-}
-.scrollCat::-webkit-scrollbar{
-	display: none;
-}
-.scrollCat > a:first-child{
-    margin-left: 10;
-}
-.MuiBadge-colorPrimary{
-    background-color: #BB0025!important;
-}
-.MuiBadge-anchorOriginTopRightRectangle{
-    right: -10px!important;
-}
-.thisCity{
-    color: #878787;
-    font-size: 1.3rem!important;
-    font-family: Ubuntu, sans-serif !important;
-    display: flex;
-    align-items: center;
-}
-.CityProfileNav{
-    display: flex;
-    flex-direction: column;
-    margin-right: 15px!important;
-}
-.CityProfileNav > span{
-    font-size: 1em;
-    font-family: Ubuntu, sans-serif !important;
+    background-color: #fff;
+    & .MuiButtonBase-root {
+        flex: 1;
+        color: inherit;
+        border: 0;
+        cursor: pointer;
+        margin: 0;
+        display: inline-flex;
+        outline: 0;
+        padding: 0;
+        position: relative;
+        align-items: center;
+        user-select: none;
+        border-radius: 0;
+        vertical-align: middle;
+        -moz-appearance: none;
+        justify-content: center;
+        text-decoration: none;
+        background-color: transparent;
+        -webkit-appearance: none;
+        -webkit-tap-highlight-color: transparent;
+        & svg{
+            font-size: 1.7rem;
+        }
+    }
 }
