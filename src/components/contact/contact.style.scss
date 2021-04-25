@@ -12,6 +12,10 @@ $Futuris: 'Futuris Bold';
     & h2{
         @include fons(1.3rem, $Futuris);
     }
+    & span, h2{
+        padding-left: 12px;
+        padding-right: 12px;
+    }
     & span, a{
         @include fons(0.9rem, $Ubuntu);
         width: max-content;
@@ -27,6 +31,21 @@ $Futuris: 'Futuris Bold';
     & > div:not(:first-child):not(:last-child){
         display: flex;
         flex-direction: column;
+    }
+    .Accordion{
+        padding-left: 12px;
+        padding-right: 12px;
+        & > div{
+            box-shadow: none!important;
+            & > div{
+                padding: 0;
+            }
+        }
+        & .AccordionDesc{
+            & b, span{
+                @include fons(0.8rem, $Ubuntu);
+            }
+        }
     }
     @media (min-width: 960px) {
         margin-left: 8.35% !important; 
@@ -46,25 +65,15 @@ $Futuris: 'Futuris Bold';
         }
     }
 }
-.Accordion{
-    & > div{
-        box-shadow: none!important;
-        & > div{
-            padding: 0;
-        }
-    }
-    & .AccordionDesc{
-        & b, span{
-            @include fons(0.8rem, $Ubuntu);
-        }
-    }
-}
+
 #ForMap{
     min-height: 400px;
     height: 40%;
     width: calc(100% - 104px);
     @media (max-width: 960px) {
         padding-bottom: 40px;
+        padding-left: 12px;
+        padding-right: 12px;
     }
 }
 .my-hint{
