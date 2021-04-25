@@ -741,7 +741,7 @@ export class App extends React.Component {
                                                         spy={true} 
                                                         isDynamic={true}
                                                         onSetActive={(el) => { 
-                                                            if( document.querySelector('.activeCat') ){
+                                                            /*if( document.querySelector('.activeCat') ){
                                                                 document.querySelector('.activeCat').classList.remove('activeCat');
                                                             }
                                                             document.querySelector('#link_'+item.id).classList.add('activeCat');
@@ -749,6 +749,20 @@ export class App extends React.Component {
                                                             document.querySelector('.scrollCat').classList.add('mandatory');
                                                             setTimeout(()=>{
                                                                 document.querySelector('.scrollCat').classList.remove('mandatory');
+                                                            }, 1000)*/
+                                                            
+                                                            if( document.querySelector('.activeCat') ){
+                                                                document.querySelector('.activeCat').classList.remove('activeCat');
+                                                            }
+                                                            document.querySelector('#link_'+item.id).classList.add('activeCat');
+                                                            
+                                                            document.querySelector('.scrollCat').classList.add('mandatory');
+                                                            document.querySelector('.activeCat').classList.add('activeCatTest');
+                                                            setTimeout(()=>{
+                                                                if( document.querySelector('.scrollCat') ){
+                                                                    document.querySelector('.scrollCat').classList.remove('mandatory');
+                                                                    document.querySelector('.activeCat').classList.remove('activeCatTest');
+                                                                }
                                                             }, 1000)
                                                         }} 
                                                         smooth={true} 
