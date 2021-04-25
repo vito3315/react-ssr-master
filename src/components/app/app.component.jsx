@@ -831,15 +831,10 @@ export class App extends React.Component {
                                                 document.querySelector('#link_'+item.id).classList.add('activeCat');
                                                 
                                                 
-                                                var element = document.getElementById('link_'+item.id);
-                                                  var headerOffset = 45;
-                                                	var elementPosition = element.getBoundingClientRect().right;
-                                                  var offsetPosition = elementPosition - headerOffset;
-                                                  
-                                                  document.getElementById('scrollCat').scrollTo({
-                                                      right: offsetPosition,
-                                                      behavior: "smooth"
-                                                  });   
+                                                document.querySelector('#link_'+item.id).scrollIntoView({
+                                                    behavior: 'smooth',
+                                                    block: 'start'
+                                                }); 
                                                 
                                                 //document.querySelector('.scrollCat').classList.add('mandatory');
                                                 //document.querySelector('.activeCat').classList.add('activeCatTest');
