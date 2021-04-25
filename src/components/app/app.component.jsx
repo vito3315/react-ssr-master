@@ -756,14 +756,14 @@ export class App extends React.Component {
                                                             }
                                                             document.querySelector('#link_'+item.id).classList.add('activeCat');
                                                             
-                                                            document.querySelector('.scrollCat').classList.add('mandatory');
+                                                            /*document.querySelector('.scrollCat').classList.add('mandatory');
                                                             document.querySelector('.activeCat').classList.add('activeCatTest');
                                                             setTimeout(()=>{
                                                                 if( document.querySelector('.scrollCat') ){
                                                                     document.querySelector('.scrollCat').classList.remove('mandatory');
                                                                     document.querySelector('.activeCat').classList.remove('activeCatTest');
                                                                 }
-                                                            }, 1000)
+                                                            }, 1000)*/
                                                         }} 
                                                         smooth={true} 
                                                         offset={-100} 
@@ -830,14 +830,14 @@ export class App extends React.Component {
                                                 }
                                                 document.querySelector('#link_'+item.id).classList.add('activeCat');
                                                 
-                                                document.querySelector('.scrollCat').classList.add('mandatory');
+                                                /*document.querySelector('.scrollCat').classList.add('mandatory');
                                                 document.querySelector('.activeCat').classList.add('activeCatTest');
                                                 setTimeout(()=>{
                                                     if( document.querySelector('.scrollCat') ){
                                                         document.querySelector('.scrollCat').classList.remove('mandatory');
                                                         document.querySelector('.activeCat').classList.remove('activeCatTest');
                                                     }
-                                                }, 1000)
+                                                }, 1000)*/
                                             }} 
                                             smooth={true} 
                                             offset={-100} 

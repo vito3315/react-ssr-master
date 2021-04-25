@@ -89,23 +89,8 @@ export function Contact() {
     itemsStore.setCity(cityName);
   
     return (
-        <div class="section">
-          <div class="section__item bg-1">Сеты</div>
-          <div class="section__item bg-2">Пицца</div>
-          <div class="section__item bg-3">Фирменные роллы</div>
-          <div class="section__item bg-4">Запеченные роллы</div>
-          <div class="section__item bg-5">Жаренные роллы</div>
-          <div class="section__item bg-1">Классичесие роллы</div>
-          <div class="section__item bg-2">Закуска</div>
-          <div class="section__item bg-3">Напитки</div>
-          <div class="section__item bg-4">Item 9</div>
-          <div class="section__item bg-5">Item 10</div>
-        </div>
-    )
-  
-    /*return (
         <RenderContact cityName={cityName} />
-    );*/
+    );
 }
 
 class RenderContact extends React.Component {

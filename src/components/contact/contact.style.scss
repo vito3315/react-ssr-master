@@ -4,53 +4,6 @@ $Futuris: 'Futuris Bold';
     font-size: $size;
     font-family: $family !important;
 }
-
-.section {
-    margin-top: 300px;
-    display: flex;
-    width: 100%;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-}
-
-.section__item {
-  justify-content: center;
-    align-items: center;
-    flex: 0 0 content;
-    height: 150px;
-    scroll-snap-align: center;
-    background-color: #ccc;
-    font-size: 1.5rem;
-    width: max-content;
-    display: flex;
-    padding: 6px 10px;
-    white-space: nowrap;
-}
-
-/* Other styles */
-
-.bg-1 {
-  background-color: #f1c2c6;
-}
-
-.bg-2 {
-  background-color: #dac2f1;
-}
-
-.bg-3 {
-  background-color: #ccf1c2;
-}
-
-.bg-4 {
-  background-color: #c2e9f1;
-}
-
-.bg-5 {
-  background-color: #f1ebc2;
-}
-
-
 .Contact{
     & h1{
         @include fons(2rem, $Futuris);
