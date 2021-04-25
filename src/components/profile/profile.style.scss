@@ -48,23 +48,73 @@ $mainColor: #BB0025;
 .MuiTabs-scroller.MuiTabs-fixed > div{
     justify-content: center;
 }
-.TablePromo .TEXT, .TableOrders .TEXT{
+.TablePromo{
+    width: 100%;
+    border-collapse: collapse;
+    & .TEXT{
+        @include fons(1.1rem, $Ubuntu);
+    }
+    & td{
+        text-align: center;
+        padding: 15px 5px;
+    }
+    & thead{
+        border-bottom: 2px solid #e5e5e5;
+        & span{
+            @include fons(1.1rem, $Ubuntu);
+            font-weight: bold;
+        }
+    }
+    & tbody{
+        & tr{
+            border-bottom: 1px solid #e5e5e5;
+        }
+        & td:first-child > span{
+            color: $mainColor!important;
+            cursor: pointer;
+        }
+        & td > span{
+            @include fons(1.1rem, $Ubuntu);
+        }
+    }
+}
+.TablePromoMobile{
+    width: 100%;
+    border-collapse: collapse;
+    & tbody{
+        & tr{
+            border-bottom: 1px solid #e5e5e5;
+            & div > span:first-child{
+                @include fons(1.1rem, $Futuris);
+            }
+            & div > span:last-child{
+                @include fons(1.1rem, $Ubuntu);
+            }
+        }
+    }
+    & td{
+        text-align: center;
+        padding: 15px 5px;
+    }
+}
+
+.TableOrders .TEXT{
     @include fons(1.1rem, $Ubuntu);
 }
-.TablePromo td, .TableOrders td{
+.TableOrders td{
     text-align: center;
 }
-.TablePromo, .TableOrders, .TablePromoMobile{
+.TableOrders{
     width: 100%;
     border-collapse: collapse;
 }
-.TablePromo thead, .TableOrders thead{
+.TableOrders thead{
     border-bottom: 2px solid #e5e5e5;
 }
-.TablePromo tbody tr, .TableOrders tbody tr, .TablePromoMobile tbody tr{
+.TableOrders tbody tr{
     border-bottom: 1px solid #e5e5e5;
 }
-.TablePromo td, .TableOrders td, .TablePromoMobile td{
+.TableOrders td{
     padding: 15px 5px;
 }
 .TableInfo{
@@ -82,6 +132,9 @@ $mainColor: #BB0025;
         -khtml-user-select: none;
         -webkit-user-select: none;
         width: calc(70% - 80px);
+        & svg{
+            font-size: 2rem
+        }
     }
     & form{
         display: flex;
@@ -149,12 +202,6 @@ $mainColor: #BB0025;
 .otherLabel{
     @include fons(0.8rem, $Ubuntu);
 }
-.textName{
-    @include fons(1.1rem, $Futuris);
-}
-.textDesc{
-    @include fons(1.1rem, $Ubuntu);
-}
 .TableOrders .CardPriceItem{
     @include fons(1.1rem, $Ubuntu);
     display: flex;
@@ -163,8 +210,4 @@ $mainColor: #BB0025;
 }
 .PrivateTabIndicator-colorSecondary-3{
     background-color: $mainColor!important;
-}
-.TEXT.promoName{
-    color: $mainColor!important;
-    cursor: pointer;
 }

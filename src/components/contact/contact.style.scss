@@ -12,7 +12,7 @@ $Futuris: 'Futuris Bold';
     & h2{
         @include fons(1.3rem, $Futuris);
     }
-    & span, h2{
+    & span, h2, a{
         padding-left: 12px;
         padding-right: 12px;
     }

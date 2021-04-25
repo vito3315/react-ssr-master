@@ -424,17 +424,17 @@ class RenderProfile extends React.Component {
                                     <table style={{ width: '100%' }} className="TablePromo">
                                         <thead>
                                             <tr>
-                                                <td><Typography variant="h5" component="span" className="TEXT">Промокод</Typography></td>
-                                                <td><Typography variant="h5" component="span" className="TEXT">Промокод дает:</Typography></td>
-                                                <td><Typography variant="h5" component="span" className="TEXT">Действует до</Typography></td>
+                                                <td><Typography variant="h5" component="span">Промокод</Typography></td>
+                                                <td><Typography variant="h5" component="span">Промокод дает:</Typography></td>
+                                                <td><Typography variant="h5" component="span">Действует до</Typography></td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {this.state.info.promo.promo.map((item, key) => 
                                                 <tr key={key}>
-                                                    <td><Typography variant="h5" component="span" className="TEXT promoName" onClick={this.activePromo.bind(this, item.info)}>{item.promo_name}</Typography></td>
-                                                    <td><Typography variant="h5" component="span" className="TEXT">{item.promo_text}</Typography></td>
-                                                    <td><Typography variant="h5" component="span" className="TEXT">{item.date_end}</Typography></td>
+                                                    <td><Typography variant="h5" component="span" onClick={this.activePromo.bind(this, item.info)}>{item.promo_name}</Typography></td>
+                                                    <td><Typography variant="h5" component="span">{item.promo_text}</Typography></td>
+                                                    <td><Typography variant="h5" component="span">{item.date_end}</Typography></td>
                                                 </tr>
                                             )}
                                         </tbody>
@@ -451,16 +451,16 @@ class RenderProfile extends React.Component {
                                                 <tr key={key}>
                                                     <td style={{ padding: '10px 20px' }}>
                                                         <div>
-                                                            <Typography variant="h5" component="span" className="textName">Промокод: </Typography>
-                                                            <Typography variant="h5" component="span" className="textDesc">{item.promo_name}</Typography>
+                                                            <Typography variant="h5" component="span">Промокод: </Typography>
+                                                            <Typography variant="h5" component="span">{item.promo_name}</Typography>
                                                         </div>
                                                         <div style={{ width: '100%', paddingTop: 10 }}>
-                                                            <Typography variant="h5" component="span" className="textName">Действует до: </Typography>
-                                                            <Typography variant="h5" component="span" className="textDesc">{item.date_end}</Typography>
+                                                            <Typography variant="h5" component="span">Действует до: </Typography>
+                                                            <Typography variant="h5" component="span">{item.date_end}</Typography>
                                                         </div>
                                                         <div style={{ width: '100%', paddingTop: 10, textAlign: 'justify' }}>
-                                                            <Typography variant="h5" component="span" className="textName">Промокод дает: </Typography>
-                                                            <Typography variant="h5" component="span" className="textDesc">{item.promo_text}</Typography>
+                                                            <Typography variant="h5" component="span">Промокод дает: </Typography>
+                                                            <Typography variant="h5" component="span">{item.promo_text}</Typography>
                                                         </div>
                                                         <div style={{ width: '100%', paddingTop: 10 }}>
                                                             <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" style={{ width: '100%' }}>
@@ -578,8 +578,6 @@ class RenderProfile extends React.Component {
                                 :
                             null
                         }
-                        
-                        
                     </TabPanel>
                 </Grid>
                 
