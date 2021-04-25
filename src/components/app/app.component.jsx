@@ -817,7 +817,7 @@ export class App extends React.Component {
                         </Toolbar>
                         
                         {this.state.activePage == 'home' ?
-                            <Grid className="scrollCat mandatory activeCatTest" style={{ backgroundColor: 'red' }}>
+                            <Grid className="scrollCat mandatory" style={{ backgroundColor: 'red' }}>
                                 <Hidden lgUp>
                                     {this.state.categoryItems.map((item, key) => 
                                         <ScrollLink 
@@ -841,7 +841,7 @@ export class App extends React.Component {
                                             }} 
                                             smooth={true} 
                                             offset={-100} 
-                                            activeClass="activeCat" 
+                                            activeClass="activeCat activeCatTest" 
                                             id={'link_'+item.id} 
                                         >
                                             <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
