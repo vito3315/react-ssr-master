@@ -109,7 +109,7 @@ class RenderActii extends React.Component {
         }
         
         return (
-            <Grid container className="Actii MuiGrid-spacing-xs-3">
+            <Grid container className="Actii mainContainer MuiGrid-spacing-xs-3">
                 <Grid item xs={12}>
                     <Typography variant="h5" component="h1">Акции</Typography>
                 </Grid>
