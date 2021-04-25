@@ -5,13 +5,13 @@ $Futuris: 'Futuris Bold';
     font-family: $family !important;
 }
 .Actii{
-    margin-top: 64;
+    margin-top: 64px!important;
     & h1{
         @include fons(2rem, $Futuris);
         text-align: center;
     }
     & .mainContainer{
-        padding-top: 0; 
+        padding-top: 0!important; 
         padding-bottom: 50;
         & .skeleton{
             width: 100%;
