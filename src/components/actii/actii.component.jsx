@@ -87,27 +87,6 @@ class RenderActii extends React.Component {
     }
     
     render() {
-        if(!this.state.is_load){
-            return (
-                <Grid container className="Actii">
-                    <Grid item xs={12} className="skelet">
-                        <div />
-                    </Grid>
-                    <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer">
-                        <Grid item  xs={12} sm={6} md={4} xl={3}>
-                            <div className="skeleton" />
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={4} xl={3}>
-                            <div className="skeleton" />
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={4} xl={3}>
-                            <div className="skeleton" />
-                        </Grid>
-                    </Grid>    
-                </Grid>
-            )
-        }
-        
         return (
             <Grid container className="Actii mainContainer MuiGrid-spacing-xs-3">
                 <Grid item xs={12}>

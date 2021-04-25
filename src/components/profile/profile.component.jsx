@@ -384,8 +384,8 @@ class RenderProfile extends React.Component {
     
     render() {
         return (
-            <Grid container className="Profile">
-                <Grid item xs={12} style={{ paddingBottom: 0 }}>
+            <Grid container className="Profile mainContainer MuiGrid-spacing-xs-3">
+                <Grid item xs={12}>
                     <Typography variant="h5" component="h1">Личный кабинет</Typography>
                 </Grid>
                 

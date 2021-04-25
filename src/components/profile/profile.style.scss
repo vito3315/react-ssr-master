@@ -6,7 +6,28 @@ $mainColor: #BB0025;
     font-family: $family !important;
 }
 .Profile{
-    margin-top: 64px;
+    margin-top: 64px!important;
+    & h1{
+        @include fons(2rem, $Futuris);
+        text-align: center;
+    }
+    & .mainContainer{
+        padding-top: 0!important; 
+        padding-bottom: 50;
+    }
+    @media (min-width: 960px) {
+        margin-left: 8.35% !important; 
+        flex-grow: 0;
+        max-width: 83.333333%;
+        flex-basis: 83.333333%;
+    }
+    @media (max-width: 960px) {
+        margin: -24px!important;
+        margin-top: 64px!important;
+        & > div{
+            padding-left: 34px!important;
+        }
+    }
 }
 .modalProfile{
     & h6{
