@@ -817,7 +817,7 @@ export class App extends React.Component {
                         </Toolbar>
                         
                         {this.state.activePage == 'home' ?
-                            <Grid className="scrollCat">
+                            <Grid className="scrollCat" style={{ backgroundColor: 'red' }}>
                                 <Hidden lgUp>
                                     {this.state.categoryItems.map((item, key) => 
                                         <ScrollLink 
