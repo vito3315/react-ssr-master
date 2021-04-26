@@ -48,6 +48,12 @@ $mainColor: #BB0025;
 .MuiTabs-scroller.MuiTabs-fixed > div{
     justify-content: center;
 }
+.MuiTabs-indicator{
+    background-color: $mainColor !important;
+}
+header.MuiAppBar-root button span{
+    @include fons(1rem, $Ubuntu);
+}
 .TablePromo{
     width: 100%;
     border-collapse: collapse;
@@ -117,6 +123,7 @@ $mainColor: #BB0025;
         border-bottom: 2px solid #e5e5e5;
         & span{
             @include fons(1rem, $Ubuntu);
+            font-weight: bold;
         }
     }
     & td{
@@ -169,8 +176,8 @@ $mainColor: #BB0025;
 }
 @media (max-width: 960px) {
     .TableOrders{
-        width: calc(100% - 40px);
-        margin-left: 20px;
+        width: calc(100% - 24px);
+        margin-left: 12px;
     }
     .TableInfo{
         display: flex; 
