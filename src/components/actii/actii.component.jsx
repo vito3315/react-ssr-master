@@ -62,6 +62,18 @@ class RenderActii extends React.Component {
                 actii: json.actii, 
                 is_load: true,
             });
+            
+            setTimeout(() => {
+                let hash = window.location.hash;
+                if( hash.length > 0 ){
+                    let act_id = hash.split('#act')[1];
+                    
+                    let this_item = json.actii.filter( (item) => item.id == act_id )[0];
+                    
+                    this.openDialog(this_item);
+                    window.location.hash = '';
+                }
+            }, 300);
         })
         .catch(err => { });
     }

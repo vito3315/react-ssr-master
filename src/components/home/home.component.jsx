@@ -242,13 +242,34 @@ class RenderHome extends React.Component {
                 banners_mobile = [];
             
             itemsStore.getBanners().map((item, key) => {
-                banners_pc.push(
-                    <img style={{ minHeight: 380 }} src={"https://jacofood.ru/src/img/banners/"+item.b_img_full+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
-                )
-                
-                banners_mobile.push(
-                    <img src={"https://jacofood.ru/src/img/banners/"+item.img_app+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
-                )
+                if( item.aktia_id && parseInt(item.aktia_id) > 0 ){
+                    banners_pc.push(
+                        <Link
+                            to={'/'+itemsStore.getCity()+'/actii#act'+item.aktia_id}
+                            exact={ true }
+                        >
+                            <img style={{ minHeight: 380 }} src={"https://jacofood.ru/src/img/banners/"+item.b_img_full+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
+                        </Link>
+                    )
+                    
+                    banners_mobile.push(
+                        <Link
+                            to={'/'+itemsStore.getCity()+'/actii#act'+item.aktia_id}
+                            exact={ true }
+                        >
+                            <img src={"https://jacofood.ru/src/img/banners/"+item.img_app+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
+                        </Link>
+                    )
+                    
+                }else{
+                    banners_pc.push(
+                        <img style={{ minHeight: 380 }} src={"https://jacofood.ru/src/img/banners/"+item.b_img_full+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
+                    )
+                    
+                    banners_mobile.push(
+                        <img src={"https://jacofood.ru/src/img/banners/"+item.img_app+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
+                    )
+                }
             })
             
             this.setState({ 
@@ -259,13 +280,8 @@ class RenderHome extends React.Component {
     }
 
     openItem(id){
-        console.log( id )
-        
         let allItems = itemsStore.getAllItems();
-            
         let item = allItems.filter( (item) => item.id == id )[0];
-        
-        console.log( item )
         
         this.setState({
             openItem: item,
