@@ -418,7 +418,7 @@ class RenderProfile extends React.Component {
                         </Tabs>
                     </AppBar>
                     <TabPanel value={this.state.valueTab} index={0} style={{ width: '100%' }}>
-                        <div>
+                        <div style={{ padding: 12 }}>
                             {this.state.info.promo ?
                                 <Hidden mdDown>
                                     <table style={{ width: '100%' }} className="TablePromo">
@@ -449,7 +449,7 @@ class RenderProfile extends React.Component {
                                         <tbody>
                                             {this.state.info.promo.promo.map((item, key) => 
                                                 <tr key={key}>
-                                                    <td style={{ padding: '10px 20px' }}>
+                                                    <td>
                                                         <div>
                                                             <Typography variant="h5" component="span">Промокод: </Typography>
                                                             <Typography variant="h5" component="span">{item.promo_name}</Typography>
