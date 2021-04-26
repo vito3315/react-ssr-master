@@ -102,24 +102,32 @@ $mainColor: #BB0025;
     }
 }
 
-.TableOrders .TEXT{
-    @include fons(1.1rem, $Ubuntu);
-}
-.TableOrders td{
-    text-align: center;
-}
 .TableOrders{
     width: 100%;
     border-collapse: collapse;
-}
-.TableOrders thead{
-    border-bottom: 2px solid #e5e5e5;
-}
-.TableOrders tbody tr{
-    border-bottom: 1px solid #e5e5e5;
-}
-.TableOrders td{
-    padding: 15px 5px;
+    & tbody{
+        & tr{
+            border-bottom: 1px solid #e5e5e5;
+        }
+        & span{
+            @include fons(1rem, $Ubuntu);
+        }
+    }
+    & thead{
+        border-bottom: 2px solid #e5e5e5;
+        & span{
+            @include fons(1rem, $Ubuntu);
+        }
+    }
+    & td{
+        text-align: center;
+        padding: 15px 5px;
+    }
+    & .CardPriceItem{
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+    }
 }
 .TableInfo{
     display: flex; 
@@ -205,12 +213,6 @@ $mainColor: #BB0025;
 }
 .otherLabel{
     @include fons(0.8rem, $Ubuntu);
-}
-.TableOrders .CardPriceItem{
-    @include fons(1.1rem, $Ubuntu);
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
 }
 .PrivateTabIndicator-colorSecondary-3{
     background-color: $mainColor!important;

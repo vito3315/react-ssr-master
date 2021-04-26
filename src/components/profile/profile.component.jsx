@@ -483,21 +483,21 @@ class RenderProfile extends React.Component {
                             <table className="TableOrders">
                                 <thead>
                                     <tr>
-                                        <td><Typography variant="h5" component="span" className="textName">№</Typography></td>
-                                        <td><Typography variant="h5" component="span" className="textName">Дата</Typography></td>
-                                        <td><Typography variant="h5" component="span" className="textName">Сумма</Typography></td>
+                                        <td><Typography variant="h5" component="span">№</Typography></td>
+                                        <td><Typography variant="h5" component="span">Дата</Typography></td>
+                                        <td><Typography variant="h5" component="span">Сумма</Typography></td>
                                         <td></td>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {this.state.info.orders.my_orders.map((item, key) => 
                                         <tr key={key}>
-                                            <td><Typography variant="h5" component="span" className="TEXT">{item.order_id}</Typography></td>
-                                            <td><Typography variant="h5" component="span" className="TEXT">{item.date_time_new}</Typography></td>
+                                            <td><Typography variant="h5" component="span">{item.order_id}</Typography></td>
+                                            <td><Typography variant="h5" component="span">{item.date_time_new}</Typography></td>
                                             <td>
                                                 <Typography className="CardPriceItem" variant="h5" component="span">{item.sum} <AttachMoneyIcon fontSize="small" /></Typography>
                                             </td>
-                                            <td><Typography variant="h5" component="span" className="TEXT">{parseInt(item.is_delete) == 1 ? <CloseIcon /> : <CheckIcon />}</Typography></td>
+                                            <td><Typography variant="h5" component="span">{parseInt(item.is_delete) == 1 ? <CloseIcon /> : <CheckIcon />}</Typography></td>
                                         </tr>
                                     )}
                                 </tbody>
