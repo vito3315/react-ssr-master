@@ -818,6 +818,14 @@ export class App extends React.Component {
                                                 }
                                                 document.querySelector('#link_'+item.id).classList.add('activeCat');
                                                 
+                                                document.getElementById('link_'+item.id).scrollIntoView(true);
+                                                
+                                                document.querySelector('.scrollCat').animate({
+                                                    scrollLeft: 200
+                                                }, 100);
+                                                
+                                                
+                                                
                                                 /*document.querySelector('.scrollCat').classList.add('mandatory');
                                                 document.querySelector('.activeCat').classList.add('activeCatTest');
                                                 setTimeout(()=>{
