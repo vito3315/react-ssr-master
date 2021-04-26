@@ -141,18 +141,6 @@ class RenderContact extends React.Component {
 				zoom: 10.8
 			});
             
-			points_zone.map((zone)=>{
-                myMap2.geoObjects.add(
-                    new ymaps.Polygon([zone], {
-    					//hintContent: "Зона доставки"
-    				}, {
-    					fillColor: 'rgba(187, 0, 37, 0)',
-    					strokeColor: 'rgb(187, 0, 37)',
-    					strokeWidth: 5
-    				})
-                );
-            })
-            
 			let HintLayout = ymaps.templateLayoutFactory.createClass( 
                 "<div class='my-hint'>" +
                     "<b>{{ properties.address }}</b><br />" +
@@ -160,6 +148,20 @@ class RenderContact extends React.Component {
                 "</div>"
             );
 			
+            points_zone.map((zone, key)=>{
+                myMap2.geoObjects.add(
+                    new ymaps.Polygon([zone], {
+    					//hintContent: "Зона доставки"
+                        address: points[ key ]['addr'],
+    				}, {
+                        hintLayout: HintLayout,
+    					fillColor: 'rgba(187, 0, 37, 0)',
+    					strokeColor: 'rgb(187, 0, 37)',
+    					strokeWidth: 5
+    				})
+                );
+            })
+            
 			points.map(function(point){
 				myMap2.geoObjects.add(
                     new ymaps.Placemark( [point['xy_point']['latitude'], point['xy_point']['longitude']], {
