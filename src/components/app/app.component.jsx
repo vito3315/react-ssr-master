@@ -88,7 +88,7 @@ class CustomBottomNavigation extends React.Component{
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                 >
                     <Badge badgeContent={itemsStore.getAllPrice()} max={500000} color="primary">
-                        <FontAwesomeIcon icon={ faShoppingCart } style={{ color: itemsStore.getPage() == 'cart' ? 'black' : 'gray' }} />
+                        <ShoppingCartOutlinedIcon style={{ fill: itemsStore.getPage() == 'cart' ? 'black' : 'gray' }} />
                     </Badge>
                 </Link>
                 <Link
