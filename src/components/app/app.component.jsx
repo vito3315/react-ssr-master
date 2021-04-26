@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink as Link, Switch, Route, useParams, Redirect, StaticRouter } from 'react-router-dom';
+import { NavLink as Link, Switch, Route, Redirect } from 'react-router-dom';
 
 import { Home } from '../home';
 import { Item } from '../item';
@@ -24,25 +24,17 @@ import IconButton from '@material-ui/core/IconButton';
 
 import Typography from '@material-ui/core/Typography';
 
-import { makeStyles } from '@material-ui/core/styles';
-
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined';
+
 import InstagramIcon from '@material-ui/icons/Instagram';
 import FacebookIcon from '@material-ui/icons/Facebook';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
-import RestaurantMenuSharpIcon from '@material-ui/icons/RestaurantMenuSharp';
-import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
-import PersonIcon from '@material-ui/icons/Person';
+
+
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 import Hidden from '@material-ui/core/Hidden';
-
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 import Popover from '@material-ui/core/Popover';
 import * as Scroll from 'react-scroll';
@@ -55,22 +47,18 @@ const queryString = require('query-string');
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
-import TextField from '@material-ui/core/TextField';
-
 import InputMask from "react-input-mask";
-
 import Badge from '@material-ui/core/Badge';
-
 import { Provider } from 'mobx-react';
 import { useStrict } from 'mobx';
-
 import itemsStore from '../../stores/items-store';
 const stores = { itemsStore };
 
-import { trace, autorun, observable, mobx } from "mobx"
+import { autorun } from "mobx"
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUtensils, faUserCog, faUser, faShoppingCart, faShoppingBasket, faSortDown, faCaretLeft, faTrashAlt, faChevronRight, faPlus, faMinus, faCheck, faCheckCircle, faTimes, faGift, faMapMarkerAlt, faSpinner, faCrow, faSquare, faCheckSquare, faInfoCircle, faMoneyBill, faCreditCard, faRubleSign, faFire } from '@fortawesome/free-solid-svg-icons'
 
 var cart = {
     allItems: []
@@ -85,14 +73,14 @@ class CustomBottomNavigation extends React.Component{
                     exact={ true }
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                 >
-                    <RestaurantMenuSharpIcon style={{ fill: itemsStore.getPage() == 'home' ? 'black' : 'gray' }} />
+                    <FontAwesomeIcon icon={ faUtensils } style={{ color: itemsStore.getPage() == 'home' ? 'black' : 'gray' }} />
                 </Link>
                 <Link
                     to={'/'+itemsStore.getCity()+'/actii'}
                     exact={ true }
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                 >
-                    <CardGiftcardIcon style={{ fill: itemsStore.getPage() == 'actii' ? 'black' : 'gray' }} />
+                    <FontAwesomeIcon icon={ faGift } style={{ color: itemsStore.getPage() == 'actii' ? 'black' : 'gray' }} />
                 </Link>
                 <Link
                     to={'/'+itemsStore.getCity()+'/'}
@@ -100,7 +88,7 @@ class CustomBottomNavigation extends React.Component{
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                 >
                     <Badge badgeContent={itemsStore.getAllPrice()} max={500000} color="primary">
-                        <ShoppingCartOutlinedIcon style={{ fill: itemsStore.getPage() == 'cart' ? 'black' : 'gray' }} />
+                        <FontAwesomeIcon icon={ faShoppingCart } style={{ color: itemsStore.getPage() == 'cart' ? 'black' : 'gray' }} />
                     </Badge>
                 </Link>
                 <Link
@@ -108,7 +96,7 @@ class CustomBottomNavigation extends React.Component{
                     exact={ true }
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                 >
-                    <LocationOnIcon style={{ fill: itemsStore.getPage() == 'contact' ? 'black' : 'gray' }} />
+                    <FontAwesomeIcon icon={ faMapMarkerAlt } style={{ color: itemsStore.getPage() == 'contact' ? 'black' : 'gray' }} />
                 </Link>
                 {itemsStore.getToken() ?
                     <Link
@@ -116,13 +104,13 @@ class CustomBottomNavigation extends React.Component{
                         exact={ true }
                         className="MuiButtonBase-root MuiBottomNavigationAction-root"
                     >
-                        <PersonIcon style={{ fill: itemsStore.getPage() == 'profile' ? 'black' : 'gray' }} />
+                        <FontAwesomeIcon icon={ faUser } style={{ color: itemsStore.getPage() == 'profile' ? 'black' : 'gray' }} />
                     </Link>
                         :
                     <Typography 
                         className="MuiButtonBase-root MuiBottomNavigationAction-root" 
                         onClick={this.props.login}>
-                            <PersonIcon style={{ fill: itemsStore.getPage() == 'profile' ? 'black' : 'gray' }} />
+                            <FontAwesomeIcon icon={ faUser } style={{ color: itemsStore.getPage() == 'profile' ? 'black' : 'gray' }} />
                     </Typography>
                 }
             </div>
@@ -359,19 +347,19 @@ class SimplePopover extends React.Component{
                                         <td>
                                             <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderWOBorder">
                                                 <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this, item.item_id)}>
-                                                    <RemoveIcon fontSize="small" />
+                                                    <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
                                                 </Button>
                                                 <Button variant="contained" className="BtnCardMain" >
                                                     <Typography component="span" className="CardCountItem">{item.count}</Typography>
                                                 </Button>
                                                 <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this, item.item_id)}> 
-                                                    <AddIcon fontSize="small" />
+                                                    <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
                                                 </Button>
                                             </ButtonGroup>
                                         </td>
                                         <td style={{ width: '30%' }}> 
                                             <div className="TableMiniPrice">
-                                                {item.all_price} <AttachMoneyIcon fontSize="small" />
+                                                {item.all_price} <FontAwesomeIcon icon={faRubleSign} />
                                             </div>
                                         </td>
                                     </tr>
@@ -382,7 +370,7 @@ class SimplePopover extends React.Component{
                                     <td className="TableMiniFullName">Сумма:</td>
                                     <td className="" style={{width: '30%', textAlign: 'center'}}>
                                         <div className="TableMiniPrice" style={{ marginRight: 21 }}>
-                                            {itemsStore.getAllPrice()} <AttachMoneyIcon fontSize="small" />
+                                            {itemsStore.getAllPrice()} <FontAwesomeIcon icon={faRubleSign} />
                                         </div>
                                     </td>
                                 </tr>
@@ -697,7 +685,7 @@ export class App extends React.Component {
                                 <Grid>
                                     <Grid item style={{ marginRight: 15 }}>
                                         <Link to={"/"+itemsStore.getCity()+"/"}>
-                                            <img alt="Жако доставка роллов и пиццы" src="https://newjacofood.ru/src/img/other/Logotip.png" />
+                                            <img alt="Жако доставка роллов и пиццы" src="https://jacochef.ru/src/img/Bely_fon_logo.png" />
                                         </Link> 
                                     </Grid>
                                     <Hidden xsDown>
@@ -712,7 +700,7 @@ export class App extends React.Component {
                                 <Grid>
                                     <Grid item style={{ marginRight: 15 }}>
                                         <Link to={"/"+itemsStore.getCity()+"/"}>
-                                            <img alt="Жако доставка роллов и пиццы" src="https://newjacofood.ru/src/img/other/Logotip.png" />
+                                            <img alt="Жако доставка роллов и пиццы" src="https://jacochef.ru/src/img/Bely_fon_logo.png" />
                                         </Link> 
                                     </Grid>
                                     <Hidden mdDown>
@@ -809,7 +797,7 @@ export class App extends React.Component {
                             
                             {this.state.is_load === true ?
                                 <Hidden lgUp>
-                                    <Typography variant="h5" component="span" className="thisCity" onClick={this.openCity.bind(this)}><LocationOnIcon /> {itemsStore.getCityRU()}</Typography>
+                                    <Typography variant="h5" component="span" className="thisCity" onClick={this.openCity.bind(this)}><FontAwesomeIcon icon={ faMapMarkerAlt } /> {itemsStore.getCityRU()}</Typography>
                                 </Hidden>
                                     :
                                 null

@@ -1,20 +1,14 @@
 import React from 'react';
-import { NavLink as Link, Switch, Route, useParams, useHistory } from 'react-router-dom';
-
+import { useParams } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import IconButton from '@material-ui/core/IconButton';
-
 import Typography from '@material-ui/core/Typography';
 
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
-import InfoIcon from '@material-ui/icons/Info';
-
-import CloseIcon from '@material-ui/icons/Close';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
@@ -105,8 +99,8 @@ class RenderActii extends React.Component {
                         <MuiDialogTitle disableTypography style={{ margin: 0, padding: 8 }}>
                             <Typography variant="h6">{this.state.showItem.promo_title}</Typography>
                           
-                            <IconButton aria-label="close" style={{ position: 'absolute', top: 0, right: 0, color: '#000' }} onClick={this.closeDialog.bind(this)}>
-                                <CloseIcon />
+                            <IconButton aria-label="close" style={{ position: 'absolute', top: 0, right: 0 }} onClick={this.closeDialog.bind(this)}>
+                                <FontAwesomeIcon icon={faTimes} style={{ fontSize: '1.8rem', color: '#e5e5e5' }} />
                             </IconButton>
                         </MuiDialogTitle>
                         

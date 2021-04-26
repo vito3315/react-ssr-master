@@ -13,7 +13,7 @@ $mainColor: #BB0025;
     }
     & .mainContainer{
         padding-top: 0!important; 
-        padding-bottom: 50;
+        padding-bottom: 50!important; 
     }
     @media (min-width: 960px) {
         margin-left: 8.35% !important; 
@@ -31,6 +31,10 @@ $mainColor: #BB0025;
             @include fons(1.7rem, $Futuris);
             text-align: center;
         }
+    }
+    & header.MuiAppBar-root button span{
+        @include fons(1rem, $Ubuntu);
+        text-transform: capitalize!important;
     }
 }
 .modalProfile{
@@ -50,10 +54,6 @@ $mainColor: #BB0025;
 }
 .MuiTabs-indicator{
     background-color: $mainColor !important;
-}
-header.MuiAppBar-root button span{
-    @include fons(0.8rem, $Ubuntu);
-    text-transform: capitalize!important;
 }
 .TablePromo{
     width: 100%;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink as Link, Switch, Route, useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import Grid from '@material-ui/core/Grid';
 
@@ -9,15 +9,6 @@ import IconButton from '@material-ui/core/IconButton';
 
 import Typography from '@material-ui/core/Typography';
 
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
-import InfoIcon from '@material-ui/icons/Info';
-
-import Popover from '@material-ui/core/Popover';
-
-
-import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -27,15 +18,7 @@ import itemsStore from '../../stores/items-store';
 
 const queryString = require('query-string');
 
-const useStyles = makeStyles((theme) => ({
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    flexShrink: 0,
-  }
-}));
-
 function ControlledAccordions(props) {
-    const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
 
     const handleChange = (panel) => (event, isExpanded) => {
@@ -53,7 +36,7 @@ function ControlledAccordions(props) {
                         aria-controls={"panel"+key+"bh-content"}
                         id={"panel"+key+"bh-header"}
                     >
-                        <Typography variant="h5" className={classes.heading}>{item.raion}: {item.addr}</Typography>
+                        <Typography variant="h5" component="span">{item.raion}: {item.addr}</Typography>
                     </AccordionSummary>
                     <AccordionDetails className="AccordionDesc" style={{ flexDirection: 'column', padding: 0 }}>
                         <div>

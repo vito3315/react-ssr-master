@@ -73,6 +73,9 @@ body{
             @include fons(1.3rem, $Ubuntu);
             display: flex;
             align-items: center;
+            & svg{
+                padding-right: 6px;
+            }
         }
         & .CityProfileNav{
             display: flex;
@@ -88,7 +91,7 @@ body{
             justify-content: center;
         }
         & img{
-            height: 40px;
+            height: 33px;
         }
         & .ShopIconBTN{
             & .MuiBadge-anchorOriginTopRightRectangle{
@@ -143,12 +146,12 @@ body{
     padding: 1px 25px;
 }
 .BtnBorder.count svg{
-    fill: $colorMain
+    color: $colorMain;
 }
 .BtnBorderWOBorder{
     width: 109px;
     & svg{
-        fill: $colorMain;
+        color: $colorMain;
     }
 }
 .MuiBadge-colorPrimary{
@@ -231,6 +234,10 @@ body{
             @include fons(1rem, $Ubuntu);
             display: flex;
             justify-content: flex-end;
+            & svg{
+                font-size: 0.7rem;
+                padding-top: 6px;
+            }
         }
         & .TableMiniFullName{
             @include fons(1rem, $Ubuntu);
@@ -382,7 +389,10 @@ body{
         -webkit-appearance: none;
         -webkit-tap-highlight-color: transparent;
         & svg{
-            font-size: 1.7rem;
+            font-size: 1.5rem;
         }
     }
+}
+.MuiBadge-badge{
+    @include fons(0.75rem, $Ubuntu);
 }

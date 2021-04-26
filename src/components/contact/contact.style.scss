@@ -4,6 +4,9 @@ $Futuris: 'Futuris Bold';
     font-size: $size;
     font-family: $family !important;
 }
+.MuiAccordionSummary-content span{
+    padding: 0!important;
+}
 .Contact{
     margin-top: 64px!important;
     & h1{

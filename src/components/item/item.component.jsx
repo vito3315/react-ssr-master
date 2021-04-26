@@ -1,25 +1,15 @@
 import React from 'react';
-import { NavLink as Link, Switch, Route, useParams, useHistory } from 'react-router-dom';
-
+import { useParams } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
-
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import IconButton from '@material-ui/core/IconButton';
-
 import Typography from '@material-ui/core/Typography';
-
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
-import InfoIcon from '@material-ui/icons/Info';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faRubleSign, faInfoCircle, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 import Popover from '@material-ui/core/Popover';
 import Hidden from '@material-ui/core/Hidden';
-
-import { observer } from 'mobx-react';
-import { trace, autorun } from "mobx"
-
+import { autorun } from "mobx"
 import itemsStore from '../../stores/items-store';
 
 const queryString = require('query-string');
@@ -62,7 +52,7 @@ function ItemInfoPopover(props) {
     return (
         <div>
             <IconButton aria-describedby={id} edge="start" color="inherit" aria-label="menu" onClick={handleClick}>
-                <InfoIcon fontSize="small" />
+                <FontAwesomeIcon icon={faInfoCircle} style={{ fontSize: '1.2rem' }} />
             </IconButton>
       
             <Popover
@@ -267,7 +257,7 @@ class RenderItem extends React.Component {
                                 :
                                 null
                             }
-                            <Typography gutterBottom variant="h5" component="span" className="ItemDesc ItemPrice">{'Цена: '+this.state.item.price} <AttachMoneyIcon fontSize="small" /></Typography>
+                            <Typography gutterBottom variant="h5" component="span" className="ItemDesc ItemPrice">{'Цена: '+this.state.item.price} <FontAwesomeIcon icon={faRubleSign} /></Typography>
                             
                             {this.state.count == 0 ?
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
@@ -276,13 +266,13 @@ class RenderItem extends React.Component {
                             :
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder count">
                                     <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this)}>
-                                        <RemoveIcon fontSize="small" />
+                                        <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
                                     </Button>
                                     <Button variant="contained" className="BtnCardMain" >
                                         <Typography component="span" className="CardCountItem">{this.state.count}</Typography>
                                     </Button>
                                     <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this)}> 
-                                        <AddIcon fontSize="small" />
+                                        <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
                                     </Button>
                                 </ButtonGroup>
                             }
@@ -297,7 +287,7 @@ class RenderItem extends React.Component {
                         </Grid>
                         <Grid item xs={12} className="MainLine">
                             <Typography variant="h5" component="h1">{this.state.item.name}</Typography>
-                            <Typography gutterBottom variant="h5" component="span" className="ItemDesc ItemPrice">{this.state.item.price} <AttachMoneyIcon fontSize="small" /></Typography>
+                            <Typography gutterBottom variant="h5" component="span" className="ItemDesc ItemPrice">{this.state.item.price} <FontAwesomeIcon icon={faRubleSign} /></Typography>
                         </Grid>
                         <Grid item xs={12} className="SecondLine">
                             <Typography variant="h5" component="span" className="ItemDesc ItemOther">{this.state.item.info_weight}</Typography>
@@ -314,13 +304,13 @@ class RenderItem extends React.Component {
                             :
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder count">
                                     <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this)}>
-                                        <RemoveIcon fontSize="small" />
+                                        <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
                                     </Button>
                                     <Button variant="contained" className="BtnCardMain" >
                                         <Typography component="span" className="CardCountItem">{this.state.count}</Typography>
                                     </Button>
                                     <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this)}> 
-                                        <AddIcon fontSize="small" />
+                                        <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
                                     </Button>
                                 </ButtonGroup>
                             }
