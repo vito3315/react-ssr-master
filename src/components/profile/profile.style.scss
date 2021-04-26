@@ -97,6 +97,9 @@ $mainColor: #BB0025;
     & td{
         padding: 12px 4px;
     }
+    & .BtnBorder span{
+        @include fons(1rem, $Ubuntu);
+    }
 }
 
 .TableOrders .TEXT{
