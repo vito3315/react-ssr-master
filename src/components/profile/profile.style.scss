@@ -52,7 +52,8 @@ $mainColor: #BB0025;
     background-color: $mainColor !important;
 }
 header.MuiAppBar-root button span{
-    @include fons(1rem, $Ubuntu);
+    @include fons(0.8rem, $Ubuntu);
+    text-transform: capitalize!important;
 }
 .TablePromo{
     width: 100%;
