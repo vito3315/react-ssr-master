@@ -6,6 +6,7 @@ import { Item } from '../item';
 import { Contact } from '../contact';
 import { Actii } from '../actii';
 import { Profile } from '../profile';
+import { Cart } from '../cart';
 
 
 import Grid from '@material-ui/core/Grid';
@@ -83,7 +84,7 @@ class CustomBottomNavigation extends React.Component{
                     <FontAwesomeIcon icon={ faGift } style={{ color: itemsStore.getPage() == 'actii' ? 'black' : 'gray' }} />
                 </Link>
                 <Link
-                    to={'/'+itemsStore.getCity()+'/'}
+                    to={'/'+itemsStore.getCity()+'/cart'}
                     exact={ true }
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                 >
@@ -397,9 +398,14 @@ class SimplePopover extends React.Component{
                         }
                         <div className="InCart">
                             {itemsStore.getToken() !== null ?
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
-                                    <Button variant="contained" className="BtnCardMain CardInCardItem">В корзину</Button>
-                                </ButtonGroup>
+                                <Link
+                                    to={'/'+itemsStore.getCity()+'/cart'}
+                                    exact={ true }
+                                >
+                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
+                                        <Button variant="contained" className="BtnCardMain CardInCardItem">В корзину</Button>
+                                    </ButtonGroup>
+                                </Link>
                                     :
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
                                     <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={this.props.openLogin}>Войти</Button>
@@ -994,6 +1000,11 @@ export class App extends React.Component {
                             path='/:cityName/menu/:itemLink'
                             exact={ true }
                             component={ Item }
+                        />
+                        <Route
+                            path='/:cityName/cart'
+                            exact={ true }
+                            component={ Cart }
                         />
                         <Route
                             component={ NotFound }

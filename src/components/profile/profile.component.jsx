@@ -389,7 +389,6 @@ class RenderProfile extends React.Component {
                     <Typography variant="h5" component="h1">Личный кабинет</Typography>
                 </Grid>
                 
-                
                 <Snackbar
                     anchorOrigin={{
                         vertical: 'top',

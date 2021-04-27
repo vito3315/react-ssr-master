@@ -1,0 +1,114 @@
+$Ubuntu: 'Ubuntu';
+$Futuris: 'Futuris Bold';
+$mainColor: #BB0025;
+@mixin fons($size: 1rem, $family: $Ubuntu) {
+    font-size: $size;
+    font-family: $family !important;
+}
+.MuiRadio-colorSecondary.Mui-checked{
+    color: $mainColor!important;
+}
+.Accordion{
+    padding-left: 12px;
+    padding-right: 12px;
+    & > div{
+        box-shadow: none!important;
+        & > div{
+            padding: 0;
+        }
+    }
+}
+.Cart{
+    margin-top: 64px!important;
+    & h1{
+        @include fons(2rem, $Futuris);
+        text-align: center;
+    }
+    & .mainContainer{
+        padding-top: 0!important; 
+        padding-bottom: 50;
+        & > div{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding-top: 20px;
+            & > div{
+                width: 50%;
+                @media (max-width: 960px) {
+                    width: 100%;
+                }
+            }
+            & .MuiFormControlLabel-label{
+                @include fons(1rem, $Ubuntu);
+            }
+        }
+        & .MuiPaper-elevation1{
+            box-shadow: none!important;
+        }
+        & .MuiAccordion-root:before{
+            height: 0!important;
+        }
+        & .MuiAccordionSummary-root{
+            padding: 0!important;
+        }
+    }
+    @media (min-width: 960px) {
+        margin-left: 8.35% !important; 
+        flex-grow: 0;
+        max-width: 83.333333%;
+        flex-basis: 83.333333%;
+    }
+    @media (max-width: 960px) {
+        margin: -24px!important;
+        margin-top: 64px!important;
+        & > div{
+            padding-left: 34px!important;
+        }
+        & h1{
+            @include fons(1.7rem, $Futuris);
+            text-align: center;
+        }
+    }
+    & .newAddr{
+        @include fons(1rem, $Ubuntu);
+        color: $mainColor;
+        cursor: pointer;
+    }
+    & .boxAddr{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        & > svg{
+            font-size: 1.3rem;
+            color: $mainColor;
+            padding: 10px;
+            cursor: pointer;
+        }
+    }
+    & .boxPic{
+        background-color: #e5e5e5;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        padding: 6px 12px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        &:hover{
+            background-color: $mainColor;
+            color: #fff;
+        }
+        &.active{
+            background-color: $mainColor;
+            color: #fff;
+        }
+        & span:first-child{
+            text-align: center;
+            @include fons(0.7rem, $Ubuntu);
+        }
+        & span:last-child{
+            text-align: center;
+            @include fons(1rem, $Ubuntu);
+        }
+    }
+}
