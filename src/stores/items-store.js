@@ -18,6 +18,16 @@ class ItemsStore {
 
   activePage = '';
 
+  need_dops = '';
+  
+  setDops = (items) => {
+    this.need_dops = JSON.stringify(items);
+  };
+
+  getDops(){
+    return this.need_dops.length == 0 ? [] : JSON.parse(this.need_dops, true);
+  };
+  
   setCityRU = (city) => {
     this.cityNameRU = city;
   };
@@ -499,8 +509,13 @@ class ItemsStore {
     let all_items = itemsStore.getAllItems();
     
     if( all_items.length > 0 ){
-      let cart_info = my_cart.filter( (item) => item.item_id == id )[0],
-          item_info = all_items.filter( (item) => item.id == id )[0],
+      let cart_info = my_cart.filter( (item) => item.item_id == id )[0];
+      
+      if( !cart_info ){
+        return 0;
+      }
+      
+      let item_info = all_items.filter( (item) => item.id == id )[0],
           count = parseInt(cart_info.count) - 1,
           price = item_info['price'],
           allPrice = 0;
@@ -527,6 +542,89 @@ class ItemsStore {
     }
   }
 
+  check_need_dops(){
+    let my_cart = itemsStore.getItems();
+    let all_items = itemsStore.getAllItems();
+    
+    console.log( my_cart )
+    
+    let count_pizza = 0,
+        count_rolls = 0;
+        
+    let need_dops = itemsStore.getDops();
+        
+    if( need_dops.length == 0 ){
+      return [];
+    }
+    
+    my_cart.forEach(el => {
+      let this_item = all_items.filter( (item) => item.id == el.item_id )[0];
+      
+      if( !this_item ){
+        return [];
+      }
+      
+      if( parseInt(this_item['cat_id']) == 14 ){
+        count_pizza += parseInt(el.count)
+      }else{
+        if( parseInt(this_item['cat_id']) !== 14 && parseInt(this_item['cat_id']) !== 5 && parseInt(this_item['cat_id']) !== 6 && parseInt(this_item['cat_id']) !== 7 ){
+          count_rolls += parseInt(el.count)
+        }
+      }
+    });
+    
+    let all_need_dops = [];
+    
+    if( count_rolls > 0 && count_pizza == 0 ){
+      all_need_dops = need_dops['rolls'];
+    }
+    
+    if( count_rolls == 0 && count_pizza > 0 ){
+      all_need_dops = need_dops['pizza'];
+    }
+    
+    if( count_rolls > 0 && count_pizza > 0 ){
+      all_need_dops = [...need_dops['rolls'], ...need_dops['pizza']];
+    }
+    
+    if( count_rolls == 0 && count_pizza == 0 ){
+      all_need_dops = [...need_dops['rolls'], ...need_dops['pizza']];
+    }
+    
+    let my_dops = [],
+        add_my_dop = [];
+    
+    my_cart.forEach(el => {
+      let this_item = all_items.filter( (item) => item.id == el.item_id )[0];
+      
+      if( !this_item ){
+        return [];
+      }
+      
+      if( parseInt(this_item['cat_id']) == 7 ){
+        my_dops.push( this_item );
+      }
+    });
+    
+    my_dops.forEach( (my_d) => {
+      let check_dop = false;
+      
+      all_need_dops.forEach( (need_dop) => {
+        if( parseInt( need_dop.id ) == parseInt( my_d.id ) ){
+          check_dop = true;
+        }
+      });
+      
+      if( !check_dop ){
+        add_my_dop.push( my_d );
+      }
+    });
+    
+    all_need_dops = [...all_need_dops, ...add_my_dop];
+    
+    return all_need_dops;
+  }
+  
   constructor() {
     if (typeof window !== 'undefined') {
       if( localStorage.getItem('my_cart') ){

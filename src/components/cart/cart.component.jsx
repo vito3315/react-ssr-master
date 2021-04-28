@@ -186,7 +186,9 @@ class RenderCart extends React.Component {
             my_addr: [],
             all_addr: [],
             
-            cartItems: []
+            cartItems_main: [],
+            cartItems_dop: [],
+            cartItems_need_dop: []
         };
     }
     
@@ -263,6 +265,7 @@ class RenderCart extends React.Component {
                 if(thisitem){
                     cartItems_new.push({
                         id: item.item_id,
+                        cat_id: thisitem.cat_id,
                         name: item.name,
                         desc: thisitem.tmp_desc,
                         count: item.count,
@@ -273,14 +276,21 @@ class RenderCart extends React.Component {
                 }
             })
             
+            let main = cartItems_new.filter( (item_) => parseInt(item_.cat_id) !== 7 );
+            let dop = cartItems_new.filter( (item_) => parseInt(item_.cat_id) == 7 );
+            let need_dop = itemsStore.check_need_dops();
+            
             this.setState({
-                cartItems: cartItems_new
+                cartItems_main: main,
+                cartItems_dop: dop,
+                cartItems_need_dop: need_dop
             })
         }
         
         autorun(() => {
             let cartItems = itemsStore.getItems();
             let allItems = itemsStore.getAllItems();
+            let need_dop = itemsStore.check_need_dops();
             
             let cartItems_new = [];
             
@@ -290,6 +300,7 @@ class RenderCart extends React.Component {
                 if(thisitem){
                     cartItems_new.push({
                         id: item.item_id,
+                        cat_id: thisitem.cat_id,
                         name: item.name,
                         desc: thisitem.tmp_desc,
                         count: item.count,
@@ -300,8 +311,47 @@ class RenderCart extends React.Component {
                 }
             })
             
+            let main = cartItems_new.filter( (item_) => parseInt(item_.cat_id) !== 7 );
+            let dop = cartItems_new.filter( (item_) => parseInt(item_.cat_id) == 7 );
+            
+            let dop_new = [];
+            
+            need_dop.map((item) => {
+                let cart_item = cartItems_new.filter( (item_) => parseInt(item_.id) == parseInt(item.id) )[0];
+                
+                if( !cart_item ){
+                    dop_new.push({
+                        id: item.id,
+                        cat_id: item.cat_id,
+                        name: item.name,
+                        desc: item.tmp_desc,
+                        count: 0,
+                        allPrice: 0,
+                        img: item.img,
+                        imgUpdate: item.img_date_update,
+                    })
+                }else{
+                    dop_new.push({
+                        id: item.id,
+                        cat_id: item.cat_id,
+                        name: item.name,
+                        desc: item.tmp_desc,
+                        count: cart_item.count,
+                        allPrice: cart_item.allPrice,
+                        img: item.img,
+                        imgUpdate: item.img_date_update,
+                    })
+                }
+            })
+            
+            console.log( 'main', main )
+            console.log( 'dop', dop )
+            console.log( 'need_dop', need_dop )
+            
             this.setState({
-                cartItems: cartItems_new
+                cartItems_main: main,
+                cartItems_dop: dop_new,
+                cartItems_need_dop: need_dop
             })
         })
     }
@@ -454,7 +504,42 @@ class RenderCart extends React.Component {
                     <div>
                         <table className="tableCart">
                             <tbody>
-                                {this.state.cartItems.map((item, key) =>
+                                {this.state.cartItems_main.map((item, key) =>
+                                    <tr key={key}>
+                                        <td style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                                            <img src={"https://newjacofood.ru/src/img/items/"+item.img+'?'+item.imgUpdate} />
+                                        
+                                            <div>
+                                                <Typography variant="h5" component="span" className="nameItem">{item.name}</Typography>
+                                                <Typography variant="h5" component="span" className="descItem">{item.desc}</Typography>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="count">
+                                                <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this, item.id)}>
+                                                    <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
+                                                </Button>
+                                                <Button variant="contained" className="BtnCardMain" >
+                                                    <Typography component="span" className="CardCountItem">{item.count}</Typography>
+                                                </Button>
+                                                <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this, item.id)}> 
+                                                    <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
+                                                </Button>
+                                            </ButtonGroup>
+                                        </td>
+                                        <td>
+                                            <Typography gutterBottom variant="h5" component="span" className="namePrice">{item.allPrice} <FontAwesomeIcon icon={faRubleSign} /></Typography>
+                                        </td>
+                                    </tr>
+                                )}
+                                <tr className="rowAboutDop">
+                                    <td colSpan='3'>
+                                        <Typography gutterBottom variant="h5" component="span" className="">Соевый соус, имбирь и васаби приобретаются отдельно!</Typography>
+                                        <br />
+                                        <Typography gutterBottom variant="h5" component="span" className="">Не забудь добавить нужные позиции в корзину.</Typography>
+                                    </td>
+                                </tr>
+                                {this.state.cartItems_dop.map((item, key) =>
                                     <tr key={key}>
                                         <td style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                                             <img src={"https://newjacofood.ru/src/img/items/"+item.img+'?'+item.imgUpdate} />

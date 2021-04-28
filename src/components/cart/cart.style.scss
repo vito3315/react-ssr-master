@@ -87,6 +87,7 @@ $mainColor: #BB0025;
                 flex-direction: row;
                 justify-content: flex-end;
                 padding-top: 6px;
+                padding-right: 12px;
                 & svg{
                     padding-top: 6px;
                     font-size: 1rem;
@@ -101,7 +102,7 @@ $mainColor: #BB0025;
                 display: flex;
                 flex-direction: column;
             }
-            & tbody > tr > td:last-child{
+            & tbody > tr:not(.rowAboutDop) > td:last-child{
                 min-width: 100px;
                 text-align: end;
             }
@@ -110,6 +111,18 @@ $mainColor: #BB0025;
             }
             & .count svg{
                 color: $mainColor;
+            }
+            & .rowAboutDop{
+                background-color: rgba(229, 229, 229, 0.3);
+                & span{
+                    @include fons(1rem, $Ubuntu);
+                    color: $mainColor;
+                    font-weight: bold;
+                }
+                & td{
+                    text-align: center;
+                    padding: 12px;
+                }
             }
         }
     }

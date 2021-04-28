@@ -463,6 +463,7 @@ export class App extends React.Component {
                 
                 itemsStore.userName = json.user_name;
                 
+                itemsStore.setDops(json.need_dop);
                 itemsStore.setAllItems(json.all_items);
                 itemsStore.setAllItemsCat(json.arr);
                 itemsStore.setBanners(json.baners)
