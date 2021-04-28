@@ -460,32 +460,35 @@ class ItemsStore {
         cart_info.count = 0;
       }
       
-      let item_info = all_items.filter( (item) => item.id == id )[0],
-          count = parseInt(cart_info.count) + 1,
-          price = item_info['price'],
-          allPrice = 0;
+      let item_info = all_items.filter( (item) => item.id == id )[0];
+      
+      if(item_info){
+        let count = parseInt(cart_info.count) + 1,
+            price = item_info['price'],
+            allPrice = 0;
+          
+        let check_in_cart = my_cart.some( (item) => item.item_id == id );
+          if( !check_in_cart ){
+            my_cart.push({
+              name: item_info.name,
+              item_id: id,
+              count: count,
+              one_price: price,
+              all_price: count * price
+            })
+          }else{
+            my_cart.forEach((item, key) => {
+              if( item.item_id == id ){
+                my_cart[key]['count'] = count;
+                my_cart[key]['all_price'] = count * price;
+              }
+            });
+          }
         
-      let check_in_cart = my_cart.some( (item) => item.item_id == id );
-        if( !check_in_cart ){
-          my_cart.push({
-            name: item_info.name,
-            item_id: id,
-            count: count,
-            one_price: price,
-            all_price: count * price
-          })
-        }else{
-          my_cart.forEach((item, key) => {
-            if( item.item_id == id ){
-              my_cart[key]['count'] = count;
-              my_cart[key]['all_price'] = count * price;
-            }
-          });
-        }
-      
-      itemsStore.setItems(my_cart);
-      
-      return count;
+        itemsStore.setItems(my_cart);
+        
+        return count;
+      }
     }else{
       return 0;
     }

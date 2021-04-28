@@ -105,7 +105,7 @@ class RenderProfile extends React.Component {
             valueTab: 1,
             info: {},
             arr_day: [],
-            arr_m: [
+            arr_m: [ 
                 {name: 'Января', value: 1},
                 {name: 'Февраля', value: 2},
                 {name: 'Марта', value: 3},

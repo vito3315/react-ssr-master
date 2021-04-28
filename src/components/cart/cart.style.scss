@@ -38,9 +38,26 @@ $mainColor: #BB0025;
                     width: 100%;
                 }
             }
+            & > fieldset{
+                width: 50%;
+                @media (max-width: 960px) {
+                    width: 100%;
+                }
+                & > div{
+                    flex-direction: row;
+                    justify-content: space-between;
+                }
+            }
+            & > form{
+                width: 50%;
+                @media (max-width: 960px) {
+                    width: 100%;
+                }
+            }
             & .MuiFormControlLabel-label{
                 @include fons(1rem, $Ubuntu);
             }
+            
         }
         & .MuiPaper-elevation1{
             box-shadow: none!important;
@@ -50,6 +67,50 @@ $mainColor: #BB0025;
         }
         & .MuiAccordionSummary-root{
             padding: 0!important;
+        }
+        & .tableCart{
+            width: 70%;
+            border-collapse: collapse;
+            @media (max-width: 960px) {
+                width: 100%;
+            }
+            & .nameItem{
+                @include fons(1.2rem, $Ubuntu);
+            }
+            & .descItem{
+                @include fons(0.7rem, $Ubuntu);
+                color: gray;
+            }
+            & .namePrice{
+                @include fons(1.2rem, $Ubuntu);
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                padding-top: 6px;
+                & svg{
+                    padding-top: 6px;
+                    font-size: 1rem;
+                    padding-left: 2px;
+                }
+            }
+            & img{
+                height: 100px;
+                padding: 12px;
+            }
+            & tbody > tr > td:first-child > div{
+                display: flex;
+                flex-direction: column;
+            }
+            & tbody > tr > td:last-child{
+                min-width: 100px;
+                text-align: end;
+            }
+            & tr{
+                border-bottom: 1px solid #e5e5e5;
+            }
+            & .count svg{
+                color: $mainColor;
+            }
         }
     }
     @media (min-width: 960px) {

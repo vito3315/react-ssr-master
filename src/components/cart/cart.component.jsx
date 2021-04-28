@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faPlus, faMinus, faRubleSign } from '@fortawesome/free-solid-svg-icons'
 
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
@@ -22,6 +22,26 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 
+
+import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Select from '@material-ui/core/Select';
+import NativeSelect from '@material-ui/core/NativeSelect';
+
+import TextField from '@material-ui/core/TextField';
+
+
+import Avatar from '@material-ui/core/Avatar';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemText from '@material-ui/core/ListItemText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
+import PersonIcon from '@material-ui/icons/Person';
+import AddIcon from '@material-ui/icons/Add';
+import { blue } from '@material-ui/core/colors';
+
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -33,6 +53,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 
 import itemsStore from '../../stores/items-store';
+import { autorun } from "mobx"
 
 const queryString = require('query-string');
 
@@ -79,6 +100,79 @@ export function Cart() {
     );
 }
 
+const emails = ['username@gmail.com', 'user02@gmail.com'];
+
+function SimpleDialog(props) {
+    const classes = useStyles();
+    const { onClose, selectedValue, open } = props;
+  
+    const handleClose = () => {
+      onClose(selectedValue);
+    };
+  
+    const handleListItemClick = (value) => {
+      onClose(value);
+    };
+  
+    return (
+      <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
+        <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
+        <List>
+          {emails.map((email) => (
+            <ListItem button onClick={() => handleListItemClick(email)} key={email}>
+              <ListItemAvatar>
+                <Avatar className={classes.avatar}>
+                  <PersonIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary={email} />
+            </ListItem>
+          ))}
+  
+          <ListItem autoFocus button onClick={() => handleListItemClick('addAccount')}>
+            <ListItemAvatar>
+              <Avatar>
+                <AddIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary="Add account" />
+          </ListItem>
+        </List>
+      </Dialog>
+    );
+  }
+  
+  SimpleDialog.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    open: PropTypes.bool.isRequired,
+    selectedValue: PropTypes.string.isRequired,
+  };
+  
+function SimpleDialogDemo() {
+    const [open, setOpen] = React.useState(false);
+    const [selectedValue, setSelectedValue] = React.useState(emails[1]);
+  
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = (value) => {
+      setOpen(false);
+      setSelectedValue(value);
+    };
+  
+    return (
+      <div>
+        <Typography variant="subtitle1">Selected: {selectedValue}</Typography>
+        <br />
+        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+          Open simple dialog
+        </Button>
+        <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} />
+      </div>
+    );
+  }
+
 class RenderCart extends React.Component {
     constructor(props) {
         super(props);
@@ -90,7 +184,9 @@ class RenderCart extends React.Component {
             
             pic_point: [],
             my_addr: [],
-            all_addr: []
+            all_addr: [],
+            
+            cartItems: []
         };
     }
     
@@ -154,12 +250,74 @@ class RenderCart extends React.Component {
         itemsStore.setPage('cart');
         
         this.loadData();
+        
+        let cartItems = itemsStore.getItems();
+        let allItems = itemsStore.getAllItems();
+        
+        let cartItems_new = [];
+        
+        if( cartItems.length > 0 && allItems.length > 0 ){
+            cartItems.map((item) => {
+                let thisitem = allItems.filter( (item_) => item_.id == item.item_id )[0];
+                
+                if(thisitem){
+                    cartItems_new.push({
+                        id: item.item_id,
+                        name: item.name,
+                        desc: thisitem.tmp_desc,
+                        count: item.count,
+                        allPrice: item.all_price,
+                        img: thisitem.img,
+                        imgUpdate: thisitem.img_date_update,
+                    })
+                }
+            })
+            
+            this.setState({
+                cartItems: cartItems_new
+            })
+        }
+        
+        autorun(() => {
+            let cartItems = itemsStore.getItems();
+            let allItems = itemsStore.getAllItems();
+            
+            let cartItems_new = [];
+            
+            cartItems.map((item) => {
+                let thisitem = allItems.filter( (item_) => item_.id == item.item_id )[0];
+                
+                if(thisitem){
+                    cartItems_new.push({
+                        id: item.item_id,
+                        name: item.name,
+                        desc: thisitem.tmp_desc,
+                        count: item.count,
+                        allPrice: item.all_price,
+                        img: thisitem.img,
+                        imgUpdate: thisitem.img_date_update,
+                    })
+                }
+            })
+            
+            this.setState({
+                cartItems: cartItems_new
+            })
+        })
     }
     
     changeTab = (event, newValue) => {
         this.setState({
             valueTab: newValue
         })
+    }
+    
+    add(item_id){
+        itemsStore.AddItem(item_id);
+    }
+    
+    minus(item_id){
+        itemsStore.MinusItem(item_id);
     }
     
     render() {
@@ -178,7 +336,7 @@ class RenderCart extends React.Component {
                     </AppBar>
                     <TabPanel value={this.state.valueTab} index={0} style={{ width: '100%' }}>
                         <FormControl component="fieldset">
-                            <RadioGroup aria-label="gender" name="gender1" >
+                            <RadioGroup name="addrs" >
                                 {this.state.my_addr.map((item, key) => 
                                     <div key={key} className="boxAddr">
                                         <FormControlLabel value={item.id} control={<Radio />} label={item.city_name+', '+item.street+' '+item.home+', Пд. '+item.pd+', Эт. '+item.et+', Кв. '+item.kv} />
@@ -198,9 +356,6 @@ class RenderCart extends React.Component {
                                 
                             </AccordionDetails>
                         </Accordion>
-                        
-                        
-                        
                     </TabPanel>
                     <TabPanel value={this.state.valueTab} index={1}>
                         <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
@@ -212,6 +367,125 @@ class RenderCart extends React.Component {
                             )}
                         </div>
                     </TabPanel>
+                    
+                    <div>
+                        <form noValidate autoComplete="off">
+                            <TextField
+                                style={{ width: '100%' }}
+                                id="outlined-multiline-flexible"
+                                label="Комментарий курьеру"
+                                multiline
+                                rowsMax={2}
+                                //value={value}
+                                //onChange={handleChange}
+                                variant="outlined"
+                            />
+                        </form>
+                    </div>
+                    <div>
+                        <FormControl component="fieldset">
+                            <FormLabel component="legend">Оплата</FormLabel>
+                            <RadioGroup name="pays" value={1}>
+                                <FormControlLabel value={1} control={<Radio />} label='Наличными' />
+                                <FormControlLabel value={2} control={<Radio />} label='Онлайн' />
+                            </RadioGroup>
+                        </FormControl>
+                    </div>
+                    <div>
+                        <FormControl component="fieldset">
+                            <FormLabel component="legend">Когда приготовить?</FormLabel>
+                            <RadioGroup name="pays" value={1}>
+                                <FormControlLabel value={1} control={<Radio />} label='Как можно быстрее' />
+                                <FormControlLabel value={2} control={<Radio />} label='Предзаказ' />
+                            </RadioGroup>
+                        </FormControl>
+                    </div>
+                    <div>
+                        <FormControl style={{ width: '30%' }}>
+                            <InputLabel htmlFor="age-native-simple">День</InputLabel>
+                            <Select
+                              native
+                              //value={state.age}
+                              //onChange={handleChange}
+                              inputProps={{
+                                name: 'age',
+                                id: 'age-native-simple',
+                              }}
+                            >
+                              <option value={1}>Сегодня, 27 апреля, 2021г.</option>
+                              <option value={2}>Завтра, 28 апреля, 2021г.</option>
+                              <option value={3}>30 апреля, 2021г.</option>
+                              <option value={4}>1 Мая, 2021г.</option>
+                              <option value={5}>2 Мая, 2021г.</option>
+                            </Select>
+                        </FormControl>
+                        <FormControl style={{ width: '20%' }}>
+                            <InputLabel htmlFor="age-native-simple">Время</InputLabel>
+                            <Select
+                              native
+                              //value={state.age}
+                              //onChange={handleChange}
+                              inputProps={{
+                                name: 'age',
+                                id: 'age-native-simple',
+                              }}
+                            >
+                              <option value={1}>10:40 - 11:00</option>
+                              <option value={2}>10:40 - 11:00</option>
+                              <option value={3}>10:40 - 11:00</option>
+                              <option value={4}>10:40 - 11:00</option>
+                              <option value={5}>10:40 - 11:00</option>
+                              <option value={6}>10:40 - 11:00</option>
+                              <option value={7}>10:40 - 11:00</option>
+                              <option value={8}>10:40 - 11:00</option>
+                              <option value={9}>10:40 - 11:00</option>
+                              <option value={10}>10:40 - 11:00</option>
+                              <option value={11}>10:40 - 11:00</option>
+                              <option value={12}>10:40 - 11:00</option>
+                              <option value={13}>10:40 - 11:00</option>
+                              <option value={14}>10:40 - 11:00</option>
+                            </Select>
+                        </FormControl>
+                    </div>
+                    
+                    <div>
+                        <Typography variant="h5" component="h2">Моя корзина</Typography>
+                    </div>
+                    <div>
+                        <table className="tableCart">
+                            <tbody>
+                                {this.state.cartItems.map((item, key) =>
+                                    <tr key={key}>
+                                        <td style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                                            <img src={"https://newjacofood.ru/src/img/items/"+item.img+'?'+item.imgUpdate} />
+                                        
+                                            <div>
+                                                <Typography variant="h5" component="span" className="nameItem">{item.name}</Typography>
+                                                <Typography variant="h5" component="span" className="descItem">{item.desc}</Typography>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="count">
+                                                <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this, item.id)}>
+                                                    <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
+                                                </Button>
+                                                <Button variant="contained" className="BtnCardMain" >
+                                                    <Typography component="span" className="CardCountItem">{item.count}</Typography>
+                                                </Button>
+                                                <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this, item.id)}> 
+                                                    <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
+                                                </Button>
+                                            </ButtonGroup>
+                                        </td>
+                                        <td>
+                                            <Typography gutterBottom variant="h5" component="span" className="namePrice">{item.allPrice} <FontAwesomeIcon icon={faRubleSign} /></Typography>
+                                        </td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
+                    
                 </Grid>
                 
             </Grid>
