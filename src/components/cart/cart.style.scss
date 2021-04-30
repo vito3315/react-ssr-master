@@ -18,6 +18,9 @@ $mainColor: #BB0025;
         }
     }
 }
+.Mui-focused .MuiOutlinedInput-notchedOutline{
+    border-color: $mainColor!important;
+}
 .Cart{
     margin-top: 64px!important;
     & h1{
@@ -27,7 +30,39 @@ $mainColor: #BB0025;
     & .mainContainer{
         padding-top: 0!important; 
         padding-bottom: 50;
-        & > div{
+        & > div.promoOrder{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding-top: 20px;
+            & > div:last-child{
+                display: flex;
+                justify-content: flex-end;
+                align-items: flex-start;
+            }
+            & > div{
+                width: 35%;
+                @media (max-width: 960px) {
+                    width: 100%;
+                }
+                & > div{
+                    width: 80%;
+                    margin: 12px 0px;
+                }
+                & > div.BtnBorder{
+                    width: 150px;
+                    display: block;
+                    & button{
+                        width: 100%;
+                    }
+                }
+            }
+            & .DescPromo span{
+                @include fons(0.8rem, $Ubuntu);
+                color: rgb(187, 189, 192);
+            }
+        }
+        & > div:not(.promoOrder){
             width: 100%;
             display: flex;
             justify-content: center;
@@ -59,7 +94,22 @@ $mainColor: #BB0025;
             }
             
         }
-        & .MuiPaper-elevation1{
+        & > div.orderSdacha{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding-top: 20px;
+            & > div{
+                width: 70%;
+                @media (max-width: 960px) {
+                    width: 100%;
+                }
+                & > div{
+                    width: 41%;
+                }
+            }
+        }
+        & .MuiPaper-elevation1:not(.SpacePromo){
             box-shadow: none!important;
         }
         & .MuiAccordion-root:before{
@@ -67,6 +117,27 @@ $mainColor: #BB0025;
         }
         & .MuiAccordionSummary-root{
             padding: 0!important;
+        }
+        & .SpacePromo{
+            padding: 2px 4px;
+            display: flex;
+            align-items: center;
+            height: 34;
+            width: 390;
+            & > div{
+                margin-left: 8;
+                flex: 1;
+            }
+            & hr{
+                height: 28;
+                margin: 4;
+            }
+            & svg{
+                fill: $mainColor;
+            }
+            & input{
+                @include fons(1rem, $Ubuntu);
+            }
         }
         & .tableCart{
             width: 70%;
@@ -106,7 +177,7 @@ $mainColor: #BB0025;
                 min-width: 100px;
                 text-align: end;
             }
-            & tr{
+            & tbody tr{
                 border-bottom: 1px solid #e5e5e5;
             }
             & .count svg{

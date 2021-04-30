@@ -8,6 +8,7 @@ class ItemsStore {
   allItemsCat = '';
   banners = '';
   AllPrice = 0;
+  sum_div = 0;
   
   cityName = '';
   cityNameRU = '';
@@ -19,6 +20,14 @@ class ItemsStore {
   activePage = '';
 
   need_dops = '';
+  
+  setSumDiv = (items) => {
+    this.sum_div = parseInt( items );
+  };
+
+  getSumDiv(){
+    return this.sum_div;
+  };
   
   setDops = (items) => {
     this.need_dops = JSON.stringify(items);
@@ -430,8 +439,6 @@ class ItemsStore {
   };
 
   setItems = (items) => {
-    console.log( items )
-    
     let tmp = 0,
         allPrice = 0;
     
@@ -442,6 +449,23 @@ class ItemsStore {
     this.items = JSON.stringify(items);
     if (typeof window !== 'undefined') {
       localStorage.setItem('my_cart', this.items);
+    }
+  };
+  
+  saveCartData = (items) => {
+    let cartData = JSON.stringify(items);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('cartData', cartData);
+    }
+  };
+  
+  getCartData(){
+    if (typeof window !== 'undefined') {
+      if( localStorage.getItem('cartData') ){
+        return JSON.parse( localStorage.getItem('cartData') );
+      }else{
+        return [];
+      }
     }
   };
   
@@ -545,8 +569,6 @@ class ItemsStore {
   check_need_dops(){
     let my_cart = itemsStore.getItems();
     let all_items = itemsStore.getAllItems();
-    
-    console.log( my_cart )
     
     let count_pizza = 0,
         count_rolls = 0;

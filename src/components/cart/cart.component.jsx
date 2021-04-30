@@ -10,6 +10,12 @@ import Typography from '@material-ui/core/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faPlus, faMinus, faRubleSign } from '@fortawesome/free-solid-svg-icons'
 
+import Paper from '@material-ui/core/Paper';
+import InputBase from '@material-ui/core/InputBase';
+import Divider from '@material-ui/core/Divider';
+
+import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined';
+
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
@@ -51,6 +57,9 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
+
+
+import Input from '@material-ui/core/Input';
 
 import itemsStore from '../../stores/items-store';
 import { autorun } from "mobx"
@@ -179,16 +188,45 @@ class RenderCart extends React.Component {
         
         this.state = {      
             is_load: false,
-            valueTab: 0,
             city_name: this.props.cityName,
+            
+            sumDiv: 0,
+            allPrice: 0,
             
             pic_point: [],
             my_addr: [],
             all_addr: [],
             
+            pays: {
+                dev: [
+                    {id: '0', name: 'Наличными'},
+                    {id: '1', name: 'Онлайн'},
+                ],
+                dev_mini: [
+                    {id: '0', name: 'Наличными'},
+                ],
+                pic: [
+                    {id: '0', name: 'В кафе'},
+                ]
+            },
+            renderPay: [
+                {id: '0', name: 'Наличными'},
+                {id: '1', name: 'Онлайн'},
+            ],
+            
             cartItems_main: [],
             cartItems_dop: [],
-            cartItems_need_dop: []
+            cartItems_need_dop: [],
+            
+            orderType: 0,
+            orderAddr: null,
+            orderPic: 0,
+            orderComment: '',
+            orderPay: '0',
+            orderTimes: '1',
+            orderSdacha: '',
+            orderPromo: '',
+            orderPromoText: ''
         };
     }
     
@@ -283,8 +321,29 @@ class RenderCart extends React.Component {
             this.setState({
                 cartItems_main: main,
                 cartItems_dop: dop,
-                cartItems_need_dop: need_dop
+                cartItems_need_dop: need_dop,
+                
+                sumDiv: itemsStore.getSumDiv(),
+                allPrice: itemsStore.getAllPrice()
             })
+        }
+        
+        let cartData = itemsStore.getCartData();
+        
+        if( cartData ){
+            this.setState({
+                orderType: cartData.orderType,
+                orderAddr: cartData.orderAddr,
+                orderPic: cartData.orderPic,
+                orderComment: cartData.orderComment,
+                orderTimes: cartData.orderTimes,
+                orderPay: cartData.orderPay,
+                orderSdacha: cartData.orderSdacha
+            })
+            
+            if( cartData.orderAddr.id ){
+                itemsStore.setSumDiv(cartData.orderAddr.sum_div);
+            }
         }
         
         autorun(() => {
@@ -344,22 +403,24 @@ class RenderCart extends React.Component {
                 }
             })
             
-            console.log( 'main', main )
-            console.log( 'dop', dop )
-            console.log( 'need_dop', need_dop )
-            
             this.setState({
                 cartItems_main: main,
                 cartItems_dop: dop_new,
-                cartItems_need_dop: need_dop
+                cartItems_need_dop: need_dop,
+                
+                sumDiv: itemsStore.getSumDiv(),
+                allPrice: itemsStore.getAllPrice()
             })
         })
     }
     
     changeTab = (event, newValue) => {
         this.setState({
-            valueTab: newValue
+            orderType: newValue
         })
+        itemsStore.setSumDiv(0);
+        
+        this.saveData();
     }
     
     add(item_id){
@@ -368,6 +429,124 @@ class RenderCart extends React.Component {
     
     minus(item_id){
         itemsStore.MinusItem(item_id);
+    }
+    
+    changeAddr = (event) => {
+        let thisitem = this.state.my_addr.filter( (item) => item.id == event.target.value )[0];
+        itemsStore.setSumDiv(thisitem.sum_div);
+        this.setState({
+            orderAddr: thisitem
+        })
+        
+        this.saveData();
+    }
+    
+    choosePic(pointId){
+        if( document.querySelector('.boxPic.active') ){
+            document.querySelector('.boxPic.active').classList.remove('active');
+        }
+        document.querySelector('#pic_'+pointId).classList.add('active');
+        
+        this.setState({
+            orderPic: pointId
+        })
+        
+        this.saveData();
+    }
+    
+    changeComment = (event) => {
+        let text = event.target.value;
+        
+        if( text.length <= 50 ){
+            this.setState({
+                orderComment: event.target.value
+            })
+        }
+        
+        this.saveData();
+    }
+    
+    changePay = (event) => {
+        this.setState({
+            orderPay: event.target.value
+        })
+        
+        this.saveData();
+    }
+    
+    changeTimes = (event) => {
+        let type = event.target.value,
+            type_order = this.state.orderType;
+        
+        if( type_order == 0 ){
+            if( type == 1 ){
+                this.setState({
+                    renderPay: this.state.pays.dev,
+                })
+            }else{
+                this.setState({
+                    renderPay: this.state.pays.dev_mini,
+                })
+            }
+        }else{
+            this.setState({
+                renderPay: this.state.pays.pic,
+            })
+        }
+        
+        this.setState({
+            orderTimes: type,
+            orderPay: '0',
+        })
+        
+        this.saveData();
+    }
+    
+    changeSdacha = (event) => {
+        this.setState({
+            orderSdacha: event.target.value
+        })
+        
+        this.saveData();
+    }
+    
+    checkPromo(){
+        fetch('https://jacofood.ru/src/php/test_app.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'},
+            body: queryString.stringify({
+                type: 'get_promo_web', 
+                point_id: 1,
+                city_id: itemsStore.getCity(),
+                promo_name: this.state.orderPromo
+            })
+        }).then(res => res.json()).then(json => {
+            itemsStore.setPromo( JSON.stringify(json) );
+            let check_promo = itemsStore.checkPromo();
+          
+            console.log( check_promo )
+            
+            this.setState({
+                orderPromoText: check_promo.text
+            })
+        })
+    }
+    
+    saveData(){
+        setTimeout(()=>{
+            let data = {
+                orderType: this.state.orderType,
+                orderAddr: this.state.orderAddr,
+                orderPic: this.state.orderPic,
+                orderComment: this.state.orderComment,
+                orderTimes: this.state.orderTimes,
+                orderPay: this.state.orderPay,
+                orderSdacha: this.state.orderSdacha
+            };
+            
+            itemsStore.saveCartData(data);
+        }, 500)
     }
     
     render() {
@@ -379,14 +558,14 @@ class RenderCart extends React.Component {
                 
                 <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer" style={{ paddingTop: 0 }}>
                     <AppBar position="static" style={{ backgroundColor: '#fff', color: '#000', zIndex: 0 }} elevation={0}>
-                        <Tabs value={this.state.valueTab} onChange={this.changeTab.bind(this)} aria-label="simple tabs example"  style={{ justifyContent: 'center' }}>
+                        <Tabs value={this.state.orderType} onChange={this.changeTab.bind(this)} aria-label="simple tabs example"  style={{ justifyContent: 'center' }}>
                             <Tab label="Доставка" {...a11yProps(0)} disableRipple={true} />
                             <Tab label="Самовывоз" {...a11yProps(1)} disableRipple={true} />
                         </Tabs>
                     </AppBar>
-                    <TabPanel value={this.state.valueTab} index={0} style={{ width: '100%' }}>
+                    <TabPanel value={this.state.orderType} index={0} style={{ width: '100%' }}>
                         <FormControl component="fieldset">
-                            <RadioGroup name="addrs" >
+                            <RadioGroup name="addrs" value={ this.state.orderAddr ? this.state.orderAddr.id : 0 } onChange={this.changeAddr}>
                                 {this.state.my_addr.map((item, key) => 
                                     <div key={key} className="boxAddr">
                                         <FormControlLabel value={item.id} control={<Radio />} label={item.city_name+', '+item.street+' '+item.home+', Пд. '+item.pd+', Эт. '+item.et+', Кв. '+item.kv} />
@@ -407,10 +586,10 @@ class RenderCart extends React.Component {
                             </AccordionDetails>
                         </Accordion>
                     </TabPanel>
-                    <TabPanel value={this.state.valueTab} index={1}>
+                    <TabPanel value={this.state.orderType} index={1}>
                         <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
                             {this.state.pic_point.map((item, key) => 
-                                <div className="boxPic" key={key}>
+                                <div className="boxPic" id={'pic_'+item.id} key={key} onClick={this.choosePic.bind(this, item.id)}>
                                     <Typography variant="h5" component="span">{item.raion}</Typography>
                                     <Typography variant="h5" component="span">{item.addr}, c 10:00 до 21:30</Typography>
                                 </div>
@@ -418,85 +597,94 @@ class RenderCart extends React.Component {
                         </div>
                     </TabPanel>
                     
-                    <div>
-                        <form noValidate autoComplete="off">
-                            <TextField
-                                style={{ width: '100%' }}
-                                id="outlined-multiline-flexible"
-                                label="Комментарий курьеру"
-                                multiline
-                                rowsMax={2}
-                                //value={value}
-                                //onChange={handleChange}
-                                variant="outlined"
-                            />
-                        </form>
-                    </div>
+                    {this.state.orderType == 0 ?
+                        <div>
+                            <form noValidate autoComplete="off">
+                                <TextField
+                                    style={{ width: '100%' }}
+                                    id="outlined-multiline-flexible"
+                                    label="Комментарий курьеру"
+                                    multiline
+                                    rowsMax={2}
+                                    value={this.state.orderComment}
+                                    onChange={this.changeComment}
+                                    variant="outlined"
+                                />
+                            </form>
+                        </div>
+                            :
+                        null
+                    }
                     <div>
                         <FormControl component="fieldset">
                             <FormLabel component="legend">Оплата</FormLabel>
-                            <RadioGroup name="pays" value={1}>
-                                <FormControlLabel value={1} control={<Radio />} label='Наличными' />
-                                <FormControlLabel value={2} control={<Radio />} label='Онлайн' />
+                            <RadioGroup aria-label="pays" name="pays" value={this.state.orderPay} onChange={this.changePay}>
+                                {this.state.renderPay.map((item, key) => 
+                                    <FormControlLabel key={key} value={item.id} control={<Radio />} label={item.name} />
+                                )}
                             </RadioGroup>
                         </FormControl>
                     </div>
                     <div>
                         <FormControl component="fieldset">
                             <FormLabel component="legend">Когда приготовить?</FormLabel>
-                            <RadioGroup name="pays" value={1}>
-                                <FormControlLabel value={1} control={<Radio />} label='Как можно быстрее' />
-                                <FormControlLabel value={2} control={<Radio />} label='Предзаказ' />
+                            <RadioGroup aria-label="times" name="times" value={this.state.orderTimes} onChange={this.changeTimes}>
+                                <FormControlLabel value='1' control={<Radio />} label="Как можно быстрее" />
+                                <FormControlLabel value='2' control={<Radio />} label="Предзаказ" />
                             </RadioGroup>
                         </FormControl>
                     </div>
-                    <div>
-                        <FormControl style={{ width: '30%' }}>
-                            <InputLabel htmlFor="age-native-simple">День</InputLabel>
-                            <Select
-                              native
-                              //value={state.age}
-                              //onChange={handleChange}
-                              inputProps={{
-                                name: 'age',
-                                id: 'age-native-simple',
-                              }}
-                            >
-                              <option value={1}>Сегодня, 27 апреля, 2021г.</option>
-                              <option value={2}>Завтра, 28 апреля, 2021г.</option>
-                              <option value={3}>30 апреля, 2021г.</option>
-                              <option value={4}>1 Мая, 2021г.</option>
-                              <option value={5}>2 Мая, 2021г.</option>
-                            </Select>
-                        </FormControl>
-                        <FormControl style={{ width: '20%' }}>
-                            <InputLabel htmlFor="age-native-simple">Время</InputLabel>
-                            <Select
-                              native
-                              //value={state.age}
-                              //onChange={handleChange}
-                              inputProps={{
-                                name: 'age',
-                                id: 'age-native-simple',
-                              }}
-                            >
-                              <option value={1}>10:40 - 11:00</option>
-                              <option value={2}>10:40 - 11:00</option>
-                              <option value={3}>10:40 - 11:00</option>
-                              <option value={4}>10:40 - 11:00</option>
-                              <option value={5}>10:40 - 11:00</option>
-                              <option value={6}>10:40 - 11:00</option>
-                              <option value={7}>10:40 - 11:00</option>
-                              <option value={8}>10:40 - 11:00</option>
-                              <option value={9}>10:40 - 11:00</option>
-                              <option value={10}>10:40 - 11:00</option>
-                              <option value={11}>10:40 - 11:00</option>
-                              <option value={12}>10:40 - 11:00</option>
-                              <option value={13}>10:40 - 11:00</option>
-                              <option value={14}>10:40 - 11:00</option>
-                            </Select>
-                        </FormControl>
-                    </div>
+                    {this.state.orderTimes == 2 ?
+                        <div>
+                            <FormControl style={{ width: '30%' }}>
+                                <InputLabel htmlFor="age-native-simple">День</InputLabel>
+                                <Select
+                                  native
+                                  //value={state.age}
+                                  //onChange={handleChange}
+                                  inputProps={{
+                                    name: 'age',
+                                    id: 'age-native-simple',
+                                  }}
+                                >
+                                  <option value={1}>Сегодня, 27 апреля, 2021г.</option>
+                                  <option value={2}>Завтра, 28 апреля, 2021г.</option>
+                                  <option value={3}>30 апреля, 2021г.</option>
+                                  <option value={4}>1 Мая, 2021г.</option>
+                                  <option value={5}>2 Мая, 2021г.</option>
+                                </Select>
+                            </FormControl>
+                            <FormControl style={{ width: '20%' }}>
+                                <InputLabel htmlFor="age-native-simple">Время</InputLabel>
+                                <Select
+                                  native
+                                  //value={state.age}
+                                  //onChange={handleChange}
+                                  inputProps={{
+                                    name: 'age',
+                                    id: 'age-native-simple',
+                                  }}
+                                >
+                                  <option value={1}>10:40 - 11:00</option>
+                                  <option value={2}>10:40 - 11:00</option>
+                                  <option value={3}>10:40 - 11:00</option>
+                                  <option value={4}>10:40 - 11:00</option>
+                                  <option value={5}>10:40 - 11:00</option>
+                                  <option value={6}>10:40 - 11:00</option>
+                                  <option value={7}>10:40 - 11:00</option>
+                                  <option value={8}>10:40 - 11:00</option>
+                                  <option value={9}>10:40 - 11:00</option>
+                                  <option value={10}>10:40 - 11:00</option>
+                                  <option value={11}>10:40 - 11:00</option>
+                                  <option value={12}>10:40 - 11:00</option>
+                                  <option value={13}>10:40 - 11:00</option>
+                                  <option value={14}>10:40 - 11:00</option>
+                                </Select>
+                            </FormControl>
+                        </div>
+                            :
+                        null
+                    }
                     
                     <div>
                         <Typography variant="h5" component="h2">Моя корзина</Typography>
@@ -568,7 +756,72 @@ class RenderCart extends React.Component {
                                     </tr>
                                 )}
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colSpan='2'>
+                                        <Typography component="span">Доставка:</Typography>
+                                    </td>
+                                    <td>
+                                        <Typography gutterBottom variant="h5" component="span" className="namePrice">{this.state.sumDiv} <FontAwesomeIcon icon={faRubleSign} /></Typography>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colSpan='2'>
+                                        <Typography component="span">Итого:</Typography>
+                                    </td>
+                                    <td>
+                                        <Typography gutterBottom variant="h5" component="span" className="namePrice">{ this.state.sumDiv + this.state.allPrice } <FontAwesomeIcon icon={faRubleSign} /></Typography>
+                                    </td>
+                                </tr>
+                            </tfoot>
                         </table>
+                    </div>
+                    
+                    {this.state.orderType == 0 ?
+                        <div className="orderSdacha">
+                            <div>
+                                <FormControl>
+                                    <InputLabel htmlFor="standard-adornment-weight">Подготовить сдачу с</InputLabel>
+                                    <Input
+                                        type="number"
+                                        id="standard-adornment-weight"
+                                        value={this.state.orderSdacha}
+                                        onChange={this.changeSdacha}
+                                        endAdornment={<FontAwesomeIcon icon={faRubleSign} />}
+                                    />
+                                </FormControl>
+                            </div>
+                        </div>    
+                            :
+                        null
+                    }
+                    <div className="promoOrder">
+                        <div>
+                            <Paper component="div" className="SpacePromo">
+                                <InputBase
+                                    onBlur={this.checkPromo.bind(this)}
+                                    value={this.state.orderPromo}
+                                    onChange={ event => this.setState({ orderPromo: event.target.value }) }
+                                    placeholder="Промокод"
+                                />
+                                <Divider orientation="vertical" />
+                                <IconButton color="primary" aria-label="directions" onClick={this.checkPromo.bind(this)}>
+                                    <CheckOutlinedIcon />
+                                </IconButton>
+                            </Paper>
+                            {this.state.orderPromoText.length > 0 ?
+                                <div className="DescPromo">
+                                    <Typography variant="h5" component="span">Промокод дает: {this.state.orderPromoText}</Typography>
+                                </div>
+                                    :
+                                null
+                            }
+                        </div>
+                        <div>
+                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
+                                <Button variant="contained" className="BtnCardMain CardInCardItem">Заказать</Button>
+                            </ButtonGroup>
+                        </div>
                     </div>
                     
                 </Grid>
