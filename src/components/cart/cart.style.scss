@@ -30,6 +30,12 @@ $mainColor: #BB0025;
     & .mainContainer{
         padding-top: 0!important; 
         padding-bottom: 50;
+        & .errTimePred{
+            @include fons(1.2rem, $Ubuntu);
+            padding: 12;
+            background-color: $mainColor;
+            opacity: 0.3;
+        }
         & > div.promoOrder{
             width: 100%;
             display: flex;

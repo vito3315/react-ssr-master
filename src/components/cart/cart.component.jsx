@@ -21,6 +21,11 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -33,7 +38,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
-
+import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 
 
@@ -42,7 +47,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 
 import PersonIcon from '@material-ui/icons/Person';
 import AddIcon from '@material-ui/icons/Add';
@@ -196,6 +200,7 @@ class RenderCart extends React.Component {
             pic_point: [],
             my_addr: [],
             all_addr: [],
+            date_pred: [],
             
             pays: {
                 dev: [
@@ -218,12 +223,24 @@ class RenderCart extends React.Component {
             cartItems_dop: [],
             cartItems_need_dop: [],
             
+            timePred: [],
+            
+            error: {
+                title: '', 
+                text: ''
+            },
+            errorOpen: false,
+            
             orderType: 0,
             orderAddr: null,
             orderPic: 0,
             orderComment: '',
             orderPay: '0',
+            
             orderTimes: '1',
+            orderPredDay: '',
+            orderPredTime: '',
+            
             orderSdacha: '',
             orderPromo: '',
             orderPromoText: ''
@@ -246,6 +263,7 @@ class RenderCart extends React.Component {
                     pic_point: json.get_addr_pic.points,
                     my_addr: json.get_my_addr,
                     all_addr: json.get_addr,
+                    date_pred: json.date_pred
                 })
                 
                 console.log( json )
@@ -336,13 +354,33 @@ class RenderCart extends React.Component {
                 orderAddr: cartData.orderAddr,
                 orderPic: cartData.orderPic,
                 orderComment: cartData.orderComment,
+                
                 orderTimes: cartData.orderTimes,
+                orderPredDay: cartData.orderPredDay,
+                orderPredTime: cartData.orderPredTime,                
+                
                 orderPay: cartData.orderPay,
                 orderSdacha: cartData.orderSdacha
             })
             
+            if( cartData.orderPredDay != '' ){
+                setTimeout(() => {
+                    this.loadTimePred();   
+                }, 300)
+            }
+            
             if( cartData.orderAddr.id ){
-                itemsStore.setSumDiv(cartData.orderAddr.sum_div);
+                let allPrice = itemsStore.getAllPrice();
+                
+                if( parseInt(cartData.orderAddr.free_drive) == 1 ){
+                    if( parseInt(allPrice) > 0 ){
+                        itemsStore.setSumDiv(0);
+                    }else{
+                        itemsStore.setSumDiv(1);
+                    }
+                }else{
+                    itemsStore.setSumDiv(parseInt(cartData.orderAddr.sum_div));
+                }
             }
         }
         
@@ -433,7 +471,21 @@ class RenderCart extends React.Component {
     
     changeAddr = (event) => {
         let thisitem = this.state.my_addr.filter( (item) => item.id == event.target.value )[0];
-        itemsStore.setSumDiv(thisitem.sum_div);
+        let allPrice = itemsStore.getAllPrice();
+        
+        if( parseInt(thisitem.free_drive) == 1 ){
+            if( parseInt(allPrice) > 0 ){
+                itemsStore.setSumDiv(0);
+            }else{
+                itemsStore.setSumDiv(1);
+            }
+        }else{
+            itemsStore.setSumDiv(parseInt(thisitem.sum_div));
+        }
+        
+        console.log( thisitem )
+        
+        
         this.setState({
             orderAddr: thisitem
         })
@@ -499,6 +551,8 @@ class RenderCart extends React.Component {
             orderPay: '0',
         })
         
+        this.loadTimePred();
+        
         this.saveData();
     }
     
@@ -540,13 +594,79 @@ class RenderCart extends React.Component {
                 orderAddr: this.state.orderAddr,
                 orderPic: this.state.orderPic,
                 orderComment: this.state.orderComment,
+                
                 orderTimes: this.state.orderTimes,
+                orderPredDay: this.state.orderPredDay,
+                orderPredTime: this.state.orderPredTime,
+                
                 orderPay: this.state.orderPay,
-                orderSdacha: this.state.orderSdacha
+                orderSdacha: this.state.orderSdacha,
+                
             };
             
             itemsStore.saveCartData(data);
         }, 500)
+    }
+    
+    loadTimePred(){
+        let my_cart = [];
+        let cartItems = itemsStore.getItems();  
+        
+        cartItems.forEach(el => {
+            my_cart.push({
+                item_id: el.item_id,
+                count: el.count,
+            });
+        });
+        
+        fetch('https://jacofood.ru/src/php/test_app.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'},
+            body: queryString.stringify({
+                type: 'get_times_pred_web',  
+                point_id: this.state.orderType+1 == 1 ? this.state.orderAddr.point_id ?? 0 : this.state.orderPic ?? 0,
+                type_order: this.state.orderType+1,
+                date: this.state.orderPredDay,
+                cart: JSON.stringify( my_cart ),
+            })
+        }).then(res => res.json()).then(json => {
+            console.log( json )
+            
+            if( !json.st ){
+                this.setState({
+                    error: {
+                        title: 'Предупреждение', 
+                        text: json.text
+                    },
+                    errorOpen: true
+                })
+            }else{
+                this.setState({
+                    timePred: json.data
+                })
+            }
+        });
+    }
+    
+    changePredDay = (event) => {
+        this.setState({
+            orderPredDay: event.target.value
+        })
+        
+        setTimeout(() => {
+            this.loadTimePred();   
+        }, 300)
+             
+        this.saveData();
+    }
+    
+    changePredTime = (event) => {
+        this.setState({
+            orderPredTime: event.target.value
+        })
+        
+        this.saveData();
     }
     
     render() {
@@ -639,46 +759,31 @@ class RenderCart extends React.Component {
                             <FormControl style={{ width: '30%' }}>
                                 <InputLabel htmlFor="age-native-simple">День</InputLabel>
                                 <Select
-                                  native
-                                  //value={state.age}
-                                  //onChange={handleChange}
+                                  displayEmpty
+                                  value={this.state.orderPredDay}
+                                  onChange={this.changePredDay}
                                   inputProps={{
-                                    name: 'age',
                                     id: 'age-native-simple',
                                   }}
                                 >
-                                  <option value={1}>Сегодня, 27 апреля, 2021г.</option>
-                                  <option value={2}>Завтра, 28 апреля, 2021г.</option>
-                                  <option value={3}>30 апреля, 2021г.</option>
-                                  <option value={4}>1 Мая, 2021г.</option>
-                                  <option value={5}>2 Мая, 2021г.</option>
+                                    {this.state.date_pred.map((item, key) => 
+                                        <MenuItem key={key} value={item.date}>{item.text}</MenuItem>
+                                    )}
                                 </Select>
                             </FormControl>
                             <FormControl style={{ width: '20%' }}>
-                                <InputLabel htmlFor="age-native-simple">Время</InputLabel>
+                                <InputLabel htmlFor="age-native-simple1">Время</InputLabel>
                                 <Select
-                                  native
-                                  //value={state.age}
-                                  //onChange={handleChange}
+                                  displayEmpty
+                                  value={this.state.orderPredTime}
+                                  onChange={this.changePredTime}
                                   inputProps={{
-                                    name: 'age',
-                                    id: 'age-native-simple',
+                                    id: 'age-native-simple1',
                                   }}
                                 >
-                                  <option value={1}>10:40 - 11:00</option>
-                                  <option value={2}>10:40 - 11:00</option>
-                                  <option value={3}>10:40 - 11:00</option>
-                                  <option value={4}>10:40 - 11:00</option>
-                                  <option value={5}>10:40 - 11:00</option>
-                                  <option value={6}>10:40 - 11:00</option>
-                                  <option value={7}>10:40 - 11:00</option>
-                                  <option value={8}>10:40 - 11:00</option>
-                                  <option value={9}>10:40 - 11:00</option>
-                                  <option value={10}>10:40 - 11:00</option>
-                                  <option value={11}>10:40 - 11:00</option>
-                                  <option value={12}>10:40 - 11:00</option>
-                                  <option value={13}>10:40 - 11:00</option>
-                                  <option value={14}>10:40 - 11:00</option>
+                                    {this.state.timePred.map((item, key) => 
+                                        <MenuItem key={key} value={item.value}>{item.text}</MenuItem>
+                                    )}
                                 </Select>
                             </FormControl>
                         </div>
@@ -825,6 +930,22 @@ class RenderCart extends React.Component {
                     </div>
                     
                 </Grid>
+                
+                
+                <Dialog
+                    open={this.state.errorOpen}
+                    onClose={() => this.setState({ errorOpen: false })}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">{this.state.error.title}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">{this.state.error.text}</DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={() => this.setState({ errorOpen: false })} color="primary">Хорошо</Button>
+                    </DialogActions>
+                </Dialog>
                 
             </Grid>
         )
