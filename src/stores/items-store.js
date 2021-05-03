@@ -1,5 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import moment from "moment";
+const queryString = require('query-string');
 
 class ItemsStore {
   // Don't need decorators now
@@ -20,6 +21,8 @@ class ItemsStore {
   activePage = '';
 
   need_dops = '';
+  
+  cart_data = '';
   
   setSumDiv = (items) => {
     this.sum_div = parseInt( items );
@@ -81,9 +84,32 @@ class ItemsStore {
     return this.userToken;
   };
 
-  setPromo = (promo) => {
+  getInfoPromo(promoName){
+    fetch('https://jacofood.ru/src/php/test_app.php', {
+      method: 'POST',
+      headers: {
+          'Content-Type':'application/x-www-form-urlencoded'},
+      body: queryString.stringify({
+          type: 'get_promo_web', 
+          city_id: itemsStore.getCity(),
+          promo_name: promoName
+      })
+  }).then(res => res.json()).then(json => {
+      itemsStore.setPromo( JSON.stringify(json), promoName );
+      let check_promo = itemsStore.checkPromo();
+              
+      if( check_promo.st === false ){
+        localStorage.removeItem('promo_name')
+      }
+      
+      //return check_promo;
+    })
+  }
+  
+  setPromo = (promo, name) => {
     this.promo = promo;
-    //localStorage.setItem('my_cart', this.items);
+    
+    localStorage.setItem('promo_name', name);
   };
   
   getPromo(){
@@ -92,10 +118,12 @@ class ItemsStore {
   };
 
   checkPromo(){
+    let orderInfo = itemsStore.getCartData();
+    
     let tmp = 0,
         allPrice = 0,
-        by_time = 0;
-      
+        by_time = !orderInfo.orderTimes || parseInt( orderInfo.orderTimes ) == 1 ? 0 : orderInfo.orderPredDay + ' ' + orderInfo.orderPredTime;   
+        
     let promo_info = this.getPromo();
     let my_cart = this.getItems();  
     let allItems = this.getAllItems();
@@ -119,9 +147,15 @@ class ItemsStore {
     let cart_new_promo = [];    
     allPrice = my_cart.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
     
-    let type_order = 1,
-        point_id_dev = 1,
-        point_id_pic = 1;
+    if( orderInfo.orderType ){
+      let type_order = parseInt( orderInfo.orderType ) ?? 0,
+          point_id_dev = parseInt( orderInfo.orderAddr.point_id ) ?? 0,
+          point_id_pic = parseInt( orderInfo.orderPic ) ?? 0;
+    }else{
+      let type_order = 0,
+          point_id_dev = 0,
+          point_id_pic = 0;
+    }
     
     let this_date = moment(by_time).format("YYYY-MM-DD"),
         this_time = moment(by_time).format("H:mm"),
@@ -342,9 +376,7 @@ class ItemsStore {
         
         allPrice = my_cart.reduce( (sum, item) => sum + item['all_price'], tmp );
         
-        //allPrice += parseInt(cart.summ_div);
-        
-        //BadgePrice.set('price', allPrice);
+        itemsStore.setAllPrice(allPrice);
         
         return {
           st: true,
@@ -368,15 +400,12 @@ class ItemsStore {
         allPrice = 0;
         
         allPrice = my_cart.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
-        //allPrice = my_cart.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
         
         tmp = 0;
-        //allPrice += my_cart_promo.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
+        
         allPrice = cart_new_promo.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
         
-        //allPrice += parseInt(cart.summ_div);
-        
-        //BadgePrice.set('price', allPrice);
+        itemsStore.setAllPrice(allPrice);
       }
       
       //товар за цену
@@ -395,15 +424,7 @@ class ItemsStore {
           allPrice = 0;
           
           allPrice = my_cart.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
-          //allPrice = my_cart.reduce( (sum, item) => sum + item['all_price'], tmp );
-          
-          //allPrice += parseInt(cart.summ_div);
-          
-          //BadgePrice.set('price', allPrice);
-          
-          /*return {
-            st: true,
-          }*/
+          itemsStore.setAllPrice(allPrice);
         }
       }
       
@@ -454,6 +475,7 @@ class ItemsStore {
   
   saveCartData = (items) => {
     let cartData = JSON.stringify(items);
+    this.cart_data = cartData;
     if (typeof window !== 'undefined') {
       localStorage.setItem('cartData', cartData);
     }
@@ -650,15 +672,35 @@ class ItemsStore {
   constructor() {
     if (typeof window !== 'undefined') {
       if( localStorage.getItem('my_cart') ){
-        this.setItems( JSON.parse(localStorage.getItem('my_cart')));
+        let cart = JSON.parse(localStorage.getItem('my_cart'));
+        let new_cart = [];
+        
+        cart.forEach(item => {
+          new_cart.push({
+            name: item.name,
+            item_id: item.item_id,
+            count: item.count,
+            one_price: parseInt( item.one_price ),
+            all_price: parseInt( item.one_price ) * parseInt( item.count )
+          })
+        });
+        
+        this.setItems( new_cart );
+      }
+      if( localStorage.getItem('token') ){
+        this.setToken( localStorage.getItem('token') );
+      }
+      if( localStorage.getItem('cartData') ){
+        this.cartData = localStorage.getItem('cartData');
+      }
+      if( localStorage.getItem('promo_name') ){
+        setTimeout(()=>{
+          this.getInfoPromo( localStorage.getItem('promo_name') )
+        }, 300)
       }
     }
     
-    if (typeof window !== 'undefined') {
-      if( localStorage.getItem('token') ){
-        this.setToken( localStorage.getItem('token'));
-      }
-    }
+    
     
     makeAutoObservable (this);
   }

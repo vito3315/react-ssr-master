@@ -269,7 +269,7 @@ class SimplePopover extends React.Component{
                     promo_name: promoName
                 })
             }).then(res => res.json()).then(json => {
-                itemsStore.setPromo( JSON.stringify(json) );
+                itemsStore.setPromo( JSON.stringify(json), promoName );
                 let check_promo = itemsStore.checkPromo();
               
                 this.setState({

@@ -204,19 +204,19 @@ class RenderCart extends React.Component {
             
             pays: {
                 dev: [
-                    {id: '0', name: 'Наличными'},
-                    {id: '1', name: 'Онлайн'},
+                    {type: 'cash', title: 'Наличными'},
+                    {type: 'card', title: 'Онлайн'},
                 ],
                 dev_mini: [
-                    {id: '0', name: 'Наличными'},
+                    {type: 'cash', title: 'Наличными'},
                 ],
                 pic: [
-                    {id: '0', name: 'В кафе'},
+                    {type: 'in', title: 'В кафе'},
                 ]
             },
             renderPay: [
-                {id: '0', name: 'Наличными'},
-                {id: '1', name: 'Онлайн'},
+                {type: 'cash', title: 'Наличными'},
+                {type: 'card', title: 'Онлайн'},
             ],
             
             cartItems_main: [],
@@ -235,7 +235,7 @@ class RenderCart extends React.Component {
             orderAddr: null,
             orderPic: 0,
             orderComment: '',
-            orderPay: '0',
+            orderPay: 'cash',
             
             orderTimes: '1',
             orderPredDay: '',
@@ -348,7 +348,8 @@ class RenderCart extends React.Component {
         
         let cartData = itemsStore.getCartData();
         
-        if( cartData ){
+        if( cartData.orderType ){
+            
             this.setState({
                 orderType: cartData.orderType,
                 orderAddr: cartData.orderAddr,
@@ -382,6 +383,16 @@ class RenderCart extends React.Component {
                     itemsStore.setSumDiv(parseInt(cartData.orderAddr.sum_div));
                 }
             }
+        }
+        
+        if (typeof window !== 'undefined') {
+            setTimeout(()=>{
+                if( localStorage.getItem('promo_name') ){
+                    this.setState({
+                        orderPromo: localStorage.getItem('promo_name')
+                    })
+                }
+            }, 1000)
         }
         
         autorun(() => {
@@ -483,9 +494,6 @@ class RenderCart extends React.Component {
             itemsStore.setSumDiv(parseInt(thisitem.sum_div));
         }
         
-        console.log( thisitem )
-        
-        
         this.setState({
             orderAddr: thisitem
         })
@@ -571,15 +579,16 @@ class RenderCart extends React.Component {
                 'Content-Type':'application/x-www-form-urlencoded'},
             body: queryString.stringify({
                 type: 'get_promo_web', 
-                point_id: 1,
                 city_id: itemsStore.getCity(),
                 promo_name: this.state.orderPromo
             })
         }).then(res => res.json()).then(json => {
-            itemsStore.setPromo( JSON.stringify(json) );
+            itemsStore.setPromo( JSON.stringify(json), this.state.orderPromo );
             let check_promo = itemsStore.checkPromo();
-          
-            console.log( check_promo )
+              
+            if( check_promo.st === false ){
+                localStorage.removeItem('promo_name')
+            }
             
             this.setState({
                 orderPromoText: check_promo.text
@@ -611,6 +620,21 @@ class RenderCart extends React.Component {
     loadTimePred(){
         let my_cart = [];
         let cartItems = itemsStore.getItems();  
+        
+        if( this.state.orderType+1 == 1 ){
+            if( !this.state.orderAddr || !this.state.orderAddr.point_id ){
+                this.setState({
+                    error: {
+                        title: 'Предупреждение', 
+                        text: 'Адрес доставки или точка самовывоза не выбрана'
+                    },
+                    errorOpen: true,
+                    orderTimes: '1'
+                })
+                
+                return;
+            }
+        }
         
         cartItems.forEach(el => {
             my_cart.push({
@@ -667,6 +691,45 @@ class RenderCart extends React.Component {
         })
         
         this.saveData();
+    }
+    
+    startOrder(){
+        let payFull = this.state.renderPay.filter( (item) => item.type == this.state.orderPay )[0];
+        
+        let new_cart = [];
+        let cartItems = itemsStore.getItems();
+        
+        cartItems.forEach( (item) => {
+            new_cart.push({
+                name: item.name,
+                count: item.count,
+                price: item.all_price,
+                id: item.item_id,
+            })
+        })
+        
+        fetch('https://jacofood.ru/src/php/test_app.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'},
+            body: queryString.stringify({
+                type: 'createOrder_web', 
+                city_id: this.state.city_name,
+                user_id: itemsStore.getToken(),
+              
+                timePred: JSON.stringify( { value: parseInt( this.state.orderTimes ) == 1 ? 0 : this.state.orderPredDay + ' ' + this.state.orderPredTime } ),//
+                typeOrder: this.state.orderType,//
+                addrPic: this.state.orderPic,//
+                comment: this.state.orderComment,//
+                addrDev: this.state.orderAddr ? JSON.stringify(this.state.orderAddr) : '', //
+                pay: payFull.title, //
+                payFull: JSON.stringify(payFull), //
+                cart: JSON.stringify(new_cart),//
+                promo_name: this.state.orderPromo//
+            })
+        }).then(res => res.json()).then(json => {
+              console.log( json )
+        })
     }
     
     render() {
@@ -740,7 +803,7 @@ class RenderCart extends React.Component {
                             <FormLabel component="legend">Оплата</FormLabel>
                             <RadioGroup aria-label="pays" name="pays" value={this.state.orderPay} onChange={this.changePay}>
                                 {this.state.renderPay.map((item, key) => 
-                                    <FormControlLabel key={key} value={item.id} control={<Radio />} label={item.name} />
+                                    <FormControlLabel key={key} value={item.type} control={<Radio />} label={item.title} />
                                 )}
                             </RadioGroup>
                         </FormControl>
@@ -923,7 +986,7 @@ class RenderCart extends React.Component {
                             }
                         </div>
                         <div>
-                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
+                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" onClick={this.startOrder.bind(this)}>
                                 <Button variant="contained" className="BtnCardMain CardInCardItem">Заказать</Button>
                             </ButtonGroup>
                         </div>
