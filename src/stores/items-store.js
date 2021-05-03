@@ -149,7 +149,7 @@ class ItemsStore {
     
     if( orderInfo.orderType ){
       let type_order = parseInt( orderInfo.orderType ) ?? 0,
-          point_id_dev = parseInt( orderInfo.orderAddr.point_id ) ?? 0,
+          point_id_dev = orderInfo.orderAddr ? parseInt( orderInfo.orderAddr.point_id ) : 0,
           point_id_pic = parseInt( orderInfo.orderPic ) ?? 0;
     }else{
       let type_order = 0,

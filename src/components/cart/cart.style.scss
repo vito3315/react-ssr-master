@@ -2,7 +2,7 @@ $Ubuntu: 'Ubuntu';
 $Futuris: 'Futuris Bold';
 $mainColor: #BB0025;
 @mixin fons($size: 1rem, $family: $Ubuntu) {
-    font-size: $size;
+    font-size: $size !important;
     font-family: $family !important;
 }
 .MuiRadio-colorSecondary.Mui-checked{
@@ -20,6 +20,16 @@ $mainColor: #BB0025;
 }
 .Mui-focused .MuiOutlinedInput-notchedOutline{
     border-color: $mainColor!important;
+}
+.orderCheckText{
+    @include fons(1.2rem, $Ubuntu);
+    padding-bottom: 10px;
+}
+.orderCheckTitle{
+    @include fons(1.5rem, $Futuris);
+    padding: 16px;
+    padding-bottom: 0;
+    text-align: center;
 }
 .Cart{
     margin-top: 64px!important;

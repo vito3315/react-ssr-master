@@ -202,6 +202,8 @@ class RenderCart extends React.Component {
             all_addr: [],
             date_pred: [],
             
+            picPointInfo: null,
+            
             pays: {
                 dev: [
                     {type: 'cash', title: 'Наличными'},
@@ -230,6 +232,7 @@ class RenderCart extends React.Component {
                 text: ''
             },
             errorOpen: false,
+            orderCheck: false,
             
             orderType: 0,
             orderAddr: null,
@@ -257,46 +260,77 @@ class RenderCart extends React.Component {
                 city_id: this.state.city_name,
                 user_id: itemsStore.getToken()
             })
-            }).then(res => res.json()).then(json => {
+        }).then(res => res.json()).then(json => {
                 
-                this.setState({
-                    pic_point: json.get_addr_pic.points,
-                    my_addr: json.get_my_addr,
-                    all_addr: json.get_addr,
-                    date_pred: json.date_pred
-                })
+            this.setState({
+                pic_point: json.get_addr_pic.points,
+                my_addr: json.get_my_addr,
+                all_addr: json.get_addr,
+                date_pred: json.date_pred
+            })
+            
+            console.log( json )
+            
+            setTimeout(() => {
+                let cartData = itemsStore.getCartData();
+    
+                console.log( cartData )
                 
-                console.log( json )
+                if( cartData.orderType || cartData.orderType == 0 ){
+                    
+                    this.setState({
+                        orderType: cartData.orderType,
+                        orderAddr: cartData.orderAddr,
+                        orderPic: cartData.orderPic,
+                        orderComment: cartData.orderComment,
+                        
+                        orderTimes: cartData.orderTimes,
+                        orderPredDay: cartData.orderPredDay,
+                        orderPredTime: cartData.orderPredTime,                
+                        
+                        orderPay: cartData.orderPay,
+                        orderSdacha: cartData.orderSdacha
+                    })
+                    
+                    
+                    
+                    if( cartData.orderPredDay != '' ){
+                        setTimeout(() => {
+                            this.loadTimePred();   
+                        }, 300)
+                    }
+                    
+                    setTimeout(() => {
+                        if( parseInt( cartData.orderType ) == 1 && parseInt( cartData.orderPic ) > 0 ){
+                            this.choosePic(cartData.orderPic);
+                        }
+                    }, 300)
+                    
+                    if( cartData.orderAddr && cartData.orderAddr.id ){
+                        let allPrice = itemsStore.getAllPrice();
+                        
+                        if( parseInt(cartData.orderAddr.free_drive) == 1 ){
+                            if( parseInt(allPrice) > 0 ){
+                                itemsStore.setSumDiv(0);
+                            }else{
+                                itemsStore.setSumDiv(1);
+                            }
+                        }else{
+                            itemsStore.setSumDiv(parseInt(cartData.orderAddr.sum_div));
+                        }
+                    }
+                }
                 
-              /*this.setState({ addrDev: json['get_addr'] });
-              this.setState({ userDev: json['get_my_addr'] });
-              
-              let city = JSON.parse(json['get_addr_pic']['city']['xy_center_map'], true),
-                  points = json['get_addr_pic']['points'],
-                  markers = [];
-              
-              points.map( (item) => {
-                let mark = JSON.parse(item['xy_point'], true);
-                
-                markers.push({
-                  coordinate: {
-                    latitude: parseFloat(mark[0]),
-                    longitude: parseFloat(mark[1]),
-                  },
-                  title: item['addr'],
-                  description: "График работы: 10:00 - 21:30",
-                  id: item['id']
-                })
-              } )
-                  
-              this.setState({ region: {
-                latitude: parseFloat(city[0]),
-                longitude: parseFloat(city[1]),
-                latitudeDelta: 0.1922,
-                longitudeDelta: 0.0321,
-              } });
-              
-              this.setState({ markers: markers });*/
+                if (typeof window !== 'undefined') {
+                    setTimeout(()=>{
+                        if( localStorage.getItem('promo_name') ){
+                            this.setState({
+                                orderPromo: localStorage.getItem('promo_name')
+                            })
+                        }
+                    }, 1000)
+                }
+            }, 300)
         });
     }
     
@@ -344,55 +378,6 @@ class RenderCart extends React.Component {
                 sumDiv: itemsStore.getSumDiv(),
                 allPrice: itemsStore.getAllPrice()
             })
-        }
-        
-        let cartData = itemsStore.getCartData();
-        
-        if( cartData.orderType ){
-            
-            this.setState({
-                orderType: cartData.orderType,
-                orderAddr: cartData.orderAddr,
-                orderPic: cartData.orderPic,
-                orderComment: cartData.orderComment,
-                
-                orderTimes: cartData.orderTimes,
-                orderPredDay: cartData.orderPredDay,
-                orderPredTime: cartData.orderPredTime,                
-                
-                orderPay: cartData.orderPay,
-                orderSdacha: cartData.orderSdacha
-            })
-            
-            if( cartData.orderPredDay != '' ){
-                setTimeout(() => {
-                    this.loadTimePred();   
-                }, 300)
-            }
-            
-            if( cartData.orderAddr.id ){
-                let allPrice = itemsStore.getAllPrice();
-                
-                if( parseInt(cartData.orderAddr.free_drive) == 1 ){
-                    if( parseInt(allPrice) > 0 ){
-                        itemsStore.setSumDiv(0);
-                    }else{
-                        itemsStore.setSumDiv(1);
-                    }
-                }else{
-                    itemsStore.setSumDiv(parseInt(cartData.orderAddr.sum_div));
-                }
-            }
-        }
-        
-        if (typeof window !== 'undefined') {
-            setTimeout(()=>{
-                if( localStorage.getItem('promo_name') ){
-                    this.setState({
-                        orderPromo: localStorage.getItem('promo_name')
-                    })
-                }
-            }, 1000)
         }
         
         autorun(() => {
@@ -507,8 +492,11 @@ class RenderCart extends React.Component {
         }
         document.querySelector('#pic_'+pointId).classList.add('active');
         
+        let picPointInfo = this.state.pic_point.filter( (item) => item.id == pointId )[0];
+        
         this.setState({
-            orderPic: pointId
+            orderPic: pointId,
+            picPointInfo: picPointInfo
         })
         
         this.saveData();
@@ -556,7 +544,7 @@ class RenderCart extends React.Component {
         
         this.setState({
             orderTimes: type,
-            orderPay: '0',
+            orderPay: 'cash',
         })
         
         this.loadTimePred();
@@ -696,6 +684,7 @@ class RenderCart extends React.Component {
     startOrder(){
         let payFull = this.state.renderPay.filter( (item) => item.type == this.state.orderPay )[0];
         
+        
         let new_cart = [];
         let cartItems = itemsStore.getItems();
         
@@ -707,6 +696,8 @@ class RenderCart extends React.Component {
                 id: item.item_id,
             })
         })
+        
+        console.log( this.state.orderAddr )
         
         fetch('https://jacofood.ru/src/php/test_app.php', {
             method: 'POST',
@@ -728,7 +719,15 @@ class RenderCart extends React.Component {
                 promo_name: this.state.orderPromo//
             })
         }).then(res => res.json()).then(json => {
-              console.log( json )
+            console.log( json )
+            
+            if( json.st ){
+                this.setState({
+                    orderCheck: true
+                })
+            }else{
+                
+            }
         })
     }
     
@@ -1007,6 +1006,115 @@ class RenderCart extends React.Component {
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={() => this.setState({ errorOpen: false })} color="primary">Хорошо</Button>
+                    </DialogActions>
+                </Dialog>
+                
+                <Dialog
+                    open={this.state.orderCheck}
+                    fullWidth={true}
+                    //maxWidth={'md'}
+                    onClose={() => this.setState({ orderCheck: false })}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <Typography variant="h5" component="span" className="orderCheckTitle">Подтверждение заказа</Typography>
+                    <DialogContent style={{ display: 'flex', flexDirection: 'column' }}>
+                        { parseInt( this.state.orderTimes ) == 1 ?
+                            null
+                                :
+                            <Typography variant="h5" component="span" className="orderCheckText">Время предзаказа: {this.state.orderPredDay + ' ' + this.state.orderPredTime}</Typography>
+                        }
+                        { parseInt( this.state.orderType ) == 0 ?
+                            <Typography variant="h5" component="span" className="orderCheckText">Доставим: { this.state.orderAddr ?
+                                this.state.orderAddr.city_name+', '+
+                                this.state.orderAddr.street+' '+
+                                this.state.orderAddr.home+', Пд.:'+
+                                this.state.orderAddr.pd+', Эт.:'+
+                                this.state.orderAddr.et+', Кв.:'+
+                                this.state.orderAddr.kv
+                                    :
+                                null
+                            }</Typography>
+                                :
+                            <Typography variant="h5" component="span" className="orderCheckText">Заберу: {this.state.picPointInfo ? this.state.picPointInfo.addr : ''}</Typography>
+                        }
+                        { parseInt( this.state.orderType ) == 0 ?
+                            this.state.orderAddr && parseInt(this.state.orderAddr.dom_true) == 1 ?
+                                <Typography variant="h5" component="span" className="orderCheckText">Домофон не работает</Typography>
+                                    :
+                                null
+                                :
+                            null
+                        }
+                        
+                        
+                        
+                        
+                        <Typography variant="h5" component="span" className="orderCheckText">Промокод: ЛЕГКО</Typography>
+                        <Typography variant="h5" component="span" className="orderCheckText">Оплачу: наличными курьеру</Typography>
+                        <Typography variant="h5" component="span" className="orderCheckText">Сдача: с 8000</Typography>
+                        
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <Typography variant="h5" component="span" className="orderCheckText">Сет Ривьера</Typography>
+                                    </td>
+                                    <td>
+                                        <Typography variant="h5" component="span" className="orderCheckText">2</Typography>
+                                    </td>
+                                    <td>
+                                        <Typography variant="h5" component="span" className="orderCheckText">300</Typography>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <Typography variant="h5" component="span" className="orderCheckText">Сет Ривьера</Typography>
+                                    </td>
+                                    <td>
+                                        <Typography variant="h5" component="span" className="orderCheckText">2</Typography>
+                                    </td>
+                                    <td>
+                                        <Typography variant="h5" component="span" className="orderCheckText">300</Typography>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <Typography variant="h5" component="span" className="orderCheckText">Сет Ривьера</Typography>
+                                    </td>
+                                    <td>
+                                        <Typography variant="h5" component="span" className="orderCheckText">2</Typography>
+                                    </td>
+                                    <td>
+                                        <Typography variant="h5" component="span" className="orderCheckText">300</Typography>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <Typography variant="h5" component="span" className="orderCheckText">Сет Ривьера</Typography>
+                                    </td>
+                                    <td>
+                                        <Typography variant="h5" component="span" className="orderCheckText">2</Typography>
+                                    </td>
+                                    <td>
+                                        <Typography variant="h5" component="span" className="orderCheckText">300</Typography>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colSpan="2">
+                                        <Typography variant="h5" component="span" className="orderCheckText">Сумма заказа</Typography>
+                                    </td>
+                                    <td>
+                                        <Typography variant="h5" component="span" className="orderCheckText">300</Typography>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={() => this.setState({ orderCheck: false })} color="primary">Хорошо</Button>
                     </DialogActions>
                 </Dialog>
                 
