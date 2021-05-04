@@ -31,6 +31,28 @@ $mainColor: #BB0025;
     padding-bottom: 0;
     text-align: center;
 }
+
+.tableOrderCheck{
+    border-collapse: collapse;
+    & tbody{
+        border-bottom: 2px solid #96969A;
+        & tr:not(:last-child){
+            border-bottom: 1px solid #96969A;
+        }
+    }
+    & .namePrice.orderCheckText{
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+        margin: 0;
+        & > svg{
+            padding-top: 9px;
+            padding-left: 2px;
+            font-size: 0.9rem;
+        }
+    }
+}
+
 .Cart{
     margin-top: 64px!important;
     & h1{

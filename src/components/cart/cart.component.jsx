@@ -62,7 +62,6 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 
-
 import Input from '@material-ui/core/Input';
 
 import itemsStore from '../../stores/items-store';
@@ -113,78 +112,97 @@ export function Cart() {
     );
 }
 
-const emails = ['username@gmail.com', 'user02@gmail.com'];
-
-function SimpleDialog(props) {
-    const classes = useStyles();
-    const { onClose, selectedValue, open } = props;
-  
-    const handleClose = () => {
-      onClose(selectedValue);
-    };
-  
-    const handleListItemClick = (value) => {
-      onClose(value);
-    };
-  
-    return (
-      <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-        <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
-        <List>
-          {emails.map((email) => (
-            <ListItem button onClick={() => handleListItemClick(email)} key={email}>
-              <ListItemAvatar>
-                <Avatar className={classes.avatar}>
-                  <PersonIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary={email} />
-            </ListItem>
-          ))}
-  
-          <ListItem autoFocus button onClick={() => handleListItemClick('addAccount')}>
-            <ListItemAvatar>
-              <Avatar>
-                <AddIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Add account" />
-          </ListItem>
-        </List>
-      </Dialog>
-    );
-  }
-  
-  SimpleDialog.propTypes = {
-    onClose: PropTypes.func.isRequired,
-    open: PropTypes.bool.isRequired,
-    selectedValue: PropTypes.string.isRequired,
-  };
-  
-function SimpleDialogDemo() {
-    const [open, setOpen] = React.useState(false);
-    const [selectedValue, setSelectedValue] = React.useState(emails[1]);
-  
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-  
-    const handleClose = (value) => {
-      setOpen(false);
-      setSelectedValue(value);
-    };
-  
-    return (
-      <div>
-        <Typography variant="subtitle1">Selected: {selectedValue}</Typography>
-        <br />
-        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-          Open simple dialog
-        </Button>
-        <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} />
-      </div>
-    );
-  }
+class CartItem extends React.Component {
+    constructor(props) {
+        super(props);
+        
+        this.state = {  
+            item: this.props.item,
+            count: 0,
+            onePrice: 0,
+            allPrice: 0
+        };
+    }
+    
+    componentDidMount(){
+        let cartItems = itemsStore.getItems();
+        let this_item = cartItems.find( (item) => item.item_id == this.state.item.id );
+        
+        if( this_item ){
+            this.setState({
+                count: this_item.count,
+                onePrice: this_item.one_price,
+                allPrice: this_item.all_price,
+            })
+        }
+        
+        autorun(() => {
+            let new_cartItems = itemsStore.getItems();
+            let this_item = new_cartItems.find( (item) => item.item_id == this.state.item.id );
+        
+            if( this_item ){
+                this.setState({
+                    count: this_item.count,
+                    onePrice: this_item.one_price,
+                    allPrice: this_item.all_price,
+                })
+            }else{
+                this.setState({
+                    count: 0,
+                    onePrice: 0,
+                    allPrice: 0,
+                })
+            }
+        })
+    }
+    
+    add(item_id){
+        itemsStore.AddItem(item_id);
+    }
+    
+    minus(item_id){
+        itemsStore.MinusItem(item_id);
+    }
+    
+    shouldComponentUpdate(nextProps) {
+        return (
+            this.props.item.count !== nextProps.item.count ||
+            this.props.item.onePrice !== nextProps.item.onePrice ||
+            this.props.item.allPrice !== nextProps.item.allPrice
+        );
+    }
+    
+    render() {
+        return (
+            <tr>
+                <td style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                    <img src={"https://newjacofood.ru/src/img/items/"+this.state.item.img+'?'+this.state.item.imgUpdate} />
+                
+                    <div>
+                        <Typography variant="h5" component="span" className="nameItem">{this.state.item.name}</Typography>
+                        <Typography variant="h5" component="span" className="descItem">{this.state.item.desc}</Typography>
+                    </div>
+                </td>
+                <td>
+                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="count">
+                        <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this, this.state.item.id)}>
+                            <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
+                        </Button>
+                        <Button variant="contained" className="BtnCardMain" >
+                            <Typography component="span" className="CardCountItem">{this.state.count}</Typography>
+                        </Button>
+                        <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this, this.state.item.id)}> 
+                            <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
+                        </Button>
+                    </ButtonGroup>
+                </td>
+                <td>
+                    <Typography gutterBottom variant="h5" component="span" className="namePrice">{this.state.allPrice} <FontAwesomeIcon icon={faRubleSign} /></Typography>
+                </td>
+            </tr>
+        )
+    }
+}
 
 class RenderCart extends React.Component {
     constructor(props) {
@@ -206,18 +224,18 @@ class RenderCart extends React.Component {
             
             pays: {
                 dev: [
-                    {type: 'cash', title: 'Наличными'},
+                    {type: 'cash', title: 'Наличными курьеру'},
                     {type: 'card', title: 'Онлайн'},
                 ],
                 dev_mini: [
-                    {type: 'cash', title: 'Наличными'},
+                    {type: 'cash', title: 'Наличными курьеру'},
                 ],
                 pic: [
                     {type: 'in', title: 'В кафе'},
                 ]
             },
             renderPay: [
-                {type: 'cash', title: 'Наличными'},
+                {type: 'cash', title: 'Наличными курьеру'},
                 {type: 'card', title: 'Онлайн'},
             ],
             
@@ -269,13 +287,9 @@ class RenderCart extends React.Component {
                 date_pred: json.date_pred
             })
             
-            console.log( json )
-            
             setTimeout(() => {
                 let cartData = itemsStore.getCartData();
     
-                console.log( cartData )
-                
                 if( cartData.orderType || cartData.orderType == 0 ){
                     
                     this.setState({
@@ -291,8 +305,6 @@ class RenderCart extends React.Component {
                         orderPay: cartData.orderPay,
                         orderSdacha: cartData.orderSdacha
                     })
-                    
-                    
                     
                     if( cartData.orderPredDay != '' ){
                         setTimeout(() => {
@@ -319,6 +331,27 @@ class RenderCart extends React.Component {
                             itemsStore.setSumDiv(parseInt(cartData.orderAddr.sum_div));
                         }
                     }
+                    
+                    setTimeout(()=>{
+                        let type = cartData.orderTimes,
+                            type_order = cartData.orderType;
+                        
+                        if( type_order == 0 ){
+                            if( type == 1 ){
+                                this.setState({
+                                    renderPay: this.state.pays.dev,
+                                })
+                            }else{
+                                this.setState({
+                                    renderPay: this.state.pays.dev_mini,
+                                })
+                            }
+                        }else{
+                            this.setState({
+                                renderPay: this.state.pays.pic,
+                            })
+                        }
+                    }, 300)
                 }
                 
                 if (typeof window !== 'undefined') {
@@ -454,15 +487,34 @@ class RenderCart extends React.Component {
         })
         itemsStore.setSumDiv(0);
         
+        let type = this.state.orderTimes,
+            type_order = newValue,
+            def_type = 'cash';
+        
+        if( type_order == 0 ){
+            if( type == 1 ){
+                this.setState({
+                    renderPay: this.state.pays.dev,
+                })
+                def_type = 'cash';
+            }else{
+                this.setState({
+                    renderPay: this.state.pays.dev_mini,
+                })
+                def_type = 'cash';
+            }
+        }else{
+            this.setState({
+                renderPay: this.state.pays.pic,
+            })
+            def_type = 'in';
+        }
+        
+        this.setState({
+            orderPay: def_type,
+        })
+        
         this.saveData();
-    }
-    
-    add(item_id){
-        itemsStore.AddItem(item_id);
-    }
-    
-    minus(item_id){
-        itemsStore.MinusItem(item_id);
     }
     
     changeAddr = (event) => {
@@ -524,27 +576,31 @@ class RenderCart extends React.Component {
     
     changeTimes = (event) => {
         let type = event.target.value,
-            type_order = this.state.orderType;
+            type_order = this.state.orderType,
+            def_type = 'cash';
         
         if( type_order == 0 ){
             if( type == 1 ){
                 this.setState({
                     renderPay: this.state.pays.dev,
-                })
+                });
+                def_type = 'cash';
             }else{
                 this.setState({
                     renderPay: this.state.pays.dev_mini,
-                })
+                });
+                def_type = 'cash';
             }
         }else{
             this.setState({
                 renderPay: this.state.pays.pic,
             })
+            def_type = 'in';
         }
         
         this.setState({
             orderTimes: type,
-            orderPay: 'cash',
+            orderPay: def_type,
         })
         
         this.loadTimePred();
@@ -682,8 +738,7 @@ class RenderCart extends React.Component {
     }
     
     startOrder(){
-        let payFull = this.state.renderPay.filter( (item) => item.type == this.state.orderPay )[0];
-        
+        let payFull = this.state.renderPay.find( (item) => item.type == this.state.orderPay );
         
         let new_cart = [];
         let cartItems = itemsStore.getItems();
@@ -860,32 +915,7 @@ class RenderCart extends React.Component {
                         <table className="tableCart">
                             <tbody>
                                 {this.state.cartItems_main.map((item, key) =>
-                                    <tr key={key}>
-                                        <td style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                                            <img src={"https://newjacofood.ru/src/img/items/"+item.img+'?'+item.imgUpdate} />
-                                        
-                                            <div>
-                                                <Typography variant="h5" component="span" className="nameItem">{item.name}</Typography>
-                                                <Typography variant="h5" component="span" className="descItem">{item.desc}</Typography>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="count">
-                                                <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this, item.id)}>
-                                                    <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
-                                                </Button>
-                                                <Button variant="contained" className="BtnCardMain" >
-                                                    <Typography component="span" className="CardCountItem">{item.count}</Typography>
-                                                </Button>
-                                                <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this, item.id)}> 
-                                                    <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
-                                                </Button>
-                                            </ButtonGroup>
-                                        </td>
-                                        <td>
-                                            <Typography gutterBottom variant="h5" component="span" className="namePrice">{item.allPrice} <FontAwesomeIcon icon={faRubleSign} /></Typography>
-                                        </td>
-                                    </tr>
+                                    <CartItem key={key} item={item} />
                                 )}
                                 <tr className="rowAboutDop">
                                     <td colSpan='3'>
@@ -895,32 +925,7 @@ class RenderCart extends React.Component {
                                     </td>
                                 </tr>
                                 {this.state.cartItems_dop.map((item, key) =>
-                                    <tr key={key}>
-                                        <td style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                                            <img src={"https://newjacofood.ru/src/img/items/"+item.img+'?'+item.imgUpdate} />
-                                        
-                                            <div>
-                                                <Typography variant="h5" component="span" className="nameItem">{item.name}</Typography>
-                                                <Typography variant="h5" component="span" className="descItem">{item.desc}</Typography>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="count">
-                                                <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this, item.id)}>
-                                                    <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
-                                                </Button>
-                                                <Button variant="contained" className="BtnCardMain" >
-                                                    <Typography component="span" className="CardCountItem">{item.count}</Typography>
-                                                </Button>
-                                                <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this, item.id)}> 
-                                                    <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
-                                                </Button>
-                                            </ButtonGroup>
-                                        </td>
-                                        <td>
-                                            <Typography gutterBottom variant="h5" component="span" className="namePrice">{item.allPrice} <FontAwesomeIcon icon={faRubleSign} /></Typography>
-                                        </td>
-                                    </tr>
+                                    <CartItem key={key} item={item} />
                                 )}
                             </tbody>
                             <tfoot>
@@ -1009,114 +1014,107 @@ class RenderCart extends React.Component {
                     </DialogActions>
                 </Dialog>
                 
-                <Dialog
-                    open={this.state.orderCheck}
-                    fullWidth={true}
-                    //maxWidth={'md'}
-                    onClose={() => this.setState({ orderCheck: false })}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                >
-                    <Typography variant="h5" component="span" className="orderCheckTitle">Подтверждение заказа</Typography>
-                    <DialogContent style={{ display: 'flex', flexDirection: 'column' }}>
-                        { parseInt( this.state.orderTimes ) == 1 ?
-                            null
-                                :
-                            <Typography variant="h5" component="span" className="orderCheckText">Время предзаказа: {this.state.orderPredDay + ' ' + this.state.orderPredTime}</Typography>
-                        }
-                        { parseInt( this.state.orderType ) == 0 ?
-                            <Typography variant="h5" component="span" className="orderCheckText">Доставим: { this.state.orderAddr ?
-                                this.state.orderAddr.city_name+', '+
-                                this.state.orderAddr.street+' '+
-                                this.state.orderAddr.home+', Пд.:'+
-                                this.state.orderAddr.pd+', Эт.:'+
-                                this.state.orderAddr.et+', Кв.:'+
-                                this.state.orderAddr.kv
+                { this.state.orderCheck === true ?
+                    <Dialog
+                        open={this.state.orderCheck}
+                        fullWidth={true}
+                        //maxWidth={'md'}
+                        onClose={() => this.setState({ orderCheck: false })}
+                        aria-labelledby="alert-dialog-title"
+                        aria-describedby="alert-dialog-description"
+                    >
+                        <Typography variant="h5" component="span" className="orderCheckTitle">Подтверждение заказа</Typography>
+                        <DialogContent style={{ display: 'flex', flexDirection: 'column' }}>
+                            { parseInt( this.state.orderTimes ) == 1 ?
+                                null
+                                    :
+                                <Typography variant="h5" component="span" className="orderCheckText">Время предзаказа: {this.state.orderPredDay + ' ' + this.state.orderPredTime}</Typography>
+                            }
+                            { parseInt( this.state.orderType ) == 0 ?
+                                <Typography variant="h5" component="span" className="orderCheckText">Доставим: { this.state.orderAddr ?
+                                    this.state.orderAddr.city_name+', '+
+                                    this.state.orderAddr.street+' '+
+                                    this.state.orderAddr.home+', Пд.:'+
+                                    this.state.orderAddr.pd+', Эт.:'+
+                                    this.state.orderAddr.et+', Кв.:'+
+                                    this.state.orderAddr.kv
+                                        :
+                                    null
+                                }</Typography>
+                                    :
+                                <Typography variant="h5" component="span" className="orderCheckText">Заберу: {this.state.picPointInfo ? this.state.picPointInfo.addr : ''}</Typography>
+                            }
+                            { parseInt( this.state.orderType ) == 0 ?
+                                this.state.orderAddr && parseInt(this.state.orderAddr.dom_true) == 1 ?
+                                    <Typography variant="h5" component="span" className="orderCheckText">Домофон не работает</Typography>
+                                        :
+                                    null
                                     :
                                 null
-                            }</Typography>
-                                :
-                            <Typography variant="h5" component="span" className="orderCheckText">Заберу: {this.state.picPointInfo ? this.state.picPointInfo.addr : ''}</Typography>
-                        }
-                        { parseInt( this.state.orderType ) == 0 ?
-                            this.state.orderAddr && parseInt(this.state.orderAddr.dom_true) == 1 ?
-                                <Typography variant="h5" component="span" className="orderCheckText">Домофон не работает</Typography>
+                            }
+                            { this.state.orderPromo.length > 0 ?
+                                <Typography variant="h5" component="span" className="orderCheckText">Промокод: {this.state.orderPromo}</Typography>
                                     :
                                 null
-                                :
-                            null
-                        }
-                        
-                        
-                        
-                        
-                        <Typography variant="h5" component="span" className="orderCheckText">Промокод: ЛЕГКО</Typography>
-                        <Typography variant="h5" component="span" className="orderCheckText">Оплачу: наличными курьеру</Typography>
-                        <Typography variant="h5" component="span" className="orderCheckText">Сдача: с 8000</Typography>
-                        
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <Typography variant="h5" component="span" className="orderCheckText">Сет Ривьера</Typography>
-                                    </td>
-                                    <td>
-                                        <Typography variant="h5" component="span" className="orderCheckText">2</Typography>
-                                    </td>
-                                    <td>
-                                        <Typography variant="h5" component="span" className="orderCheckText">300</Typography>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <Typography variant="h5" component="span" className="orderCheckText">Сет Ривьера</Typography>
-                                    </td>
-                                    <td>
-                                        <Typography variant="h5" component="span" className="orderCheckText">2</Typography>
-                                    </td>
-                                    <td>
-                                        <Typography variant="h5" component="span" className="orderCheckText">300</Typography>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <Typography variant="h5" component="span" className="orderCheckText">Сет Ривьера</Typography>
-                                    </td>
-                                    <td>
-                                        <Typography variant="h5" component="span" className="orderCheckText">2</Typography>
-                                    </td>
-                                    <td>
-                                        <Typography variant="h5" component="span" className="orderCheckText">300</Typography>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <Typography variant="h5" component="span" className="orderCheckText">Сет Ривьера</Typography>
-                                    </td>
-                                    <td>
-                                        <Typography variant="h5" component="span" className="orderCheckText">2</Typography>
-                                    </td>
-                                    <td>
-                                        <Typography variant="h5" component="span" className="orderCheckText">300</Typography>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colSpan="2">
-                                        <Typography variant="h5" component="span" className="orderCheckText">Сумма заказа</Typography>
-                                    </td>
-                                    <td>
-                                        <Typography variant="h5" component="span" className="orderCheckText">300</Typography>
-                                    </td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={() => this.setState({ orderCheck: false })} color="primary">Хорошо</Button>
-                    </DialogActions>
-                </Dialog>
+                            }
+                            <Typography variant="h5" component="span" className="orderCheckText">Оплачу: {this.state.renderPay.find( (item) => item.type == this.state.orderPay )['title']}</Typography>
+                            
+                            { parseInt( this.state.orderType ) == 0 ?
+                                this.state.orderSdacha.length > 0 ?
+                                    <Typography variant="h5" component="span" className="orderCheckText">Сдача с: {this.state.orderSdacha}</Typography>
+                                        :
+                                    <Typography variant="h5" component="span" className="orderCheckText">Без сдачи</Typography>
+                                    :
+                                null
+                            }
+                            
+                            <table className="tableOrderCheck">
+                                <tbody>
+                                    {itemsStore.getItems().map((item, key) => 
+                                        <tr key={key}>
+                                            <td>
+                                                <Typography variant="h5" component="span" className="orderCheckText">{item.name}</Typography>
+                                            </td>
+                                            <td>
+                                                <Typography variant="h5" component="span" className="orderCheckText">{item.count}</Typography>
+                                            </td>
+                                            <td>
+                                                <Typography variant="h5" component="span" className="namePrice orderCheckText">{item.all_price} <FontAwesomeIcon icon={faRubleSign} /></Typography>
+                                            </td>
+                                        </tr>
+                                    )}
+                                    { parseInt( this.state.orderType ) == 0 ?
+                                        <tr>
+                                            <td colSpan="2">
+                                                <Typography variant="h5" component="span" className="orderCheckText">Доставка</Typography>
+                                            </td>
+                                            <td>
+                                                <Typography variant="h5" component="span" className="namePrice orderCheckText">{ itemsStore.getSumDiv() } <FontAwesomeIcon icon={faRubleSign} /></Typography>
+                                            </td>
+                                        </tr>
+                                            :
+                                        null
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colSpan="2">
+                                            <Typography variant="h5" component="span" className="orderCheckText">Сумма заказа</Typography>
+                                        </td>
+                                        <td>
+                                            <Typography variant="h5" component="span" className="namePrice orderCheckText">{ parseInt(itemsStore.getAllPrice()) + parseInt(itemsStore.getSumDiv()) } <FontAwesomeIcon icon={faRubleSign} /></Typography>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={() => this.setState({ orderCheck: false })} color="primary">Хорошо</Button>
+                        </DialogActions>
+                    </Dialog>
+                        :
+                    null
+                }
                 
             </Grid>
         )

@@ -45,23 +45,22 @@ class CardItem extends React.Component {
         this._isMounted = true; 
         let my_cart = itemsStore.getItems();
             
-        let item = my_cart.filter( (item) => item.item_id == this.state.item['id'] );
+        let item = my_cart.find( (item) => item.item_id == this.state.item['id'] );
   
-        if( item.length > 0 ){
+        if( item ){
             this.setState({ 
-              count: item[0].count,
+              count: item.count,
             })
         }
         
         autorun(() => {
             if( this._isMounted ){
                 let my_cart = itemsStore.getItems();
-            
-                let item = my_cart.filter( (item) => item.item_id == this.state.item['id'] );
+                let item = my_cart.find( (item) => item.item_id == this.state.item['id'] );
           
-                if( item.length > 0 ){
+                if( item ){
                     this.setState({ 
-                      count: item[0].count,
+                      count: item.count,
                     })
                 }else{
                     this.setState({ 
@@ -74,20 +73,23 @@ class CardItem extends React.Component {
     
     add(){
         if(this._isMounted){
-            let count = itemsStore.AddItem(this.state.item['id']);
-            this.setState({ count: count })
+            itemsStore.AddItem(this.state.item['id']);
         }
     }
     
     minus(){
         if(this._isMounted){
-            let count = itemsStore.MinusItem(this.state.item['id']);
-            this.setState({ count: count })
+            itemsStore.MinusItem(this.state.item['id']);
         }
     }
     
+    shouldComponentUpdate(nextProps, nextState) {
+        return (
+            this.state.count !== nextState.count
+        );
+    }
+    
     render() {
-        
         if( this.props.type == 'pc' ){
             return (
                 <Card elevation={0} className="CardItem">
