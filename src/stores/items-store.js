@@ -469,7 +469,10 @@ class ItemsStore {
     
     this.items = JSON.stringify(items);
     if (typeof window !== 'undefined') {
-      localStorage.setItem('my_cart', this.items);
+      let my_cart = items.filter( (item) => item.count > 0 );
+      my_cart = JSON.stringify(my_cart);
+      
+      localStorage.setItem('my_cart', my_cart);
     }
   };
   
@@ -520,8 +523,7 @@ class ItemsStore {
       
       if(item_info){
         let count = parseInt(cart_info.count) + 1,
-            price = item_info['price'],
-            allPrice = 0;
+            price = item_info['price'];
           
         let check_in_cart = my_cart.some( (item) => item.item_id == id );
           if( !check_in_cart ){
@@ -555,16 +557,15 @@ class ItemsStore {
     let all_items = itemsStore.getAllItems();
     
     if( all_items.length > 0 ){
-      let cart_info = my_cart.filter( (item) => item.item_id == id )[0];
+      let cart_info = my_cart.find( (item) => item.item_id == id );
       
       if( !cart_info ){
         return 0;
       }
       
-      let item_info = all_items.filter( (item) => item.id == id )[0],
+      let item_info = all_items.find( (item) => item.id == id ),
           count = parseInt(cart_info.count) - 1,
-          price = item_info['price'],
-          allPrice = 0;
+          price = item_info['price'];
       
       if( count >= 0 ){
         if( count < 0 ){
@@ -578,7 +579,7 @@ class ItemsStore {
           }
         } )
         
-        my_cart = my_cart.filter( (item) => item.count > 0 );
+        //my_cart = my_cart.filter( (item) => item.count > 0 );
         itemsStore.setItems(my_cart)
       }
     

@@ -113,6 +113,8 @@ export function Cart() {
 }
 
 class CartItem extends React.Component {
+    _isMounted = false;
+    
     constructor(props) {
         super(props);
         
@@ -125,6 +127,8 @@ class CartItem extends React.Component {
     }
     
     componentDidMount(){
+        this._isMounted = true; 
+        
         let cartItems = itemsStore.getItems();
         let this_item = cartItems.find( (item) => item.item_id == this.state.item.id );
         
@@ -137,23 +141,29 @@ class CartItem extends React.Component {
         }
         
         autorun(() => {
-            let new_cartItems = itemsStore.getItems();
-            let this_item = new_cartItems.find( (item) => item.item_id == this.state.item.id );
-        
-            if( this_item ){
-                this.setState({
-                    count: this_item.count,
-                    onePrice: this_item.one_price,
-                    allPrice: this_item.all_price,
-                })
-            }else{
-                this.setState({
-                    count: 0,
-                    onePrice: 0,
-                    allPrice: 0,
-                })
+            if( this._isMounted === true ){
+                let new_cartItems = itemsStore.getItems();
+                let this_item = new_cartItems.find( (item) => item.item_id == this.state.item.id );
+            
+                if( this_item ){
+                    this.setState({
+                        count: this_item.count,
+                        onePrice: this_item.one_price,
+                        allPrice: this_item.all_price,
+                    })
+                }else{
+                    this.setState({
+                        count: 0,
+                        onePrice: 0,
+                        allPrice: 0,
+                    })
+                }
             }
         })
+    }
+    
+    componentWillUnmount(){
+        this._isMounted = false;
     }
     
     add(item_id){
@@ -164,47 +174,57 @@ class CartItem extends React.Component {
         itemsStore.MinusItem(item_id);
     }
     
-    shouldComponentUpdate(nextProps) {
+    shouldComponentUpdate(nextProps, nextState) {
         return (
-            this.props.item.count !== nextProps.item.count ||
-            this.props.item.onePrice !== nextProps.item.onePrice ||
-            this.props.item.allPrice !== nextProps.item.allPrice
+            this.state.count !== nextState.count ||
+            this.state.onePrice !== nextState.onePrice ||
+            this.state.allPrice !== nextState.allPrice ||
+            this.state.item.name !== nextProps.item.name
         );
     }
     
     render() {
-        return (
-            <tr>
-                <td style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                    <img src={"https://newjacofood.ru/src/img/items/"+this.state.item.img+'?'+this.state.item.imgUpdate} />
-                
-                    <div>
-                        <Typography variant="h5" component="span" className="nameItem">{this.state.item.name}</Typography>
-                        <Typography variant="h5" component="span" className="descItem">{this.state.item.desc}</Typography>
-                    </div>
-                </td>
-                <td>
-                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="count">
-                        <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this, this.state.item.id)}>
-                            <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
-                        </Button>
-                        <Button variant="contained" className="BtnCardMain" >
-                            <Typography component="span" className="CardCountItem">{this.state.count}</Typography>
-                        </Button>
-                        <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this, this.state.item.id)}> 
-                            <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
-                        </Button>
-                    </ButtonGroup>
-                </td>
-                <td>
-                    <Typography gutterBottom variant="h5" component="span" className="namePrice">{this.state.allPrice} <FontAwesomeIcon icon={faRubleSign} /></Typography>
-                </td>
-            </tr>
-        )
+        if( this.state.count > 0 || parseInt(this.state.item.cat_id) == 7 ){
+            return (
+                <tr>
+                    <td style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                        <img src={"https://newjacofood.ru/src/img/items/"+this.state.item.img+'?'+this.state.item.imgUpdate} />
+                    
+                        <div>
+                            <Typography variant="h5" component="span" className="nameItem">{this.state.item.name}</Typography>
+                            <Typography variant="h5" component="span" className="descItem">{this.state.item.desc}</Typography>
+                        </div>
+                    </td>
+                    <td>
+                        <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="count">
+                            <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this, this.state.item.id)}>
+                                <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
+                            </Button>
+                            <Button variant="contained" className="BtnCardMain" >
+                                <Typography component="span" className="CardCountItem">{this.state.count}</Typography>
+                            </Button>
+                            <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this, this.state.item.id)}> 
+                                <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
+                            </Button>
+                        </ButtonGroup>
+                    </td>
+                    <td>
+                        <Typography gutterBottom variant="h5" component="span" className="namePrice">{this.state.allPrice} <FontAwesomeIcon icon={faRubleSign} /></Typography>
+                    </td>
+                </tr>
+            )
+        }else{
+            return (
+                null
+            )
+        }
     }
 }
 
 class RenderCart extends React.Component {
+    _isMounted = false;
+    clickOrderStart = false
+    
     constructor(props) {
         super(props);
         
@@ -318,7 +338,7 @@ class RenderCart extends React.Component {
                         }
                     }, 300)
                     
-                    if( cartData.orderAddr && cartData.orderAddr.id ){
+                    if( cartData.orderType == 0 && cartData.orderAddr && cartData.orderAddr.id ){
                         let allPrice = itemsStore.getAllPrice();
                         
                         if( parseInt(cartData.orderAddr.free_drive) == 1 ){
@@ -368,6 +388,8 @@ class RenderCart extends React.Component {
     }
     
     componentDidMount = () => {
+        this._isMounted = true; 
+        
         if( document.querySelector('.activeCat') ){
             document.querySelector('.activeCat').classList.remove('activeCat');
         }
@@ -414,71 +436,77 @@ class RenderCart extends React.Component {
         }
         
         autorun(() => {
-            let cartItems = itemsStore.getItems();
-            let allItems = itemsStore.getAllItems();
-            let need_dop = itemsStore.check_need_dops();
-            
-            let cartItems_new = [];
-            
-            cartItems.map((item) => {
-                let thisitem = allItems.filter( (item_) => item_.id == item.item_id )[0];
+            if( this._isMounted === true ){
+                let cartItems = itemsStore.getItems();
+                let allItems = itemsStore.getAllItems();
+                let need_dop = itemsStore.check_need_dops();
                 
-                if(thisitem){
-                    cartItems_new.push({
-                        id: item.item_id,
-                        cat_id: thisitem.cat_id,
-                        name: item.name,
-                        desc: thisitem.tmp_desc,
-                        count: item.count,
-                        allPrice: item.all_price,
-                        img: thisitem.img,
-                        imgUpdate: thisitem.img_date_update,
-                    })
-                }
-            })
-            
-            let main = cartItems_new.filter( (item_) => parseInt(item_.cat_id) !== 7 );
-            let dop = cartItems_new.filter( (item_) => parseInt(item_.cat_id) == 7 );
-            
-            let dop_new = [];
-            
-            need_dop.map((item) => {
-                let cart_item = cartItems_new.filter( (item_) => parseInt(item_.id) == parseInt(item.id) )[0];
+                let cartItems_new = [];
                 
-                if( !cart_item ){
-                    dop_new.push({
-                        id: item.id,
-                        cat_id: item.cat_id,
-                        name: item.name,
-                        desc: item.tmp_desc,
-                        count: 0,
-                        allPrice: 0,
-                        img: item.img,
-                        imgUpdate: item.img_date_update,
-                    })
-                }else{
-                    dop_new.push({
-                        id: item.id,
-                        cat_id: item.cat_id,
-                        name: item.name,
-                        desc: item.tmp_desc,
-                        count: cart_item.count,
-                        allPrice: cart_item.allPrice,
-                        img: item.img,
-                        imgUpdate: item.img_date_update,
-                    })
-                }
-            })
-            
-            this.setState({
-                cartItems_main: main,
-                cartItems_dop: dop_new,
-                cartItems_need_dop: need_dop,
+                cartItems.map((item) => {
+                    let thisitem = allItems.filter( (item_) => item_.id == item.item_id )[0];
+                    
+                    if(thisitem){
+                        cartItems_new.push({
+                            id: item.item_id,
+                            cat_id: thisitem.cat_id,
+                            name: item.name,
+                            desc: thisitem.tmp_desc,
+                            count: item.count,
+                            allPrice: item.all_price,
+                            img: thisitem.img,
+                            imgUpdate: thisitem.img_date_update,
+                        })
+                    }
+                })
                 
-                sumDiv: itemsStore.getSumDiv(),
-                allPrice: itemsStore.getAllPrice()
-            })
+                let main = cartItems_new.filter( (item_) => parseInt(item_.cat_id) !== 7 );
+                let dop = cartItems_new.filter( (item_) => parseInt(item_.cat_id) == 7 );
+                
+                let dop_new = [];
+                
+                need_dop.map((item) => {
+                    let cart_item = cartItems_new.filter( (item_) => parseInt(item_.id) == parseInt(item.id) )[0];
+                    
+                    if( !cart_item ){
+                        dop_new.push({
+                            id: item.id,
+                            cat_id: item.cat_id,
+                            name: item.name,
+                            desc: item.tmp_desc,
+                            count: 0,
+                            allPrice: 0,
+                            img: item.img,
+                            imgUpdate: item.img_date_update,
+                        })
+                    }else{
+                        dop_new.push({
+                            id: item.id,
+                            cat_id: item.cat_id,
+                            name: item.name,
+                            desc: item.tmp_desc,
+                            count: cart_item.count,
+                            allPrice: cart_item.allPrice,
+                            img: item.img,
+                            imgUpdate: item.img_date_update,
+                        })
+                    }
+                })
+                
+                this.setState({
+                    cartItems_main: main,
+                    cartItems_dop: dop_new,
+                    cartItems_need_dop: need_dop,
+                    
+                    sumDiv: itemsStore.getSumDiv(),
+                    allPrice: itemsStore.getAllPrice()
+                })
+            }
         })
+    }
+    
+    componentWillUnmount(){
+        this._isMounted = false;
     }
     
     changeTab = (event, newValue) => {
@@ -518,6 +546,7 @@ class RenderCart extends React.Component {
     }
     
     changeAddr = (event) => {
+        
         let thisitem = this.state.my_addr.filter( (item) => item.id == event.target.value )[0];
         let allPrice = itemsStore.getAllPrice();
         
@@ -738,52 +767,57 @@ class RenderCart extends React.Component {
     }
     
     startOrder(){
-        let payFull = this.state.renderPay.find( (item) => item.type == this.state.orderPay );
-        
-        let new_cart = [];
-        let cartItems = itemsStore.getItems();
-        
-        cartItems.forEach( (item) => {
-            new_cart.push({
-                name: item.name,
-                count: item.count,
-                price: item.all_price,
-                id: item.item_id,
-            })
-        })
-        
-        console.log( this.state.orderAddr )
-        
-        fetch('https://jacofood.ru/src/php/test_app.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/x-www-form-urlencoded'},
-            body: queryString.stringify({
-                type: 'createOrder_web', 
-                city_id: this.state.city_name,
-                user_id: itemsStore.getToken(),
-              
-                timePred: JSON.stringify( { value: parseInt( this.state.orderTimes ) == 1 ? 0 : this.state.orderPredDay + ' ' + this.state.orderPredTime } ),//
-                typeOrder: this.state.orderType,//
-                addrPic: this.state.orderPic,//
-                comment: this.state.orderComment,//
-                addrDev: this.state.orderAddr ? JSON.stringify(this.state.orderAddr) : '', //
-                pay: payFull.title, //
-                payFull: JSON.stringify(payFull), //
-                cart: JSON.stringify(new_cart),//
-                promo_name: this.state.orderPromo//
-            })
-        }).then(res => res.json()).then(json => {
-            console.log( json )
+        if( this.clickOrderStart == false ){
+            this.clickOrderStart = true;
             
-            if( json.st ){
-                this.setState({
-                    orderCheck: true
+            let payFull = this.state.renderPay.find( (item) => item.type == this.state.orderPay );
+            let new_cart = [];
+            let cartItems = itemsStore.getItems();
+            
+            cartItems.forEach( (item) => {
+                new_cart.push({
+                    name: item.name,
+                    count: item.count,
+                    price: item.all_price,
+                    id: item.item_id,
                 })
-            }else{
+            })
+            
+            fetch('https://jacofood.ru/src/php/test_app.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/x-www-form-urlencoded'},
+                body: queryString.stringify({
+                    type: 'createOrder_web', 
+                    city_id: this.state.city_name,
+                    user_id: itemsStore.getToken(),
+                  
+                    timePred: JSON.stringify( { value: parseInt( this.state.orderTimes ) == 1 ? 0 : this.state.orderPredDay + ' ' + this.state.orderPredTime } ),//
+                    typeOrder: this.state.orderType,//
+                    addrPic: this.state.orderPic,//
+                    comment: this.state.orderComment,//
+                    addrDev: this.state.orderAddr ? JSON.stringify(this.state.orderAddr) : '', //
+                    pay: payFull.title, //
+                    payFull: JSON.stringify(payFull), //
+                    cart: JSON.stringify(new_cart),//
+                    promo_name: this.state.orderPromo//
+                })
+            }).then(res => res.json()).then(json => {
+                console.log( json )
                 
-            }
-        })
+                setTimeout(()=>{
+                    this.clickOrderStart = false;    
+                }, 300)
+                
+                if( json.st ){
+                    this.setState({
+                        orderCheck: true
+                    })
+                }else{
+                    
+                }
+            })
+        }
     }
     
     render() {

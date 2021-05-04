@@ -71,6 +71,10 @@ class CardItem extends React.Component {
         })
     }
     
+    componentWillUnmount(){
+        this._isMounted = false;
+    }
+    
     add(){
         if(this._isMounted){
             itemsStore.AddItem(this.state.item['id']);

@@ -199,21 +199,26 @@ class SimplePopover extends React.Component{
             this.setState({
                 cartItems: cartItems
             })
+            itemsStore.getSumDiv();
         })
     }
     
-    add=(id)=>{
-        let count = itemsStore.AddItem(id);
+    add(id){
+        itemsStore.AddItem(id);
     }
     
     minus(id){
-        let count = itemsStore.MinusItem(id);
+        itemsStore.MinusItem(id);
     }
     
     handleClick = (event) => {
-        this.setState({
-            anchorEl: event.currentTarget
-        })
+        if( itemsStore.getPage() == 'home' ){
+            this.setState({
+                anchorEl: event.currentTarget
+            })
+        }else{
+            this.handleClose()
+        }
     }
 
     handleClose = () => {
@@ -319,7 +324,7 @@ class SimplePopover extends React.Component{
         return(
             <div>
                 <IconButton className="ShopIconBTN" aria-describedby={id} color="inherit" aria-label="menu" onClick={this.handleClick.bind(this)}>
-                    <Badge badgeContent={itemsStore.getAllPrice()} max={500000} color="primary">
+                    <Badge badgeContent={itemsStore.getAllPrice() + itemsStore.getSumDiv()} max={500000} color="primary">
                         <ShoppingCartOutlinedIcon />
                     </Badge>
                 </IconButton>
@@ -371,7 +376,7 @@ class SimplePopover extends React.Component{
                                     <td className="TableMiniFullName">Сумма:</td>
                                     <td className="" style={{width: '30%', textAlign: 'center'}}>
                                         <div className="TableMiniPrice" style={{ marginRight: 21 }}>
-                                            {itemsStore.getAllPrice()} <FontAwesomeIcon icon={faRubleSign} />
+                                            { itemsStore.getAllPrice() + itemsStore.getSumDiv() } <FontAwesomeIcon icon={faRubleSign} />
                                         </div>
                                     </td>
                                 </tr>
@@ -401,6 +406,8 @@ class SimplePopover extends React.Component{
                                 <Link
                                     to={'/'+itemsStore.getCity()+'/cart'}
                                     exact={ true }
+                                    style={{ textDecoration: 'none' }}
+                                    onClick={this.handleClose.bind(this)}
                                 >
                                     <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
                                         <Button variant="contained" className="BtnCardMain CardInCardItem">В корзину</Button>
@@ -443,12 +450,13 @@ export class App extends React.Component {
             
             timerSMS: 59,
             errPhone: '',
-            errSMS: ''
+            errSMS: '',
+            userName: '',
         };
     }
 
     load(){
-        if( itemsStore.getCity() ){
+        if( itemsStore.getCity() && this.state.categoryItems.length == 0 ){
             fetch('https://jacofood.ru/src/php/test_app.php', {
                 method: 'POST',
                 headers: {
@@ -515,7 +523,7 @@ export class App extends React.Component {
 
     chooseCity(city){
         let this_addr = window.location.href;
-        window.location.href = this_addr.replace(itemsStore.getCity(), city);
+        window.location.href = this_addr.replace(this.state.cityName, city);
     }
 
     openLogin(){
@@ -682,133 +690,126 @@ export class App extends React.Component {
         }
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return (
+            this.state.activePage !== nextState.activePage ||
+            this.state.cityName !== nextState.cityName ||
+            this.state.categoryItems.length !== nextState.categoryItems.length ||
+            this.state.openCity !== nextState.openCity ||
+            this.state.openLogin !== nextState.openLogin
+        );
+    }
+    
     render() {
+        
+        console.log( 'reload app page' )
+        
         return (
             <Provider { ...stores }>
                 <div className="home">
                     <AppBar position="fixed" className="header" style={{ zIndex: 1 }}>
                         <Toolbar className="sub_header">
-                            {!this.state.is_load ?
-                                <Grid>
-                                    <Grid item style={{ marginRight: 15 }}>
-                                        <Link to={"/"+itemsStore.getCity()+"/"}>
-                                            <img alt="Жако доставка роллов и пиццы" src="https://jacochef.ru/src/img/Bely_fon_logo.png" />
-                                        </Link> 
-                                    </Grid>
-                                    <Hidden xsDown>
-                                        {this.state.testData.map((item, key) => 
-                                            <Grid item key={key} style={{ padding: '8px 16px' }}>
-                                                <div style={{ width: 100, height: 20, backgroundColor: '#e5e5e5' }} />
-                                            </Grid>
-                                        )}
-                                    </Hidden>
+                            
+                            <Grid>
+                                <Grid item style={{ marginRight: 15 }}>
+                                    <Link to={"/"+this.state.cityName+"/"}>
+                                        <img alt="Жако доставка роллов и пиццы" src="https://jacochef.ru/src/img/Bely_fon_logo.png" />
+                                    </Link> 
                                 </Grid>
-                                    :
-                                <Grid>
-                                    <Grid item style={{ marginRight: 15 }}>
-                                        <Link to={"/"+itemsStore.getCity()+"/"}>
-                                            <img alt="Жако доставка роллов и пиццы" src="https://jacochef.ru/src/img/Bely_fon_logo.png" />
-                                        </Link> 
-                                    </Grid>
-                                    <Hidden mdDown>
+                                <Hidden mdDown>
+                                    
+                                    <Grid item className="CityProfileNav">
+                                        <Typography className="cat" variant="h5" component="span" onClick={this.openCity.bind(this)} style={{ display: 'flex', flexDirection: 'row' }}>{itemsStore.getCityRU()} <ArrowDropDownIcon /></Typography>
                                         
-                                        <Grid item className="CityProfileNav">
-                                            <Typography className="cat" variant="h5" component="span" onClick={this.openCity.bind(this)} style={{ display: 'flex', flexDirection: 'row' }}>{itemsStore.getCityRU()} <ArrowDropDownIcon /></Typography>
-                                            
-                                            {itemsStore.getToken() ?
-                                                itemsStore.userName.length > 0 ?
-                                                    <Link to={"/"+itemsStore.getCity()+"/profile"} className="cat">{itemsStore.userName}</Link> 
-                                                        :
-                                                    <Link to={"/"+itemsStore.getCity()+"/profile"}>
-                                                        <Typography className="cat" variant="h5" component="span">Профиль</Typography>
-                                                    </Link>
+                                        {itemsStore.getToken() ?
+                                            itemsStore.userName && itemsStore.userName.length > 0 ?
+                                                <Link to={"/"+this.state.cityName+"/profile"} className="cat">{itemsStore.userName}</Link> 
                                                     :
-                                                <Typography className="cat" variant="h5" component="span" onClick={this.openLogin.bind(this)}>Войти</Typography>
-                                            }
-                                        </Grid>
-                                        
-                                        {this.state.categoryItems.map((item, key) => 
-                                            <Grid item key={key}>
-                                                {this.state.activePage == 'home' ?
-                                                    <ScrollLink 
-                                                        key={key}
-                                                        to={"cat"+item.id} 
-                                                        spy={true} 
-                                                        isDynamic={true}
-                                                        onSetActive={(el) => { 
-                                                            /*if( document.querySelector('.activeCat') ){
-                                                                document.querySelector('.activeCat').classList.remove('activeCat');
-                                                            }
-                                                            document.querySelector('#link_'+item.id).classList.add('activeCat');
-                                                            
-                                                            document.querySelector('.scrollCat').classList.add('mandatory');
-                                                            setTimeout(()=>{
-                                                                document.querySelector('.scrollCat').classList.remove('mandatory');
-                                                            }, 1000)*/
-                                                            
-                                                            if( document.querySelector('.activeCat') ){
-                                                                document.querySelector('.activeCat').classList.remove('activeCat');
-                                                            }
-                                                            document.querySelector('#link_'+item.id).classList.add('activeCat');
-                                                            
-                                                            /*document.querySelector('.scrollCat').classList.add('mandatory');
-                                                            document.querySelector('.activeCat').classList.add('activeCatTest');
-                                                            setTimeout(()=>{
-                                                                if( document.querySelector('.scrollCat') ){
-                                                                    document.querySelector('.scrollCat').classList.remove('mandatory');
-                                                                    document.querySelector('.activeCat').classList.remove('activeCatTest');
-                                                                }
-                                                            }, 1000)*/
-                                                        }} 
-                                                        smooth={true} 
-                                                        offset={-100} 
-                                                        activeClass="activeCat" 
-                                                        id={'link_'+item.id} 
-                                                        style={{ width: 'max-content', display: 'flex', whiteSpace: 'nowrap', padding: '4px 8px' }}
-                                                    >
-                                                        <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
-                                                    </ScrollLink> 
-                                                        :
-                                                    <Link to={"/"+itemsStore.getCity()+"/"} className="catLink" style={{ padding: '4px 8px' }} onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
-                                                        <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
-                                                    </Link> 
-                                                }
-                                            </Grid>)
+                                                <Link to={"/"+this.state.cityName+"/profile"}>
+                                                    <Typography className="cat" variant="h5" component="span">Профиль</Typography>
+                                                </Link>
+                                                :
+                                            <Typography className="cat" variant="h5" component="span" onClick={this.openLogin.bind(this)}>Войти</Typography>
                                         }
-                                        
-                                        <Grid item>
-                                            <Link 
-                                                style={{ padding: '4px 8px' }}
-                                                to={"/"+itemsStore.getCity()+"/actii"} 
-                                                className="catLink"
-                                            >
-                                                <Typography className="cat" variant="h5" component="span">Акции</Typography>
-                                            </Link>    
-                                        </Grid>
-                                        <Grid item>
-                                            <Link 
-                                                style={{ padding: '4px 8px' }}
-                                                to={"/"+itemsStore.getCity()+"/contact"} 
-                                                className="catLink"
-                                            >
-                                                <Typography className="cat" variant="h5" component="span">Контакты</Typography>
-                                            </Link>    
-                                        </Grid>
-                                        <Grid item>
-                                            <SimplePopover openLogin={this.openLogin.bind(this)} />
-                                        </Grid>
-                                    </Hidden>
-                                </Grid>
-                            }
-                            
-                            
-                            {this.state.is_load === true ?
-                                <Hidden lgUp>
-                                    <Typography variant="h5" component="span" className="thisCity" onClick={this.openCity.bind(this)}><FontAwesomeIcon icon={ faMapMarkerAlt } /> {itemsStore.getCityRU()}</Typography>
+                                    </Grid>
+                                    
+                                    {this.state.categoryItems.map((item, key) => 
+                                        <Grid item key={key}>
+                                            {this.state.activePage == 'home' ?
+                                                <ScrollLink 
+                                                    key={key}
+                                                    to={"cat"+item.id} 
+                                                    spy={true} 
+                                                    isDynamic={true}
+                                                    onSetActive={(el) => { 
+                                                        /*if( document.querySelector('.activeCat') ){
+                                                            document.querySelector('.activeCat').classList.remove('activeCat');
+                                                        }
+                                                        document.querySelector('#link_'+item.id).classList.add('activeCat');
+                                                        
+                                                        document.querySelector('.scrollCat').classList.add('mandatory');
+                                                        setTimeout(()=>{
+                                                            document.querySelector('.scrollCat').classList.remove('mandatory');
+                                                        }, 1000)*/
+                                                        
+                                                        if( document.querySelector('.activeCat') ){
+                                                            document.querySelector('.activeCat').classList.remove('activeCat');
+                                                        }
+                                                        document.querySelector('#link_'+item.id).classList.add('activeCat');
+                                                        
+                                                        /*document.querySelector('.scrollCat').classList.add('mandatory');
+                                                        document.querySelector('.activeCat').classList.add('activeCatTest');
+                                                        setTimeout(()=>{
+                                                            if( document.querySelector('.scrollCat') ){
+                                                                document.querySelector('.scrollCat').classList.remove('mandatory');
+                                                                document.querySelector('.activeCat').classList.remove('activeCatTest');
+                                                            }
+                                                        }, 1000)*/
+                                                    }} 
+                                                    smooth={true} 
+                                                    offset={-100} 
+                                                    activeClass="activeCat" 
+                                                    id={'link_'+item.id} 
+                                                    style={{ width: 'max-content', display: 'flex', whiteSpace: 'nowrap', padding: '4px 8px' }}
+                                                >
+                                                    <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
+                                                </ScrollLink> 
+                                                    :
+                                                <Link to={"/"+this.state.cityName+"/"} className="catLink" style={{ padding: '4px 8px' }} onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
+                                                    <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
+                                                </Link> 
+                                            }
+                                        </Grid>)
+                                    }
+                                    
+                                    <Grid item>
+                                        <Link 
+                                            style={{ padding: '4px 8px' }}
+                                            to={"/"+this.state.cityName+"/actii"} 
+                                            className="catLink"
+                                        >
+                                            <Typography className="cat" variant="h5" component="span">Акции</Typography>
+                                        </Link>    
+                                    </Grid>
+                                    <Grid item>
+                                        <Link 
+                                            style={{ padding: '4px 8px' }}
+                                            to={"/"+this.state.cityName+"/contact"} 
+                                            className="catLink"
+                                        >
+                                            <Typography className="cat" variant="h5" component="span">Контакты</Typography>
+                                        </Link>    
+                                    </Grid>
+                                    <Grid item>
+                                        <SimplePopover openLogin={this.openLogin.bind(this)} />
+                                    </Grid>
                                 </Hidden>
-                                    :
-                                null
-                            }
+                            </Grid>
+                        
+                            <Hidden lgUp>
+                                <Typography variant="h5" component="span" className="thisCity" onClick={this.openCity.bind(this)}><FontAwesomeIcon icon={ faMapMarkerAlt } /> {itemsStore.getCityRU()}</Typography>
+                            </Hidden>
+                                    
                         </Toolbar>
                         
                         {this.state.activePage == 'home' ?
@@ -870,7 +871,7 @@ export class App extends React.Component {
                         <DialogTitle id="alert-dialog-title">Выберите город</DialogTitle>
                         <DialogContent className="ModalContent_1_1" style={{ paddingBottom: 24, paddingTop: 0 }}>
                             {this.state.cityList.map((item, key) => 
-                                <Typography key={key} variant="h5" component="span" className={"ModalLabel "+( itemsStore.getCity() == item.link ? 'active' : '' )} onClick={this.chooseCity.bind(this, item.link)}>{item.name}</Typography>
+                                <Typography key={key} variant="h5" component="span" className={"ModalLabel "+( this.state.cityName == item.link ? 'active' : '' )} onClick={this.chooseCity.bind(this, item.link)}>{item.name}</Typography>
                             )}
                         </DialogContent>
                     </Dialog>
@@ -995,7 +996,7 @@ export class App extends React.Component {
                             component={ Home }
                         />
                         <Route exact path='/:cityName/profile/'>
-                            {!itemsStore.getToken() && itemsStore.getCity() ? <Redirect push to={"/"+itemsStore.getCity()+"/"} /> : <Profile />}
+                            {!itemsStore.getToken() && this.state.cityName ? <Redirect push to={"/"+this.state.cityName+"/"} /> : <Profile />}
                         </Route>
                         <Route
                             path='/:cityName/menu/:itemLink'
