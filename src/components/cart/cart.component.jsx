@@ -1251,7 +1251,7 @@ class RenderCart extends React.Component {
                                         id="outlined-multiline-flexible"
                                         label="Комментарий курьеру"
                                         multiline
-                                        rowsMax={1}
+                                        rowsMax={2}
                                         value={this.state.orderComment}
                                         onChange={this.changeComment}
                                         variant="outlined"
@@ -1370,8 +1370,8 @@ class RenderCart extends React.Component {
                     <Typography variant="h5" component="span" className="orderCheckTitle">Время заказа</Typography>
                     <FontAwesomeIcon className="closeDialog" onClick={() => this.setState({ chooseTimeDialog: false })} icon={faTimes}/>
                     <DialogContent>
-                        <div>
-                            <FormControl style={{ width: this.state.orderPredDay == 0 ? '100%' : '60%' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                            <FormControl style={{ width: '100%', paddingBottom: 20 }}>
                                 <InputLabel htmlFor="age-native-simple">День</InputLabel>
                                 <Select
                                   displayEmpty
@@ -1387,7 +1387,7 @@ class RenderCart extends React.Component {
                                     )}
                                 </Select>
                             </FormControl>
-                            <FormControl style={{ width: '40%', display: this.state.orderPredDay == 0 ? 'none' : 'inline-flex' }}>
+                            <FormControl style={{ width: '100%', paddingBottom: 20, display: this.state.orderPredDay == 0 ? 'none' : 'inline-flex' }}>
                                 <InputLabel htmlFor="age-native-simple1">Время</InputLabel>
                                 <Select
                                   displayEmpty
@@ -1413,7 +1413,7 @@ class RenderCart extends React.Component {
                     fullWidth={true}
                     className="DialogChoosePayDialog"
                 >
-                    <DialogTitle id="simple-dialog-title">Оплата</DialogTitle>
+                    <DialogTitle id="simple-dialog-title" style={{ paddingBottom: 0 }}>Оплата</DialogTitle>
                     <FontAwesomeIcon className="closeDialog" onClick={() => this.setState({ choosePayDialog: false })} icon={faTimes}/>
                     <List>
                         {this.state.renderPay.map((item, key) => 
