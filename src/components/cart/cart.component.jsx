@@ -1202,7 +1202,7 @@ class RenderCart extends React.Component {
                 </Hidden>
                 
                 <Hidden smUp>
-                    <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer mobile" style={{ paddingTop: 0 }}>
+                    <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer mobile" style={{ paddingTop: 0, paddingleft: '46px!important', paddingRight: 24 }}>
                         <AppBar position="static" style={{ backgroundColor: '#fff', color: '#000', zIndex: 0 }} elevation={0}>
                             <Tabs value={this.state.orderType} onChange={this.changeTab.bind(this)} aria-label="simple tabs example"  style={{ justifyContent: 'center' }}>
                                 <Tab label="Доставка" {...a11yProps(0)} style={{ width: '50%' }} disableRipple={true} />
