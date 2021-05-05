@@ -8,7 +8,9 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes, faPlus, faMinus, faRubleSign } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faPlus, faMinus, faRubleSign, faCreditCard, faMoneyBill, faCashRegister } from '@fortawesome/free-solid-svg-icons'
+
+import Hidden from '@material-ui/core/Hidden';
 
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
@@ -221,6 +223,109 @@ class CartItem extends React.Component {
     }
 }
 
+class CartItemMobile extends React.Component {
+    _isMounted = false;
+    
+    constructor(props) {
+        super(props);
+        
+        this.state = {  
+            item: this.props.item,
+            count: 0,
+            onePrice: 0,
+            allPrice: 0
+        };
+    }
+    
+    componentDidMount(){
+        this._isMounted = true; 
+        
+        let cartItems = itemsStore.getItems();
+        let this_item = cartItems.find( (item) => item.item_id == this.state.item.id );
+        
+        if( this_item ){
+            this.setState({
+                count: this_item.count,
+                onePrice: this_item.one_price,
+                allPrice: this_item.all_price,
+            })
+        }
+        
+        autorun(() => {
+            if( this._isMounted === true ){
+                let new_cartItems = itemsStore.getItems();
+                let this_item = new_cartItems.find( (item) => item.item_id == this.state.item.id );
+            
+                if( this_item ){
+                    this.setState({
+                        count: this_item.count,
+                        onePrice: this_item.one_price,
+                        allPrice: this_item.all_price,
+                    })
+                }else{
+                    this.setState({
+                        count: 0,
+                        onePrice: 0,
+                        allPrice: 0,
+                    })
+                }
+            }
+        })
+    }
+    
+    componentWillUnmount(){
+        this._isMounted = false;
+    }
+    
+    add(item_id){
+        itemsStore.AddItem(item_id);
+    }
+    
+    minus(item_id){
+        itemsStore.MinusItem(item_id);
+    }
+    
+    shouldComponentUpdate(nextProps, nextState) {
+        return (
+            this.state.count !== nextState.count ||
+            this.state.onePrice !== nextState.onePrice ||
+            this.state.allPrice !== nextState.allPrice ||
+            this.state.item.name !== nextProps.item.name
+        );
+    }
+    
+    render() {
+        if( this.state.count > 0 || parseInt(this.state.item.cat_id) == 7 ){
+            return (
+                <div className="boxItem">
+                    <img src={"https://newjacofood.ru/src/img/items/"+this.state.item.img+'?'+this.state.item.imgUpdate} />
+                    <div>
+                        <Typography variant="h5" component="span">{this.state.item.name}</Typography>
+                        <div>
+                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="count">
+                                <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this, this.state.item.id)}>
+                                    <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
+                                </Button>
+                                <Button variant="contained" className="BtnCardMain" >
+                                    <Typography component="span" className="CardCountItem">{this.state.count}</Typography>
+                                </Button>
+                                <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this, this.state.item.id)}> 
+                                    <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
+                                </Button>
+                            </ButtonGroup>
+                            <Typography variant="h5" component="span" className="namePrice">{this.state.allPrice} <FontAwesomeIcon icon={faRubleSign} /></Typography>
+                        </div>    
+                    </div>
+                </div>
+            )
+        }else{
+            return (
+                null
+            )
+        }
+    }
+}
+
 class RenderCart extends React.Component {
     _isMounted = false;
     clickOrderStart = false
@@ -231,6 +336,11 @@ class RenderCart extends React.Component {
         this.state = {      
             is_load: false,
             city_name: this.props.cityName,
+            
+            chooseAddr: false,
+            choosePicDialog: false,
+            chooseTimeDialog: false,
+            choosePayDialog: false,
             
             sumDiv: 0,
             allPrice: 0,
@@ -437,6 +547,7 @@ class RenderCart extends React.Component {
         
         autorun(() => {
             if( this._isMounted === true ){
+                
                 let cartItems = itemsStore.getItems();
                 let allItems = itemsStore.getAllItems();
                 let need_dop = itemsStore.check_need_dops();
@@ -494,8 +605,15 @@ class RenderCart extends React.Component {
                 })
                 
                 this.setState({
-                    cartItems_main: main,
+                    cartItems_dop: []
+                })
+                
+                this.setState({
                     cartItems_dop: dop_new,
+                })
+                
+                this.setState({
+                    cartItems_main: main,
                     cartItems_need_dop: need_dop,
                     
                     sumDiv: itemsStore.getSumDiv(),
@@ -546,7 +664,6 @@ class RenderCart extends React.Component {
     }
     
     changeAddr = (event) => {
-        
         let thisitem = this.state.my_addr.filter( (item) => item.id == event.target.value )[0];
         let allPrice = itemsStore.getAllPrice();
         
@@ -561,7 +678,8 @@ class RenderCart extends React.Component {
         }
         
         this.setState({
-            orderAddr: thisitem
+            orderAddr: thisitem,
+            chooseAddr: false
         })
         
         this.saveData();
@@ -598,6 +716,15 @@ class RenderCart extends React.Component {
     changePay = (event) => {
         this.setState({
             orderPay: event.target.value
+        })
+        
+        this.saveData();
+    }
+    
+    changePayMobile(type){
+        this.setState({
+            orderPay: type,
+            choosePayDialog: false
         })
         
         this.saveData();
@@ -747,14 +874,34 @@ class RenderCart extends React.Component {
     }
     
     changePredDay = (event) => {
-        this.setState({
-            orderPredDay: event.target.value
-        })
+        if( event.target.value !== 0 ){
+            this.setState({
+                orderPredDay: event.target.value,
+                orderTimes: '2'
+            })
+            
+            setTimeout(() => {
+                this.loadTimePred();   
+            }, 300)
+        }else{
+            this.setState({
+                orderPredDay: 0,
+                orderTimes: '1'
+            })
+            
+            let type_order = this.state.orderType;                
+            
+            if( type_order == 0 ){
+                this.setState({
+                    renderPay: this.state.pays.dev_mini,
+                });
+            }else{
+                this.setState({
+                    renderPay: this.state.pays.pic,
+                })
+            }
+        }
         
-        setTimeout(() => {
-            this.loadTimePred();   
-        }, 300)
-             
         this.saveData();
     }
     
@@ -827,181 +974,238 @@ class RenderCart extends React.Component {
                     <Typography variant="h5" component="h1">Корзина</Typography>
                 </Grid>
                 
-                <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer" style={{ paddingTop: 0 }}>
-                    <AppBar position="static" style={{ backgroundColor: '#fff', color: '#000', zIndex: 0 }} elevation={0}>
-                        <Tabs value={this.state.orderType} onChange={this.changeTab.bind(this)} aria-label="simple tabs example"  style={{ justifyContent: 'center' }}>
-                            <Tab label="Доставка" {...a11yProps(0)} disableRipple={true} />
-                            <Tab label="Самовывоз" {...a11yProps(1)} disableRipple={true} />
-                        </Tabs>
-                    </AppBar>
-                    <TabPanel value={this.state.orderType} index={0} style={{ width: '100%' }}>
-                        <FormControl component="fieldset">
-                            <RadioGroup name="addrs" value={ this.state.orderAddr ? this.state.orderAddr.id : 0 } onChange={this.changeAddr}>
-                                {this.state.my_addr.map((item, key) => 
-                                    <div key={key} className="boxAddr">
-                                        <FormControlLabel value={item.id} control={<Radio />} label={item.city_name+', '+item.street+' '+item.home+', Пд. '+item.pd+', Эт. '+item.et+', Кв. '+item.kv} />
-                                        <FontAwesomeIcon icon={faTimes}/>
+                <Hidden xsDown>
+                    <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer" style={{ paddingTop: 0 }}>
+                        <AppBar position="static" style={{ backgroundColor: '#fff', color: '#000', zIndex: 0 }} elevation={0}>
+                            <Tabs value={this.state.orderType} onChange={this.changeTab.bind(this)} aria-label="simple tabs example"  style={{ justifyContent: 'center' }}>
+                                <Tab label="Доставка" {...a11yProps(0)} disableRipple={true} />
+                                <Tab label="Самовывоз" {...a11yProps(1)} disableRipple={true} />
+                            </Tabs>
+                        </AppBar>
+                        <TabPanel value={this.state.orderType} index={0} style={{ width: '100%' }}>
+                            <FormControl component="fieldset">
+                                <RadioGroup name="addrs" value={ this.state.orderAddr ? this.state.orderAddr.id : 0 } onChange={this.changeAddr}>
+                                    {this.state.my_addr.map((item, key) => 
+                                        <div key={key} className="boxAddr">
+                                            <FormControlLabel value={item.id} control={<Radio />} label={item.city_name+', '+item.street+' '+item.home+', Пд. '+item.pd+', Эт. '+item.et+', Кв. '+item.kv} />
+                                            <FontAwesomeIcon icon={faTimes}/>
+                                        </div>
+                                    )}
+                                </RadioGroup>
+                            </FormControl>
+                            <Accordion>
+                                <AccordionSummary
+                                    aria-controls="panel1a-content"
+                                    id="panel1a-header"
+                                >
+                                    <Typography variant="h5" component="span" className="newAddr">Новый адрес</Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    
+                                </AccordionDetails>
+                            </Accordion>
+                        </TabPanel>
+                        <TabPanel value={this.state.orderType} index={1}>
+                            <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
+                                {this.state.pic_point.map((item, key) => 
+                                    <div className="boxPic" id={'pic_'+item.id} key={key} onClick={this.choosePic.bind(this, item.id)}>
+                                        <Typography variant="h5" component="span">{item.raion}</Typography>
+                                        <Typography variant="h5" component="span">{item.addr}, c 10:00 до 21:30</Typography>
                                     </div>
                                 )}
-                            </RadioGroup>
-                        </FormControl>
-                        <Accordion>
-                            <AccordionSummary
-                                aria-controls="panel1a-content"
-                                id="panel1a-header"
-                            >
-                                <Typography variant="h5" component="span" className="newAddr">Новый адрес</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                
-                            </AccordionDetails>
-                        </Accordion>
-                    </TabPanel>
-                    <TabPanel value={this.state.orderType} index={1}>
-                        <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
-                            {this.state.pic_point.map((item, key) => 
-                                <div className="boxPic" id={'pic_'+item.id} key={key} onClick={this.choosePic.bind(this, item.id)}>
-                                    <Typography variant="h5" component="span">{item.raion}</Typography>
-                                    <Typography variant="h5" component="span">{item.addr}, c 10:00 до 21:30</Typography>
-                                </div>
-                            )}
-                        </div>
-                    </TabPanel>
-                    
-                    {this.state.orderType == 0 ?
-                        <div>
-                            <form noValidate autoComplete="off">
-                                <TextField
-                                    style={{ width: '100%' }}
-                                    id="outlined-multiline-flexible"
-                                    label="Комментарий курьеру"
-                                    multiline
-                                    rowsMax={2}
-                                    value={this.state.orderComment}
-                                    onChange={this.changeComment}
-                                    variant="outlined"
-                                />
-                            </form>
-                        </div>
-                            :
-                        null
-                    }
-                    <div>
-                        <FormControl component="fieldset">
-                            <FormLabel component="legend">Оплата</FormLabel>
-                            <RadioGroup aria-label="pays" name="pays" value={this.state.orderPay} onChange={this.changePay}>
-                                {this.state.renderPay.map((item, key) => 
-                                    <FormControlLabel key={key} value={item.type} control={<Radio />} label={item.title} />
-                                )}
-                            </RadioGroup>
-                        </FormControl>
-                    </div>
-                    <div>
-                        <FormControl component="fieldset">
-                            <FormLabel component="legend">Когда приготовить?</FormLabel>
-                            <RadioGroup aria-label="times" name="times" value={this.state.orderTimes} onChange={this.changeTimes}>
-                                <FormControlLabel value='1' control={<Radio />} label="Как можно быстрее" />
-                                <FormControlLabel value='2' control={<Radio />} label="Предзаказ" />
-                            </RadioGroup>
-                        </FormControl>
-                    </div>
-                    {this.state.orderTimes == 2 ?
-                        <div>
-                            <FormControl style={{ width: '30%' }}>
-                                <InputLabel htmlFor="age-native-simple">День</InputLabel>
-                                <Select
-                                  displayEmpty
-                                  value={this.state.orderPredDay}
-                                  onChange={this.changePredDay}
-                                  inputProps={{
-                                    id: 'age-native-simple',
-                                  }}
-                                >
-                                    {this.state.date_pred.map((item, key) => 
-                                        <MenuItem key={key} value={item.date}>{item.text}</MenuItem>
-                                    )}
-                                </Select>
-                            </FormControl>
-                            <FormControl style={{ width: '20%' }}>
-                                <InputLabel htmlFor="age-native-simple1">Время</InputLabel>
-                                <Select
-                                  displayEmpty
-                                  value={this.state.orderPredTime}
-                                  onChange={this.changePredTime}
-                                  inputProps={{
-                                    id: 'age-native-simple1',
-                                  }}
-                                >
-                                    {this.state.timePred.map((item, key) => 
-                                        <MenuItem key={key} value={item.value}>{item.text}</MenuItem>
-                                    )}
-                                </Select>
-                            </FormControl>
-                        </div>
-                            :
-                        null
-                    }
-                    
-                    <div>
-                        <Typography variant="h5" component="h2">Моя корзина</Typography>
-                    </div>
-                    <div>
-                        <table className="tableCart">
-                            <tbody>
-                                {this.state.cartItems_main.map((item, key) =>
-                                    <CartItem key={key} item={item} />
-                                )}
-                                <tr className="rowAboutDop">
-                                    <td colSpan='3'>
-                                        <Typography gutterBottom variant="h5" component="span" className="">Соевый соус, имбирь и васаби приобретаются отдельно!</Typography>
-                                        <br />
-                                        <Typography gutterBottom variant="h5" component="span" className="">Не забудь добавить нужные позиции в корзину.</Typography>
-                                    </td>
-                                </tr>
-                                {this.state.cartItems_dop.map((item, key) =>
-                                    <CartItem key={key} item={item} />
-                                )}
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colSpan='2'>
-                                        <Typography component="span">Доставка:</Typography>
-                                    </td>
-                                    <td>
-                                        <Typography gutterBottom variant="h5" component="span" className="namePrice">{this.state.sumDiv} <FontAwesomeIcon icon={faRubleSign} /></Typography>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colSpan='2'>
-                                        <Typography component="span">Итого:</Typography>
-                                    </td>
-                                    <td>
-                                        <Typography gutterBottom variant="h5" component="span" className="namePrice">{ this.state.sumDiv + this.state.allPrice } <FontAwesomeIcon icon={faRubleSign} /></Typography>
-                                    </td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                    
-                    {this.state.orderType == 0 ?
-                        <div className="orderSdacha">
+                            </div>
+                        </TabPanel>
+                        
+                        {this.state.orderType == 0 ?
                             <div>
-                                <FormControl>
-                                    <InputLabel htmlFor="standard-adornment-weight">Подготовить сдачу с</InputLabel>
-                                    <Input
-                                        type="number"
-                                        id="standard-adornment-weight"
-                                        value={this.state.orderSdacha}
-                                        onChange={this.changeSdacha}
-                                        endAdornment={<FontAwesomeIcon icon={faRubleSign} />}
+                                <form noValidate autoComplete="off">
+                                    <TextField
+                                        style={{ width: '100%' }}
+                                        id="outlined-multiline-flexible"
+                                        label="Комментарий курьеру"
+                                        multiline
+                                        rowsMax={2}
+                                        value={this.state.orderComment}
+                                        onChange={this.changeComment}
+                                        variant="outlined"
                                     />
+                                </form>
+                            </div>
+                                :
+                            null
+                        }
+                        <div>
+                            <FormControl component="fieldset">
+                                <FormLabel component="legend">Оплата</FormLabel>
+                                <RadioGroup aria-label="pays" name="pays" value={this.state.orderPay} onChange={this.changePay}>
+                                    {this.state.renderPay.map((item, key) => 
+                                        <FormControlLabel key={key} value={item.type} control={<Radio />} label={item.title} />
+                                    )}
+                                </RadioGroup>
+                            </FormControl>
+                        </div>
+                        <div>
+                            <FormControl component="fieldset">
+                                <FormLabel component="legend">Когда приготовить?</FormLabel>
+                                <RadioGroup aria-label="times" name="times" value={this.state.orderTimes} onChange={this.changeTimes}>
+                                    <FormControlLabel value='1' control={<Radio />} label="Как можно быстрее" />
+                                    <FormControlLabel value='2' control={<Radio />} label="Предзаказ" />
+                                </RadioGroup>
+                            </FormControl>
+                        </div>
+                        {this.state.orderTimes == 2 ?
+                            <div>
+                                <FormControl style={{ width: '30%' }}>
+                                    <InputLabel htmlFor="age-native-simple">День</InputLabel>
+                                    <Select
+                                      displayEmpty
+                                      value={this.state.orderPredDay}
+                                      onChange={this.changePredDay}
+                                      inputProps={{
+                                        id: 'age-native-simple',
+                                      }}
+                                    >
+                                        {this.state.date_pred.map((item, key) => 
+                                            <MenuItem key={key} value={item.date}>{item.text}</MenuItem>
+                                        )}
+                                    </Select>
+                                </FormControl>
+                                <FormControl style={{ width: '20%' }}>
+                                    <InputLabel htmlFor="age-native-simple1">Время</InputLabel>
+                                    <Select
+                                      displayEmpty
+                                      value={this.state.orderPredTime}
+                                      onChange={this.changePredTime}
+                                      inputProps={{
+                                        id: 'age-native-simple1',
+                                      }}
+                                    >
+                                        {this.state.timePred.map((item, key) => 
+                                            <MenuItem key={key} value={item.value}>{item.text}</MenuItem>
+                                        )}
+                                    </Select>
                                 </FormControl>
                             </div>
-                        </div>    
-                            :
-                        null
-                    }
-                    <div className="promoOrder">
+                                :
+                            null
+                        }
+                        
+                        <div>
+                            <Typography variant="h5" component="h2">Моя корзина</Typography>
+                        </div>
+                        <div>
+                            <table className="tableCart">
+                                <tbody>
+                                    {this.state.cartItems_main.map((item, key) =>
+                                        <CartItem key={key} item={item} />
+                                    )}
+                                    <tr className="rowAboutDop">
+                                        <td colSpan='3'>
+                                            <Typography gutterBottom variant="h5" component="span" className="">Соевый соус, имбирь и васаби приобретаются отдельно!</Typography>
+                                            <br />
+                                            <Typography gutterBottom variant="h5" component="span" className="">Не забудь добавить нужные позиции в корзину.</Typography>
+                                        </td>
+                                    </tr>
+                                    {this.state.cartItems_dop.map((item, key) =>
+                                        <CartItem key={key} item={item} />
+                                    )}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colSpan='2'>
+                                            <Typography component="span">Доставка:</Typography>
+                                        </td>
+                                        <td>
+                                            <Typography gutterBottom variant="h5" component="span" className="namePrice">{this.state.sumDiv} <FontAwesomeIcon icon={faRubleSign} /></Typography>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan='2'>
+                                            <Typography component="span">Итого:</Typography>
+                                        </td>
+                                        <td>
+                                            <Typography gutterBottom variant="h5" component="span" className="namePrice">{ this.state.sumDiv + this.state.allPrice } <FontAwesomeIcon icon={faRubleSign} /></Typography>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        
+                        {this.state.orderType == 0 ?
+                            <div className="orderSdacha">
+                                <div>
+                                    <FormControl>
+                                        <InputLabel htmlFor="standard-adornment-weight">Подготовить сдачу с</InputLabel>
+                                        <Input
+                                            type="number"
+                                            id="standard-adornment-weight"
+                                            value={this.state.orderSdacha}
+                                            onChange={this.changeSdacha}
+                                            endAdornment={<FontAwesomeIcon icon={faRubleSign} />}
+                                        />
+                                    </FormControl>
+                                </div>
+                            </div>    
+                                :
+                            null
+                        }
+                        <div className="promoOrder">
+                            <div>
+                                <Paper component="div" className="SpacePromo">
+                                    <InputBase
+                                        onBlur={this.checkPromo.bind(this)}
+                                        value={this.state.orderPromo}
+                                        onChange={ event => this.setState({ orderPromo: event.target.value }) }
+                                        placeholder="Промокод"
+                                    />
+                                    <Divider orientation="vertical" />
+                                    <IconButton color="primary" aria-label="directions" onClick={this.checkPromo.bind(this)}>
+                                        <CheckOutlinedIcon />
+                                    </IconButton>
+                                </Paper>
+                                {this.state.orderPromoText.length > 0 ?
+                                    <div className="DescPromo">
+                                        <Typography variant="h5" component="span">Промокод дает: {this.state.orderPromoText}</Typography>
+                                    </div>
+                                        :
+                                    null
+                                }
+                            </div>
+                            <div>
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" onClick={this.startOrder.bind(this)}>
+                                    <Button variant="contained" className="BtnCardMain CardInCardItem">Заказать</Button>
+                                </ButtonGroup>
+                            </div>
+                        </div>
+                        
+                    </Grid>
+                </Hidden>
+                
+                <Hidden smUp>
+                    <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer mobile" style={{ paddingTop: 0 }}>
+                        <AppBar position="static" style={{ backgroundColor: '#fff', color: '#000', zIndex: 0 }} elevation={0}>
+                            <Tabs value={this.state.orderType} onChange={this.changeTab.bind(this)} aria-label="simple tabs example"  style={{ justifyContent: 'center' }}>
+                                <Tab label="Доставка" {...a11yProps(0)} style={{ width: '50%' }} disableRipple={true} />
+                                <Tab label="Самовывоз" {...a11yProps(1)} style={{ width: '50%' }} disableRipple={true} />
+                            </Tabs>
+                        </AppBar>
+                        <TabPanel value={this.state.orderType} index={0} style={{ width: '100%' }}>
+                            <div className="boxMobile" onClick={() => this.setState({ chooseAddr: true })}>
+                                <Typography variant="h5" component="span">Адрес: {this.state.orderAddr ? this.state.orderAddr.city_name+', '+this.state.orderAddr.street+' '+this.state.orderAddr.home+', Пд. '+this.state.orderAddr.pd+', Эт. '+this.state.orderAddr.et+', Кв. '+this.state.orderAddr.kv : ''}</Typography>
+                            </div>
+                        </TabPanel>
+                        <TabPanel value={this.state.orderType} index={1} style={{ width: '100%' }}>
+                            <div className="boxMobile" onClick={() => this.setState({ choosePicDialog: true })}>
+                                <Typography variant="h5" component="span">Адрес: Ворошилова 12а</Typography>
+                            </div>
+                        </TabPanel>
+                        
+                        <div className="boxMobile" onClick={() => this.setState({ chooseTimeDialog: true })}>
+                            <Typography variant="h5" component="span">Приготовим: {this.state.orderTimes == 1 ? 'как можно быстрее' : this.state.orderPredDay+' '+this.state.orderPredTime}</Typography>
+                        </div>
+                        <div className="boxMobile" onClick={() => this.setState({ choosePayDialog: true })}>
+                            <Typography variant="h5" component="span">Оплачу: { this.state.renderPay.find( (item) => item.type == this.state.orderPay )['title'] }</Typography>
+                        </div>
                         <div>
                             <Paper component="div" className="SpacePromo">
                                 <InputBase
@@ -1024,14 +1228,28 @@ class RenderCart extends React.Component {
                             }
                         </div>
                         <div>
-                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" onClick={this.startOrder.bind(this)}>
-                                <Button variant="contained" className="BtnCardMain CardInCardItem">Заказать</Button>
-                            </ButtonGroup>
+                            <div className="tableMobile">
+                                {this.state.cartItems_main.map((item, key) =>
+                                    <CartItemMobile key={key} item={item} />
+                                )}
+                                
+                                <div className="boxItem rowAboutDop">
+                                    <Typography gutterBottom variant="h5" component="span" className="">Соевый соус, имбирь и васаби приобретаются отдельно!</Typography>
+                                    <br />
+                                    <Typography gutterBottom variant="h5" component="span" className="">Не забудьте добавить нужные позиции в корзину.</Typography>
+                                </div>
+                                
+                                {this.state.cartItems_dop.map((item, key) =>
+                                    <CartItemMobile key={key} item={item} />
+                                )}
+                                
+                                
+                            </div>
+                            
+                            
                         </div>
-                    </div>
-                    
-                </Grid>
-                
+                    </Grid>
+                </Hidden>
                 
                 <Dialog
                     open={this.state.errorOpen}
@@ -1048,11 +1266,123 @@ class RenderCart extends React.Component {
                     </DialogActions>
                 </Dialog>
                 
+                <Dialog
+                    open={this.state.chooseAddr}
+                    fullWidth={true}
+                    onClose={() => this.setState({ chooseAddr: false })}
+                    className="DialogChooseAddr"
+                >
+                    <Typography variant="h5" component="span" className="orderCheckTitle">Адрес доставки</Typography>
+                    <FontAwesomeIcon className="closeDialog" onClick={() => this.setState({ chooseAddr: false })} icon={faTimes}/>
+                    <DialogContent>
+                        <FormControl component="fieldset">
+                            <RadioGroup name="addrs" value={ this.state.orderAddr ? this.state.orderAddr.id : 0 } onChange={this.changeAddr}>
+                                {this.state.my_addr.map((item, key) => 
+                                    <div key={key} className="boxAddr">
+                                        <FormControlLabel value={item.id} control={<Radio />} label={item.city_name+', '+item.street+' '+item.home+', Пд. '+item.pd+', Эт. '+item.et+', Кв. '+item.kv} />
+                                        <FontAwesomeIcon icon={faTimes}/>
+                                    </div>
+                                )}
+                            </RadioGroup>
+                        </FormControl>
+                    </DialogContent>
+                </Dialog>
+                
+                <Dialog
+                    open={this.state.choosePicDialog}
+                    fullWidth={true}
+                    onClose={() => this.setState({ choosePicDialog: false })}
+                    className="DialogChoosePicDialog"
+                >
+                    <Typography variant="h5" component="span" className="orderCheckTitle">Адрес кафе</Typography>
+                    <FontAwesomeIcon className="closeDialog" onClick={() => this.setState({ choosePicDialog: false })} icon={faTimes}/>
+                    <DialogContent>
+                        <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
+                            {this.state.pic_point.map((item, key) => 
+                                <div className="boxPic" id={'pic_'+item.id} key={key} onClick={this.choosePic.bind(this, item.id)}>
+                                    <Typography variant="h5" component="span">{item.raion}</Typography>
+                                    <Typography variant="h5" component="span">{item.addr}, c 10:00 до 21:30</Typography>
+                                </div>
+                            )}
+                        </div>
+                    </DialogContent>
+                </Dialog>
+                
+                <Dialog
+                    open={this.state.chooseTimeDialog}
+                    fullWidth={true}
+                    onClose={() => this.setState({ chooseTimeDialog: false })}
+                    className="DialogChoosePicDialog"
+                >
+                    <Typography variant="h5" component="span" className="orderCheckTitle">Время заказа</Typography>
+                    <FontAwesomeIcon className="closeDialog" onClick={() => this.setState({ chooseTimeDialog: false })} icon={faTimes}/>
+                    <DialogContent>
+                        <div>
+                            <FormControl style={{ width: this.state.orderPredDay == 0 ? '100%' : '60%' }}>
+                                <InputLabel htmlFor="age-native-simple">День</InputLabel>
+                                <Select
+                                  displayEmpty
+                                  value={this.state.orderPredDay}
+                                  onChange={this.changePredDay}
+                                  inputProps={{
+                                    id: 'age-native-simple',
+                                  }}
+                                >
+                                    <MenuItem value={0}>Как можно быстрее</MenuItem>
+                                    {this.state.date_pred.map((item, key) => 
+                                        <MenuItem key={key} value={item.date}>{item.text}</MenuItem>
+                                    )}
+                                </Select>
+                            </FormControl>
+                            <FormControl style={{ width: '40%', display: this.state.orderPredDay == 0 ? 'none' : 'inline-flex' }}>
+                                <InputLabel htmlFor="age-native-simple1">Время</InputLabel>
+                                <Select
+                                  displayEmpty
+                                  value={this.state.orderPredTime}
+                                  onChange={this.changePredTime}
+                                  inputProps={{
+                                    id: 'age-native-simple1',
+                                  }}
+                                >
+                                    {this.state.timePred.map((item, key) => 
+                                        <MenuItem key={key} value={item.value}>{item.text}</MenuItem>
+                                    )}
+                                </Select>
+                            </FormControl>
+                        </div>
+                    </DialogContent>
+                </Dialog>
+                
+                <Dialog 
+                    onClose={() => this.setState({ choosePayDialog: false })}
+                    aria-labelledby="simple-dialog-title" 
+                    open={this.state.choosePayDialog}>
+                    <DialogTitle id="simple-dialog-title">Оплата</DialogTitle>
+                    <List>
+                        {this.state.renderPay.map((item, key) => 
+                            <ListItem button onClick={this.changePayMobile.bind(this, item.type)} key={key}>
+                                <ListItemAvatar>
+                                    <Avatar style={{ color: '#fff', backgroundColor: '#000' }}>
+                                        { item.type == 'cash' ?
+                                            <FontAwesomeIcon icon={ faMoneyBill } />
+                                                :
+                                            item.type == 'in' ?
+                                                <FontAwesomeIcon icon={ faCashRegister } />
+                                                    :
+                                                <FontAwesomeIcon icon={ faCreditCard } />
+                                        }
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText primary={item.title} />
+                            </ListItem>
+                        )}
+                    </List>
+                </Dialog>
+                
                 { this.state.orderCheck === true ?
                     <Dialog
                         open={this.state.orderCheck}
                         fullWidth={true}
-                        //maxWidth={'md'}
                         onClose={() => this.setState({ orderCheck: false })}
                         aria-labelledby="alert-dialog-title"
                         aria-describedby="alert-dialog-description"

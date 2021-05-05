@@ -31,7 +31,60 @@ $mainColor: #BB0025;
     padding-bottom: 0;
     text-align: center;
 }
-
+.boxAddr{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    & > svg{
+        font-size: 1.3rem;
+        color: $mainColor;
+        padding: 10px;
+        cursor: pointer;
+    }
+}
+.boxPic{
+    background-color: #e5e5e5;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    padding: 6px 12px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    &:hover{
+        background-color: $mainColor;
+        color: #fff;
+    }
+    &.active{
+        background-color: $mainColor;
+        color: #fff;
+    }
+    & span:first-child{
+        text-align: center;
+        @include fons(0.7rem, $Ubuntu);
+    }
+    & span:last-child{
+        text-align: center;
+        @include fons(1rem, $Ubuntu);
+    }
+}
+.DialogChooseAddr .MuiDialog-container > div{
+    margin: 16px;
+    width: 100%;
+}
+.DialogChoosePicDialog .MuiDialog-container > div{
+    margin: 16px;
+    width: 100%;
+}
+.closeDialog{
+    font-size: 1.5rem;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 15px;
+    color: #e5e5e5;
+}
 .tableOrderCheck{
     border-collapse: collapse;
     & tbody{
@@ -46,7 +99,7 @@ $mainColor: #BB0025;
         padding: 0;
         margin: 0;
         & > svg{
-            padding-top: 9px;
+            padding-top: 8px;
             padding-left: 2px;
             font-size: 0.9rem;
         }
@@ -59,7 +112,107 @@ $mainColor: #BB0025;
         @include fons(2rem, $Futuris);
         text-align: center;
     }
-    & .mainContainer{
+    & .mainContainer.mobile{
+        display: flex;
+        flex-direction: column;
+        & .boxMobile{
+            padding: 10px 5px;
+            border-bottom: 1px solid #e5e5e5;
+            & span{
+                @include fons(1rem, $Ubuntu);
+            }
+        }
+        & .SpacePromo{
+            padding: 2px 4px;
+            display: flex;
+            align-items: center;
+            height: 34;
+            width: 390;
+            & > div{
+                margin-left: 8;
+                flex: 1;
+            }
+            & hr{
+                height: 28;
+                margin: 4;
+            }
+            & svg{
+                fill: $mainColor;
+            }
+            & input{
+                @include fons(1rem, $Ubuntu);
+            }
+        }
+        & .DescPromo{
+            padding-top: 10px;
+            & span{
+                @include fons(0.95rem, $Ubuntu);
+                color: rgb(187, 189, 192);
+            }
+        }
+        & .tableMobile{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20;
+            padding-bottom: 20;
+            & > .boxItem:not(:last-child){
+                border-bottom: 1px solid #e5e5e5;
+            }
+            & > .boxItem.rowAboutDop{
+                padding: 10;
+                background-color: rgba(229, 229, 229, 0.3);
+                text-align: center;
+                & span{
+                    @include fons(1rem, $Ubuntu);
+                    color: $mainColor;
+                    font-weight: bold;
+                }
+            }
+            & > .boxItem:not(.rowAboutDop){
+                display: flex; 
+                flex-direction: row;
+                padding: 10;
+                & img{
+                    max-width: calc(100% / 2.6);
+                }
+                & > div{
+                    display: flex; 
+                    flex-direction: column;
+                    justify-content: space-between;
+                    width: 100%;
+                    & > span{
+                        @include fons(1.2rem, $Ubuntu);
+                        padding-left: 7px;
+                    }
+                    & > div{
+                        display: flex; 
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: center;
+                        & .BtnCardMain svg{
+                            @include fons(1.2rem, $Ubuntu);
+                            color: $mainColor;
+                        }
+                        & .BtnCardMain .CardCountItem{
+                            @include fons(1.4rem, $Ubuntu);
+                        }
+                        & .namePrice{
+                            display: flex; 
+                            flex-direction: row;
+                            @include fons(1.4rem, $Ubuntu);
+                            & > svg{
+                                font-size: 1rem;
+                                padding-top: 11px;
+                                padding-left: 1px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    & .mainContainer:not(.mobile){
         padding-top: 0!important; 
         padding-bottom: 50;
         & .errTimePred{
@@ -256,42 +409,5 @@ $mainColor: #BB0025;
         @include fons(1rem, $Ubuntu);
         color: $mainColor;
         cursor: pointer;
-    }
-    & .boxAddr{
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        & > svg{
-            font-size: 1.3rem;
-            color: $mainColor;
-            padding: 10px;
-            cursor: pointer;
-        }
-    }
-    & .boxPic{
-        background-color: #e5e5e5;
-        border-radius: 4px;
-        display: flex;
-        flex-direction: column;
-        padding: 6px 12px;
-        margin-bottom: 10px;
-        cursor: pointer;
-        &:hover{
-            background-color: $mainColor;
-            color: #fff;
-        }
-        &.active{
-            background-color: $mainColor;
-            color: #fff;
-        }
-        & span:first-child{
-            text-align: center;
-            @include fons(0.7rem, $Ubuntu);
-        }
-        & span:last-child{
-            text-align: center;
-            @include fons(1rem, $Ubuntu);
-        }
     }
 }

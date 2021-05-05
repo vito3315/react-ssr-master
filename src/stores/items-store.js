@@ -593,6 +593,10 @@ class ItemsStore {
     let my_cart = itemsStore.getItems();
     let all_items = itemsStore.getAllItems();
     
+    if( !all_items || all_items.length == 0 ){
+      return [];
+    }
+    
     let count_pizza = 0,
         count_rolls = 0;
         
