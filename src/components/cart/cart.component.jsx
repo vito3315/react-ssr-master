@@ -490,6 +490,10 @@ class RenderCart extends React.Component {
                             this.setState({
                                 orderPromo: localStorage.getItem('promo_name')
                             })
+                            
+                            setTimeout(()=>{
+                                this.checkPromo();
+                            }, 300)
                         }
                     }, 1000)
                 }
