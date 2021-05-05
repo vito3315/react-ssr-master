@@ -51,6 +51,10 @@ $mainColor: #BB0025;
 } 
 .MuiTabs-scroller.MuiTabs-fixed > div{
     justify-content: center;
+    & span{
+        @include fons(1.1rem, $Ubuntu);
+        text-transform: none;
+    }
 }
 .MuiTabs-indicator{
     background-color: $mainColor !important;

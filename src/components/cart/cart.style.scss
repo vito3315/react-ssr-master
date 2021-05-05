@@ -37,6 +37,9 @@ $mainColor: #BB0025;
     align-items: center;
     justify-content: space-between;
     padding-bottom: 10px;
+    & span{
+        @include fons(1rem, $Ubuntu);
+    }
     & > svg{
         font-size: 1.3rem;
         color: $mainColor;
@@ -130,9 +133,11 @@ $mainColor: #BB0025;
 }
 .boxMobile_.area .MuiInputLabel-outlined{
     transform: translate(14px, 12px) scale(1);
+    @include fons(1rem, $Ubuntu);
 }
 .boxMobile_.area .MuiInputLabel-outlined.MuiInputLabel-shrink{
     transform: translate(14px, -5px) scale(0.75);
+    @include fons(1rem, $Ubuntu);
 }
 .Cart{
     margin-top: 64px!important;

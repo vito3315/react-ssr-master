@@ -689,13 +689,16 @@ class RenderCart extends React.Component {
         if( document.querySelector('.boxPic.active') ){
             document.querySelector('.boxPic.active').classList.remove('active');
         }
-        document.querySelector('#pic_'+pointId).classList.add('active');
+        if( document.querySelector('#pic_'+pointId) ){
+            document.querySelector('#pic_'+pointId).classList.add('active');
+        }
         
         let picPointInfo = this.state.pic_point.filter( (item) => item.id == pointId )[0];
         
         this.setState({
             orderPic: pointId,
-            picPointInfo: picPointInfo
+            picPointInfo: picPointInfo,
+            choosePicDialog: false
         })
         
         this.saveData();
@@ -983,6 +986,8 @@ class RenderCart extends React.Component {
     }
     
     render() {
+        let this_pay = this.state.renderPay.find( (item) => item.type == this.state.orderPay );
+        
         return (
             <Grid container className="Cart mainContainer MuiGrid-spacing-xs-3">
                 <Grid item xs={12}>
@@ -1211,7 +1216,7 @@ class RenderCart extends React.Component {
                         </TabPanel>
                         <TabPanel value={this.state.orderType} index={1} style={{ width: '100%' }}>
                             <div className="boxMobile" onClick={() => this.setState({ choosePicDialog: true })}>
-                                <Typography variant="h5" component="span">Адрес: Ворошилова 12а</Typography>
+                            <Typography variant="h5" component="span">Адрес: { this.state.orderPic > 0 ? this.state.pic_point.find( (item) => item.id == this.state.orderPic )['addr'] : '' }</Typography>
                             </div>
                         </TabPanel>
                         
@@ -1219,7 +1224,7 @@ class RenderCart extends React.Component {
                             <Typography variant="h5" component="span">Приготовим: {this.state.orderTimes == 1 ? 'как можно быстрее' : this.state.orderPredDay+' '+this.state.orderPredTime}</Typography>
                         </div>
                         <div className="boxMobile" onClick={() => this.setState({ choosePayDialog: true })}>
-                            <Typography variant="h5" component="span">Оплачу: { this.state.renderPay.find( (item) => item.type == this.state.orderPay )['title'] ?? '' }</Typography>
+                            <Typography variant="h5" component="span">Оплачу: { this_pay ? this_pay['title'] : '' }</Typography>
                         </div>
                         <div style={{ marginTop: 15 }}>
                             <Paper component="div" className="SpacePromo">
@@ -1352,7 +1357,7 @@ class RenderCart extends React.Component {
                     <DialogContent>
                         <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
                             {this.state.pic_point.map((item, key) => 
-                                <div className="boxPic" id={'pic_'+item.id} key={key} onClick={this.choosePic.bind(this, item.id)}>
+                                <div className={"boxPic "+( this.state.orderPic == item.id ? 'active' : '' )} id={'pic_'+item.id} key={key} onClick={this.choosePic.bind(this, item.id)}>
                                     <Typography variant="h5" component="span">{item.raion}</Typography>
                                     <Typography variant="h5" component="span">{item.addr}, c 10:00 до 21:30</Typography>
                                 </div>
