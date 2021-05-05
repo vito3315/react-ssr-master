@@ -1263,7 +1263,7 @@ class RenderCart extends React.Component {
                         }
                                               
                         {this.state.orderType == 0 ?
-                            <div className="boxMobile_">
+                            <div className="boxMobile_ area">
                                 <FormControl  variant="outlined">
                                     <InputLabel htmlFor="outlined-adornment-password">Подготовить сдачу с</InputLabel>
                                     <OutlinedInput
