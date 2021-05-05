@@ -42,7 +42,7 @@ import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
-
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 import Avatar from '@material-ui/core/Avatar';
 import List from '@material-ui/core/List';
@@ -880,6 +880,20 @@ class RenderCart extends React.Component {
                 orderTimes: '2'
             })
             
+            let type_order = this.state.orderType;                
+            
+            if( type_order == 0 ){
+                this.setState({
+                    renderPay: this.state.pays.dev_mini,
+                    orderPay: 'cash'
+                });
+            }else{
+                this.setState({
+                    renderPay: this.state.pays.pic,
+                    orderPay: 'in'
+                })
+            }
+            
             setTimeout(() => {
                 this.loadTimePred();   
             }, 300)
@@ -893,11 +907,12 @@ class RenderCart extends React.Component {
             
             if( type_order == 0 ){
                 this.setState({
-                    renderPay: this.state.pays.dev_mini,
+                    renderPay: this.state.pays.dev,
                 });
             }else{
                 this.setState({
                     renderPay: this.state.pays.pic,
+                    orderPay: 'in'
                 })
             }
         }
@@ -1204,9 +1219,9 @@ class RenderCart extends React.Component {
                             <Typography variant="h5" component="span">Приготовим: {this.state.orderTimes == 1 ? 'как можно быстрее' : this.state.orderPredDay+' '+this.state.orderPredTime}</Typography>
                         </div>
                         <div className="boxMobile" onClick={() => this.setState({ choosePayDialog: true })}>
-                            <Typography variant="h5" component="span">Оплачу: { this.state.renderPay.find( (item) => item.type == this.state.orderPay )['title'] }</Typography>
+                            <Typography variant="h5" component="span">Оплачу: { this.state.renderPay.find( (item) => item.type == this.state.orderPay )['title'] ?? '' }</Typography>
                         </div>
-                        <div>
+                        <div style={{ marginTop: 15 }}>
                             <Paper component="div" className="SpacePromo">
                                 <InputBase
                                     onBlur={this.checkPromo.bind(this)}
@@ -1227,6 +1242,44 @@ class RenderCart extends React.Component {
                                 null
                             }
                         </div>
+                        
+                        {this.state.orderType == 0 ?
+                            <div className="boxMobile_ area" style={{ paddingTop: 20 }}>
+                                <form noValidate autoComplete="off">
+                                    <TextField
+                                        style={{ width: '100%' }}
+                                        id="outlined-multiline-flexible"
+                                        label="Комментарий курьеру"
+                                        multiline
+                                        rowsMax={1}
+                                        value={this.state.orderComment}
+                                        onChange={this.changeComment}
+                                        variant="outlined"
+                                    />
+                                </form>
+                            </div>
+                                :
+                            null
+                        }
+                                              
+                        {this.state.orderType == 0 ?
+                            <div className="boxMobile_">
+                                <FormControl  variant="outlined">
+                                    <InputLabel htmlFor="outlined-adornment-password">Подготовить сдачу с</InputLabel>
+                                    <OutlinedInput
+                                        id="outlined-adornment-password"
+                                        type="number"
+                                        value={this.state.orderSdacha}
+                                        onChange={this.changeSdacha}
+                                        endAdornment={<FontAwesomeIcon icon={faRubleSign} />}
+                                        label="Подготовить сдачу с"
+                                    />
+                                </FormControl>
+                            </div>
+                            :
+                            null
+                        }
+                        
                         <div>
                             <div className="tableMobile">
                                 {this.state.cartItems_main.map((item, key) =>
@@ -1356,8 +1409,12 @@ class RenderCart extends React.Component {
                 <Dialog 
                     onClose={() => this.setState({ choosePayDialog: false })}
                     aria-labelledby="simple-dialog-title" 
-                    open={this.state.choosePayDialog}>
+                    open={this.state.choosePayDialog}
+                    fullWidth={true}
+                    className="DialogChoosePayDialog"
+                >
                     <DialogTitle id="simple-dialog-title">Оплата</DialogTitle>
+                    <FontAwesomeIcon className="closeDialog" onClick={() => this.setState({ choosePayDialog: false })} icon={faTimes}/>
                     <List>
                         {this.state.renderPay.map((item, key) => 
                             <ListItem button onClick={this.changePayMobile.bind(this, item.type)} key={key}>

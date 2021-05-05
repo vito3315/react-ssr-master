@@ -44,6 +44,26 @@ $mainColor: #BB0025;
         cursor: pointer;
     }
 }
+.DialogChoosePayDialog{
+    & .MuiAvatar-root{
+        width: 50px;
+        height: 50px;
+    }
+    & svg{
+        font-size: 1.5rem;
+    }
+    & span{
+        @include fons(1.2rem, $Ubuntu);
+    }
+    & .MuiListItemAvatar-root{
+        min-width: 66px;
+    }
+    & h2{
+        @include fons(1.5rem, $Futuris);
+        text-align: center;
+        color: #000;
+    }
+}
 .boxPic{
     background-color: #e5e5e5;
     border-radius: 4px;
@@ -105,7 +125,15 @@ $mainColor: #BB0025;
         }
     }
 }
-
+.boxMobile_ input, .boxMobile_ .MuiInputBase-multiline{
+    padding: 10px 14px!important;
+}
+.boxMobile_.area .MuiInputLabel-outlined{
+    transform: translate(14px, 12px) scale(1);
+}
+.boxMobile_.area .MuiInputLabel-outlined.MuiInputLabel-shrink{
+    transform: translate(14px, -5px) scale(0.75);
+}
 .Cart{
     margin-top: 64px!important;
     & h1{
@@ -203,7 +231,7 @@ $mainColor: #BB0025;
                             @include fons(1.4rem, $Ubuntu);
                             & > svg{
                                 font-size: 1rem;
-                                padding-top: 11px;
+                                padding-top: 9px;
                                 padding-left: 1px;
                             }
                         }
