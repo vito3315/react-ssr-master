@@ -15,6 +15,9 @@ $colorMain: #BB0025;
 body{
     margin: 0px!important;
 }
+.BtnBorder span{
+    @include fons(1rem, $Ubuntu);
+}
 .footer{
     padding: 24px 16px;
     margin-top: auto;

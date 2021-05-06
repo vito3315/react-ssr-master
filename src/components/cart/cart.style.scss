@@ -24,9 +24,12 @@ $mainColor: #BB0025;
 .orderCheckText{
     @include fons(1.2rem, $Ubuntu);
     padding-bottom: 10px;
+    &.bold{
+        font-weight: bold;
+    }
 }
 .orderCheckTitle{
-    @include fons(1.5rem, $Futuris);
+    @include fons(1.3rem, $Futuris);
     padding: 16px;
     padding-bottom: 0;
     text-align: center;

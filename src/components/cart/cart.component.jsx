@@ -1482,7 +1482,7 @@ class RenderCart extends React.Component {
                                 <Typography variant="h5" component="span" className="orderCheckText">Время предзаказа: {this.state.orderPredDay + ' ' + this.state.orderPredTime}</Typography>
                             }
                             { parseInt( this.state.orderType ) == 0 ?
-                                <Typography variant="h5" component="span" className="orderCheckText">Доставим: { this.state.orderAddr ?
+                                <Typography variant="h5" component="span" className="orderCheckText bold">Доставим: { this.state.orderAddr ?
                                     this.state.orderAddr.city_name+', '+
                                     this.state.orderAddr.street+' '+
                                     this.state.orderAddr.home+', Пд.:'+
@@ -1493,7 +1493,7 @@ class RenderCart extends React.Component {
                                     null
                                 }</Typography>
                                     :
-                                <Typography variant="h5" component="span" className="orderCheckText">Заберу: {this.state.picPointInfo ? this.state.picPointInfo.addr : ''}</Typography>
+                                <Typography variant="h5" component="span" className="orderCheckText bold">Заберу: {this.state.picPointInfo ? this.state.picPointInfo.addr : ''}</Typography>
                             }
                             { parseInt( this.state.orderType ) == 0 ?
                                 this.state.orderAddr && parseInt(this.state.orderAddr.dom_true) == 1 ?
@@ -1553,7 +1553,7 @@ class RenderCart extends React.Component {
                                 <tfoot>
                                     <tr>
                                         <td colSpan="2">
-                                            <Typography variant="h5" component="span" className="orderCheckText">Сумма заказа</Typography>
+                                            <Typography variant="h5" component="span" className="orderCheckText bold">Сумма заказа</Typography>
                                         </td>
                                         <td>
                                             <Typography variant="h5" component="span" className="namePrice orderCheckText">{ parseInt(itemsStore.getAllPrice()) + parseInt(itemsStore.getSumDiv()) } <FontAwesomeIcon icon={faRubleSign} /></Typography>
