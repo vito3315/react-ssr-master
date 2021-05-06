@@ -1340,6 +1340,7 @@ class RenderCart extends React.Component {
                     aria-describedby="alert-dialog-description"
                 >
                     <DialogTitle id="alert-dialog-title">{this.state.error.title}</DialogTitle>
+                    <FontAwesomeIcon className="closeDialog" onClick={() => this.setState({ errorOpen: false })} icon={faTimes}/>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">{this.state.error.text}</DialogContentText>
                     </DialogContent>
@@ -1473,6 +1474,7 @@ class RenderCart extends React.Component {
                         className="DialogOrderCheckDialog"
                     >
                         <Typography variant="h5" component="span" className="orderCheckTitle">Подтверждение заказа</Typography>
+                        <FontAwesomeIcon className="closeDialog" onClick={() => this.setState({ orderCheck: false })} icon={faTimes}/>
                         <DialogContent style={{ display: 'flex', flexDirection: 'column' }}>
                             { parseInt( this.state.orderTimes ) == 1 ?
                                 null
@@ -1520,7 +1522,7 @@ class RenderCart extends React.Component {
                             <table className="tableOrderCheck">
                                 <tbody>
                                     {itemsStore.getItems().map((item, key) => 
-                                        {item.count > 0 ?
+                                        parseInt(item.count) > 0 ?
                                             <tr key={key}>
                                                 <td>
                                                     <Typography variant="h5" component="span" className="orderCheckText">{item.name}</Typography>
@@ -1534,7 +1536,6 @@ class RenderCart extends React.Component {
                                             </tr>
                                                 :
                                             null
-                                        }
                                     )}
                                     { parseInt( this.state.orderType ) == 0 ?
                                         <tr>
@@ -1561,8 +1562,10 @@ class RenderCart extends React.Component {
                                 </tfoot>
                             </table>
                         </DialogContent>
-                        <DialogActions>
-                            <Button onClick={() => this.setState({ orderCheck: false })} color="primary">Хорошо</Button>
+                        <DialogActions style={{ padding: '12px 24px', paddingBottom: 24 }}>
+                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" style={{ width: '100%' }} onClick={() => this.setState({ orderCheck: false })}>
+                                <Button variant="contained" style={{ width: '100%' }} className="BtnCardMain CardInCardItem">Подтвердить заказ</Button>
+                            </ButtonGroup>
                         </DialogActions>
                     </Dialog>
                         :
