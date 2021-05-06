@@ -158,6 +158,31 @@ $mainColor: #BB0025;
                 @include fons(1rem, $Ubuntu);
             }
         }
+        & .bottomOrder{
+            width: calc(100% - 48px);
+            padding: 12 24px;
+            height: 100px;
+            background-color: red;
+            position: fixed;
+            bottom: 45px;
+            left: 0;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            & > div:first-child{
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+                justify-content: space-between;
+            }
+            & > div:last-child > div{
+                width: 100%;
+                & > button{
+                    width: 100%;
+                }
+            }
+        }
         & .SpacePromo{
             padding: 2px 4px;
             display: flex;

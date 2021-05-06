@@ -1310,6 +1310,18 @@ class RenderCart extends React.Component {
                             
                             
                         </div>
+                    
+                        <div className="bottomOrder">
+                            <div>
+                                <Typography variant="h5" component="span">К оплате</Typography>
+                                <Typography variant="h5" component="span" className="namePrice">{ this.state.sumDiv + this.state.allPrice } <FontAwesomeIcon icon={faRubleSign} /></Typography>
+                            </div>
+                            <div>
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" onClick={this.startOrder.bind(this)}>
+                                    <Button variant="contained" className="BtnCardMain CardInCardItem">Заказать</Button>
+                                </ButtonGroup>
+                            </div>
+                        </div>
                     </Grid>
                 </Hidden>
                 
