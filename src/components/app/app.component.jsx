@@ -701,9 +701,6 @@ export class App extends React.Component {
     }
     
     render() {
-        
-        console.log( 'reload app page' )
-        
         return (
             <Provider { ...stores }>
                 <div className="home">
