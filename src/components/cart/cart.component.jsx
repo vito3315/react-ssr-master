@@ -944,12 +944,14 @@ class RenderCart extends React.Component {
             let cartItems = itemsStore.getItems();
             
             cartItems.forEach( (item) => {
-                new_cart.push({
-                    name: item.name,
-                    count: item.count,
-                    price: item.all_price,
-                    id: item.item_id,
-                })
+                if( item.count > 0 ){
+                    new_cart.push({
+                        name: item.name,
+                        count: item.count,
+                        price: item.all_price,
+                        id: item.item_id,
+                    })
+                }
             })
             
             fetch('https://jacofood.ru/src/php/test_app.php', {
@@ -983,7 +985,13 @@ class RenderCart extends React.Component {
                         orderCheck: true
                     })
                 }else{
-                    
+                    this.setState({
+                        error: {
+                            title: 'Предупреждение', 
+                            text: json.text_err
+                        },
+                        errorOpen: true
+                    })
                 }
             })
         }
@@ -1462,8 +1470,7 @@ class RenderCart extends React.Component {
                         open={this.state.orderCheck}
                         fullWidth={true}
                         onClose={() => this.setState({ orderCheck: false })}
-                        aria-labelledby="alert-dialog-title"
-                        aria-describedby="alert-dialog-description"
+                        className="DialogOrderCheckDialog"
                     >
                         <Typography variant="h5" component="span" className="orderCheckTitle">Подтверждение заказа</Typography>
                         <DialogContent style={{ display: 'flex', flexDirection: 'column' }}>
@@ -1513,17 +1520,21 @@ class RenderCart extends React.Component {
                             <table className="tableOrderCheck">
                                 <tbody>
                                     {itemsStore.getItems().map((item, key) => 
-                                        <tr key={key}>
-                                            <td>
-                                                <Typography variant="h5" component="span" className="orderCheckText">{item.name}</Typography>
-                                            </td>
-                                            <td>
-                                                <Typography variant="h5" component="span" className="orderCheckText">{item.count}</Typography>
-                                            </td>
-                                            <td>
-                                                <Typography variant="h5" component="span" className="namePrice orderCheckText">{item.all_price} <FontAwesomeIcon icon={faRubleSign} /></Typography>
-                                            </td>
-                                        </tr>
+                                        {item.count > 0 ?
+                                            <tr key={key}>
+                                                <td>
+                                                    <Typography variant="h5" component="span" className="orderCheckText">{item.name}</Typography>
+                                                </td>
+                                                <td>
+                                                    <Typography variant="h5" component="span" className="orderCheckText">{item.count}</Typography>
+                                                </td>
+                                                <td>
+                                                    <Typography variant="h5" component="span" className="namePrice orderCheckText">{item.all_price} <FontAwesomeIcon icon={faRubleSign} /></Typography>
+                                                </td>
+                                            </tr>
+                                                :
+                                            null
+                                        }
                                     )}
                                     { parseInt( this.state.orderType ) == 0 ?
                                         <tr>

@@ -119,6 +119,7 @@ $mainColor: #BB0025;
     & .namePrice.orderCheckText{
         display: flex;
         flex-direction: row;
+        justify-content: flex-end;
         padding: 0;
         margin: 0;
         & > svg{
@@ -138,6 +139,10 @@ $mainColor: #BB0025;
 .boxMobile_.area .MuiInputLabel-outlined.MuiInputLabel-shrink{
     transform: translate(14px, -5px) scale(0.75);
     @include fons(1rem, $Ubuntu);
+}
+.DialogOrderCheckDialog .MuiDialog-paperFullWidth{
+    width: calc(100% - 48px)!important;
+    margin: 24px!important;
 }
 .Cart{
     margin-top: 64px!important;
@@ -315,7 +320,7 @@ $mainColor: #BB0025;
                     margin: 12px 0px;
                 }
                 & > div.BtnBorder{
-                    width: 150px;
+                    width: 200px;
                     display: block;
                     & button{
                         width: 100%;
