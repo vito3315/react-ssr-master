@@ -160,8 +160,8 @@ $mainColor: #BB0025;
         }
         & .bottomOrder{
             width: calc(100% - 48px);
-            padding: 16px 24px;
-            height: 75px;
+            padding: 12px 24px;
+            height: 80px;
             background-color: #fff;
             position: fixed;
             bottom: 45px;
@@ -178,7 +178,7 @@ $mainColor: #BB0025;
                 & .namePrice{
                     display: flex; 
                     flex-direction: row;
-                    @include fons(1.4rem, $Ubuntu);
+                    @include fons(1.2rem, $Ubuntu);
                     & > svg{
                         font-size: 1rem;
                         padding-top: 9px;
