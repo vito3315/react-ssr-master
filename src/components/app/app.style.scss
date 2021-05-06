@@ -368,6 +368,9 @@ body{
     display: flex;
     justify-content: center;
     background-color: #fff;
+    & .MuiBadge-anchorOriginTopRightRectangle{
+        right: -7px!important;
+    }
     & .MuiButtonBase-root {
         flex: 1;
         color: inherit;

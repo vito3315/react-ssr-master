@@ -1197,7 +1197,7 @@ class RenderCart extends React.Component {
                             </div>
                             <div>
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" onClick={this.startOrder.bind(this)}>
-                                    <Button variant="contained" className="BtnCardMain CardInCardItem">Заказать</Button>
+                                    <Button variant="contained" className="BtnCardMain CardInCardItem">Оформить заказ</Button>
                                 </ButtonGroup>
                             </div>
                         </div>
@@ -1318,7 +1318,7 @@ class RenderCart extends React.Component {
                             </div>
                             <div>
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" onClick={this.startOrder.bind(this)}>
-                                    <Button variant="contained" className="BtnCardMain CardInCardItem">Заказать</Button>
+                                    <Button variant="contained" className="BtnCardMain CardInCardItem">Оформить заказ</Button>
                                 </ButtonGroup>
                             </div>
                         </div>
