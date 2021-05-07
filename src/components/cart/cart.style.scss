@@ -21,7 +21,29 @@ $mainColor: #BB0025;
 .Mui-focused .MuiOutlinedInput-notchedOutline{
     border-color: $mainColor!important;
 }
-
+.newAddr{
+    padding-left: 0px!important;
+    padding-right: 0px!important;
+    display: flex;
+    flex-direction: column;
+    & > div:first-child{
+        padding-bottom: 10px;
+    }
+    & > div:last-child{
+        display: flex;
+        flex-direction: row;
+        & > div:first-child{
+            margin-right: 9px;
+        }
+        & > div:last-child{
+            margin-left: 9px;
+        }
+        & > div:not(:last-child):not(:first-child){
+            margin-left: 9px;
+            margin-right: 9px;
+        }
+    }
+}
 .orderCheckText{
     @include fons(1.2rem, $Ubuntu);
     padding-bottom: 10px;
@@ -99,13 +121,17 @@ $mainColor: #BB0025;
         @include fons(1rem, $Ubuntu);
     }
 }
-.DialogChooseAddr .MuiDialog-container > div{
-    margin: 16px;
-    width: 100%;
-}
+.DialogChooseAddr .MuiDialog-container > div, 
+.DialogChooseNewAddr .MuiDialog-container > div, 
 .DialogChoosePicDialog .MuiDialog-container > div{
     margin: 16px;
     width: 100%;
+}
+.newAddrMobile > div{
+    margin: 10 0px;
+    & .MuiFormControl-marginNormal{
+        margin: 0!important;
+    }
 }
 .closeDialog{
     font-size: 1.5rem;

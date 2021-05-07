@@ -329,109 +329,6 @@ class CartItemMobile extends React.Component {
     }
 }
 
-const top100Films = [
-    { title: 'The Shawshank Redemption', year: 1994 },
-    { title: 'The Godfather', year: 1972 },
-    { title: 'The Godfather: Part II', year: 1974 },
-    { title: 'The Dark Knight', year: 2008 },
-    { title: '12 Angry Men', year: 1957 },
-    { title: "Schindler's List", year: 1993 },
-    { title: 'Pulp Fiction', year: 1994 },
-    { title: 'The Lord of the Rings: The Return of the King', year: 2003 },
-    { title: 'The Good, the Bad and the Ugly', year: 1966 },
-    { title: 'Fight Club', year: 1999 },
-    { title: 'The Lord of the Rings: The Fellowship of the Ring', year: 2001 },
-    { title: 'Star Wars: Episode V - The Empire Strikes Back', year: 1980 },
-    { title: 'Forrest Gump', year: 1994 },
-    { title: 'Inception', year: 2010 },
-    { title: 'The Lord of the Rings: The Two Towers', year: 2002 },
-    { title: "One Flew Over the Cuckoo's Nest", year: 1975 },
-    { title: 'Goodfellas', year: 1990 },
-    { title: 'The Matrix', year: 1999 },
-    { title: 'Seven Samurai', year: 1954 },
-    { title: 'Star Wars: Episode IV - A New Hope', year: 1977 },
-    { title: 'City of God', year: 2002 },
-    { title: 'Se7en', year: 1995 },
-    { title: 'The Silence of the Lambs', year: 1991 },
-    { title: "It's a Wonderful Life", year: 1946 },
-    { title: 'Life Is Beautiful', year: 1997 },
-    { title: 'The Usual Suspects', year: 1995 },
-    { title: 'Léon: The Professional', year: 1994 },
-    { title: 'Spirited Away', year: 2001 },
-    { title: 'Saving Private Ryan', year: 1998 },
-    { title: 'Once Upon a Time in the West', year: 1968 },
-    { title: 'American History X', year: 1998 },
-    { title: 'Interstellar', year: 2014 },
-    { title: 'Casablanca', year: 1942 },
-    { title: 'City Lights', year: 1931 },
-    { title: 'Psycho', year: 1960 },
-    { title: 'The Green Mile', year: 1999 },
-    { title: 'The Intouchables', year: 2011 },
-    { title: 'Modern Times', year: 1936 },
-    { title: 'Raiders of the Lost Ark', year: 1981 },
-    { title: 'Rear Window', year: 1954 },
-    { title: 'The Pianist', year: 2002 },
-    { title: 'The Departed', year: 2006 },
-    { title: 'Terminator 2: Judgment Day', year: 1991 },
-    { title: 'Back to the Future', year: 1985 },
-    { title: 'Whiplash', year: 2014 },
-    { title: 'Gladiator', year: 2000 },
-    { title: 'Memento', year: 2000 },
-    { title: 'The Prestige', year: 2006 },
-    { title: 'The Lion King', year: 1994 },
-    { title: 'Apocalypse Now', year: 1979 },
-    { title: 'Alien', year: 1979 },
-    { title: 'Sunset Boulevard', year: 1950 },
-    { title: 'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb', year: 1964 },
-    { title: 'The Great Dictator', year: 1940 },
-    { title: 'Cinema Paradiso', year: 1988 },
-    { title: 'The Lives of Others', year: 2006 },
-    { title: 'Grave of the Fireflies', year: 1988 },
-    { title: 'Paths of Glory', year: 1957 },
-    { title: 'Django Unchained', year: 2012 },
-    { title: 'The Shining', year: 1980 },
-    { title: 'WALL·E', year: 2008 },
-    { title: 'American Beauty', year: 1999 },
-    { title: 'The Dark Knight Rises', year: 2012 },
-    { title: 'Princess Mononoke', year: 1997 },
-    { title: 'Aliens', year: 1986 },
-    { title: 'Oldboy', year: 2003 },
-    { title: 'Once Upon a Time in America', year: 1984 },
-    { title: 'Witness for the Prosecution', year: 1957 },
-    { title: 'Das Boot', year: 1981 },
-    { title: 'Citizen Kane', year: 1941 },
-    { title: 'North by Northwest', year: 1959 },
-    { title: 'Vertigo', year: 1958 },
-    { title: 'Star Wars: Episode VI - Return of the Jedi', year: 1983 },
-    { title: 'Reservoir Dogs', year: 1992 },
-    { title: 'Braveheart', year: 1995 },
-    { title: 'M', year: 1931 },
-    { title: 'Requiem for a Dream', year: 2000 },
-    { title: 'Amélie', year: 2001 },
-    { title: 'A Clockwork Orange', year: 1971 },
-    { title: 'Like Stars on Earth', year: 2007 },
-    { title: 'Taxi Driver', year: 1976 },
-    { title: 'Lawrence of Arabia', year: 1962 },
-    { title: 'Double Indemnity', year: 1944 },
-    { title: 'Eternal Sunshine of the Spotless Mind', year: 2004 },
-    { title: 'Amadeus', year: 1984 },
-    { title: 'To Kill a Mockingbird', year: 1962 },
-    { title: 'Toy Story 3', year: 2010 },
-    { title: 'Logan', year: 2017 },
-    { title: 'Full Metal Jacket', year: 1987 },
-    { title: 'Dangal', year: 2016 },
-    { title: 'The Sting', year: 1973 },
-    { title: '2001: A Space Odyssey', year: 1968 },
-    { title: "Singin' in the Rain", year: 1952 },
-    { title: 'Toy Story', year: 1995 },
-    { title: 'Bicycle Thieves', year: 1948 },
-    { title: 'The Kid', year: 1921 },
-    { title: 'Inglourious Basterds', year: 2009 },
-    { title: 'Snatch', year: 2000 },
-    { title: '3 Idiots', year: 2009 },
-    { title: 'Monty Python and the Holy Grail', year: 1975 },
-  ];
-
 class RenderCart extends React.Component {
     _isMounted = false;
     clickOrderStart = false
@@ -447,6 +344,7 @@ class RenderCart extends React.Component {
             choosePicDialog: false,
             chooseTimeDialog: false,
             choosePayDialog: false,
+            chooseNewAddr: false,
             
             sumDiv: 0,
             allPrice: 0,
@@ -487,6 +385,11 @@ class RenderCart extends React.Component {
             },
             errorOpen: false,
             orderCheck: false,
+            
+            newAddrInfo: null,
+            newAddrPD: 0,
+            newAddrET: 0,
+            newAddrKV: 0,
             
             orderType: 0,
             orderAddr: null,
@@ -530,7 +433,7 @@ class RenderCart extends React.Component {
                     
                     this.setState({
                         orderType: cartData.orderType,
-                        orderAddr: cartData.orderAddr,
+                        orderAddr: cartData.orderAddr && cartData.orderAddr.id == -1 ? null : cartData.orderAddr,
                         orderPic: cartData.orderPic,
                         orderComment: cartData.orderComment,
                         
@@ -554,7 +457,7 @@ class RenderCart extends React.Component {
                         }
                     }, 300)
                     
-                    if( cartData.orderType == 0 && cartData.orderAddr && cartData.orderAddr.id ){
+                    if( cartData.orderType == 0 && cartData.orderAddr && cartData.orderAddr.id && cartData.orderAddr.id !== -1 ){
                         let allPrice = itemsStore.getAllPrice();
                         
                         if( parseInt(cartData.orderAddr.free_drive) == 1 ){
@@ -809,7 +712,12 @@ class RenderCart extends React.Component {
         
         this.setState({
             orderAddr: thisitem,
-            chooseAddr: false
+            chooseAddr: false,
+            
+            newAddrInfo: null,
+            newAddrPD: 0,
+            newAddrET: 0,
+            newAddrKV: 0,
         })
         
         this.saveData();
@@ -945,6 +853,44 @@ class RenderCart extends React.Component {
                 orderSdacha: this.state.orderSdacha,
                 
             };
+            
+            itemsStore.saveCartData(data);
+        }, 500)
+    }
+    
+    saveDataCustomAddr(){
+        setTimeout(()=>{
+            let data = {
+                orderType: this.state.orderType,
+                orderAddr: {
+                    id: -1,
+                    city_name: itemsStore.getCityRU(),
+                    street: this.state.newAddrInfo ? this.state.newAddrInfo.street : '',
+                    home: this.state.newAddrInfo ? this.state.newAddrInfo.home : '',
+                    kv: this.state.newAddrKV,
+                    pd: this.state.newAddrPD,
+                    et: this.state.newAddrET,
+                    dom_true: 0,
+                    free_drive: this.state.newAddrInfo ? this.state.newAddrInfo.free_drive : 0,
+                    sum_div: this.state.newAddrInfo ? this.state.newAddrInfo.sum_div : 0,
+                    point_id: this.state.newAddrInfo ? this.state.newAddrInfo.point_id : 0,
+                    xy: this.state.newAddrInfo ? this.state.newAddrInfo.xy : '',
+                    pay_active: this.state.newAddrInfo ? this.state.newAddrInfo.pay_active : 0,
+                },
+                orderPic: this.state.orderPic,
+                orderComment: this.state.orderComment,
+                
+                orderTimes: this.state.orderTimes,
+                orderPredDay: this.state.orderPredDay,
+                orderPredTime: this.state.orderPredTime,
+                
+                orderPay: this.state.orderPay,
+                orderSdacha: this.state.orderSdacha,
+            };
+            
+            this.setState({
+                orderAddr: data.orderAddr
+            })
             
             itemsStore.saveCartData(data);
         }, 500)
@@ -1123,6 +1069,41 @@ class RenderCart extends React.Component {
         }
     }
     
+    checkNewAddr(){
+        let street = document.querySelector('#newAddrStreet').value;
+        
+        if( street.length > 0 ){
+            fetch('https://jacofood.ru/src/php/test_app.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/x-www-form-urlencoded'},
+                body: queryString.stringify({
+                    type: 'save_new_addr_web',  
+                    city_id: this.state.city_name,
+                    user_id: itemsStore.getToken(),
+                    street: street
+                })
+            }).then(res => res.json()).then(json => {
+                console.log( json )
+                
+                if( !json.st ){
+                    this.setState({
+                        error: {
+                            title: 'Предупреждение', 
+                            text: json.text
+                        },
+                        errorOpen: true
+                    })
+                }else{
+                    this.setState({
+                        newAddrInfo: json.data
+                    })
+                    this.saveDataCustomAddr()
+                }
+            });
+        }
+    }
+    
     render() {
         let this_pay = this.state.renderPay.find( (item) => item.type == this.state.orderPay );
         
@@ -1158,14 +1139,42 @@ class RenderCart extends React.Component {
                                 >
                                     <Typography variant="h5" component="span" className="newAddr">Новый адрес</Typography>
                                 </AccordionSummary>
-                                <AccordionDetails>
-                                    <Autocomplete
-                                        id="combo-box-demo"
-                                        options={top100Films}
-                                        getOptionLabel={(option) => option.title}
-                                        style={{ width: 300 }}
-                                        renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
-                                    />
+                                <AccordionDetails className="newAddr">
+                                    <div>
+                                        <Autocomplete
+                                            freeSolo
+                                            id="newAddrStreet"
+                                            style={{ width: '100%' }}
+                                            onBlur={this.checkNewAddr.bind(this)}
+                                            options={this.state.all_addr.map((option) => option.value)}
+                                            renderInput={(params) => (
+                                                <TextField {...params} label="Адрес" margin="normal" variant="outlined" />
+                                            )}
+                                        />
+                                    </div>
+                                    <div>
+                                        <TextField 
+                                            label="Подъезд" 
+                                            variant="outlined" 
+                                            value={this.state.newAddrPD} 
+                                            onChange={ event => this.setState({ newAddrPD: event.target.value }) }
+                                            onBlur={this.saveDataCustomAddr.bind(this)}
+                                        />
+                                        <TextField 
+                                            label="Этаж" 
+                                            variant="outlined" 
+                                            value={this.state.newAddrET} 
+                                            onChange={ event => this.setState({ newAddrET: event.target.value }) }
+                                            onBlur={this.saveDataCustomAddr.bind(this)}
+                                        />
+                                        <TextField 
+                                            label="Квартира" 
+                                            variant="outlined" 
+                                            value={this.state.newAddrKV} 
+                                            onChange={ event => this.setState({ newAddrKV: event.target.value }) }
+                                            onBlur={this.saveDataCustomAddr.bind(this)}
+                                        />  
+                                    </div>
                                 </AccordionDetails>
                             </Accordion>
                         </TabPanel>
@@ -1500,6 +1509,55 @@ class RenderCart extends React.Component {
                                 )}
                             </RadioGroup>
                         </FormControl>
+                        <Typography variant="h5" component="span" className="newAddr" onClick={ () => { this.setState({ chooseAddr: false, chooseNewAddr: true }) } } >Новый адрес</Typography>
+                    </DialogContent>
+                </Dialog>
+                
+                <Dialog
+                    open={this.state.chooseNewAddr}
+                    fullWidth={true}
+                    onClose={() => this.setState({ chooseNewAddr: false })}
+                    className="DialogChooseNewAddr"
+                >
+                    <Typography variant="h5" component="span" className="orderCheckTitle">Новый адрес</Typography>
+                    <FontAwesomeIcon className="closeDialog" onClick={() => this.setState({ chooseNewAddr: false })} icon={faTimes}/>
+                    <DialogContent>
+                        <div className="newAddrMobile">
+                            <Autocomplete
+                                freeSolo
+                                id="newAddrStreet"
+                                style={{ width: '100%' }}
+                                onBlur={this.checkNewAddr.bind(this)}
+                                options={this.state.all_addr.map((option) => option.value)}
+                                renderInput={(params) => (
+                                    <TextField {...params} label="Адрес" margin="normal" variant="outlined" />
+                                )}
+                            />
+                            <TextField 
+                                label="Подъезд" 
+                                variant="outlined" 
+                                style={{ width: '100%' }}
+                                value={this.state.newAddrPD} 
+                                onChange={ event => this.setState({ newAddrPD: event.target.value }) }
+                                onBlur={this.saveDataCustomAddr.bind(this)}
+                            />
+                            <TextField 
+                                label="Этаж" 
+                                variant="outlined" 
+                                style={{ width: '100%' }}
+                                value={this.state.newAddrET} 
+                                onChange={ event => this.setState({ newAddrET: event.target.value }) }
+                                onBlur={this.saveDataCustomAddr.bind(this)}
+                            />
+                            <TextField 
+                                label="Квартира" 
+                                variant="outlined" 
+                                style={{ width: '100%' }}
+                                value={this.state.newAddrKV} 
+                                onChange={ event => this.setState({ newAddrKV: event.target.value }) }
+                                onBlur={this.saveDataCustomAddr.bind(this)}
+                            />  
+                        </div>
                     </DialogContent>
                 </Dialog>
                 

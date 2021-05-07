@@ -4,6 +4,7 @@ const { Contact } = require( '../src/components/contact' );
 const { Actii } = require( '../src/components/actii' );
 const { Profile } = require( '../src/components/profile' );
 const { NotFound } = require( '../src/components/app' );
+const { Cart } = require( '../src/components/cart' );
 
 
 module.exports = [
@@ -52,6 +53,12 @@ module.exports = [
         path: '/:cityName/profile',
         exact: true,
         component: Profile,
+        code: 200
+    },
+    {
+        path: '/:cityName/cart',
+        exact: true,
+        component: Cart,
         code: 200
     },
     {
