@@ -387,9 +387,9 @@ class RenderCart extends React.Component {
             orderCheck: false,
             
             newAddrInfo: null,
-            newAddrPD: 0,
-            newAddrET: 0,
-            newAddrKV: 0,
+            newAddrPD: '',
+            newAddrET: '',
+            newAddrKV: '',
             
             orderType: 0,
             orderAddr: null,
@@ -715,9 +715,9 @@ class RenderCart extends React.Component {
             chooseAddr: false,
             
             newAddrInfo: null,
-            newAddrPD: 0,
-            newAddrET: 0,
-            newAddrKV: 0,
+            newAddrPD: '',
+            newAddrET: '',
+            newAddrKV: '',
         })
         
         this.saveData();
@@ -1530,12 +1530,12 @@ class RenderCart extends React.Component {
                                 onBlur={this.checkNewAddr.bind(this)}
                                 options={this.state.all_addr.map((option) => option.value)}
                                 renderInput={(params) => (
-                                    <TextField {...params} label="Адрес" margin="normal" variant="outlined" />
+                                    <TextField {...params} label="Адрес" margin="normal"  />
                                 )}
                             />
                             <TextField 
                                 label="Подъезд" 
-                                variant="outlined" 
+                                //variant="outlined" 
                                 style={{ width: '100%' }}
                                 value={this.state.newAddrPD} 
                                 onChange={ event => this.setState({ newAddrPD: event.target.value }) }
@@ -1543,7 +1543,7 @@ class RenderCart extends React.Component {
                             />
                             <TextField 
                                 label="Этаж" 
-                                variant="outlined" 
+                                //variant="outlined" 
                                 style={{ width: '100%' }}
                                 value={this.state.newAddrET} 
                                 onChange={ event => this.setState({ newAddrET: event.target.value }) }
@@ -1551,13 +1551,16 @@ class RenderCart extends React.Component {
                             />
                             <TextField 
                                 label="Квартира" 
-                                variant="outlined" 
+                                //variant="outlined" 
                                 style={{ width: '100%' }}
                                 value={this.state.newAddrKV} 
                                 onChange={ event => this.setState({ newAddrKV: event.target.value }) }
                                 onBlur={this.saveDataCustomAddr.bind(this)}
                             />  
                         </div>
+                        <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" onClick={() => this.setState({ chooseNewAddr: false })}>
+                            <Button variant="contained" className="BtnCardMain CardInCardItem">Использовать</Button>
+                        </ButtonGroup>
                     </DialogContent>
                 </Dialog>
                 

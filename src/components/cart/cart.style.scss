@@ -44,6 +44,13 @@ $mainColor: #BB0025;
         }
     }
 }
+.DialogChooseNewAddr div.BtnBorder{
+    width: 100%;
+    margin: 14px 0px;
+    & button{
+        width: 100%;
+    }
+}
 .orderCheckText{
     @include fons(1.2rem, $Ubuntu);
     padding-bottom: 10px;
@@ -127,10 +134,14 @@ $mainColor: #BB0025;
     margin: 16px;
     width: 100%;
 }
-.newAddrMobile > div{
-    margin: 10 0px;
-    & .MuiFormControl-marginNormal{
-        margin: 0!important;
+.newAddrMobile{
+    display: flex;
+    flex-direction: column;
+    & > div{
+        margin: 10 0px;
+        & .MuiFormControl-marginNormal{
+            margin: 0!important;
+        }
     }
 }
 .closeDialog{
