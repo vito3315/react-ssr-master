@@ -704,7 +704,7 @@ export class App extends React.Component {
         return (
             <Provider { ...stores }>
                 <div className="home">
-                    <AppBar position="fixed" className="header" style={{ zIndex: 1 }}>
+                    <AppBar position="fixed" className="header" style={{ zIndex: 2 }}>
                         <Toolbar className="sub_header">
                             
                             <Grid>

@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes, faPlus, faMinus, faRubleSign, faCreditCard, faMoneyBill, faCashRegister } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faPlus, faMinus, faRubleSign, faCreditCard, faMoneyBill, faCashRegister, faGift } from '@fortawesome/free-solid-svg-icons'
 
 import Hidden from '@material-ui/core/Hidden';
 
@@ -19,9 +19,6 @@ import Divider from '@material-ui/core/Divider';
 import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined';
 
 import Dialog from '@material-ui/core/Dialog';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogActions from '@material-ui/core/DialogActions';
 
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -29,17 +26,13 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Box from '@material-ui/core/Box';
 
 
 import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
@@ -49,10 +42,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
-
-import PersonIcon from '@material-ui/icons/Person';
-import AddIcon from '@material-ui/icons/Add';
-import { blue } from '@material-ui/core/colors';
 
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -67,7 +56,6 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Input from '@material-ui/core/Input';
 
 import Autocomplete from '@material-ui/lab/Autocomplete';
-
 
 import itemsStore from '../../stores/items-store';
 import { autorun } from "mobx"
@@ -125,6 +113,7 @@ class CartItem extends React.Component {
         
         this.state = {  
             item: this.props.item,
+            type: this.props.type,
             count: 0,
             onePrice: 0,
             allPrice: 0
@@ -135,6 +124,7 @@ class CartItem extends React.Component {
         this._isMounted = true; 
         
         let cartItems = itemsStore.getItems();
+        let promo_cartItems = itemsStore.getItemsPromo();
         let this_item = cartItems.find( (item) => item.item_id == this.state.item.id );
         
         if( this_item ){
@@ -148,20 +138,36 @@ class CartItem extends React.Component {
         autorun(() => {
             if( this._isMounted === true ){
                 let new_cartItems = itemsStore.getItems();
+                let promo_cartItems = itemsStore.getItemsPromo();
+                
+                if( promo_cartItems && promo_cartItems.length > 0 ){
+                    let this_item = promo_cartItems.find( (item) => item.item_id == this.state.item.id );
+                    
+                    if( this_item ){
+                        this.setState({
+                            count: this_item.count,
+                            onePrice: this_item.one_price,
+                            allPrice: this_item.all_price,
+                        })
+                    }
+                }
+                
                 let this_item = new_cartItems.find( (item) => item.item_id == this.state.item.id );
-            
-                if( this_item ){
-                    this.setState({
-                        count: this_item.count,
-                        onePrice: this_item.one_price,
-                        allPrice: this_item.all_price,
-                    })
-                }else{
-                    this.setState({
-                        count: 0,
-                        onePrice: 0,
-                        allPrice: 0,
-                    })
+                
+                if( this.state.type != 'promo' ){
+                    if( this_item ){
+                        this.setState({
+                            count: this_item.count,
+                            onePrice: this_item.one_price,
+                            allPrice: this_item.all_price,
+                        })
+                    }else{
+                        this.setState({
+                            count: 0,
+                            onePrice: 0,
+                            allPrice: 0,
+                        })
+                    }
                 }
             }
         })
@@ -189,29 +195,47 @@ class CartItem extends React.Component {
     }
     
     render() {
-        if( this.state.count > 0 || parseInt(this.state.item.cat_id) == 7 ){
+        if( parseInt(this.state.count) > 0 || parseInt(this.state.item.cat_id) == 7 ){
             return (
                 <tr>
-                    <td style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                    <td style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', position: 'relative' }}>
                         <img src={"https://newjacofood.ru/src/img/items/"+this.state.item.img+'?'+this.state.item.imgUpdate} />
-                    
+                        {this.state.type == 'promo' ? 
+                            <FontAwesomeIcon icon={faGift} className="promoIcon" />
+                                :
+                            null
+                        }
                         <div>
                             <Typography variant="h5" component="span" className="nameItem">{this.state.item.name}</Typography>
                             <Typography variant="h5" component="span" className="descItem">{this.state.item.desc}</Typography>
                         </div>
                     </td>
                     <td>
-                        <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="count">
-                            <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this, this.state.item.id)}>
-                                <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
-                            </Button>
-                            <Button variant="contained" className="BtnCardMain" >
-                                <Typography component="span" className="CardCountItem">{this.state.count}</Typography>
-                            </Button>
-                            <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this, this.state.item.id)}> 
-                                <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
-                            </Button>
-                        </ButtonGroup>
+                        {this.state.type != 'promo' ? 
+                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="count">
+                                <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this, this.state.item.id)}>
+                                    <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
+                                </Button>
+                                <Button variant="contained" className="BtnCardMain" >
+                                    <Typography component="span" className="CardCountItem">{this.state.count}</Typography>
+                                </Button>
+                                <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this, this.state.item.id)}> 
+                                    <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
+                                </Button>
+                            </ButtonGroup>
+                                :
+                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="count promo">
+                                <Button variant="contained" className="BtnCardMain">
+                                    <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
+                                </Button>
+                                <Button variant="contained" className="BtnCardMain" >
+                                    <Typography component="span" className="CardCountItem">{this.state.count}</Typography>
+                                </Button>
+                                <Button variant="contained" className="BtnCardMain"> 
+                                    <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
+                                </Button>
+                            </ButtonGroup>
+                        }
                     </td>
                     <td>
                         <Typography gutterBottom variant="h5" component="span" className="namePrice">{this.state.allPrice} <FontAwesomeIcon icon={faRubleSign} /></Typography>
@@ -234,6 +258,7 @@ class CartItemMobile extends React.Component {
         
         this.state = {  
             item: this.props.item,
+            type: this.props.type,
             count: 0,
             onePrice: 0,
             allPrice: 0
@@ -257,20 +282,36 @@ class CartItemMobile extends React.Component {
         autorun(() => {
             if( this._isMounted === true ){
                 let new_cartItems = itemsStore.getItems();
+                let promo_cartItems = itemsStore.getItemsPromo();
+                
+                if( promo_cartItems && promo_cartItems.length > 0 ){
+                    let this_item = promo_cartItems.find( (item) => item.item_id == this.state.item.id );
+                    
+                    if( this_item ){
+                        this.setState({
+                            count: this_item.count,
+                            onePrice: this_item.one_price,
+                            allPrice: this_item.all_price,
+                        })
+                    }
+                }
+                
                 let this_item = new_cartItems.find( (item) => item.item_id == this.state.item.id );
-            
-                if( this_item ){
-                    this.setState({
-                        count: this_item.count,
-                        onePrice: this_item.one_price,
-                        allPrice: this_item.all_price,
-                    })
-                }else{
-                    this.setState({
-                        count: 0,
-                        onePrice: 0,
-                        allPrice: 0,
-                    })
+                
+                if( this.state.type != 'promo' ){
+                    if( this_item ){
+                        this.setState({
+                            count: this_item.count,
+                            onePrice: this_item.one_price,
+                            allPrice: this_item.all_price,
+                        })
+                    }else{
+                        this.setState({
+                            count: 0,
+                            onePrice: 0,
+                            allPrice: 0,
+                        })
+                    }
                 }
             }
         })
@@ -302,20 +343,39 @@ class CartItemMobile extends React.Component {
             return (
                 <div className="boxItem">
                     <img src={"https://newjacofood.ru/src/img/items/"+this.state.item.img+'?'+this.state.item.imgUpdate} />
+                    {this.state.type == 'promo' ? 
+                        <FontAwesomeIcon icon={faGift} className="promoIcon" />
+                            :
+                        null
+                    }
                     <div>
                         <Typography variant="h5" component="span">{this.state.item.name}</Typography>
                         <div>
-                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="count">
-                                <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this, this.state.item.id)}>
-                                    <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
-                                </Button>
-                                <Button variant="contained" className="BtnCardMain" >
-                                    <Typography component="span" className="CardCountItem">{this.state.count}</Typography>
-                                </Button>
-                                <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this, this.state.item.id)}> 
-                                    <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
-                                </Button>
-                            </ButtonGroup>
+                            {this.state.type != 'promo' ? 
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="count">
+                                    <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this, this.state.item.id)}>
+                                        <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
+                                    </Button>
+                                    <Button variant="contained" className="BtnCardMain" >
+                                        <Typography component="span" className="CardCountItem">{this.state.count}</Typography>
+                                    </Button>
+                                    <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this, this.state.item.id)}> 
+                                        <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
+                                    </Button>
+                                </ButtonGroup>
+                                    :
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="count promo">
+                                    <Button variant="contained" className="BtnCardMain">
+                                        <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
+                                    </Button>
+                                    <Button variant="contained" className="BtnCardMain" >
+                                        <Typography component="span" className="CardCountItem">{this.state.count}</Typography>
+                                    </Button>
+                                    <Button variant="contained" className="BtnCardMain"> 
+                                        <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
+                                    </Button>
+                                </ButtonGroup>
+                            }
                             <Typography variant="h5" component="span" className="namePrice">{this.state.allPrice} <FontAwesomeIcon icon={faRubleSign} /></Typography>
                         </div>    
                     </div>
@@ -376,6 +436,7 @@ class RenderCart extends React.Component {
             cartItems_main: [],
             cartItems_dop: [],
             cartItems_need_dop: [],
+            cartItems_promo: [],
             
             timePred: [],
             
@@ -419,6 +480,8 @@ class RenderCart extends React.Component {
             })
         }).then(res => res.json()).then(json => {
                 
+            console.log( json )
+            
             this.setState({
                 pic_point: json.get_addr_pic.points,
                 my_addr: json.get_my_addr,
@@ -445,7 +508,7 @@ class RenderCart extends React.Component {
                         orderSdacha: cartData.orderSdacha
                     })
                     
-                    if( cartData.orderPredDay != '' ){
+                    if( parseInt(cartData.orderTimes) == 2 && cartData.orderPredDay != '' && ((cartData.orderAddr && cartData.orderAddr.id !== -1) || parseInt( cartData.orderPic ) > 0) ){
                         setTimeout(() => {
                             this.loadTimePred();   
                         }, 300)
@@ -478,7 +541,7 @@ class RenderCart extends React.Component {
                         if( type_order == 0 ){
                             if( type == 1 ){
                                 this.setState({
-                                    renderPay: this.state.pays.dev,
+                                    renderPay: cartData.orderAddr && parseInt(cartData.orderAddr.pay_active) == 1 ? this.state.pays.dev : this.state.pays.dev_mini,
                                 })
                             }else{
                                 this.setState({
@@ -523,6 +586,9 @@ class RenderCart extends React.Component {
         
         let cartItems = itemsStore.getItems();
         let allItems = itemsStore.getAllItems();
+        let promoItems = itemsStore.getItemsPromo();
+        
+        console.log( promoItems )
         
         let cartItems_new = [];
         
@@ -564,8 +630,12 @@ class RenderCart extends React.Component {
                 let cartItems = itemsStore.getItems();
                 let allItems = itemsStore.getAllItems();
                 let need_dop = itemsStore.check_need_dops();
+                let promoItems = itemsStore.getItemsPromo();
+                
+                console.log( promoItems )
                 
                 let cartItems_new = [];
+                let cartPromoItems = [];
                 
                 cartItems.map((item) => {
                     let thisitem = allItems.filter( (item_) => item_.id == item.item_id )[0];
@@ -617,6 +687,23 @@ class RenderCart extends React.Component {
                     }
                 })
                 
+                promoItems.map((item) => {
+                    let thisitem = allItems.find( (item_) => item_.id == item.item_id );
+                    
+                    if(thisitem){
+                        cartPromoItems.push({
+                            id: item.item_id,
+                            cat_id: thisitem.cat_id,
+                            name: thisitem.name,
+                            desc: thisitem.tmp_desc,
+                            count: item.count,
+                            allPrice: item.all_price,
+                            img: thisitem.img,
+                            imgUpdate: thisitem.img_date_update,
+                        })
+                    }
+                })
+                
                 this.setState({
                     cartItems_dop: []
                 })
@@ -625,9 +712,12 @@ class RenderCart extends React.Component {
                     cartItems_dop: dop_new,
                 })
                 
+                console.log( cartPromoItems )
+                
                 this.setState({
                     cartItems_main: main,
                     cartItems_need_dop: need_dop,
+                    cartItems_promo: cartPromoItems,
                     
                     sumDiv: itemsStore.getSumDiv(),
                     allPrice: itemsStore.getAllPrice()
@@ -673,7 +763,7 @@ class RenderCart extends React.Component {
         if( type_order == 0 ){
             if( type == 1 ){
                 this.setState({
-                    renderPay: this.state.pays.dev,
+                    renderPay: thisitem && parseInt(thisitem.pay_active) == 1 ? this.state.pays.dev : this.state.pays.dev_mini,
                 })
                 def_type = 'cash';
             }else{
@@ -697,7 +787,7 @@ class RenderCart extends React.Component {
     }
     
     changeAddr = (event) => {
-        let thisitem = this.state.my_addr.filter( (item) => item.id == event.target.value )[0];
+        let thisitem = this.state.my_addr.find( (item) => item.id == event.target.value );
         let allPrice = itemsStore.getAllPrice();
         
         if( parseInt(thisitem.free_drive) == 1 ){
@@ -708,6 +798,25 @@ class RenderCart extends React.Component {
             }
         }else{
             itemsStore.setSumDiv(parseInt(thisitem.sum_div));
+        }
+        
+        let type = this.state.orderTimes,
+            type_order = this.state.orderType;
+        
+        if( type_order == 0 ){
+            if( type == 1 ){
+                this.setState({
+                    renderPay: thisitem && parseInt(thisitem.pay_active) == 1 ? this.state.pays.dev : this.state.pays.dev_mini,
+                })
+            }else{
+                this.setState({
+                    renderPay: this.state.pays.dev_mini,
+                })
+            }
+        }else{
+            this.setState({
+                renderPay: this.state.pays.pic,
+            })
         }
         
         this.setState({
@@ -779,7 +888,7 @@ class RenderCart extends React.Component {
         if( type_order == 0 ){
             if( type == 1 ){
                 this.setState({
-                    renderPay: this.state.pays.dev,
+                    renderPay: this.state.orderAddr && parseInt(this.state.orderAddr.pay_active) == 1 ? this.state.pays.dev : this.state.pays.dev_mini,
                 });
                 def_type = 'cash';
             }else{
@@ -824,9 +933,14 @@ class RenderCart extends React.Component {
                 promo_name: this.state.orderPromo
             })
         }).then(res => res.json()).then(json => {
+            
+            console.log( json )
+            
             itemsStore.setPromo( JSON.stringify(json), this.state.orderPromo );
             let check_promo = itemsStore.checkPromo();
               
+            console.log( check_promo )
+            
             if( check_promo.st === false ){
                 localStorage.removeItem('promo_name')
             }
@@ -888,9 +1002,11 @@ class RenderCart extends React.Component {
                 orderSdacha: this.state.orderSdacha,
             };
             
-            this.setState({
-                orderAddr: data.orderAddr
-            })
+            if( data.orderAddr.street.length > 0 && data.orderAddr.home.length > 0 ){
+                this.setState({
+                    orderAddr: data.orderAddr
+                })
+            }
             
             itemsStore.saveCartData(data);
         }, 500)
@@ -986,7 +1102,7 @@ class RenderCart extends React.Component {
             
             if( type_order == 0 ){
                 this.setState({
-                    renderPay: this.state.pays.dev,
+                    renderPay: this.state.orderAddr && parseInt(this.state.orderAddr.pay_active) == 1 ? this.state.pays.dev : this.state.pays.dev_mini,
                 });
             }else{
                 this.setState({
@@ -1095,10 +1211,20 @@ class RenderCart extends React.Component {
                         errorOpen: true
                     })
                 }else{
-                    this.setState({
-                        newAddrInfo: json.data
-                    })
-                    this.saveDataCustomAddr()
+                    if( json.data.home == '' ){
+                        this.setState({
+                            error: {
+                                title: 'Предупреждение', 
+                                text: 'Номер дома не указан'
+                            },
+                            errorOpen: true
+                        })
+                    }else{
+                        this.setState({
+                            newAddrInfo: json.data
+                        })
+                        this.saveDataCustomAddr()
+                    }
                 }
             });
         }
@@ -1270,8 +1396,12 @@ class RenderCart extends React.Component {
                             <table className="tableCart">
                                 <tbody>
                                     {this.state.cartItems_main.map((item, key) =>
-                                        <CartItem key={key} item={item} />
+                                        <CartItem key={key} item={item} type="item" />
                                     )}
+                                    {this.state.cartItems_promo.map((item, key) =>
+                                        <CartItem key={key} item={item} type="promo" />
+                                    )}
+                                    
                                     <tr className="rowAboutDop">
                                         <td colSpan='3'>
                                             <Typography gutterBottom variant="h5" component="span" className="">Соевый соус, имбирь и васаби приобретаются отдельно!</Typography>
@@ -1280,7 +1410,7 @@ class RenderCart extends React.Component {
                                         </td>
                                     </tr>
                                     {this.state.cartItems_dop.map((item, key) =>
-                                        <CartItem key={key} item={item} />
+                                        <CartItem key={key} item={item} type="dop" />
                                     )}
                                 </tbody>
                                 <tfoot>
@@ -1441,7 +1571,11 @@ class RenderCart extends React.Component {
                         <div>
                             <div className="tableMobile">
                                 {this.state.cartItems_main.map((item, key) =>
-                                    <CartItemMobile key={key} item={item} />
+                                    <CartItemMobile key={key} item={item} type="item" />
+                                )}
+                                
+                                {this.state.cartItems_promo.map((item, key) =>
+                                    <CartItemMobile key={key} item={item} type="promo" />
                                 )}
                                 
                                 <div className="boxItem rowAboutDop">
@@ -1451,7 +1585,7 @@ class RenderCart extends React.Component {
                                 </div>
                                 
                                 {this.state.cartItems_dop.map((item, key) =>
-                                    <CartItemMobile key={key} item={item} />
+                                    <CartItemMobile key={key} item={item} type="dop" />
                                 )}
                                 
                                 
@@ -1477,16 +1611,17 @@ class RenderCart extends React.Component {
                 <Dialog
                     open={this.state.errorOpen}
                     onClose={() => this.setState({ errorOpen: false })}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
+                    className="DialogErr"
                 >
-                    <DialogTitle id="alert-dialog-title">{this.state.error.title}</DialogTitle>
+                    <Typography variant="h5" component="span" className="orderCheckTitle">{this.state.error.title}</Typography>
                     <FontAwesomeIcon className="closeDialog" onClick={() => this.setState({ errorOpen: false })} icon={faTimes}/>
                     <DialogContent>
-                        <DialogContentText id="alert-dialog-description">{this.state.error.text}</DialogContentText>
+                        <DialogContentText className="DialogErrText">{this.state.error.text}</DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={() => this.setState({ errorOpen: false })} color="primary">Хорошо</Button>
+                        <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" onClick={() => this.setState({ errorOpen: false })}>
+                            <Button variant="contained" className="BtnCardMain CardInCardItem">Хорошо</Button>
+                        </ButtonGroup>
                     </DialogActions>
                 </Dialog>
                 
@@ -1509,7 +1644,7 @@ class RenderCart extends React.Component {
                                 )}
                             </RadioGroup>
                         </FormControl>
-                        <Typography variant="h5" component="span" className="newAddr" onClick={ () => { this.setState({ chooseAddr: false, chooseNewAddr: true }) } } >Новый адрес</Typography>
+                        <Typography variant="h5" component="span" className="newAddrMobile" onClick={ () => { this.setState({ chooseAddr: false, chooseNewAddr: true }) } } >Новый адрес</Typography>
                     </DialogContent>
                 </Dialog>
                 
@@ -1626,6 +1761,9 @@ class RenderCart extends React.Component {
                                 </Select>
                             </FormControl>
                         </div>
+                        <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" onClick={() => this.setState({ chooseTimeDialog: false })}>
+                            <Button variant="contained" className="BtnCardMain CardInCardItem">Использовать</Button>
+                        </ButtonGroup>
                     </DialogContent>
                 </Dialog>
                 
@@ -1729,6 +1867,19 @@ class RenderCart extends React.Component {
                                             </tr>
                                                 :
                                             null
+                                    )}
+                                    {this.state.cartItems_promo.map((item, key) =>
+                                        <tr key={key}>
+                                            <td>
+                                                <Typography variant="h5" component="span" className="orderCheckText">{item.name}</Typography>
+                                            </td>
+                                            <td>
+                                                <Typography variant="h5" component="span" className="orderCheckText">{item.count}</Typography>
+                                            </td>
+                                            <td>
+                                                <Typography variant="h5" component="span" className="namePrice orderCheckText">{item.allPrice} <FontAwesomeIcon icon={faRubleSign} /></Typography>
+                                            </td>
+                                        </tr>
                                     )}
                                     { parseInt( this.state.orderType ) == 0 ?
                                         <tr>

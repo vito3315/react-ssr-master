@@ -5,6 +5,7 @@ const queryString = require('query-string');
 class ItemsStore {
   // Don't need decorators now
   items = '';
+  itemsPromo = '';
   allItems = '';
   allItemsCat = '';
   banners = '';
@@ -119,6 +120,7 @@ class ItemsStore {
 
   checkPromo(){
     let orderInfo = itemsStore.getCartData();
+    itemsStore.setItemsPromo([]);
     
     let tmp = 0,
         allPrice = 0,
@@ -403,8 +405,11 @@ class ItemsStore {
         
         tmp = 0;
         
-        allPrice = cart_new_promo.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
+        allPrice += cart_new_promo.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
         
+        console.log( 'need', allPrice )
+        
+        itemsStore.setItemsPromo(cart_new_promo);
         itemsStore.setAllPrice(allPrice);
       }
       
@@ -450,6 +455,14 @@ class ItemsStore {
   getBanners(){
     return this.banners.length == 0 ? [] : JSON.parse(this.banners, true);
   };
+  
+  setItemsPromo = (items) => {
+    this.itemsPromo = JSON.stringify(items);
+  };
+
+  getItemsPromo(){
+    return this.itemsPromo.length == 0 ? [] : JSON.parse(this.itemsPromo, true);
+  };
 
   setAllItemsCat = (items) => {
     this.allItemsCat = JSON.stringify(items);
@@ -463,7 +476,13 @@ class ItemsStore {
     let tmp = 0,
         allPrice = 0;
     
+    let cart_new_promo = this.getItemsPromo();
+        
     allPrice = items.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
+    
+    tmp = 0;
+        
+    allPrice += cart_new_promo.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
     
     this.setAllPrice(allPrice);
     

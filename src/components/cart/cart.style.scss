@@ -18,6 +18,24 @@ $mainColor: #BB0025;
         }
     }
 }
+div:not(.boxItem) .promoIcon{
+    font-size: 1.3rem;
+    position: absolute;
+    top: 10px;
+    left: 145px;
+    color: $mainColor;
+}
+div.boxItem .promoIcon{
+    font-size: 1.3rem;
+    position: absolute;
+    top: 10px;
+    left: 100px;
+    color: $mainColor;
+}
+.DialogErrText{
+    @include fons(1rem, $Ubuntu);
+    text-align: center;
+}
 .Mui-focused .MuiOutlinedInput-notchedOutline{
     border-color: $mainColor!important;
 }
@@ -44,12 +62,20 @@ $mainColor: #BB0025;
         }
     }
 }
-.DialogChooseNewAddr div.BtnBorder{
+.DialogChooseNewAddr div.BtnBorder, 
+.DialogChoosePicDialog div.BtnBorder,
+.DialogErr div.BtnBorder{
     width: 100%;
     margin: 14px 0px;
     & button{
         width: 100%;
     }
+}
+.DialogErr .MuiDialog-paper{
+    min-width: 300;
+}
+.DialogErr div.BtnBorder{
+    margin: 14px 14px;
 }
 .orderCheckText{
     @include fons(1.2rem, $Ubuntu);
@@ -295,6 +321,9 @@ $mainColor: #BB0025;
             flex-direction: column;
             padding-top: 20;
             padding-bottom: 20;
+            & > .boxItem{
+                position: relative;
+            }
             & > .boxItem:not(:last-child){
                 border-bottom: 1px solid #e5e5e5;
             }
@@ -329,9 +358,13 @@ $mainColor: #BB0025;
                         flex-direction: row;
                         justify-content: space-between;
                         align-items: center;
-                        & .BtnCardMain svg{
+                        & div:not(.promo) > .BtnCardMain svg{
                             @include fons(1.2rem, $Ubuntu);
                             color: $mainColor;
+                        }
+                        & div.promo > .BtnCardMain svg{
+                            @include fons(1.2rem, $Ubuntu);
+                            color: #e5e5e5;
                         }
                         & .BtnCardMain .CardCountItem{
                             @include fons(1.4rem, $Ubuntu);
@@ -510,8 +543,11 @@ $mainColor: #BB0025;
             & tbody tr{
                 border-bottom: 1px solid #e5e5e5;
             }
-            & .count svg{
+            & .count:not(.promo) svg{
                 color: $mainColor;
+            }
+            & .count.promo svg{
+                color: #e5e5e5;
             }
             & .rowAboutDop{
                 background-color: rgba(229, 229, 229, 0.3);
@@ -544,9 +580,16 @@ $mainColor: #BB0025;
             text-align: center;
         }
     }
-    & .newAddr{
-        @include fons(1rem, $Ubuntu);
-        color: $mainColor;
-        cursor: pointer;
-    }
+}
+.newAddr{
+    @include fons(1rem, $Ubuntu);
+    color: $mainColor;
+    cursor: pointer;
+}
+.newAddrMobile{
+    @include fons(1.2rem, $Ubuntu);
+    color: $mainColor;
+    cursor: pointer;
+    padding: 10px;
+    text-align: center;
 }
