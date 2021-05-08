@@ -127,7 +127,7 @@ module.exports = {
     },
 
     // generate source map
-    devtool: ( 'development' === process.env.NODE_ENV ? 'eval-source-map' : 'eval' ),
-    //devtool: 'source-map'
+    //devtool: ( 'development' === process.env.NODE_ENV ? 'eval-source-map' : 'eval' ),
+    devtool: 'source-map'
 
 };
