@@ -37,7 +37,6 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import Hidden from '@material-ui/core/Hidden';
 
 import Popover from '@material-ui/core/Popover';
-import * as Scroll from 'react-scroll';
 import { Link as ScrollLink } from "react-scroll";
 
 const queryString = require('query-string');
@@ -56,54 +55,82 @@ import { autorun } from "mobx"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUtensils, faUser, faPlus, faMinus, faGift, faMapMarkerAlt, faRubleSign } from '@fortawesome/free-solid-svg-icons'
+import { faInstagram, faFacebookF, faOdnoklassniki, faVk, faTelegramPlane } from '@fortawesome/free-brands-svg-icons'
 
 class CustomBottomNavigation extends React.Component{
+    constructor(props) {
+        super(props);
+        
+        this.state = {      
+            allPrice: 0,
+            thisPage: ''
+        };
+    }
+    
+    componentDidMount = () => {
+        autorun(() => {
+            this.setState({
+                allPrice: itemsStore.getSumDiv() + itemsStore.getAllPrice(),
+                thisPage: itemsStore.getPage()
+            })
+        })
+    }
+    
+    shouldComponentUpdate(nextProps, nextState) {
+        return (
+            this.state.allPrice !== nextState.allPrice ||
+            this.state.thisPage !== nextState.thisPage
+        );
+    }
+    
     render(){
+        let this_city = itemsStore.getCity();
+        
         return(
             <div className="bottomNavigate">
                 <Link
-                    to={'/'+itemsStore.getCity()+'/'}
+                    to={'/'+this_city+'/'}
                     exact={ true }
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                 >
-                    <FontAwesomeIcon icon={ faUtensils } style={{ color: itemsStore.getPage() == 'home' ? 'black' : 'gray' }} />
+                    <FontAwesomeIcon icon={ faUtensils } style={{ color: this.state.thisPage == 'home' ? 'black' : 'gray' }} />
                 </Link>
                 <Link
-                    to={'/'+itemsStore.getCity()+'/actii'}
+                    to={'/'+this_city+'/actii'}
                     exact={ true }
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                 >
-                    <FontAwesomeIcon icon={ faGift } style={{ color: itemsStore.getPage() == 'actii' ? 'black' : 'gray' }} />
+                    <FontAwesomeIcon icon={ faGift } style={{ color: this.state.thisPage == 'actii' ? 'black' : 'gray' }} />
                 </Link>
                 <Link
-                    to={'/'+itemsStore.getCity()+'/cart'}
+                    to={'/'+this_city+'/cart'}
                     exact={ true }
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                 >
-                    <Badge badgeContent={itemsStore.getAllPrice()} max={500000} color="primary">
-                        <ShoppingCartOutlinedIcon style={{ fill: itemsStore.getPage() == 'cart' ? 'black' : 'gray' }} />
+                    <Badge badgeContent={ this.state.allPrice } max={500000} color="primary">
+                        <ShoppingCartOutlinedIcon style={{ fill: this.state.thisPage == 'cart' ? 'black' : 'gray' }} />
                     </Badge>
                 </Link>
                 <Link
-                    to={'/'+itemsStore.getCity()+'/contact'}
+                    to={'/'+this_city+'/contact'}
                     exact={ true }
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                 >
-                    <FontAwesomeIcon icon={ faMapMarkerAlt } style={{ color: itemsStore.getPage() == 'contact' ? 'black' : 'gray' }} />
+                    <FontAwesomeIcon icon={ faMapMarkerAlt } style={{ color: this.state.thisPage == 'contact' ? 'black' : 'gray' }} />
                 </Link>
                 {itemsStore.getToken() ?
                     <Link
-                        to={'/'+itemsStore.getCity()+'/profile'}
+                        to={'/'+this_city+'/profile'}
                         exact={ true }
                         className="MuiButtonBase-root MuiBottomNavigationAction-root"
                     >
-                        <FontAwesomeIcon icon={ faUser } style={{ color: itemsStore.getPage() == 'profile' ? 'black' : 'gray' }} />
+                        <FontAwesomeIcon icon={ faUser } style={{ color: this.state.thisPage == 'profile' ? 'black' : 'gray' }} />
                     </Link>
                         :
                     <Typography 
                         className="MuiButtonBase-root MuiBottomNavigationAction-root" 
                         onClick={this.props.login}>
-                            <FontAwesomeIcon icon={ faUser } style={{ color: itemsStore.getPage() == 'profile' ? 'black' : 'gray' }} />
+                            <FontAwesomeIcon icon={ faUser } style={{ color: this.state.thisPage == 'profile' ? 'black' : 'gray' }} />
                     </Typography>
                 }
             </div>
@@ -135,33 +162,125 @@ export function NotFound() {
   );
 }
 
-function StickyFooter() {
-    return (
-        <footer className="footer">
-            <Grid container className="mainContainer">
-                <Grid item lg={3} md={3} sm={3} xl={3} xs={12}>
-                    <Typography variant="body1">Жако роллы и пицца — сеть кафе</Typography>
-                    <Typography variant="body1">© Жако 2017 - {new Date().getFullYear()}</Typography>
+class StickyFooter extends React.Component{
+    constructor(props) {
+        super(props);
+        
+        this.state = {      
+            soc_link: null,
+            cityName: ''
+        };
+    }
+    
+    loadPageInfo(){
+        if( itemsStore.getCity() ){
+            fetch('https://jacofood.ru/src/php/test_app.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/x-www-form-urlencoded'},
+                body: queryString.stringify({
+                    type: 'get_page_info', 
+                    city_id: itemsStore.getCity(),
+                    page: 'info'
+                })
+            }).then(res => res.json()).then(json => {
+                console.log( json )
+                
+                this.setState({
+                    soc_link: json.soc_link,
+                });
+            })
+            .catch(err => { });
+        }
+    }
+    
+    componentDidMount = () => {
+        autorun(() => {
+            this.setState({
+                cityName: itemsStore.getCity()
+            })
+            
+            this.loadPageInfo();
+        })
+    }
+    
+    render(){
+        return (
+            <footer className="footer">
+                <Grid container className="mainContainer">
+                    <Grid item lg={3} md={3} sm={3} xl={3} xs={12}>
+                        <Typography variant="body1">Жако роллы и пицца — сеть кафе</Typography>
+                        <Typography variant="body1">© Жако 2017 - {new Date().getFullYear()}</Typography>
+                    </Grid>
+                    <Grid item lg={3} md={3} sm={3} xl={3} xs={12}>
+                        <Typography variant="body1">О Компании</Typography>
+                        <Typography variant="body1">Вакансии</Typography>
+                        <Typography variant="body1">Публичная оферта</Typography>
+                    </Grid>
+                    <Grid item lg={3} md={3} sm={3} xl={3} xs={12}>
+                        <Typography variant="body1">Политика конфиденциальности</Typography>
+                        <Typography variant="body1">Доставка и контакты</Typography>
+                        <Typography variant="body1">Правила оплаты товаров</Typography>
+                    </Grid>
+                    <Grid item lg={3} md={3} sm={3} xl={3} xs={12} className="socIcons">
+                        { this.state.soc_link && this.state.soc_link.link_fb ?
+                            <Link
+                                to={{ pathname: this.state.soc_link.link_fb }}
+                                target="_blank"
+                                style={{ textDecoration: 'none' }}
+                            >
+                                <FontAwesomeIcon icon={faFacebookF} style={{ fontSize: '2rem', padding: 10 }} />
+                            </Link>
+                                :
+                            null
+                        }
+                        { this.state.soc_link && this.state.soc_link.link_inst ?
+                            <Link
+                                to={{ pathname: this.state.soc_link.link_inst }}
+                                target="_blank"
+                                style={{ textDecoration: 'none' }}
+                            >
+                                <FontAwesomeIcon icon={faInstagram} style={{ fontSize: '2rem', padding: 10 }} />
+                            </Link>
+                                :
+                            null
+                        }
+                        { this.state.soc_link && this.state.soc_link.link_ok ?
+                            <Link
+                                to={{ pathname: this.state.soc_link.link_ok }}
+                                target="_blank"
+                                style={{ textDecoration: 'none' }}
+                            >
+                                <FontAwesomeIcon icon={faOdnoklassniki} style={{ fontSize: '2rem', padding: 10 }} />
+                            </Link>
+                                :
+                            null
+                        }
+                        { this.state.soc_link && this.state.soc_link.link_vk ?
+                            <Link
+                                to={{ pathname: this.state.soc_link.link_vk }}
+                                target="_blank"
+                                style={{ textDecoration: 'none' }}
+                            >
+                                <FontAwesomeIcon icon={faVk} style={{ fontSize: '2rem', padding: 10 }} />
+                            </Link>
+                                :
+                            null
+                        }
+                        
+                            <Link
+                                to={{ pathname: 'https://t.me/jacofood' }}
+                                target="_blank"
+                                style={{ textDecoration: 'none' }}
+                            >
+                                <FontAwesomeIcon icon={faTelegramPlane} style={{ fontSize: '2rem', padding: 10 }} />
+                            </Link>
+                                
+                    </Grid>
                 </Grid>
-                <Grid item lg={3} md={3} sm={3} xl={3} xs={12}>
-                    <Typography variant="body1">О Компании</Typography>
-                    <Typography variant="body1">Вакансии</Typography>
-                    <Typography variant="body1">Публичная оферта</Typography>
-                </Grid>
-                <Grid item lg={3} md={3} sm={3} xl={3} xs={12}>
-                    <Typography variant="body1">Политика конфиденциальности</Typography>
-                    <Typography variant="body1">Доставка и контакты</Typography>
-                    <Typography variant="body1">Правила оплаты товаров</Typography>
-                </Grid>
-                <Grid item lg={3} md={3} sm={3} xl={3} xs={12} className="socIcons">
-                    <InstagramIcon fontSize="small" />
-                    <InstagramIcon fontSize="small" />
-                    <FacebookIcon fontSize="small" />
-                    <FacebookIcon fontSize="small" />
-                </Grid>
-            </Grid>
-        </footer>
-    );
+            </footer>
+        );
+    }
 }
 
 class SimplePopover extends React.Component{
@@ -444,6 +563,8 @@ export class App extends React.Component {
             errPhone: '',
             errSMS: '',
             userName: '',
+            
+            soc_link: null
         };
     }
 
@@ -476,11 +597,9 @@ export class App extends React.Component {
                     is_load: true,
                 });
                 
-                console.log( itemsStore.userName )
+                
             })
             .catch(err => { });
-        }else{
-            
         }
     }  
     

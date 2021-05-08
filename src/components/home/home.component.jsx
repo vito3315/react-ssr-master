@@ -151,7 +151,7 @@ class CardItem extends React.Component {
                         <CardMedia
                             component="img"
                             alt={this.state.item.name}
-                            image={"https://newjacofood.ru/src/img_app/"+this.state.item.img_app+'?'+this.state.item.img_full_date_update}
+                            image={'https://jacofood.ru/src/img_app/'+this.state.item.img_app+'?'+this.state.item.img_app_update}
                             title={this.state.item.name}
                         />
                     </Grid>

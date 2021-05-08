@@ -39,6 +39,7 @@ class RenderActii extends React.Component {
             showItem: null,
             openDialog: false,
             city_name: this.props.cityName,
+            page: null
         };
     }
     
@@ -76,6 +77,27 @@ class RenderActii extends React.Component {
             }, 300);
         })
         .catch(err => { });
+        
+        fetch('https://jacofood.ru/src/php/test_app.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'},
+            body: queryString.stringify({
+                type: 'get_page_info', 
+                city_id: itemsStore.getCity(),
+                page: 'akcii'
+            })
+        }).then(res => res.json()).then(json => {
+            console.log( json )
+            this.setState({ 
+                page: json.page
+            });
+            initial_state = {
+                title: json.title,
+                description: json.description
+            }
+        })
+        .catch(err => { });
     }
     
     closeDialog(){
@@ -96,7 +118,7 @@ class RenderActii extends React.Component {
         return (
             <Grid container className="Actii mainContainer MuiGrid-spacing-xs-3">
                 <Grid item xs={12}>
-                    <Typography variant="h5" component="h1">Акции</Typography>
+                    <Typography variant="h5" component="h1">{ this.state.page && this.state.page.page_h ? this.state.page.page_h : '' }</Typography>
                 </Grid>
                 <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer">
                     {this.state.actii.map((item, key) =>
