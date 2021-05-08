@@ -211,6 +211,89 @@ div.boxItem .promoIcon{
         font-size: 0.9rem;
     }
 }
+.tableMobile{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20;
+    padding-bottom: 20;
+    & > .boxItem{
+        position: relative;
+    }
+    & > .boxItem:not(:last-child){
+        border-bottom: 1px solid #e5e5e5;
+    }
+    & > .boxItem.rowAboutDop{
+        padding: 10;
+        background-color: rgba(229, 229, 229, 0.3);
+        text-align: center;
+        & span{
+            @include fons(1rem, $Ubuntu);
+            color: $mainColor;
+            font-weight: bold;
+        }
+    }
+    &.OrderCheckDopDialog .boxItem:not(.rowAboutDop){
+        & img{
+            max-width: calc(100% / 5)!important;
+        }
+    }
+    & > .boxItem:not(.rowAboutDop){
+        display: flex; 
+        flex-direction: row;
+        padding: 10;
+        & img{
+            max-width: calc(100% / 2.6);
+        }
+        & > div{
+            display: flex; 
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+            & > span{
+                @include fons(1.2rem, $Ubuntu);
+                padding-left: 7px;
+            }
+            & > div{
+                display: flex; 
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                & div:not(.promo) > .BtnCardMain svg{
+                    @include fons(1.2rem, $Ubuntu);
+                    color: $mainColor;
+                }
+                & div.promo > .BtnCardMain svg{
+                    @include fons(1.2rem, $Ubuntu);
+                    color: #e5e5e5;
+                }
+                & .BtnCardMain .CardCountItem{
+                    @include fons(1.4rem, $Ubuntu);
+                }
+                & .namePrice{
+                    display: flex; 
+                    flex-direction: row;
+                    @include fons(1.4rem, $Ubuntu);
+                    & > svg{
+                        font-size: 1rem;
+                        padding-top: 9px;
+                        padding-left: 1px;
+                    }
+                }
+                & .namePriceOld{
+                    @include fons(0.85rem, $Ubuntu);
+                    color: rgb(187, 189, 192);
+                    font-weight: bold;
+                    text-decoration: line-through;
+                    padding-right: 12px;
+                    position: absolute;
+                    right: 0;
+                    bottom: 2.5rem;
+                }
+            }
+        }
+    }
+}
 .boxMobile_ input, .boxMobile_ .MuiInputBase-multiline{
     padding: 10px 14px!important;
     z-index: 1;
@@ -320,84 +403,6 @@ div.boxItem .promoIcon{
             & span{
                 @include fons(0.95rem, $Ubuntu);
                 color: rgb(187, 189, 192);
-            }
-        }
-        & .tableMobile{
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            padding-top: 20;
-            padding-bottom: 20;
-            & > .boxItem{
-                position: relative;
-            }
-            & > .boxItem:not(:last-child){
-                border-bottom: 1px solid #e5e5e5;
-            }
-            & > .boxItem.rowAboutDop{
-                padding: 10;
-                background-color: rgba(229, 229, 229, 0.3);
-                text-align: center;
-                & span{
-                    @include fons(1rem, $Ubuntu);
-                    color: $mainColor;
-                    font-weight: bold;
-                }
-            }
-            & > .boxItem:not(.rowAboutDop){
-                display: flex; 
-                flex-direction: row;
-                padding: 10;
-                & img{
-                    max-width: calc(100% / 2.6);
-                }
-                & > div{
-                    display: flex; 
-                    flex-direction: column;
-                    justify-content: space-between;
-                    width: 100%;
-                    & > span{
-                        @include fons(1.2rem, $Ubuntu);
-                        padding-left: 7px;
-                    }
-                    & > div{
-                        display: flex; 
-                        flex-direction: row;
-                        justify-content: space-between;
-                        align-items: center;
-                        & div:not(.promo) > .BtnCardMain svg{
-                            @include fons(1.2rem, $Ubuntu);
-                            color: $mainColor;
-                        }
-                        & div.promo > .BtnCardMain svg{
-                            @include fons(1.2rem, $Ubuntu);
-                            color: #e5e5e5;
-                        }
-                        & .BtnCardMain .CardCountItem{
-                            @include fons(1.4rem, $Ubuntu);
-                        }
-                        & .namePrice{
-                            display: flex; 
-                            flex-direction: row;
-                            @include fons(1.4rem, $Ubuntu);
-                            & > svg{
-                                font-size: 1rem;
-                                padding-top: 9px;
-                                padding-left: 1px;
-                            }
-                        }
-                        & .namePriceOld{
-                            @include fons(0.85rem, $Ubuntu);
-                            color: rgb(187, 189, 192);
-                            font-weight: bold;
-                            text-decoration: line-through;
-                            padding-right: 12px;
-                            position: absolute;
-                            right: 0;
-                            bottom: 2.5rem;
-                        }
-                    }
-                }
             }
         }
     }

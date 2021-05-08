@@ -33,15 +33,12 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 
 
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 import Hidden from '@material-ui/core/Hidden';
 
 import Popover from '@material-ui/core/Popover';
 import * as Scroll from 'react-scroll';
-import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
-
-var scroller = Scroll.scroller;
+import { Link as ScrollLink } from "react-scroll";
 
 const queryString = require('query-string');
 
@@ -52,18 +49,13 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import InputMask from "react-input-mask";
 import Badge from '@material-ui/core/Badge';
 import { Provider } from 'mobx-react';
-import { useStrict } from 'mobx';
 import itemsStore from '../../stores/items-store';
 const stores = { itemsStore };
 
 import { autorun } from "mobx"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUtensils, faUserCog, faUser, faShoppingCart, faShoppingBasket, faSortDown, faCaretLeft, faTrashAlt, faChevronRight, faPlus, faMinus, faCheck, faCheckCircle, faTimes, faGift, faMapMarkerAlt, faSpinner, faCrow, faSquare, faCheckSquare, faInfoCircle, faMoneyBill, faCreditCard, faRubleSign, faFire } from '@fortawesome/free-solid-svg-icons'
-
-var cart = {
-    allItems: []
-}
+import { faUtensils, faUser, faPlus, faMinus, faGift, faMapMarkerAlt, faRubleSign } from '@fortawesome/free-solid-svg-icons'
 
 class CustomBottomNavigation extends React.Component{
     render(){

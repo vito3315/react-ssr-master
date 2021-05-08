@@ -423,6 +423,7 @@ class RenderCart extends React.Component {
             chooseTimeDialog: false,
             choosePayDialog: false,
             chooseNewAddr: false,
+            orderCheckDop: false,
             
             sumDiv: 0,
             allPrice: 0,
@@ -1139,6 +1140,79 @@ class RenderCart extends React.Component {
         if( this.clickOrderStart == false ){
             this.clickOrderStart = true;
             
+            let new_cart = [];
+            let cartItems = itemsStore.getItems();
+            let allItems = itemsStore.getAllItems();
+            
+            cartItems.forEach( (item) => {
+                if( item.count > 0 ){
+                    new_cart.push({
+                        name: item.name,
+                        count: item.count,
+                        price: item.all_price,
+                        id: item.item_id,
+                        cat_id: allItems.find( (item_) => item_.id == item.item_id )['cat_id']
+                    })
+                }
+            })
+            
+            let check_need_dop = false;
+            let check_dop_17 = false;
+            let check_dop_19 = false;
+            
+            new_cart.forEach( (item) => {
+                if( 
+                    (parseInt(item.cat_id) == 3 
+                        || 
+                    parseInt(item.cat_id) == 4 
+                        || 
+                    parseInt(item.cat_id) == 9 
+                        ||
+                    parseInt(item.cat_id) == 10 
+                        ||
+                    parseInt(item.cat_id) == 12
+                        ||
+                    parseInt(item.cat_id) == 13)
+                        && 
+                    parseInt(item.count) > 0
+                ){
+                    check_need_dop = true;
+                }
+                
+                if( parseInt(item.item_id) == 17 && parseInt(item.count) > 0 ){
+                    check_dop_17 = true;
+                }
+                
+                if( parseInt(item.item_id) == 19 && parseInt(item.count) > 0 ){
+                    check_dop_19 = true;
+                }
+              });
+              
+              if( (check_need_dop && check_dop_17 == false) || (check_need_dop && check_dop_19 == false) ){
+                
+                this.setState({
+                    orderCheckDop: true
+                })
+                
+                setTimeout(()=>{
+                    this.clickOrderStart = false;    
+                }, 300)
+                
+                return;
+            }
+            
+            this.startOrderNext();
+        }
+    }
+    
+    startOrderNext(){
+        if( this.clickOrderStart == false ){
+            this.clickOrderStart = true;
+            
+            this.setState({ 
+                orderCheckDop: false 
+            })
+            
             let payFull = this.state.renderPay.find( (item) => item.type == this.state.orderPay );
             let new_cart = [];
             let cartItems = itemsStore.getItems();
@@ -1807,6 +1881,28 @@ class RenderCart extends React.Component {
                             </ListItem>
                         )}
                     </List>
+                </Dialog>
+                
+                <Dialog
+                    open={this.state.orderCheckDop}
+                    fullWidth={true}
+                    onClose={this.startOrderNext.bind(this)}
+                    className="DialogOrderCheckDopDialog"
+                >
+                    <Typography variant="h5" component="span" className="orderCheckTitle">А как же палочки и соевый соус ?</Typography>
+                    <FontAwesomeIcon className="closeDialog" onClick={this.startOrderNext.bind(this)} icon={faTimes}/>
+                    <DialogContent>
+                        <div className="tableMobile OrderCheckDopDialog">
+                            {this.state.cartItems_dop.map((item, key) =>
+                                <CartItemMobile key={key} item={item} type="dop" />
+                            )}
+                        </div>
+                    </DialogContent>
+                    <DialogActions style={{ padding: '12px 24px', paddingBottom: 24 }}>
+                        <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" style={{ width: '100%' }} onClick={this.startOrderNext.bind(this)}>
+                            <Button variant="contained" style={{ width: '100%' }} className="BtnCardMain CardInCardItem">Продолжить</Button>
+                        </ButtonGroup>
+                    </DialogActions>
                 </Dialog>
                 
                 { this.state.orderCheck === true ?
