@@ -24,6 +24,29 @@ export function Actii() {
   
     itemsStore.setCity(cityName);
   
+    function fetchData() {
+        console.log( 'Post.fetchData()' );
+
+        fetch('https://jacofood.ru/src/php/test_app.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'},
+            body: queryString.stringify({
+                type: 'get_page_info', 
+                city_id: cityName,
+                page: 'akcii'
+            })
+        }).then(res => res.json()).then(json => {
+            
+            return {
+                title: json.title,
+                description: json.description,
+                body: json.description,
+            };
+        })
+        .catch(err => { });
+    }
+    
     return (
         <RenderActii cityName={cityName} />
     );
