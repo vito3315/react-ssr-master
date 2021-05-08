@@ -4,6 +4,7 @@ const path = require( 'path' );
 const React = require( 'react' );
 const ReactDOMServer = require( 'react-dom/server' );
 const { StaticRouter, matchPath } = require( 'react-router-dom' );
+const {Helmet} = require("react-helmet");
 
 // create express application
 const app = express();
@@ -24,15 +25,12 @@ app.use( '*', async ( req, res ) => {
     const matchRoute = routes.find( route => matchPath( req.originalUrl, route ) );
 
     if( matchRoute ){
-        console.log( 'matchRoute', matchRoute )
         // fetch data of the matched component
         let componentData = null;
         if( typeof matchRoute.component.fetchData === 'function' ) {
             componentData = await matchRoute.component.fetchData();
         }
 
-        console.log( 'componentData', componentData )
-        
         // read `index.html` file
         let indexHTML = fs.readFileSync( path.resolve( __dirname, '../dist/index.html' ), {
             encoding: 'utf8',
@@ -45,6 +43,13 @@ app.use( '*', async ( req, res ) => {
             </StaticRouter>
         );
 
+        const helmet = Helmet.renderStatic();
+        
+        indexHTML = indexHTML.replace(
+            '<!-- title -->',
+            `${helmet.title.toString()}`
+        );
+        
         // populate `#app` element with `appHTML`
         indexHTML = indexHTML.replace( '<div id="app"></div>', `<div id="app">${ appHTML }</div>` );
 
@@ -63,6 +68,6 @@ app.use( '*', async ( req, res ) => {
 } );
 
 // run express server on port 9000
-app.listen( '7979', () => {
-    console.log( 'Express server started at http://localhost:7979' );
+app.listen( '7987', () => {
+    console.log( 'Express server started at http://localhost:7987' );
 } );

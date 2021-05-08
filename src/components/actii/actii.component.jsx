@@ -15,6 +15,8 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 
+import {Helmet} from "react-helmet";
+
 import itemsStore from '../../stores/items-store';
 
 const queryString = require('query-string');
@@ -24,29 +26,6 @@ export function Actii() {
   
     itemsStore.setCity(cityName);
   
-    function fetchData() {
-        console.log( 'Post.fetchData()' );
-
-        fetch('https://jacofood.ru/src/php/test_app.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/x-www-form-urlencoded'},
-            body: queryString.stringify({
-                type: 'get_page_info', 
-                city_id: cityName,
-                page: 'akcii'
-            })
-        }).then(res => res.json()).then(json => {
-            
-            return {
-                title: json.title,
-                description: json.description,
-                body: json.description,
-            };
-        })
-        .catch(err => { });
-    }
-    
     return (
         <RenderActii cityName={cityName} />
     );
@@ -163,6 +142,13 @@ class RenderActii extends React.Component {
     render() {
         return (
             <Grid container className="Actii mainContainer MuiGrid-spacing-xs-3">
+                
+                <Helmet>
+                    <meta charSet="utf-8" />
+                    <title>My Title</title>
+                    <link rel="canonical" href="http://mysite.com/example" />
+                </Helmet>
+                
                 <Grid item xs={12}>
                     <Typography variant="h5" component="h1">{ this.state.page && this.state.page.page_h ? this.state.page.page_h : '' }</Typography>
                 </Grid>
