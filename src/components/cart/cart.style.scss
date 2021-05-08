@@ -279,6 +279,13 @@ div.boxItem .promoIcon{
                         padding-left: 1px;
                     }
                 }
+                & .namePriceOld{
+                    @include fons(0.85rem, $Ubuntu);
+                    color: rgb(187, 189, 192);
+                    font-weight: bold;
+                    text-decoration: line-through;
+                    padding-right: 12px;
+                }
             }
             & > div:last-child > div{
                 width: 100%;
@@ -378,6 +385,16 @@ div.boxItem .promoIcon{
                                 padding-top: 9px;
                                 padding-left: 1px;
                             }
+                        }
+                        & .namePriceOld{
+                            @include fons(0.85rem, $Ubuntu);
+                            color: rgb(187, 189, 192);
+                            font-weight: bold;
+                            text-decoration: line-through;
+                            padding-right: 12px;
+                            position: absolute;
+                            right: 0;
+                            bottom: 2.5rem;
                         }
                     }
                 }
@@ -527,6 +544,13 @@ div.boxItem .promoIcon{
                     font-size: 1rem;
                     padding-left: 2px;
                 }
+            }
+            & .namePriceOld{
+                @include fons(0.85rem, $Ubuntu);
+                color: rgb(187, 189, 192);
+                font-weight: bold;
+                text-decoration: line-through;
+                padding-right: 12px;
             }
             & img{
                 height: 100px;

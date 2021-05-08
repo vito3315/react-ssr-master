@@ -474,6 +474,7 @@ export class App extends React.Component {
                 itemsStore.setDops(json.need_dop);
                 itemsStore.setAllItems(json.all_items);
                 itemsStore.setAllItemsCat(json.arr);
+                itemsStore.setFreeItems(json.free_items);
                 itemsStore.setBanners(json.baners)
                 itemsStore.setCityRU(json.this_city_name_ru);
                 

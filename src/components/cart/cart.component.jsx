@@ -116,6 +116,7 @@ class CartItem extends React.Component {
             type: this.props.type,
             count: 0,
             onePrice: 0,
+            new_onePrice: -1,
             allPrice: 0
         };
     }
@@ -160,12 +161,14 @@ class CartItem extends React.Component {
                             count: this_item.count,
                             onePrice: this_item.one_price,
                             allPrice: this_item.all_price,
+                            new_onePrice: this_item.new_one_price ? this_item.new_one_price : -1
                         })
                     }else{
                         this.setState({
                             count: 0,
                             onePrice: 0,
                             allPrice: 0,
+                            new_onePrice: -1
                         })
                     }
                 }
@@ -238,6 +241,11 @@ class CartItem extends React.Component {
                         }
                     </td>
                     <td>
+                        { this.state.new_onePrice != -1 ?
+                            <Typography gutterBottom variant="h5" component="span" className="namePriceOld">{ parseInt(this.state.count) * parseInt(this.state.onePrice) }</Typography>
+                                :
+                            null
+                        }
                         <Typography gutterBottom variant="h5" component="span" className="namePrice">{this.state.allPrice} <FontAwesomeIcon icon={faRubleSign} /></Typography>
                     </td>
                 </tr>
@@ -261,7 +269,8 @@ class CartItemMobile extends React.Component {
             type: this.props.type,
             count: 0,
             onePrice: 0,
-            allPrice: 0
+            allPrice: 0,
+            new_onePrice: -1
         };
     }
     
@@ -304,12 +313,14 @@ class CartItemMobile extends React.Component {
                             count: this_item.count,
                             onePrice: this_item.one_price,
                             allPrice: this_item.all_price,
+                            new_onePrice: this_item.new_one_price ? this_item.new_one_price : -1
                         })
                     }else{
                         this.setState({
                             count: 0,
                             onePrice: 0,
                             allPrice: 0,
+                            new_onePrice: -1
                         })
                     }
                 }
@@ -376,6 +387,13 @@ class CartItemMobile extends React.Component {
                                     </Button>
                                 </ButtonGroup>
                             }
+                            
+                            { this.state.new_onePrice != -1 ?
+                                <Typography gutterBottom variant="h5" component="span" className="namePriceOld">{ parseInt(this.state.count) * parseInt(this.state.onePrice) }</Typography>
+                                    :
+                                null
+                            }
+                            
                             <Typography variant="h5" component="span" className="namePrice">{this.state.allPrice} <FontAwesomeIcon icon={faRubleSign} /></Typography>
                         </div>    
                     </div>
@@ -588,8 +606,6 @@ class RenderCart extends React.Component {
         let allItems = itemsStore.getAllItems();
         let promoItems = itemsStore.getItemsPromo();
         
-        console.log( promoItems )
-        
         let cartItems_new = [];
         
         if( cartItems.length > 0 && allItems.length > 0 ){
@@ -631,8 +647,6 @@ class RenderCart extends React.Component {
                 let allItems = itemsStore.getAllItems();
                 let need_dop = itemsStore.check_need_dops();
                 let promoItems = itemsStore.getItemsPromo();
-                
-                console.log( promoItems )
                 
                 let cartItems_new = [];
                 let cartPromoItems = [];
@@ -711,8 +725,6 @@ class RenderCart extends React.Component {
                 this.setState({
                     cartItems_dop: dop_new,
                 })
-                
-                console.log( cartPromoItems )
                 
                 this.setState({
                     cartItems_main: main,

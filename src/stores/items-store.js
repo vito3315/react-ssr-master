@@ -22,7 +22,7 @@ class ItemsStore {
   activePage = '';
 
   need_dops = '';
-  
+  free_items = '';
   cart_data = '';
   
   setSumDiv = (items) => {
@@ -39,6 +39,14 @@ class ItemsStore {
 
   getDops(){
     return this.need_dops.length == 0 ? [] : JSON.parse(this.need_dops, true);
+  };
+  
+  setFreeItems = (items) => {
+    this.free_items = JSON.stringify(items);
+  };
+
+  getFreeItems(){
+    return this.free_items.length == 0 ? [] : JSON.parse(this.free_items, true);
   };
   
   setCityRU = (city) => {
@@ -259,6 +267,25 @@ class ItemsStore {
         }
       }
       
+      if( promo_info.limits.items.length > 0 ){
+        let check = 0;
+        let this_item = null;
+        
+        promo_info.limits.items.map((need_item)=>{
+          this_item = new_my_cart.find( (item) => item.item_id == need_item );
+          
+          if( this_item ){
+            check ++;
+          }
+        })
+        
+        if( promo_info.limits.items.length != check ){
+          return {
+            st: false,
+            text: promo_info.promo_text.false
+          }
+        }
+      }
       //
       
       
@@ -528,6 +555,7 @@ class ItemsStore {
   AddItem(id){
     let my_cart = itemsStore.getItems();
     let all_items = itemsStore.getAllItems();
+    let promo = itemsStore.getPromo();
     
     if( all_items.length > 0 ){
       let cart_info = my_cart.filter( (item) => item.item_id == id );
@@ -544,27 +572,37 @@ class ItemsStore {
         let count = parseInt(cart_info.count) + 1,
             price = item_info['price'];
           
-        let check_in_cart = my_cart.some( (item) => item.item_id == id );
-          if( !check_in_cart ){
-            my_cart.push({
-              name: item_info.name,
-              item_id: id,
-              count: count,
-              one_price: price,
-              all_price: count * price
-            })
-          }else{
-            my_cart.forEach((item, key) => {
-              if( item.item_id == id ){
-                my_cart[key]['count'] = count;
-                my_cart[key]['all_price'] = count * price;
-              }
-            });
+        let max_count = itemsStore.check_max_count( parseInt(id) );    
+        
+        if( parseInt(max_count) >= count ){
+          let check_in_cart = my_cart.some( (item) => item.item_id == id );
+            if( !check_in_cart ){
+              my_cart.push({
+                name: item_info.name,
+                item_id: id,
+                count: count,
+                one_price: price,
+                all_price: count * price
+              })
+            }else{
+              my_cart.forEach((item, key) => {
+                if( item.item_id == id ){
+                  my_cart[key]['count'] = count;
+                  my_cart[key]['all_price'] = count * price;
+                }
+              });
+            }
+          
+          itemsStore.setItems(my_cart);
+          
+          if( promo ){
+            itemsStore.checkPromo();
           }
+          
+          return count;
+        }
         
-        itemsStore.setItems(my_cart);
-        
-        return count;
+        return count - 1;
       }
     }else{
       return 0;
@@ -574,6 +612,7 @@ class ItemsStore {
   MinusItem(id){
     let my_cart = itemsStore.getItems();
     let all_items = itemsStore.getAllItems();
+    let promo = itemsStore.getPromo();
     
     if( all_items.length > 0 ){
       let cart_info = my_cart.find( (item) => item.item_id == id );
@@ -602,6 +641,10 @@ class ItemsStore {
         itemsStore.setItems(my_cart)
       }
     
+      if( promo ){
+        itemsStore.checkPromo();
+      }
+      
       return count;
     }else{
       return 0;
@@ -691,6 +734,65 @@ class ItemsStore {
     all_need_dops = [...all_need_dops, ...add_my_dop];
     
     return all_need_dops;
+  }
+  
+  check_max_count(item_id){
+    let free_dops_in_cart = [];
+    let unic_id = [];
+    
+    let my_cart = itemsStore.getItems();
+    let free_items = itemsStore.getFreeItems();
+    
+    if( !free_items ){
+      return 99;
+    }
+    
+    my_cart.forEach((item_cart, key) => {
+      free_items.forEach( (item) => {
+        if( parseInt(item_cart['item_id']) == parseInt(item['this_item_id']) ){
+          item['count_in_cart'] = parseInt(item_cart['count']);
+          
+          free_dops_in_cart.push( item );
+          unic_id.push( parseInt(item['item_id']) );
+        }
+      });
+    });
+    
+    unic_id = [...new Set(unic_id)];
+    
+    let new_free_dop = [];
+    
+    unic_id.forEach( (unic_item, key) => {
+      free_dops_in_cart.forEach( (item_free) => {
+        if( parseInt(unic_item) == parseInt(item_free['item_id']) ){
+          let check = false;
+          
+          new_free_dop.forEach( (el, k) => {
+            if( parseInt( el['item_id'] ) == parseInt(unic_item) ){
+              check = true;
+              new_free_dop[k]['count'] += item_free['count_in_cart'] * item_free['max_count'];
+            }
+          });
+          
+          if( !check ){
+            new_free_dop.push({
+              item_id: parseInt(unic_item),
+              count: item_free['count_in_cart'] * item_free['max_count']
+            });
+          }
+        }
+      })
+    });
+    
+    let max_count = 99;
+    
+    new_free_dop.forEach(el => {
+      if( parseInt( el['item_id'] ) == parseInt(item_id) ){
+        max_count = parseInt(el['count']);
+      }
+    });
+    
+    return max_count;
   }
   
   constructor() {
