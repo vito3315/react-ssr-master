@@ -24,12 +24,15 @@ app.use( '*', async ( req, res ) => {
     const matchRoute = routes.find( route => matchPath( req.originalUrl, route ) );
 
     if( matchRoute ){
+        console.log( 'matchRoute', matchRoute )
         // fetch data of the matched component
         let componentData = null;
         if( typeof matchRoute.component.fetchData === 'function' ) {
             componentData = await matchRoute.component.fetchData();
         }
 
+        console.log( 'componentData', componentData )
+        
         // read `index.html` file
         let indexHTML = fs.readFileSync( path.resolve( __dirname, '../dist/index.html' ), {
             encoding: 'utf8',
