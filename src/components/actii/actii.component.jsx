@@ -43,6 +43,29 @@ class RenderActii extends React.Component {
         };
     }
     
+    static fetchData() {
+        console.log( 'Post.fetchData()' );
+
+        fetch('https://jacofood.ru/src/php/test_app.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'},
+            body: queryString.stringify({
+                type: 'get_page_info', 
+                city_id: itemsStore.getCity(),
+                page: 'akcii'
+            })
+        }).then(res => res.json()).then(json => {
+            
+            return {
+                title: json.title,
+                description: json.description,
+                body: json.description,
+            };
+        })
+        .catch(err => { });
+    }
+    
     componentDidMount = () => {
         if( document.querySelector('.activeCat') ){
             document.querySelector('.activeCat').classList.remove('activeCat');
