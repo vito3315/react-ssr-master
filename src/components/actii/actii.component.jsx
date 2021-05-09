@@ -68,19 +68,11 @@ export class Actii extends React.Component {
         axios.post('https://jacofood.ru/src/php/test_app.php', data, {
             headers: { 'Content-Type':'application/x-www-form-urlencoded' },
         }).then(data =>
-            console.log(data)
+            console.log('data', data)
         ).catch(err => {
-            console.log(err)
-            return null
+            console.log('err', err)
+            //return null
         })
-        
-        axios.post('https://jacofood.ru/src/php/test_app.php', {
-            type: 'get_page_info', 
-            city_id: 'samara',
-            page: 'akcii' }
-        ).then(function(response) {
-            //code here 
-        });
         
         return axios.get( 'https://jsonplaceholder.typicode.com/posts/3' ).then( response => {
             return {
