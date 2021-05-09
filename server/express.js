@@ -43,12 +43,15 @@ app.use( '*', async ( req, res ) => {
             </StaticRouter>
         );
 
-        const helmet = Helmet.renderStatic();
+        //const helmet = Helmet.renderStatic();
         
         /*indexHTML = indexHTML.replace(
             '<!-- title -->',
             `${helmet.title.toString()}`
         );*/
+        
+        indexHTML = indexHTML.replace('<!-- title -->', `${componentData.title}`);
+        indexHTML = indexHTML.replace('<!-- description -->', `${componentData.description}`);
         
         // populate `#app` element with `appHTML`
         indexHTML = indexHTML.replace( '<div id="app"></div>', `<div id="app">${ appHTML }</div>` );
