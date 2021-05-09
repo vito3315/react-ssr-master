@@ -116,10 +116,14 @@ class RenderActii extends React.Component {
         return (
             <Grid container className="Actii mainContainer MuiGrid-spacing-xs-3">
                 
-                <Helmet>
-                    <title>{this.state.page.title}</title>
-                    <meta name="description" content={this.state.page.description} />
-                </Helmet>
+                {this.state.page ?
+                    <Helmet>
+                        <title>{this.state.page.title}</title>
+                        <meta name="description" content={this.state.page.description} />
+                    </Helmet>
+                        :
+                    null
+                }
                 
                 <Grid item xs={12}>
                     <Typography variant="h5" component="h1">{ this.state.page && this.state.page.page_h ? this.state.page.page_h : '' }</Typography>
