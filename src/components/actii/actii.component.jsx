@@ -51,11 +51,9 @@ export class Actii extends React.Component {
     }
     
     static fetchData(propsData) {
-        console.log( 'Post.fetchData()', propsData, this.props );
-
         let data = {
             type: 'get_page_info', 
-            city_id: 'samara',
+            city_id: get_city(propsData),
             page: 'akcii' 
         };
         
@@ -70,8 +68,7 @@ export class Actii extends React.Component {
                 
                 return {
                     title: json.page.title,
-                    description: json.page.description,
-                    data: json.data
+                    description: json.page.description
                 }
             } 
         }).catch(function (error) {
@@ -86,7 +83,7 @@ export class Actii extends React.Component {
         window.scrollTo(0, 0);
         itemsStore.setPage('actii');
         
-        /*fetch('https://jacofood.ru/src/php/test_app.php', {
+        fetch('https://jacofood.ru/src/php/test_app.php', {
             method: 'POST',
             headers: {
                 'Content-Type':'application/x-www-form-urlencoded'},
@@ -112,9 +109,7 @@ export class Actii extends React.Component {
                 }
             }, 300);
         })
-        .catch(err => { });*/
-        
-        
+        .catch(err => { });
     }
     
     closeDialog(){

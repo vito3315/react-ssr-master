@@ -59,10 +59,10 @@ app.use( '*', async ( req, res ) => {
         indexHTML = indexHTML.replace( '<div id="app"></div>', `<div id="app">${ appHTML }</div>` );
 
         // set value of `initial_state` global variable
-        indexHTML = indexHTML.replace(
+        /*indexHTML = indexHTML.replace(
             'var initial_state = null;',
             `var initial_state = ${ JSON.stringify( componentData ) };`
-        );
+        );*/
 
         // set header and status
         res.contentType( 'text/html' );
