@@ -52,8 +52,8 @@ app.use( '*', async ( req, res ) => {
         
         console.log( 'componentData', componentData )
         
-        //indexHTML = indexHTML.replace('<!-- title -->', `${componentData.title}`);
-        //indexHTML = indexHTML.replace('<!-- description -->', `${componentData.description}`);
+        indexHTML = indexHTML.replace('<!-- title -->', `${componentData.title}`);
+        indexHTML = indexHTML.replace('<!-- description -->', `${componentData.description}`);
         
         // populate `#app` element with `appHTML`
         indexHTML = indexHTML.replace( '<div id="app"></div>', `<div id="app">${ appHTML }</div>` );
