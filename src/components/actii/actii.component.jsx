@@ -37,6 +37,9 @@ export class Actii extends React.Component {
     constructor(props) {
         super(props);
         
+        console.log( 'location', props.location )
+        console.log( 'context', props.context )
+        
         this.state = {      
             actii: [],  
             is_load: false,
