@@ -64,6 +64,9 @@ export class Actii extends React.Component {
                 openDialog: false,
                 city_name: get_city(props.location.pathname),
             };
+            
+            window.initial_state = null;
+            
         } else {
             console.log( 'null' )
             this.state = {
