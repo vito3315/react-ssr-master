@@ -42,7 +42,8 @@ export class Actii extends React.Component {
         super(props);
         
         //console.log( 'location', props.location )
-        console.log( 'context', props.staticContext.data )
+        console.log( 'context', props.staticContext )
+        console.log( 'context', props.context )
         
         if( props.staticContext ) {
             this.state = {
@@ -92,7 +93,7 @@ export class Actii extends React.Component {
                 return {
                     title: json.page.title,
                     description: json.page.description,
-                    data: json.data.actii
+                    data: json.data
                 }
             } 
         }).catch(function (error) {
