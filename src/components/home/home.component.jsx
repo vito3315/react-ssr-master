@@ -14,6 +14,7 @@ import * as Scroll from 'react-scroll';
 var Element  = Scroll.Element;
 var scroller = Scroll.scroller;
 const queryString = require('query-string');
+import axios from 'axios';
 
 import itemsStore from '../../stores/items-store';
 import { autorun } from "mobx"
@@ -26,6 +27,10 @@ import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 
 const handleDragStart = (e) => e.preventDefault();
+
+function get_city(path){
+    return path.split('/')[1];
+}
 
 import { Item } from '../item';
 
@@ -190,17 +195,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export function Home() {
-    let { cityName } = useParams();
-  
-    itemsStore.setCity(cityName);
-  
-    return (
-        <RenderHome />
-    );
-}
-
-class RenderHome extends React.Component {
+export class Home extends React.Component {
     constructor(props) {
         super(props);
         
@@ -211,10 +206,41 @@ class RenderHome extends React.Component {
             openItem: null,
             openModal: false,
             banners_pc: [],
-            banners_mobile: []
+            banners_mobile: [],
+            city_name: props.match.params.cityName,
+            page: null
         };
+        
+        itemsStore.setCity(props.match.params.cityName);
     }
 
+    static fetchData(propsData) {
+        let data = {
+            type: 'get_page_info', 
+            city_id: get_city(propsData),
+            page: '' 
+        };
+        
+        return axios({
+            method: 'POST',
+            url:'https://jacofood.ru/src/php/test_app.php',
+            headers: { 'content-type': 'application/x-www-form-urlencoded' },
+            data: queryString.stringify(data)
+        }).then(response => {
+            if(response['status'] === 200){
+                var json = response['data'];
+                
+                return {
+                    title: json.page.title,
+                    description: json.page.description,
+                    page: json.page,
+                }
+            } 
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+    
     componentDidMount = () => {
         if (typeof window !== 'undefined') {
             setTimeout(() => {
@@ -232,6 +258,14 @@ class RenderHome extends React.Component {
                 }
             }, 2000);
         }
+        
+        Home.fetchData('/'+this.state.city_name).then( data => {
+            console.log( data )
+            
+            this.setState( {
+                page: data.page
+            } );
+        } );
         
         itemsStore.setPage('home');
         
@@ -343,7 +377,7 @@ class RenderHome extends React.Component {
         }
         
         return (
-            <Element name="myScrollToElement">
+            <Element name="myScrollToElement" className="Category">
                 
                 <Hidden xsDown>
                     <AliceCarousel 
@@ -366,7 +400,7 @@ class RenderHome extends React.Component {
                 </Hidden>
                 
                 {itemsStore.getAllItemsCat().map((cat, key) => (
-                    <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" key={key} name={"cat"+cat.id} id={"cat"+cat.id}>
+                    <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer dis_none" key={key} name={"cat"+cat.id} id={"cat"+cat.id}>
                         {cat.items.map((it, k) => (
                             <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '16px 8px', display: 'flex'}}>
                                 <Hidden xsDown>
@@ -380,6 +414,15 @@ class RenderHome extends React.Component {
                     </Grid>
                 ))}
                 
+                <Grid item xs={12}>
+                    <Typography variant="h5" component="h2">{ this.state.page && this.state.page.page_h ? this.state.page.page_h : '' }</Typography>
+                </Grid>
+                
+                { this.state.page && this.state.page.content ?
+                    <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer dopText" dangerouslySetInnerHTML={{__html: this.state.page.content}} />
+                        :
+                    null
+                }
                 
                 {this.state.openItem ?
                     <Dialog fullScreen open={this.state.openModal} className="ItemDialog" onClose={this.handleClose.bind(this)} TransitionComponent={Transition}>

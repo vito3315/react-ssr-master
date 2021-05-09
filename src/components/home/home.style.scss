@@ -5,6 +5,12 @@ $colorMain: #BB0025;
     font-size: $size;
     font-family: $family !important;
 }
+.Category{
+    & h1, h2{
+        @include fons(2rem, $Futuris);
+        text-align: center;
+    }
+}
 .ItemDialog{
     & .MainItem_mobile{
         margin-top: 30px!important;
