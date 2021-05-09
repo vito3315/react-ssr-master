@@ -65,7 +65,7 @@ export class Actii extends React.Component {
             page: 'akcii' 
         };
         
-        axios({
+        return axios({
             method: 'POST',
             url:'https://jacofood.ru/src/php/test_app.php',
             headers: { 'content-type': 'application/x-www-form-urlencoded' },
