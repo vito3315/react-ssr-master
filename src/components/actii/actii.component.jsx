@@ -74,7 +74,9 @@ export class Actii extends React.Component {
             if(response['status'] === 200){
                 var json = response['data'];
                 
-                //console.log( 'data', json )
+                console.log( 'data', json.page )
+                
+                return json;
                 
                 return {
                     title: json.page.title,
