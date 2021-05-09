@@ -48,6 +48,8 @@ export class Actii extends React.Component {
             openDialog: false,
             city_name: props.match.params.cityName,
         };
+        
+        itemsStore.setCity(props.match.params.cityName);
     }
     
     static fetchData(propsData) {

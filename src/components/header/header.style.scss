@@ -1,0 +1,231 @@
+$Ubuntu: 'Ubuntu';
+$Futuris: 'Futuris Bold';
+$mainColor: #BB0025;
+@mixin fons($size: 1rem, $family: $Ubuntu) {
+    font-size: $size;
+    font-family: $family !important;
+}
+.Profile{
+    margin-top: 64px!important;
+    & h1{
+        @include fons(2rem, $Futuris);
+        text-align: center;
+    }
+    & .mainContainer{
+        padding-top: 0!important; 
+        padding-bottom: 50!important; 
+    }
+    @media (min-width: 960px) {
+        margin-left: 8.35% !important; 
+        flex-grow: 0;
+        max-width: 83.333333%;
+        flex-basis: 83.333333%;
+    }
+    @media (max-width: 960px) {
+        margin: -24px!important;
+        margin-top: 64px!important;
+        & > div{
+            padding-left: 34px!important;
+        }
+        & h1{
+            @include fons(1.7rem, $Futuris);
+            text-align: center;
+        }
+    }
+    & header.MuiAppBar-root button span{
+        @include fons(1rem, $Ubuntu);
+        text-transform: capitalize!important;
+    }
+}
+.modalProfile{
+    & h6{
+        text-align: center;
+        @include fons(1.6rem, $Futuris);
+    }
+    & .modalProfileContent{
+        padding-top: 0!important;
+        & span, p, b{
+            @include fons(1rem, $Ubuntu);
+        }
+    }
+} 
+.MuiTabs-scroller.MuiTabs-fixed > div{
+    justify-content: center;
+    & span{
+        @include fons(1.1rem, $Ubuntu);
+        text-transform: none;
+    }
+}
+.MuiTabs-indicator{
+    background-color: $mainColor !important;
+}
+.TablePromo{
+    width: 100%;
+    border-collapse: collapse;
+    padding-bottom: 50!important;
+    & .TEXT{
+        @include fons(1.1rem, $Ubuntu);
+    }
+    & td{
+        text-align: center;
+        padding: 12px 5px;
+    }
+    & thead{
+        border-bottom: 2px solid #e5e5e5;
+        & span{
+            @include fons(1.1rem, $Ubuntu);
+            font-weight: bold;
+        }
+    }
+    & tbody{
+        & tr{
+            border-bottom: 1px solid #e5e5e5;
+        }
+        & td:first-child > span{
+            color: $mainColor!important;
+            cursor: pointer;
+        }
+        & td > span{
+            @include fons(1.1rem, $Ubuntu);
+        }
+    }
+}
+.TablePromoMobile{
+    width: 100%;
+    border-collapse: collapse;
+    padding-bottom: 50!important;
+    & tbody{
+        & tr{
+            border-bottom: 1px solid #e5e5e5;
+            & div > span:first-child{
+                @include fons(1.1rem, $Futuris);
+            }
+            & div > span:last-child{
+                @include fons(1.1rem, $Ubuntu);
+            }
+        }
+    }
+    & td{
+        padding: 12px 4px;
+    }
+    & .BtnBorder span{
+        @include fons(1rem, $Ubuntu);
+    }
+}
+
+.TableOrders{
+    width: 100%;
+    border-collapse: collapse;
+    & tbody{
+        & tr{
+            border-bottom: 1px solid #e5e5e5;
+        }
+        & span{
+            @include fons(1rem, $Ubuntu);
+        }
+    }
+    & thead{
+        border-bottom: 2px solid #e5e5e5;
+        & span{
+            @include fons(1rem, $Ubuntu);
+            font-weight: bold;
+        }
+    }
+    & td{
+        text-align: center;
+        padding: 15px 5px;
+    }
+    & .CardPriceItem{
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+    }
+}
+.TableInfo{
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+    margin: 40px 0;
+    & .input{
+        margin: 0px 40px;
+        width: calc(100% - 80px);
+    }
+    & .input.checkbox{
+        -ms-user-select: none;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        width: calc(70% - 80px);
+        & svg{
+            font-size: 1.7rem
+        }
+    }
+    & form{
+        display: flex;
+        width: 70%;
+    }
+    & *{
+        @include fons(1.1rem, $Ubuntu);
+    }
+    & .ChangeDay{
+        width: calc(40% - 5px);
+        margin-right: 5px;
+    }
+    & .ChangeM{
+        width: calc(60% - 5px);
+        margin-left: 5px;
+    }
+}
+.menuItem{
+    @include fons(1.1rem, $Ubuntu);
+}
+@media (max-width: 960px) {
+    .TableOrders{
+        width: calc(100% - 24px);
+        margin-left: 12px;
+    }
+    .TableInfo{
+        display: flex; 
+        flex-direction: column;
+        align-items: center; 
+        margin: 0;
+        & .input{
+            margin: 20px 40px;
+            width: calc(100% - 80px);
+        }
+        & .input.checkbox{
+            -ms-user-select: none;
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            width: calc(100% - 80px);
+        }
+        & form{
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            margin-bottom: 0;
+        }
+    }
+}
+.MuiFormLabel-root.Mui-focused{
+    color: $mainColor!important;
+}
+.MuiInput-underline:after{
+    border-bottom: 2px solid $mainColor!important;
+}
+.MuiCheckbox-colorSecondary.Mui-checked{
+    color: $mainColor!important;
+}
+.MuiSelect-select:focus{
+    background-color: #fff!important;
+}
+.MuiSnackbarContent-root{
+    background-color: inherit!important;
+}
+.otherLabel{
+    @include fons(0.8rem, $Ubuntu);
+}
+.PrivateTabIndicator-colorSecondary-3{
+    background-color: $mainColor!important;
+}
