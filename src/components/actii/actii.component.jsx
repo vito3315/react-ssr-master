@@ -45,29 +45,6 @@ class RenderActii extends React.Component {
         };
     }
     
-    static fetchData() {
-        console.log( 'Post.fetchData()' );
-
-        fetch('https://jacofood.ru/src/php/test_app.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/x-www-form-urlencoded'},
-            body: queryString.stringify({
-                type: 'get_page_info', 
-                city_id: itemsStore.getCity(),
-                page: 'akcii'
-            })
-        }).then(res => res.json()).then(json => {
-            
-            return {
-                title: json.title,
-                description: json.description,
-                body: json.description,
-            };
-        })
-        .catch(err => { });
-    }
-    
     componentDidMount = () => {
         if( document.querySelector('.activeCat') ){
             document.querySelector('.activeCat').classList.remove('activeCat');
@@ -117,10 +94,6 @@ class RenderActii extends React.Component {
             this.setState({ 
                 page: json.page
             });
-            initial_state = {
-                title: json.title,
-                description: json.description
-            }
         })
         .catch(err => { });
     }
@@ -144,9 +117,8 @@ class RenderActii extends React.Component {
             <Grid container className="Actii mainContainer MuiGrid-spacing-xs-3">
                 
                 <Helmet>
-                    <meta charSet="utf-8" />
-                    <title>My Title</title>
-                    <link rel="canonical" href="http://mysite.com/example" />
+                    <title>{this.state.page.title}</title>
+                    <meta name="description" content={this.state.page.description} />
                 </Helmet>
                 
                 <Grid item xs={12}>

@@ -45,10 +45,10 @@ app.use( '*', async ( req, res ) => {
 
         const helmet = Helmet.renderStatic();
         
-        indexHTML = indexHTML.replace(
+        /*indexHTML = indexHTML.replace(
             '<!-- title -->',
             `${helmet.title.toString()}`
-        );
+        );*/
         
         // populate `#app` element with `appHTML`
         indexHTML = indexHTML.replace( '<div id="app"></div>', `<div id="app">${ appHTML }</div>` );
