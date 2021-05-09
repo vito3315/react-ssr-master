@@ -43,10 +43,11 @@ export class Actii extends React.Component {
         
         //console.log( 'location', props.location )
         console.log( 'context', props )
-        console.log( 'initial_state', window.initial_state )
+        //console.log( 'initial_state', window.initial_state )
         console.log( '1' )
         
         if( props.staticContext ) {
+            console.log( 'staticContext', props.staticContext )
             this.state = {
                 actii: [],//props.staticContext.data.actii,  
                 is_load: false,
@@ -55,6 +56,7 @@ export class Actii extends React.Component {
                 city_name: get_city(props.location.pathname),
             };
         } else if( window.initial_state ) {
+            console.log( 'initial_state', window.initial_state )
             this.state = {
                 actii: window.initial_state.data.actii,
                 is_load: false,
@@ -63,6 +65,7 @@ export class Actii extends React.Component {
                 city_name: get_city(props.location.pathname),
             };
         } else {
+            console.log( 'null' )
             this.state = {
                 actii: [],  
                 is_load: false,
