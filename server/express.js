@@ -58,7 +58,7 @@ app.use( '*', async ( req, res ) => {
         
         
         // populate `#app` element with `appHTML`
-        indexHTML = indexHTML.replace( '<div id="app"></div>', `<div id="app"><h1 class="MuiTypography-root MuiTypography-h5">${componentData.page_h}</h1>${ appHTML }</div>` );
+        indexHTML = indexHTML.replace( '<div id="app"></div>', `<div id="app"><h1 class="MuiTypography-root MuiTypography-h5">${componentData.page.page_h}</h1>${ appHTML }</div>` );
 
         //indexHTML = indexHTML.replace('<h1 class="MuiTypography-root MuiTypography-h5"></h1>', `<h1 class="MuiTypography-root MuiTypography-h5">${componentData.page_h}</h1>`);
         

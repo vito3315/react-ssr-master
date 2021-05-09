@@ -68,7 +68,8 @@ export class Actii extends React.Component {
                 
                 return {
                     title: json.page.title,
-                    description: json.page.description
+                    description: json.page.description,
+                    page: json.page,
                 }
             } 
         }).catch(function (error) {
