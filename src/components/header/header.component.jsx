@@ -345,9 +345,6 @@ export class Header extends React.Component {
     }
     
     load(){
-        
-        console.log( itemsStore.getCity(), this.state.categoryItems )
-        
         if( itemsStore.getCity() && this.state.categoryItems.length == 0 ){
             fetch('https://jacofood.ru/src/php/test_app.php', {
                 method: 'POST',
@@ -562,6 +559,11 @@ export class Header extends React.Component {
     }
     
     render() {
+        
+        if( !this.state.is_load ){
+            return null;
+        }
+        
         return (
             <div>
                 <AppBar position="fixed" className="header" style={{ zIndex: 2 }}>

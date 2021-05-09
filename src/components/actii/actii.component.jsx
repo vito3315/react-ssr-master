@@ -46,6 +46,7 @@ export class Actii extends React.Component {
             is_load: false,
             showItem: null,
             openDialog: false,
+            page: null,
             city_name: props.match.params.cityName,
         };
         
@@ -85,6 +86,14 @@ export class Actii extends React.Component {
         }
         window.scrollTo(0, 0);
         itemsStore.setPage('actii');
+        
+        Actii.fetchData('/'+this.state.city_name).then( data => {
+            console.log( data )
+            
+            this.setState( {
+                page: data.page
+            } );
+        } );
         
         fetch('https://jacofood.ru/src/php/test_app.php', {
             method: 'POST',
@@ -130,11 +139,16 @@ export class Actii extends React.Component {
     }
     
     render() {
+        
+        if( !this.state.is_load ){
+            return null;
+        }
+        
         return (
             <Grid container className="Actii mainContainer MuiGrid-spacing-xs-3">
                 
                 <Grid item xs={12}>
-                    <Typography variant="h5" component="h1">{ this.state.page && this.state.page.page_h ? this.state.page.page_h : '' }</Typography>
+                    <Typography variant="h5" component="h1">Акции</Typography>
                 </Grid>
                 <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer">
                     {this.state.actii.map((item, key) =>
@@ -143,6 +157,16 @@ export class Actii extends React.Component {
                         </Grid>
                     )}
                 </Grid>
+                
+                <Grid item xs={12}>
+                    <Typography variant="h5" component="h2">{ this.state.page && this.state.page.page_h ? this.state.page.page_h : '' }</Typography>
+                </Grid>
+                
+                { this.state.page && this.state.page.content ?
+                    <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer dopText" dangerouslySetInnerHTML={{__html: this.state.page.content}} />
+                        :
+                    null
+                }
                 
                 { this.state.showItem ?
                     <Dialog onClose={this.closeDialog.bind(this)} aria-labelledby="customized-dialog-title" className="modalActii" open={this.state.openDialog}>

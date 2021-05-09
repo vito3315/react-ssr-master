@@ -4,9 +4,36 @@ $Futuris: 'Futuris Bold';
     font-size: $size;
     font-family: $family !important;
 }
+.dopText{
+    @include fons(1rem, $Ubuntu);
+    column-count: 1;
+    column-gap: 20px;
+    -moz-column-count: 1;
+    -moz-column-gap: 20px;
+    -webkit-column-count: 1;
+    -webkit-column-gap: 20px;
+    text-align: justify;
+    display: inline-block;
+    
+    @media (min-width: 601px){
+        column-count: 2;
+        column-gap: 20px;
+        -moz-column-count: 2;
+        -moz-column-gap: 20px;
+        -webkit-column-count: 2;
+        -webkit-column-gap: 20px;
+        text-align: justify;
+        display: inline-block!important;
+    }
+    & p{
+        padding: 0!important;
+        margin: 0!important;
+        break-inside: avoid;
+    }
+}
 .Actii{
     margin-top: 64px!important;
-    & h1{
+    & h1, h2{
         @include fons(2rem, $Futuris);
         text-align: center;
     }
@@ -29,6 +56,33 @@ $Futuris: 'Futuris Bold';
         & h1{
             @include fons(1.7rem, $Futuris);
             text-align: center;
+        }
+    }
+    & .dopText{
+        @include fons(1rem, $Ubuntu);
+        column-count: 1;
+        column-gap: 20px;
+        -moz-column-count: 1;
+        -moz-column-gap: 20px;
+        -webkit-column-count: 1;
+        -webkit-column-gap: 20px;
+        text-align: justify;
+        display: inline-block;
+        
+        @media (min-width: 601px){
+            column-count: 2;
+            column-gap: 20px;
+            -moz-column-count: 2;
+            -moz-column-gap: 20px;
+            -webkit-column-count: 2;
+            -webkit-column-gap: 20px;
+            text-align: justify;
+            display: inline-block!important;
+        }
+        & p{
+            padding: 0!important;
+            margin: 0!important;
+            break-inside: avoid;
         }
     }
 }
