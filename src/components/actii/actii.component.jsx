@@ -74,11 +74,11 @@ export class Actii extends React.Component {
             if(response['status'] === 200){
                 var json = response['data'];
                 
-                console.log( 'data', json )
+                //console.log( 'data', json )
                 
                 return {
-                    title: json.title,
-                    description: json.description,
+                    title: json.page.title,
+                    description: json.page.description,
                 }
             } 
         }).catch(function (error) {
