@@ -41,7 +41,9 @@ class RenderActii extends React.Component {
             showItem: null,
             openDialog: false,
             city_name: this.props.cityName,
-            page: null
+            page: null,
+            title: '',
+            description: ''
         };
     }
     
@@ -86,13 +88,15 @@ class RenderActii extends React.Component {
                 'Content-Type':'application/x-www-form-urlencoded'},
             body: queryString.stringify({
                 type: 'get_page_info', 
-                city_id: itemsStore.getCity(),
+                city_id: this.props.cityName,
                 page: 'akcii'
             })
         }).then(res => res.json()).then(json => {
             console.log( json )
             this.setState({ 
-                page: json.page
+                page: json.page,
+                title: json.page.title,
+                description: json.page.description
             });
         })
         .catch(err => { });
@@ -116,14 +120,12 @@ class RenderActii extends React.Component {
         return (
             <Grid container className="Actii mainContainer MuiGrid-spacing-xs-3">
                 
-                {this.state.page ?
-                    <Helmet>
-                        <title>{this.state.page.title}</title>
-                        <meta name="description" content={this.state.page.description} />
-                    </Helmet>
-                        :
-                    null
-                }
+                
+                <Helmet>
+                    <title>{this.state.title}</title>
+                    <meta name="description" content={this.state.description} />
+                </Helmet>
+                        
                 
                 <Grid item xs={12}>
                     <Typography variant="h5" component="h1">{ this.state.page && this.state.page.page_h ? this.state.page.page_h : '' }</Typography>
