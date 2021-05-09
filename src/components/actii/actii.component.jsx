@@ -65,6 +65,24 @@ export class Actii extends React.Component {
             page: 'akcii' 
         };
         
+        axios({
+            method: 'POST',
+            url:'https://jacofood.ru/src/php/test_app.php',
+            headers: { 'content-type': 'application/x-www-form-urlencoded' },
+            data: queryString.stringify(data)
+          })
+          .then(response => {
+            
+            console.log( response )
+            
+            if(response['status'] === 200){
+              
+            } 
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+        
         axios.post('https://jacofood.ru/src/php/test_app.php', data, {
             headers: { 'Content-Type':'application/x-www-form-urlencoded' },
         }).then(data =>
