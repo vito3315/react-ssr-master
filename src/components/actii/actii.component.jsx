@@ -130,13 +130,6 @@ export class Actii extends React.Component {
         return (
             <Grid container className="Actii mainContainer MuiGrid-spacing-xs-3">
                 
-                
-                <Helmet>
-                    <title>{this.state.title}</title>
-                    <meta name="description" content={this.state.description} />
-                </Helmet>
-                        
-                
                 <Grid item xs={12}>
                     <Typography variant="h5" component="h1">{ this.state.page && this.state.page.page_h ? this.state.page.page_h : '' }</Typography>
                 </Grid>
