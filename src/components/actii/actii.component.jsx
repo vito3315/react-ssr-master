@@ -41,54 +41,17 @@ export class Actii extends React.Component {
     constructor(props) {
         super(props);
         
-        //console.log( 'location', props.location )
-        console.log( 'context', props )
-        //console.log( 'initial_state', window.initial_state )
-        console.log( '1' )
-        
-        if( props.staticContext ) {
-            console.log( 'staticContext', props.staticContext )
-            this.state = {
-                actii: [],//props.staticContext.data.actii,  
-                is_load: false,
-                showItem: null,
-                openDialog: false,
-                city_name: get_city(props.location.pathname),
-            };
-        } else if( window.initial_state ) {
-            console.log( 'initial_state', window.initial_state )
-            this.state = {
-                actii: window.initial_state.data.actii,
-                is_load: false,
-                showItem: null,
-                openDialog: false,
-                city_name: get_city(props.location.pathname),
-            };
-            
-            window.initial_state = null;
-            
-        } else {
-            console.log( 'null' )
-            this.state = {
-                actii: [],  
-                is_load: false,
-                showItem: null,
-                openDialog: false,
-                city_name: get_city(props.location.pathname),
-            };
-        }
-        
-        /*this.state = {      
+        this.state = {      
             actii: [],  
             is_load: false,
             showItem: null,
             openDialog: false,
-            city_name: get_city(props.location.pathname),
-        };*/
+            city_name: props.match.params.cityName,
+        };
     }
     
     static fetchData() {
-        console.log( 'Post.fetchData()' );
+        console.log( 'Post.fetchData()', this.state.city_name );
 
         let data = {
             type: 'get_page_info', 
