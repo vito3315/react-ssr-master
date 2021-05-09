@@ -13,7 +13,7 @@ $mainColor: #BB0025;
     }
     & .mainContainer{
         padding-top: 0!important; 
-        padding-bottom: 50!important; 
+        padding-bottom: 50px!important; 
     }
     @media (min-width: 960px) {
         margin-left: 8.35% !important; 
@@ -62,7 +62,7 @@ $mainColor: #BB0025;
 .TablePromo{
     width: 100%;
     border-collapse: collapse;
-    padding-bottom: 50!important;
+    padding-bottom: 50px!important;
     & .TEXT{
         @include fons(1.1rem, $Ubuntu);
     }
@@ -93,7 +93,7 @@ $mainColor: #BB0025;
 .TablePromoMobile{
     width: 100%;
     border-collapse: collapse;
-    padding-bottom: 50!important;
+    padding-bottom: 50px!important;
     & tbody{
         & tr{
             border-bottom: 1px solid #e5e5e5;

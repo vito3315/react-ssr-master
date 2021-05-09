@@ -1,5 +1,4 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 
 import Button from '@material-ui/core/Button';
@@ -17,21 +16,9 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 
 import axios from 'axios';
 
-import {Helmet} from "react-helmet";
-
 import itemsStore from '../../stores/items-store';
 
 const queryString = require('query-string');
-
-/*export function Actii() {
-    let { cityName } = useParams();
-  
-    itemsStore.setCity(cityName);
-  
-    return (
-        <RenderActii cityName={cityName} />
-    );
-}*/
 
 function get_city(path){
     return path.split('/')[1];

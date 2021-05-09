@@ -85,7 +85,7 @@ class SimplePopover extends React.Component{
     }
     
     handleClick = (event) => {
-        if( itemsStore.getPage() == 'home' ){
+        if( itemsStore.getPage() !== 'home' ){
             this.setState({
                 anchorEl: event.currentTarget
             })

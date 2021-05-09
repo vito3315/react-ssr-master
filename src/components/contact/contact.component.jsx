@@ -16,6 +16,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import itemsStore from '../../stores/items-store';
 
+import axios from 'axios';
 const queryString = require('query-string');
 
 function ControlledAccordions(props) {
@@ -66,25 +67,21 @@ function ControlledAccordions(props) {
     );
 }
 
-export function Contact() {
-    let { cityName } = useParams();
-  
-    itemsStore.setCity(cityName);
-  
-    return (
-        <RenderContact cityName={cityName} />
-    );
+function get_city(path){
+    return path.split('/')[1];
 }
 
-class RenderContact extends React.Component {
+export class Contact extends React.Component {
     constructor(props) {
         super(props);
         
         this.state = {      
             points: [],  
-            city_name: this.props.cityName,
+            city_name: props.match.params.cityName,
             is_load: false,
         };
+        
+        itemsStore.setCity(props.match.params.cityName);
     }
     
     dynamicallyLoadScript() {
@@ -122,6 +119,7 @@ class RenderContact extends React.Component {
             
             this.setState({
                 points: json,
+                is_load: true
             })
             
             setTimeout(() => {
@@ -130,6 +128,33 @@ class RenderContact extends React.Component {
             
         })
         .catch(err => { });
+    }
+    
+    static fetchData(propsData) {
+        let data = {
+            type: 'get_page_info', 
+            city_id: get_city(propsData),
+            page: 'contacts' 
+        };
+        
+        return axios({
+            method: 'POST',
+            url:'https://jacofood.ru/src/php/test_app.php',
+            headers: { 'content-type': 'application/x-www-form-urlencoded' },
+            data: queryString.stringify(data)
+        }).then(response => {
+            if(response['status'] === 200){
+                var json = response['data'];
+                
+                return {
+                    title: json.page.title,
+                    description: json.page.description,
+                    page: json.page,
+                }
+            } 
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
     
     loadMap(points, points_zone){
@@ -182,6 +207,11 @@ class RenderContact extends React.Component {
     }
     
     render() {
+        
+        if( !this.state.is_load ){
+            return null;
+        }
+        
         return (
             <Grid container className="Contact mainContainer MuiGrid-spacing-xs-3">
                 <Grid item xs={12}>

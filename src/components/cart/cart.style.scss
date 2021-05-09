@@ -72,7 +72,7 @@ div.boxItem .promoIcon{
     }
 }
 .DialogErr .MuiDialog-paper{
-    min-width: 300;
+    min-width: 300px;
 }
 .DialogErr div.BtnBorder{
     margin: 14px 14px;
@@ -164,7 +164,7 @@ div.boxItem .promoIcon{
     display: flex;
     flex-direction: column;
     & > div{
-        margin: 10 0px;
+        margin: 10px 0px;
         & .MuiFormControl-marginNormal{
             margin: 0!important;
         }
@@ -215,8 +215,8 @@ div.boxItem .promoIcon{
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding-top: 20;
-    padding-bottom: 20;
+    padding-top: 20px;
+    padding-bottom: 20px;
     & > .boxItem{
         position: relative;
     }
@@ -224,7 +224,7 @@ div.boxItem .promoIcon{
         border-bottom: 1px solid #e5e5e5;
     }
     & > .boxItem.rowAboutDop{
-        padding: 10;
+        padding: 10px;
         background-color: rgba(229, 229, 229, 0.3);
         text-align: center;
         & span{
@@ -241,7 +241,7 @@ div.boxItem .promoIcon{
     & > .boxItem:not(.rowAboutDop){
         display: flex; 
         flex-direction: row;
-        padding: 10;
+        padding: 10px;
         & img{
             max-width: calc(100% / 2.6);
         }
@@ -324,7 +324,7 @@ div.boxItem .promoIcon{
         flex-direction: column;
         padding-top: 0;
         padding-left: 46px!important;
-        padding-right: 24;
+        padding-right: 24px;
         & .boxMobile{
             padding: 10px 5px;
             border-bottom: 1px solid #e5e5e5;
@@ -381,15 +381,15 @@ div.boxItem .promoIcon{
             padding: 2px 4px;
             display: flex;
             align-items: center;
-            height: 34;
-            max-width: 390;
+            height: 34px;
+            max-width: 390px;
             & > div{
-                margin-left: 8;
+                margin-left: 8px;
                 flex: 1;
             }
             & hr{
-                height: 28;
-                margin: 4;
+                height: 28px;
+                margin: 4px;
             }
             & svg{
                 fill: $mainColor;
@@ -408,10 +408,10 @@ div.boxItem .promoIcon{
     }
     & .mainContainer:not(.mobile){
         padding-top: 0!important; 
-        padding-bottom: 50;
+        padding-bottom: 50px;
         & .errTimePred{
             @include fons(1.2rem, $Ubuntu);
-            padding: 12;
+            padding: 12px;
             background-color: $mainColor;
             opacity: 0.3;
         }
@@ -507,15 +507,15 @@ div.boxItem .promoIcon{
             padding: 2px 4px;
             display: flex;
             align-items: center;
-            height: 34;
-            width: 390;
+            height: 34px;
+            width: 390px;
             & > div{
-                margin-left: 8;
+                margin-left: 8px;
                 flex: 1;
             }
             & hr{
-                height: 28;
-                margin: 4;
+                height: 28px;
+                margin: 4px;
             }
             & svg{
                 fill: $mainColor;
