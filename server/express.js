@@ -38,7 +38,7 @@ app.use( '*', async ( req, res ) => {
 
         // get HTML string from the `App` component
         let appHTML = ReactDOMServer.renderToString(
-            <StaticRouter location={ req.originalUrl } context={ componentData }>
+            <StaticRouter location={ req.originalUrl } data={ componentData } context={ componentData }>
                 <App />
             </StaticRouter>
         );
