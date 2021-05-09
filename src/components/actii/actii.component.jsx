@@ -42,12 +42,12 @@ export class Actii extends React.Component {
         super(props);
         
         //console.log( 'location', props.location )
-        //console.log( 'context', props )
+        console.log( 'context', props )
         console.log( '1' )
         
         if( props.staticContext ) {
             this.state = {
-                actii: props.staticContext.data.actii,  
+                actii: [],//props.staticContext.data.actii,  
                 is_load: false,
                 showItem: null,
                 openDialog: false,
