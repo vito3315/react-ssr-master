@@ -15,13 +15,15 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 
+import axios from 'axios';
+
 import {Helmet} from "react-helmet";
 
 import itemsStore from '../../stores/items-store';
 
 const queryString = require('query-string');
 
-export function Actii() {
+/*export function Actii() {
     let { cityName } = useParams();
   
     itemsStore.setCity(cityName);
@@ -29,9 +31,9 @@ export function Actii() {
     return (
         <RenderActii cityName={cityName} />
     );
-}
+}*/
 
-class RenderActii extends React.Component {
+export class Actii extends React.Component {
     constructor(props) {
         super(props);
         
@@ -40,11 +42,22 @@ class RenderActii extends React.Component {
             is_load: false,
             showItem: null,
             openDialog: false,
-            city_name: this.props.cityName,
+            city_name: 'samara',
             page: null,
             title: '',
             description: ''
         };
+    }
+    
+    static fetchData() {
+        console.log( 'Post.fetchData()' );
+
+        return axios.get( 'https://jsonplaceholder.typicode.com/posts/3' ).then( response => {
+            return {
+                title: response.data.title,
+                body: response.data.body,
+            };
+        } );
     }
     
     componentDidMount = () => {
