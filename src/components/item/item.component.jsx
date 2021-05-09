@@ -13,8 +13,17 @@ import { autorun } from "mobx"
 import itemsStore from '../../stores/items-store';
 
 const queryString = require('query-string');
+import axios from 'axios';
 
-export function Item(props = 0) {
+function get_city(path){
+    return path.split('/')[1];
+}
+
+function get_item(path){
+    return path.split('/')[3];
+}
+
+/*export function Item(props = 0) {
     let { itemLink } = useParams();
     let { cityName } = useParams();
     
@@ -29,7 +38,7 @@ export function Item(props = 0) {
     return (
         <RenderItem itemLink={itemLink} type={"render"} />
     );
-}
+}*/
 
 function ItemInfoPopover(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -110,7 +119,7 @@ function ItemInfoPopover(props) {
     );
 }
 
-class RenderItem extends React.Component {
+export class Item extends React.Component {
     _isMounted = false;
     
     constructor(props) {
@@ -119,8 +128,40 @@ class RenderItem extends React.Component {
         this.state = {      
             item: this.props.item ? this.props.item : [],  
             is_load: false,
-            count: 0
+            count: 0,
+            city_name: props.match.params.cityName,
+            itemLink: props.match.params.itemLink
         };
+        
+        itemsStore.setCity(props.match.params.cityName);
+    }
+    
+    static fetchData(propsData) {
+        let data = {
+            type: 'get_page_info', 
+            city_id: get_city(propsData),
+            item: get_item(propsData),
+            page: 'item' 
+        };
+        
+        return axios({
+            method: 'POST',
+            url:'https://jacofood.ru/src/php/test_app.php',
+            headers: { 'content-type': 'application/x-www-form-urlencoded' },
+            data: queryString.stringify(data)
+        }).then(response => {
+            if(response['status'] === 200){
+                var json = response['data'];
+                
+                return {
+                    title: json.page.title,
+                    description: json.page.description,
+                    page: json.page,
+                }
+            } 
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
     
     componentWillUnmount(){
@@ -132,7 +173,7 @@ class RenderItem extends React.Component {
         
         autorun(() => {
             if( this._isMounted ){
-                let item = itemsStore.getAllItems().filter( (item) => item.link == this.props.itemLink )[0];
+                let item = itemsStore.getAllItems().find( (item) => item.link == this.state.itemLink );
                 
                 if( item ){
                     this.setState({
@@ -180,14 +221,14 @@ class RenderItem extends React.Component {
             });
             
             let my_cart = itemsStore.getItems();
-            let item = my_cart.filter( (item) => item.item_id == this.state.item['id'] )[0];
+            let item = my_cart.find( (item) => item.item_id == this.state.item['id'] );
       
             this.setState({ 
                 count: item ? item.count : 0,
             })
         }
         
-        if( this.props.type == 'render' ){
+        if( !this.props.item ){
             if( document.querySelector('.activeCat') ){
                 document.querySelector('.activeCat').classList.remove('activeCat');
             }

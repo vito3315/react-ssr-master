@@ -24,7 +24,7 @@ $Futuris: 'Futuris Bold';
         justify-content: flex-end;
     }
     & img{
-        max-width: 400;
+        max-width: 400px;
         width: 100%;
         height: intrinsic;
     }
@@ -66,7 +66,7 @@ $Futuris: 'Futuris Bold';
         @include fons(1.7rem, $Futuris);
     }
     & img{
-        max-width: 400;
+        max-width: 400px;
         width: 100%;
         height: intrinsic;
     }
