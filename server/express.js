@@ -50,6 +50,8 @@ app.use( '*', async ( req, res ) => {
             `${helmet.title.toString()}`
         );*/
         
+        console.log( componentData )
+        
         indexHTML = indexHTML.replace('<!-- title -->', `${componentData.title}`);
         indexHTML = indexHTML.replace('<!-- description -->', `${componentData.description}`);
         
