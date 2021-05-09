@@ -815,346 +815,350 @@ export class App extends React.Component {
     render() {
         return (
             <Provider { ...stores }>
-                <div className="home">
-                    <AppBar position="fixed" className="header" style={{ zIndex: 2 }}>
-                        <Toolbar className="sub_header">
-                            
-                            <Grid>
-                                <Grid item style={{ marginRight: 15 }}>
-                                    <Link to={"/"+this.state.cityName+"/"}>
-                                        <img alt="Жако доставка роллов и пиццы" src="https://jacochef.ru/src/img/Bely_fon_logo.png" />
-                                    </Link> 
-                                </Grid>
-                                <Hidden mdDown>
-                                    
-                                    <Grid item className="CityProfileNav">
-                                        <Typography className="cat" variant="h5" component="span" onClick={this.openCity.bind(this)} style={{ display: 'flex', flexDirection: 'row' }}>{itemsStore.getCityRU()} <ArrowDropDownIcon /></Typography>
+                { this.state.is_load ?
+                    <div className="home">
+                        <AppBar position="fixed" className="header" style={{ zIndex: 2 }}>
+                            <Toolbar className="sub_header">
+                                
+                                <Grid>
+                                    <Grid item style={{ marginRight: 15 }}>
+                                        <Link to={"/"+this.state.cityName+"/"}>
+                                            <img alt="Жако доставка роллов и пиццы" src="https://jacochef.ru/src/img/Bely_fon_logo.png" />
+                                        </Link> 
+                                    </Grid>
+                                    <Hidden mdDown>
                                         
-                                        {itemsStore.getToken() ?
-                                            itemsStore.userName && itemsStore.userName.length > 0 ?
-                                                <Link to={"/"+this.state.cityName+"/profile"} className="cat">{itemsStore.userName}</Link> 
-                                                    :
-                                                <Link to={"/"+this.state.cityName+"/profile"}>
-                                                    <Typography className="cat" variant="h5" component="span">Профиль</Typography>
-                                                </Link>
-                                                :
-                                            <Typography className="cat" variant="h5" component="span" onClick={this.openLogin.bind(this)}>Войти</Typography>
-                                        }
-                                    </Grid>
-                                    
-                                    {this.state.categoryItems.map((item, key) => 
-                                        <Grid item key={key}>
-                                            {this.state.activePage == 'home' ?
-                                                <ScrollLink 
-                                                    key={key}
-                                                    to={"cat"+item.id} 
-                                                    spy={true} 
-                                                    isDynamic={true}
-                                                    onSetActive={(el) => { 
-                                                        /*if( document.querySelector('.activeCat') ){
-                                                            document.querySelector('.activeCat').classList.remove('activeCat');
-                                                        }
-                                                        document.querySelector('#link_'+item.id).classList.add('activeCat');
-                                                        
-                                                        document.querySelector('.scrollCat').classList.add('mandatory');
-                                                        setTimeout(()=>{
-                                                            document.querySelector('.scrollCat').classList.remove('mandatory');
-                                                        }, 1000)*/
-                                                        
-                                                        if( document.querySelector('.activeCat') ){
-                                                            document.querySelector('.activeCat').classList.remove('activeCat');
-                                                        }
-                                                        document.querySelector('#link_'+item.id).classList.add('activeCat');
-                                                        
-                                                        /*document.querySelector('.scrollCat').classList.add('mandatory');
-                                                        document.querySelector('.activeCat').classList.add('activeCatTest');
-                                                        setTimeout(()=>{
-                                                            if( document.querySelector('.scrollCat') ){
-                                                                document.querySelector('.scrollCat').classList.remove('mandatory');
-                                                                document.querySelector('.activeCat').classList.remove('activeCatTest');
-                                                            }
-                                                        }, 1000)*/
-                                                    }} 
-                                                    smooth={true} 
-                                                    offset={-100} 
-                                                    activeClass="activeCat" 
-                                                    id={'link_'+item.id} 
-                                                    style={{ width: 'max-content', display: 'flex', whiteSpace: 'nowrap', padding: '4px 8px' }}
-                                                >
-                                                    <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
-                                                </ScrollLink> 
-                                                    :
-                                                <Link to={"/"+this.state.cityName+"/"} className="catLink" style={{ padding: '4px 8px' }} onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
-                                                    <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
-                                                </Link> 
-                                            }
-                                        </Grid>)
-                                    }
-                                    
-                                    <Grid item>
-                                        <Link 
-                                            style={{ padding: '4px 8px' }}
-                                            to={"/"+this.state.cityName+"/actii"} 
-                                            className="catLink"
-                                        >
-                                            <Typography className="cat" variant="h5" component="span">Акции</Typography>
-                                        </Link>    
-                                    </Grid>
-                                    <Grid item>
-                                        <Link 
-                                            style={{ padding: '4px 8px' }}
-                                            to={"/"+this.state.cityName+"/contact"} 
-                                            className="catLink"
-                                        >
-                                            <Typography className="cat" variant="h5" component="span">Контакты</Typography>
-                                        </Link>    
-                                    </Grid>
-                                    <Grid item>
-                                        <SimplePopover openLogin={this.openLogin.bind(this)} />
-                                    </Grid>
-                                </Hidden>
-                            </Grid>
-                        
-                            <Hidden lgUp>
-                                <Typography variant="h5" component="span" className="thisCity" onClick={this.openCity.bind(this)}><FontAwesomeIcon icon={ faMapMarkerAlt } /> {itemsStore.getCityRU()}</Typography>
-                            </Hidden>
-                                    
-                        </Toolbar>
-                        
-                        {this.state.activePage == 'home' ?
-                            <Grid className="scrollCat">
-                                <Hidden lgUp>
-                                    {this.state.categoryItems.map((item, key) => 
-                                        <ScrollLink 
-                                            key={key}
-                                            to={"cat"+item.id} 
-                                            spy={true} 
-                                            onSetActive={(el) => { 
-                                                if( document.querySelector('.activeCat') ){
-                                                    document.querySelector('.activeCat').classList.remove('activeCat');
-                                                }
-                                                document.querySelector('#link_'+item.id).classList.add('activeCat');
-                                                
-                                                document.getElementById('link_'+item.id).scrollIntoView(true);
-                                                
-                                                document.querySelector('.scrollCat').animate({
-                                                    scrollLeft: 200
-                                                }, 100);
-                                                
-                                                
-                                                
-                                                /*document.querySelector('.scrollCat').classList.add('mandatory');
-                                                document.querySelector('.activeCat').classList.add('activeCatTest');
-                                                setTimeout(()=>{
-                                                    if( document.querySelector('.scrollCat') ){
-                                                        document.querySelector('.scrollCat').classList.remove('mandatory');
-                                                        document.querySelector('.activeCat').classList.remove('activeCatTest');
-                                                    }
-                                                }, 1000)*/
-                                            }} 
-                                            smooth={true} 
-                                            offset={-100} 
-                                            activeClass="activeCat" 
-                                            id={'link_'+item.id} 
-                                        >
-                                            <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
-                                        </ScrollLink>    
+                                        <Grid item className="CityProfileNav">
+                                            <Typography className="cat" variant="h5" component="span" onClick={this.openCity.bind(this)} style={{ display: 'flex', flexDirection: 'row' }}>{itemsStore.getCityRU()} <ArrowDropDownIcon /></Typography>
                                             
-                                    )}
-                                </Hidden>
-                            </Grid>
-                                :
-                            null
-                        }
-                    </AppBar>
-                    
-                    <Dialog
-                        open={this.state.openCity}
-                        fullWidth={true}
-                        maxWidth={'xs'}
-                        onClose={this.closeCity.bind(this)}
-                        aria-labelledby="alert-dialog-title"
-                        aria-describedby="alert-dialog-description"
-                        className="ModalCity"
-                    >
-                        <DialogTitle id="alert-dialog-title">Выберите город</DialogTitle>
-                        <DialogContent className="ModalContent_1_1" style={{ paddingBottom: 24, paddingTop: 0 }}>
-                            {this.state.cityList.map((item, key) => 
-                                <Typography key={key} variant="h5" component="span" className={"ModalLabel "+( this.state.cityName == item.link ? 'active' : '' )} onClick={this.chooseCity.bind(this, item.link)}>{item.name}</Typography>
-                            )}
-                        </DialogContent>
-                    </Dialog>
-                    
-                    <Dialog
-                        open={this.state.openLogin}
-                        fullWidth={true}
-                        maxWidth={'xs'}
-                        onClose={this.closeLogin.bind(this)}
-                        aria-labelledby="alert-dialog-title"
-                        aria-describedby="alert-dialog-description"
-                        className="ModalAuth"
-                    >
-                        <DialogTitle id="alert-dialog-title">Вход на сайт</DialogTitle>
-                        <DialogContent className="ModalContent_1_1">
-                            <div className="ModalContent_1_2">
-                                <Typography variant="h5" component="span" className="ModalLabel">Номер телефона</Typography>
-                                <InputMask 
-                                    className="InputMask"
-                                    mask="8 (999) 999-99-99" 
-                                    placeholder="8 (999) 999-99-99" 
-                                    disabled={!this.state.stage_1}
-                                    value={this.state.userLogin}
-                                    onKeyPress={this.handleKeyPress}
-                                    onChange={ event => this.state.stage_1 ? this.setState({ userLogin: event.target.value }) : {} }
-                                />
-                                {this.state.stage_2 ?
-                                    <Typography variant="h5" component="span" className="changeNumber" onClick={this.changeNumber.bind(this)}>Изменеить номер</Typography>
-                                        :
-                                    null
-                                }
-                                {this.state.errPhone.length > 0 ?
-                                    <div style={{ marginTop: 10, padding: 16, backgroundColor: '#BB0025', borderRadius: 4 }}>
-                                        <Typography variant="h5" component="span" style={{ fontSize: '1.1rem', color: '#fff' }}>{this.state.errPhone}</Typography>
-                                    </div>
-                                        :
-                                    null
-                                }
-                            </div>
-                            {this.state.stage_2 ?
-                                <div className="ModalContent_1_3">
-                                    <Typography variant="h5" component="span" className="ModalLabel">Код из смс</Typography>
-                                    <div className="ModalContent_1_2">
-                                        <InputMask 
-                                            className="InputMask"
-                                            mask="9999" 
-                                            value={this.state.userCode}
-                                            //onChange={ (event) => { this.changeCode.bind(this, event.target.value) } }
-                                            onChange={ this.changeCode.bind(this) }
-                                        />
-                                        {this.state.timerSMS > 0 ?
-                                            <Typography variant="h5" component="span" style={{ fontSize: '0.8rem', paddingTop: 10 }}>{'Новое смс доступно через '+this.state.timerSMS+' сек.'}</Typography>
-                                                :
-                                            <Typography variant="h5" component="span" style={{ fontSize: '0.8rem', paddingTop: 10, cursor: 'pointer', width: 'fit-content' }} onClick={this.repeatSMS.bind(this)}>Получить новый код</Typography>
+                                            {itemsStore.getToken() ?
+                                                itemsStore.userName && itemsStore.userName.length > 0 ?
+                                                    <Link to={"/"+this.state.cityName+"/profile"} className="cat">{itemsStore.userName}</Link> 
+                                                        :
+                                                    <Link to={"/"+this.state.cityName+"/profile"}>
+                                                        <Typography className="cat" variant="h5" component="span">Профиль</Typography>
+                                                    </Link>
+                                                    :
+                                                <Typography className="cat" variant="h5" component="span" onClick={this.openLogin.bind(this)}>Войти</Typography>
+                                            }
+                                        </Grid>
+                                        
+                                        {this.state.categoryItems.map((item, key) => 
+                                            <Grid item key={key}>
+                                                {this.state.activePage == 'home' ?
+                                                    <ScrollLink 
+                                                        key={key}
+                                                        to={"cat"+item.id} 
+                                                        spy={true} 
+                                                        isDynamic={true}
+                                                        onSetActive={(el) => { 
+                                                            /*if( document.querySelector('.activeCat') ){
+                                                                document.querySelector('.activeCat').classList.remove('activeCat');
+                                                            }
+                                                            document.querySelector('#link_'+item.id).classList.add('activeCat');
+                                                            
+                                                            document.querySelector('.scrollCat').classList.add('mandatory');
+                                                            setTimeout(()=>{
+                                                                document.querySelector('.scrollCat').classList.remove('mandatory');
+                                                            }, 1000)*/
+                                                            
+                                                            if( document.querySelector('.activeCat') ){
+                                                                document.querySelector('.activeCat').classList.remove('activeCat');
+                                                            }
+                                                            document.querySelector('#link_'+item.id).classList.add('activeCat');
+                                                            
+                                                            /*document.querySelector('.scrollCat').classList.add('mandatory');
+                                                            document.querySelector('.activeCat').classList.add('activeCatTest');
+                                                            setTimeout(()=>{
+                                                                if( document.querySelector('.scrollCat') ){
+                                                                    document.querySelector('.scrollCat').classList.remove('mandatory');
+                                                                    document.querySelector('.activeCat').classList.remove('activeCatTest');
+                                                                }
+                                                            }, 1000)*/
+                                                        }} 
+                                                        smooth={true} 
+                                                        offset={-100} 
+                                                        activeClass="activeCat" 
+                                                        id={'link_'+item.id} 
+                                                        style={{ width: 'max-content', display: 'flex', whiteSpace: 'nowrap', padding: '4px 8px' }}
+                                                    >
+                                                        <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
+                                                    </ScrollLink> 
+                                                        :
+                                                    <Link to={"/"+this.state.cityName+"/"} className="catLink" style={{ padding: '4px 8px' }} onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
+                                                        <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
+                                                    </Link> 
+                                                }
+                                            </Grid>)
                                         }
-                                    </div>
-                                    {this.state.errSMS.length > 0 ?
+                                        
+                                        <Grid item>
+                                            <Link 
+                                                style={{ padding: '4px 8px' }}
+                                                to={"/"+this.state.cityName+"/actii"} 
+                                                className="catLink"
+                                            >
+                                                <Typography className="cat" variant="h5" component="span">Акции</Typography>
+                                            </Link>    
+                                        </Grid>
+                                        <Grid item>
+                                            <Link 
+                                                style={{ padding: '4px 8px' }}
+                                                to={"/"+this.state.cityName+"/contact"} 
+                                                className="catLink"
+                                            >
+                                                <Typography className="cat" variant="h5" component="span">Контакты</Typography>
+                                            </Link>    
+                                        </Grid>
+                                        <Grid item>
+                                            <SimplePopover openLogin={this.openLogin.bind(this)} />
+                                        </Grid>
+                                    </Hidden>
+                                </Grid>
+                            
+                                <Hidden lgUp>
+                                    <Typography variant="h5" component="span" className="thisCity" onClick={this.openCity.bind(this)}><FontAwesomeIcon icon={ faMapMarkerAlt } /> {itemsStore.getCityRU()}</Typography>
+                                </Hidden>
+                                        
+                            </Toolbar>
+                            
+                            {this.state.activePage == 'home' ?
+                                <Grid className="scrollCat">
+                                    <Hidden lgUp>
+                                        {this.state.categoryItems.map((item, key) => 
+                                            <ScrollLink 
+                                                key={key}
+                                                to={"cat"+item.id} 
+                                                spy={true} 
+                                                onSetActive={(el) => { 
+                                                    if( document.querySelector('.activeCat') ){
+                                                        document.querySelector('.activeCat').classList.remove('activeCat');
+                                                    }
+                                                    document.querySelector('#link_'+item.id).classList.add('activeCat');
+                                                    
+                                                    document.getElementById('link_'+item.id).scrollIntoView(true);
+                                                    
+                                                    document.querySelector('.scrollCat').animate({
+                                                        scrollLeft: 200
+                                                    }, 100);
+                                                    
+                                                    
+                                                    
+                                                    /*document.querySelector('.scrollCat').classList.add('mandatory');
+                                                    document.querySelector('.activeCat').classList.add('activeCatTest');
+                                                    setTimeout(()=>{
+                                                        if( document.querySelector('.scrollCat') ){
+                                                            document.querySelector('.scrollCat').classList.remove('mandatory');
+                                                            document.querySelector('.activeCat').classList.remove('activeCatTest');
+                                                        }
+                                                    }, 1000)*/
+                                                }} 
+                                                smooth={true} 
+                                                offset={-100} 
+                                                activeClass="activeCat" 
+                                                id={'link_'+item.id} 
+                                            >
+                                                <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
+                                            </ScrollLink>    
+                                                
+                                        )}
+                                    </Hidden>
+                                </Grid>
+                                    :
+                                null
+                            }
+                        </AppBar>
+                        
+                        <Dialog
+                            open={this.state.openCity}
+                            fullWidth={true}
+                            maxWidth={'xs'}
+                            onClose={this.closeCity.bind(this)}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                            className="ModalCity"
+                        >
+                            <DialogTitle id="alert-dialog-title">Выберите город</DialogTitle>
+                            <DialogContent className="ModalContent_1_1" style={{ paddingBottom: 24, paddingTop: 0 }}>
+                                {this.state.cityList.map((item, key) => 
+                                    <Typography key={key} variant="h5" component="span" className={"ModalLabel "+( this.state.cityName == item.link ? 'active' : '' )} onClick={this.chooseCity.bind(this, item.link)}>{item.name}</Typography>
+                                )}
+                            </DialogContent>
+                        </Dialog>
+                        
+                        <Dialog
+                            open={this.state.openLogin}
+                            fullWidth={true}
+                            maxWidth={'xs'}
+                            onClose={this.closeLogin.bind(this)}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                            className="ModalAuth"
+                        >
+                            <DialogTitle id="alert-dialog-title">Вход на сайт</DialogTitle>
+                            <DialogContent className="ModalContent_1_1">
+                                <div className="ModalContent_1_2">
+                                    <Typography variant="h5" component="span" className="ModalLabel">Номер телефона</Typography>
+                                    <InputMask 
+                                        className="InputMask"
+                                        mask="8 (999) 999-99-99" 
+                                        placeholder="8 (999) 999-99-99" 
+                                        disabled={!this.state.stage_1}
+                                        value={this.state.userLogin}
+                                        onKeyPress={this.handleKeyPress}
+                                        onChange={ event => this.state.stage_1 ? this.setState({ userLogin: event.target.value }) : {} }
+                                    />
+                                    {this.state.stage_2 ?
+                                        <Typography variant="h5" component="span" className="changeNumber" onClick={this.changeNumber.bind(this)}>Изменеить номер</Typography>
+                                            :
+                                        null
+                                    }
+                                    {this.state.errPhone.length > 0 ?
                                         <div style={{ marginTop: 10, padding: 16, backgroundColor: '#BB0025', borderRadius: 4 }}>
-                                            <Typography variant="h5" component="span" style={{ fontSize: '1.1rem', color: '#fff' }}>{this.state.errSMS}</Typography>
+                                            <Typography variant="h5" component="span" style={{ fontSize: '1.1rem', color: '#fff' }}>{this.state.errPhone}</Typography>
                                         </div>
                                             :
                                         null
                                     }
                                 </div>
+                                {this.state.stage_2 ?
+                                    <div className="ModalContent_1_3">
+                                        <Typography variant="h5" component="span" className="ModalLabel">Код из смс</Typography>
+                                        <div className="ModalContent_1_2">
+                                            <InputMask 
+                                                className="InputMask"
+                                                mask="9999" 
+                                                value={this.state.userCode}
+                                                //onChange={ (event) => { this.changeCode.bind(this, event.target.value) } }
+                                                onChange={ this.changeCode.bind(this) }
+                                            />
+                                            {this.state.timerSMS > 0 ?
+                                                <Typography variant="h5" component="span" style={{ fontSize: '0.8rem', paddingTop: 10 }}>{'Новое смс доступно через '+this.state.timerSMS+' сек.'}</Typography>
+                                                    :
+                                                <Typography variant="h5" component="span" style={{ fontSize: '0.8rem', paddingTop: 10, cursor: 'pointer', width: 'fit-content' }} onClick={this.repeatSMS.bind(this)}>Получить новый код</Typography>
+                                            }
+                                        </div>
+                                        {this.state.errSMS.length > 0 ?
+                                            <div style={{ marginTop: 10, padding: 16, backgroundColor: '#BB0025', borderRadius: 4 }}>
+                                                <Typography variant="h5" component="span" style={{ fontSize: '1.1rem', color: '#fff' }}>{this.state.errSMS}</Typography>
+                                            </div>
+                                                :
+                                            null
+                                        }
+                                    </div>
+                                        :
+                                    null
+                                }
+                            </DialogContent>
+                            {this.state.stage_1 ?
+                                <DialogActions style={{ padding: '12px 24px' }}>
+                                    <Button onClick={this.sendSMS.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Выслать код</Button>
+                                </DialogActions>
                                     :
                                 null
                             }
-                        </DialogContent>
-                        {this.state.stage_1 ?
-                            <DialogActions style={{ padding: '12px 24px' }}>
-                                <Button onClick={this.sendSMS.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Выслать код</Button>
-                            </DialogActions>
+                            {this.state.stage_2 ?
+                                <DialogActions style={{ padding: '12px 24px' }}>
+                                    <Button onClick={this.checkCode.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Подтвердить код</Button>
+                                </DialogActions>
+                                    :
+                                null
+                            }
+                        </Dialog>
+                        
+                        {this.state.activePage == 'home' ?
+                            <Hidden lgUp>
+                                <div style={{ width: '100%', height: 3, position: 'fixed', top: 85, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', top: 88, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', top: 91, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', top: 94, zIndex: 0, backgroundColor: '#bababa', opacity: 0.07 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', top: 97, zIndex: 0, backgroundColor: '#bababa', opacity: 0.06 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', top: 100, zIndex: 0, backgroundColor: '#bababa', opacity: 0.05 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', top: 103, zIndex: 0, backgroundColor: '#bababa', opacity: 0.04 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', top: 106, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', top: 109, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', top: 112, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
+                            </Hidden>
                                 :
                             null
                         }
-                        {this.state.stage_2 ?
-                            <DialogActions style={{ padding: '12px 24px' }}>
-                                <Button onClick={this.checkCode.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Подтвердить код</Button>
-                            </DialogActions>
+                        
+                        
+                        <Switch>
+                            <Route
+                                path='/:cityName/contact'
+                                exact={ true }
+                                component={ Contact }
+                            />
+                            <Route
+                                path='/:cityName/actii'
+                                exact={ true }
+                                component={ Actii }
+                            />
+                            <Route
+                                path='/:cityName/menu'
+                                exact={ true }
+                                component={ Home }
+                            />
+                            <Route
+                                path='/:cityName'
+                                exact={ true }
+                                component={ Home }
+                            />
+                            <Route exact path='/:cityName/profile/'>
+                                {!itemsStore.getToken() && this.state.cityName ? <Redirect push to={"/"+this.state.cityName+"/"} /> : <Profile />}
+                            </Route>
+                            <Route
+                                path='/:cityName/menu/:itemLink'
+                                exact={ true }
+                                component={ Item }
+                            />
+                            <Route
+                                path='/:cityName/cart'
+                                exact={ true }
+                                component={ Cart }
+                            />
+                            <Route
+                                component={ NotFound }
+                            />
+                        </Switch>
+                        
+                    
+                        {this.state.activePage == 'cart' ?
+                            <Hidden lgUp>
+                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 72+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 69+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 66+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 63+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.04 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 60+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.05 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 57+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.06 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 54+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.07 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 51+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 48+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 45+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
+                            </Hidden>
                                 :
-                            null
+                            <Hidden lgUp>
+                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 72, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 69, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 66, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 63, zIndex: 0, backgroundColor: '#bababa', opacity: 0.04 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 60, zIndex: 0, backgroundColor: '#bababa', opacity: 0.05 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 57, zIndex: 0, backgroundColor: '#bababa', opacity: 0.06 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 54, zIndex: 0, backgroundColor: '#bababa', opacity: 0.07 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 51, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 48, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
+                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 45, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
+                            </Hidden>
                         }
-                    </Dialog>
-                    
-                    {this.state.activePage == 'home' ?
                         <Hidden lgUp>
-                            <div style={{ width: '100%', height: 3, position: 'fixed', top: 85, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', top: 88, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', top: 91, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', top: 94, zIndex: 0, backgroundColor: '#bababa', opacity: 0.07 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', top: 97, zIndex: 0, backgroundColor: '#bababa', opacity: 0.06 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', top: 100, zIndex: 0, backgroundColor: '#bababa', opacity: 0.05 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', top: 103, zIndex: 0, backgroundColor: '#bababa', opacity: 0.04 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', top: 106, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', top: 109, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', top: 112, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
+                            <CustomBottomNavigation login={this.openLogin.bind(this)} />
                         </Hidden>
-                            :
-                        null
-                    }
-                    
-                    
-                    <Switch>
-                        <Route
-                            path='/:cityName/contact'
-                            exact={ true }
-                            component={ Contact }
-                        />
-                        <Route
-                            path='/:cityName/actii'
-                            exact={ true }
-                            component={ Actii }
-                        />
-                        <Route
-                            path='/:cityName/menu'
-                            exact={ true }
-                            component={ Home }
-                        />
-                        <Route
-                            path='/:cityName'
-                            exact={ true }
-                            component={ Home }
-                        />
-                        <Route exact path='/:cityName/profile/'>
-                            {!itemsStore.getToken() && this.state.cityName ? <Redirect push to={"/"+this.state.cityName+"/"} /> : <Profile />}
-                        </Route>
-                        <Route
-                            path='/:cityName/menu/:itemLink'
-                            exact={ true }
-                            component={ Item }
-                        />
-                        <Route
-                            path='/:cityName/cart'
-                            exact={ true }
-                            component={ Cart }
-                        />
-                        <Route
-                            component={ NotFound }
-                        />
-                    </Switch>
-                    
-                
-                    {this.state.activePage == 'cart' ?
-                        <Hidden lgUp>
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 72+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 69+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 66+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 63+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.04 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 60+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.05 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 57+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.06 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 54+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.07 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 51+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 48+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 45+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
-                        </Hidden>
-                            :
-                        <Hidden lgUp>
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 72, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 69, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 66, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 63, zIndex: 0, backgroundColor: '#bababa', opacity: 0.04 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 60, zIndex: 0, backgroundColor: '#bababa', opacity: 0.05 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 57, zIndex: 0, backgroundColor: '#bababa', opacity: 0.06 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 54, zIndex: 0, backgroundColor: '#bababa', opacity: 0.07 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 51, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 48, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 45, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
-                        </Hidden>
-                    }
-                    <Hidden lgUp>
-                        <CustomBottomNavigation login={this.openLogin.bind(this)} />
-                    </Hidden>
-                    <StickyFooter />
-                </div>
+                        <StickyFooter />
+                    </div>
+                        :
+                    null
+                }
             </Provider>
         );
     }
