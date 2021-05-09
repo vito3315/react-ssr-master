@@ -27,17 +27,15 @@ app.use( '*', async ( req, res ) => {
     if( matchRoute ){
         // fetch data of the matched component
         let componentData = null;
-        //if( typeof matchRoute.component.fetchData === 'function' ) {
-            componentData = matchRoute.component.fetchData();
-        //}
+        if( typeof matchRoute.component.fetchData === 'function' ) {
+            componentData = await matchRoute.component.fetchData();
+        }
 
         // read `index.html` file
         let indexHTML = fs.readFileSync( path.resolve( __dirname, '../dist/index.html' ), {
             encoding: 'utf8',
         } );
 
-        console.log( '2' )
-        
         // get HTML string from the `App` component
         let appHTML = ReactDOMServer.renderToString(
             <StaticRouter location={ req.originalUrl } data={ componentData } context={ componentData }>
@@ -54,7 +52,6 @@ app.use( '*', async ( req, res ) => {
         
         //console.log( 'componentData', componentData )
         
-        console.log( '3' )
         indexHTML = indexHTML.replace('<!-- title -->', `${componentData.title}`);
         indexHTML = indexHTML.replace('<!-- description -->', `${componentData.description}`);
         
