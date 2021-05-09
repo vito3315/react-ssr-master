@@ -28,7 +28,7 @@ app.use( '*', async ( req, res ) => {
         // fetch data of the matched component
         let componentData = null;
         if( typeof matchRoute.component.fetchData === 'function' ) {
-            componentData = await matchRoute.component.fetchData();
+            componentData = await matchRoute.component.fetchData(req.originalUrl);
         }
 
         // read `index.html` file

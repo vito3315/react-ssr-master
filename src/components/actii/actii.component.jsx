@@ -50,8 +50,8 @@ export class Actii extends React.Component {
         };
     }
     
-    static fetchData() {
-        console.log( 'Post.fetchData()', this.state.city_name );
+    static fetchData(propsData) {
+        console.log( 'Post.fetchData()', propsData, props );
 
         let data = {
             type: 'get_page_info', 
