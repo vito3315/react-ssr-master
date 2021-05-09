@@ -51,7 +51,7 @@ export class Actii extends React.Component {
     }
     
     static fetchData(propsData) {
-        console.log( 'Post.fetchData()', propsData, props );
+        console.log( 'Post.fetchData()', propsData, this.props );
 
         let data = {
             type: 'get_page_info', 
