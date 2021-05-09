@@ -96,15 +96,25 @@ class CustomBottomNavigation extends React.Component{
                 >
                     <FontAwesomeIcon icon={ faGift } style={{ color: this.state.thisPage == 'actii' ? 'black' : 'gray' }} />
                 </Link>
-                <Link
-                    to={'/'+this_city+'/cart'}
-                    exact={ true }
-                    className="MuiButtonBase-root MuiBottomNavigationAction-root"
-                >
-                    <Badge badgeContent={ this.state.allPrice } max={500000} color="primary">
-                        <ShoppingCartOutlinedIcon style={{ fill: this.state.thisPage == 'cart' ? 'black' : 'gray' }} />
-                    </Badge>
-                </Link>
+                {itemsStore.getToken() ?
+                    <Link
+                        to={'/'+this_city+'/cart'}
+                        exact={ true }
+                        className="MuiButtonBase-root MuiBottomNavigationAction-root"
+                    >
+                        <Badge badgeContent={ this.state.allPrice } max={500000} color="primary">
+                            <ShoppingCartOutlinedIcon style={{ fill: this.state.thisPage == 'cart' ? 'black' : 'gray' }} />
+                        </Badge>
+                    </Link>
+                        :
+                    <Typography 
+                        className="MuiButtonBase-root MuiBottomNavigationAction-root" 
+                        onClick={this.props.login}>
+                        <Badge badgeContent={ this.state.allPrice } max={500000} color="primary">
+                            <ShoppingCartOutlinedIcon style={{ fill: this.state.thisPage == 'cart' ? 'black' : 'gray' }} />
+                        </Badge>
+                    </Typography>
+                }
                 <Link
                     to={'/'+this_city+'/contact'}
                     exact={ true }
@@ -162,7 +172,8 @@ class StickyFooter extends React.Component{
         
         this.state = {      
             soc_link: null,
-            cityName: ''
+            cityName: '',
+            is_load: false,
         };
     }
     
@@ -182,6 +193,7 @@ class StickyFooter extends React.Component{
                 
                 this.setState({
                     soc_link: json.soc_link,
+                    is_load: true
                 });
             })
             .catch(err => { });
@@ -216,61 +228,65 @@ class StickyFooter extends React.Component{
                         <Typography variant="body1">Доставка и контакты</Typography>
                         <Typography variant="body1">Правила оплаты товаров</Typography>
                     </Grid>
-                    <Grid item lg={3} md={3} sm={3} xl={3} xs={12} className="socIcons">
-                        { this.state.soc_link && this.state.soc_link.link_fb ?
-                            <Link
-                                to={{ pathname: this.state.soc_link.link_fb }}
-                                target="_blank"
-                                style={{ textDecoration: 'none' }}
-                            >
-                                <FontAwesomeIcon icon={faFacebookF} style={{ fontSize: '2rem', padding: 10 }} />
-                            </Link>
-                                :
-                            null
-                        }
-                        { this.state.soc_link && this.state.soc_link.link_inst ?
-                            <Link
-                                to={{ pathname: this.state.soc_link.link_inst }}
-                                target="_blank"
-                                style={{ textDecoration: 'none' }}
-                            >
-                                <FontAwesomeIcon icon={faInstagram} style={{ fontSize: '2rem', padding: 10 }} />
-                            </Link>
-                                :
-                            null
-                        }
-                        { this.state.soc_link && this.state.soc_link.link_ok ?
-                            <Link
-                                to={{ pathname: this.state.soc_link.link_ok }}
-                                target="_blank"
-                                style={{ textDecoration: 'none' }}
-                            >
-                                <FontAwesomeIcon icon={faOdnoklassniki} style={{ fontSize: '2rem', padding: 10 }} />
-                            </Link>
-                                :
-                            null
-                        }
-                        { this.state.soc_link && this.state.soc_link.link_vk ?
-                            <Link
-                                to={{ pathname: this.state.soc_link.link_vk }}
-                                target="_blank"
-                                style={{ textDecoration: 'none' }}
-                            >
-                                <FontAwesomeIcon icon={faVk} style={{ fontSize: '2rem', padding: 10 }} />
-                            </Link>
-                                :
-                            null
-                        }
-                        
-                            <Link
-                                to={{ pathname: 'https://t.me/jacofood' }}
-                                target="_blank"
-                                style={{ textDecoration: 'none' }}
-                            >
-                                <FontAwesomeIcon icon={faTelegramPlane} style={{ fontSize: '2rem', padding: 10 }} />
-                            </Link>
-                                
-                    </Grid>
+                    { this.state.is_load ?
+                        <Grid item lg={3} md={3} sm={3} xl={3} xs={12} className="socIcons">
+                            { this.state.soc_link && this.state.soc_link.link_fb ?
+                                <Link
+                                    to={{ pathname: this.state.soc_link.link_fb }}
+                                    target="_blank"
+                                    style={{ textDecoration: 'none' }}
+                                >
+                                    <FontAwesomeIcon icon={faFacebookF} style={{ fontSize: '2rem', padding: 10 }} />
+                                </Link>
+                                    :
+                                null
+                            }
+                            { this.state.soc_link && this.state.soc_link.link_inst ?
+                                <Link
+                                    to={{ pathname: this.state.soc_link.link_inst }}
+                                    target="_blank"
+                                    style={{ textDecoration: 'none' }}
+                                >
+                                    <FontAwesomeIcon icon={faInstagram} style={{ fontSize: '2rem', padding: 10 }} />
+                                </Link>
+                                    :
+                                null
+                            }
+                            { this.state.soc_link && this.state.soc_link.link_ok ?
+                                <Link
+                                    to={{ pathname: this.state.soc_link.link_ok }}
+                                    target="_blank"
+                                    style={{ textDecoration: 'none' }}
+                                >
+                                    <FontAwesomeIcon icon={faOdnoklassniki} style={{ fontSize: '2rem', padding: 10 }} />
+                                </Link>
+                                    :
+                                null
+                            }
+                            { this.state.soc_link && this.state.soc_link.link_vk ?
+                                <Link
+                                    to={{ pathname: this.state.soc_link.link_vk }}
+                                    target="_blank"
+                                    style={{ textDecoration: 'none' }}
+                                >
+                                    <FontAwesomeIcon icon={faVk} style={{ fontSize: '2rem', padding: 10 }} />
+                                </Link>
+                                    :
+                                null
+                            }
+                            
+                                <Link
+                                    to={{ pathname: 'https://t.me/jacofood' }}
+                                    target="_blank"
+                                    style={{ textDecoration: 'none' }}
+                                >
+                                    <FontAwesomeIcon icon={faTelegramPlane} style={{ fontSize: '2rem', padding: 10 }} />
+                                </Link>
+                                    
+                        </Grid>
+                            :
+                        null
+                    }
                 </Grid>
             </footer>
         );
@@ -404,7 +420,7 @@ export class App extends React.Component {
                         </Hidden>
                     }
                     <Hidden lgUp>
-                        <CustomBottomNavigation login={ () => { /*this.openLogin.bind(this)*/ }} />
+                        <CustomBottomNavigation login={ Header.openLogin } />
                     </Hidden>
                     <StickyFooter />
                 </div>

@@ -61,6 +61,11 @@ import itemsStore from '../../stores/items-store';
 import { autorun } from "mobx"
 
 const queryString = require('query-string');
+import axios from 'axios';
+
+function get_city(path){
+    return path.split('/')[1];
+}
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -93,16 +98,6 @@ function a11yProps(index) {
     id: `simple-tab-${index}`,
     'aria-controls': `simple-tabpanel-${index}`,
   };
-}
-
-export function Cart() {
-    let { cityName } = useParams();
-  
-    itemsStore.setCity(cityName);
-  
-    return (
-        <RenderCart cityName={cityName} />
-    );
 }
 
 class CartItem extends React.Component {
@@ -407,7 +402,7 @@ class CartItemMobile extends React.Component {
     }
 }
 
-class RenderCart extends React.Component {
+export class Cart extends React.Component {
     _isMounted = false;
     clickOrderStart = false
     
@@ -416,7 +411,7 @@ class RenderCart extends React.Component {
         
         this.state = {      
             is_load: false,
-            city_name: this.props.cityName,
+            city_name: props.match.params.cityName,
             
             chooseAddr: false,
             choosePicDialog: false,
@@ -485,6 +480,35 @@ class RenderCart extends React.Component {
             orderPromo: '',
             orderPromoText: ''
         };
+        
+        itemsStore.setCity(props.match.params.cityName);
+    }
+    
+    static fetchData(propsData) {
+        let data = {
+            type: 'get_page_info', 
+            city_id: get_city(propsData),
+            page: 'cart' 
+        };
+        
+        return axios({
+            method: 'POST',
+            url:'https://jacofood.ru/src/php/test_app.php',
+            headers: { 'content-type': 'application/x-www-form-urlencoded' },
+            data: queryString.stringify(data)
+        }).then(response => {
+            if(response['status'] === 200){
+                var json = response['data'];
+                
+                return {
+                    title: json.page.title,
+                    description: json.page.description,
+                    page: json.page,
+                }
+            } 
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
     
     loadData(){

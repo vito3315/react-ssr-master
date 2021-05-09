@@ -400,6 +400,12 @@ export class Header extends React.Component {
         })
     }
     
+    static openLoginNew(){
+        this.setState({
+            openLogin: true
+        })
+    }
+    
     closeLogin(){
         this.setState({
             openLogin: false

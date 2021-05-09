@@ -1,5 +1,4 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
@@ -22,23 +21,6 @@ function get_city(path){
 function get_item(path){
     return path.split('/')[3];
 }
-
-/*export function Item(props = 0) {
-    let { itemLink } = useParams();
-    let { cityName } = useParams();
-    
-    itemsStore.setCity(cityName);
-  
-    if( props.item ){
-        return (
-            <RenderItem itemLink={itemLink} item={props.item} type={"props"} />
-        );
-    }
-  
-    return (
-        <RenderItem itemLink={itemLink} type={"render"} />
-    );
-}*/
 
 function ItemInfoPopover(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
