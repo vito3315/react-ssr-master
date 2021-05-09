@@ -33,6 +33,10 @@ const queryString = require('query-string');
     );
 }*/
 
+function get_city(path){
+    return path.split('/')[1];
+}
+
 export class Actii extends React.Component {
     constructor(props) {
         super(props);
@@ -45,7 +49,7 @@ export class Actii extends React.Component {
             is_load: false,
             showItem: null,
             openDialog: false,
-            city_name: 'samara',
+            city_name: get_city(props.location.pathname),
             page: null,
             title: '',
             description: ''
@@ -55,6 +59,29 @@ export class Actii extends React.Component {
     static fetchData() {
         console.log( 'Post.fetchData()' );
 
+        let data = {
+            type: 'get_page_info', 
+            city_id: 'samara',
+            page: 'akcii' 
+        };
+        
+        axios.post('https://jacofood.ru/src/php/test_app.php', data, {
+            headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+        }).then(data =>
+            console.log(data)
+        ).catch(err => {
+            console.log(err)
+            return null
+        })
+        
+        axios.post('https://jacofood.ru/src/php/test_app.php', {
+            type: 'get_page_info', 
+            city_id: 'samara',
+            page: 'akcii' }
+        ).then(function(response) {
+            //code here 
+        });
+        
         return axios.get( 'https://jsonplaceholder.typicode.com/posts/3' ).then( response => {
             return {
                 title: response.data.title,
