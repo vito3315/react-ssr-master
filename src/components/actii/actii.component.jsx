@@ -42,7 +42,7 @@ export class Actii extends React.Component {
         super(props);
         
         //console.log( 'location', props.location )
-        console.log( 'context', props.staticContext )
+        console.log( 'context', props )
         //console.log( 'context', props.context )
         
         if( props.staticContext ) {
