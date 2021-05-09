@@ -41,19 +41,34 @@ export class Actii extends React.Component {
     constructor(props) {
         super(props);
         
-        console.log( 'location', props.location )
-        console.log( 'context', props.context )
+        //console.log( 'location', props.location )
+        //console.log( 'context', props.context )
         
-        this.state = {      
+        if( props.staticContext ) {
+            this.state = {
+                actii: props.staticContext.data,  
+                is_load: false,
+                showItem: null,
+                openDialog: false,
+                city_name: get_city(props.location.pathname),
+            };
+        } else {
+            this.state = {
+                actii: [],  
+                is_load: false,
+                showItem: null,
+                openDialog: false,
+                city_name: get_city(props.location.pathname),
+            };
+        }
+        
+        /*this.state = {      
             actii: [],  
             is_load: false,
             showItem: null,
             openDialog: false,
             city_name: get_city(props.location.pathname),
-            page: null,
-            title: '',
-            description: ''
-        };
+        };*/
     }
     
     static fetchData() {
@@ -77,6 +92,7 @@ export class Actii extends React.Component {
                 return {
                     title: json.page.title,
                     description: json.page.description,
+                    data: json.data
                 }
             } 
         }).catch(function (error) {
@@ -91,7 +107,7 @@ export class Actii extends React.Component {
         window.scrollTo(0, 0);
         itemsStore.setPage('actii');
         
-        fetch('https://jacofood.ru/src/php/test_app.php', {
+        /*fetch('https://jacofood.ru/src/php/test_app.php', {
             method: 'POST',
             headers: {
                 'Content-Type':'application/x-www-form-urlencoded'},
@@ -117,26 +133,9 @@ export class Actii extends React.Component {
                 }
             }, 300);
         })
-        .catch(err => { });
+        .catch(err => { });*/
         
-        fetch('https://jacofood.ru/src/php/test_app.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/x-www-form-urlencoded'},
-            body: queryString.stringify({
-                type: 'get_page_info', 
-                city_id: this.props.cityName,
-                page: 'akcii'
-            })
-        }).then(res => res.json()).then(json => {
-            console.log( json )
-            this.setState({ 
-                page: json.page,
-                title: json.page.title,
-                description: json.page.description
-            });
-        })
-        .catch(err => { });
+        
     }
     
     closeDialog(){
