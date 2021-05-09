@@ -43,11 +43,11 @@ export class Actii extends React.Component {
         
         //console.log( 'location', props.location )
         console.log( 'context', props.staticContext )
-        console.log( 'context', props.context )
+        //console.log( 'context', props.context )
         
         if( props.staticContext ) {
             this.state = {
-                actii: props.staticContext.data,  
+                actii: props.staticContext.data.actii,  
                 is_load: false,
                 showItem: null,
                 openDialog: false,
