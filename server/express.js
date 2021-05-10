@@ -58,6 +58,8 @@ app.use( '*', async ( req, res ) => {
             `${helmet.title.toString()}`
         );
         
+        console.log( helmet )
+        
         // populate `#app` element with `appHTML`
         indexHTML = indexHTML.replace( 
             '<div id="app"></div>', 
