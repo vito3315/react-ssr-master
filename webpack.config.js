@@ -120,7 +120,7 @@ module.exports = {
         }
     },
 
-    externals: ["react-helmet"],
+    externals: ["react-helmet", "react"],
     
     // development server configuration
     devServer: {
