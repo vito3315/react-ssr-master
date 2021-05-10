@@ -414,7 +414,8 @@ export class Cart extends React.Component {
             is_load: false,
             city_name: props.match.params.cityName,
             
-            page: null,
+            title: '',
+            description: '',
             
             chooseAddr: false,
             choosePicDialog: false,

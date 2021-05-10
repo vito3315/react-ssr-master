@@ -128,10 +128,6 @@ export class Actii extends React.Component {
     
     render() {
         
-        if( !this.state.is_load ){
-            return null;
-        }
-        
         return (
             <Grid container className="Actii mainContainer MuiGrid-spacing-xs-3">
                 

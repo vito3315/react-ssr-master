@@ -11,6 +11,7 @@ import Hidden from '@material-ui/core/Hidden';
 import { autorun } from "mobx"
 import itemsStore from '../../stores/items-store';
 
+import {Helmet} from "react-helmet";
 const queryString = require('query-string');
 import axios from 'axios';
 
@@ -112,7 +113,9 @@ export class Item extends React.Component {
             is_load: false,
             count: 0,
             city_name: props.match.params.cityName,
-            itemLink: props.match.params.itemLink
+            itemLink: props.match.params.itemLink,
+            title: '',
+            description: '',
         };
         
         itemsStore.setCity(props.match.params.cityName);
@@ -188,6 +191,14 @@ export class Item extends React.Component {
         })
         
         if( this.props.item ){
+            
+            Item.fetchData('/'+this.state.city_name+'/menu/'+this.state.itemLink).then( data => {
+                this.setState( {
+                    title: data.page.title,
+                    description: data.page.description,
+                } );
+            } );
+            
             if( this.state.item.items.length == 0 && (parseInt(this.state.item.type) !== 3 && parseInt(this.state.item.type) !== 4) ){
                 this.state.item.items.push({
                     kkal: this.state.item.kkal,
@@ -265,6 +276,11 @@ export class Item extends React.Component {
         
         return (
             <div>
+                <Helmet>
+                    <title>{this.state.title}</title>
+                    <meta name="description" content={this.state.description} />
+                </Helmet>
+                
                 <Hidden xsDown>
                     <Grid container className="MainItem mainContainer">
                         <Grid item xs={12} style={{ paddingBottom: 15 }}>
@@ -340,9 +356,6 @@ export class Item extends React.Component {
                         </Grid>
                     </Grid>
                 </Hidden>
-                
-                
-                
             </div>
         )
     }

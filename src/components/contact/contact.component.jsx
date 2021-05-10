@@ -1,12 +1,6 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 
 import Grid from '@material-ui/core/Grid';
-
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import IconButton from '@material-ui/core/IconButton';
-
 import Typography from '@material-ui/core/Typography';
 
 import Accordion from '@material-ui/core/Accordion';
@@ -16,6 +10,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import itemsStore from '../../stores/items-store';
 
+import {Helmet} from "react-helmet";
 import axios from 'axios';
 const queryString = require('query-string');
 
@@ -77,6 +72,10 @@ export class Contact extends React.Component {
         
         this.state = {      
             points: [],  
+            
+            title: '',
+            description: '',
+            
             city_name: props.match.params.cityName,
             is_load: false,
         };
@@ -99,6 +98,13 @@ export class Contact extends React.Component {
         itemsStore.setPage('contact');
         
         this.dynamicallyLoadScript();
+        
+        Contact.fetchData('/'+this.state.city_name).then( data => {
+            this.setState( {
+                title: data.page.title,
+                description: data.page.description,
+            } );
+        } );
         
         fetch('https://jacofood.ru/src/php/test_app.php', {
             method: 'POST',
@@ -207,13 +213,14 @@ export class Contact extends React.Component {
     }
     
     render() {
-        
-        if( !this.state.is_load ){
-            return null;
-        }
-        
         return (
             <Grid container className="Contact mainContainer MuiGrid-spacing-xs-3">
+                
+                <Helmet>
+                    <title>{this.state.title}</title>
+                    <meta name="description" content={this.state.description} />
+                </Helmet>
+                
                 <Grid item xs={12}>
                     <Typography variant="h5" component="h1">Контакты</Typography>
                 </Grid>
