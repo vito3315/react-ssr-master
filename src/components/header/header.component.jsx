@@ -134,6 +134,8 @@ class SimplePopover extends React.Component{
                 localStorage.removeItem('promo_name')
             }
             
+            console.log( check_promo )
+            
             this.setState({
                 promoText: check_promo.text
             })

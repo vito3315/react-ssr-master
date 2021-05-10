@@ -300,8 +300,7 @@ class ItemsStore {
           count_sale = parseInt(promo_info.sale.count_sale);
           
           my_cart.forEach( (el_cart, key_cart) => {
-            //this_item = cart.allItems[ el_cart.item_id ];
-            this_item = allItems.filter( (item) => item.id == el_cart.item_id )[0];
+            this_item = allItems.find( (item) => item.id == el_cart.item_id );
             
             if( parseInt(this_item.type) != 3 && parseInt(this_item.type) != 4 ){
               promo_info.sale.sale_action.forEach( (el_promo) => {
@@ -338,7 +337,7 @@ class ItemsStore {
           count_sale = parseInt(promo_info.sale.count_sale);
           
           my_cart.forEach( (el_cart, key_cart) => {
-            this_item = cart.allItems[ el_cart.item_id ];
+            this_item = allItems.find( (item) => item.id == el_cart.item_id );
             
             if( parseInt(this_item.type) != 3 && parseInt(this_item.type) != 4 ){
               promo_info.sale.sale_action.forEach( (el_promo) => {
@@ -374,7 +373,7 @@ class ItemsStore {
           count_sale = parseInt(promo_info.sale.count_sale);
           
           my_cart.forEach( (el_cart, key_cart) => {
-            this_item = cart.allItems[ el_cart.item_id ];
+            this_item = allItems.find( (item) => item.id == el_cart.item_id );
             
             if( parseInt(this_item.type) != 3 && parseInt(this_item.type) != 4 ){
               if( parseInt(promo_info.sale.type_price) == 1 ){
@@ -409,13 +408,14 @@ class ItemsStore {
         
         return {
           st: true,
+          text: promo_info.promo_text.true
         }
       }
       
       //добавление товара
       if( parseInt(promo_info.promo_action) == 2 ){
         promo_info.items_add.forEach((el) => {
-          this_item = allItems.filter( (item) => item.id == el.item_id )[0];
+          this_item = allItems.find( (item) => item.id == el.item_id );
           
           cart_new_promo.push({
             item_id: el.item_id,
@@ -433,8 +433,6 @@ class ItemsStore {
         tmp = 0;
         
         allPrice += cart_new_promo.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
-        
-        console.log( 'need', allPrice )
         
         itemsStore.setItemsPromo(cart_new_promo);
         itemsStore.setAllPrice(allPrice);
@@ -558,15 +556,13 @@ class ItemsStore {
     let promo = itemsStore.getPromo();
     
     if( all_items.length > 0 ){
-      let cart_info = my_cart.filter( (item) => item.item_id == id );
+      let cart_info = my_cart.find( (item) => item.item_id == id );
       
-      if( cart_info.length > 0 ){
-        cart_info = cart_info[0];
-      }else{
+      if( !cart_info ){
         cart_info.count = 0;
       }
       
-      let item_info = all_items.filter( (item) => item.id == id )[0];
+      let item_info = all_items.find( (item) => item.id == id );
       
       if(item_info){
         let count = parseInt(cart_info.count) + 1,
@@ -637,7 +633,6 @@ class ItemsStore {
           }
         } )
         
-        //my_cart = my_cart.filter( (item) => item.count > 0 );
         itemsStore.setItems(my_cart)
       }
     
@@ -669,7 +664,7 @@ class ItemsStore {
     }
     
     my_cart.forEach(el => {
-      let this_item = all_items.filter( (item) => item.id == el.item_id )[0];
+      let this_item = all_items.find( (item) => item.id == el.item_id );
       
       if( !this_item ){
         return [];
@@ -706,7 +701,7 @@ class ItemsStore {
         add_my_dop = [];
     
     my_cart.forEach(el => {
-      let this_item = all_items.filter( (item) => item.id == el.item_id )[0];
+      let this_item = all_items.find( (item) => item.id == el.item_id );
       
       if( !this_item ){
         return [];

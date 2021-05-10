@@ -326,8 +326,8 @@ class RenderProfile extends React.Component {
         }
     }
     
-    activePromo(promo){
-        itemsStore.setPromo(JSON.stringify(promo))
+    activePromo(promo_info, promo_name){
+        itemsStore.setPromo(JSON.stringify(promo_info), promo_name)
         let res = itemsStore.checkPromo();
         
         setTimeout(() => {
@@ -431,7 +431,7 @@ class RenderProfile extends React.Component {
                                         <tbody>
                                             {this.state.info.promo.promo.map((item, key) => 
                                                 <tr key={key}>
-                                                    <td><Typography variant="h5" component="span" onClick={this.activePromo.bind(this, item.info)}>{item.promo_name}</Typography></td>
+                                                    <td><Typography variant="h5" component="span" onClick={this.activePromo.bind(this, item.info, item.promo_name)}>{item.promo_name}</Typography></td>
                                                     <td><Typography variant="h5" component="span">{item.promo_text}</Typography></td>
                                                     <td><Typography variant="h5" component="span">{item.date_end}</Typography></td>
                                                 </tr>
@@ -462,7 +462,7 @@ class RenderProfile extends React.Component {
                                                             <Typography variant="h5" component="span">{item.promo_text}</Typography>
                                                         </div>
                                                         <div style={{ width: '100%', paddingTop: 10 }}>
-                                                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" style={{ width: '100%' }}>
+                                                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" style={{ width: '100%' }} onClick={this.activePromo.bind(this, item.info, item.promo_name)}>
                                                                 <Button variant="contained" className="BtnCardMain CardInCardItem" style={{ width: '100%' }}>Активирывать промокод</Button>
                                                             </ButtonGroup>
                                                         </div>
