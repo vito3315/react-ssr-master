@@ -120,6 +120,8 @@ module.exports = {
         }
     },
 
+    externals: ["react-helmet"],
+    
     // development server configuration
     devServer: {
         port: 4052,

@@ -46,9 +46,6 @@ app.use( '*', async ( req, res ) => {
         const helmet = Helmet.renderStatic();
         
         
-        
-        console.log( 'componentData', componentData )
-        
         indexHTML = indexHTML.replace('<!-- title -->', `${componentData.title}`);
         indexHTML = indexHTML.replace('<!-- description -->', `<meta name="description" content="${componentData.description}" />`);
         //indexHTML = indexHTML.replace('<h1 class="MuiTypography-root MuiTypography-h5"></h1>', `<h1 class="MuiTypography-root MuiTypography-h5">${componentData.page_h}</h1>`);
@@ -62,8 +59,6 @@ app.use( '*', async ( req, res ) => {
             '<!-- description -->',
             `<meta name="description" content="${helmet.meta.toString()}" />`
         );
-        
-        console.log( helmet.meta.toString() )
         
         // populate `#app` element with `appHTML`
         indexHTML = indexHTML.replace( 
