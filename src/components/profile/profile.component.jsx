@@ -383,6 +383,25 @@ class RenderProfile extends React.Component {
     }
     
     render() {
+        const red = 'red';
+        
+        /*
+            <div style={{ flex: 1, position: 'relative', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingTop: 10, display: 'flex' }}>
+                                                        <div style={{ flex: 2, backgroundColor: parseInt(item.steps[0]['active']) == 0 || parseInt(item.steps[0]['active']) == 2 ? '#e5e5e5' : red, borderWidth: 1, borderColor: parseInt(item.steps[0]['active']) == 0 || parseInt(item.steps[0]['active']) == 2 ? '#bababa' : red, borderStyle: 'solid', borderTopLeftRadius: 6, borderBottomLeftRadius: 6 }}>
+                                                            <span style={[{ color: parseInt(item.steps[0]['active']) == 0 || parseInt(item.steps[0]['active']) == 2 ? '#000' : '#fff' }]}>{item.steps[0]['name']}</span>
+                                                        </div>
+                                                        <div style={{ flex: 2, backgroundColor: parseInt(item.steps[1]['active']) == 0 || parseInt(item.steps[1]['active']) == 2 ? '#e5e5e5' : red, borderWidth: 1, borderColor: parseInt(item.steps[1]['active']) == 0 || parseInt(item.steps[1]['active']) == 2 ? '#bababa' : red, borderStyle: 'solid' }}>
+                                                            <span style={[{ color: parseInt(item.steps[1]['active']) == 0 || parseInt(item.steps[1]['active']) == 2 ? '#000' : '#fff' }]}>{item.steps[1]['name']}</span>
+                                                        </div>
+                                                        <div style={{ flex: 3, backgroundColor: parseInt(item.steps[2]['active']) == 0 || parseInt(item.steps[2]['active']) == 2 ? '#e5e5e5' : red, borderWidth: 1, borderColor: parseInt(item.steps[2]['active']) == 0 || parseInt(item.steps[2]['active']) == 2 ? '#bababa' : red, borderStyle: 'solid' }}>
+                                                            <span style={[{ color: parseInt(item.steps[2]['active']) == 0 || parseInt(item.steps[2]['active']) == 2 ? '#000' : '#fff' }]}>{item.steps[2]['name']}</span>
+                                                        </div>
+                                                        <div style={{ flex: 2, backgroundColor: parseInt(item.steps[3]['active']) == 0 || parseInt(item.steps[3]['active']) == 2 ? '#e5e5e5' : red, borderWidth: 1, borderColor: parseInt(item.steps[3]['active']) == 0 || parseInt(item.steps[3]['active']) == 2 ? '#bababa' : red, borderStyle: 'solid', borderTopRightRadius: 6, borderBottomRightRadius: 6 }}>
+                                                            <span style={[{ color: parseInt(item.steps[3]['active']) == 0 || parseInt(item.steps[3]['active']) == 2 ? '#000' : '#fff' }]}>{item.steps[3]['name']}</span>
+                                                        </div>
+                                                    </div>
+        */
+        
         return (
             <Grid container className="Profile mainContainer MuiGrid-spacing-xs-3">
                 <Grid item xs={12}>
@@ -479,28 +498,48 @@ class RenderProfile extends React.Component {
                     </TabPanel>
                     <TabPanel value={this.state.valueTab} index={1} style={{ width: '100%' }}>
                         {this.state.info.orders ?
-                            <table className="TableOrders">
-                                <thead>
-                                    <tr>
-                                        <td><Typography variant="h5" component="span">№</Typography></td>
-                                        <td><Typography variant="h5" component="span">Дата</Typography></td>
-                                        <td><Typography variant="h5" component="span">Сумма</Typography></td>
-                                        <td></td>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                            <div className="TableOrders">
+                                <div className="thead">
+                                    <Typography variant="h5" component="span" style={{ flex: 2 }}>№</Typography>
+                                    <Typography variant="h5" component="span" style={{ flex: 3 }}>Дата</Typography>
+                                    <Typography variant="h5" component="span" style={{ flex: 1 }}>Сумма</Typography>
+                                    <Typography variant="h5" component="span" style={{ flex: 1 }}></Typography>
+                                </div>
+                                <div className="tbody">
                                     {this.state.info.orders.my_orders.map((item, key) => 
-                                        <tr key={key}>
-                                            <td><Typography variant="h5" component="span">{item.order_id}</Typography></td>
-                                            <td><Typography variant="h5" component="span">{item.date_time_new}</Typography></td>
-                                            <td>
-                                                <Typography className="CardPriceItem" variant="h5" component="span">{item.sum} <AttachMoneyIcon fontSize="small" /></Typography>
-                                            </td>
-                                            <td><Typography variant="h5" component="span">{parseInt(item.is_delete) == 1 ? <CloseIcon /> : <CheckIcon />}</Typography></td>
-                                        </tr>
+                                        <div key={key} className={ (parseInt(item.status_order) == 6 || parseInt(item.is_delete) == 1) ? '' : 'active' }>
+                                            <div>
+                                                <Typography variant="h5" component="span" style={{ flex: 2 }}>{item.order_id}</Typography>
+                                                <Typography variant="h5" component="span" style={{ flex: 3 }}>{item.date_time_new}</Typography>
+                                                <Typography className="CardPriceItem" variant="h5" component="span" style={{ flex: 1 }}>{item.sum} <AttachMoneyIcon fontSize="small" /></Typography>
+                                                <Typography variant="h5" component="span" style={{ flex: 1 }}>{parseInt(item.is_delete) == 1 ? <CloseIcon /> : <CheckIcon />}</Typography>
+                                            </div>
+                                            
+                                            {(parseInt(item.status_order) == 6 || parseInt(item.is_delete) == 1) ? null :
+                                                <div className="boxSteps">
+                                                    <div>
+                                                        <div className={ parseInt(item.steps[0]['active']) == 0 || parseInt(item.steps[0]['active']) == 2 ? '' : 'active' }>
+                                                            <Typography variant="h5" component="span">{item.steps[0]['name']}</Typography>
+                                                        </div>
+                                                        <div className={ parseInt(item.steps[1]['active']) == 0 || parseInt(item.steps[1]['active']) == 2 ? '' : 'active' }>
+                                                            <Typography variant="h5" component="span">{item.steps[1]['name']}</Typography>
+                                                        </div>
+                                                        <div className={ parseInt(item.steps[2]['active']) == 0 || parseInt(item.steps[2]['active']) == 2 ? '' : 'active' }>
+                                                            <Typography variant="h5" component="span">{item.steps[2]['name']}</Typography>
+                                                        </div>
+                                                        <div className={ parseInt(item.steps[3]['active']) == 0 || parseInt(item.steps[3]['active']) == 2 ? '' : 'active' }>
+                                                            <Typography variant="h5" component="span">{item.steps[3]['name']}</Typography>                                                        
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <Typography variant="h5" component="span">Заказ { parseInt(item.type_order) == 1 ? 'привезут через: ' : 'будет готов через: ' }{item.time_to_client}</Typography>
+                                                    </div>
+                                                </div> 
+                                            }
+                                        </div>
                                     )}
-                                </tbody>
-                            </table>
+                                </div>
+                            </div>
                                 :
                             null
                         }

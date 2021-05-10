@@ -290,6 +290,10 @@ export class Header extends React.Component {
             this.setState({
                 cityName: itemsStore.getCity()
             })
+            
+            this.setState({
+                userName: itemsStore.userName
+            })
         })
         
         this.load();

@@ -5,6 +5,70 @@ $mainColor: #BB0025;
     font-size: $size;
     font-family: $family !important;
 }
+.boxSteps{
+    width: 100%;
+    padding-top: 10px;
+    & > div:first-child{
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        & > div:not(.active){
+            background-color: #e5e5e5;
+            border: 1px solid #bababa;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            text-align: center;
+            white-space: nowrap;
+            & > span{
+                @include fons(1rem, $Ubuntu);
+                color: #000;
+                padding: 5px 10px;
+                @media (max-width: 960px) {
+                    @include fons(0.7rem, $Ubuntu);
+                }
+            }
+        }
+        & > div.active{
+            background-color: $mainColor;
+            border: 1px solid $mainColor;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            text-align: center;
+            white-space: nowrap;
+            & > span{
+                @include fons(1rem, $Ubuntu);
+                color: #fff;
+                padding: 5px 10px;
+                @media (max-width: 960px) {
+                    @include fons(0.7rem, $Ubuntu);
+                }
+            }
+        }
+        & > div:first-child{
+            border-top-left-radius: 6px;
+            border-bottom-left-radius: 6px;
+        }
+        & > div:last-child{
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px;
+        }
+    }
+    & > div:last-child{
+        display: flex;
+        flex-direction: row; 
+        justify-content: center; 
+        align-items: center; 
+        padding-top: 10px;
+        & > span{
+            @include fons(1rem, $Ubuntu);
+            text-align: center;
+        }
+    }
+}
 .Profile{
     margin-top: 64px!important;
     & h1{
@@ -115,25 +179,35 @@ $mainColor: #BB0025;
 
 .TableOrders{
     width: 100%;
-    border-collapse: collapse;
-    & tbody{
-        & tr{
+    & .tbody{
+        & > div{
+            padding: 15px 0;
             border-bottom: 1px solid #e5e5e5;
+        }
+        & > div > div:first-child{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+            & span{
+                text-align: center;
+            }
         }
         & span{
             @include fons(1rem, $Ubuntu);
         }
     }
-    & thead{
+    & .thead{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
         border-bottom: 2px solid #e5e5e5;
         & span{
             @include fons(1rem, $Ubuntu);
             font-weight: bold;
+            text-align: center;
+            padding: 10px 0;
         }
-    }
-    & td{
-        text-align: center;
-        padding: 15px 5px;
     }
     & .CardPriceItem{
         display: flex;
@@ -147,7 +221,7 @@ $mainColor: #BB0025;
     align-items: center; 
     margin: 40px 0;
     & .input{
-        margin: 0px 40px;
+        margin: 15px 40px;
         width: calc(100% - 80px);
     }
     & .input.checkbox{

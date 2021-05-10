@@ -105,6 +105,9 @@ body{
             }
         } 
     }
+    & a{
+        text-decoration: none;
+    }
     & .cat{
         @include fons(1rem, $Ubuntu);
         cursor: pointer;
