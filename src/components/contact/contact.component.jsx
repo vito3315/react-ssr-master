@@ -136,6 +136,15 @@ export class Contact extends React.Component {
         .catch(err => { });
     }
     
+    UNSAFE_componentWillMount(){
+        Contact.fetchData('/'+this.props.match.params.cityName).then( data => {
+            this.setState( {
+                title: data.page.title,
+                description: data.page.description,
+            } );
+        } );
+    }
+    
     static fetchData(propsData) {
         let data = {
             type: 'get_page_info', 
@@ -216,7 +225,9 @@ export class Contact extends React.Component {
         return (
             <Grid container className="Contact mainContainer MuiGrid-spacing-xs-3">
                 
-                <Helmet>
+                <Helmet
+                    defer = { false }
+                >
                     <title>{this.state.title}</title>
                     <meta name="description" content={this.state.description} />
                 </Helmet>
