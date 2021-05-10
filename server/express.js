@@ -16,7 +16,7 @@ const { App } = require( '../src/components/app' );
 const routes = require( './routes' );
 
 // serve static assets
-app.get( /\.(js|css|map|ico)$/, express.static( path.resolve( __dirname, '../dist' ) ) );
+app.get( /\.(js|css|map|ico|png)$/, express.static( path.resolve( __dirname, '../dist' ) ) );
 
 // for any other requests, send `index.html` as a response
 app.use( '*', async ( req, res ) => {
