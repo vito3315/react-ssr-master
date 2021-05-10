@@ -14,6 +14,9 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 
+import CloseIcon from '@material-ui/icons/Close';
+import Snackbar from '@material-ui/core/Snackbar';
+
 import axios from 'axios';
 import {Helmet} from "react-helmet";
 
@@ -37,6 +40,10 @@ export class Actii extends React.Component {
             title: '',
             description: '',
             city_name: props.match.params.cityName,
+            
+            openMSG: false,
+            statusMSG: false,
+            textMSG: '',
         };
         
         itemsStore.setCity(props.match.params.cityName);
@@ -92,6 +99,9 @@ export class Actii extends React.Component {
                 city_id: this.state.city_name
             })
         }).then(res => res.json()).then(json => {
+            
+            console.log( json )
+            
             this.setState({ 
                 actii: json.actii, 
                 is_load: true,
@@ -126,8 +136,34 @@ export class Actii extends React.Component {
         })
     }
     
-    render() {
+    closeAlert(){
+        this.setState({
+            openMSG: false
+        })
+    }
+    
+    activePromo(promo_info, promo_name){
+        itemsStore.setPromo(JSON.stringify(promo_info), promo_name)
+        let res = itemsStore.checkPromo();
         
+        setTimeout(() => {
+            if( res['st'] ){
+                this.setState({
+                    openMSG: true,
+                    statusMSG: true,
+                    textMSG: "Промокод применен"
+                })
+            }else{
+                this.setState({
+                    openMSG: true,
+                    statusMSG: false,
+                    textMSG: res['text']
+                })
+            }
+        }, 300);
+    }
+    
+    render() {
         return (
             <Grid container className="Actii mainContainer MuiGrid-spacing-xs-3">
                 
@@ -136,13 +172,32 @@ export class Actii extends React.Component {
                     <meta name="description" content={this.state.description} />
                 </Helmet>
                 
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                    }}
+                    open={this.state.openMSG}
+                    autoHideDuration={3000}
+                    onClose={this.closeAlert.bind(this)}
+                    message={this.state.textMSG}
+                    style={{ backgroundColor: this.state.statusMSG ? 'green' : '#BB0025', borderRadius: 4 }}
+                    action={
+                        <React.Fragment>
+                            <IconButton size="small" aria-label="close" color="inherit" onClick={this.closeAlert.bind(this)}>
+                                <CloseIcon fontSize="small" />
+                            </IconButton>
+                        </React.Fragment>
+                    }
+                />
+                
                 <Grid item xs={12}>
                     <Typography variant="h5" component="h1">Акции</Typography>
                 </Grid>
                 <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer">
                     {this.state.actii.map((item, key) =>
                         <Grid item xs={12} sm={6} md={4} xl={3} key={key}>
-                            <img src={"https://newjacofood.ru/src/img/aktii/"+item.img_min} alt={item.promo_title} style={{ width: '100%' }} onClick={this.openDialog.bind(this, item)} />
+                            <img src={"https://jacofood.ru/src/img/aktii/"+item.img_full} alt={item.promo_title} style={{ width: '100%' }} onClick={this.openDialog.bind(this, item)} />
                         </Grid>
                     )}
                 </Grid>
@@ -172,7 +227,7 @@ export class Actii extends React.Component {
                         </MuiDialogContent>
                         {this.state.showItem.promo.length > 0 ?
                             <MuiDialogActions style={{ justifyContent: 'center', padding: '15px 0px' }}>
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderOther">
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderOther" onClick={this.activePromo.bind(this, this.state.showItem.info, this.state.showItem.promo)}>
                                     <Button variant="contained" className="BtnCardMain CardInCardItem">Применить промокод</Button>
                                 </ButtonGroup>
                             </MuiDialogActions>

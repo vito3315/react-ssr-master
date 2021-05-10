@@ -73,6 +73,8 @@ class SimplePopover extends React.Component{
         autorun(() => {
             let cartItems = itemsStore.getItems();
             
+            console.log( itemsStore.getPromo() )
+            
             let newCart = [];
             
             cartItems.map((item) => {
@@ -82,8 +84,10 @@ class SimplePopover extends React.Component{
             })
             
             this.setState({
-                cartItems: newCart
+                cartItems: newCart,
+                promoName: localStorage.getItem('promo_name') ? localStorage.getItem('promo_name') : ''
             })
+            
             itemsStore.getSumDiv();
         })
     }
@@ -113,94 +117,27 @@ class SimplePopover extends React.Component{
     }
     
     checkPromo(){
-        let promoName = this.state.promoName;
-    
-        if( promoName == '' ){
-          /*storage.save({
-            key: 'promoName',
-            data: '',
-            expires: 1000 * 3600 * 24 * parseInt( cart.days_cart )
-          });*/
-          
-          //cart.promo_info = null;
-          //cart.cart_new_promo = [];
-          
-          /*let allPrice = 0;
-          
-          cart.cart_new.forEach( (el_cart, key_cart) => {
-            allPrice += parseInt(el_cart.one_price) * parseInt(el_cart.count);
-            cart.cart_new[ key_cart ].all_price = parseInt(el_cart.one_price) * parseInt(el_cart.count);
-          })*/
-          
-          //allPrice += parseInt(cart.summ_div);
-          
-          //BadgePrice.set('price', allPrice);
-        }else{
-            let point_id = 0;
-          //let type_order = cart.typeOrder;
-            let type_order = 1;
-          
-            if( type_order == 0 ){
-            //point_id = cart.point_id_dev ?? 0;
-                point_id = 1;
-            }else{
-                point_id = 1;
-            //point_id = cart.point_id_pic ?? 0;
-            }
-          
-            fetch('https://jacofood.ru/src/php/test_app.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type':'application/x-www-form-urlencoded'},
-                body: queryString.stringify({
-                    type: 'get_promo', 
-                    point_id: point_id,
-                    city_id: itemsStore.getCity(),
-                    promo_name: promoName
-                })
-            }).then(res => res.json()).then(json => {
-                itemsStore.setPromo( JSON.stringify(json), promoName );
-                let check_promo = itemsStore.checkPromo();
+        fetch('https://jacofood.ru/src/php/test_app.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'},
+            body: queryString.stringify({
+                type: 'get_promo_web', 
+                city_id: itemsStore.getCity(),
+                promo_name: this.state.promoName
+            })
+        }).then(res => res.json()).then(json => {
+            itemsStore.setPromo( JSON.stringify(json), this.state.promoName );
+            let check_promo = itemsStore.checkPromo();
               
-                this.setState({
-                    promoText: check_promo.text
-                })
-              
-            /*cart.promo_info = json;
-            
-            this.setState({ textPromoStatus: json.status_promo })
-            
-            if( json.status_promo ){
-              let res_promo = cart.check_promo();
-              
-              if( res_promo.st ){
-                this.setState({ textPromoStatus: true })
-                this.setState({ textPromoText: json.promo_text.true })
-                
-                storage.save({
-                  key: 'promoName',
-                  data: promoName,
-                  expires: 1000 * 3600 * 24 * parseInt( cart.days_cart )
-                });
-              }else{
-                this.setState({ textPromoStatus: false })
-                this.setState({ textPromoText: json.promo_text.false })
-                
-                storage.save({
-                  key: 'promoName',
-                  data: '',
-                  expires: 1000 * 3600 * 24 * parseInt( cart.days_cart )
-                });
-              }
-            }else{
-              this.setState({ textPromoText: json.promo_text.false })
-              
-              let res_promo = cart.check_promo();
+            if( check_promo.st === false ){
+                localStorage.removeItem('promo_name')
             }
             
-            this.setState({ textPromoShow: true })*/
-            });
-        }
+            this.setState({
+                promoText: check_promo.text
+            })
+        })
     }
     
     render(){
