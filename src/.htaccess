@@ -13,6 +13,8 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d 
 RewriteRule . /index.php [L] 
 
+Header always edit Set-Cookie ^(.*)$ "$1; HttpOnly; Secure; SameSite=lax"
+
 AddHandler application/x-httpd-php .html 
 AddHandler cgi-script .pl .py .jsp .asp .htm .shtml .sh .cgi 
 AddType application/x-javascript .js 
