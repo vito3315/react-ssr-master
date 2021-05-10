@@ -43,12 +43,9 @@ app.use( '*', async ( req, res ) => {
             </StaticRouter>
         );
 
-        //const helmet = Helmet.renderStatic();
+        const helmet = Helmet.renderStatic();
         
-        /*indexHTML = indexHTML.replace(
-            '<!-- title -->',
-            `${helmet.title.toString()}`
-        );*/
+        
         
         console.log( 'componentData', componentData )
         
@@ -56,6 +53,15 @@ app.use( '*', async ( req, res ) => {
         indexHTML = indexHTML.replace('<!-- description -->', `${componentData.description}`);
         //indexHTML = indexHTML.replace('<h1 class="MuiTypography-root MuiTypography-h5"></h1>', `<h1 class="MuiTypography-root MuiTypography-h5">${componentData.page_h}</h1>`);
         
+        indexHTML = indexHTML.replace(
+            '<!-- title -->',
+            `${helmet.title.toString()}`
+        );
+        
+        indexHTML = indexHTML.replace(
+            '<!-- description -->',
+            `${helmet.description.toString()}`
+        );
         
         // populate `#app` element with `appHTML`
         indexHTML = indexHTML.replace( 

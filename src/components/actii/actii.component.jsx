@@ -15,6 +15,7 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 
 import axios from 'axios';
+import {Helmet} from "react-helmet";
 
 import itemsStore from '../../stores/items-store';
 
@@ -33,7 +34,8 @@ export class Actii extends React.Component {
             is_load: false,
             showItem: null,
             openDialog: false,
-            page: null,
+            title: '',
+            description: '',
             city_name: props.match.params.cityName,
         };
         
@@ -75,10 +77,9 @@ export class Actii extends React.Component {
         itemsStore.setPage('actii');
         
         Actii.fetchData('/'+this.state.city_name).then( data => {
-            console.log( data )
-            
             this.setState( {
-                page: data.page
+                title: data.page.title,
+                description: data.page.description,
             } );
         } );
         
@@ -133,6 +134,11 @@ export class Actii extends React.Component {
         
         return (
             <Grid container className="Actii mainContainer MuiGrid-spacing-xs-3">
+                
+                <Helmet>
+                    <title>{this.state.title}</title>
+                    <meta name="description" content={this.state.description} />
+                </Helmet>
                 
                 <Grid item xs={12}>
                     <Typography variant="h5" component="h1">Акции</Typography>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 
 import Button from '@material-ui/core/Button';
@@ -59,6 +58,8 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 
 import itemsStore from '../../stores/items-store';
 import { autorun } from "mobx"
+
+import {Helmet} from "react-helmet";
 
 const queryString = require('query-string');
 import axios from 'axios';
@@ -413,6 +414,8 @@ export class Cart extends React.Component {
             is_load: false,
             city_name: props.match.params.cityName,
             
+            page: null,
+            
             chooseAddr: false,
             choosePicDialog: false,
             chooseTimeDialog: false,
@@ -626,6 +629,13 @@ export class Cart extends React.Component {
         itemsStore.setPage('cart');
         
         this.loadData();
+        
+        Cart.fetchData('/'+this.state.city_name).then( data => {
+            this.setState( {
+                title: data.page.title,
+                description: data.page.description,
+            } );
+        } );
         
         let cartItems = itemsStore.getItems();
         let allItems = itemsStore.getAllItems();
@@ -1345,6 +1355,12 @@ export class Cart extends React.Component {
         
         return (
             <Grid container className="Cart mainContainer MuiGrid-spacing-xs-3">
+                
+                <Helmet>
+                    <title>{this.state.title}</title>
+                    <meta name="description" content={this.state.description} />
+                </Helmet>
+                
                 <Grid item xs={12}>
                     <Typography variant="h5" component="h1">Корзина</Typography>
                 </Grid>
