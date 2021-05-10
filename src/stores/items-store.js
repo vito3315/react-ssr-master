@@ -24,19 +24,7 @@ class ItemsStore {
   need_dops = '';
   free_items = '';
   cart_data = '';
-  
-  fetchData() {
-    console.log( 'Post.fetchData()' );
-
     
-    return {
-        title: 'my title',
-        description: 'my description',
-        body: 'my body',
-    };
-    
-}
-  
   setSumDiv = (items) => {
     this.sum_div = parseInt( items );
   };

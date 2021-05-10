@@ -7,8 +7,15 @@ import { Contact } from '../contact';
 import { Actii } from '../actii';
 import { Profile } from '../profile';
 import { Cart } from '../cart';
-import { Header } from '../header';
 
+import { PageAbout } from '../pageAbout';
+import { PageJob } from '../pageJob';
+import { PageInstPay } from '../pageInstPay';
+import { PageOferta } from '../pageOferta';
+import { PagePolitika } from '../pagePolitika';
+
+
+import { Header } from '../header';
 
 import Grid from '@material-ui/core/Grid';
 
@@ -219,14 +226,44 @@ class StickyFooter extends React.Component{
                         <Typography variant="body1">© Жако 2017 - {new Date().getFullYear()}</Typography>
                     </Grid>
                     <Grid item lg={3} md={3} sm={3} xl={3} xs={12}>
-                        <Typography variant="body1">О Компании</Typography>
-                        <Typography variant="body1">Вакансии</Typography>
-                        <Typography variant="body1">Публичная оферта</Typography>
+                        <Link
+                            to={ '/'+this.state.cityName+'/about' }
+                            style={{ textDecoration: 'none' }}
+                        >
+                            <Typography variant="body1">О Компании</Typography>
+                        </Link>
+                        <Link
+                            to={ '/'+this.state.cityName+'/jobs' }
+                            style={{ textDecoration: 'none' }}
+                        >
+                            <Typography variant="body1">Вакансии</Typography>
+                        </Link>
+                        <Link
+                            to={ '/'+this.state.cityName+'/publichnaya-oferta' }
+                            style={{ textDecoration: 'none' }}
+                        >
+                            <Typography variant="body1">Публичная оферта</Typography>
+                        </Link>
                     </Grid>
                     <Grid item lg={3} md={3} sm={3} xl={3} xs={12}>
-                        <Typography variant="body1">Политика конфиденциальности</Typography>
-                        <Typography variant="body1">Доставка и контакты</Typography>
-                        <Typography variant="body1">Правила оплаты товаров</Typography>
+                        <Link
+                            to={ '/'+this.state.cityName+'/politika-konfidencialnosti' }
+                            style={{ textDecoration: 'none' }}
+                        >
+                            <Typography variant="body1">Политика конфиденциальности</Typography>
+                        </Link>
+                        <Link
+                            to={ '/'+this.state.cityName+'/contact' }
+                            style={{ textDecoration: 'none' }}
+                        >
+                            <Typography variant="body1">Доставка и контакты</Typography>
+                        </Link>
+                        <Link
+                            to={ '/'+this.state.cityName+'/instpayorders' }
+                            style={{ textDecoration: 'none' }}
+                        >
+                            <Typography variant="body1">Правила оплаты товаров</Typography>
+                        </Link>
                     </Grid>
                     { this.state.is_load ?
                         <Grid item lg={3} md={3} sm={3} xl={3} xs={12} className="socIcons">
@@ -386,6 +423,33 @@ export class App extends React.Component {
                             exact={ true }
                             component={ Cart }
                         />
+                        <Route
+                            path='/:cityName/about'
+                            exact={ true }
+                            component={ PageAbout }
+                        />
+                        <Route
+                            path='/:cityName/jobs'
+                            exact={ true }
+                            component={ PageJob }
+                        />
+                        <Route
+                            path='/:cityName/instpayorders'
+                            exact={ true }
+                            component={ PageInstPay }
+                        />
+                        <Route
+                            path='/:cityName/publichnaya-oferta'
+                            exact={ true }
+                            component={ PageOferta }
+                        />
+                        <Route
+                            path='/:cityName/politika-konfidencialnosti'
+                            exact={ true }
+                            component={ PagePolitika }
+                        />
+                        
+                        
                         <Route
                             component={ NotFound }
                         />

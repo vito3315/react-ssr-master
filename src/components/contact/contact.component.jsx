@@ -136,15 +136,6 @@ export class Contact extends React.Component {
         .catch(err => { });
     }
     
-    UNSAFE_componentWillMount(){
-        Contact.fetchData('/'+this.props.match.params.cityName).then( data => {
-            this.setState( {
-                title: data.page.title,
-                description: data.page.description,
-            } );
-        } );
-    }
-    
     static fetchData(propsData) {
         let data = {
             type: 'get_page_info', 

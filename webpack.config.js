@@ -119,8 +119,6 @@ module.exports = {
             }
         }
     },
-
-    externals: ["react-helmet", "react"],
     
     // development server configuration
     devServer: {

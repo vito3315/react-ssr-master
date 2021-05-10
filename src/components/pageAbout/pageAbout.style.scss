@@ -1,0 +1,63 @@
+$Ubuntu: 'Ubuntu';
+$Futuris: 'Futuris Bold';
+@mixin fons($size: 1rem, $family: $Ubuntu) {
+    font-size: $size;
+    font-family: $family !important;
+}
+.PAGEabout{
+    margin-top: 64px!important;
+    & h1{
+        @include fons(1.3rem, $Futuris);
+        text-align: center;
+    }
+    & h2{
+        @include fons(1.3rem, $Futuris);
+    }
+    & .mainContainer{
+        padding-top: 0!important; 
+        padding-bottom: 36px!important;
+    }
+    @media (min-width: 960px) {
+        margin-left: 8.35% !important; 
+        flex-grow: 0;
+        max-width: 83.333333%;
+        flex-basis: 83.333333%;
+    }
+    @media (max-width: 960px) {
+        margin: -24px!important;
+        margin-top: 64px!important;
+        & > div{
+            padding-left: 48px!important;
+        }
+        & h1{
+            @include fons(1.3rem, $Futuris);
+            text-align: center;
+        }
+    }
+    & p, li{
+        @include fons(1rem, $Ubuntu);
+    }
+    & > .mainContainer{
+        display: flex;
+        flex-direction: row;
+        & .two_text{
+            width: 46%;
+            @media (max-width: 960px) {
+                width: 100%;
+            }
+        }
+        & .two_text:first-child{
+            padding-right: 2%;
+            @media (max-width: 960px) {
+                padding-right: 0%;
+            }
+        }
+        & .two_text:last-child{
+            padding-left: 2%;
+            @media (max-width: 960px) {
+                padding-left: 0%;
+            }
+        }
+    }
+    
+}
