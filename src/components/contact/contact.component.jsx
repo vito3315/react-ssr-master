@@ -225,9 +225,7 @@ export class Contact extends React.Component {
         return (
             <Grid container className="Contact mainContainer MuiGrid-spacing-xs-3">
                 
-                <Helmet
-                    defer = { false }
-                >
+                <Helmet>
                     <title>{this.state.title}</title>
                     <meta name="description" content={this.state.description} />
                 </Helmet>

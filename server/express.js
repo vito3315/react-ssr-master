@@ -49,8 +49,8 @@ app.use( '*', async ( req, res ) => {
         
         console.log( 'componentData', componentData )
         
-        //indexHTML = indexHTML.replace('<!-- title -->', `${componentData.title}`);
-        //indexHTML = indexHTML.replace('<!-- description -->', `<meta name="description" content="${componentData.description}" />`);
+        indexHTML = indexHTML.replace('<!-- title -->', `${componentData.title}`);
+        indexHTML = indexHTML.replace('<!-- description -->', `<meta name="description" content="${componentData.description}" />`);
         //indexHTML = indexHTML.replace('<h1 class="MuiTypography-root MuiTypography-h5"></h1>', `<h1 class="MuiTypography-root MuiTypography-h5">${componentData.page_h}</h1>`);
         
         indexHTML = indexHTML.replace(
