@@ -18,6 +18,11 @@ const routes = require( './routes' );
 // serve static assets
 app.get( /\.(js|css|map|ico|png)$/, express.static( path.resolve( __dirname, '../dist' ) ) );
 
+app.use((req, res, next) => {
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private, max-age=10800')
+    next()
+})
+
 // for any other requests, send `index.html` as a response
 app.use( '*', async ( req, res ) => {
 
