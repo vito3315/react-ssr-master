@@ -19,7 +19,7 @@ const routes = require( './routes' );
 app.get( /\.(js|css|map|ico|png)$/, express.static( path.resolve( __dirname, '../dist' ) ) );
 
 app.use((req, res, next) => {
-    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private, max-age=10800')
+    res.set('Cache-Control', 'immutable, public, max-age=10800')
     next()
 })
 
