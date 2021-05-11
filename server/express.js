@@ -12,6 +12,8 @@ const app = express();
 // import App component
 const { App } = require( '../src/components/app' );
 
+const DATA = require( '../src/assets/data.json' );
+
 // import routes
 const routes = require( './routes' );
 
@@ -24,6 +26,8 @@ app.use( '*', async ( req, res ) => {
     // get matched route
     const matchRoute = routes.find( route => matchPath( req.originalUrl, route ) );
 
+    console.log( DATA )
+    
     if( matchRoute ){
         // fetch data of the matched component
         let componentData = {
