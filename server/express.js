@@ -27,9 +27,9 @@ app.use( '*', async ( req, res ) => {
     if( matchRoute ){
         // fetch data of the matched component
         let componentData = null;
-        if( typeof matchRoute.component.fetchData === 'function' ) {
-            componentData = await matchRoute.component.fetchData(req.originalUrl);
-        }
+        //if( typeof matchRoute.component.fetchData === 'function' ) {
+            //componentData = await matchRoute.component.fetchData(req.originalUrl);
+        //}
 
         // read `index.html` file
         let indexHTML = fs.readFileSync( path.resolve( __dirname, '../dist/index.html' ), {
@@ -38,19 +38,19 @@ app.use( '*', async ( req, res ) => {
 
         // get HTML string from the `App` component
         let appHTML = ReactDOMServer.renderToString(
-            <StaticRouter location={ req.originalUrl } context={ componentData }>
+            <StaticRouter location={ req.originalUrl }>
                 <App />
             </StaticRouter>
         );
 
-        const helmet = Helmet.renderStatic();
+        //const helmet = Helmet.renderStatic();
         
         
-        indexHTML = indexHTML.replace('<!-- title -->', `${componentData.title}`);
-        indexHTML = indexHTML.replace('<!-- description -->', `<meta name="description" content="${componentData.description}" />`);
+        //indexHTML = indexHTML.replace('<!-- title -->', `${componentData.title}`);
+        //indexHTML = indexHTML.replace('<!-- description -->', `<meta name="description" content="${componentData.description}" />`);
         //indexHTML = indexHTML.replace('<h1 class="MuiTypography-root MuiTypography-h5"></h1>', `<h1 class="MuiTypography-root MuiTypography-h5">${componentData.page_h}</h1>`);
         
-        indexHTML = indexHTML.replace(
+        /*indexHTML = indexHTML.replace(
             '<!-- title -->',
             `${helmet.title.toString()}`
         );
@@ -58,14 +58,12 @@ app.use( '*', async ( req, res ) => {
         indexHTML = indexHTML.replace(
             '<!-- description -->',
             `<meta name="description" content="${helmet.meta.toString()}" />`
-        );
+        );*/
         
         // populate `#app` element with `appHTML`
         indexHTML = indexHTML.replace( 
             '<div id="app"></div>', 
             `<div id="app">
-                <h1 class="MuiTypography-root MuiTypography-h5">${componentData.page.page_h}</h1>
-                ${componentData.page.content}
                 ${ appHTML }
             </div>` );
 
