@@ -251,6 +251,8 @@ class SimplePopover extends React.Component{
 }
 
 export class Header extends React.Component {
+    is_load = false;
+    
     constructor(props) {
         super(props);
         
@@ -304,35 +306,39 @@ export class Header extends React.Component {
     }
     
     load(){
-        if( itemsStore.getCity() && this.state.categoryItems.length == 0 ){
-            fetch('https://jacofood.ru/src/php/test_app.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type':'application/x-www-form-urlencoded'},
-                body: queryString.stringify({
-                    type: 'get_cat_web', 
-                    city_id: itemsStore.getCity(),
-                    user_id: itemsStore.getToken()
+        if( !this.is_load ){
+            this.is_load = true
+            if( itemsStore.getCity() && this.state.categoryItems.length == 0 ){
+                fetch('https://jacofood.ru/src/php/test_app.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type':'application/x-www-form-urlencoded'},
+                    body: queryString.stringify({
+                        type: 'get_cat_web', 
+                        city_id: itemsStore.getCity(),
+                        user_id: itemsStore.getToken()
+                    })
+                }).then(res => res.json()).then(json => {
+                    console.log( json )
+                    
+                    itemsStore.userName = json.user_name;
+                    
+                    itemsStore.setDops(json.need_dop);
+                    itemsStore.setAllItems(json.all_items);
+                    itemsStore.setAllItemsCat(json.arr);
+                    itemsStore.setFreeItems(json.free_items);
+                    itemsStore.setBanners(json.baners)
+                    itemsStore.setCityRU(json.this_city_name_ru);
+                    
+                    this.setState({
+                        cityList: json.city_list,
+                        categoryItems: json.arr, 
+                        is_load: true,
+                    });
+                    this.is_load = false
                 })
-            }).then(res => res.json()).then(json => {
-                console.log( json )
-                
-                itemsStore.userName = json.user_name;
-                
-                itemsStore.setDops(json.need_dop);
-                itemsStore.setAllItems(json.all_items);
-                itemsStore.setAllItemsCat(json.arr);
-                itemsStore.setFreeItems(json.free_items);
-                itemsStore.setBanners(json.baners)
-                itemsStore.setCityRU(json.this_city_name_ru);
-                
-                this.setState({
-                    cityList: json.city_list,
-                    categoryItems: json.arr, 
-                    is_load: true,
-                });
-            })
-            .catch(err => { });
+                .catch(err => { });
+            }
         }
     }  
     
