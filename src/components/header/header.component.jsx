@@ -287,9 +287,13 @@ export class Header extends React.Component {
                 activePage: itemsStore.getPage()
             })
             
-            this.setState({
-                cityName: itemsStore.getCity()
-            })
+            if( itemsStore.getCity() !== this.state.cityName ){
+                this.setState({
+                    cityName: itemsStore.getCity()
+                })
+                
+                this.load();
+            }
             
             this.setState({
                 userName: itemsStore.userName
@@ -347,6 +351,16 @@ export class Header extends React.Component {
     chooseCity(city){
         let this_addr = window.location.href;
         window.location.href = this_addr.replace(this.state.cityName, city);
+    }
+    
+    getNewLink(city){
+        let this_addr = window.location.pathname;
+        
+        console.log( this_addr )
+        console.log( this.state.cityName )
+        console.log( city )
+        
+        return this_addr.replace(this.state.cityName, city);
     }
 
     openLogin(){
@@ -661,7 +675,11 @@ export class Header extends React.Component {
                     <DialogTitle id="alert-dialog-title">Выберите город</DialogTitle>
                     <DialogContent className="ModalContent_1_1" style={{ paddingBottom: 24, paddingTop: 0 }}>
                         {this.state.cityList.map((item, key) => 
-                            <Typography key={key} variant="h5" component="span" className={"ModalLabel "+( this.state.cityName == item.link ? 'active' : '' )} onClick={this.chooseCity.bind(this, item.link)}>{item.name}</Typography>
+                            <Link key={key} to={{ pathname: this.getNewLink(item.link) }} onClick={() => { window.location.reload(); }}>
+                                <Typography variant="h5" component="span" className={"ModalLabel "+( this.state.cityName == item.link ? 'active' : '' )}>{item.name}</Typography>
+                            </Link> 
+                        
+                            
                         )}
                     </DialogContent>
                 </Dialog>

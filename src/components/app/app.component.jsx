@@ -383,6 +383,7 @@ export class App extends React.Component {
     }
     
     render() {
+        //{!itemsStore.getToken() && this.state.cityName ? <Redirect push to={"/"+this.state.cityName+"/"} /> : <Profile />}
         return (
             <Provider { ...stores }>
                 <div className="home">
@@ -410,9 +411,11 @@ export class App extends React.Component {
                             exact={ true }
                             component={ Home }
                         />
-                        <Route exact path='/:cityName/profile/'>
-                            {!itemsStore.getToken() && this.state.cityName ? <Redirect push to={"/"+this.state.cityName+"/"} /> : <Profile />}
-                        </Route>
+                        <Route 
+                            exact 
+                            path='/:cityName/profile/'
+                            component={ Profile }
+                        />
                         <Route
                             path='/:cityName/menu/:itemLink'
                             exact={ true }

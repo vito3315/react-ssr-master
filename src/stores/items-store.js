@@ -557,15 +557,16 @@ class ItemsStore {
     
     if( all_items.length > 0 ){
       let cart_info = my_cart.find( (item) => item.item_id == id );
+      let count_ = 0;
       
-      if( !cart_info ){
-        cart_info.count = 0;
+      if( cart_info ){
+        count_ = cart_info.count;
       }
       
       let item_info = all_items.find( (item) => item.id == id );
       
       if(item_info){
-        let count = parseInt(cart_info.count) + 1,
+        let count = count_ + 1,
             price = item_info['price'];
           
         let max_count = itemsStore.check_max_count( parseInt(id) );    

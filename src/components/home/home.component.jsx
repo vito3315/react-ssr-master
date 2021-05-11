@@ -94,7 +94,8 @@ class CardItem extends React.Component {
     
     shouldComponentUpdate(nextProps, nextState) {
         return (
-            this.state.count !== nextState.count
+            this.state.count !== nextState.count ||
+            this.state.item.price !== nextState.item.price
         );
     }
     
@@ -274,6 +275,9 @@ export class Home extends React.Component {
         //}
         
         autorun(() => {
+            
+            console.log( itemsStore.getAllItemsCat() )
+            
             this.setState({
                 allItems: itemsStore.getAllItemsCat()
             })

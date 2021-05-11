@@ -27,6 +27,8 @@ import itemsStore from '../../stores/items-store';
 
 import TextField from '@material-ui/core/TextField';
 
+import axios from 'axios';
+import {Helmet} from "react-helmet";
 const queryString = require('query-string');
 
 import PropTypes from 'prop-types';
@@ -82,17 +84,11 @@ function a11yProps(index) {
   };
 }
 
-export function Profile() {
-    let { cityName } = useParams();
-  
-    itemsStore.setCity(cityName);
-  
-    return (
-        <RenderProfile cityName={cityName} />
-    );
+function get_city(path){
+    return path.split('/')[1];
 }
 
-class RenderProfile extends React.Component {
+export class Profile extends React.Component {
     constructor(props) {
         super(props);
         
@@ -100,7 +96,11 @@ class RenderProfile extends React.Component {
             actii: [],  
             is_load: false,
             openDialog: false,
-            city_name: this.props.cityName,
+            
+            title: '',
+            description: '',
+            page: null,
+            city_name: props.match.params.cityName,
             
             valueTab: 1,
             info: {},
@@ -129,6 +129,8 @@ class RenderProfile extends React.Component {
             spam: 0,
             userName: ''
         };
+        
+        itemsStore.setCity(props.match.params.cityName);
     }
     
     componentDidMount = () => {
@@ -137,6 +139,13 @@ class RenderProfile extends React.Component {
         }
         window.scrollTo(0, 0);
         itemsStore.setPage('actii');
+        
+        Profile.fetchData('/'+this.state.city_name).then( data => {
+            this.setState( {
+                title: data.page.title,
+                description: data.page.description,
+            } );
+        } );
         
         let arr_day = [];
         
@@ -166,6 +175,33 @@ class RenderProfile extends React.Component {
             });
         })
         .catch(err => { });
+    }
+    
+    static fetchData(propsData) {
+        let data = {
+            type: 'get_page_info', 
+            city_id: get_city(propsData),
+            page: 'profile' 
+        };
+        
+        return axios({
+            method: 'POST',
+            url:'https://jacofood.ru/src/php/test_app.php',
+            headers: { 'content-type': 'application/x-www-form-urlencoded' },
+            data: queryString.stringify(data)
+        }).then(response => {
+            if(response['status'] === 200){
+                var json = response['data'];
+                
+                return {
+                    title: json.page.title,
+                    description: json.page.description,
+                    page: json.page,
+                }
+            } 
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
     
     closeDialog(){
@@ -383,27 +419,14 @@ class RenderProfile extends React.Component {
     }
     
     render() {
-        const red = 'red';
-        
-        /*
-            <div style={{ flex: 1, position: 'relative', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingTop: 10, display: 'flex' }}>
-                                                        <div style={{ flex: 2, backgroundColor: parseInt(item.steps[0]['active']) == 0 || parseInt(item.steps[0]['active']) == 2 ? '#e5e5e5' : red, borderWidth: 1, borderColor: parseInt(item.steps[0]['active']) == 0 || parseInt(item.steps[0]['active']) == 2 ? '#bababa' : red, borderStyle: 'solid', borderTopLeftRadius: 6, borderBottomLeftRadius: 6 }}>
-                                                            <span style={[{ color: parseInt(item.steps[0]['active']) == 0 || parseInt(item.steps[0]['active']) == 2 ? '#000' : '#fff' }]}>{item.steps[0]['name']}</span>
-                                                        </div>
-                                                        <div style={{ flex: 2, backgroundColor: parseInt(item.steps[1]['active']) == 0 || parseInt(item.steps[1]['active']) == 2 ? '#e5e5e5' : red, borderWidth: 1, borderColor: parseInt(item.steps[1]['active']) == 0 || parseInt(item.steps[1]['active']) == 2 ? '#bababa' : red, borderStyle: 'solid' }}>
-                                                            <span style={[{ color: parseInt(item.steps[1]['active']) == 0 || parseInt(item.steps[1]['active']) == 2 ? '#000' : '#fff' }]}>{item.steps[1]['name']}</span>
-                                                        </div>
-                                                        <div style={{ flex: 3, backgroundColor: parseInt(item.steps[2]['active']) == 0 || parseInt(item.steps[2]['active']) == 2 ? '#e5e5e5' : red, borderWidth: 1, borderColor: parseInt(item.steps[2]['active']) == 0 || parseInt(item.steps[2]['active']) == 2 ? '#bababa' : red, borderStyle: 'solid' }}>
-                                                            <span style={[{ color: parseInt(item.steps[2]['active']) == 0 || parseInt(item.steps[2]['active']) == 2 ? '#000' : '#fff' }]}>{item.steps[2]['name']}</span>
-                                                        </div>
-                                                        <div style={{ flex: 2, backgroundColor: parseInt(item.steps[3]['active']) == 0 || parseInt(item.steps[3]['active']) == 2 ? '#e5e5e5' : red, borderWidth: 1, borderColor: parseInt(item.steps[3]['active']) == 0 || parseInt(item.steps[3]['active']) == 2 ? '#bababa' : red, borderStyle: 'solid', borderTopRightRadius: 6, borderBottomRightRadius: 6 }}>
-                                                            <span style={[{ color: parseInt(item.steps[3]['active']) == 0 || parseInt(item.steps[3]['active']) == 2 ? '#000' : '#fff' }]}>{item.steps[3]['name']}</span>
-                                                        </div>
-                                                    </div>
-        */
-        
         return (
             <Grid container className="Profile mainContainer MuiGrid-spacing-xs-3">
+                
+                <Helmet>
+                    <title>{this.state.title}</title>
+                    <meta name="description" content={this.state.description} />
+                </Helmet>
+                
                 <Grid item xs={12}>
                     <Typography variant="h5" component="h1">Личный кабинет</Typography>
                 </Grid>
@@ -618,13 +641,6 @@ class RenderProfile extends React.Component {
                         }
                     </TabPanel>
                 </Grid>
-                
-                
-                
-                
-                
-                
-                
                 
                 { this.state.showItem ?
                     <Dialog onClose={this.closeDialog.bind(this)} aria-labelledby="customized-dialog-title" className="modalProfile" open={this.state.openDialog}>
