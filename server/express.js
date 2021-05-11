@@ -4,7 +4,7 @@ const path = require( 'path' );
 const React = require( 'react' );
 const ReactDOMServer = require( 'react-dom/server' );
 const { StaticRouter, matchPath } = require( 'react-router-dom' );
-//const {Helmet} = require("react-helmet");
+const {Helmet} = require("react-helmet");
 
 // create express application
 const app = express();
@@ -19,7 +19,7 @@ const routes = require( './routes' );
 app.get( /\.(js|css|map|ico|png)$/, express.static( path.resolve( __dirname, '../dist' ) ) );
 
 app.use((req, res, next) => {
-    res.set('Cache-Control', 'immutable, public, max-age=10800')
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private, max-age=10800')
     next()
 })
 
@@ -32,9 +32,9 @@ app.use( '*', async ( req, res ) => {
     if( matchRoute ){
         // fetch data of the matched component
         let componentData = null;
-        //if( typeof matchRoute.component.fetchData === 'function' ) {
-        //    componentData = await matchRoute.component.fetchData(req.originalUrl);
-        //}
+        if( typeof matchRoute.component.fetchData === 'function' ) {
+            componentData = await matchRoute.component.fetchData(req.originalUrl);
+        }
 
         // read `index.html` file
         let indexHTML = fs.readFileSync( path.resolve( __dirname, '../dist/index.html' ), {
@@ -48,14 +48,14 @@ app.use( '*', async ( req, res ) => {
             </StaticRouter>
         );
 
-        //const helmet = Helmet.renderStatic();
+        const helmet = Helmet.renderStatic();
         
         
-        //indexHTML = indexHTML.replace('<!-- title -->', `${componentData.title}`);
-        //indexHTML = indexHTML.replace('<!-- description -->', `<meta name="description" content="${componentData.description}" />`);
+        indexHTML = indexHTML.replace('<!-- title -->', `${componentData.title}`);
+        indexHTML = indexHTML.replace('<!-- description -->', `<meta name="description" content="${componentData.description}" />`);
         //indexHTML = indexHTML.replace('<h1 class="MuiTypography-root MuiTypography-h5"></h1>', `<h1 class="MuiTypography-root MuiTypography-h5">${componentData.page_h}</h1>`);
         
-        /*indexHTML = indexHTML.replace(
+        indexHTML = indexHTML.replace(
             '<!-- title -->',
             `${helmet.title.toString()}`
         );
@@ -63,7 +63,7 @@ app.use( '*', async ( req, res ) => {
         indexHTML = indexHTML.replace(
             '<!-- description -->',
             `<meta name="description" content="${helmet.meta.toString()}" />`
-        );*/
+        );
         
         // populate `#app` element with `appHTML`
         indexHTML = indexHTML.replace( 
