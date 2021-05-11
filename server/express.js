@@ -4,7 +4,7 @@ const path = require( 'path' );
 const React = require( 'react' );
 const ReactDOMServer = require( 'react-dom/server' );
 const { StaticRouter, matchPath } = require( 'react-router-dom' );
-const {Helmet} = require("react-helmet");
+//const {Helmet} = require("react-helmet");
 
 // create express application
 const app = express();
@@ -43,14 +43,14 @@ app.use( '*', async ( req, res ) => {
             </StaticRouter>
         );
 
-        const helmet = Helmet.renderStatic();
+        //const helmet = Helmet.renderStatic();
         
         
         //indexHTML = indexHTML.replace('<!-- title -->', `${componentData.title}`);
         //indexHTML = indexHTML.replace('<!-- description -->', `<meta name="description" content="${componentData.description}" />`);
         //indexHTML = indexHTML.replace('<h1 class="MuiTypography-root MuiTypography-h5"></h1>', `<h1 class="MuiTypography-root MuiTypography-h5">${componentData.page_h}</h1>`);
         
-        indexHTML = indexHTML.replace(
+        /*indexHTML = indexHTML.replace(
             '<!-- title -->',
             `${helmet.title.toString()}`
         );
@@ -58,7 +58,7 @@ app.use( '*', async ( req, res ) => {
         indexHTML = indexHTML.replace(
             '<!-- description -->',
             `<meta name="description" content="${helmet.meta.toString()}" />`
-        );
+        );*/
         
         // populate `#app` element with `appHTML`
         indexHTML = indexHTML.replace( 
