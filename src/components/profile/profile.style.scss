@@ -5,6 +5,28 @@ $mainColor: #BB0025;
     font-size: $size;
     font-family: $family !important;
 }
+.showOrderDialog{
+    & h6{
+        @include fons(1.3rem, $Futuris);
+        text-align: center;
+    }
+    & .showOrderDialogContent{
+        display: flex;
+        flex-direction: column;
+        & > span{
+            @include fons(1rem, $Ubuntu);
+            padding: 6px 0px;
+        }
+        & > span.noSpace{
+            padding: 0px;
+            margin-top: -10px;
+        }
+        & table span{
+            @include fons(1rem, $Ubuntu);
+        }
+    }
+}
+
 .boxSteps{
     width: 100%;
     padding-top: 10px;

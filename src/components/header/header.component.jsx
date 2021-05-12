@@ -38,7 +38,6 @@ import { autorun } from "mobx"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faMinus, faMapMarkerAlt, faRubleSign } from '@fortawesome/free-solid-svg-icons'
 
-
 class SimplePopover extends React.Component{
     constructor(props) {
         super(props);
@@ -72,9 +71,6 @@ class SimplePopover extends React.Component{
         
         autorun(() => {
             let cartItems = itemsStore.getItems();
-            
-            console.log( itemsStore.getPromo() )
-            
             let newCart = [];
             
             cartItems.map((item) => {
@@ -133,8 +129,6 @@ class SimplePopover extends React.Component{
             if( check_promo.st === false ){
                 localStorage.removeItem('promo_name')
             }
-            
-            console.log( check_promo )
             
             this.setState({
                 promoText: check_promo.text
@@ -319,8 +313,6 @@ export class Header extends React.Component {
                         user_id: itemsStore.getToken()
                     })
                 }).then(res => res.json()).then(json => {
-                    console.log( json )
-                    
                     itemsStore.userName = json.user_name;
                     
                     itemsStore.setDops(json.need_dop);
@@ -361,11 +353,6 @@ export class Header extends React.Component {
     
     getNewLink(city){
         let this_addr = window.location.pathname;
-        
-        console.log( this_addr )
-        console.log( this.state.cityName )
-        console.log( city )
-        
         return this_addr.replace(this.state.cityName, city);
     }
 
@@ -407,44 +394,34 @@ export class Header extends React.Component {
         })
         
         fetch('https://jacofood.ru/src/php/test_app.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type':'application/x-www-form-urlencoded'},
-          body: queryString.stringify({
-            type: 'create_profile', 
-            number: number
-          })
-        }).then(res => res.json()).then(json => {
-            console.log( json )
-            
-          if( json['st'] ){
-            this.setState({ 
-              stage_1: false,
-              stage_2: true, 
-              errPhone: ''
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'},
+            body: queryString.stringify({
+                type: 'create_profile', 
+                number: number
             })
+        }).then(res => res.json()).then(json => {
+            if( json['st'] ){
+                this.setState({ 
+                    stage_1: false,
+                    stage_2: true, 
+                    errPhone: ''
+                })
             
-            let timerId = setInterval(() => {
-              this.setState({
-                timerSMS: this.state.timerSMS-1
-              })
-              if( this.state.timerSMS == 0 ){
-                  clearInterval(timerId);
-              }
-            }, 1000);
-            
-            
-            //setTimeout(() => { clearInterval(timerId); }, 60000);
-            
-            //this.checkAuth(2, 'Профиль создан')
-            //AppMetrica.reportEvent('Профиль создан', {number: this.state.number});
-          }else{
-            //this.checkAuth(3, 'Ошибка создание профиля')
-            //AppMetrica.reportEvent('Ошибка создание профиля', {number: this.state.number});
-            this.setState({
-              errPhone: json.text
-            });
-          }
+                let timerId = setInterval(() => {
+                    this.setState({
+                        timerSMS: this.state.timerSMS-1
+                    })
+                    if( this.state.timerSMS == 0 ){
+                        clearInterval(timerId);
+                    }
+                }, 1000);
+            }else{
+                this.setState({
+                  errPhone: json.text
+                });
+            }
         });
     }
     
@@ -681,7 +658,7 @@ export class Header extends React.Component {
                     <DialogTitle id="alert-dialog-title">Выберите город</DialogTitle>
                     <DialogContent className="ModalContent_1_1" style={{ paddingBottom: 24, paddingTop: 0 }}>
                         {this.state.cityList.map((item, key) => 
-                            <Link key={key} to={{ pathname: this.getNewLink(item.link) }} onClick={() => { window.location.reload(); }}>
+                            <Link key={key} to={{ pathname: this.getNewLink(item.link) }} onClick={() => { setTimeout(()=>{ window.location.reload(); }, 100) }}>
                                 <Typography variant="h5" component="span" className={"ModalLabel "+( this.state.cityName == item.link ? 'active' : '' )}>{item.name}</Typography>
                             </Link> 
                         

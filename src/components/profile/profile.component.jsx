@@ -9,6 +9,9 @@ import IconButton from '@material-ui/core/IconButton';
 
 import Typography from '@material-ui/core/Typography';
 
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
@@ -22,6 +25,7 @@ import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 import itemsStore from '../../stores/items-store';
 
@@ -30,6 +34,10 @@ import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
 import {Helmet} from "react-helmet";
 const queryString = require('query-string');
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes, faPlus, faMinus, faRubleSign, faCreditCard, faMoneyBill, faCashRegister, faGift } from '@fortawesome/free-solid-svg-icons'
+
 
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
@@ -42,6 +50,14 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Checkbox from '@material-ui/core/Checkbox';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogActions from '@material-ui/core/DialogActions';
+
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+
+import FormLabel from '@material-ui/core/FormLabel';
 
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -96,11 +112,14 @@ export class Profile extends React.Component {
             actii: [],  
             is_load: false,
             openDialog: false,
+            delOrder: false,
             
             title: '',
             description: '',
             page: null,
             city_name: props.match.params.cityName,
+            
+            typeDel: '0',
             
             valueTab: 1,
             info: {},
@@ -120,6 +139,15 @@ export class Profile extends React.Component {
                 {name: 'Декабря', value: 12}
             ],
             
+            radiogroup_options: [
+                {id: '0', label: 'Решили отредактировать заказ', value: 0 },
+                {id: '1', label: 'Не устраивает время ожидания', value: 0 },
+                {id: '2', label: 'Изминились планы', value: 0 },
+                {id: '3', label: 'Недостаточно средств', value: 0 },
+                {id: '4', label: 'Другое', value: 0 },
+            ],
+            textDel: '',
+            
             changeDay: '',
             changeM: '',
             userMail: '',
@@ -127,7 +155,10 @@ export class Profile extends React.Component {
             statusMSG: false,
             textMSG: '',
             spam: 0,
-            userName: ''
+            userName: '',
+            
+            spiner: false,
+            showOrder: null
         };
         
         itemsStore.setCity(props.match.params.cityName);
@@ -418,6 +449,90 @@ export class Profile extends React.Component {
         });
     }
     
+    getOrder(order_id, point_id){
+        this.setState({ 
+            spiner: true
+        });
+        
+        fetch('https://jacofood.ru/src/php/test_app.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'},
+            body: queryString.stringify({
+                type: 'get_order', 
+                order_id: order_id,
+                point_id: point_id
+            })
+        }).then(res => res.json()).then(json => {
+            console.log( json )
+            
+            setTimeout(()=>{
+                this.setState({ 
+                    showOrder: json,
+                    openDialog: true,
+                    spiner: false
+                });
+            }, 1000)
+        })
+        .catch(err => { });
+    }
+    
+    closeOrder(){
+        this.setState({
+            delOrder: true,
+            typeDel: '0',
+            textDel: ''
+        })
+    }
+    
+    changeAddr = (event) => {
+        this.setState({
+            typeDel: event.target.value,
+        })
+    }
+    
+    closeOrderTrue(){
+        
+        let deltype = this.state.radiogroup_options.find( (item) => item.id == this.state.typeDel );
+        
+        if( deltype.id == '4' ){
+            deltype.label = this.state.textDel;
+        }
+        
+        if (confirm("Отменить заказ #"+this.state.showOrder.order.order_id)) {
+            fetch('https://jacofood.ru/src/php/test_app.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/x-www-form-urlencoded'},
+                body: queryString.stringify({
+                    type: 'close_order', 
+                    user_id: itemsStore.getToken(),
+                    order_id: this.state.showOrder.order.order_id,
+                    point_id: this.state.showOrder.order.point_id,
+                    ans: deltype.label
+                })
+            }).then(res => res.json()).then(json => {
+                console.log( json )
+                
+                /*setTimeout(() => {
+                    if( json['st'] ){
+                        this.setState({
+                            openMSG: true,
+                            statusMSG: true,
+                            textMSG: "Данные успешно обновлены"
+                        })
+                    }else{
+                        this.setState({
+                            openMSG: true,
+                            statusMSG: false,
+                            textMSG: json['text']
+                        })
+                    }
+                }, 300);*/
+            });
+        }
+    }
+    
     render() {
         return (
             <Grid container className="Profile mainContainer MuiGrid-spacing-xs-3">
@@ -426,6 +541,10 @@ export class Profile extends React.Component {
                     <title>{this.state.title}</title>
                     <meta name="description" content={this.state.description} />
                 </Helmet>
+                
+                <Backdrop open={this.state.spiner} style={{ zIndex: 99, color: '#fff' }}>
+                    <CircularProgress color="inherit" />
+                </Backdrop>
                 
                 <Grid item xs={12}>
                     <Typography variant="h5" component="h1">Личный кабинет</Typography>
@@ -530,12 +649,12 @@ export class Profile extends React.Component {
                                 </div>
                                 <div className="tbody">
                                     {this.state.info.orders.my_orders.map((item, key) => 
-                                        <div key={key} className={ (parseInt(item.status_order) == 6 || parseInt(item.is_delete) == 1) ? '' : 'active' }>
+                                        <div key={key} className={ (parseInt(item.status_order) == 6 || parseInt(item.is_delete) == 1) ? '' : 'active' } onClick={ this.getOrder.bind(this, item.order_id, item.point_id) }>
                                             <div>
                                                 <Typography variant="h5" component="span" style={{ flex: 2 }}>{item.order_id}</Typography>
                                                 <Typography variant="h5" component="span" style={{ flex: 3 }}>{item.date_time_new}</Typography>
                                                 <Typography className="CardPriceItem" variant="h5" component="span" style={{ flex: 1 }}>{item.sum} <AttachMoneyIcon fontSize="small" /></Typography>
-                                                <Typography variant="h5" component="span" style={{ flex: 1 }}>{parseInt(item.is_delete) == 1 ? <CloseIcon /> : <CheckIcon />}</Typography>
+                                                <Typography variant="h5" component="span" style={{ flex: 1 }}>{parseInt(item.is_delete) == 1 ? <CloseIcon /> : parseInt(item.status_order) == 6 ? <CheckIcon /> : null}</Typography>
                                             </div>
                                             
                                             {(parseInt(item.status_order) == 6 || parseInt(item.is_delete) == 1) ? null :
@@ -554,9 +673,11 @@ export class Profile extends React.Component {
                                                             <Typography variant="h5" component="span">{item.steps[3]['name']}</Typography>                                                        
                                                         </div>
                                                     </div>
-                                                    <div>
-                                                        <Typography variant="h5" component="span">Заказ { parseInt(item.type_order) == 1 ? 'привезут через: ' : 'будет готов через: ' }{item.time_to_client}</Typography>
-                                                    </div>
+                                                    { parseInt(item.time_to_client) == 0 ? null :
+                                                        <div>
+                                                            <Typography variant="h5" component="span">Заказ { parseInt(item.type_order) == 1 ? 'привезут через: ' : 'будет готов через: ' }{item.time_to_client}</Typography>
+                                                        </div>
+                                                    }
                                                 </div> 
                                             }
                                         </div>
@@ -642,23 +763,57 @@ export class Profile extends React.Component {
                     </TabPanel>
                 </Grid>
                 
-                { this.state.showItem ?
-                    <Dialog onClose={this.closeDialog.bind(this)} aria-labelledby="customized-dialog-title" className="modalProfile" open={this.state.openDialog}>
+                { this.state.showOrder ?
+                    <Dialog 
+                        onClose={this.closeDialog.bind(this)} 
+                        aria-labelledby="customized-dialog-title" 
+                        className="showOrderDialog" 
+                        open={this.state.openDialog}
+                        fullWidth={true}
+                    >
                         <MuiDialogTitle disableTypography style={{ margin: 0, padding: 8 }}>
-                            <Typography variant="h6">{this.state.showItem.promo_title}</Typography>
+                            <Typography variant="h6">Заказ {this.state.showOrder.order.order_id}</Typography>
                           
                             <IconButton aria-label="close" style={{ position: 'absolute', top: 0, right: 0, color: '#000' }} onClick={this.closeDialog.bind(this)}>
                                 <CloseIcon />
                             </IconButton>
                         </MuiDialogTitle>
                         
-                        <MuiDialogContent className="modalProfileContent">
-                            <div dangerouslySetInnerHTML={{__html: this.state.showItem.text}} />
+                        <MuiDialogContent className="showOrderDialogContent">
+                            <Typography variant="h6" component="span">{this.state.showOrder.order.type_order}: {this.state.showOrder.order.type_order_addr_new}</Typography>
+                            <Typography variant="h6" component="span">{this.state.showOrder.order.time_order_name}: {this.state.showOrder.order.time_order}</Typography>
+                            { parseInt(this.state.showOrder.order.is_preorder) == 1 ? null :
+                                <Typography variant="h6" component="span">{this.state.showOrder.order.text_time}{this.state.showOrder.order.unix_time_to_client}</Typography>
+                            }
+                            { this.state.showOrder.order.promo_name.length == 0 ? null :
+                                <Typography variant="h6" component="span">Промокод: {this.state.showOrder.order.promo_name}</Typography>
+                            }
+                            { this.state.showOrder.order.promo_name.length == 0 ? null :
+                                <Typography variant="h6" component="span" className="noSpace">{this.state.showOrder.order.promo_text}</Typography>
+                            }
+                            <Typography variant="h6" component="span">Сумма закза: {this.state.showOrder.order.sum_order}</Typography>
+                            
+                            <table className="tableOrderCheck">
+                                <tbody>
+                                    {this.state.showOrder.order_items.map((item, key) => 
+                                        <tr key={key}>
+                                            <td>
+                                                <Typography variant="h5" component="span">{item.name}</Typography>
+                                            </td>
+                                            <td>
+                                                <Typography variant="h5" component="span">{item.count}</Typography>
+                                            </td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
+                            
                         </MuiDialogContent>
-                        {this.state.showItem.promo.length > 0 ?
-                            <MuiDialogActions style={{ justifyContent: 'center', padding: '15px 0px' }}>
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderOther">
-                                    <Button variant="contained" className="BtnCardMain CardInCardItem">Применить промокод</Button>
+                        
+                        { parseInt( this.state.showOrder.order.is_delete ) == 0 && parseInt( this.state.showOrder.order.status_order ) !== 7 ? 
+                            <MuiDialogActions style={{ justifyContent: 'flex-end', padding: '15px 0px' }}>
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderOther" style={{ marginRight: 24 }}>
+                                    <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={ this.closeOrder.bind(this, this.state.showOrder.order.order_id, this.state.showOrder.order.point_id) }>Отменить заказ</Button>
                                 </ButtonGroup>
                             </MuiDialogActions>
                                 :
@@ -668,6 +823,43 @@ export class Profile extends React.Component {
                         :
                     null
                 }
+                
+                <Dialog open={this.state.delOrder} onClose={() => { this.setState({delOrder: false}) }} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title">Отмена заказа</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            Нам очень жаль, что вы приняли решение отменить заказ. Возможно, мы сделали что-то не так, помогите нам стать лучше, поделитесь причиной отказа:
+                        </DialogContentText>
+                      
+                        <IconButton aria-label="close" style={{ position: 'absolute', top: 0, right: 0, color: '#000' }} onClick={() => { this.setState({delOrder: false}) }}>
+                            <CloseIcon />
+                        </IconButton>
+                      
+                        <FormControl component="fieldset">
+                            <RadioGroup name="typeDel" value={ this.state.typeDel } onChange={this.changeAddr} >
+                                {this.state.radiogroup_options.map((item, key) => 
+                                    <FormControlLabel key={key} value={item.id} control={<Radio />} label={item.label} />
+                                )}
+                            </RadioGroup>
+                        </FormControl>
+                      
+                        <TextField
+                            //autoFocus
+                            onFocus={ () => { this.setState({ typeDel: '4' }) } }
+                            value={ this.state.textDel }
+                            onChange={ (event) => { this.setState({ textDel: event.target.value }) } }
+                            margin="dense"
+                            id="name"
+                            label="Причина отмены"
+                            type="text"
+                            fullWidth
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={() => { this.setState({delOrder: false}) }} color="primary">К заказу</Button>
+                        <Button onClick={this.closeOrderTrue.bind(this)} color="primary">Отменить заказ</Button>
+                    </DialogActions>
+                </Dialog>
             </Grid>
         )
     }
