@@ -108,17 +108,21 @@ export class Item extends React.Component {
     constructor(props) {
         super(props);
         
+        console.log( props )
+        
         this.state = {      
             item: this.props.item ? this.props.item : [],  
             is_load: false,
             count: 0,
-            city_name: props.match.params.cityName,
-            itemLink: props.match.params.itemLink,
+            city_name: !this.props.item ? props.match.params.cityName : '',
+            itemLink: !this.props.item ? props.match.params.itemLink : '',
             title: '',
             description: '',
         };
         
-        itemsStore.setCity(props.match.params.cityName);
+        if( !this.props.item ){
+            itemsStore.setCity(props.match.params.cityName);
+        }
     }
     
     static fetchData(propsData) {
