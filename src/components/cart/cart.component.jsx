@@ -638,6 +638,10 @@ export class Cart extends React.Component {
         window.scrollTo(0, 0);
         itemsStore.setPage('cart');
         
+        if( !itemsStore.getToken() ){
+            this.props.history.push('/'+this.state.city_name+'/');
+        }
+        
         this.loadData();
         
         Cart.fetchData('/'+this.state.city_name).then( data => {

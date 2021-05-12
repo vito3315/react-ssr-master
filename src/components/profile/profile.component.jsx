@@ -191,6 +191,10 @@ export class Profile extends React.Component {
         window.scrollTo(0, 0);
         itemsStore.setPage('actii');
         
+        if( !itemsStore.getToken() ){
+            this.props.history.push('/'+this.state.city_name+'/');
+        }
+        
         Profile.fetchData('/'+this.state.city_name).then( data => {
             this.setState( {
                 title: data.page.title,
@@ -199,6 +203,8 @@ export class Profile extends React.Component {
         } );
         
         this.loadData();
+        
+        
     }
     
     loadData(){
@@ -996,7 +1002,7 @@ export class Profile extends React.Component {
                             
                         </MuiDialogContent>
                         
-                        { parseInt( this.state.showOrder.order.is_delete ) == 0 && parseInt( this.state.showOrder.order.status_order ) !== 6 ? 
+                        { parseInt( this.state.showOrder.order.is_delete ) == 0 && parseInt( this.state.showOrder.order.status_order ) !== 7 ? 
                             <MuiDialogActions style={{ justifyContent: 'flex-end', padding: '15px 0px' }}>
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderOther" style={{ marginRight: 24 }}>
                                     <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={ this.closeOrder.bind(this, this.state.showOrder.order.order_id, this.state.showOrder.order.point_id) }>Отменить заказ</Button>
@@ -1005,7 +1011,7 @@ export class Profile extends React.Component {
                                 :
                             null
                         }
-                        { parseInt( this.state.showOrder.order.is_delete ) == 1 || parseInt( this.state.showOrder.order.status_order ) == 6 ? 
+                        { parseInt( this.state.showOrder.order.is_delete ) == 1 || parseInt( this.state.showOrder.order.status_order ) == 7 ? 
                             <MuiDialogActions style={{ justifyContent: 'flex-end', padding: '15px 0px' }}>
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderOther" style={{ marginRight: 24 }}>
                                     <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={ this.repeatOrder.bind(this, this.state.showOrder.order.order_id, this.state.showOrder.order.point_id) }>Повторить заказ</Button>
@@ -1050,9 +1056,15 @@ export class Profile extends React.Component {
                             fullWidth
                         />
                     </DialogContent>
-                    <DialogActions>
-                        <Button onClick={() => { this.setState({delOrder: false}) }} color="primary">К заказу</Button>
-                        <Button onClick={this.closeOrderTrue.bind(this)} color="primary">Отменить заказ</Button>
+                    <DialogActions style={{ paddingBottom: 24 }}>
+                        <Hidden xsDown>
+                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderOther" style={{ marginRight: 24 }}>
+                                <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={() => { this.setState({delOrder: false}) }}>К заказу</Button>
+                            </ButtonGroup>
+                        </Hidden>
+                        <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderOther" style={{ marginRight: 24 }}>
+                            <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={this.closeOrderTrue.bind(this)}>Отменить заказ</Button>
+                        </ButtonGroup>
                     </DialogActions>
                 </Dialog>
             </Grid>

@@ -851,7 +851,7 @@ export class Header extends React.Component {
                 }    
                 
                 <Hidden lgUp>
-                    <CustomBottomNavigation login={ this.openLogin } />
+                    <CustomBottomNavigation login={ this.openLogin.bind(this) } />
                 </Hidden>
             </div>
         )
