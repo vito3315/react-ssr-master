@@ -713,6 +713,8 @@ class ItemsStore {
       }
     });
     
+    console.log( 'my_dops', my_dops )
+    
     my_dops.forEach( (my_d) => {
       let check_dop = false;
       

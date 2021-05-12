@@ -6,6 +6,8 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 
+import { NavLink as Link, Switch, Route, Redirect } from 'react-router-dom';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faPlus, faMinus, faRubleSign, faCreditCard, faMoneyBill, faCashRegister, faGift } from '@fortawesome/free-solid-svg-icons'
 
@@ -14,6 +16,9 @@ import Hidden from '@material-ui/core/Hidden';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
+
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined';
 
@@ -414,6 +419,8 @@ export class Cart extends React.Component {
             is_load: false,
             city_name: props.match.params.cityName,
             
+            spiner: false,
+            
             title: '',
             description: '',
             
@@ -482,7 +489,9 @@ export class Cart extends React.Component {
             
             orderSdacha: '',
             orderPromo: '',
-            orderPromoText: ''
+            orderPromoText: '',
+            
+            newOrderData: null
         };
         
         itemsStore.setCity(props.match.params.cityName);
@@ -666,6 +675,8 @@ export class Cart extends React.Component {
             let dop = cartItems_new.filter( (item_) => parseInt(item_.cat_id) == 7 );
             let need_dop = itemsStore.check_need_dops();
             
+            console.log( 'need_dop', need_dop );
+            
             this.setState({
                 cartItems_main: main,
                 cartItems_dop: dop,
@@ -783,8 +794,9 @@ export class Cart extends React.Component {
             orderType: newValue
         })
         
+        let thisitem = this.state.orderAddr;
+        
         if( newValue == 0 ){
-            let thisitem = this.state.orderAddr;
             let allPrice = itemsStore.getAllPrice();
         
             if(thisitem){
@@ -1175,6 +1187,10 @@ export class Cart extends React.Component {
         if( this.clickOrderStart == false ){
             this.clickOrderStart = true;
             
+            this.setState({
+                spiner: true
+            })
+            
             let new_cart = [];
             let cartItems = itemsStore.getItems();
             let allItems = itemsStore.getAllItems();
@@ -1185,7 +1201,7 @@ export class Cart extends React.Component {
                         name: item.name,
                         count: item.count,
                         price: item.all_price,
-                        id: item.item_id,
+                        item_id: item.item_id,
                         cat_id: allItems.find( (item_) => item_.id == item.item_id )['cat_id']
                     })
                 }
@@ -1221,12 +1237,13 @@ export class Cart extends React.Component {
                 if( parseInt(item.item_id) == 19 && parseInt(item.count) > 0 ){
                     check_dop_19 = true;
                 }
-              });
+            });
               
-              if( (check_need_dop && check_dop_17 == false) || (check_need_dop && check_dop_19 == false) ){
+            if( (check_need_dop && check_dop_17 == false) || (check_need_dop && check_dop_19 == false) ){
                 
                 this.setState({
-                    orderCheckDop: true
+                    orderCheckDop: true,
+                    spiner: false
                 })
                 
                 setTimeout(()=>{
@@ -1234,9 +1251,10 @@ export class Cart extends React.Component {
                 }, 300)
                 
                 return;
+            }else{
+                this.clickOrderStart = false;  
+                this.startOrderNext(); 
             }
-            
-            this.startOrderNext();
         }
     }
     
@@ -1245,7 +1263,8 @@ export class Cart extends React.Component {
             this.clickOrderStart = true;
             
             this.setState({ 
-                orderCheckDop: false 
+                orderCheckDop: false,
+                spiner: true
             })
             
             let payFull = this.state.renderPay.find( (item) => item.type == this.state.orderPay );
@@ -1289,20 +1308,31 @@ export class Cart extends React.Component {
                     this.clickOrderStart = false;    
                 }, 300)
                 
-                if( json.st ){
+                setTimeout(()=>{
                     this.setState({
-                        orderCheck: true
+                        spiner: false
                     })
-                }else{
-                    this.setState({
-                        error: {
-                            title: 'Предупреждение', 
-                            text: json.text_err
-                        },
-                        errorOpen: true
-                    })
-                }
+                    
+                    if( json.st ){
+                        this.setState({
+                            orderCheck: true,
+                            newOrderData: json
+                        })
+                    }else{
+                        this.setState({
+                            error: {
+                                title: 'Предупреждение', 
+                                text: json.text_err
+                            },
+                            errorOpen: true
+                        })
+                    }
+                }, 1000)
+                
+                
             })
+        }else{
+            console.log( 'this_false' )
         }
     }
     
@@ -1351,6 +1381,54 @@ export class Cart extends React.Component {
         }
     }
     
+    trueOrder(){
+        fetch('https://jacofood.ru/src/php/test_app.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'},
+            body: queryString.stringify({
+                type: 'trueOrder', 
+                city_id: this.state.city_name,
+                user_id: itemsStore.getToken(),
+                
+                order_id: this.state.newOrderData.order_id,
+                point_id: this.state.newOrderData.point_id,
+            })
+        }).then(res => res.json()).then(json => {
+            if( json['st'] == false ){
+                this.setState({
+                    error: {
+                        title: 'При подтверждении оплаты произошла ошибка', 
+                        text: json.text_err
+                    },
+                    errorOpen: true
+                })
+            }else{
+                itemsStore.setItems([]);
+                
+                let data = {
+                    orderType: '0',
+                    orderAddr: '',
+                    orderPic: 0,
+                    orderComment: '',
+                    
+                    orderTimes: '1',
+                    orderPredDay: '',
+                    orderPredTime: '',
+                    
+                    orderPay: '',
+                    orderSdacha: '',
+                };
+                
+                itemsStore.saveCartData(data);
+                
+                setTimeout(()=>{
+                    window.location.pathname = '/'+this.state.city_name+'/profile'
+                }, 300)
+            }
+        });
+    }
+    
     render() {
         let this_pay = this.state.renderPay.find( (item) => item.type == this.state.orderPay );
         
@@ -1361,6 +1439,10 @@ export class Cart extends React.Component {
                     <title>{this.state.title}</title>
                     <meta name="description" content={this.state.description} />
                 </Helmet>
+                
+                <Backdrop open={this.state.spiner} style={{ zIndex: 99, color: '#fff' }}>
+                    <CircularProgress color="inherit" />
+                </Backdrop>
                 
                 <Grid item xs={12}>
                     <Typography variant="h5" component="h1">Корзина</Typography>
@@ -2056,9 +2138,21 @@ export class Cart extends React.Component {
                             </table>
                         </DialogContent>
                         <DialogActions style={{ padding: '12px 24px', paddingBottom: 24 }}>
-                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" style={{ width: '100%' }} onClick={() => this.setState({ orderCheck: false })}>
-                                <Button variant="contained" style={{ width: '100%' }} className="BtnCardMain CardInCardItem">Подтвердить заказ</Button>
-                            </ButtonGroup>
+                            { this.state.orderPay == 'card' ? 
+                                <a
+                                    href={ this.state.newOrderData.pay.formUrl }
+                                    className="MuiButtonBase-root MuiBottomNavigationAction-root"
+                                >
+                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" style={{ width: '100%' }}>
+                                        <Button variant="contained" style={{ width: '100%', padding: '0px 10px' }} className="BtnCardMain CardInCardItem">Оплатить заказ</Button>
+                                    </ButtonGroup>
+                                </a>
+                                
+                                    :
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" style={{ width: '100%' }} onClick={ this.trueOrder.bind(this) }>
+                                    <Button variant="contained" style={{ width: '100%' }} className="BtnCardMain CardInCardItem">Подтвердить заказ</Button>
+                                </ButtonGroup>
+                            }
                         </DialogActions>
                     </Dialog>
                         :

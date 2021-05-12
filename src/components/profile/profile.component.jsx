@@ -114,6 +114,12 @@ export class Profile extends React.Component {
             openDialog: false,
             delOrder: false,
             
+            errorOpen: false,
+            error: {
+                title: '',
+                text: ''
+            },
+            
             title: '',
             description: '',
             page: null,
@@ -161,6 +167,20 @@ export class Profile extends React.Component {
             showOrder: null
         };
         
+        if( props.location.search.length > 3 ){
+            
+            let order_pay = props.location.search;
+            
+            let p1 = order_pay.split('&');
+    		let bank = p1[0].split('bank=');
+    		bank = bank[1];
+
+    		let order_id = p1[1].split('orderId=');
+            order_id = order_id[1];
+            
+            this.checkPay(bank, order_id);            
+        }
+        
         itemsStore.setCity(props.match.params.cityName);
     }
     
@@ -178,6 +198,10 @@ export class Profile extends React.Component {
             } );
         } );
         
+        this.loadData();
+    }
+    
+    loadData(){
         let arr_day = [];
         
         for(let i = 1; i <= 31; i++){
@@ -232,6 +256,101 @@ export class Profile extends React.Component {
             } 
         }).catch(function (error) {
             console.log(error);
+        });
+    }
+    
+    checkPay(bank, pay_id) {
+        let data = {
+            type: 'check_pay_web', 
+            payId: pay_id,
+            bank: bank
+        };
+        
+        axios({
+            method: 'POST',
+            url:'https://jacofood.ru/src/php/test_app.php',
+            headers: { 'content-type': 'application/x-www-form-urlencoded' },
+            data: queryString.stringify(data)
+        }).then(response => {
+            if(response['status'] === 200){
+                var json = response['data'];
+                
+                console.log( json )
+                
+                if( json.repeat ){
+                    setTimeout(()=>{
+                        this.checkPay(bank, pay_id);
+                    }, 5000)
+                }else{
+                    if( !json.is_create ){
+                        this.setState({
+                            spiner: false
+                        })
+                      
+                        if( json.st ){
+                            this.trueOrder(json.order_id, json.point_id);
+                        }else{
+                            this.props.history.push(this.props.location.pathname);
+                            
+                            this.setState({
+                                error: {
+                                    title: 'Ошибка оплаты', 
+                                    text: json.pay.actionCodeDescription
+                                },
+                                errorOpen: true
+                            })
+                        }
+                    }
+                }
+            } 
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+    
+    trueOrder(order_id, point_id){
+        fetch('https://jacofood.ru/src/php/test_app.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'},
+            body: queryString.stringify({
+                type: 'trueOrder', 
+                city_id: this.state.city_name,
+                user_id: itemsStore.getToken(),
+                
+                order_id: order_id,
+                point_id: point_id,
+            })
+        }).then(res => res.json()).then(json => {
+            if( json['st'] == false ){
+                this.setState({
+                    error: {
+                        title: 'При подтверждении оплаты произошла ошибка', 
+                        text: json.text_err
+                    },
+                    errorOpen: true
+                })
+            }else{
+                itemsStore.setItems([]);
+                
+                let data = {
+                    orderType: '0',
+                    orderAddr: '',
+                    orderPic: 0,
+                    orderComment: '',
+                    
+                    orderTimes: '1',
+                    orderPredDay: '',
+                    orderPredTime: '',
+                    
+                    orderPay: '',
+                    orderSdacha: '',
+                };
+                
+                itemsStore.saveCartData(data);
+                
+                this.loadData();
+            }
         });
     }
     
@@ -533,6 +652,56 @@ export class Profile extends React.Component {
         }
     }
     
+    repeatOrder(){
+        let my_cart = [];
+        let all_items = itemsStore.getAllItems();
+        let item_info = null;
+        
+        this.state.showOrder.order_items.map( (item) => {
+            item_info = all_items.find( (item_) => item_.id == item.item_id );
+            
+            if( item_info ){
+                let price = parseInt(item_info.price),
+                    all_price = parseInt(item.count) * parseInt(item_info.price);
+                
+                my_cart.push({
+                    name: item.name,
+                    item_id: item.item_id,
+                    count: item.count,
+                    
+                    one_price: price,
+                    all_price: all_price
+                })
+            }
+        } )
+        
+        let data = {
+            orderType: parseInt(this.state.showOrder.order.type_order_) - 1,
+            orderAddr: this.state.showOrder.street.name,
+            orderPic: parseInt(this.state.showOrder.order.point_id),
+            orderComment: '',
+            
+            orderTimes: '1',
+            orderPredDay: '',
+            orderPredTime: '',
+            
+            orderPay: parseInt(this.state.showOrder.order.type_order_) == 1 ? 'cash' : 'in',
+            orderSdacha: '',
+            
+        };
+        
+        itemsStore.saveCartData(data);
+        
+        if( this.state.showOrder.order.promo_name && this.state.showOrder.order.promo_name != '' ){
+            itemsStore.setPromo( this.state.showOrder.promo_info, this.state.showOrder.order.promo_name )
+        }
+        itemsStore.setItems(my_cart)
+        
+        setTimeout(()=>{
+            window.location.pathname = '/'+this.state.city_name+'/cart';
+        }, 300)
+    }
+    
     render() {
         return (
             <Grid container className="Profile mainContainer MuiGrid-spacing-xs-3">
@@ -545,6 +714,23 @@ export class Profile extends React.Component {
                 <Backdrop open={this.state.spiner} style={{ zIndex: 99, color: '#fff' }}>
                     <CircularProgress color="inherit" />
                 </Backdrop>
+                
+                <Dialog
+                    open={this.state.errorOpen}
+                    onClose={() => this.setState({ errorOpen: false })}
+                    className="DialogErr"
+                >
+                    <Typography variant="h5" component="span" className="orderCheckTitle">{this.state.error.title}</Typography>
+                    <FontAwesomeIcon className="closeDialog" onClick={() => this.setState({ errorOpen: false })} icon={faTimes}/>
+                    <DialogContent>
+                        <DialogContentText className="DialogErrText">{this.state.error.text}</DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" onClick={() => this.setState({ errorOpen: false })}>
+                            <Button variant="contained" className="BtnCardMain CardInCardItem">Хорошо</Button>
+                        </ButtonGroup>
+                    </DialogActions>
+                </Dialog>
                 
                 <Grid item xs={12}>
                     <Typography variant="h5" component="h1">Личный кабинет</Typography>
@@ -653,7 +839,7 @@ export class Profile extends React.Component {
                                             <div>
                                                 <Typography variant="h5" component="span" style={{ flex: 2 }}>{item.order_id}</Typography>
                                                 <Typography variant="h5" component="span" style={{ flex: 3 }}>{item.date_time_new}</Typography>
-                                                <Typography className="CardPriceItem" variant="h5" component="span" style={{ flex: 1 }}>{item.sum} <AttachMoneyIcon fontSize="small" /></Typography>
+                                                <Typography variant="h5" component="span" className="CardPriceItem" style={{ flex: 1 }}>{item.sum} <FontAwesomeIcon icon={faRubleSign} /></Typography>
                                                 <Typography variant="h5" component="span" style={{ flex: 1 }}>{parseInt(item.is_delete) == 1 ? <CloseIcon /> : parseInt(item.status_order) == 6 ? <CheckIcon /> : null}</Typography>
                                             </div>
                                             
@@ -785,13 +971,13 @@ export class Profile extends React.Component {
                             { parseInt(this.state.showOrder.order.is_preorder) == 1 ? null :
                                 <Typography variant="h6" component="span">{this.state.showOrder.order.text_time}{this.state.showOrder.order.unix_time_to_client}</Typography>
                             }
-                            { this.state.showOrder.order.promo_name.length == 0 ? null :
+                            { this.state.showOrder.order.promo_name == null || this.state.showOrder.order.promo_name.length == 0 ? null :
                                 <Typography variant="h6" component="span">Промокод: {this.state.showOrder.order.promo_name}</Typography>
                             }
-                            { this.state.showOrder.order.promo_name.length == 0 ? null :
+                            { this.state.showOrder.order.promo_name == null || this.state.showOrder.order.promo_name.length == 0 ? null :
                                 <Typography variant="h6" component="span" className="noSpace">{this.state.showOrder.order.promo_text}</Typography>
                             }
-                            <Typography variant="h6" component="span">Сумма закза: {this.state.showOrder.order.sum_order}</Typography>
+                            <Typography variant="h5" component="span" className="CardPriceItem">Сумма закза: {this.state.showOrder.order.sum_order} <FontAwesomeIcon icon={faRubleSign} /></Typography>
                             
                             <table className="tableOrderCheck">
                                 <tbody>
@@ -810,10 +996,19 @@ export class Profile extends React.Component {
                             
                         </MuiDialogContent>
                         
-                        { parseInt( this.state.showOrder.order.is_delete ) == 0 && parseInt( this.state.showOrder.order.status_order ) !== 7 ? 
+                        { parseInt( this.state.showOrder.order.is_delete ) == 0 && parseInt( this.state.showOrder.order.status_order ) !== 6 ? 
                             <MuiDialogActions style={{ justifyContent: 'flex-end', padding: '15px 0px' }}>
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderOther" style={{ marginRight: 24 }}>
                                     <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={ this.closeOrder.bind(this, this.state.showOrder.order.order_id, this.state.showOrder.order.point_id) }>Отменить заказ</Button>
+                                </ButtonGroup>
+                            </MuiDialogActions>
+                                :
+                            null
+                        }
+                        { parseInt( this.state.showOrder.order.is_delete ) == 1 || parseInt( this.state.showOrder.order.status_order ) == 6 ? 
+                            <MuiDialogActions style={{ justifyContent: 'flex-end', padding: '15px 0px' }}>
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderOther" style={{ marginRight: 24 }}>
+                                    <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={ this.repeatOrder.bind(this, this.state.showOrder.order.order_id, this.state.showOrder.order.point_id) }>Повторить заказ</Button>
                                 </ButtonGroup>
                             </MuiDialogActions>
                                 :

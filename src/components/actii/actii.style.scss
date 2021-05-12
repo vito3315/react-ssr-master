@@ -4,6 +4,9 @@ $Futuris: 'Futuris Bold';
     font-size: $size;
     font-family: $family !important;
 }
+.MuiSnackbarContent-root.MuiPaper-elevation6{
+    box-shadow: none;
+}
 .dopText{
     @include fons(1rem, $Ubuntu);
     column-count: 1;

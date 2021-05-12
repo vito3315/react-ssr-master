@@ -342,7 +342,7 @@ body{
     }
 }
 .ModalCity{
-    & .ModalLabel{
+    & a{
         @include fons(1.5rem, $Ubuntu);
         margin: 6px 6px;
         text-align: center;
@@ -350,6 +350,8 @@ body{
         border-radius: 4px;
         padding: 5px;
         cursor: pointer;
+        text-decoration: none;
+        color: #000;
         &.active{
             background-color: $colorMain!important;
             color: #fff;

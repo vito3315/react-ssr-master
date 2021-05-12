@@ -658,8 +658,8 @@ export class Header extends React.Component {
                     <DialogTitle id="alert-dialog-title">Выберите город</DialogTitle>
                     <DialogContent className="ModalContent_1_1" style={{ paddingBottom: 24, paddingTop: 0 }}>
                         {this.state.cityList.map((item, key) => 
-                            <Link key={key} to={{ pathname: this.getNewLink(item.link) }} onClick={() => { setTimeout(()=>{ window.location.reload(); }, 100) }}>
-                                <Typography variant="h5" component="span" className={"ModalLabel "+( this.state.cityName == item.link ? 'active' : '' )}>{item.name}</Typography>
+                            <Link key={key} className={ this.state.cityName == item.link ? 'active' : '' } to={{ pathname: this.getNewLink(item.link) }} onClick={() => { setTimeout(()=>{ window.location.reload(); }, 100) }}>
+                                <Typography variant="h5" component="span" className={"ModalLabel"}>{item.name}</Typography>
                             </Link> 
                         
                             

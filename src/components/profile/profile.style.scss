@@ -5,6 +5,9 @@ $mainColor: #BB0025;
     font-size: $size;
     font-family: $family !important;
 }
+.MuiSnackbarContent-root.MuiPaper-elevation6{
+    box-shadow: none;
+}
 .showOrderDialog{
     & h6{
         @include fons(1.3rem, $Futuris);
@@ -13,6 +16,7 @@ $mainColor: #BB0025;
     & .showOrderDialogContent{
         display: flex;
         flex-direction: column;
+        padding-bottom: 20px;
         & > span{
             @include fons(1rem, $Ubuntu);
             padding: 6px 0px;
@@ -231,11 +235,18 @@ $mainColor: #BB0025;
             padding: 10px 0;
         }
     }
-    & .CardPriceItem{
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
+}
+.CardPriceItem{
+    display: flex;
+    justify-content: center;
+    & svg{
+        font-size: 0.8rem;
+        padding-top: 6px;
+        padding-left: 1px;
     }
+}
+.showOrderDialogContent .CardPriceItem{
+    justify-content: flex-start;
 }
 .TableInfo{
     display: flex; 
