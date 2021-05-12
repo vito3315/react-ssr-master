@@ -189,7 +189,7 @@ export class Profile extends React.Component {
             document.querySelector('.activeCat').classList.remove('activeCat');
         }
         window.scrollTo(0, 0);
-        itemsStore.setPage('actii');
+        itemsStore.setPage('profile');
         
         if( !itemsStore.getToken() ){
             this.props.history.push('/'+this.state.city_name+'/');
@@ -203,8 +203,6 @@ export class Profile extends React.Component {
         } );
         
         this.loadData();
-        
-        
     }
     
     loadData(){

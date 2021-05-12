@@ -66,7 +66,7 @@ export class PageOferta extends React.Component {
             document.querySelector('.activeCat').classList.remove('activeCat');
         }
         window.scrollTo(0, 0);
-        itemsStore.setPage('actii');
+        itemsStore.setPage('PageOferta');
         
         PageOferta.fetchData('/'+this.state.city_name).then( data => {
             data.page.content = data.page.content.replace(
