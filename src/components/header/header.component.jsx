@@ -37,6 +37,98 @@ import { autorun } from "mobx"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faMinus, faMapMarkerAlt, faRubleSign } from '@fortawesome/free-solid-svg-icons'
+import { faUtensils, faUser, faGift } from '@fortawesome/free-solid-svg-icons'
+
+class CustomBottomNavigation extends React.Component{
+    constructor(props) {
+        super(props);
+        
+        this.state = {      
+            allPrice: 0,
+            thisPage: ''
+        };
+    }
+    
+    componentDidMount = () => {
+        autorun(() => {
+            this.setState({
+                allPrice: itemsStore.getSumDiv() + itemsStore.getAllPrice(),
+                thisPage: itemsStore.getPage()
+            })
+        })
+    }
+    
+    shouldComponentUpdate(nextProps, nextState) {
+        return (
+            this.state.allPrice !== nextState.allPrice ||
+            this.state.thisPage !== nextState.thisPage
+        );
+    }
+    
+    render(){
+        let this_city = itemsStore.getCity();
+        
+        return(
+            <div className="bottomNavigate">
+                <Link
+                    to={'/'+this_city+'/'}
+                    exact={ true }
+                    className="MuiButtonBase-root MuiBottomNavigationAction-root"
+                >
+                    <FontAwesomeIcon icon={ faUtensils } style={{ color: this.state.thisPage == 'home' ? 'black' : 'gray' }} />
+                </Link>
+                <Link
+                    to={'/'+this_city+'/actii'}
+                    exact={ true }
+                    className="MuiButtonBase-root MuiBottomNavigationAction-root"
+                >
+                    <FontAwesomeIcon icon={ faGift } style={{ color: this.state.thisPage == 'actii' ? 'black' : 'gray' }} />
+                </Link>
+                {itemsStore.getToken() ?
+                    <Link
+                        to={'/'+this_city+'/cart'}
+                        exact={ true }
+                        className="MuiButtonBase-root MuiBottomNavigationAction-root"
+                    >
+                        <Badge badgeContent={ this.state.allPrice } max={500000} color="primary">
+                            <ShoppingCartOutlinedIcon style={{ fill: this.state.thisPage == 'cart' ? 'black' : 'gray' }} />
+                        </Badge>
+                    </Link>
+                        :
+                    <Typography 
+                        className="MuiButtonBase-root MuiBottomNavigationAction-root" 
+                        onClick={this.props.login}>
+                        <Badge badgeContent={ this.state.allPrice } max={500000} color="primary">
+                            <ShoppingCartOutlinedIcon style={{ fill: this.state.thisPage == 'cart' ? 'black' : 'gray' }} />
+                        </Badge>
+                    </Typography>
+                }
+                <Link
+                    to={'/'+this_city+'/contact'}
+                    exact={ true }
+                    className="MuiButtonBase-root MuiBottomNavigationAction-root"
+                >
+                    <FontAwesomeIcon icon={ faMapMarkerAlt } style={{ color: this.state.thisPage == 'contact' ? 'black' : 'gray' }} />
+                </Link>
+                {itemsStore.getToken() ?
+                    <Link
+                        to={'/'+this_city+'/profile'}
+                        exact={ true }
+                        className="MuiButtonBase-root MuiBottomNavigationAction-root"
+                    >
+                        <FontAwesomeIcon icon={ faUser } style={{ color: this.state.thisPage == 'profile' ? 'black' : 'gray' }} />
+                    </Link>
+                        :
+                    <Typography 
+                        className="MuiButtonBase-root MuiBottomNavigationAction-root" 
+                        onClick={this.props.login}>
+                            <FontAwesomeIcon icon={ faUser } style={{ color: this.state.thisPage == 'profile' ? 'black' : 'gray' }} />
+                    </Typography>
+                }
+            </div>
+        )
+    }
+}
 
 class SimplePopover extends React.Component{
     constructor(props) {
@@ -357,12 +449,6 @@ export class Header extends React.Component {
     }
 
     openLogin(){
-        this.setState({
-            openLogin: true
-        })
-    }
-    
-    static openLoginNew(){
         this.setState({
             openLogin: true
         })
@@ -763,6 +849,10 @@ export class Header extends React.Component {
                         :
                     null
                 }    
+                
+                <Hidden lgUp>
+                    <CustomBottomNavigation login={ this.openLogin } />
+                </Hidden>
             </div>
         )
     }
