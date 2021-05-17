@@ -157,14 +157,14 @@ class ItemsStore {
     let cart_new_promo = [];    
     allPrice = my_cart.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
     
-    if( orderInfo.orderType ){
-      let type_order = parseInt( orderInfo.orderType ) ?? 0,
-          point_id_dev = orderInfo.orderAddr ? parseInt( orderInfo.orderAddr.point_id ) : 0,
-          point_id_pic = parseInt( orderInfo.orderPic ) ?? 0;
-    }else{
-      let type_order = 0,
-          point_id_dev = 0,
-          point_id_pic = 0;
+    let type_order = 0,
+        point_id_dev = 0,
+        point_id_pic = 0;
+    
+    if( orderInfo.orderType || orderInfo.orderType == 0 ){
+      type_order = parseInt( orderInfo.orderType ) ?? 0;
+      point_id_dev = orderInfo.orderAddr ? parseInt( orderInfo.orderAddr.point_id ) : 0;
+      point_id_pic = parseInt( orderInfo.orderPic ) ?? 0;
     }
     
     let this_date = moment(by_time).format("YYYY-MM-DD"),

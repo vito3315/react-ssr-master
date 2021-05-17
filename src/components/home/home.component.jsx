@@ -109,7 +109,7 @@ class CardItem extends React.Component {
                             <CardMedia
                                 component="img"
                                 alt={this.state.item.name}
-                                image={"https://newjacofood.ru/src/img/items/"+this.state.item.img_full+'?'+this.state.item.img_full_date_update}
+                                image={"https://jacofood.ru/src/img/items/"+this.state.item.img_full+'?'+this.state.item.img_full_date_update}
                                 title={this.state.item.name}
                                 style={{ minHeight: 150 }}
                             />
