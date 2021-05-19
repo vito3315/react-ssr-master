@@ -203,7 +203,19 @@ class CartItem extends React.Component {
             return (
                 <tr>
                     <td style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', position: 'relative' }}>
-                        <img src={"https://newjacofood.ru/src/img/items/"+this.state.item.img+'?'+this.state.item.imgUpdate} />
+                        <picture>
+                            <source 
+                                srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.webp?"+this.state.item.img_new_update} 
+                                type="image/webp" 
+                            />
+                            <img 
+                                src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.jpg?"+this.state.item.img_new_update} 
+                                alt={this.state.item.name}
+                                title={this.state.item.name}
+                                style={{ minHeight: 150 }}
+                            />
+                        </picture>
+                        
                         {this.state.type == 'promo' ? 
                             <FontAwesomeIcon icon={faGift} className="promoIcon" />
                                 :
@@ -354,7 +366,18 @@ class CartItemMobile extends React.Component {
         if( this.state.count > 0 || parseInt(this.state.item.cat_id) == 7 ){
             return (
                 <div className="boxItem">
-                    <img src={"https://newjacofood.ru/src/img/items/"+this.state.item.img+'?'+this.state.item.imgUpdate} />
+                    <picture>
+                        <source 
+                            srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.webp?"+this.state.item.img_new_update} 
+                            type="image/webp" 
+                        />
+                        <img 
+                            src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.jpg?"+this.state.item.img_new_update} 
+                            alt={this.state.item.name}
+                            title={this.state.item.name}
+                            style={{ minHeight: 150 }}
+                        />
+                    </picture>
                     {this.state.type == 'promo' ? 
                         <FontAwesomeIcon icon={faGift} className="promoIcon" />
                             :

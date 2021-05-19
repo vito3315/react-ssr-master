@@ -291,7 +291,18 @@ export class Item extends React.Component {
                             <Typography variant="h5" component="h1">{this.state.item.name}</Typography>
                         </Grid>
                         <Grid item xs={6} style={{ paddingRight: 12 }}>
-                            <img src={"https://newjacofood.ru/src/img/items/"+this.state.item.img_full} alt={this.state.item.name} />
+                            <picture>
+                               <source 
+                                    srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
+                                    type="image/webp" 
+                                />
+                               <img 
+                                    src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
+                                    alt={this.state.item.name}
+                                    title={this.state.item.name}
+                                    style={{ minHeight: 150 }}
+                                />
+                            </picture>
                         </Grid>
                         <Grid item xs={6} style={{ paddingLeft: 12 }}>
                             <Typography gutterBottom variant="h5" component="span" className="ItemDesc">{'Состав: '+this.state.item.tmp_desc}</Typography>
@@ -326,7 +337,18 @@ export class Item extends React.Component {
                 <Hidden smUp>
                     <Grid container className="MainItem_mobile">
                         <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
-                            <img src={"https://newjacofood.ru/src/img/items/"+this.state.item.img_full} alt={this.state.item.name} />
+                            <picture>
+                               <source 
+                                    srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
+                                    type="image/webp" 
+                                />
+                               <img 
+                                    src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
+                                    alt={this.state.item.name}
+                                    title={this.state.item.name}
+                                    style={{ minHeight: 150 }}
+                                />
+                            </picture>
                         </Grid>
                         <Grid item xs={12} className="MainLine">
                             <Typography variant="h5" component="h1">{this.state.item.name}</Typography>
