@@ -106,13 +106,18 @@ class CardItem extends React.Component {
                     
                     <CardContent>
                         <Link to={"/"+itemsStore.getCity()+"/menu/"+this.state.item.link} >
-                            <CardMedia
-                                component="img"
-                                alt={this.state.item.name}
-                                image={"https://jacofood.ru/src/img/items/"+this.state.item.img_full+'?'+this.state.item.img_full_date_update}
-                                title={this.state.item.name}
-                                style={{ minHeight: 150 }}
-                            />
+                            <picture>
+                               <source 
+                                    srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
+                                    type="image/webp" 
+                                />
+                               <img 
+                                    src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
+                                    alt={this.state.item.name}
+                                    title={this.state.item.name}
+                                    style={{ minHeight: 150 }}
+                                />
+                            </picture>
                             <CardContent style={{ padding: '1.2vw' }}>
                                 <Typography className="CardNameItem" gutterBottom variant="h5" component="span">{this.state.item.name}</Typography>
                                 <Typography className="CardInfoItem" component="p">{this.state.item.tmp_desc}</Typography>
@@ -157,7 +162,8 @@ class CardItem extends React.Component {
                         <CardMedia
                             component="img"
                             alt={this.state.item.name}
-                            image={'https://jacofood.ru/src/img_app/'+this.state.item.img_app+'?'+this.state.item.img_app_update}
+                            image={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.jpg?"+this.state.item.img_new_update}
+                            //image={'https://jacofood.ru/src/img_app/'+this.state.item.img_app+'?'+this.state.item.img_app_update}
                             title={this.state.item.name}
                         />
                     </Grid>
