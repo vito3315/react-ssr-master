@@ -25,8 +25,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Slide from '@material-ui/core/Slide';
 import Hidden from '@material-ui/core/Hidden';
-import AliceCarousel from 'react-alice-carousel';
-import 'react-alice-carousel/lib/alice-carousel.css';
 
 import Swiper from "swiper";
 import SwiperCore, { Pagination, Navigation, A11y } from 'swiper';
