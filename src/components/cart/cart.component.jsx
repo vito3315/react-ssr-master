@@ -112,6 +112,8 @@ class CartItem extends React.Component {
     constructor(props) {
         super(props);
         
+        console.log( 'item', this.props.item )
+        
         this.state = {  
             item: this.props.item,
             type: this.props.type,
@@ -205,11 +207,11 @@ class CartItem extends React.Component {
                     <td style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', position: 'relative' }}>
                         <picture>
                             <source 
-                                srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.webp?"+this.state.item.img_new_update} 
+                                srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img+"300х200.webp?"+this.state.item.imgUpdate} 
                                 type="image/webp" 
                             />
                             <img 
-                                src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.jpg?"+this.state.item.img_new_update} 
+                                src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img+"300х200.jpg?"+this.state.item.imgUpdate} 
                                 alt={this.state.item.name}
                                 title={this.state.item.name}
                                 style={{ minHeight: 150 }}
@@ -368,11 +370,11 @@ class CartItemMobile extends React.Component {
                 <div className="boxItem">
                     <picture>
                         <source 
-                            srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.webp?"+this.state.item.img_new_update} 
+                            srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img+"300х200.webp?"+this.state.item.imgUpdate} 
                             type="image/webp" 
                         />
                         <img 
-                            src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.jpg?"+this.state.item.img_new_update} 
+                            src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img+"300х200.jpg?"+this.state.item.imgUpdate} 
                             alt={this.state.item.name}
                             title={this.state.item.name}
                             style={{ minHeight: 150 }}
@@ -692,8 +694,8 @@ export class Cart extends React.Component {
                         desc: thisitem.tmp_desc,
                         count: item.count,
                         allPrice: item.all_price,
-                        img: thisitem.img,
-                        imgUpdate: thisitem.img_date_update,
+                        img: thisitem.img_new,
+                        imgUpdate: thisitem.img_new_update,
                     })
                 }
             })
@@ -726,7 +728,7 @@ export class Cart extends React.Component {
                 let cartPromoItems = [];
                 
                 cartItems.map((item) => {
-                    let thisitem = allItems.filter( (item_) => item_.id == item.item_id )[0];
+                    let thisitem = allItems.find( (item_) => item_.id == item.item_id );
                     
                     if(thisitem){
                         cartItems_new.push({
@@ -736,11 +738,13 @@ export class Cart extends React.Component {
                             desc: thisitem.tmp_desc,
                             count: item.count,
                             allPrice: item.all_price,
-                            img: thisitem.img,
-                            imgUpdate: thisitem.img_date_update,
+                            img: thisitem.img_new,
+                            imgUpdate: thisitem.img_new_update,
                         })
                     }
                 })
+                
+                
                 
                 let main = cartItems_new.filter( (item_) => parseInt(item_.cat_id) !== 7 );
                 let dop = cartItems_new.filter( (item_) => parseInt(item_.cat_id) == 7 );
@@ -748,7 +752,8 @@ export class Cart extends React.Component {
                 let dop_new = [];
                 
                 need_dop.map((item) => {
-                    let cart_item = cartItems_new.filter( (item_) => parseInt(item_.id) == parseInt(item.id) )[0];
+                    let cart_item = cartItems_new.find( (item_) => parseInt(item_.id) == parseInt(item.id) );
+                    let thisitem = allItems.find( (item_) => parseInt(item_.id) == parseInt(item.id) );
                     
                     if( !cart_item ){
                         dop_new.push({
@@ -758,8 +763,8 @@ export class Cart extends React.Component {
                             desc: item.tmp_desc,
                             count: 0,
                             allPrice: 0,
-                            img: item.img,
-                            imgUpdate: item.img_date_update,
+                            img: thisitem.img_new,
+                            imgUpdate: thisitem.img_new_update,
                         })
                     }else{
                         dop_new.push({
@@ -769,8 +774,8 @@ export class Cart extends React.Component {
                             desc: item.tmp_desc,
                             count: cart_item.count,
                             allPrice: cart_item.allPrice,
-                            img: item.img,
-                            imgUpdate: item.img_date_update,
+                            img: thisitem.img_new,
+                            imgUpdate: thisitem.img_new_update,
                         })
                     }
                 })
@@ -786,8 +791,8 @@ export class Cart extends React.Component {
                             desc: thisitem.tmp_desc,
                             count: item.count,
                             allPrice: item.all_price,
-                            img: thisitem.img,
-                            imgUpdate: thisitem.img_date_update,
+                            img: thisitem.img_new,
+                            imgUpdate: thisitem.img_new_update,
                         })
                     }
                 })
@@ -799,6 +804,10 @@ export class Cart extends React.Component {
                 this.setState({
                     cartItems_dop: dop_new,
                 })
+                
+                console.log( 'cartItems_main', main )
+                console.log( 'cartItems_need_dop', dop_new )
+                console.log( 'cartItems_promo', cartPromoItems )
                 
                 this.setState({
                     cartItems_main: main,

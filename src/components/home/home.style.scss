@@ -1,6 +1,6 @@
 $Ubuntu: 'Ubuntu';
 $Futuris: 'Futuris Bold';
-$colorMain: #BB0025;
+$colorMain: #CC0033;
 @mixin fons($size: 1rem, $family: $Ubuntu) {
     font-size: $size;
     font-family: $family !important;
@@ -10,12 +10,103 @@ $colorMain: #BB0025;
         @include fons(2rem, $Futuris);
         text-align: center;
     }
+    & h3{
+        @include fons(1.2rem, $Ubuntu);
+        text-transform: uppercase;
+    }
 }
 .ItemDialog{
     & .MainItem_mobile{
         margin-top: 30px!important;
     }   
 }
+.fohover{
+    & .NONHOVERED{
+        display: grid;
+    }
+    & .HOVERED{
+        display: none;
+    }
+    &:hover{
+        & .NONHOVERED{
+            display: none!important;
+        }
+        & .HOVERED{
+            display: grid!important;
+        }
+    }
+}
+
+.swiper_mobile{
+    padding-top: 83px!important;
+    margin-bottom: 20px!important;
+}
+
+.swiper_pc{
+    padding-top: 70px!important;
+    margin-bottom: 20px!important;
+    & .swiper-slide-prev{
+        margin-right: 50px!important;
+        width: calc(100vw - 250px )!important;
+        margin-left: calc(-51vw)!important;
+    }
+    & .swiper-slide-active{
+        width: calc(100vw - 250px )!important;
+        margin-right: 50px!important;
+    }
+    & .swiper-slide-next{
+        margin-right: 50px!important;
+        width: calc(100vw - 250px )!important;
+    }
+}
+
+.swiper-button-prev{
+    width: 100px;
+    height: 100%;
+    top: 0;
+    z-index: 1;
+    position: absolute;
+}
+.swiper-button-next{
+    width: 100px;
+    height: 100%;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    position: absolute;
+}
+
+.swiper-pagination-bullet{
+    font-size: 0;
+    width: 2px;
+    height: 2px;
+    padding: 6px;
+    margin-right: 20px;
+    border-radius: 50%;
+    opacity: 0.5;
+    background-color: $colorMain;
+}
+.swiper-pagination-bullet-active{
+    font-size: 0;
+    width: 2px;
+    height: 2px;
+    padding: 6px;
+    border-radius: 50%;
+    margin-right: 20px;
+    opacity: 1;
+    background-color: $colorMain;
+}
+
+.swiper-pagination-bullets{
+    text-align: center;
+    position: absolute;
+    z-index: 1;
+    margin: auto;
+    left: 0;
+    bottom: 20px;
+    right: 0;
+}
+
 .CardItem{
     max-width: 345px; 
     min-height: 300px;
@@ -23,15 +114,29 @@ $colorMain: #BB0025;
     flex-direction: column; 
     align-items: stretch;
     justify-content: space-between;
+    &:hover img{
+        transform: translate(0,5px);
+        -webkit-transform: translate(0,5px);
+        -o-transform: translate(0,5px);
+        -moz-transform: translate(0,5px);
+        
+        transition: all 0.2s ease-in-out;
+        -webkit-transition: all 0.2s ease-in-out; /** Chrome & Safari **/
+        -moz-transition: all 0.2s ease-in-out; /** Firefox **/
+        -o-transition: all 0.2s ease-in-out; /** Opera **/
+    }
     & > div:first-child{
         padding: 0;
     }
     & img{
-        width: 100%;
-        min-height: initial;
+        max-width: 100%;
+        width: 90%;
+        padding: 0px 1.2vw;
     }
     & .CardInfoItem{
-        @include fons(0.8rem, $Ubuntu);
+        @include fons(0.7rem, $Ubuntu);
+        color: #666;
+        text-align: justify;
     }
     & .CardCountItem{
         @include fons(1rem, $Ubuntu);
@@ -61,6 +166,8 @@ $colorMain: #BB0025;
         width: 100%;
         text-align: center;
         @include fons(0.8rem, $Ubuntu);
+        fill: $colorMain;
+        border-radius: inherit!important;
     }
     & .CardAction{
         flex-direction: column;
@@ -106,9 +213,13 @@ $colorMain: #BB0025;
         width: 100%;
         text-align: center;
         @include fons(0.8rem, $Ubuntu);
+        fill: $colorMain;
+        border-radius: inherit!important;
     }
     & .CardInfoItem{
-        @include fons(0.8rem, $Ubuntu);
+        @include fons(0.7rem, $Ubuntu);
+        text-align: justify;
+        color: #666;
         overflow: hidden;
         text-overflow: ellipsis;
         display: -moz-box;

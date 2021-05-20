@@ -16,6 +16,8 @@ var scroller = Scroll.scroller;
 const queryString = require('query-string');
 import axios from 'axios';
 
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
+
 import itemsStore from '../../stores/items-store';
 import { autorun } from "mobx"
 import Dialog from '@material-ui/core/Dialog';
@@ -25,6 +27,87 @@ import Slide from '@material-ui/core/Slide';
 import Hidden from '@material-ui/core/Hidden';
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
+
+import Swiper from "swiper";
+import SwiperCore, { Pagination, Navigation, A11y } from 'swiper';
+SwiperCore.use([Navigation, Pagination, A11y]);
+// CSS
+//swiper css must come first
+import "swiper/swiper.min.css";
+// your custom css must come second to overwrite certain stylings in swiper.css
+
+class CoverFlowCarousel extends React.Component {
+    swiper = null;
+    
+    constructor(props) {
+        super(props);
+        
+        this.state = {      
+            data: this.props.data,
+            type: this.props.type,
+        };
+    }
+    
+    componentDidMount() {
+        this.swiper = new Swiper(".swiper-container", {
+            grabCursor: true,
+            loop: true,
+            centeredSlidesBounds: false,
+            setWrapperSize: true,
+            autoHeight: true,
+            spaceBetween: 100,
+            centeredSlides: true,
+            slidesPerView: this.state.type == 'pc' ? 2 : 1,
+            
+            pagination: this.state.type == 'pc' ? true : false,
+            pagination: this.state.type == 'pc' ? {
+                el: ".swiper-pagination",
+                clickable: true,
+                type: 'bullets',
+                renderBullet: function (index, className) {
+                    return '<span class="' + className + '">' + (index + 1) + '</span>';
+                },
+            } : {},
+            navigation: this.state.type == 'pc' ? {
+                nextEl: ".swiper-button-next", // arrows on the side of the slides
+                prevEl: ".swiper-button-prev", // arrows on the side of the slides
+            } : {},
+        });
+    }
+     
+    prev(){
+        this.swiper.slidePrev();
+    }
+    
+    next(){
+        this.swiper.slideNext();
+    }
+     
+    render() {
+        return (
+            <div className={"swiper-container swiper_"+this.state.type}>
+                <div className="swiper-wrapper">
+                    {this.state.data.map((item, key) => 
+                        <div className="swiper-slide" key={key}>
+                            {item}
+                        </div>
+                    )}
+                </div>
+                    
+                {this.state.type == 'pc' ?
+                    <>
+                        <div className="swiper-pagination" />
+                        <div className="swiper-button-prev" onClick={this.prev.bind(this)} />
+                        <div className="swiper-button-next" onClick={this.next.bind(this)} />
+                    </>
+                        :
+                    null
+                }
+            </div>
+        );
+    }
+}
+
 
 const handleDragStart = (e) => e.preventDefault();
 
@@ -107,31 +190,34 @@ class CardItem extends React.Component {
                     <CardContent>
                         <Link to={"/"+itemsStore.getCity()+"/menu/"+this.state.item.link} >
                             <picture>
-                               <source 
+                                <source 
                                     srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
                                     type="image/webp" 
                                 />
-                               <img 
+                                <img 
                                     src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
                                     alt={this.state.item.name}
                                     title={this.state.item.name}
                                     style={{ minHeight: 150 }}
                                 />
                             </picture>
-                            <CardContent style={{ padding: '1.2vw' }}>
+                            <CardContent style={{ padding: '1.2vw', paddingBottom: 0, paddingTop: 0 }}>
                                 <Typography className="CardNameItem" gutterBottom variant="h5" component="span">{this.state.item.name}</Typography>
+                                <Typography gutterBottom className="CardInfoWeiItem" component="p">{this.state.item.info_weight}</Typography>
                                 <Typography className="CardInfoItem" component="p">{this.state.item.tmp_desc}</Typography>
                             </CardContent>
                         </Link>
                     </CardContent>
                     
                     <CardActions className="CardAction">
-                        <Typography gutterBottom className="CardInfoWeiItem" component="span">{this.state.item.info_weight}</Typography>
                         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginLeft: 0, width: '100%' }}>
                             <div><Typography className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <FontAwesomeIcon icon={faRubleSign} /></Typography></div>
                             {this.state.count == 0 ?
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
-                                    <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={this.add.bind(this)}>В корзину</Button>
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder fohover">
+                                    <Button variant="contained" className="BtnCardMain CardInCardItem NONHOVERED" onClick={this.add.bind(this)}>
+                                        <ShoppingCartOutlinedIcon color='inherit'  />
+                                    </Button>
+                                    <Button variant="contained" className="BtnCardMain CardInCardItem HOVERED" onClick={this.add.bind(this)}>В корзину</Button>
                                 </ButtonGroup>
                             :
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder count">
@@ -281,9 +367,6 @@ export class Home extends React.Component {
         //}
         
         autorun(() => {
-            
-            console.log( itemsStore.getAllItemsCat() )
-            
             this.setState({
                 allItems: itemsStore.getAllItemsCat()
             })
@@ -297,8 +380,9 @@ export class Home extends React.Component {
                         <Link
                             to={'/'+itemsStore.getCity()+'/actii#act'+item.aktia_id}
                             exact={ true }
+                            style={{ width: 'inherit', height: 'auto', minHeight: 300, borderRadius: 15 }}
                         >
-                            <img style={{ minHeight: 380 }} src={"https://jacofood.ru/src/img/banners/"+item.b_img_full+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
+                            <img style={{ width: 'inherit', height: 'auto', minHeight: 300, borderRadius: 15 }} src={"https://jacofood.ru/src/img/banners/"+item.b_img_full+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
                         </Link>
                     )
                     
@@ -306,18 +390,19 @@ export class Home extends React.Component {
                         <Link
                             to={'/'+itemsStore.getCity()+'/actii#act'+item.aktia_id}
                             exact={ true }
+                            style={{ width: 'inherit', height: 'auto', minHeight: 150 }}
                         >
-                            <img src={"https://jacofood.ru/src/img/banners/"+item.img_app+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
+                            <img style={{ width: 'inherit', height: 'auto', minHeight: 150 }} src={"https://jacofood.ru/src/img/banners/"+item.img_app+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
                         </Link>
                     )
                     
                 }else{
                     banners_pc.push(
-                        <img style={{ minHeight: 380 }} src={"https://jacofood.ru/src/img/banners/"+item.b_img_full+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
+                        <img style={{ width: 'inherit', height: 'auto', minHeight: 300, borderRadius: 15 }} src={"https://jacofood.ru/src/img/banners/"+item.b_img_full+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
                     )
                     
                     banners_mobile.push(
-                        <img src={"https://jacofood.ru/src/img/banners/"+item.img_app+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
+                        <img style={{ width: 'inherit', height: 'auto', minHeight: 150 }} src={"https://jacofood.ru/src/img/banners/"+item.img_app+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
                     )
                 }
             })
@@ -386,43 +471,85 @@ export class Home extends React.Component {
             );
         }
         
-        return (
-            <Element name="myScrollToElement" className="Category">
-                
-                <Hidden xsDown>
-                    <AliceCarousel 
+        /*
+        
+        <AliceCarousel 
                         mouseTracking 
+                        
+                        slidesPerPage={3}
+                        slidesPerScroll={3}
+                        centered
+                        
                         //autoPlay={true}
                         //autoPlayInterval={3000}
                         infinite={true}
                         items={this.state.banners_pc} 
                     />
-                </Hidden>
-                <Hidden smUp>
+        
                     <AliceCarousel 
                         mouseTracking 
                         disableButtonsControls={true}
+                        
+                        slidesPerPage={3}
+                        slidesPerScroll={3}
+                        centered
+                        
                         //autoPlay={true}
                         //autoPlayInterval={3000}
                         infinite={true}
                         items={this.state.banners_mobile} 
                     />
+                    
+        */
+        
+        return (
+            <Element name="myScrollToElement" className="Category">
+                
+                
+                <Hidden xsDown>
+                    { this.state.banners_pc.length == 0 ? null :
+                        <CoverFlowCarousel
+                            type="pc"
+                            data={this.state.banners_pc}
+                        />
+                    }
+                </Hidden>
+                <Hidden smUp>
+                    { this.state.banners_mobile.length == 0 ? null :
+                        <CoverFlowCarousel
+                            type="mobile"
+                            data={this.state.banners_mobile}
+                        />
+                    }
                 </Hidden>
                 
-                {itemsStore.getAllItemsCat().map((cat, key) => (
-                    <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" key={key} name={"cat"+cat.id} id={"cat"+cat.id}>
-                        {cat.items.map((it, k) => (
-                            <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '16px 8px', display: 'flex'}}>
-                                <Hidden xsDown>
-                                    <CardItem data={it} type={'pc'} openItem={this.openItem.bind(this)} />
-                                </Hidden>
-                                <Hidden smUp>
-                                    <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
-                                </Hidden>
-                            </Grid>
-                        ))}
-                    </Grid>
-                ))}
+                
+                
+                
+                
+                
+                
+                
+                
+                {itemsStore.getAllItemsCat().map((cat, key) => 
+                    <div key={key} name={"cat"+cat.id} id={"cat"+cat.id}>
+                        <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer">
+                            <Typography variant="h5" component="h3">{ cat.name }</Typography>
+                        </Grid>
+                        <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
+                            {cat.items.map((it, k) => (
+                                <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '10px 8px', display: 'flex'}}>
+                                    <Hidden xsDown>
+                                        <CardItem data={it} type={'pc'} openItem={this.openItem.bind(this)} />
+                                    </Hidden>
+                                    <Hidden smUp>
+                                        <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
+                                    </Hidden>
+                                </Grid>
+                            ))}
+                        </Grid>
+                    </div>
+                )}
                 
                 <Grid item xs={12}>
                     <Typography variant="h5" component="h2">{ this.state.page && this.state.page.page_h ? this.state.page.page_h : '' }</Typography>

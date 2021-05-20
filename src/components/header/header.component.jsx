@@ -651,7 +651,7 @@ export class Header extends React.Component {
                                                     document.querySelector('#link_'+item.id).classList.add('activeCat');
                                                 }} 
                                                 smooth={true} 
-                                                offset={-100} 
+                                                offset={-60} 
                                                 activeClass="activeCat" 
                                                 id={'link_'+item.id} 
                                                 style={{ width: 'max-content', display: 'flex', whiteSpace: 'nowrap', padding: '4px 8px' }}
@@ -717,7 +717,7 @@ export class Header extends React.Component {
                                             }, 100);
                                         }} 
                                         smooth={true} 
-                                        offset={-100} 
+                                        offset={-60} 
                                         activeClass="activeCat" 
                                         id={'link_'+item.id} 
                                     >

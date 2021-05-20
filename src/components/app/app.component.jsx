@@ -130,8 +130,7 @@ class StickyFooter extends React.Component{
         return (
             <footer className="footer">
                 <Grid container className="mainContainer">
-                    <Grid item lg={3} md={3} sm={3} xl={3} xs={12}>
-                        <Typography variant="body1">Жако роллы и пицца — сеть кафе</Typography>
+                    <Grid item lg={3} md={3} sm={3} xl={3} xs={12} className="copy">
                         <Typography variant="body1">© Жако 2017 - {new Date().getFullYear()}</Typography>
                     </Grid>
                     <Grid item lg={3} md={3} sm={3} xl={3} xs={12}>
@@ -242,8 +241,6 @@ class StickyFooter extends React.Component{
 export class App extends React.Component {
     constructor(props) {
         super(props);
-        
-        console.log( props )
         
         this.state = {      
             categoryItems: [],  

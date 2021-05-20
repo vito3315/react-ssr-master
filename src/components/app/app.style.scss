@@ -7,7 +7,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 $Ubuntu: 'Ubuntu';
 $Futuris: 'Futuris Bold';
-$colorMain: #BB0025;
+$colorMain: #CC0033;
 @mixin fons($size: 1rem, $family: $Ubuntu) {
     font-size: $size;
     font-family: $family !important;
@@ -26,9 +26,14 @@ body{
     display: flex;
     flex-wrap: wrap;
     box-sizing: border-box;
+    & .copy{
+        align-content: flex-end;
+        display: grid;
+    }
     & p{
         @include fons(1rem, $Ubuntu);
         color: #fff;
+        padding: 4px 0px;
     }
     & svg{
         color: #fff;
@@ -140,6 +145,9 @@ body{
 .BtnBorder{
     border: 2px solid $colorMain;
     width: 109px;
+    border-radius: 10px!important;
+    justify-content: center;
+    overflow: hidden;
 }
 .BtnBorderOther{
     border: 2px solid $colorMain;
