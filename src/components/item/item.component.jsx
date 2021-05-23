@@ -526,7 +526,7 @@ export class Item extends React.Component {
                 
                 <Hidden smUp>
                     <Grid container className="MainItem mainContainer" style={{ paddingLeft: '4%', paddingRight: '4%' }}>
-                        <Grid item xs={12} style={{ paddingRight: 12 }}>
+                        <Grid item xs={12} style={{ paddingRight: 12, height: 170 }}>
                             <picture>
                                 <source 
                                     srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
@@ -553,7 +553,7 @@ export class Item extends React.Component {
                                 </Tabs>
                             </AppBar>
                             <TabPanel value={this.state.itemTab} index={1} style={{ width: '100%', marginTop: 10, marginBottom: 15 }}>
-                                <div style={{ maxHeight: '30vh', overflow: 'auto' }} className={this.state.item.items.length == 1 ? 'MainItemPopover tab MainItemPopoverOne' : 'MainItemPopover tab MainItemPopoverLot'}>
+                                <div style={{ maxHeight: '30vh', height: '100%', overflow: 'auto' }} className={this.state.item.items.length == 1 ? 'MainItemPopover tab MainItemPopoverOne' : 'MainItemPopover tab MainItemPopoverLot'}>
                                     <table>
                                         <tbody>
                                             
@@ -600,7 +600,7 @@ export class Item extends React.Component {
                             </TabPanel>
                             <TabPanel value={this.state.itemTab} index={0} style={{ marginTop: 10, marginBottom: 15 }}>
                                 { this.state.item.items.length > 1 ?
-                                    <div style={{ maxHeight: '30vh', overflow: 'auto' }}>
+                                    <div style={{ maxHeight: '30vh', height: '100%', overflow: 'auto' }}>
                                         {this.state.item.items.map((item, key) =>
                                             <div key={key} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                                                 <picture>
@@ -620,7 +620,9 @@ export class Item extends React.Component {
                                         )}
                                     </div>
                                         :
-                                    <Typography gutterBottom variant="h5" component="span" className="ItemDesc">{this.state.item.tmp_desc}</Typography>
+                                    <div style={{ maxHeight: '30vh', height: '100%', overflow: 'auto' }}>
+                                        <Typography gutterBottom variant="h5" component="span" className="ItemDesc">{this.state.item.tmp_desc}</Typography>    
+                                    </div>
                                 }
                             </TabPanel>
                             <TabPanel value={this.state.itemTab} index={2}>
