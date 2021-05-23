@@ -59,9 +59,8 @@ $Futuris: 'Futuris Bold';
         justify-content: flex-end;
     }
     & img{
-        max-width: 400px;
-        width: 100%;
-        height: intrinsic;
+        width: auto;
+        height: auto;
     }
     & .ItemDesc{
         @include fons(1.2rem, $Ubuntu);

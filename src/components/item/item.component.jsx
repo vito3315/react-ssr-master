@@ -536,7 +536,7 @@ export class Item extends React.Component {
                                     src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
                                     alt={this.state.item.name}
                                     title={this.state.item.name}
-                                    style={{ minHeight: 150 }}
+                                    style={{ height: 150, paddingTop: 20 }}
                                 />
                             </picture>
                         </Grid>
@@ -553,7 +553,7 @@ export class Item extends React.Component {
                                 </Tabs>
                             </AppBar>
                             <TabPanel value={this.state.itemTab} index={1} style={{ width: '100%', marginTop: 10, marginBottom: 15 }}>
-                                <div style={{ maxHeight: '35vh', overflow: 'auto' }} className={this.state.item.items.length == 1 ? 'MainItemPopover tab MainItemPopoverOne' : 'MainItemPopover tab MainItemPopoverLot'}>
+                                <div style={{ maxHeight: '30vh', overflow: 'auto' }} className={this.state.item.items.length == 1 ? 'MainItemPopover tab MainItemPopoverOne' : 'MainItemPopover tab MainItemPopoverLot'}>
                                     <table>
                                         <tbody>
                                             
@@ -600,7 +600,7 @@ export class Item extends React.Component {
                             </TabPanel>
                             <TabPanel value={this.state.itemTab} index={0} style={{ marginTop: 10, marginBottom: 15 }}>
                                 { this.state.item.items.length > 1 ?
-                                    <div style={{ maxHeight: '35vh', overflow: 'auto' }}>
+                                    <div style={{ maxHeight: '30vh', overflow: 'auto' }}>
                                         {this.state.item.items.map((item, key) =>
                                             <div key={key} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                                                 <picture>
