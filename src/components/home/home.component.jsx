@@ -16,6 +16,13 @@ var scroller = Scroll.scroller;
 const queryString = require('query-string');
 import axios from 'axios';
 
+
+
+import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import MuiDialogContent from '@material-ui/core/DialogContent';
+import MuiDialogActions from '@material-ui/core/DialogActions';
+
+import IconButton from '@material-ui/core/IconButton';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 
 import itemsStore from '../../stores/items-store';
@@ -29,10 +36,7 @@ import Hidden from '@material-ui/core/Hidden';
 import Swiper from "swiper";
 import SwiperCore, { Pagination, Navigation, A11y } from 'swiper';
 SwiperCore.use([Navigation, Pagination, A11y]);
-// CSS
-//swiper css must come first
 import "swiper/swiper.min.css";
-// your custom css must come second to overwrite certain stylings in swiper.css
 
 class CoverFlowCarousel extends React.Component {
     swiper = null;
@@ -106,6 +110,15 @@ class CoverFlowCarousel extends React.Component {
     }
 }
 
+function Ruble(){
+    return (
+        <svg width="50" height="20" viewBox="0 0 1500 200" xmlns="http://www.w3.org/2000/svg">
+            <g>
+                <path id="svg_1" d="m219.27,252.76c63.98,-2.85 99.22,-39.48 99.22,-103.13c0,-37.42 -12.62,-65.49 -37.52,-83.44c-22.29,-16.07 -48.63,-19.21 -62.35,-19.65c-28.61,-0.92 -107.02,-0.04 -110.34,0c-5.75,0.07 -10.38,4.75 -10.38,10.5l0,174.95c-9.23,-0.11 -15.07,-0.2 -15.31,-0.21c-0.06,0 -0.11,0 -0.17,0c-5.72,0 -10.41,4.59 -10.5,10.34c-0.09,5.8 4.54,10.57 10.34,10.66c0.95,0.01 6.78,0.1 15.64,0.21l0,26.12l-15.48,0c-5.8,0 -10.5,4.7 -10.5,10.5s4.7,10.5 10.5,10.5l15.48,0l0,74.89c0,5.8 4.7,10.5 10.5,10.5s10.5,-4.7 10.5,-10.5l0,-74.9l109.39,0c5.8,0 10.5,-4.7 10.5,-10.5s-4.7,-10.5 -10.5,-10.5l-109.39,0l0,-25.88c32.67,0.31 78.53,0.51 100.37,-0.46zm-100.37,-185.33c22.81,-0.21 76.99,-0.61 99.05,0.1c23.92,0.77 79.55,10.31 79.55,82.1c0,52.17 -26.63,79.82 -79.16,82.16c-21.17,0.94 -66.91,0.74 -99.44,0.43l0,-164.79z"/>
+            </g>
+        </svg>
+    )
+}
 
 const handleDragStart = (e) => e.preventDefault();
 
@@ -181,35 +194,36 @@ class CardItem extends React.Component {
     }
     
     render() {
+        
+        //  <FontAwesomeIcon icon={faRubleSign} />
+        
         if( this.props.type == 'pc' ){
             return (
                 <Card elevation={0} className="CardItem">
                     
-                    <CardContent>
-                        <Link to={"/"+itemsStore.getCity()+"/menu/"+this.state.item.link} >
-                            <picture>
-                                <source 
-                                    srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
-                                    type="image/webp" 
-                                />
-                                <img 
-                                    src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
-                                    alt={this.state.item.name}
-                                    title={this.state.item.name}
-                                    style={{ minHeight: 150 }}
-                                />
-                            </picture>
-                            <CardContent style={{ padding: '1.2vw', paddingBottom: 0, paddingTop: 0 }}>
-                                <Typography className="CardNameItem" gutterBottom variant="h5" component="span">{this.state.item.name}</Typography>
-                                <Typography gutterBottom className="CardInfoWeiItem" component="p">{this.state.item.info_weight}</Typography>
-                                <Typography className="CardInfoItem" component="p">{this.state.item.tmp_desc}</Typography>
-                            </CardContent>
-                        </Link>
+                    <CardContent onClick={ () => this.props.openItem(this.state.item.id)}>
+                        <picture>
+                            <source 
+                                srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
+                                type="image/webp" 
+                            />
+                            <img 
+                                src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
+                                alt={this.state.item.name}
+                                title={this.state.item.name}
+                                style={{ minHeight: 150 }}
+                            />
+                        </picture>
+                        <CardContent style={{ padding: '1.2vw', paddingBottom: 0, paddingTop: 0 }}>
+                            <Typography className="CardNameItem" gutterBottom variant="h5" component="span">{this.state.item.name}</Typography>
+                            <Typography gutterBottom className="CardInfoWeiItem" component="p">{this.state.item.info_weight}</Typography>
+                            <Typography className="CardInfoItem" component="p">{this.state.item.tmp_desc}</Typography>
+                        </CardContent>
                     </CardContent>
                     
                     <CardActions className="CardAction">
                         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginLeft: 0, width: '100%' }}>
-                            <div><Typography className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <FontAwesomeIcon icon={faRubleSign} /></Typography></div>
+                            <div><Typography className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <Ruble /></Typography></div>
                             {this.state.count == 0 ?
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder fohover">
                                     <Button variant="contained" className="BtnCardMain CardInCardItem NONHOVERED" onClick={this.add.bind(this)}>
@@ -217,7 +231,7 @@ class CardItem extends React.Component {
                                     </Button>
                                     <Button variant="contained" className="BtnCardMain CardInCardItem HOVERED" onClick={this.add.bind(this)}>В корзину</Button>
                                 </ButtonGroup>
-                            :
+                                    :
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder count">
                                     <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this)}>
                                         <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
@@ -243,19 +257,23 @@ class CardItem extends React.Component {
             return (
                 <Grid item container xs={12} className="CardItem_mobile">
                     <Grid item xs={5} sm={5} md={5} xl={5} onClick={ () => this.props.openItem(this.state.item.id)}>
-                        <CardMedia
-                            component="img"
-                            alt={this.state.item.name}
-                            image={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.jpg?"+this.state.item.img_new_update}
-                            //image={'https://jacofood.ru/src/img_app/'+this.state.item.img_app+'?'+this.state.item.img_app_update}
-                            title={this.state.item.name}
-                        />
+                        <picture>
+                            <source 
+                                srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.webp?"+this.state.item.img_new_update} 
+                                type="image/webp" 
+                            />
+                            <img 
+                                src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.jpg?"+this.state.item.img_new_update} 
+                                alt={this.state.item.name}
+                                title={this.state.item.name}
+                            />
+                        </picture>
                     </Grid>
                     <Grid item xs={7} sm={7} md={7} xl={7} className="SecondBox">
                         <Typography className="CardNameItem" gutterBottom variant="h5" component="span" onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>
                         <Typography className="CardInfoItem" component="p" onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.tmp_desc}</Typography>
                         <div>
-                            <Typography gutterBottom className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <FontAwesomeIcon icon={faRubleSign} /></Typography>
+                            <Typography gutterBottom className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <Ruble /></Typography>
                             {this.state.count == 0 ?
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
                                     <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={this.add.bind(this)}>В корзину</Button>
@@ -296,6 +314,7 @@ export class Home extends React.Component {
             testData: [1, 2, 3, 4, 5, 6, 7, 8, 9],
             openItem: null,
             openModal: false,
+            openModalPC: false,
             banners_pc: [],
             banners_mobile: [],
             city_name: props.match.params.cityName,
@@ -414,11 +433,21 @@ export class Home extends React.Component {
 
     openItem(id){
         let allItems = itemsStore.getAllItems();
-        let item = allItems.filter( (item) => item.id == id )[0];
+        let item = allItems.find( (item) => item.id == id );
         
         this.setState({
             openItem: item,
             openModal: true
+        })
+    }
+    
+    openItemPC(id){
+        let allItems = itemsStore.getAllItems();
+        let item = allItems.find( (item) => item.id == id );
+        
+        this.setState({
+            openItem: item,
+            openModalPC: true
         })
     }
 
@@ -431,6 +460,13 @@ export class Home extends React.Component {
     handleClose(){
         this.setState({
             openModal: false,
+            openItem: null
+        })
+    }
+    
+    handleClosePC(){
+        this.setState({
+            openModalPC: false,
             openItem: null
         })
     }
@@ -469,40 +505,8 @@ export class Home extends React.Component {
             );
         }
         
-        /*
-        
-        <AliceCarousel 
-                        mouseTracking 
-                        
-                        slidesPerPage={3}
-                        slidesPerScroll={3}
-                        centered
-                        
-                        //autoPlay={true}
-                        //autoPlayInterval={3000}
-                        infinite={true}
-                        items={this.state.banners_pc} 
-                    />
-        
-                    <AliceCarousel 
-                        mouseTracking 
-                        disableButtonsControls={true}
-                        
-                        slidesPerPage={3}
-                        slidesPerScroll={3}
-                        centered
-                        
-                        //autoPlay={true}
-                        //autoPlayInterval={3000}
-                        infinite={true}
-                        items={this.state.banners_mobile} 
-                    />
-                    
-        */
-        
         return (
             <Element name="myScrollToElement" className="Category">
-                
                 
                 <Hidden xsDown>
                     { this.state.banners_pc.length == 0 ? null :
@@ -521,14 +525,6 @@ export class Home extends React.Component {
                     }
                 </Hidden>
                 
-                
-                
-                
-                
-                
-                
-                
-                
                 {itemsStore.getAllItemsCat().map((cat, key) => 
                     <div key={key} name={"cat"+cat.id} id={"cat"+cat.id}>
                         <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer">
@@ -538,7 +534,7 @@ export class Home extends React.Component {
                             {cat.items.map((it, k) => (
                                 <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '10px 8px', display: 'flex'}}>
                                     <Hidden xsDown>
-                                        <CardItem data={it} type={'pc'} openItem={this.openItem.bind(this)} />
+                                        <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
                                     </Hidden>
                                     <Hidden smUp>
                                         <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
@@ -566,13 +562,29 @@ export class Home extends React.Component {
                                 <img alt="Жако доставка роллов и пиццы" src="https://jacochef.ru/src/img/Bely_fon_logo.png" style={{ height: 33 }} />
                             
                                 <Button autoFocus color="inherit" onClick={this.handleClose.bind(this)}>
-                                    <FontAwesomeIcon icon={faTimes} style={{ fontSize: '2.2rem', color: '#000' }} />
+                                    <FontAwesomeIcon icon={faTimes} style={{ fontSize: '1.8rem', color: '#e5e5e5' }} />
                                 </Button>
                             </Toolbar>
                         </AppBar>
                         <div>
                             <Item itemId={this.state.openItem.id} item={this.state.openItem} />
                         </div>
+                    </Dialog>
+                        :
+                    null
+                }
+                
+                {this.state.openItem ?
+                    <Dialog maxWidth={'md'} fullWidth={true} onClose={this.handleClosePC.bind(this)} className="modalActii Item" open={this.state.openModalPC}>
+                        <MuiDialogTitle disableTypography style={{ margin: 0, padding: 8 }}>
+                            <IconButton aria-label="close" style={{ position: 'absolute', top: 0, right: 0 }} onClick={this.handleClosePC.bind(this)}>
+                                <FontAwesomeIcon icon={faTimes} style={{ fontSize: '1.8rem', color: '#e5e5e5' }} />
+                            </IconButton>
+                        </MuiDialogTitle>
+                        
+                        <MuiDialogContent className="modalActiiContent">
+                            <Item itemId={this.state.openItem.id} item={this.state.openItem} />
+                        </MuiDialogContent>
                     </Dialog>
                         :
                     null

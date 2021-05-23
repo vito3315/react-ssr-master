@@ -4,13 +4,48 @@ $Futuris: 'Futuris Bold';
     font-size: $size;
     font-family: $family !important;
 }
+@mixin fons_new($size: 1rem, $family: $Ubuntu) {
+    font-size: $size !important;
+    font-family: $family !important;
+}
+
+.itemTabs .MuiTab-root{
+    min-width: 100px;
+}
+.MuiAccordion-root.MuiPaper-elevation1{
+    box-shadow: none!important;
+}
+.Accordion{
+    padding-left: 12px;
+    padding-right: 12px;
+    & > div{
+        box-shadow: none!important;
+        & > div{
+            padding: 0;
+        }
+    }
+}
+.MuiAccordion-root:before{
+    height: 0!important;
+}
+.MuiAccordionSummary-root{
+    padding: 0!important;
+}
+.ItemPriceLabel{
+    @include fons_new(1.2rem, $Ubuntu);
+}
+.ItemPriceValue{
+    @include fons_new(1.2rem, $Ubuntu);
+    font-weight: bold!important;
+}
+
 .MainItem{
     margin-bottom: 50px!important;
     padding-left: 10%;
     padding-right: 10%;
-    margin-top: 64px;
     & h1{
-        @include fons(2rem, $Futuris);
+        @include fons(1.2rem, $Ubuntu);
+        font-weight: bold;
     }
     & > div:first-child{
         text-align: center;
@@ -98,7 +133,7 @@ $Futuris: 'Futuris Bold';
     }
 }
 .MainItemPopover{
-    & > table{
+    &:not(.tab) > table{
         padding: 16px;
         background-color: #000;
         width: 100%;
@@ -106,8 +141,18 @@ $Futuris: 'Futuris Bold';
             padding-bottom: 10px;
         }
     }
-    & span{
+    &.tab > table{
+        padding: 16px;
+        width: 100%;
+        & td{
+            padding-bottom: 10px;
+        }
+    }
+    &:not(.tab) span{
         color: #fff;
+        @include fons(0.9rem, $Ubuntu);
+    }
+    &.tab span{
         @include fons(0.9rem, $Ubuntu);
     }
     & .OtherMiniPopover{
@@ -120,12 +165,12 @@ $Futuris: 'Futuris Bold';
         display: flex;
         justify-content: space-between;
     }
-    &.MainItemPopoverLot{
+    &:not(.tab).MainItemPopoverLot{
         height: calc(200px - 32px);
         width: 260px;
         background-color: #000;
     }
-    &.MainItemPopoverOne{
+    &:not(.tab).MainItemPopoverOne{
         height: calc(170px - 32px);
         width: 260px;
         background-color: #000;

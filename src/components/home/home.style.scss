@@ -5,6 +5,26 @@ $colorMain: #CC0033;
     font-size: $size;
     font-family: $family !important;
 }
+
+.modalActii.Item .dopItemName{
+    @include fons(1rem, $Ubuntu);
+}
+.modalActii.Item .modalActiiContent span, 
+.modalActii.Item .modalActiiContent p, 
+.modalActii.Item .modalActiiContent b{
+    @include fons(0.8rem, $Ubuntu);
+}
+.imgSVG{
+    height: 30px;
+    width: 20px;
+    position: absolute;
+    left: 33px;
+    bottom: -13px;
+    & svg{
+        margin-top: 12px;
+        margin-left: 2px;
+    }
+}
 .Category{
     & h1, h2{
         @include fons(2rem, $Futuris);
@@ -18,7 +38,10 @@ $colorMain: #CC0033;
 .ItemDialog{
     & .MainItem_mobile{
         margin-top: 30px!important;
-    }   
+    }
+    & span, p, b{
+        @include fons(1rem, $Ubuntu);
+    }
 }
 .fohover{
     & .NONHOVERED{
@@ -153,9 +176,11 @@ $colorMain: #CC0033;
         @include fons(0.8rem, $Ubuntu);
     }
     & .CardPriceItem{
-        @include fons(1.5rem, $Ubuntu);
+        @include fons(1.2rem, $Ubuntu);
         display: flex;
         align-items: flex-end;
+        font-weight: bold;
+        position: relative;
         & > svg{
             padding-bottom: 4px;
             font-size: 1.2rem;
@@ -190,6 +215,7 @@ $colorMain: #CC0033;
             flex-direction: row; 
             align-items: end;
             justify-content: space-between;
+            padding-top: 5px;
         }
     }
     & .CardNameItem{
@@ -200,7 +226,7 @@ $colorMain: #CC0033;
         @include fons(0.8rem, $Ubuntu);
     }
     & .CardPriceItem{
-        @include fons(1.5rem, $Ubuntu);
+        @include fons(1.2rem, $Ubuntu);
         display: flex;
         align-items: flex-end;
         & > svg{
