@@ -557,15 +557,11 @@ export class Home extends React.Component {
                 
                 {this.state.openItem ?
                     <Dialog fullScreen open={this.state.openModal} className="ItemDialog" onClose={this.handleClose.bind(this)} TransitionComponent={Transition}>
-                        <AppBar style={{ position: 'relative', backgroundColor: '#fff', height: 50 }}>
-                            <Toolbar style={{ display: 'flex', justifyContent: 'space-between', height: 50, minHeight: 50 }}>
-                                <img alt="Жако доставка роллов и пиццы" src="https://jacochef.ru/src/img/Bely_fon_logo.png" style={{ height: 33 }} />
-                            
-                                <Button autoFocus color="inherit" onClick={this.handleClose.bind(this)}>
-                                    <FontAwesomeIcon icon={faTimes} style={{ fontSize: '1.8rem', color: '#e5e5e5' }} />
-                                </Button>
-                            </Toolbar>
-                        </AppBar>
+                        <MuiDialogTitle disableTypography style={{ margin: 0, padding: 8 }}>
+                            <IconButton aria-label="close" style={{ position: 'absolute', top: 0, right: 0 }} onClick={this.handleClose.bind(this)}>
+                                <FontAwesomeIcon icon={faTimes} style={{ fontSize: '1.8rem', color: '#e5e5e5' }} />
+                            </IconButton>
+                        </MuiDialogTitle>
                         <div>
                             <Item itemId={this.state.openItem.id} item={this.state.openItem} />
                         </div>
