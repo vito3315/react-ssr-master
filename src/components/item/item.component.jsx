@@ -552,7 +552,7 @@ export class Item extends React.Component {
                                     }
                                 </Tabs>
                             </AppBar>
-                            <TabPanel value={this.state.itemTab} index={1} style={{ width: '100%', marginTop: 10, marginBottom: 15 }}>
+                            <TabPanel value={this.state.itemTab} index={1} style={{ width: '100%', marginTop: 10, marginBottom: 15, minHeight: '30vh' }}>
                                 <div style={{ maxHeight: '30vh', height: '100%', overflow: 'auto' }} className={this.state.item.items.length == 1 ? 'MainItemPopover tab MainItemPopoverOne' : 'MainItemPopover tab MainItemPopoverLot'}>
                                     <table>
                                         <tbody>
@@ -598,7 +598,7 @@ export class Item extends React.Component {
                                     </table>
                                 </div>
                             </TabPanel>
-                            <TabPanel value={this.state.itemTab} index={0} style={{ marginTop: 10, marginBottom: 15 }}>
+                            <TabPanel value={this.state.itemTab} index={0} style={{ marginTop: 10, marginBottom: 15, minHeight: '30vh' }}>
                                 { this.state.item.items.length > 1 ?
                                     <div style={{ maxHeight: '30vh', height: '100%', overflow: 'auto' }}>
                                         {this.state.item.items.map((item, key) =>
