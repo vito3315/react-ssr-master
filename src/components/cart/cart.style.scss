@@ -244,7 +244,7 @@ div.boxItem .promoIcon{
         flex-direction: row;
         padding: 10px;
         & img{
-            width: 100%;
+            max-width: 150px;
             height: auto;
         }
         & > div{
