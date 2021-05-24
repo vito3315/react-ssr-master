@@ -61,10 +61,10 @@ class CoverFlowCarousel extends React.Component {
             centeredSlides: true,
             slidesPerView: this.state.type == 'pc' ? 2 : 2,
             
-            /*autoplay: true,
+            autoplay: true,
             autoplay: {
                 delay: 5000,
-            },*/
+            },
             
             pagination: this.state.type == 'pc' ? true : true,
             pagination: this.state.type == 'pc' ? {

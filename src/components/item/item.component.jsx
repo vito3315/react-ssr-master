@@ -525,8 +525,8 @@ export class Item extends React.Component {
                 </Hidden>
                 
                 <Hidden smUp>
-                    <Grid container className="MainItem mainContainer" style={{ paddingLeft: '4%', paddingRight: '4%' }}>
-                        <Grid item xs={12} style={{ paddingRight: 12, height: 170 }}>
+                    <Grid container className="MainItem mainContainer" style={{ paddingLeft: '4%', paddingRight: '4%', height: '100vh' }}>
+                        <Grid item xs={12} style={{ paddingRight: 12 }}>
                             <picture>
                                 <source 
                                     srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
@@ -536,13 +536,13 @@ export class Item extends React.Component {
                                     src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
                                     alt={this.state.item.name}
                                     title={this.state.item.name}
-                                    style={{ height: 150, paddingTop: 20 }}
+                                    style={{ height: 'auto', width: '100%', paddingTop: 20 }}
                                 />
                             </picture>
+                            
+                            <Typography variant="h5" component="h1" style={{ textAlign: 'center' }}>{this.state.item.name}</Typography>
                         </Grid>
                         <Grid item xs={12} style={{ paddingLeft: 12, position: 'relative' }}>
-                            <Typography variant="h5" component="h1" style={{ textAlign: 'center' }}>{this.state.item.name}</Typography>
-                            
                             <AppBar position="static" style={{ backgroundColor: '#fff', color: '#000', zIndex: 0 }} elevation={0}>
                                 <Tabs aria-label="simple tabs example" className="itemTabs" value={this.state.itemTab} onChange={this.changeTab.bind(this)} style={{ justifyContent: 'center' }}>
                                     <Tab label="Состав" {...a11yProps(0)} disableRipple={true} />

@@ -24,6 +24,9 @@ $Futuris: 'Futuris Bold';
         width: max-content;
         color: #000;
         text-decoration: none;
+        @media (max-width: 500px) {
+            @include fons(0.7rem, $Ubuntu);
+        }
     }
     & .p20{
         padding-bottom: 20px;
