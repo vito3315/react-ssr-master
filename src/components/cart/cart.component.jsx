@@ -377,7 +377,6 @@ class CartItemMobile extends React.Component {
                             src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img+"300х200.jpg?"+this.state.item.imgUpdate} 
                             alt={this.state.item.name}
                             title={this.state.item.name}
-                            style={{ minHeight: 150 }}
                         />
                     </picture>
                     {this.state.type == 'promo' ? 

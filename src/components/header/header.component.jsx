@@ -45,7 +45,8 @@ class CustomBottomNavigation extends React.Component{
         
         this.state = {      
             allPrice: 0,
-            thisPage: ''
+            thisPage: '',
+            auth: false
         };
     }
     
@@ -53,7 +54,8 @@ class CustomBottomNavigation extends React.Component{
         autorun(() => {
             this.setState({
                 allPrice: itemsStore.getSumDiv() + itemsStore.getAllPrice(),
-                thisPage: itemsStore.getPage()
+                thisPage: itemsStore.getPage(),
+                auth: itemsStore.getToken() ? true : false
             })
         })
     }
@@ -84,7 +86,7 @@ class CustomBottomNavigation extends React.Component{
                 >
                     <FontAwesomeIcon icon={ faGift } style={{ color: this.state.thisPage == 'actii' ? 'black' : 'gray' }} />
                 </Link>
-                {itemsStore.getToken() ?
+                {this.state.auth === true ?
                     <Link
                         to={'/'+this_city+'/cart'}
                         exact={ true }
@@ -110,7 +112,7 @@ class CustomBottomNavigation extends React.Component{
                 >
                     <FontAwesomeIcon icon={ faMapMarkerAlt } style={{ color: this.state.thisPage == 'contact' ? 'black' : 'gray' }} />
                 </Link>
-                {itemsStore.getToken() ?
+                {this.state.auth === true ?
                     <Link
                         to={'/'+this_city+'/profile'}
                         exact={ true }
@@ -339,6 +341,9 @@ class SimplePopover extends React.Component{
 export class Header extends React.Component {
     is_load = false;
     
+    sms1 = false;
+    sms2 = false;
+    
     constructor(props) {
         super(props);
         
@@ -405,7 +410,7 @@ export class Header extends React.Component {
                         user_id: itemsStore.getToken()
                     })
                 }).then(res => res.json()).then(json => {
-                    itemsStore.userName = json.user_name;
+                    itemsStore.setUserName(json.user_name);
                     
                     itemsStore.setDops(json.need_dop);
                     itemsStore.setAllItems(json.all_items);
@@ -461,89 +466,101 @@ export class Header extends React.Component {
     }
     
     sendSMS(){
-        this.setState({
-            errPhone: '',
-            errSMS: ''
-        });
-        
-        let number = this.state.userLogin;
-        
-        number = number.split(' ').join('');
-        number = number.split('(').join('');
-        number = number.split(')').join('');
-        number = number.split('-').join('');
-        
-        number = number.slice(1);
-        
-        this.setState({
-            userLoginFormat: number
-        })
-        
-        fetch('https://jacofood.ru/src/php/test_app.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/x-www-form-urlencoded'},
-            body: queryString.stringify({
-                type: 'create_profile', 
-                number: number
-            })
-        }).then(res => res.json()).then(json => {
-            if( json['st'] ){
-                this.setState({ 
-                    stage_1: false,
-                    stage_2: true, 
-                    errPhone: ''
-                })
+        if( this.sms1 === false ){
+            this.sms1 = true;
             
-                let timerId = setInterval(() => {
-                    this.setState({
-                        timerSMS: this.state.timerSMS-1
+            this.setState({
+                errPhone: '',
+                errSMS: ''
+            });
+            
+            let number = this.state.userLogin;
+            
+            number = number.split(' ').join('');
+            number = number.split('(').join('');
+            number = number.split(')').join('');
+            number = number.split('-').join('');
+            
+            number = number.slice(1);
+            
+            this.setState({
+                userLoginFormat: number
+            })
+            
+            fetch('https://jacofood.ru/src/php/test_app.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/x-www-form-urlencoded'},
+                body: queryString.stringify({
+                    type: 'create_profile', 
+                    number: number
+                })
+            }).then(res => res.json()).then(json => {
+                this.sms1 = false;
+                
+                if( json['st'] ){
+                    this.setState({ 
+                        stage_1: false,
+                        stage_2: true, 
+                        errPhone: ''
                     })
-                    if( this.state.timerSMS == 0 ){
-                        clearInterval(timerId);
-                    }
-                }, 1000);
-            }else{
-                this.setState({
-                  errPhone: json.text
-                });
-            }
-        });
+                
+                    let timerId = setInterval(() => {
+                        this.setState({
+                            timerSMS: this.state.timerSMS-1
+                        })
+                        if( this.state.timerSMS == 0 ){
+                            clearInterval(timerId);
+                        }
+                    }, 1000);
+                }else{
+                    this.setState({
+                      errPhone: json.text
+                    });
+                }
+            });
+        }
     }
     
     repeatSMS(){
-        this.setState({
-            errSMS: ''
-        });
-        
-        fetch('https://jacofood.ru/src/php/test_app.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type':'application/x-www-form-urlencoded'},
-          body: queryString.stringify({
-            type: 'repeat_sms', 
-            number: this.state.userLoginFormat
-          })
-        }).then(res => res.json()).then(json => {
-          if( json['st'] ){
-            this.setState({
-              timerSMS: 59
-            })
+        if( this.sms2 === false ){
+            this.sms2 = true;
             
-            let timerId = setInterval(() => {
-              this.setState({
-                timerSMS: this.state.timerSMS-1
-              })
-              if( this.state.timerSMS == 0 ){
-                  clearInterval(timerId);
-              }
-            }, 1000);
-          }else{
-                this.setState({
-                    errSMS: json.text
-                });
-          }
-        });
+            this.setState({
+                errSMS: ''
+            });
+            
+            fetch('https://jacofood.ru/src/php/test_app.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/x-www-form-urlencoded'},
+                body: queryString.stringify({
+                    type: 'repeat_sms', 
+                    number: this.state.userLoginFormat
+                })
+            }).then(res => res.json()).then(json => {
+                this.sms2 = false;
+                
+                if( json['st'] ){
+                    this.setState({
+                        timerSMS: 59
+                    })
+                
+                    let timerId = setInterval(() => {
+                        this.setState({
+                            timerSMS: this.state.timerSMS-1
+                        })
+                        if( this.state.timerSMS == 0 ){
+                            clearInterval(timerId);
+                        }
+                    }, 1000);
+                }else{
+                    this.setState({
+                        errSMS: json.text
+                    });
+                }
+            });
+        }
     }
     
     checkCode(){
@@ -625,8 +642,8 @@ export class Header extends React.Component {
                                     <Typography className="cat" variant="h5" component="span" onClick={this.openCity.bind(this)} style={{ display: 'flex', flexDirection: 'row' }}>{itemsStore.getCityRU()} <ArrowDropDownIcon /></Typography>
                                     
                                     {itemsStore.getToken() ?
-                                        itemsStore.userName && itemsStore.userName.length > 0 ?
-                                            <Link to={"/"+this.state.cityName+"/profile"} className="cat">{itemsStore.userName}</Link> 
+                                        itemsStore.getUserName() && itemsStore.getUserName().length > 0 ?
+                                            <Link to={"/"+this.state.cityName+"/profile"} className="cat">{itemsStore.getUserName()}</Link> 
                                                 :
                                             <Link to={"/"+this.state.cityName+"/profile"}>
                                                 <Typography className="cat" variant="h5" component="span">Профиль</Typography>

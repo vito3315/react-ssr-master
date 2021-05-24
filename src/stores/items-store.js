@@ -83,11 +83,20 @@ class ItemsStore {
 
   setToken = (userToken, userName) => {
     this.userToken = userToken;
-    this.userName = userName;
+    this.setUserName(userName);
+    
     if (typeof window !== 'undefined') {
       localStorage.setItem('token', userToken);
     }
   };
+  
+  getUserName(){
+    return this.userName.length > 0 ? this.userName : '';
+  }
+  
+  setUserName(userName){
+    this.userName = userName;
+  }
   
   getToken(){
     return this.userToken;

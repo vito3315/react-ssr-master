@@ -236,6 +236,7 @@ div.boxItem .promoIcon{
     &.OrderCheckDopDialog .boxItem:not(.rowAboutDop){
         & img{
             max-width: calc(100% / 5)!important;
+            height: auto;
         }
     }
     & > .boxItem:not(.rowAboutDop){
@@ -243,7 +244,8 @@ div.boxItem .promoIcon{
         flex-direction: row;
         padding: 10px;
         & img{
-            max-width: calc(100% / 2.6);
+            width: 100%;
+            height: auto;
         }
         & > div{
             display: flex; 
@@ -560,6 +562,7 @@ div.boxItem .promoIcon{
             & img{
                 height: 100px;
                 padding: 12px;
+                width: auto;
             }
             & tbody > tr > td:first-child > div{
                 display: flex;
