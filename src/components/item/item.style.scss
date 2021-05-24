@@ -61,6 +61,7 @@ $Futuris: 'Futuris Bold';
     & img{
         width: auto;
         height: auto;
+        max-width: 100%;
     }
     & .ItemDesc{
         @include fons(1.2rem, $Ubuntu);
