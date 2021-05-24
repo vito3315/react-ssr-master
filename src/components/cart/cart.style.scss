@@ -44,8 +44,24 @@ div.boxItem .promoIcon{
     padding-right: 0px!important;
     display: flex;
     flex-direction: column;
+    & .MuiFormControl-root{
+        vertical-align: baseline!important;
+    }
+    & .MuiFormControl-marginNormal{
+        margin-top: 0!important;
+    }
     & > div:first-child{
         padding-bottom: 10px;
+        display: flex;
+        flex-direction: row;
+        & > div:first-child{
+            margin-right: 9px;
+            width: calc(67% - 8px);
+        }
+        & > div:last-child{
+            margin-left: 9px;
+            width: calc(33% - 9px);
+        }
     }
     & > div:last-child{
         display: flex;
@@ -104,7 +120,7 @@ div.boxItem .promoIcon{
     }
     & > svg{
         font-size: 1.3rem;
-        color: $mainColor;
+        color: #e5e5e5;
         padding: 10px;
         cursor: pointer;
     }
@@ -169,6 +185,34 @@ div.boxItem .promoIcon{
             margin: 0!important;
         }
     }
+    & .chooseDomTrue{
+        & button:first-child{
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+        & button:last-child{
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+        & button.active{
+            background-color: $mainColor;
+            color: #fff;
+        }
+        & button:not(.active){
+            background-color: #fff;
+            border: 1px solid $mainColor;
+            color: $mainColor;
+        }
+        & button{
+            width: 50%;
+        }
+        & span{
+            font-size: 0.6rem!important;;
+            width: 100%;
+            font-family: "Ubuntu" !important;
+            text-transform: none;
+        }
+    }
 }
 .closeDialog{
     font-size: 1.5rem;
@@ -226,7 +270,7 @@ div.boxItem .promoIcon{
     }
     &.OrderCheckDopDialog .boxItem:not(.rowAboutDop){
         & img{
-            max-width: calc(100% / 2)!important;
+            max-width: 100%!important;
             height: auto;
         }
     }
