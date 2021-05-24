@@ -72,6 +72,7 @@ export class Contact extends React.Component {
         
         this.state = {      
             points: [],  
+            unic_point: [],
             
             title: '',
             description: '',
@@ -115,6 +116,9 @@ export class Contact extends React.Component {
                 city_id: this.state.city_name
             })
         }).then(res => res.json()).then(json => {
+            
+            console.log( json )
+            
             let points_zone = [];
             
             json.map(function(point){
@@ -123,8 +127,26 @@ export class Contact extends React.Component {
 				}
             })
             
+            let unic_point = [],
+                check = false;
+            
+            json.map(function(point){
+                check = false;
+                
+                unic_point.map(function(new_point){
+                    if( parseInt(new_point.id) == parseInt(point.id) ){
+                        check = true;
+                    }
+                })
+                
+                if( !check ){
+                    unic_point.push(point)
+                }
+            })
+            
             this.setState({
                 points: json,
+                unic_point: unic_point,
                 is_load: true
             })
             
@@ -240,7 +262,7 @@ export class Contact extends React.Component {
                         null
                     }
                     <Typography variant="h5" component="h2">Адреса кафе:</Typography>
-                    <ControlledAccordions points={this.state.points}/>
+                    <ControlledAccordions points={this.state.unic_point}/>
                 </Grid>
                 <Grid item lg={8} md={8} xl={8} sm={12} xs={12} id="ForMap"></Grid>
             </Grid>

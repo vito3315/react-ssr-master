@@ -182,13 +182,7 @@ export class Actii extends React.Component {
                     onClose={this.closeAlert.bind(this)}
                     message={this.state.textMSG}
                     style={{ backgroundColor: this.state.statusMSG ? 'green' : '#BB0025', borderRadius: 4 }}
-                    action={
-                        <React.Fragment>
-                            <IconButton size="small" aria-label="close" color="inherit" onClick={this.closeAlert.bind(this)}>
-                                <CloseIcon fontSize="small" />
-                            </IconButton>
-                        </React.Fragment>
-                    }
+                    
                 />
                 
                 <Grid item xs={12}>

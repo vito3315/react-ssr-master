@@ -34,8 +34,8 @@ import Slide from '@material-ui/core/Slide';
 import Hidden from '@material-ui/core/Hidden';
 
 import Swiper from "swiper";
-import SwiperCore, { Pagination, Navigation, A11y } from 'swiper';
-SwiperCore.use([Navigation, Pagination, A11y]);
+import SwiperCore, { Pagination, Navigation, A11y, Autoplay } from 'swiper';
+SwiperCore.use([Navigation, Pagination, A11y, Autoplay]);
 import "swiper/swiper.min.css";
 
 class CoverFlowCarousel extends React.Component {
@@ -59,9 +59,14 @@ class CoverFlowCarousel extends React.Component {
             autoHeight: true,
             spaceBetween: 100,
             centeredSlides: true,
-            slidesPerView: this.state.type == 'pc' ? 2 : 1,
+            slidesPerView: this.state.type == 'pc' ? 2 : 2,
             
-            pagination: this.state.type == 'pc' ? true : false,
+            /*autoplay: true,
+            autoplay: {
+                delay: 5000,
+            },*/
+            
+            pagination: this.state.type == 'pc' ? true : true,
             pagination: this.state.type == 'pc' ? {
                 el: ".swiper-pagination",
                 clickable: true,
@@ -275,11 +280,10 @@ class CardItem extends React.Component {
                         <div>
                             <Typography gutterBottom className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <Ruble /></Typography>
                             {this.state.count == 0 ?
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder fohover">
-                                    <Button variant="contained" className="BtnCardMain CardInCardItem NONHOVERED" onClick={this.add.bind(this)}>
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
+                                    <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={this.add.bind(this)}>
                                         <ShoppingCartOutlinedIcon color='inherit'  />
                                     </Button>
-                                    <Button variant="contained" className="BtnCardMain CardInCardItem HOVERED" onClick={this.add.bind(this)}>В корзину</Button>
                                 </ButtonGroup>
                                     :
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder count">
@@ -410,9 +414,9 @@ export class Home extends React.Component {
                         <Link
                             to={'/'+itemsStore.getCity()+'/actii#act'+item.aktia_id}
                             exact={ true }
-                            style={{ width: 'inherit', height: 'auto', minHeight: 150 }}
+                            style={{ width: 'inherit', height: 'auto', borderRadius: 15 }}
                         >
-                            <img style={{ width: 'inherit', height: 'auto', minHeight: 150 }} src={"https://jacofood.ru/src/img/banners/"+item.img_app+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
+                            <img style={{ width: 'inherit', height: 'auto', borderRadius: 15 }} src={"https://jacofood.ru/src/img/banners/"+item.img_app+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
                         </Link>
                     )
                     
@@ -422,7 +426,7 @@ export class Home extends React.Component {
                     )
                     
                     banners_mobile.push(
-                        <img style={{ width: 'inherit', height: 'auto', minHeight: 150 }} src={"https://jacofood.ru/src/img/banners/"+item.img_app+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
+                        <img style={{ width: 'inherit', height: 'auto', borderRadius: 15 }} src={"https://jacofood.ru/src/img/banners/"+item.img_app+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
                     )
                 }
             })
@@ -533,7 +537,7 @@ export class Home extends React.Component {
                         <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer">
                             <Typography variant="h5" component="h3">{ cat.name }</Typography>
                         </Grid>
-                        <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
+                        <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
                             {cat.items.map((it, k) => (
                                 <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '10px 8px', display: 'flex'}}>
                                     <Hidden xsDown>

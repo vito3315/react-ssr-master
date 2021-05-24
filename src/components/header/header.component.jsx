@@ -63,7 +63,8 @@ class CustomBottomNavigation extends React.Component{
     shouldComponentUpdate(nextProps, nextState) {
         return (
             this.state.allPrice !== nextState.allPrice ||
-            this.state.thisPage !== nextState.thisPage
+            this.state.thisPage !== nextState.thisPage ||
+            this.state.auth !== nextState.auth
         );
     }
     
@@ -93,7 +94,7 @@ class CustomBottomNavigation extends React.Component{
                         className="MuiButtonBase-root MuiBottomNavigationAction-root"
                     >
                         <Badge badgeContent={ this.state.allPrice } max={500000} color="primary">
-                            <ShoppingCartOutlinedIcon style={{ fill: this.state.thisPage == 'cart' ? 'black' : 'gray' }} />
+                            <ShoppingCartOutlinedIcon style={{ fill: this.state.thisPage == 'cart' ? '#CC0033' : '#CC0033' }} />
                         </Badge>
                     </Link>
                         :
@@ -101,7 +102,7 @@ class CustomBottomNavigation extends React.Component{
                         className="MuiButtonBase-root MuiBottomNavigationAction-root" 
                         onClick={this.props.login}>
                         <Badge badgeContent={ this.state.allPrice } max={500000} color="primary">
-                            <ShoppingCartOutlinedIcon style={{ fill: this.state.thisPage == 'cart' ? 'black' : 'gray' }} />
+                            <ShoppingCartOutlinedIcon style={{ fill: this.state.thisPage == 'cart' ? '#CC0033' : '#CC0033' }} />
                         </Badge>
                     </Typography>
                 }
@@ -519,6 +520,8 @@ export class Header extends React.Component {
                     });
                 }
             });
+        }else{
+            console.log( 'double click 1' )
         }
     }
     
@@ -560,6 +563,8 @@ export class Header extends React.Component {
                     });
                 }
             });
+        }else{
+            console.log( 'double click 2' )
         }
     }
     
@@ -671,12 +676,12 @@ export class Header extends React.Component {
                                                 offset={-60} 
                                                 activeClass="activeCat" 
                                                 id={'link_'+item.id} 
-                                                style={{ width: 'max-content', display: 'flex', whiteSpace: 'nowrap', padding: '4px 8px' }}
+                                                style={{ width: 'max-content', display: 'flex', whiteSpace: 'nowrap', padding: '4px 0.5vw' }}
                                             >
                                                 <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
                                             </ScrollLink> 
                                                 :
-                                            <Link to={"/"+this.state.cityName+"/"} className="catLink" style={{ padding: '4px 8px' }} onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
+                                            <Link to={"/"+this.state.cityName+"/"} className="catLink" style={{ padding: '4px 0.5vw' }} onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
                                                 <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
                                             </Link> 
                                         }

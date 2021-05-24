@@ -637,11 +637,10 @@ export class Item extends React.Component {
                                 </div>
                                 
                                 {this.state.count == 0 ?
-                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder fohover">
-                                        <Button variant="contained" className="BtnCardMain CardInCardItem NONHOVERED" onClick={this.add.bind(this)}>
+                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
+                                        <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={this.add.bind(this)}>
                                             <ShoppingCartOutlinedIcon color='inherit'  />
                                         </Button>
-                                        <Button variant="contained" className="BtnCardMain CardInCardItem HOVERED" onClick={this.add.bind(this)}>В корзину</Button>
                                     </ButtonGroup>
                                         :
                                     <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder count">

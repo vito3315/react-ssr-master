@@ -61,8 +61,21 @@ $colorMain: #CC0033;
 }
 
 .swiper_mobile{
-    padding-top: 83px!important;
+    padding-top: 94px!important;
     margin-bottom: 20px!important;
+    & .swiper-slide-prev{
+        margin-right: 5vw!important;
+        width: calc(80vw - 0px) !important;
+        margin-left: -44.5vw !important;
+    }
+    & .swiper-slide-active{
+        width: calc(80vw - 0px )!important;
+        margin-right: 5vw!important;
+    }
+    & .swiper-slide-next{
+        margin-right: 5vw!important;
+        width: calc(80vw - 0px )!important;
+    }
 }
 
 .swiper_pc{
@@ -193,6 +206,7 @@ $colorMain: #CC0033;
         @include fons(0.8rem, $Ubuntu);
         fill: $colorMain;
         border-radius: inherit!important;
+        text-transform: none;
     }
     & .CardAction{
         flex-direction: column;
