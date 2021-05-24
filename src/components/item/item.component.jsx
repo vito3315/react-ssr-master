@@ -15,10 +15,7 @@ import {Helmet} from "react-helmet";
 const queryString = require('query-string');
 import axios from 'axios';
 
-
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
@@ -503,8 +500,11 @@ export class Item extends React.Component {
                                 </div>
                                 
                                 {this.state.count == 0 ?
-                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
-                                        <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={this.add.bind(this)}>В корзину</Button>
+                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder fohover">
+                                        <Button variant="contained" className="BtnCardMain CardInCardItem NONHOVERED" onClick={this.add.bind(this)}>
+                                            <ShoppingCartOutlinedIcon color='inherit'  />
+                                        </Button>
+                                        <Button variant="contained" className="BtnCardMain CardInCardItem HOVERED" onClick={this.add.bind(this)}>В корзину</Button>
                                     </ButtonGroup>
                                         :
                                     <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder count">
@@ -637,8 +637,11 @@ export class Item extends React.Component {
                                 </div>
                                 
                                 {this.state.count == 0 ?
-                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
-                                        <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={this.add.bind(this)}>В корзину</Button>
+                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder fohover">
+                                        <Button variant="contained" className="BtnCardMain CardInCardItem NONHOVERED" onClick={this.add.bind(this)}>
+                                            <ShoppingCartOutlinedIcon color='inherit'  />
+                                        </Button>
+                                        <Button variant="contained" className="BtnCardMain CardInCardItem HOVERED" onClick={this.add.bind(this)}>В корзину</Button>
                                     </ButtonGroup>
                                         :
                                     <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder count">

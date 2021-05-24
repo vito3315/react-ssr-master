@@ -87,10 +87,10 @@ class CoverFlowCarousel extends React.Component {
      
     render() {
         return (
-            <div className={"swiper-container swiper_"+this.state.type}>
-                <div className="swiper-wrapper">
+            <div className={"swiper-container swiper_"+this.state.type+" _h1_"}>
+                <div className="swiper-wrapper _h2_">
                     {this.state.data.map((item, key) => 
-                        <div className="swiper-slide" key={key}>
+                        <div className={"swiper-slide _h3_ "+key} key={key}>
                             {item}
                         </div>
                     )}
@@ -275,8 +275,11 @@ class CardItem extends React.Component {
                         <div>
                             <Typography gutterBottom className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <Ruble /></Typography>
                             {this.state.count == 0 ?
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
-                                    <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={this.add.bind(this)}>В корзину</Button>
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder fohover">
+                                    <Button variant="contained" className="BtnCardMain CardInCardItem NONHOVERED" onClick={this.add.bind(this)}>
+                                        <ShoppingCartOutlinedIcon color='inherit'  />
+                                    </Button>
+                                    <Button variant="contained" className="BtnCardMain CardInCardItem HOVERED" onClick={this.add.bind(this)}>В корзину</Button>
                                 </ButtonGroup>
                                     :
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder count">
@@ -397,9 +400,9 @@ export class Home extends React.Component {
                         <Link
                             to={'/'+itemsStore.getCity()+'/actii#act'+item.aktia_id}
                             exact={ true }
-                            style={{ width: 'inherit', height: 'auto', minHeight: 300, borderRadius: 15 }}
+                            style={{ width: 'inherit', height: 'auto', borderRadius: 15 }}
                         >
-                            <img style={{ width: 'inherit', height: 'auto', minHeight: 300, borderRadius: 15 }} src={"https://jacofood.ru/src/img/banners/"+item.b_img_full+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
+                            <img style={{ width: 'inherit', height: 'auto', borderRadius: 15 }} src={"https://jacofood.ru/src/img/banners/"+item.b_img_full+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
                         </Link>
                     )
                     
@@ -415,7 +418,7 @@ export class Home extends React.Component {
                     
                 }else{
                     banners_pc.push(
-                        <img style={{ width: 'inherit', height: 'auto', minHeight: 300, borderRadius: 15 }} src={"https://jacofood.ru/src/img/banners/"+item.b_img_full+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
+                        <img style={{ width: 'inherit', height: 'auto', borderRadius: 15 }} src={"https://jacofood.ru/src/img/banners/"+item.b_img_full+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
                     )
                     
                     banners_mobile.push(

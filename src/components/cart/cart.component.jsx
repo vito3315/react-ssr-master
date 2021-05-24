@@ -122,8 +122,6 @@ class CartItem extends React.Component {
     constructor(props) {
         super(props);
         
-        console.log( 'item', this.props.item )
-        
         this.state = {  
             item: this.props.item,
             type: this.props.type,
@@ -570,9 +568,6 @@ export class Cart extends React.Component {
                 user_id: itemsStore.getToken()
             })
         }).then(res => res.json()).then(json => {
-                
-            console.log( json )
-            
             this.setState({
                 pic_point: json.get_addr_pic.points,
                 my_addr: json.get_my_addr,
@@ -645,6 +640,14 @@ export class Cart extends React.Component {
                             })
                         }
                     }, 300)
+                }else{
+                    if( this.state.pic_point.length > 0 ){
+                        this.choosePic(this.state.pic_point[0]['id']);
+                    }
+                    
+                    if( this.state.my_addr.length > 0 ){
+                        this.changeAddr({target: {value: this.state.my_addr[0]['id']}})
+                    }
                 }
                 
                 if (typeof window !== 'undefined') {
@@ -815,10 +818,6 @@ export class Cart extends React.Component {
                     cartItems_dop: dop_new,
                 })
                 
-                console.log( 'cartItems_main', main )
-                console.log( 'cartItems_need_dop', dop_new )
-                console.log( 'cartItems_promo', cartPromoItems )
-                
                 this.setState({
                     cartItems_main: main,
                     cartItems_need_dop: need_dop,
@@ -946,7 +945,7 @@ export class Cart extends React.Component {
             document.querySelector('#pic_'+pointId).classList.add('active');
         }
         
-        let picPointInfo = this.state.pic_point.filter( (item) => item.id == pointId )[0];
+        let picPointInfo = this.state.pic_point.find( (item) => item.id == pointId );
         
         this.setState({
             orderPic: pointId,
@@ -1039,14 +1038,9 @@ export class Cart extends React.Component {
                 promo_name: this.state.orderPromo
             })
         }).then(res => res.json()).then(json => {
-            
-            console.log( json )
-            
             itemsStore.setPromo( JSON.stringify(json), this.state.orderPromo );
             let check_promo = itemsStore.checkPromo();
               
-            console.log( check_promo )
-            
             if( check_promo.st === false ){
                 localStorage.removeItem('promo_name')
             }
@@ -1090,7 +1084,7 @@ export class Cart extends React.Component {
                     kv: this.state.newAddrKV,
                     pd: this.state.newAddrPD,
                     et: this.state.newAddrET,
-                    dom_true: 0,
+                    dom_true: this.state.newAddrDom ? 0 : 1,
                     free_drive: this.state.newAddrInfo ? this.state.newAddrInfo.free_drive : 0,
                     sum_div: this.state.newAddrInfo ? this.state.newAddrInfo.sum_div : 0,
                     point_id: this.state.newAddrInfo ? this.state.newAddrInfo.point_id : 0,
@@ -1156,8 +1150,6 @@ export class Cart extends React.Component {
                 cart: JSON.stringify( my_cart ),
             })
         }).then(res => res.json()).then(json => {
-            console.log( json )
-            
             if( !json.st ){
                 this.setState({
                     error: {
@@ -1348,8 +1340,6 @@ export class Cart extends React.Component {
                     promo_name: this.state.orderPromo//
                 })
             }).then(res => res.json()).then(json => {
-                console.log( json )
-                
                 setTimeout(()=>{
                     this.clickOrderStart = false;    
                 }, 300)
@@ -1374,11 +1364,7 @@ export class Cart extends React.Component {
                         })
                     }
                 }, 1000)
-                
-                
             })
-        }else{
-            console.log( 'this_false' )
         }
     }
     
@@ -1397,8 +1383,6 @@ export class Cart extends React.Component {
                     street: street+' '+this.state.newAddrHome
                 })
             }).then(res => res.json()).then(json => {
-                console.log( json )
-                
                 if( !json.st ){
                     this.setState({
                         error: {
@@ -1488,8 +1472,6 @@ export class Cart extends React.Component {
                     id_addr: id
                 })
             }).then(res => res.json()).then(json => {
-                console.log( json )
-                
                 this.setState({
                     my_addr: json
                 })
@@ -1589,6 +1571,12 @@ export class Cart extends React.Component {
                                             onChange={ event => this.setState({ newAddrKV: event.target.value }) }
                                             onBlur={this.saveDataCustomAddr.bind(this)}
                                         />  
+                                    </div>
+                                    <div>
+                                        <ButtonGroup disableElevation variant="contained" className="chooseDomTrue">
+                                            <Button className={ this.state.newAddrDom === true ? 'active' : '' } onClick={ this.changeDomTrue.bind(this, true) }>Домофон работает</Button>
+                                            <Button className={ this.state.newAddrDom === false ? 'active' : '' } onClick={ this.changeDomTrue.bind(this, false) }>Домофон не работает</Button>
+                                        </ButtonGroup>
                                     </div>
                                 </AccordionDetails>
                             </Accordion>
@@ -1946,8 +1934,8 @@ export class Cart extends React.Component {
                 >
                     <Typography variant="h5" component="span" className="orderCheckTitle">Новый адрес</Typography>
                     <FontAwesomeIcon className="closeDialog" onClick={() => this.setState({ chooseNewAddr: false })} icon={faTimes}/>
-                    <DialogContent>
-                        <div className="newAddrMobile">
+                    <DialogContent style={{ paddingTop: 0 }}>
+                        <div className="newAddrMobile" style={{ paddingTop: 0 }}>
                             <Autocomplete
                                 freeSolo
                                 id="newAddrStreet"
