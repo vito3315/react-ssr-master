@@ -16,7 +16,7 @@ var scroller = Scroll.scroller;
 const queryString = require('query-string');
 import axios from 'axios';
 
-
+import {Helmet} from "react-helmet";
 
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
@@ -325,7 +325,9 @@ export class Home extends React.Component {
             banners_pc: [],
             banners_mobile: [],
             city_name: props.match.params.cityName,
-            page: null
+            page: null,
+            title: '',
+            description: ''
         };
         
         itemsStore.setCity(props.match.params.cityName);
@@ -377,10 +379,10 @@ export class Home extends React.Component {
         }
         
         Home.fetchData('/'+this.state.city_name).then( data => {
-            console.log( data )
-            
             this.setState( {
-                page: data.page
+                page: data.page,
+                title: data.title,
+                description: data.description,
             } );
         } );
         
@@ -514,6 +516,11 @@ export class Home extends React.Component {
         
         return (
             <Element name="myScrollToElement" className="Category">
+                
+                <Helmet>
+                    <title>{this.state.title}</title>
+                    <meta name="description" content={this.state.description} />
+                </Helmet>
                 
                 <Hidden xsDown>
                     { this.state.banners_pc.length == 0 ? null :
