@@ -96,7 +96,7 @@ body{
         justify-content: space-between;
         & .thisCity{
             color: #878787;
-            @include fons(1.3rem, $Ubuntu);
+            @include fons(1rem, $Ubuntu);
             display: flex;
             align-items: center;
             padding-bottom: 2px;
