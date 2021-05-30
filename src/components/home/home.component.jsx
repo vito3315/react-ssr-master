@@ -330,6 +330,8 @@ export class Home extends React.Component {
             description: ''
         };
         
+        console.log( 'home state', props.match.params.cityName )
+        
         itemsStore.setCity(props.match.params.cityName);
     }
 
@@ -372,10 +374,10 @@ export class Home extends React.Component {
                         duration: 800,
                         delay: 500,
                         smooth: "easeInOutQuart",
-                        offset: document.getElementById('cat'+hash).getBoundingClientRect()['y'] - 150
+                        offset: document.getElementById('cat'+hash).getBoundingClientRect()['y'] - 50
                     });
                 }
-            }, 2000);
+            }, 1000);
         }
         
         Home.fetchData('/'+this.state.city_name).then( data => {
@@ -387,6 +389,14 @@ export class Home extends React.Component {
         } );
         
         itemsStore.setPage('home');
+        
+        console.log( itemsStore.getAllItemsCat() )
+        
+        if( itemsStore.getAllItemsCat().length == 0 ){
+            this.setState({
+                allItems: itemsStore.getAllItemsCat()
+            })
+        }
         
         //if( itemsStore.getAllItemsCat().length == 0 ){
             window.scrollTo(0, 0);

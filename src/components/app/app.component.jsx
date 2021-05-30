@@ -357,7 +357,13 @@ export class App extends React.Component {
                             exact={ true }
                             component={ PagePolitika }
                         />
-                        
+                        <Route
+                            path='/'
+                        >
+                            <Redirect push
+                                to={"/togliatti"}
+                            />
+                        </Route>
                         
                         <Route
                             component={ NotFound }

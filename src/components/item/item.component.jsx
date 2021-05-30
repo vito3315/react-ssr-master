@@ -349,11 +349,11 @@ export class Item extends React.Component {
                         </Grid>
                         <Grid item xs={6} style={{ paddingRight: 12 }}>
                             <picture>
-                               <source 
+                                <source 
                                     srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
                                     type="image/webp" 
                                 />
-                               <img 
+                                <img 
                                     src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
                                     alt={this.state.item.name}
                                     title={this.state.item.name}

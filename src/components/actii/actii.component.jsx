@@ -191,7 +191,19 @@ export class Actii extends React.Component {
                 <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer">
                     {this.state.actii.map((item, key) =>
                         <Grid item xs={12} sm={6} md={4} xl={3} key={key}>
-                            <img src={"https://jacofood.ru/src/img/aktii/"+item.img_full} alt={item.promo_title} style={{ width: '100%' }} onClick={this.openDialog.bind(this, item)} />
+                            <picture>
+                                <source 
+                                    srcSet={"https://storage.yandexcloud.net/site-aktii/"+item.img_new+"750х750.webp?"+item.img_new_update} 
+                                    type="image/webp" 
+                                />
+                                <img 
+                                    src={"https://storage.yandexcloud.net/site-aktii/"+item.img_new+"750х750.jpg?"+item.img_new_update} 
+                                    alt={item.promo_title}
+                                    title={item.promo_title}
+                                    style={{ width: '100%' }}
+                                    onClick={this.openDialog.bind(this, item)}
+                                />
+                            </picture>
                         </Grid>
                     )}
                 </Grid>
