@@ -116,9 +116,6 @@ export class Contact extends React.Component {
                 city_id: this.state.city_name
             })
         }).then(res => res.json()).then(json => {
-            
-            console.log( json )
-            
             let points_zone = [];
             
             json.map(function(point){

@@ -105,8 +105,6 @@ class StickyFooter extends React.Component{
                     page: 'info'
                 })
             }).then(res => res.json()).then(json => {
-                console.log( json )
-                
                 this.setState({
                     soc_link: json.soc_link,
                     is_load: true

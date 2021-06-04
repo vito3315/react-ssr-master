@@ -386,8 +386,6 @@ export class Header extends React.Component {
                     cityName: itemsStore.getCity()
                 })
                 
-                console.log( 'new city name', itemsStore.getCity() )
-                
                 this.load();
             }
             
@@ -400,18 +398,10 @@ export class Header extends React.Component {
     }
     
     load(){
-        console.log( 'init load data' )
-        
         if( !this.is_load ){
             this.is_load = true;
             
-            console.log( 'init 2 load data' )
-            
-            console.log( 'city', itemsStore.getCity() )
-            console.log( 'categoryItems', this.state.categoryItems.length )
-            
             if( itemsStore.getCity() && this.state.categoryItems.length == 0 ){
-                console.log( 'init 2 load data start' )
                 fetch('https://jacofood.ru/src/php/test_app.php', {
                     method: 'POST',
                     headers: {
@@ -533,8 +523,6 @@ export class Header extends React.Component {
                     });
                 }
             });
-        }else{
-            console.log( 'double click 1' )
         }
     }
     
@@ -576,8 +564,6 @@ export class Header extends React.Component {
                     });
                 }
             });
-        }else{
-            console.log( 'double click 2' )
         }
     }
     

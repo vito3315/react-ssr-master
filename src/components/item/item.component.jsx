@@ -158,8 +158,6 @@ export class Item extends React.Component {
     constructor(props) {
         super(props);
         
-        console.log( props )
-        
         this.state = {      
             item: this.props.item ? this.props.item : [],  
             is_load: false,

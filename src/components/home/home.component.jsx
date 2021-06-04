@@ -330,8 +330,6 @@ export class Home extends React.Component {
             description: ''
         };
         
-        console.log( 'home state', props.match.params.cityName )
-        
         itemsStore.setCity(props.match.params.cityName);
     }
 
@@ -390,8 +388,6 @@ export class Home extends React.Component {
         
         itemsStore.setPage('home');
         
-        console.log( itemsStore.getAllItemsCat() )
-        
         if( itemsStore.getAllItemsCat().length == 0 ){
             this.setState({
                 allItems: itemsStore.getAllItemsCat()
@@ -418,7 +414,19 @@ export class Home extends React.Component {
                             exact={ true }
                             style={{ width: 'inherit', height: 'auto', borderRadius: 15 }}
                         >
-                            <img style={{ width: 'inherit', height: 'auto', borderRadius: 15 }} src={"https://jacofood.ru/src/img/banners/"+item.b_img_full+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
+                            <picture style={{ width: 'inherit', height: 'auto' }}>
+                                <source 
+                                    srcSet={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"3700х1000.webp?"+item.img_new_update} 
+                                    type="image/webp" 
+                                />
+                                <img 
+                                    src={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"3700х1000.jpg?"+item.img_new_update} 
+                                    //alt={this.state.item.name}
+                                    //title={this.state.item.name}
+                                    style={{ width: 'inherit', height: 'auto', minHeight: 250, borderRadius: 15 }}
+                                    onDragStart={handleDragStart}
+                                />
+                            </picture>
                         </Link>
                     )
                     
@@ -428,17 +436,53 @@ export class Home extends React.Component {
                             exact={ true }
                             style={{ width: 'inherit', height: 'auto', borderRadius: 15 }}
                         >
-                            <img style={{ width: 'inherit', height: 'auto', borderRadius: 15 }} src={"https://jacofood.ru/src/img/banners/"+item.img_app+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
+                            <picture style={{ width: 'inherit', height: 'auto' }}>
+                                <source 
+                                    srcSet={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"1000х500.webp?"+item.img_new_update} 
+                                    type="image/webp" 
+                                />
+                                <img 
+                                    src={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"1000х500.jpg?"+item.img_new_update} 
+                                    //alt={this.state.item.name}
+                                    //title={this.state.item.name}
+                                    style={{ width: 'inherit', height: 'auto', borderRadius: 15 }}
+                                    onDragStart={handleDragStart}
+                                />
+                            </picture>
                         </Link>
                     )
                     
                 }else{
                     banners_pc.push(
-                        <img style={{ width: 'inherit', height: 'auto', borderRadius: 15 }} src={"https://jacofood.ru/src/img/banners/"+item.b_img_full+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
+                        <picture style={{ width: 'inherit', height: 'auto' }}>
+                            <source 
+                                srcSet={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"3700х1000.webp?"+item.img_new_update} 
+                                type="image/webp" 
+                            />
+                            <img 
+                                src={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"3700х1000.jpg?"+item.img_new_update} 
+                                //alt={this.state.item.name}
+                                //title={this.state.item.name}
+                                style={{ width: 'inherit', height: 'auto', minHeight: 250, borderRadius: 15 }}
+                                onDragStart={handleDragStart}
+                            />
+                        </picture>
                     )
                     
                     banners_mobile.push(
-                        <img style={{ width: 'inherit', height: 'auto', borderRadius: 15 }} src={"https://jacofood.ru/src/img/banners/"+item.img_app+"?date=2021_03_12_13_56_39"} onDragStart={handleDragStart} />
+                        <picture style={{ width: 'inherit', height: 'auto' }}>
+                            <source 
+                                srcSet={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"1000х500.webp?"+item.img_new_update} 
+                                type="image/webp" 
+                            />
+                            <img 
+                                src={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"1000х500.jpg?"+item.img_new_update} 
+                                //alt={this.state.item.name}
+                                //title={this.state.item.name}
+                                style={{ width: 'inherit', height: 'auto', borderRadius: 15 }}
+                                onDragStart={handleDragStart}
+                            />
+                        </picture>
                     )
                 }
             })
