@@ -69,6 +69,8 @@ app.use( '*', async ( req, res ) => {
         indexHTML = indexHTML.replace( 
             '<div id="app"></div>', 
             `<div id="app">
+                <h1 class="MuiTypography-root MuiTypography-h5">${componentData.page.page_h}</h1>
+                ${componentData.page.content}
                 ${ appHTML }
             </div>` );
 

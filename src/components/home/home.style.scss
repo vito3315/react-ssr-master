@@ -5,14 +5,28 @@ $colorMain: #CC0033;
     font-size: $size;
     font-family: $family !important;
 }
-
-.modalActii.Item .dopItemName{
-    @include fons(1rem, $Ubuntu);
+@mixin fons_new($size: 1rem, $family: $Ubuntu) {
+    font-size: $size !important;
+    font-family: $family !important;
 }
-.modalActii.Item .modalActiiContent span, 
-.modalActii.Item .modalActiiContent p, 
-.modalActii.Item .modalActiiContent b{
-    @include fons(0.8rem, $Ubuntu);
+
+.swiper-wrapper._h2_{
+    height: auto!important;
+}
+
+.modalActii.Item .MuiTabs-scroller.MuiTabs-fixed > div{
+    justify-content: flex-start!important;
+}
+.modalActii.Item .MuiPaper-rounded{
+    border-radius: 50px!important;
+}
+.modalActii.Item .dopItemName{
+    //@include fons(1rem, $Ubuntu);
+}
+.modalActii.Item .modalActiiContent{
+    & span:not(.dopItemName):not(.ItemDesc), p:not(.dopItemName):not(.ItemDesc), b:not(.dopItemName):not(.ItemDesc){
+        @include fons(0.8rem, $Ubuntu);
+    }
 }
 .imgSVG{
     height: 30px;
@@ -341,5 +355,15 @@ $colorMain: #CC0033;
         flex-grow: 0;
         max-width: 83.333333%;
         flex-basis: 83.333333%;
+    }
+}
+.itemMiniText{
+    display: flex;
+    flex-direction: column;
+    & .dopItemName{
+        @include fons_new(0.8rem, $Futuris);
+    }
+    & .ItemDesc{
+        @include fons_new(0.7rem, $Ubuntu);
     }
 }

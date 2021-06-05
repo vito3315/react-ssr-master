@@ -54,7 +54,8 @@ class ItemsStore {
   };
   
   getCityRU(){
-    return this.cityNameRU;
+    //return this.cityNameRU;
+    return this.cityNameRU && this.cityNameRU.length > 0 ? this.cityNameRU : 'Город';
   };
 
   setCity = (city) => {
@@ -91,7 +92,7 @@ class ItemsStore {
   };
   
   getUserName(){
-    return this.userName.length > 0 ? this.userName : '';
+    return this.userName && this.userName.length > 0 ? this.userName : '';
   }
   
   setUserName(userName){
@@ -574,6 +575,8 @@ class ItemsStore {
       
       let item_info = all_items.find( (item) => item.id == id );
       
+      console.log( 'count_', count_ )
+      
       if(item_info){
         let count = count_ + 1,
             price = item_info['price'];
@@ -631,11 +634,11 @@ class ItemsStore {
           count = parseInt(cart_info.count) - 1,
           price = item_info['price'];
       
+      if( count <= 0 ){
+        count = 0;
+      }    
+          
       if( count >= 0 ){
-        if( count < 0 ){
-          count = 0;
-        }
-        
         my_cart.map( (item, key) => {
           if( item.item_id == id ){
             my_cart[key]['count'] = count;

@@ -206,7 +206,7 @@ class CardItem extends React.Component {
             return (
                 <Card elevation={0} className="CardItem">
                     
-                    <CardContent onClick={ () => this.props.openItem(this.state.item.id)}>
+                    <CardContent style={{ cursor: 'pointer' }} onClick={ () => this.props.openItem(this.state.item.id)}>
                         <picture>
                             <source 
                                 srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
@@ -368,12 +368,21 @@ export class Home extends React.Component {
                     
                     localStorage.removeItem('goTo');
                     
-                    scroller.scrollTo("myScrollToElement", {
+                    /*scroller.scrollTo("myScrollToElement", {
                         duration: 800,
                         delay: 500,
                         smooth: "easeInOutQuart",
-                        offset: document.getElementById('cat'+hash).getBoundingClientRect()['y'] - 50
-                    });
+                        offset: document.getElementById('cat'+hash).getBoundingClientRect()['y']
+                    });*/
+                    
+                    setTimeout(()=>{
+                        scroller.scrollTo("myScrollToElement", {
+                            duration: 800,
+                            delay: 800,
+                            smooth: "easeInOutQuart",
+                            offset: document.getElementById('cat'+hash).getBoundingClientRect()['y'] - 50
+                        });
+                    }, 300)
                 }
             }, 1000);
         }
@@ -537,33 +546,34 @@ export class Home extends React.Component {
     render() {
         if( itemsStore.getAllItemsCat().length == 0 ){
             return (
-                <Element name="myScrollToElement">
-                    <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingTop: 64, flexWrap: 'wrap' }} className="MainItems mainContainer">
-                        {this.state.testData.map((cat, key) => [
-                            <div key={key}>
-                                <Hidden xsDown>
-                                    <Grid item xs={12} sm={4} md={3} xl={3} style={{ padding: '16px 8px'}}>
+                <Element name="myScrollToElement" className="Category">
+                    
+                    <div style={{ width: '79.3vw', marginLeft: '9.6vw', borderRadius: 10, height: 300, marginTop: 80, marginBottom: 50, backgroundColor: 'rgb(229, 229, 229)' }} />
+                    
+                    <div>
+                        <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
+                            {this.state.testData.map((it, k) => (
+                                <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '10px 8px'}}>
+                                    <Hidden xsDown>
                                         <div style={{ width: 260, height: 170, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
                                         <div style={{ width: 120, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
                                         <div style={{ width: 260, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
                                         <div style={{ width: 260, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
                                         <div style={{ width: 260, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
-                                    </Grid>
-                                </Hidden>
-                                <Hidden smUp>
-                                    <Grid item xs={12} sm={4} md={3} xl={3} style={{ padding: '16px 8px', display: 'flex', flexDirection: 'row'}}>
-                                        <div style={{ width: 200, height: 170, backgroundColor: '#e5e5e5' }} />
+                                    </Hidden>
+                                    <Hidden smUp>
+                                        <div style={{ width: '79.3vw', marginLeft: 15, height: 170, marginBottom: 10, backgroundColor: '#e5e5e5' }} />
                                         <div style={{ marginLeft: 15}}>
                                             <div style={{ width: 100, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
                                             <div style={{ width: 150, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
                                             <div style={{ width: 150, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
                                             <div style={{ width: 150, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
                                         </div>
-                                    </Grid>
-                                </Hidden>
-                            </div>    
-                        ])}
-                    </Grid>
+                                    </Hidden>
+                                </Grid>
+                            ))}
+                        </Grid>
+                    </div>
                 </Element>
             );
         }
@@ -595,7 +605,7 @@ export class Home extends React.Component {
                 
                 {itemsStore.getAllItemsCat().map((cat, key) => 
                     <div key={key} name={"cat"+cat.id} id={"cat"+cat.id}>
-                        <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer">
+                        <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%', paddingBottom: 40 }} className="MainItems mainContainer">
                             <Typography variant="h5" component="h3">{ cat.name }</Typography>
                         </Grid>
                         <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
@@ -613,16 +623,6 @@ export class Home extends React.Component {
                     </div>
                 )}
                 
-                <Grid item xs={12}>
-                    <Typography variant="h5" component="h2">{ this.state.page && this.state.page.page_h ? this.state.page.page_h : '' }</Typography>
-                </Grid>
-                
-                { this.state.page && this.state.page.content ?
-                    <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer dopText" dangerouslySetInnerHTML={{__html: this.state.page.content}} />
-                        :
-                    null
-                }
-                
                 {this.state.openItem ?
                     <Dialog fullScreen open={this.state.openModal} className="ItemDialog" onClose={this.handleClose.bind(this)} TransitionComponent={Transition}>
                         <MuiDialogTitle disableTypography style={{ margin: 0, padding: 8 }}>
@@ -639,10 +639,10 @@ export class Home extends React.Component {
                 }
                 
                 {this.state.openItem ?
-                    <Dialog maxWidth={'md'} fullWidth={true} onClose={this.handleClosePC.bind(this)} className="modalActii Item" open={this.state.openModalPC}>
+                    <Dialog maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item" open={this.state.openModalPC}>
                         <MuiDialogTitle disableTypography style={{ margin: 0, padding: 8 }}>
-                            <IconButton aria-label="close" style={{ position: 'absolute', top: 0, right: 0 }} onClick={this.handleClosePC.bind(this)}>
-                                <FontAwesomeIcon icon={faTimes} style={{ fontSize: '1.8rem', color: '#e5e5e5' }} />
+                            <IconButton aria-label="close" style={{ position: 'absolute', top: 0, right: 50 }} onClick={this.handleClosePC.bind(this)}>
+                                <FontAwesomeIcon icon={faTimes} style={{ fontSize: '1.8rem', color: '#CC0033' }} />
                             </IconButton>
                         </MuiDialogTitle>
                         

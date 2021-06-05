@@ -133,6 +133,16 @@ class CustomBottomNavigation extends React.Component{
     }
 }
 
+function Ruble(props){
+    return (
+        <svg width={ props.width ? props.width : "50"} height="20" viewBox={ props.viewBox ? props.viewBox : "0 0 1500 200"} xmlns="http://www.w3.org/2000/svg">
+            <g>
+                <path id="svg_1" d="m219.27,252.76c63.98,-2.85 99.22,-39.48 99.22,-103.13c0,-37.42 -12.62,-65.49 -37.52,-83.44c-22.29,-16.07 -48.63,-19.21 -62.35,-19.65c-28.61,-0.92 -107.02,-0.04 -110.34,0c-5.75,0.07 -10.38,4.75 -10.38,10.5l0,174.95c-9.23,-0.11 -15.07,-0.2 -15.31,-0.21c-0.06,0 -0.11,0 -0.17,0c-5.72,0 -10.41,4.59 -10.5,10.34c-0.09,5.8 4.54,10.57 10.34,10.66c0.95,0.01 6.78,0.1 15.64,0.21l0,26.12l-15.48,0c-5.8,0 -10.5,4.7 -10.5,10.5s4.7,10.5 10.5,10.5l15.48,0l0,74.89c0,5.8 4.7,10.5 10.5,10.5s10.5,-4.7 10.5,-10.5l0,-74.9l109.39,0c5.8,0 10.5,-4.7 10.5,-10.5s-4.7,-10.5 -10.5,-10.5l-109.39,0l0,-25.88c32.67,0.31 78.53,0.51 100.37,-0.46zm-100.37,-185.33c22.81,-0.21 76.99,-0.61 99.05,0.1c23.92,0.77 79.55,10.31 79.55,82.1c0,52.17 -26.63,79.82 -79.16,82.16c-21.17,0.94 -66.91,0.74 -99.44,0.43l0,-164.79z"/>
+            </g>
+        </svg>
+    )
+}
+
 class SimplePopover extends React.Component{
     constructor(props) {
         super(props);
@@ -141,6 +151,7 @@ class SimplePopover extends React.Component{
             anchorEl: null,
             cartItems: [],
             allPrice: 0,
+            sumDiv: 0,
             promoName: '',
             promoText: '',
         };
@@ -176,10 +187,9 @@ class SimplePopover extends React.Component{
             
             this.setState({
                 cartItems: newCart,
+                sumDiv: itemsStore.getSumDiv(),
                 promoName: localStorage.getItem('promo_name') ? localStorage.getItem('promo_name') : ''
             })
-            
-            itemsStore.getSumDiv();
         })
     }
     
@@ -278,18 +288,28 @@ class SimplePopover extends React.Component{
                                         </td>
                                         <td style={{ width: '30%' }}> 
                                             <div className="TableMiniPrice">
-                                                {item.all_price} <FontAwesomeIcon icon={faRubleSign} />
+                                                {item.all_price} <Ruble viewBox="0 220 700 300" width="20" />
                                             </div>
                                         </td>
                                     </tr>
                                 )}
                             </tbody>
                             <tfoot>
+                                { this.state.sumDiv == 0 ? null :
+                                    <tr style={{height: 35}}>
+                                        <td className="TableMiniFullName">Доставка:</td>
+                                        <td className="" style={{width: '30%', textAlign: 'center'}}>
+                                            <div className="TableMiniPrice" style={{ marginRight: 21 }}>
+                                                { this.state.sumDiv } <Ruble viewBox="0 220 700 300" width="20" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
                                 <tr style={{height: 35}}>
                                     <td className="TableMiniFullName">Сумма:</td>
                                     <td className="" style={{width: '30%', textAlign: 'center'}}>
                                         <div className="TableMiniPrice" style={{ marginRight: 21 }}>
-                                            { itemsStore.getAllPrice() + itemsStore.getSumDiv() } <FontAwesomeIcon icon={faRubleSign} />
+                                            { itemsStore.getAllPrice() + itemsStore.getSumDiv() } <Ruble viewBox="0 220 700 300" width="20" />
                                         </div>
                                     </td>
                                 </tr>
@@ -355,7 +375,7 @@ export class Header extends React.Component {
             is_load: false,
             openCity: false,
             cityName: '',
-            testData: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+            testData: [1, 2, 3, 4, 5, 6, 7],
             cityList: [],
             
             openLogin: false,
@@ -376,6 +396,27 @@ export class Header extends React.Component {
     }
     
     componentDidMount = () => {
+        
+        setTimeout(() => {
+            let cartData = itemsStore.getCartData();
+
+            if( cartData.orderType || cartData.orderType == 0 ){
+                if( cartData.orderType == 0 && cartData.orderAddr && cartData.orderAddr.id && cartData.orderAddr.id !== -1 ){
+                    let allPrice = itemsStore.getAllPrice();
+                    
+                    if( parseInt(cartData.orderAddr.free_drive) == 1 ){
+                        if( parseInt(allPrice) > 0 ){
+                            itemsStore.setSumDiv(0);
+                        }else{
+                            itemsStore.setSumDiv(1);
+                        }
+                    }else{
+                        itemsStore.setSumDiv(parseInt(cartData.orderAddr.sum_div));
+                    }
+                }
+            }
+        }, 300)
+        
         autorun(() => {
             this.setState({
                 activePage: itemsStore.getPage()
@@ -625,8 +666,75 @@ export class Header extends React.Component {
     
     render() {
         
-        if( !this.state.is_load ){
-            return null;
+        if( this.state.is_load === false ){
+            return (
+                <AppBar position="fixed" className="header" style={{ zIndex: 2 }}>
+                    <Toolbar className="sub_header">
+                        
+                        <Grid>
+                            <Grid item style={{ marginRight: 15 }}>
+                                <Link to={"/"+this.state.cityName+"/"}>
+                                    <img alt="Жако доставка роллов и пиццы" src="https://jacochef.ru/src/img/Bely_fon_logo.png" />
+                                </Link> 
+                            </Grid>
+                            <Hidden mdDown>
+                                
+                                <Grid item className="CityProfileNav">
+                                    <Typography className="cat" variant="h5" component="span" onClick={this.openCity.bind(this)} style={{ display: 'flex', flexDirection: 'row' }}>{itemsStore.getCityRU()} <ArrowDropDownIcon /></Typography>
+                                    <Typography className="cat" variant="h5" component="span" onClick={this.openLogin.bind(this)}>Войти</Typography>
+                                </Grid>
+                                
+                                {this.state.testData.map((item, key) => 
+                                    <Grid item key={key}>
+                                        <div style={{ width: 120, height: 28, marginRight: 12, backgroundColor: '#e5e5e5' }} />    
+                                    </Grid>)
+                                }
+                                
+                                <Grid item>
+                                    <Link 
+                                        style={{ padding: '4px 8px' }}
+                                        to={"/"+this.state.cityName+"/actii"} 
+                                        className={ this.state.activePage == 'actii' ? "catLink activeCat" : "catLink"}
+                                    >
+                                        <Typography className="cat" variant="h5" component="span">Акции</Typography>
+                                    </Link>    
+                                </Grid>
+                                <Grid item>
+                                    <Link 
+                                        style={{ padding: '4px 8px' }}
+                                        to={"/"+this.state.cityName+"/contact"} 
+                                        className={ this.state.activePage == 'contact' ? "catLink activeCat" : "catLink"}
+                                    >
+                                        <Typography className="cat" variant="h5" component="span">Контакты</Typography>
+                                    </Link>    
+                                </Grid>
+                                <Grid item>
+                                    <SimplePopover openLogin={this.openLogin.bind(this)} />
+                                </Grid>
+                            </Hidden>
+                        </Grid>
+                    
+                        <Hidden lgUp>
+                            <Typography variant="h5" component="span" className="thisCity" onClick={this.openCity.bind(this)}><FontAwesomeIcon icon={ faMapMarkerAlt } /> {itemsStore.getCityRU()}</Typography>
+                        </Hidden>
+                                
+                    </Toolbar>
+                    
+                    {this.state.activePage == 'home' ?
+                        <Grid className="scrollCat">
+                            <Hidden lgUp>
+                                {this.state.testData.map((item, key) => 
+                                    <Grid item key={key}>
+                                        <div style={{ width: 120, height: 28, marginRight: 12, backgroundColor: '#e5e5e5' }} />    
+                                    </Grid>)
+                                }
+                            </Hidden>
+                        </Grid>
+                            :
+                        null
+                    }
+                </AppBar>
+            )
         }
         
         return (
@@ -691,7 +799,7 @@ export class Header extends React.Component {
                                     <Link 
                                         style={{ padding: '4px 8px' }}
                                         to={"/"+this.state.cityName+"/actii"} 
-                                        className="catLink"
+                                        className={ this.state.activePage == 'actii' ? "catLink activeCat" : "catLink"}
                                     >
                                         <Typography className="cat" variant="h5" component="span">Акции</Typography>
                                     </Link>    
@@ -700,7 +808,7 @@ export class Header extends React.Component {
                                     <Link 
                                         style={{ padding: '4px 8px' }}
                                         to={"/"+this.state.cityName+"/contact"} 
-                                        className="catLink"
+                                        className={ this.state.activePage == 'contact' ? "catLink activeCat" : "catLink"}
                                     >
                                         <Typography className="cat" variant="h5" component="span">Контакты</Typography>
                                     </Link>    

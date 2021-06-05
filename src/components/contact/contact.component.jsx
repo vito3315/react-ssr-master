@@ -261,7 +261,9 @@ export class Contact extends React.Component {
                     <Typography variant="h5" component="h2">Адреса кафе:</Typography>
                     <ControlledAccordions points={this.state.unic_point}/>
                 </Grid>
-                <Grid item lg={8} md={8} xl={8} sm={12} xs={12} id="ForMap"></Grid>
+                <Grid item lg={8} md={8} xl={8} sm={12} xs={12} id="ForMap">
+                    <div style={{ width: '100%', height: '100%', marginRight: 12, backgroundColor: '#e5e5e5' }} />    
+                </Grid>
             </Grid>
         )
     }

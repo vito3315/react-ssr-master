@@ -1,5 +1,6 @@
 $Ubuntu: 'Ubuntu';
 $Futuris: 'Futuris Bold';
+$colorMain: #CC0033;
 @mixin fons($size: 1rem, $family: $Ubuntu) {
     font-size: $size;
     font-family: $family !important;
@@ -9,8 +10,14 @@ $Futuris: 'Futuris Bold';
     font-family: $family !important;
 }
 
+
+.itemTabs.MuiTabs-root{
+    min-height: auto;
+}
 .itemTabs .MuiTab-root{
-    min-width: 100px;
+    min-width: auto;
+    min-height: 25px;
+    padding: 3px 12px;
 }
 .MuiAccordion-root.MuiPaper-elevation1{
     box-shadow: none!important;
@@ -44,7 +51,7 @@ $Futuris: 'Futuris Bold';
     padding-left: 10%;
     padding-right: 10%;
     & h1{
-        @include fons(1.2rem, $Ubuntu);
+        @include fons(2rem, $Ubuntu);
         font-weight: bold;
     }
     & > div:first-child{
@@ -175,5 +182,33 @@ $Futuris: 'Futuris Bold';
         width: 260px;
         background-color: #000;
         overflow: hidden;
+    }
+}
+.itemMiniText{
+    display: flex;
+    flex-direction: column;
+    & .dopItemName{
+        @include fons_new(0.8rem, $Futuris);
+    }
+    & .ItemDesc{
+        @include fons_new(0.7rem, $Ubuntu);
+    }
+}
+.newBTN{
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    cursor: pointer;
+    //background-color: $colorMain;
+    background: linear-gradient(160deg, $colorMain, #fff 300%);
+    border-radius: 10px; 
+    padding: 0 10px; 
+    color: #fff;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    & svg{
+        fill: #fff;
     }
 }

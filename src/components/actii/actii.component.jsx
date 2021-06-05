@@ -14,7 +14,6 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 
-import CloseIcon from '@material-ui/icons/Close';
 import Snackbar from '@material-ui/core/Snackbar';
 
 import axios from 'axios';
@@ -33,7 +32,8 @@ export class Actii extends React.Component {
         super(props);
         
         this.state = {      
-            actii: [],  
+            actii: [],
+            pre_actii: [1, 2, 3, 4],  
             is_load: false,
             showItem: null,
             openDialog: false,
@@ -100,22 +100,22 @@ export class Actii extends React.Component {
             })
         }).then(res => res.json()).then(json => {
             
-            console.log( json )
-            
             this.setState({ 
-                actii: json.actii, 
+                actii: json.actii,  
                 is_load: true,
             });
             
             setTimeout(() => {
                 let hash = window.location.hash;
+                
                 if( hash.length > 0 ){
                     let act_id = hash.split('#act')[1];
                     
                     let this_item = json.actii.filter( (item) => item.id == act_id )[0];
                     
                     this.openDialog(this_item);
-                    window.location.hash = '';
+                    
+                    this.props.history.replace({ pathname: window.location.pathname })
                 }
             }, 300);
         })
@@ -130,6 +130,13 @@ export class Actii extends React.Component {
     }
     
     openDialog(item){
+        
+        let allItems = itemsStore.getAllItems();
+        
+        item.items.map((act_item, key) => {
+            item.items[key]['item'] = allItems.find( (item) => item.id == act_item.item_id );
+        })
+        
         this.setState({
             showItem: item,
             openDialog: true
@@ -189,23 +196,34 @@ export class Actii extends React.Component {
                     <Typography variant="h5" component="h1">Акции</Typography>
                 </Grid>
                 <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer">
-                    {this.state.actii.map((item, key) =>
-                        <Grid item xs={12} sm={6} md={4} xl={3} key={key}>
-                            <picture>
-                                <source 
-                                    srcSet={"https://storage.yandexcloud.net/site-aktii/"+item.img_new+"750х750.webp?"+item.img_new_update} 
-                                    type="image/webp" 
-                                />
-                                <img 
-                                    src={"https://storage.yandexcloud.net/site-aktii/"+item.img_new+"750х750.jpg?"+item.img_new_update} 
-                                    alt={item.promo_title}
-                                    title={item.promo_title}
-                                    style={{ width: '100%' }}
-                                    onClick={this.openDialog.bind(this, item)}
-                                />
-                            </picture>
-                        </Grid>
-                    )}
+                    
+                    {this.state.is_load === false ?
+                        this.state.pre_actii.map((item, key) =>
+                            <Grid item xs={12} sm={6} md={3} xl={3} key={key} style={{ padding: 12}}>
+                                <div style={{ width: '100%', height: 300, backgroundColor: '#e5e5e5' }} />
+                            </Grid>
+                        )
+                            :
+                        this.state.actii.map((item, key) =>
+                            <Grid item xs={12} sm={6} md={4} xl={3} key={key}>
+                                <picture>
+                                    <source 
+                                        srcSet={"https://storage.yandexcloud.net/site-aktii/"+item.img_new+"750х750.webp?"+item.img_new_update} 
+                                        type="image/webp" 
+                                    />
+                                    <img 
+                                        src={"https://storage.yandexcloud.net/site-aktii/"+item.img_new+"750х750.jpg?"+item.img_new_update} 
+                                        alt={item.promo_title}
+                                        title={item.promo_title}
+                                        style={{ width: '100%' }}
+                                        onClick={this.openDialog.bind(this, item)}
+                                    />
+                                </picture>
+                            </Grid>
+                        )
+                    }
+                    
+                    
                 </Grid>
                 
                 <Grid item xs={12}>

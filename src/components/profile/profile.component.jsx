@@ -202,7 +202,7 @@ export class Profile extends React.Component {
         itemsStore.setPage('profile');
         
         if( !itemsStore.getToken() ){
-            this.props.history.push('/'+this.state.city_name+'/');
+            this.props.history.replace({ pathname: '/'+this.state.city_name+'/' });
         }
         
         Profile.fetchData('/'+this.state.city_name).then( data => {
@@ -232,6 +232,9 @@ export class Profile extends React.Component {
                 user_id: itemsStore.getToken()
             })
         }).then(res => res.json()).then(json => {
+            
+            let check_reload = json.orders.my_orders.filter( (item) => parseInt(item.status_order) != 6 && parseInt(item.is_delete) == 0 );
+            
             this.setState({ 
                 info: json, 
                 is_load: true,
@@ -241,13 +244,12 @@ export class Profile extends React.Component {
                 userName: json.user.name
             });
             
-            let check_reload = json.orders.filter( (item) => parseInt(item.status_order) != 6 && parseInt(item.is_delete) == 0 );
-            
             if( check_reload.length > 0 ){
                 setTimeout(()=>{
                     this.loadData();
                 }, 6000)
             }
+            
         })
         .catch(err => { });
     }
@@ -881,7 +883,7 @@ export class Profile extends React.Component {
                                                             <Typography variant="h5" component="span">{item.steps[3]['name']}</Typography>                                                        
                                                         </div>
                                                     </div>
-                                                    { parseInt(item.time_to_client) == 0 ? null :
+                                                    { item.time_to_client == 0 ? null :
                                                         <div>
                                                             <Typography variant="h5" component="span">Заказ { parseInt(item.type_order) == 1 ? 'привезут через: ' : 'будет готов через: ' }{item.time_to_client}</Typography>
                                                         </div>
