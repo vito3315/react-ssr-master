@@ -465,11 +465,7 @@ export class Item extends React.Component {
                 </Hidden>
                 
                 <Hidden smUp>
-                    <Grid container className="MainItem mainContainer" style={{ paddingLeft: '4%', paddingRight: '4%', height: '100vh' }}
-                        //onTouchMove={(el, dat)=>{ console.log( 'onTouchMove el', el ), console.log( ' onTouchMovedat', dat ) }}
-                        //onTouchStart={this.touchStart.bind(this)}
-                        //onTouchEnd={this.touchEnd.bind(this)}
-                    >
+                    <Grid container className="MainItem mainContainer" style={{ paddingLeft: '4%', paddingRight: '4%', height: '100vh' }}>
                         <Grid item xs={12} style={{ paddingRight: 12 }}>
                             <picture id="forSwiper">
                                 <source 
@@ -547,7 +543,7 @@ export class Item extends React.Component {
                                     <div style={{ maxHeight: '30vh', height: '100%', overflow: 'auto' }}>
                                         {this.state.item.items.map((item, key) =>
                                             <div key={key} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                                                <picture>
+                                                <picture style={{ height: 'auto', width: 70, display: 'table' }}>
                                                     <source 
                                                         srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_new+"300х200.webp?"+item.img_new_update} 
                                                         type="image/webp" 
@@ -556,10 +552,13 @@ export class Item extends React.Component {
                                                         src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"300х200.jpg?"+item.img_new_update} 
                                                         alt={item.name}
                                                         title={item.name}
-                                                        style={{ maxHeight: 70, width: 'auto' }}
+                                                        style={{ height: 'auto', width: '100%' }}
                                                     />
                                                 </picture>
-                                                <Typography variant="h5" component="span" className="dopItemName">{item.name}</Typography>
+                                                <div className="itemMiniText">
+                                                    <Typography variant="h5" component="span" className="dopItemName">{item.name}</Typography>
+                                                    <Typography variant="h5" component="span" className="ItemDesc">{item.tmp_desc}</Typography>
+                                                </div>
                                             </div>
                                         )}
                                     </div>

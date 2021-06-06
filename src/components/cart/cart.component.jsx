@@ -268,7 +268,7 @@ class CartItem extends React.Component {
                                 :
                             null
                         }
-                        <Typography gutterBottom variant="h5" component="span" className="namePrice">{this.state.allPrice} <Ruble /></Typography>
+                        <Typography gutterBottom variant="h5" component="span" className="namePrice">{this.state.allPrice} <Ruble width="20" viewBox="0 20 500 200" /></Typography>
                     </td>
                 </tr>
             )
@@ -717,8 +717,6 @@ export class Cart extends React.Component {
             let dop = cartItems_new.filter( (item_) => parseInt(item_.cat_id) == 7 );
             let need_dop = itemsStore.check_need_dops();
             
-            console.log( 'need_dop', need_dop );
-            
             this.setState({
                 cartItems_main: main,
                 cartItems_dop: dop,
@@ -859,6 +857,12 @@ export class Cart extends React.Component {
             }
         }else{
             itemsStore.setSumDiv(0);
+            
+            setTimeout(()=>{
+                if( this.state.pic_point.length > 0 ){
+                    this.choosePic(this.state.orderPic);
+                }
+            }, 300)
         }
         
         let type = this.state.orderTimes,
@@ -1344,6 +1348,8 @@ export class Cart extends React.Component {
                     this.clickOrderStart = false;    
                 }, 300)
                 
+                console.log( json );
+                
                 setTimeout(()=>{
                     this.setState({
                         spiner: false
@@ -1354,6 +1360,14 @@ export class Cart extends React.Component {
                             orderCheck: true,
                             newOrderData: json
                         })
+                        
+                        setTimeout(()=>{
+                            this.setState({
+                                orderCheck: false,
+                                newOrderData: null
+                            })
+                        }, 10000)
+                        
                     }else{
                         this.setState({
                             error: {
@@ -1483,6 +1497,19 @@ export class Cart extends React.Component {
         this.setState({
             newAddrDom: type
         })
+    }
+    
+    closeTimeDialog(){
+        if( this.state.orderPredTime == '' ){
+            this.changePredDay({target: {value: 0}});
+            this.setState({ 
+                chooseTimeDialog: false 
+            })
+        }else{
+            this.setState({ 
+                chooseTimeDialog: false 
+            })
+        }
     }
     
     render() {
@@ -1696,7 +1723,7 @@ export class Cart extends React.Component {
                                             <Typography component="span">Доставка:</Typography>
                                         </td>
                                         <td>
-                                            <Typography gutterBottom variant="h5" component="span" className="namePrice">{this.state.sumDiv} <Ruble /></Typography>
+                                            <Typography gutterBottom variant="h5" component="span" className="namePrice">{this.state.sumDiv} <Ruble width="20" viewBox="0 20 500 200"  /></Typography>
                                         </td>
                                     </tr>
                                     <tr>
@@ -1704,7 +1731,7 @@ export class Cart extends React.Component {
                                             <Typography component="span">Итого:</Typography>
                                         </td>
                                         <td>
-                                            <Typography gutterBottom variant="h5" component="span" className="namePrice">{ this.state.sumDiv + this.state.allPrice } <Ruble /></Typography>
+                                            <Typography gutterBottom variant="h5" component="span" className="namePrice">{ this.state.sumDiv + this.state.allPrice } <Ruble width="20" viewBox="0 20 500 200"  /></Typography>
                                         </td>
                                     </tr>
                                 </tfoot>
@@ -2012,11 +2039,11 @@ export class Cart extends React.Component {
                 <Dialog
                     open={this.state.chooseTimeDialog}
                     fullWidth={true}
-                    onClose={() => this.setState({ chooseTimeDialog: false })}
+                    onClose={this.closeTimeDialog.bind(this)}
                     className="DialogChoosePicDialog"
                 >
                     <Typography variant="h5" component="span" className="orderCheckTitle">Время заказа</Typography>
-                    <FontAwesomeIcon className="closeDialog" onClick={() => this.setState({ chooseTimeDialog: false })} icon={faTimes}/>
+                    <FontAwesomeIcon className="closeDialog" onClick={this.closeTimeDialog.bind(this)} icon={faTimes}/>
                     <DialogContent>
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
                             <FormControl style={{ width: '100%', paddingBottom: 20 }}>

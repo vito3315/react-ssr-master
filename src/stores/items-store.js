@@ -575,8 +575,6 @@ class ItemsStore {
       
       let item_info = all_items.find( (item) => item.id == id );
       
-      console.log( 'count_', count_ )
-      
       if(item_info){
         let count = count_ + 1,
             price = item_info['price'];
@@ -724,8 +722,6 @@ class ItemsStore {
         my_dops.push( this_item );
       }
     });
-    
-    console.log( 'my_dops', my_dops )
     
     my_dops.forEach( (my_d) => {
       let check_dop = false;

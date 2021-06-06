@@ -310,7 +310,7 @@ div.boxItem .promoIcon{
     & > .boxItem:not(.rowAboutDop){
         display: flex; 
         flex-direction: row;
-        padding: 10px;
+        padding: 10px 0;
         & img{
             max-width: calc(100vw / 3);
             height: auto;

@@ -522,9 +522,9 @@ export class Home extends React.Component {
         })
         
         setTimeout(()=>{
-            var el = document.getElementById("forSwiper");
-          el.addEventListener("touchstart", this.touchStart.bind(this), false);
-          el.addEventListener("touchend", this.touchEnd.bind(this), false);
+            let el = document.getElementById("forSwiper");
+            el.addEventListener("touchstart", this.touchStart.bind(this), false);
+            el.addEventListener("touchend", this.touchEnd.bind(this), false);
         }, 300)
         
     }
@@ -546,6 +546,10 @@ export class Home extends React.Component {
     }
     
     handleClose(){
+        let el = document.getElementById("forSwiper");
+        el.removeEventListener("touchstart", this.touchStart.bind(this), false);
+        el.removeEventListener("touchend", this.touchEnd.bind(this), false);
+        
         this.setState({
             openModal: false,
             openItem: null
@@ -568,7 +572,7 @@ export class Home extends React.Component {
         console.log( el['changedTouches'][0].pageY )
         console.log( 'dif', el['changedTouches'][0].pageY - this.startMove )
         
-        if( el['changedTouches'][0].pageY - this.startMove > 150 ){
+        if( el['changedTouches'][0].pageY - this.startMove > 125 ){
             this.handleClose();
         }
     }

@@ -144,6 +144,8 @@ function Ruble(props){
 }
 
 class SimplePopover extends React.Component{
+    _isMounted = false;
+    
     constructor(props) {
         super(props);
         
@@ -157,7 +159,13 @@ class SimplePopover extends React.Component{
         };
     }
     
+    componentWillUnmount(){
+        this._isMounted = false;
+    }
+    
     componentDidMount = () => {
+        this._isMounted = true;
+        
         let cartItems = itemsStore.getItems();
         
         if( cartItems.length > 0 ){
@@ -176,20 +184,22 @@ class SimplePopover extends React.Component{
         }
         
         autorun(() => {
-            let cartItems = itemsStore.getItems();
-            let newCart = [];
-            
-            cartItems.map((item) => {
-                if( item.count > 0 ){
-                    newCart.push(item)
-                }
-            })
-            
-            this.setState({
-                cartItems: newCart,
-                sumDiv: itemsStore.getSumDiv(),
-                promoName: localStorage.getItem('promo_name') ? localStorage.getItem('promo_name') : ''
-            })
+            if( this._isMounted ){
+                let cartItems = itemsStore.getItems();
+                let newCart = [];
+                
+                cartItems.map((item) => {
+                    if( item.count > 0 ){
+                        newCart.push(item)
+                    }
+                })
+                
+                this.setState({
+                    cartItems: newCart,
+                    sumDiv: itemsStore.getSumDiv(),
+                    promoName: localStorage.getItem('promo_name') ? localStorage.getItem('promo_name') : ''
+                })
+            }
         })
     }
     
@@ -490,7 +500,11 @@ export class Header extends React.Component {
 
     chooseCity(city){
         let this_addr = window.location.href;
-        window.location.href = this_addr.replace(this.state.cityName, city);
+        localStorage.removeItem('cartData');
+        setTimeout(()=>{
+            //window.location.href = this_addr.replace(this.state.cityName, city);
+        }, 300)
+        
     }
     
     getNewLink(city){
@@ -873,7 +887,12 @@ export class Header extends React.Component {
                     <DialogTitle id="alert-dialog-title">Выберите город</DialogTitle>
                     <DialogContent className="ModalContent_1_1" style={{ paddingBottom: 24, paddingTop: 0 }}>
                         {this.state.cityList.map((item, key) => 
-                            <Link key={key} className={ this.state.cityName == item.link ? 'active' : '' } to={{ pathname: this.getNewLink(item.link) }} onClick={() => { setTimeout(()=>{ window.location.reload(); }, 100) }}>
+                            <Link 
+                                key={key} 
+                                className={ this.state.cityName == item.link ? 'active' : '' } 
+                                to={{ pathname: this.getNewLink(item.link) }} 
+                                onClick={() => { setTimeout(()=>{ itemsStore.saveCartData([]); window.location.reload(); }, 300) }}
+                            >
                                 <Typography variant="h5" component="span" className={"ModalLabel"}>{item.name}</Typography>
                             </Link> 
                         
