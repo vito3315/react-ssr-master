@@ -18,6 +18,9 @@ import axios from 'axios';
 
 import {Helmet} from "react-helmet";
 
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
@@ -544,36 +547,47 @@ export class Home extends React.Component {
     }
 
     render() {
+        
+        
+        
         if( itemsStore.getAllItemsCat().length == 0 ){
             return (
                 <Element name="myScrollToElement" className="Category">
                     
-                    <div style={{ width: '79.3vw', marginLeft: '9.6vw', borderRadius: 10, height: 300, marginTop: 80, marginBottom: 50, backgroundColor: 'rgb(229, 229, 229)' }} />
+                    <Hidden xsDown>
+                        <div style={{ width: '79.3vw', marginLeft: '9.6vw', borderRadius: 10, height: 300, marginTop: 80, marginBottom: 50, backgroundColor: 'rgb(229, 229, 229)' }} />
                     
-                    <div>
-                        <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
-                            {this.state.testData.map((it, k) => (
-                                <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '10px 8px'}}>
-                                    <Hidden xsDown>
-                                        <div style={{ width: 260, height: 170, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
-                                        <div style={{ width: 120, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
-                                        <div style={{ width: 260, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
-                                        <div style={{ width: 260, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
-                                        <div style={{ width: 260, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
-                                    </Hidden>
-                                    <Hidden smUp>
-                                        <div style={{ width: '79.3vw', marginLeft: 15, height: 170, marginBottom: 10, backgroundColor: '#e5e5e5' }} />
-                                        <div style={{ marginLeft: 15}}>
-                                            <div style={{ width: 100, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
-                                            <div style={{ width: 150, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
-                                            <div style={{ width: 150, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
-                                            <div style={{ width: 150, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
-                                        </div>
-                                    </Hidden>
-                                </Grid>
-                            ))}
-                        </Grid>
-                    </div>
+                        <div>
+                            <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
+                                {this.state.testData.map((it, k) => (
+                                    <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '10px 8px'}}>
+                                        <Hidden xsDown>
+                                            <div style={{ width: 260, height: 170, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
+                                            <div style={{ width: 120, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
+                                            <div style={{ width: 260, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
+                                            <div style={{ width: 260, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
+                                            <div style={{ width: 260, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
+                                        </Hidden>
+                                        <Hidden smUp>
+                                            <div style={{ width: '79.3vw', marginLeft: 15, height: 170, marginBottom: 10, backgroundColor: '#e5e5e5' }} />
+                                            <div style={{ marginLeft: 15}}>
+                                                <div style={{ width: 100, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
+                                                <div style={{ width: 150, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
+                                                <div style={{ width: 150, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
+                                                <div style={{ width: 150, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
+                                            </div>
+                                        </Hidden>
+                                    </Grid>
+                                ))}
+                            </Grid>
+                        </div>
+                        
+                    </Hidden>
+                    <Hidden smUp>
+                        <Backdrop style={{ zIndex: 4, color: '#fff' }} open={true}>
+                            <CircularProgress color="inherit" />
+                        </Backdrop>
+                    </Hidden>
                 </Element>
             );
         }

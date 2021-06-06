@@ -25,7 +25,7 @@ $Futuris: 'Futuris Bold';
         color: #000;
         text-decoration: none;
         @media (max-width: 500px) {
-            @include fons(0.7rem, $Ubuntu);
+            @include fons(1rem, $Ubuntu);
         }
     }
     & .p20{
@@ -41,6 +41,10 @@ $Futuris: 'Futuris Bold';
     .Accordion{
         padding-left: 12px;
         padding-right: 12px;
+        & .MuiAccordionSummary-content{
+            width: 100%;
+            display: block;
+        }
         & > div{
             box-shadow: none!important;
             & > div{
@@ -90,6 +94,8 @@ $Futuris: 'Futuris Bold';
     @include fons(0.9rem, $Ubuntu);
     display: inline-block;
     position: relative;
+    left: -120px;
+    top: 10px;
     color: #fff;
     background-color: #000;
     border-radius: 5px;

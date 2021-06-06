@@ -22,6 +22,11 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
+import Swiper from "swiper";
+import SwiperCore, { Pagination, Navigation, A11y, Autoplay } from 'swiper';
+SwiperCore.use([Navigation, Pagination, A11y, Autoplay]);
+import "swiper/swiper.min.css";
+
 function Ruble(props){
     return (
         <svg width={ props.width ? props.width : "50"} height="20" viewBox={ props.viewBox ? props.viewBox : "0 0 1500 300"} xmlns="http://www.w3.org/2000/svg">
@@ -154,6 +159,7 @@ function ItemInfoPopover(props) {
 
 export class Item extends React.Component {
     _isMounted = false;
+    swiper = null;
     
     constructor(props) {
         super(props);
@@ -283,6 +289,33 @@ export class Item extends React.Component {
             window.scrollTo(0, 0);
             itemsStore.setPage('item');
         }
+        
+        this.swiper = new Swiper(".forSwiper", {
+            grabCursor: true,
+            
+            direction: 'vertical',
+            
+            
+            on: {
+                init: function () {
+                    console.log('swiper initialized');
+                },
+            },
+        });
+        
+        this.swiper.on('touchMove', function(swiper, event) {
+            console.log('touchMove swiper', swiper);
+            console.log('touchMove event', event);
+            
+            alert('touchMove')
+        });
+        
+        this.swiper.on('observerUpdate', function(swiper, event) {
+            console.log('observerUpdate swiper', swiper);
+            console.log('observerUpdate event', event);
+            
+            alert('observerUpdate')
+        });
     }
     
     add(){
@@ -300,21 +333,6 @@ export class Item extends React.Component {
             itemTab: newValue
         })
     }
-    
-    /*
-        <div itemscope itemtype="https://schema.org/Product"> 
-			<meta itemprop="name" content={this.state.item.name} /> 
-			<link itemprop="url" href={'https://jacofood.ru/'} /> 
-			<link itemprop="image" href="https://jacofood.ru/src/img/items/<?=$site->data['page']['item']['img']?>" /> 
-			<meta itemprop="category" content="<?=$site->data['page']['item']['cat_name']?>" /> 
-			<div itemprop="offers" itemscope itemtype="https://schema.org/Offer"> 
-				<meta itemprop="priceCurrency" content="RUB" /> 
-				<meta itemprop="price" content="<?=$site->data['page']['item']['price']?>" /> 
-				<link itemprop="availability" href="https://schema.org/InStock" /> 
-			</div> 
-			<meta itemprop="description" content="<?=$site->data['page']['item']['tmp_desc']?>" /> 
-		</div>
-    */
     
     render() {
         if(!this.state.is_load){
@@ -343,53 +361,6 @@ export class Item extends React.Component {
                 </Helmet>
                 
                 <Hidden xsDown>
-                    <Grid container className="MainItem mainContainer dis_none">
-                        <Grid item xs={12} style={{ paddingBottom: 15 }}>
-                            <Typography variant="h5" component="h1">{this.state.item.name}</Typography>
-                        </Grid>
-                        <Grid item xs={6} style={{ paddingRight: 12 }}>
-                            <picture>
-                                <source 
-                                    srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
-                                    type="image/webp" 
-                                />
-                                <img 
-                                    src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
-                                    alt={this.state.item.name}
-                                    title={this.state.item.name}
-                                    style={{ minHeight: 150 }}
-                                />
-                            </picture>
-                        </Grid>
-                        <Grid item xs={6} style={{ paddingLeft: 12 }}>
-                            <Typography gutterBottom variant="h5" component="span" className="ItemDesc">{'Состав: '+this.state.item.tmp_desc}</Typography>
-                            { this.state.item.info_weight.length > 0 ?
-                                <Typography gutterBottom variant="h5" component="span" className="ItemDesc ItemOther">{'Вес: '+this.state.item.info_weight} <ItemInfoPopover items={this.state.item.items} /></Typography>
-                                :
-                                null
-                            }
-                            <Typography gutterBottom variant="h5" component="span" className="ItemDesc ItemPrice">{'Цена: '+this.state.item.price} <FontAwesomeIcon icon={faRubleSign} /></Typography>
-                            
-                            {this.state.count == 0 ?
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
-                                    <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={this.add.bind(this)}>В корзину</Button>
-                                </ButtonGroup>
-                            :
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder count">
-                                    <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this)}>
-                                        <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
-                                    </Button>
-                                    <Button variant="contained" className="BtnCardMain" >
-                                        <Typography component="span" className="CardCountItem">{this.state.count}</Typography>
-                                    </Button>
-                                    <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this)}> 
-                                        <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
-                                    </Button>
-                                </ButtonGroup>
-                            }
-                        </Grid>
-                    </Grid>
-                    
                     <Grid container className="MainItem mainContainer" style={{ paddingLeft: '6%', paddingRight: '6%' }}>
                         <Grid item xs={6} style={{ paddingRight: 12, display: 'flex', alignItems: 'center', paddingTop: 60 }}>
                             <picture>
@@ -522,7 +493,7 @@ export class Item extends React.Component {
                 </Hidden>
                 
                 <Hidden smUp>
-                    <Grid container className="MainItem mainContainer" style={{ paddingLeft: '4%', paddingRight: '4%', height: '100vh' }}>
+                    <Grid container className="MainItem mainContainer forSwiper" style={{ paddingLeft: '4%', paddingRight: '4%', height: '100vh' }}>
                         <Grid item xs={12} style={{ paddingRight: 12 }}>
                             <picture>
                                 <source 
