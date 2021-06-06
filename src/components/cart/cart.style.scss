@@ -375,8 +375,8 @@ div.boxItem .promoIcon{
     @include fons(1rem, $Ubuntu);
 }
 .DialogOrderCheckDialog .MuiDialog-paperFullWidth{
-    width: calc(100% - 48px)!important;
-    margin: 24px!important;
+    width: calc(100% - 24px)!important;
+    margin: 12px!important;
 }
 .Cart{
     margin-top: 64px!important;

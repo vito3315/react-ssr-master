@@ -443,7 +443,7 @@ export class Cart extends React.Component {
     _isMounted = false;
     clickOrderStart = false
     
-    startOrderInterval = 90;
+    startOrderInterval = 900;
     startOrderIntervalTimer = null;
     
     constructor(props) {
@@ -1035,7 +1035,6 @@ export class Cart extends React.Component {
     }
     
     checkPromo(){
-        
         if( this.state.orderPromo.length == 0 ){
             this.setState({
                 orderPromoText: ''
@@ -2191,7 +2190,7 @@ export class Cart extends React.Component {
                             
                             { parseInt( this.state.orderType ) == 0 && this.state.orderPay == 'cash' ?
                                 this.state.orderSdacha.length > 0 ?
-                                    <Typography variant="h5" component="span" className="nameSdacha orderCheckText">Сдача с: {this.state.orderSdacha} <Ruble viewBox="0 0 1700 300" /></Typography>
+                                    <Typography variant="h5" component="span" className="nameSdacha orderCheckText">Сдача с: {this.state.orderSdacha} <Ruble width="20" viewBox="0 0 700 300" /></Typography>
                                         :
                                     <Typography variant="h5" component="span" className="orderCheckText">Без сдачи</Typography>
                                     :
@@ -2210,7 +2209,7 @@ export class Cart extends React.Component {
                                                     <Typography variant="h5" component="span" className="orderCheckText">{item.count}</Typography>
                                                 </td>
                                                 <td>
-                                                    <Typography variant="h5" component="span" className="namePrice orderCheckText">{item.all_price} <Ruble viewBox="0 0 1700 300" /></Typography>
+                                                    <Typography variant="h5" component="span" className="namePrice orderCheckText">{item.all_price} <Ruble width="20" viewBox="0 0 700 300" /></Typography>
                                                 </td>
                                             </tr>
                                                 :
@@ -2225,7 +2224,7 @@ export class Cart extends React.Component {
                                                 <Typography variant="h5" component="span" className="orderCheckText">{item.count}</Typography>
                                             </td>
                                             <td>
-                                                <Typography variant="h5" component="span" className="namePrice orderCheckText">{item.allPrice} <Ruble viewBox="0 0 1700 300" /></Typography>
+                                                <Typography variant="h5" component="span" className="namePrice orderCheckText">{item.allPrice} <Ruble width="20" viewBox="0 0 700 300" /></Typography>
                                             </td>
                                         </tr>
                                     )}
@@ -2235,7 +2234,7 @@ export class Cart extends React.Component {
                                                 <Typography variant="h5" component="span" className="orderCheckText">Доставка</Typography>
                                             </td>
                                             <td>
-                                                <Typography variant="h5" component="span" className="namePrice orderCheckText">{ itemsStore.getSumDiv() } <Ruble viewBox="0 0 1700 300" /></Typography>
+                                                <Typography variant="h5" component="span" className="namePrice orderCheckText">{ itemsStore.getSumDiv() } <Ruble width="20" viewBox="0 0 700 300" /></Typography>
                                             </td>
                                         </tr>
                                             :
@@ -2248,7 +2247,7 @@ export class Cart extends React.Component {
                                             <Typography variant="h5" component="span" className="orderCheckText bold">Сумма заказа</Typography>
                                         </td>
                                         <td>
-                                            <Typography variant="h5" component="span" className="namePrice orderCheckText">{ parseInt(itemsStore.getAllPrice()) + parseInt(itemsStore.getSumDiv()) } <Ruble viewBox="0 0 1700 300" /></Typography>
+                                            <Typography variant="h5" component="span" className="namePrice orderCheckText">{ parseInt(itemsStore.getAllPrice()) + parseInt(itemsStore.getSumDiv()) } <Ruble width="20" viewBox="0 0 700 300" /></Typography>
                                         </td>
                                     </tr>
                                 </tfoot>

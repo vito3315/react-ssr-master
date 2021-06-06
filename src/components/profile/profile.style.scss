@@ -239,11 +239,6 @@ $mainColor: #CC0033;
 .CardPriceItem{
     display: flex;
     justify-content: center;
-    & svg{
-        font-size: 0.8rem;
-        padding-top: 6px;
-        padding-left: 1px;
-    }
 }
 .showOrderDialogContent .CardPriceItem{
     justify-content: flex-start;

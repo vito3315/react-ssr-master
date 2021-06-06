@@ -863,7 +863,7 @@ export class Profile extends React.Component {
                                             <div>
                                                 <Typography variant="h5" component="span" style={{ flex: 2 }}>{item.order_id}</Typography>
                                                 <Typography variant="h5" component="span" style={{ flex: 3 }}>{item.date_time_new}</Typography>
-                                                <Typography variant="h5" component="span" className="CardPriceItem" style={{ flex: 1 }}>{item.sum} <Ruble viewBox="0 220 1500 200" /></Typography>
+                                                <Typography variant="h5" component="span" className="CardPriceItem" style={{ flex: 1 }}>{item.sum} <Ruble width="20" viewBox="0 0 700 300" /></Typography>
                                                 <Typography variant="h5" component="span" style={{ flex: 1 }}>{parseInt(item.is_delete) == 1 ? <CloseIcon /> : parseInt(item.status_order) == 6 ? <CheckIcon /> : null}</Typography>
                                             </div>
                                             
@@ -1001,7 +1001,7 @@ export class Profile extends React.Component {
                             { this.state.showOrder.order.promo_name == null || this.state.showOrder.order.promo_name.length == 0 ? null :
                                 <Typography variant="h6" component="span" className="noSpace">{this.state.showOrder.order.promo_text}</Typography>
                             }
-                            <Typography variant="h5" component="span" className="CardPriceItem">Сумма закза: {this.state.showOrder.order.sum_order} <Ruble viewBox="0 220 1500 200" /></Typography>
+                            <Typography variant="h5" component="span" className="CardPriceItem">Сумма закза: {this.state.showOrder.order.sum_order} <Ruble width="20" viewBox="0 0 700 300" /></Typography>
                             
                             <table className="tableOrderCheck">
                                 <tbody>
