@@ -864,7 +864,7 @@ export class Profile extends React.Component {
                                                 <Typography variant="h5" component="span" style={{ flex: 2 }}>{item.order_id}</Typography>
                                                 <Typography variant="h5" component="span" style={{ flex: 3 }}>{item.date_time_new}</Typography>
                                                 <Typography variant="h5" component="span" className="CardPriceItem" style={{ flex: 1 }}>{item.sum} <Ruble width="20" viewBox="0 0 700 300" /></Typography>
-                                                <Typography variant="h5" component="span" style={{ flex: 1 }}>{parseInt(item.is_delete) == 1 ? <CloseIcon /> : parseInt(item.status_order) == 6 ? <CheckIcon /> : null}</Typography>
+                                                <Typography variant="h5" component="span" style={{ flex: 1 }}>{parseInt(item.is_delete) == 1 ? <CloseIcon style={{ position: 'relative', top: 3 }} /> : parseInt(item.status_order) == 6 ? <CheckIcon style={{ position: 'relative', top: 3 }} /> : null}</Typography>
                                             </div>
                                             
                                             {(parseInt(item.status_order) == 6 || parseInt(item.is_delete) == 1) ? null :

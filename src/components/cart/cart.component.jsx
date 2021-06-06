@@ -1910,7 +1910,7 @@ export class Cart extends React.Component {
                         <div className="bottomOrder">
                             <div>
                                 <Typography variant="h5" component="span">К оплате</Typography>
-                                <Typography variant="h5" component="span" className="namePrice">{ this.state.sumDiv + this.state.allPrice } <Ruble /></Typography>
+                                <Typography variant="h5" component="span" className="namePrice">{ this.state.sumDiv + this.state.allPrice } <Ruble width="20" viewBox="0 0 600 200" /></Typography>
                             </div>
                             <div>
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" onClick={this.startOrder.bind(this)}>
@@ -2260,7 +2260,7 @@ export class Cart extends React.Component {
                                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                                 >
                                     <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" style={{ width: '100%' }}>
-                                        <Button variant="contained" style={{ width: '100%', padding: '0px 10px' }} className="BtnCardMain CardInCardItem">Оплатить заказ</Button>
+                                        <Button variant="contained" style={{ width: '100%', margin: '0px 10px' }} className="BtnCardMain CardInCardItem">Оплатить заказ</Button>
                                     </ButtonGroup>
                                 </a>
                                 
