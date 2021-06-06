@@ -443,7 +443,7 @@ export class Cart extends React.Component {
     _isMounted = false;
     clickOrderStart = false
     
-    startOrderInterval = 900;
+    startOrderInterval = 90;
     startOrderIntervalTimer = null;
     
     constructor(props) {
