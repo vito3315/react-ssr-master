@@ -140,8 +140,6 @@ class ItemsStore {
     let orderInfo = itemsStore.getCartData();
     itemsStore.setItemsPromo([]);
     
-    
-    
     let tmp = 0,
         allPrice = 0,
         by_time = !orderInfo.orderTimes || parseInt( orderInfo.orderTimes ) == 1 ? 0 : orderInfo.orderPredDay + ' ' + orderInfo.orderPredTime;   

@@ -555,7 +555,7 @@ export class Item extends React.Component {
                                                         style={{ height: 'auto', width: '100%' }}
                                                     />
                                                 </picture>
-                                                <div className="itemMiniText">
+                                                <div className="itemMiniText" style={{ width: '100%', overflow: 'hidden', flexWrap: 'wrap' }}>
                                                     <Typography variant="h5" component="span" className="dopItemName">{item.name}</Typography>
                                                     <Typography variant="h5" component="span" className="ItemDesc">{item.tmp_desc}</Typography>
                                                 </div>
