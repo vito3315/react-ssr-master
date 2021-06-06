@@ -315,6 +315,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export class Home extends React.Component {
+    startMove = 0;
+    
     constructor(props) {
         super(props);
         
@@ -504,6 +506,10 @@ export class Home extends React.Component {
                 banners_mobile: banners_mobile
             });
         })
+        
+        
+          //el.addEventListener("touchcancel", handleCancel, false);
+          //el.addEventListener("touchmove", handleMove, false);
     }
 
     openItem(id){
@@ -514,6 +520,13 @@ export class Home extends React.Component {
             openItem: item,
             openModal: true
         })
+        
+        setTimeout(()=>{
+            var el = document.getElementById("forSwiper");
+          el.addEventListener("touchstart", this.touchStart.bind(this), false);
+          el.addEventListener("touchend", this.touchEnd.bind(this), false);
+        }, 300)
+        
     }
     
     openItemPC(id){
@@ -546,6 +559,20 @@ export class Home extends React.Component {
         })
     }
 
+    touchStart(el){
+        console.log( el['changedTouches'][0].pageY )
+        this.startMove = el['changedTouches'][0].pageY;
+    }
+    
+    touchEnd(el){
+        console.log( el['changedTouches'][0].pageY )
+        console.log( 'dif', el['changedTouches'][0].pageY - this.startMove )
+        
+        if( el['changedTouches'][0].pageY - this.startMove > 150 ){
+            this.handleClose();
+        }
+    }
+    
     render() {
         
         

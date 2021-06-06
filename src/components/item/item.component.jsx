@@ -22,11 +22,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-import Swiper from "swiper";
-import SwiperCore, { Pagination, Navigation, A11y, Autoplay } from 'swiper';
-SwiperCore.use([Navigation, Pagination, A11y, Autoplay]);
-import "swiper/swiper.min.css";
-
 function Ruble(props){
     return (
         <svg width={ props.width ? props.width : "50"} height="20" viewBox={ props.viewBox ? props.viewBox : "0 0 1500 300"} xmlns="http://www.w3.org/2000/svg">
@@ -161,6 +156,8 @@ export class Item extends React.Component {
     _isMounted = false;
     swiper = null;
     
+    startMove = 0;
+    
     constructor(props) {
         super(props);
         
@@ -290,32 +287,7 @@ export class Item extends React.Component {
             itemsStore.setPage('item');
         }
         
-        this.swiper = new Swiper(".forSwiper", {
-            grabCursor: true,
-            
-            direction: 'vertical',
-            
-            
-            on: {
-                init: function () {
-                    console.log('swiper initialized');
-                },
-            },
-        });
         
-        this.swiper.on('touchMove', function(swiper, event) {
-            console.log('touchMove swiper', swiper);
-            console.log('touchMove event', event);
-            
-            alert('touchMove')
-        });
-        
-        this.swiper.on('observerUpdate', function(swiper, event) {
-            console.log('observerUpdate swiper', swiper);
-            console.log('observerUpdate event', event);
-            
-            alert('observerUpdate')
-        });
     }
     
     add(){
@@ -493,9 +465,13 @@ export class Item extends React.Component {
                 </Hidden>
                 
                 <Hidden smUp>
-                    <Grid container className="MainItem mainContainer forSwiper" style={{ paddingLeft: '4%', paddingRight: '4%', height: '100vh' }}>
+                    <Grid container className="MainItem mainContainer" style={{ paddingLeft: '4%', paddingRight: '4%', height: '100vh' }}
+                        //onTouchMove={(el, dat)=>{ console.log( 'onTouchMove el', el ), console.log( ' onTouchMovedat', dat ) }}
+                        //onTouchStart={this.touchStart.bind(this)}
+                        //onTouchEnd={this.touchEnd.bind(this)}
+                    >
                         <Grid item xs={12} style={{ paddingRight: 12 }}>
-                            <picture>
+                            <picture id="forSwiper">
                                 <source 
                                     srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
                                     type="image/webp" 
