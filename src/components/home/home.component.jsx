@@ -564,14 +564,10 @@ export class Home extends React.Component {
     }
 
     touchStart(el){
-        console.log( el['changedTouches'][0].pageY )
         this.startMove = el['changedTouches'][0].pageY;
     }
     
     touchEnd(el){
-        console.log( el['changedTouches'][0].pageY )
-        console.log( 'dif', el['changedTouches'][0].pageY - this.startMove )
-        
         if( el['changedTouches'][0].pageY - this.startMove > 125 ){
             this.handleClose();
         }

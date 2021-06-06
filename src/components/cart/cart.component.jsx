@@ -443,6 +443,9 @@ export class Cart extends React.Component {
     _isMounted = false;
     clickOrderStart = false
     
+    startOrderInterval = 90;
+    startOrderIntervalTimer = null;
+    
     constructor(props) {
         super(props);
         
@@ -1032,27 +1035,34 @@ export class Cart extends React.Component {
     }
     
     checkPromo(){
-        fetch('https://jacofood.ru/src/php/test_app.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/x-www-form-urlencoded'},
-            body: queryString.stringify({
-                type: 'get_promo_web', 
-                city_id: itemsStore.getCity(),
-                promo_name: this.state.orderPromo
-            })
-        }).then(res => res.json()).then(json => {
-            itemsStore.setPromo( JSON.stringify(json), this.state.orderPromo );
-            let check_promo = itemsStore.checkPromo();
-              
-            if( check_promo.st === false ){
-                localStorage.removeItem('promo_name')
-            }
-            
+        
+        if( this.state.orderPromo.length == 0 ){
             this.setState({
-                orderPromoText: check_promo.text
+                orderPromoText: ''
             })
-        })
+        }else{
+            fetch('https://jacofood.ru/src/php/test_app.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/x-www-form-urlencoded'},
+                body: queryString.stringify({
+                    type: 'get_promo_web', 
+                    city_id: itemsStore.getCity(),
+                    promo_name: this.state.orderPromo
+                })
+            }).then(res => res.json()).then(json => {
+                itemsStore.setPromo( JSON.stringify(json), this.state.orderPromo );
+                let check_promo = itemsStore.checkPromo();
+                  
+                if( check_promo.st === false ){
+                    localStorage.removeItem('promo_name')
+                }
+                
+                this.setState({
+                    orderPromoText: check_promo.text
+                })
+            })
+        }
     }
     
     saveData(){
@@ -1304,6 +1314,8 @@ export class Cart extends React.Component {
         if( this.clickOrderStart == false ){
             this.clickOrderStart = true;
             
+            clearTimeout(this.startOrderIntervalTimer);
+            
             this.setState({ 
                 orderCheckDop: false,
                 spiner: true
@@ -1348,8 +1360,6 @@ export class Cart extends React.Component {
                     this.clickOrderStart = false;    
                 }, 300)
                 
-                console.log( json );
-                
                 setTimeout(()=>{
                     this.setState({
                         spiner: false
@@ -1361,13 +1371,12 @@ export class Cart extends React.Component {
                             newOrderData: json
                         })
                         
-                        setTimeout(()=>{
+                        this.startOrderIntervalTimer = setTimeout(()=>{
                             this.setState({
                                 orderCheck: false,
                                 newOrderData: null
                             })
-                        }, 10000)
-                        
+                        }, this.startOrderInterval * 1000)
                     }else{
                         this.setState({
                             error: {
