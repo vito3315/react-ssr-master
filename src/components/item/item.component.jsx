@@ -540,7 +540,7 @@ export class Item extends React.Component {
                             </TabPanel>
                             <TabPanel value={this.state.itemTab} index={0} style={{ marginTop: 10, marginBottom: 15, minHeight: '30vh' }}>
                                 { this.state.item.items.length > 1 ?
-                                    <div style={{ maxHeight: '30vh', height: '100%', overflow: 'auto' }}>
+                                    <div style={{ maxHeight: '30vh', height: '100%', overflowY: 'auto', overflowX: 'hidden' }}>
                                         {this.state.item.items.map((item, key) =>
                                             <div key={key} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                                                 <picture style={{ height: 'auto', width: 70, display: 'table' }}>
