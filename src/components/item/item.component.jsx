@@ -482,7 +482,7 @@ export class Item extends React.Component {
                             
                             <Typography variant="h5" component="h1" style={{ textAlign: 'center' }}>{this.state.item.name}</Typography>
                         </Grid>
-                        <Grid item xs={12} style={{ paddingLeft: 12, position: 'relative' }}>
+                        <Grid item xs={12} style={{ position: 'relative' }}>
                             <AppBar position="static" style={{ backgroundColor: '#fff', color: '#000', zIndex: 0 }} elevation={0}>
                                 <Tabs aria-label="simple tabs example" className="itemTabs" value={this.state.itemTab} onChange={this.changeTab.bind(this)} style={{ justifyContent: 'center' }}>
                                     <Tab label="Состав" {...a11yProps(0)} disableRipple={true} />
@@ -556,8 +556,8 @@ export class Item extends React.Component {
                                                     />
                                                 </picture>
                                                 <div className="itemMiniText" style={{ width: '100%', overflow: 'hidden', flexWrap: 'wrap' }}>
-                                                    <Typography variant="h5" component="span" className="dopItemName">{item.name}</Typography>
-                                                    <Typography variant="h5" component="span" className="ItemDesc">{item.tmp_desc}</Typography>
+                                                    <Typography variant="h5" component="span" className="dopItemName" style={{ width: '100%' }}>{item.name}</Typography>
+                                                    <Typography variant="h5" component="span" className="ItemDesc" style={{ width: '100%', wordWrap: 'normal' }}>{item.tmp_desc}</Typography>
                                                 </div>
                                             </div>
                                         )}
