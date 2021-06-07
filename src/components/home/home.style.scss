@@ -13,19 +13,15 @@ $colorMain: #CC0033;
 .swiper-wrapper._h2_{
     height: auto!important;
 }
-
 .modalActii.Item .MuiTabs-scroller.MuiTabs-fixed > div{
     justify-content: flex-start!important;
 }
 .modalActii.Item .MuiPaper-rounded{
     border-radius: 50px!important;
 }
-.modalActii.Item .dopItemName{
-    //@include fons(1rem, $Ubuntu);
-}
 .modalActii.Item .modalActiiContent{
     & span:not(.dopItemName):not(.ItemDesc), p:not(.dopItemName):not(.ItemDesc), b:not(.dopItemName):not(.ItemDesc){
-        @include fons(0.8rem, $Ubuntu);
+        //@include fons(0.8rem, $Ubuntu);
     }
 }
 .imgSVG{

@@ -205,7 +205,7 @@ class CardItem extends React.Component {
             return (
                 <Card elevation={0} className="CardItem">
                     
-                    <CardContent style={{ cursor: 'pointer' }} onClick={ () => this.props.openItem(this.state.item.id)}>
+                    <CardContent style={{ cursor: 'pointer', position: 'relative' }} onClick={ () => this.props.openItem(this.state.item.id)}>
                         <picture>
                             <source 
                                 srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
@@ -218,6 +218,14 @@ class CardItem extends React.Component {
                                 style={{ minHeight: 150 }}
                             />
                         </picture>
+                        
+                        { parseInt(this.state.item.is_new) == 0 ? null :
+                            <img 
+                                src='/assets/is_new.png'
+                                style={{ position: 'absolute', width: 70, top: 0, right: 0 }}
+                            />
+                        }
+                        
                         <CardContent style={{ padding: '1.2vw', paddingBottom: 0, paddingTop: 0 }}>
                             <Typography className="CardNameItem" gutterBottom variant="h5" component="span">{this.state.item.name}</Typography>
                             <Typography gutterBottom className="CardInfoWeiItem" component="p">{this.state.item.info_weight}</Typography>
@@ -260,7 +268,7 @@ class CardItem extends React.Component {
         if( this.props.type == 'mobile' ){
             return (
                 <Grid item container xs={12} className="CardItem_mobile">
-                    <Grid item xs={5} sm={5} md={5} xl={5} onClick={ () => this.props.openItem(this.state.item.id)}>
+                    <Grid style={{ position: 'relative' }} item xs={5} sm={5} md={5} xl={5} onClick={ () => this.props.openItem(this.state.item.id)}>
                         <picture>
                             <source 
                                 srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.webp?"+this.state.item.img_new_update} 
@@ -272,6 +280,13 @@ class CardItem extends React.Component {
                                 title={this.state.item.name}
                             />
                         </picture>
+                        
+                        { parseInt(this.state.item.is_new) == 0 ? null :
+                            <img 
+                                src='/assets/is_new.png'
+                                style={{ position: 'absolute', width: 70, top: 0, right: 0 }}
+                            />
+                        }
                     </Grid>
                     <Grid item xs={7} sm={7} md={7} xl={7} className="SecondBox">
                         <Typography className="CardNameItem" gutterBottom variant="h5" component="span" onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>

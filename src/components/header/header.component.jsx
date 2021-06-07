@@ -758,7 +758,7 @@ export class Header extends React.Component {
                         
                         <Grid>
                             <Grid item style={{ marginRight: 15 }}>
-                                <Link to={"/"+this.state.cityName+"/"}>
+                                <Link to={"/"+this.state.cityName+"/"} onClick={ () => { window.scrollTo({ top: 0, behavior: 'smooth', }) } }>
                                     <img alt="Жако доставка роллов и пиццы" src="https://jacochef.ru/src/img/Bely_fon_logo.png" />
                                 </Link> 
                             </Grid>

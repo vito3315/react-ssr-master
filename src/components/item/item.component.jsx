@@ -433,7 +433,7 @@ export class Item extends React.Component {
                             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', position: 'absolute', bottom: -30, width: '65%' }}>
                                 
                                 <div className="newBTN" onClick={this.add.bind(this)}>
-                                    <Typography variant="h5" component="span" className="ItemPriceValue" style={{ paddingLeft: 5 }}>{this.state.item.price}</Typography>
+                                    <Typography variant="h5" component="span" className="ItemPriceValue" style={{ paddingLeft: 5 }}>{ parseInt(this.state.count) == 0 ? parseInt(this.state.item.price) : parseInt(this.state.item.price) * parseInt(this.state.count) }</Typography>
                                     <Ruble viewBox="0 0 600 300" width="20" />
                                      
                                     <ShoppingCartOutlinedIcon color='inherit'  />
