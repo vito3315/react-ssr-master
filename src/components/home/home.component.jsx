@@ -4,12 +4,11 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Typography from '@material-ui/core/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faRubleSign, faInfoCircle, faPlus, faMinus, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faMinus, faTimes } from '@fortawesome/free-solid-svg-icons'
 import * as Scroll from 'react-scroll';
 var Element  = Scroll.Element;
 var scroller = Scroll.scroller;
@@ -23,7 +22,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogActions from '@material-ui/core/DialogActions';
 
 import IconButton from '@material-ui/core/IconButton';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
@@ -31,8 +29,6 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import itemsStore from '../../stores/items-store';
 import { autorun } from "mobx"
 import Dialog from '@material-ui/core/Dialog';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Slide from '@material-ui/core/Slide';
 import Hidden from '@material-ui/core/Hidden';
 

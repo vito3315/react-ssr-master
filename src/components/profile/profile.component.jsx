@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavLink as Link, Switch, Route, useParams, useHistory } from 'react-router-dom';
 
 import Grid from '@material-ui/core/Grid';
 
@@ -11,11 +10,6 @@ import Typography from '@material-ui/core/Typography';
 
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
-import InfoIcon from '@material-ui/icons/Info';
 
 import CheckIcon from '@material-ui/icons/Check';
 
@@ -36,15 +30,13 @@ import {Helmet} from "react-helmet";
 const queryString = require('query-string');
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes, faPlus, faMinus, faRubleSign, faCreditCard, faMoneyBill, faCashRegister, faGift } from '@fortawesome/free-solid-svg-icons'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Box from '@material-ui/core/Box';
 
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -57,11 +49,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 
-import FormLabel from '@material-ui/core/FormLabel';
-
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
 
 import Snackbar from '@material-ui/core/Snackbar';

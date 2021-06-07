@@ -14,40 +14,15 @@ import { PageInstPay } from '../pageInstPay';
 import { PageOferta } from '../pageOferta';
 import { PagePolitika } from '../pagePolitika';
 
-
 import { Header } from '../header';
 
 import Grid from '@material-ui/core/Grid';
 
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-
-
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
-import Divider from '@material-ui/core/Divider';
-
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import IconButton from '@material-ui/core/IconButton';
-
 import Typography from '@material-ui/core/Typography';
-
-import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
-import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import Hidden from '@material-ui/core/Hidden';
-import Popover from '@material-ui/core/Popover';
-import { Link as ScrollLink } from "react-scroll";
 
 const queryString = require('query-string');
 
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import InputMask from "react-input-mask";
-import Badge from '@material-ui/core/Badge';
 import { Provider } from 'mobx-react';
 import itemsStore from '../../stores/items-store';
 const stores = { itemsStore };
@@ -55,7 +30,6 @@ const stores = { itemsStore };
 import { autorun } from "mobx"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUtensils, faUser, faPlus, faMinus, faGift, faMapMarkerAlt, faRubleSign } from '@fortawesome/free-solid-svg-icons'
 import { faInstagram, faFacebookF, faOdnoklassniki, faVk, faTelegramPlane } from '@fortawesome/free-brands-svg-icons'
 
 function Status({ code, children }) {
