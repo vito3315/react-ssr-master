@@ -400,7 +400,7 @@ export class Item extends React.Component {
                             </TabPanel>
                             <TabPanel value={this.state.itemTab} index={0} style={{ marginTop: 10, marginBottom: 15 }}>
                                 { this.state.item.items.length > 1 ?
-                                    <div style={{ maxHeight: 300, overflow: 'auto' }}>
+                                    <div style={{ maxHeight: 300, overflowY: 'auto', overflowX: 'hidden' }}>
                                         {this.state.item.items.map((item, key) =>
                                             <div key={key} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                                                 <picture style={{ height: 'auto', width: 100, display: 'table' }}>
@@ -573,20 +573,21 @@ export class Item extends React.Component {
                             </TabPanel>
                                     
                             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                                    <Typography variant="h5" component="span" className="ItemPriceLabel">Цена: </Typography>
-                                    <Typography variant="h5" component="span" className="ItemPriceValue" style={{ paddingLeft: 5 }}>{this.state.item.price}</Typography>
-                                    <Ruble />
+                                <div className="newBTN" onClick={this.add.bind(this)}>
+                                    <Typography variant="h5" component="span" className="ItemPriceValue" style={{ paddingLeft: 5 }}>{ parseInt(this.state.count) == 0 ? parseInt(this.state.item.price) : parseInt(this.state.item.price) * parseInt(this.state.count) }</Typography>
+                                    <Ruble viewBox="0 0 600 300" width="20" />
+                                     
+                                    <ShoppingCartOutlinedIcon color='inherit'  />
                                 </div>
                                 
-                                {this.state.count == 0 ?
+                                {false && this.state.count == 0 ?
                                     <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
                                         <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={this.add.bind(this)}>
                                             <ShoppingCartOutlinedIcon color='inherit'  />
                                         </Button>
                                     </ButtonGroup>
                                         :
-                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder count">
+                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder count" style={{ border: 'none' }}>
                                         <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this)}>
                                             <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
                                         </Button>

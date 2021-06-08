@@ -384,13 +384,6 @@ export class Home extends React.Component {
                     
                     localStorage.removeItem('goTo');
                     
-                    /*scroller.scrollTo("myScrollToElement", {
-                        duration: 800,
-                        delay: 500,
-                        smooth: "easeInOutQuart",
-                        offset: document.getElementById('cat'+hash).getBoundingClientRect()['y']
-                    });*/
-                    
                     setTimeout(()=>{
                         scroller.scrollTo("myScrollToElement", {
                             duration: 800,
@@ -399,8 +392,26 @@ export class Home extends React.Component {
                             offset: document.getElementById('cat'+hash).getBoundingClientRect()['y'] - 50
                         });
                     }, 300)
+                    
+                    
                 }
             }, 1000);
+            
+            setTimeout(() => {
+                let hash = window.location.hash;
+                
+                if( hash.length > 0 ){
+                    let act_id = hash.split('#item')[1];
+                    
+                    if( window.innerWidth <= 400 ){
+                        this.openItem(act_id);
+                    }else{
+                        this.openItemPC(act_id);
+                    }
+                    
+                    this.props.history.replace({ pathname: window.location.pathname })
+                }
+            }, 1300);
         }
         
         Home.fetchData('/'+this.state.city_name).then( data => {
@@ -517,10 +528,6 @@ export class Home extends React.Component {
                 banners_mobile: banners_mobile
             });
         })
-        
-        
-          //el.addEventListener("touchcancel", handleCancel, false);
-          //el.addEventListener("touchmove", handleMove, false);
     }
 
     openItem(id){
@@ -537,7 +544,6 @@ export class Home extends React.Component {
             el.addEventListener("touchstart", this.touchStart.bind(this), false);
             el.addEventListener("touchend", this.touchEnd.bind(this), false);
         }, 300)
-        
     }
     
     openItemPC(id){
@@ -585,9 +591,6 @@ export class Home extends React.Component {
     }
     
     render() {
-        
-        
-        
         if( itemsStore.getAllItemsCat().length == 0 ){
             return (
                 <Element name="myScrollToElement" className="Category">
