@@ -401,7 +401,7 @@ export class Home extends React.Component {
                 let hash = window.location.hash;
                 
                 if( hash.length > 0 ){
-                    let act_id = hash.split('#item')[1];
+                    let act_id = hash.split('#item_')[1];
                     
                     if( window.innerWidth <= 400 ){
                         this.openItem(act_id);
@@ -489,37 +489,73 @@ export class Home extends React.Component {
                     )
                     
                 }else{
-                    banners_pc.push(
-                        <picture style={{ width: 'inherit', height: 'auto' }}>
-                            <source 
-                                srcSet={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"3700х1000.webp?"+item.img_new_update} 
-                                type="image/webp" 
-                            />
-                            <img 
-                                src={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"3700х1000.jpg?"+item.img_new_update} 
-                                //alt={this.state.item.name}
-                                //title={this.state.item.name}
-                                style={{ width: 'inherit', height: 'auto', minHeight: 250, borderRadius: 15 }}
-                                onDragStart={handleDragStart}
-                            />
-                        </picture>
-                    )
-                    
-                    banners_mobile.push(
-                        <picture style={{ width: 'inherit', height: 'auto' }}>
-                            <source 
-                                srcSet={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"1000х500.webp?"+item.img_new_update} 
-                                type="image/webp" 
-                            />
-                            <img 
-                                src={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"1000х500.jpg?"+item.img_new_update} 
-                                //alt={this.state.item.name}
-                                //title={this.state.item.name}
-                                style={{ width: 'inherit', height: 'auto', borderRadius: 15 }}
-                                onDragStart={handleDragStart}
-                            />
-                        </picture>
-                    )
+                    if( item.item && parseInt(item.item) > 0 ){
+                        banners_pc.push(
+                            <picture style={{ width: 'inherit', height: 'auto' }}>
+                                <source 
+                                    srcSet={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"3700х1000.webp?"+item.img_new_update} 
+                                    type="image/webp" 
+                                />
+                                <img 
+                                    src={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"3700х1000.jpg?"+item.img_new_update} 
+                                    //alt={this.state.item.name}
+                                    //title={this.state.item.name}
+                                    style={{ width: 'inherit', height: 'auto', minHeight: 250, borderRadius: 15 }}
+                                    onDragStart={handleDragStart}
+                                    onClick={this.openItemPC.bind(this, item.item)}
+                                />
+                            </picture>
+                        )
+                        
+                        banners_mobile.push(
+                            <picture style={{ width: 'inherit', height: 'auto' }}>
+                                <source 
+                                    srcSet={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"1000х500.webp?"+item.img_new_update} 
+                                    type="image/webp" 
+                                />
+                                <img 
+                                    src={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"1000х500.jpg?"+item.img_new_update} 
+                                    //alt={this.state.item.name}
+                                    //title={this.state.item.name}
+                                    style={{ width: 'inherit', height: 'auto', borderRadius: 15 }}
+                                    onDragStart={handleDragStart}
+                                    onClick={this.openItem.bind(this, item.item)}
+                                />
+                            </picture>
+                        )
+                    }else{
+                        banners_pc.push(
+                            <picture style={{ width: 'inherit', height: 'auto' }}>
+                                <source 
+                                    srcSet={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"3700х1000.webp?"+item.img_new_update} 
+                                    type="image/webp" 
+                                />
+                                <img 
+                                    src={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"3700х1000.jpg?"+item.img_new_update} 
+                                    //alt={this.state.item.name}
+                                    //title={this.state.item.name}
+                                    style={{ width: 'inherit', height: 'auto', minHeight: 250, borderRadius: 15 }}
+                                    onDragStart={handleDragStart}
+                                />
+                            </picture>
+                        )
+                        
+                        banners_mobile.push(
+                            <picture style={{ width: 'inherit', height: 'auto' }}>
+                                <source 
+                                    srcSet={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"1000х500.webp?"+item.img_new_update} 
+                                    type="image/webp" 
+                                />
+                                <img 
+                                    src={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"1000х500.jpg?"+item.img_new_update} 
+                                    //alt={this.state.item.name}
+                                    //title={this.state.item.name}
+                                    style={{ width: 'inherit', height: 'auto', borderRadius: 15 }}
+                                    onDragStart={handleDragStart}
+                                />
+                            </picture>
+                        )
+                    }
                 }
             })
             
