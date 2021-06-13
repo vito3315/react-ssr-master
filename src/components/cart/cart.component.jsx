@@ -601,6 +601,23 @@ export class Cart extends React.Component {
                         setTimeout(() => {
                             this.loadTimePred();   
                         }, 300)
+                    }else{
+                        let data = {
+                            orderType: cartData.orderType,
+                            orderAddr: '',
+                            orderPic: cartData.orderPic,
+                            orderComment: cartData.orderComment,
+                            
+                            orderTimes: cartData.orderTimes,
+                            orderPredDay: '',
+                            orderPredTime: '',
+                            
+                            orderPay: cartData.orderPay,
+                            orderSdacha: cartData.orderSdacha,
+                            
+                        };
+                        
+                        itemsStore.saveCartData(data);
                     }
                     
                     setTimeout(() => {
@@ -1122,6 +1139,38 @@ export class Cart extends React.Component {
             }
             
             itemsStore.saveCartData(data);
+            
+            //let thisitem = this.state.my_addr.find( (item) => item.id == event.target.value );
+            let allPrice = itemsStore.getAllPrice();
+            
+            if( parseInt(this.state.newAddrInfo ? this.state.newAddrInfo.free_drive : 0) == 1 ){
+                if( parseInt(allPrice) > 0 ){
+                    itemsStore.setSumDiv(0);
+                }else{
+                    itemsStore.setSumDiv(1);
+                }
+            }else{
+                itemsStore.setSumDiv(parseInt(this.state.newAddrInfo ? this.state.newAddrInfo.sum_div : 0));
+            }
+            
+            let type = this.state.orderTimes,
+                type_order = this.state.orderType;
+            
+            if( type_order == 0 ){
+                if( type == 1 ){
+                    this.setState({
+                        renderPay: this.state.newAddrInfo && parseInt(this.state.newAddrInfo.pay_active) == 1 ? this.state.pays.dev : this.state.pays.dev_mini,
+                    })
+                }else{
+                    this.setState({
+                        renderPay: this.state.pays.dev_mini,
+                    })
+                }
+            }else{
+                this.setState({
+                    renderPay: this.state.pays.pic,
+                })
+            }
         }, 500)
     }
     
@@ -1129,7 +1178,7 @@ export class Cart extends React.Component {
         let my_cart = [];
         let cartItems = itemsStore.getItems();  
         
-        if( this.state.orderType+1 == 1 ){
+        if( this.state.orderType+1 == 1 && parseInt(this.state.orderTimes) == 1 ){
             if( !this.state.orderAddr || !this.state.orderAddr.point_id ){
                 this.setState({
                     error: {
@@ -1175,6 +1224,8 @@ export class Cart extends React.Component {
                 this.setState({
                     timePred: json.data
                 })
+                
+                let cartData = itemsStore.getCartData();
             }
         });
     }
@@ -1355,6 +1406,7 @@ export class Cart extends React.Component {
                     promo_name: this.state.orderPromo//
                 })
             }).then(res => res.json()).then(json => {
+                
                 setTimeout(()=>{
                     this.clickOrderStart = false;    
                 }, 300)
@@ -1552,7 +1604,7 @@ export class Cart extends React.Component {
                                 <RadioGroup name="addrs" value={ this.state.orderAddr ? this.state.orderAddr.id : 0 } onChange={this.changeAddr}>
                                     {this.state.my_addr.map((item, key) => 
                                         <div key={key} className="boxAddr">
-                                            <FormControlLabel value={item.id} control={<Radio />} label={item.city_name+', '+item.street+' '+item.home+', Пд. '+item.pd+', Эт. '+item.et+', Кв. '+item.kv} />
+                                            <FormControlLabel value={item.id} control={<Radio />} label={ item.city_name+', '+item.street+' '+item.home+( parseInt(item.pd) == 0 ? '' : ', Пд. '+item.pd )+( parseInt(item.et) == 0 ? '' : ', Эт. '+item.et )+( parseInt(item.kv) == 0 ? '' : ', Кв. '+item.kv ) } />
                                             <FontAwesomeIcon onClick={this.delAddr.bind(this, item.id)} icon={faTimes}/>
                                         </div>
                                     )}
@@ -2167,10 +2219,10 @@ export class Cart extends React.Component {
                                 <Typography variant="h5" component="span" className="orderCheckText">Доставим: { this.state.orderAddr ?
                                     this.state.orderAddr.city_name+', '+
                                     this.state.orderAddr.street+' '+
-                                    this.state.orderAddr.home+', Пд.:'+
-                                    this.state.orderAddr.pd+', Эт.:'+
-                                    this.state.orderAddr.et+', Кв.:'+
-                                    this.state.orderAddr.kv
+                                    this.state.orderAddr.home+
+                                    ( parseInt(this.state.orderAddr.pd) == 0 ? '' : ', Пд. '+this.state.orderAddr.pd )+
+                                    ( parseInt(this.state.orderAddr.et) == 0 ? '' : ', Эт. '+this.state.orderAddr.et )+
+                                    ( parseInt(this.state.orderAddr.kv) == 0 ? '' : ', Кв. '+this.state.orderAddr.kv )
                                         :
                                     null
                                 }</Typography>
