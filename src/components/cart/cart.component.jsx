@@ -1909,6 +1909,10 @@ export class Cart extends React.Component {
                     
                         <div className="bottomOrder">
                             <div>
+                                <Typography variant="h5" component="span">Доставка</Typography>
+                                <Typography variant="h5" component="span" className="namePrice">{ this.state.sumDiv } <Ruble width="20" viewBox="0 0 600 200" /></Typography>
+                            </div>
+                            <div>
                                 <Typography variant="h5" component="span">К оплате</Typography>
                                 <Typography variant="h5" component="span" className="namePrice">{ this.state.sumDiv + this.state.allPrice } <Ruble width="20" viewBox="0 0 600 200" /></Typography>
                             </div>

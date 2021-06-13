@@ -256,6 +256,7 @@ div.boxItem .promoIcon{
 }
 .tableOrderCheck{
     border-collapse: collapse;
+    width: 100%;
     & tbody{
         border-bottom: 2px solid #96969A;
         & tr:not(:last-child){
@@ -409,7 +410,7 @@ div.boxItem .promoIcon{
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            & > div:first-child{
+            & > div:first-child, div:not(:first-child):not(:last-child){
                 display: flex;
                 flex-direction: row;
                 width: 100%;

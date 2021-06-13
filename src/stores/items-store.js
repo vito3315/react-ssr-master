@@ -205,7 +205,7 @@ class ItemsStore {
         }else{
           return {
             st: false,
-            text: 'Данный промокод не распространяется на указанный вами день. Попробуйте изменить дату заказа.'
+            text: promo_info.promo_text.false
           }
         }
       }
@@ -216,7 +216,7 @@ class ItemsStore {
         }else{
           return {
             st: false,
-            text: 'Введённый вами промокод не может быть применён на указанное время. Попробуйте изменить время заказа.'
+            text: promo_info.promo_text.false
           }
         }
       }
