@@ -592,6 +592,9 @@ export class Profile extends React.Component {
                 point_id: point_id
             })
         }).then(res => res.json()).then(json => {
+            
+            console.log( json )
+            
             setTimeout(()=>{
                 this.setState({ 
                     showOrder: json,
@@ -982,7 +985,7 @@ export class Profile extends React.Component {
                             <Typography variant="h6" component="span">{this.state.showOrder.order.type_order}: {this.state.showOrder.order.type_order_addr_new}</Typography>
                             <Typography variant="h6" component="span">{this.state.showOrder.order.time_order_name}: {this.state.showOrder.order.time_order}</Typography>
                             { parseInt(this.state.showOrder.order.is_preorder) == 1 ? null :
-                                <Typography variant="h6" component="span">{this.state.showOrder.order.text_time}{this.state.showOrder.order.unix_time_to_client}</Typography>
+                                <Typography variant="h6" component="span">{this.state.showOrder.order.text_time}{this.state.showOrder.order.time_to_client}</Typography>
                             }
                             { this.state.showOrder.order.promo_name == null || this.state.showOrder.order.promo_name.length == 0 ? null :
                                 <Typography variant="h6" component="span">Промокод: {this.state.showOrder.order.promo_name}</Typography>

@@ -1224,8 +1224,6 @@ export class Cart extends React.Component {
                 this.setState({
                     timePred: json.data
                 })
-                
-                let cartData = itemsStore.getCartData();
             }
         });
     }
