@@ -1602,7 +1602,13 @@ export class Cart extends React.Component {
                                 <RadioGroup name="addrs" value={ this.state.orderAddr ? this.state.orderAddr.id : 0 } onChange={this.changeAddr}>
                                     {this.state.my_addr.map((item, key) => 
                                         <div key={key} className="boxAddr">
-                                            <FormControlLabel value={item.id} control={<Radio />} label={ item.city_name+', '+item.street+' '+item.home+( parseInt(item.pd) == 0 ? '' : ', Пд. '+item.pd )+( parseInt(item.et) == 0 ? '' : ', Эт. '+item.et )+( parseInt(item.kv) == 0 ? '' : ', Кв. '+item.kv ) } />
+                                            <FormControlLabel value={item.id} control={<Radio />} label={ 
+                                                item.city_name+', '+
+                                                item.street+' '+
+                                                item.home+
+                                                ( parseInt(item.pd) == 0 ? '' : ', Пд. '+item.pd )+
+                                                ( parseInt(item.et) == 0 ? '' : ', Эт. '+item.et )+
+                                                ( parseInt(item.kv) == 0 ? '' : ', Кв. '+item.kv ) } />
                                             <FontAwesomeIcon onClick={this.delAddr.bind(this, item.id)} icon={faTimes}/>
                                         </div>
                                     )}
@@ -1856,7 +1862,15 @@ export class Cart extends React.Component {
                         </AppBar>
                         <TabPanel value={this.state.orderType} index={0} style={{ width: '100%' }}>
                             <div className="boxMobile" onClick={() => this.setState({ chooseAddr: true })}>
-                                <Typography variant="h5" component="span">Адрес: {this.state.orderAddr ? this.state.orderAddr.city_name+', '+this.state.orderAddr.street+' '+this.state.orderAddr.home+', Пд. '+this.state.orderAddr.pd+', Эт. '+this.state.orderAddr.et+', Кв. '+this.state.orderAddr.kv : ''}</Typography>
+                                <Typography variant="h5" component="span">Адрес: {this.state.orderAddr ? 
+                                    this.state.orderAddr.city_name+', '+
+                                    this.state.orderAddr.street+' '+
+                                    this.state.orderAddr.home+
+                                    
+                                    ( parseInt(this.state.orderAddr.pd) == 0 ? '' : ', Пд. '+this.state.orderAddr.pd )+
+                                    ( parseInt(this.state.orderAddr.et) == 0 ? '' : ', Эт. '+this.state.orderAddr.et )+
+                                    ( parseInt(this.state.orderAddr.kv) == 0 ? '' : ', Кв. '+this.state.orderAddr.kv )
+                                        : ''}</Typography>
                             </div>
                         </TabPanel>
                         <TabPanel value={this.state.orderType} index={1} style={{ width: '100%' }}>
@@ -2005,7 +2019,14 @@ export class Cart extends React.Component {
                             <RadioGroup name="addrs" value={ this.state.orderAddr ? this.state.orderAddr.id : 0 } onChange={this.changeAddr}>
                                 {this.state.my_addr.map((item, key) => 
                                     <div key={key} className="boxAddr">
-                                        <FormControlLabel value={item.id} control={<Radio />} label={item.city_name+', '+item.street+' '+item.home+', Пд. '+item.pd+', Эт. '+item.et+', Кв. '+item.kv} />
+                                        <FormControlLabel value={item.id} control={<Radio />} label={
+                                            item.city_name+', '+
+                                            item.street+' '+
+                                            item.home+
+                                            ( parseInt(item.pd) == 0 ? '' : ', Пд. '+item.pd )+
+                                            ( parseInt(item.et) == 0 ? '' : ', Эт. '+item.et )+
+                                            ( parseInt(item.kv) == 0 ? '' : ', Кв. '+item.kv )
+                                        } />
                                         <FontAwesomeIcon icon={faTimes}/>
                                     </div>
                                 )}
