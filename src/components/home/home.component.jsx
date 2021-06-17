@@ -407,10 +407,14 @@ export class Home extends React.Component {
                         
                         arrMax = [];
                         
-                        if( document.querySelector('.activeCat') ){
-                            document.querySelector('.activeCat').classList.remove('activeCat');
+                        if( max.length > 0 ){
+                            if( document.querySelector('.activeCat') ){
+                                document.querySelector('.activeCat').classList.remove('activeCat');
+                            }
+                            if( document.querySelector('#link_'+max[0].main_id) ){
+                                document.querySelector('#link_'+max[0].main_id).classList.add('activeCat');
+                            }
                         }
-                        document.querySelector('#link_'+max.main_id).classList.add('activeCat');
                     }
                     
                     time = Date.now();
