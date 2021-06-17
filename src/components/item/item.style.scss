@@ -185,6 +185,8 @@ $colorMain: #CC0033;
     }
 }
 .itemMiniText{
+    position: absolute;
+    margin-left: 70px;
     display: flex;
     flex-direction: column;
     & .dopItemName{
@@ -202,7 +204,7 @@ $colorMain: #CC0033;
     //background-color: $colorMain;
     background: linear-gradient(160deg, $colorMain, #fff 300%);
     border-radius: 10px; 
-    padding: 0 10px; 
+    padding: 3px 10px; 
     color: #fff;
     -ms-user-select: none;
     -moz-user-select: none;

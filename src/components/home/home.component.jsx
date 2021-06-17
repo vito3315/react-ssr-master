@@ -10,7 +10,10 @@ import Typography from '@material-ui/core/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faMinus, faTimes } from '@fortawesome/free-solid-svg-icons'
 import * as Scroll from 'react-scroll';
+//import { Link, Button, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+
 var Element  = Scroll.Element;
+var Events  = Scroll.Events;
 var scroller = Scroll.scroller;
 const queryString = require('query-string');
 import axios from 'axios';
@@ -334,7 +337,7 @@ export class Home extends React.Component {
         this.state = {      
             allItems: [],  
             is_load: true,
-            testData: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+            testData: [1, 2, 3, 4, 5, 6, 7, 8],
             openItem: null,
             openModal: false,
             openModalPC: false,
@@ -376,7 +379,48 @@ export class Home extends React.Component {
         });
     }
     
+    componentDidUmount(){
+        window.removeEventListener('scroll');
+    }
+    
     componentDidMount = () => {
+        var time = Date.now();
+        
+        let arrMax = [];
+        
+        setTimeout( () => {
+            window.addEventListener('scroll', function() {
+                if ((time + 500 - Date.now()) < 0) {
+                    itemsStore.getAllItemsCat().map( (item, key) => {
+                        var elem = document.getElementById('cat'+item.id);
+                        if( elem ){
+                            var top = elem.getBoundingClientRect().top + document.body.scrollTop - 60;
+                            
+                            if(top < 0){
+                                arrMax.push({ name: item.name, Y: top, main_id: item.main_id })
+                            }
+                        }
+                    })
+                    
+                    if( arrMax.length > 0 ){
+                        let max = arrMax.reduce((acc, curr) => acc.b > curr.b ? acc : curr);
+                        
+                        arrMax = [];
+                        
+                        if( document.querySelector('.activeCat') ){
+                            document.querySelector('.activeCat').classList.remove('activeCat');
+                        }
+                        document.querySelector('#link_'+max.main_id).classList.add('activeCat');
+                    }
+                    
+                    time = Date.now();
+                }
+            });
+        }, 300 )
+        
+        
+      
+      
         if (typeof window !== 'undefined') {
             setTimeout(() => {
                 if( localStorage.getItem('goTo') ){
@@ -695,7 +739,7 @@ export class Home extends React.Component {
                 </Hidden>
                 
                 {itemsStore.getAllItemsCat().map((cat, key) => 
-                    <div key={key} name={"cat"+cat.id} id={"cat"+cat.id}>
+                    <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
                         <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%', paddingBottom: 40 }} className="MainItems mainContainer">
                             <Typography variant="h5" component="h3">{ cat.name }</Typography>
                         </Grid>

@@ -8,6 +8,7 @@ class ItemsStore {
   itemsPromo = '';
   allItems = '';
   allItemsCat = '';
+  allItemsCatNew = '';
   banners = '';
   AllPrice = 0;
   sum_div = 0;
@@ -502,11 +503,19 @@ class ItemsStore {
   setAllItemsCat = (items) => {
     this.allItemsCat = JSON.stringify(items);
   };
+  
+  setAllItemsCatNew = (items) => {
+    this.allItemsCatNew = JSON.stringify(items);
+  };
 
   getAllItemsCat(){
     return this.allItemsCat.length == 0 ? [] : JSON.parse(this.allItemsCat, true);
   };
 
+  getAllItemsCatNew(){
+    return this.allItemsCatNew.length == 0 ? [] : JSON.parse(this.allItemsCatNew, true);
+  };
+  
   setItems = (items) => {
     let tmp = 0,
         allPrice = 0;

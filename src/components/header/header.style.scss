@@ -5,3 +5,7 @@ $mainColor: #CC0033;
     font-size: $size;
     font-family: $family !important;
 }
+
+.MuiMenu-list span{
+    @include fons(1rem, $Ubuntu);
+}
