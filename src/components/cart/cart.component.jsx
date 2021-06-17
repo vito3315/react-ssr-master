@@ -1957,12 +1957,12 @@ export class Cart extends React.Component {
                             
                         </div>
                     
-                        <div className="bottomOrder">
-                            <div>
+                        <div className="bottomOrder" style={{ paddingTop: 0 }}>
+                            <div style={{ padding: '5px 0px' }}>
                                 <Typography variant="h5" component="span">Доставка</Typography>
                                 <Typography variant="h5" component="span" className="namePrice">{ this.state.sumDiv } <Ruble width="20" viewBox="0 0 600 200" /></Typography>
                             </div>
-                            <div>
+                            <div style={{ paddingBottom: 5 }}>
                                 <Typography variant="h5" component="span">К оплате</Typography>
                                 <Typography variant="h5" component="span" className="namePrice">{ this.state.sumDiv + this.state.allPrice } <Ruble width="20" viewBox="0 0 600 200" /></Typography>
                             </div>
@@ -2256,7 +2256,7 @@ export class Cart extends React.Component {
                                     {itemsStore.getItems().map((item, key) => 
                                         parseInt(item.count) > 0 ?
                                             <tr key={key}>
-                                                <td>
+                                                <td style={{ width: '60%' }}>
                                                     <Typography variant="h5" component="span" className="orderCheckText">{item.name}</Typography>
                                                 </td>
                                                 <td>
@@ -2271,7 +2271,7 @@ export class Cart extends React.Component {
                                     )}
                                     {this.state.cartItems_promo.map((item, key) =>
                                         <tr key={key}>
-                                            <td>
+                                            <td style={{ width: '60%' }}>
                                                 <Typography variant="h5" component="span" className="orderCheckText">{item.name}</Typography>
                                             </td>
                                             <td>

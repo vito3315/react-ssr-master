@@ -540,9 +540,9 @@ export class Item extends React.Component {
                             </TabPanel>
                             <TabPanel value={this.state.itemTab} index={0} style={{ marginTop: 10, marginBottom: 15, minHeight: '30vh' }}>
                                 { this.state.item.items.length > 1 ?
-                                    <div style={{ maxHeight: '30vh', height: '100%', overflowY: 'auto', overflowX: 'hidden' }}>
+                                    <div style={{ maxHeight: '30vh', height: '100%', overflowY: 'auto', overflowX: 'hidden', position: 'relative' }}>
                                         {this.state.item.items.map((item, key) =>
-                                            <div key={key} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                                            <div key={key} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', margin: '10px 0px' }}>
                                                 <picture style={{ height: 'auto', width: 70, display: 'table' }}>
                                                     <source 
                                                         srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_new+"300х200.webp?"+item.img_new_update} 
@@ -555,7 +555,7 @@ export class Item extends React.Component {
                                                         style={{ height: 'auto', width: '100%' }}
                                                     />
                                                 </picture>
-                                                <div className="itemMiniText" style={{ width: '100%', overflow: 'hidden', flexWrap: 'wrap', paddingRight: 15 }}>
+                                                <div className="itemMiniText" style={{ overflow: 'hidden', flexWrap: 'wrap', paddingRight: 15 }}>
                                                     <Typography variant="h5" component="span" className="dopItemName" style={{ width: '100%' }}>{item.name}</Typography>
                                                     <Typography variant="h5" component="span" className="ItemDesc" style={{ width: '100%', wordWrap: 'normal' }}>{item.tmp_desc}</Typography>
                                                 </div>

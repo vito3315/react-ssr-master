@@ -159,6 +159,7 @@ class SimplePopover extends React.Component{
             sumDiv: 0,
             promoName: '',
             promoText: '',
+            promoST: false,
         };
     }
     
@@ -248,9 +249,16 @@ class SimplePopover extends React.Component{
                 localStorage.removeItem('promo_name')
             }
             
-            this.setState({
-                promoText: check_promo.text
-            })
+            if( this.state.promoName.length == 0 ){
+                this.setState({
+                    promoText: ''
+                })
+            }else{
+                this.setState({
+                    promoText: check_promo.text,
+                    promoST: check_promo.st
+                })
+            }
         })
     }
     
@@ -342,7 +350,7 @@ class SimplePopover extends React.Component{
                         </Paper>
                         {this.state.promoText.length > 0 ?
                             <div className="DescPromo">
-                                <Typography className="cat" variant="h5" component="span">Промокод дает: {this.state.promoText}</Typography>
+                                <Typography className="cat" variant="h5" component="span">{ this.state.promoST === true ? 'Промокод дает:' : 'Промокодом нельзя воспользоваться. '} {this.state.promoText}</Typography>
                             </div>
                                 :
                             null
