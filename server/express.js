@@ -20,6 +20,7 @@ app.get( /\.(js|css|map|ico|png|svg)$/, express.static( path.resolve( __dirname,
 
 app.use((req, res, next) => {
     res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private, max-age=10800')
+    res.set('Set-Cookie', 'SameSite=None')
     next()
 })
 
