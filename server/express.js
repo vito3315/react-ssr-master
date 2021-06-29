@@ -72,7 +72,7 @@ app.use( '*', async ( req, res ) => {
             header += '<a href="/">'+element+'</a>';
         });*/
         
-        console.log( 'test11', componentData.keys() )
+        console.log( 'test11', Object.keys(componentData) )
         
         // populate `#app` element with `appHTML`
         indexHTML = indexHTML.replace( 
