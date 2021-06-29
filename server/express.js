@@ -66,13 +66,13 @@ app.use( '*', async ( req, res ) => {
             `<meta name="description" content="${helmet.meta.toString()}" />`
         );
         
-        let header = '';
+        let header = '';cats
         
         /*componentData.cats.forEach(element => {
             header += '<a href="/">'+element+'</a>';
         });*/
         
-        console.log( 'test11', componentData.cats )
+        console.log( 'test11', componentData )
         
         // populate `#app` element with `appHTML`
         indexHTML = indexHTML.replace( 
