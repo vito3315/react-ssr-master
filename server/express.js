@@ -78,9 +78,11 @@ app.use( '*', async ( req, res ) => {
             
             body += '<div style="display: flex; flex-wrap: wrap;">';
             
-            element.items.forEach(item => {
-                body += '<div style="width: 25%;"> <h3>'+item.name+'</h3> <span>Состав: '+item.tmp_desc+'</span> <span>Цена: '+item.price+'р</span> </div>';
-            })
+            //element.items.forEach(item => {
+            //    body += '<div style="width: 25%;"> <h3>'+item.name+'</h3> <span>Состав: '+item.tmp_desc+'</span> <span>Цена: '+item.price+'р</span> </div>';
+            //})
+            
+            body += '</div>';
         });
         
         // populate `#app` element with `appHTML`
