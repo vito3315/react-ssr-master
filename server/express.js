@@ -68,9 +68,9 @@ app.use( '*', async ( req, res ) => {
         
         let header = '';
         
-        componentData.cats.map( (item) => {
-            header += '<a href="/">'+item.name+'</a>';
-        } )
+        componentData.cats.forEach(element => {
+            header += '<a href="/">'+element+'</a>';
+        });
         
         // populate `#app` element with `appHTML`
         indexHTML = indexHTML.replace( 
