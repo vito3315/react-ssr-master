@@ -67,12 +67,21 @@ app.use( '*', async ( req, res ) => {
         );
         
         let header = '';
+        let body = '';
         
         componentData.cats.forEach(element => {
-            header += '<a href="/">'+element+'</a>';
+            header += '<a href="/'+req.originalUr+'/menu/">'+element.name+'</a>';
         });
         
-        console.log( 'test11', Object.keys(componentData) )
+        componentData.cats.forEach(element => {
+            body += '<h2>'+element.name+'</h2>';
+            
+            body += '<div style="display: flex; flex-wrap: wrap;">';
+            
+            element.items.forEach(item => {
+                body += '<div style="width: 25%;"> <h3>'+item.name+'</h3> <span>Состав: '+item.desc+'</span> <span>Цена: '+item.price+'р</span> </div>';
+            })
+        });
         
         // populate `#app` element with `appHTML`
         indexHTML = indexHTML.replace( 
@@ -80,7 +89,7 @@ app.use( '*', async ( req, res ) => {
             `<div id="app">
             
                 <header>
-                    <a href="/">Главная</a>
+                    <a href="${req.originalUrl}">Главная</a>
                     ${header}
                     <a href="${req.originalUrl}/actii">Акции</a>
                     <a href="${req.originalUrl}/contact">Контакты</a>
@@ -89,17 +98,7 @@ app.use( '*', async ( req, res ) => {
                     <h1 class="MuiTypography-root MuiTypography-h5">${componentData.page.page_h}</h1>
                     
                     <div>
-                        
-                        <h2>Сеты</h2>
-                    
-                        <div style="display: flex; flex-wrap: wrap;">
-                            <div style="width: 25%;">
-                                <h3>Сет 1</h3>
-                                <span>Состав: Сет 1, сет 2, сет 3</span>
-                                <span>Цена: 33р</span>
-                            </div>
-                        </div>
-                        
+                        ${body}
                     </div>
                 </body>
             
@@ -111,10 +110,10 @@ app.use( '*', async ( req, res ) => {
         //indexHTML = indexHTML.replace('<h1 class="MuiTypography-root MuiTypography-h5"></h1>', `<h1 class="MuiTypography-root MuiTypography-h5">${componentData.page_h}</h1>`);
         
         // set value of `initial_state` global variable
-        indexHTML = indexHTML.replace(
+        /*indexHTML = indexHTML.replace(
             'var initial_state = null;',
             `var initial_state = ${ JSON.stringify( componentData ) };`
-        );
+        );*/
 
         // set header and status
         res.contentType( 'text/html' );
