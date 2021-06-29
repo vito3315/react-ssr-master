@@ -70,16 +70,16 @@ app.use( '*', async ( req, res ) => {
         let body = '';
         
         componentData.cats.forEach(element => {
-            header += '<a href="/'+req.originalUr+'/menu/">'+element.name+'</a>';
+            header += '<a href="/'+req.originalUr+'/menu/">'+element+'</a>';
         });
         
-        componentData.cats.forEach(element => {
+        componentData.allItems.forEach(element => {
             body += '<h2>'+element.name+'</h2>';
             
             body += '<div style="display: flex; flex-wrap: wrap;">';
             
             element.items.forEach(item => {
-                body += '<div style="width: 25%;"> <h3>'+item.name+'</h3> <span>Состав: '+item.desc+'</span> <span>Цена: '+item.price+'р</span> </div>';
+                body += '<div style="width: 25%;"> <h3>'+item.name+'</h3> <span>Состав: '+item.tmp_desc+'</span> <span>Цена: '+item.price+'р</span> </div>';
             })
         });
         
