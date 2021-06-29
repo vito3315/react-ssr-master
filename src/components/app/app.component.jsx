@@ -67,7 +67,7 @@ class StickyFooter extends React.Component{
         
         this.state = {      
             soc_link: null,
-            cityName: '',
+            cityName: this.props.cityName,
             is_load: false,
         };
     }
@@ -225,7 +225,7 @@ export class App extends React.Component {
             activePage: '',
             is_load: false,
             openCity: false,
-            cityName: '',
+            cityName: props.match.params.cityName,
             testData: [1, 2, 3, 4, 5, 6, 7, 8, 9],
             cityList: [],
             
@@ -376,7 +376,7 @@ export class App extends React.Component {
                         </Hidden>
                     }
                     
-                    <StickyFooter />
+                    <StickyFooter cityName={ this.state.cityName } />
                 </div>
             </Provider>
         );
