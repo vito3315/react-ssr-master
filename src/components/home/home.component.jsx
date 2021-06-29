@@ -374,6 +374,8 @@ export class Home extends React.Component {
                     title: json.page.title,
                     description: json.page.description,
                     page: json.page,
+                    cats: json.cats,
+                    allItems: json.allItems
                 }
             } 
         }).catch(function (error) {

@@ -68,9 +68,9 @@ app.use( '*', async ( req, res ) => {
         
         let header = '';
         
-        /*componentData.cats.forEach(element => {
+        componentData.cats.forEach(element => {
             header += '<a href="/">'+element+'</a>';
-        });*/
+        });
         
         console.log( 'test11', Object.keys(componentData) )
         
