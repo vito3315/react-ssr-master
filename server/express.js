@@ -66,11 +66,42 @@ app.use( '*', async ( req, res ) => {
             `<meta name="description" content="${helmet.meta.toString()}" />`
         );
         
+        let header = '';
+        
+        componentData.cats.map( (item) => {
+            header += '<a href="/">'+item.name+'</a>';
+        } )
+        
         // populate `#app` element with `appHTML`
         indexHTML = indexHTML.replace( 
             '<div id="app"></div>', 
             `<div id="app">
-                <h1 class="MuiTypography-root MuiTypography-h5">${componentData.page.page_h}</h1>
+            
+                <header>
+                    <a href="/">Главная</a>
+                    ${header}
+                    <a href="${req.originalUrl}/actii">Акции</a>
+                    <a href="${req.originalUrl}/contact">Контакты</a>
+                </header>
+                <body>
+                    <h1 class="MuiTypography-root MuiTypography-h5">${componentData.page.page_h}</h1>
+                    
+                    <div>
+                        
+                        <h2>Сеты</h2>
+                    
+                        <div style="display: flex; flex-wrap: wrap;">
+                            <div style="width: 25%;">
+                                <h3>Сет 1</h3>
+                                <span>Состав: Сет 1, сет 2, сет 3</span>
+                                <span>Цена: 33р</span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </body>
+            
+                
                 ${componentData.page.content}
                 ${ appHTML }
             </div>` );

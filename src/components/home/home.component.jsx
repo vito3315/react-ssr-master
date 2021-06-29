@@ -368,6 +368,8 @@ export class Home extends React.Component {
             if(response['status'] === 200){
                 var json = response['data'];
                 
+                console.log( 'fetchData', json )
+                
                 return {
                     title: json.page.title,
                     description: json.page.description,
@@ -422,7 +424,28 @@ export class Home extends React.Component {
             });
         }, 300 )
         
+        let data = {
+            type: 'get_page_info', 
+            city_id: this.state.city_name,
+            page: '' 
+        };
         
+        axios({
+            method: 'POST',
+            url:'https://jacofood.ru/src/php/test_app.php',
+            headers: { 'content-type': 'application/x-www-form-urlencoded' },
+            data: queryString.stringify(data)
+        }).then(response => {
+            if(response['status'] === 200){
+                var json = response['data'];
+                
+                console.log( 'fetchData', json )
+                
+                
+            } 
+        }).catch(function (error) {
+            console.log(error);
+        });
       
       
         if (typeof window !== 'undefined') {
