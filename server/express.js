@@ -78,10 +78,10 @@ app.use( '*', async ( req, res ) => {
         //indexHTML = indexHTML.replace('<h1 class="MuiTypography-root MuiTypography-h5"></h1>', `<h1 class="MuiTypography-root MuiTypography-h5">${componentData.page_h}</h1>`);
         
         // set value of `initial_state` global variable
-        /*indexHTML = indexHTML.replace(
+        indexHTML = indexHTML.replace(
             'var initial_state = null;',
-            `var initial_state = ${ JSON.stringify( componentData ) };`
-        );*/
+            `var initial_state = ${ JSON.stringify( matchRoute ) };`
+        );
 
         // set header and status
         res.contentType( 'text/html' );

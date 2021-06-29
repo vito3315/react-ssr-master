@@ -225,7 +225,7 @@ export class App extends React.Component {
             activePage: '',
             is_load: false,
             openCity: false,
-            cityName: props.match.params.cityName,
+            cityName: '',
             testData: [1, 2, 3, 4, 5, 6, 7, 8, 9],
             cityList: [],
             
