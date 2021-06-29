@@ -60,9 +60,14 @@ class StickyFooter extends React.Component{
     constructor(props) {
         super(props);
         
+        let pathname = window.location.pathname;
+        
+        pathname = pathname.split('/');
+        pathname = pathname[0];
+        
         this.state = {      
             soc_link: null,
-            cityName: '',
+            cityName: pathname,
             is_load: false,
         };
     }

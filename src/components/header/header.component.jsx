@@ -389,13 +389,18 @@ export class Header extends React.Component {
     constructor(props) {
         super(props);
         
+        let pathname = window.location.pathname;
+        
+        pathname = pathname.split('/');
+        pathname = pathname[0];
+        
         this.state = {      
             categoryItems: [],  
             cartItems: [],
             activePage: '',
             is_load: false,
             openCity: false,
-            cityName: '',
+            cityName: pathname,
             testData: [1, 2, 3, 4],
             cityList: [],
             
