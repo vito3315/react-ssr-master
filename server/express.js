@@ -165,7 +165,7 @@ app.use( '*', async ( req, res ) => {
         // set value of `initial_state` global variable
         indexHTML = indexHTML.replace(
             'var initial_state = null;',
-            `var initial_state = ${ JSON.stringify( req.originalUrl ) };`
+            `var initial_state = ${ JSON.stringify( city ) };`
         );
 
         // set header and status
