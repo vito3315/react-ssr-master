@@ -76,22 +76,34 @@ app.use( '*', async ( req, res ) => {
             <meta property="og:site_name" content="Жако роллы и пицца">
             <meta property="og:type" content="website">
             <meta property="og:url" content="https://jacofood.ru${req.originalUrl}">
-            `;
+        `;
         
         if( matchRoute.type == 'item' ){  
             
-            //componentData.allItems.find( (item) => item.link == '' )
+            let link = req.originalUrl.split("/item/")[1];
             
-            /*meta += `
-                <meta property="og:image" content="https://jacofood.ru/src/img/items/Set_Taiti.jpg">
-                <meta property="og:image:width" content="300" />
-                
-            
-                <meta name="twitter:card" content="summary_large_image" /> 
-                <meta name="twitter:title" content="${componentData.title}" /> 
-                <meta name="twitter:desсription" content="${componentData.description}" /> 
-                <meta name="twitter:image" content="https://jacofood.ru/src/img/items/Set_Taiti.jpg" /> 
-            `;*/
+            componentData.allItems.forEach(element => {
+                element.items.forEach(item => {
+                    if( item.link == link ){
+                        meta = `
+                            <meta property="og:image" content="https://storage.yandexcloud.net/site-img/${item.img_new}300х200.jpg">
+                            <meta property="og:image:width" content="300" />
+                            
+                            <meta property="og:title" content="${item.name}">
+                            <meta property="og:description" content="${item.tmp_desc}">
+                            <meta property="og:site_name" content="Жако роллы и пицца">
+                            <meta property="og:type" content="website">
+                            <meta property="og:url" content="https://jacofood.ru${req.originalUrl}">
+                            
+                        
+                            <meta name="twitter:card" content="summary_large_image" /> 
+                            <meta name="twitter:title" content="${item.name}" /> 
+                            <meta name="twitter:desсription" content="${item.tmp_desc}" /> 
+                            <meta name="twitter:image" content="https://storage.yandexcloud.net/site-img/${item.img_new}300х200.jpg" /> 
+                        `;
+                    }
+                })
+            });
         }
             
         indexHTML = indexHTML.replace('<!-- meta -->', `${meta}`);
