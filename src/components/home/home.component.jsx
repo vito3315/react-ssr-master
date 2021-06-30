@@ -473,10 +473,6 @@ export class Home extends React.Component {
             setTimeout(() => {
                 let hash = window.location.pathname;
                 
-                console.log( window.location )
-                
-                console.log( hash.split('/item/') )
-                
                 let checkItem = hash.split('/item/');
                 
                 if( checkItem.length > 1 ){
@@ -490,8 +486,6 @@ export class Home extends React.Component {
                     
                     let str = window.location.pathname;
                     str.replace("/item/"+act_id, '');
-                    
-                    console.log( 'str', window.location.pathname, str, checkItem[0] )
                     
                     this.props.history.replace({ pathname: checkItem[0] })
                 }

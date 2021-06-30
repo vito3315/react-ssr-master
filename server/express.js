@@ -79,7 +79,7 @@ app.use( '*', async ( req, res ) => {
             body += '<div style="display: flex; flex-wrap: wrap;">';
             
             element.items.forEach(item => {
-                body += `<a href="${req.originalUrl}/menu/${element.link}"/${item.link}"> <div style="width: 25%;"> <h3>${item.name}</h3> <span>Состав: ${item.tmp_desc}</span> <span>Цена: ${item.price}р</span> </div> </a>`;
+                body += `<a href="${req.originalUrl}/menu/${element.link}/item/${item.link}"> <div style="width: 25%;"> <h3>${item.name}</h3> <span>Состав: ${item.tmp_desc}</span> <span>Цена: ${item.price}р</span> </div> </a>`;
             })
             
             body += '</div>';
