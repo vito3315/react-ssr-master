@@ -70,7 +70,7 @@ app.use( '*', async ( req, res ) => {
         let body = '';
         
         componentData.cats.forEach(element => {
-            header += '<a href="/'+req.originalUr+'/menu/">'+element+'</a>';
+            header += `<a href="/${req.originalUrl}/menu/${element.link}">${element.name}</a>`;
         });
         
         componentData.allItems.forEach(element => {
