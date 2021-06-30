@@ -296,6 +296,11 @@ export class App extends React.Component {
                             exact={ true }
                             component={ Home }
                         />
+                        <Route
+                            path='/:cityName/item/:id'
+                            exact={ true }
+                            component={ Home }
+                        />
                         <Route 
                             exact 
                             path='/:cityName/profile/'

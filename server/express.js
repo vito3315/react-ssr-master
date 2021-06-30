@@ -70,7 +70,7 @@ app.use( '*', async ( req, res ) => {
         let body = '';
         
         componentData.cats.forEach(element => {
-            header += `<a href="/${req.originalUrl}/menu/${element.link}">${element.name}</a>`;
+            header += `<a href="${req.originalUrl}/menu/${element.link}">${element.name}</a>`;
         });
         
         componentData.allItems.forEach(element => {
@@ -79,7 +79,7 @@ app.use( '*', async ( req, res ) => {
             body += '<div style="display: flex; flex-wrap: wrap;">';
             
             element.items.forEach(item => {
-                body += '<div style="width: 25%;"> <h3>'+item.name+'</h3> <span>Состав: '+item.tmp_desc+'</span> <span>Цена: '+item.price+'р</span> </div>';
+                body += `<a href="${req.originalUrl}/menu/${element.link}"/${item.link}"> <div style="width: 25%;"> <h3>${item.name}</h3> <span>Состав: ${item.tmp_desc}</span> <span>Цена: ${item.price}р</span> </div> </a>`;
             })
             
             body += '</div>';
