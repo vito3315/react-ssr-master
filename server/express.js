@@ -24,10 +24,6 @@ app.use((req, res, next) => {
     next()
 })
 
-app.use("/",function (request, response) {
-    response.redirect("/togliatti")
-});
-
 // for any other requests, send `index.html` as a response
 app.use( '*', async ( req, res ) => {
 
