@@ -17,63 +17,74 @@ module.exports = [
         path: '/:cityName',
         exact: true,
         component: Home,
+        type: 'home',
         code: 200
     },
     {
         path: '/:cityName/home',
         exact: true,
         component: Home,
+        type: 'home',
         code: 200
     },
     {
         path: '/:cityName/menu',
         exact: true,
         component: Home,
+        type: 'home',
         code: 200
     },
     {
         path: '/:cityName/contact',
         exact: true,
         component: Contact,
+        type: '',
         code: 200
     },
     {
         path: '/:cityName/actii',
         exact: true,
         component: Actii,
+        type: '',
         code: 200
     },
     {
         path: '/:cityName/menu/:itemLink',
         component: Item,
+        type: '',
         code: 200
     },
     {
         path: '/:cityName/item/:itemLink',
         component: Home,
+        type: 'home',
         code: 200
     },
     {
         path: '/:cityName/menu/:catLink/item/:itemId',
         component: Home,
+        type: 'home',
         code: 200
     },
     {
         path: '/',
         exact: true,
         component: Contact,
+        type: '',
         code: 200
     },
     {
         path: '/:cityName/profile',
         exact: true,
         component: Profile,
+        type: '',
         code: 200
     },
     {
         path: '/:cityName/cart',
         exact: true,
         component: Cart,
+        type: '',
         code: 200
     },
     
@@ -81,36 +92,42 @@ module.exports = [
         path: '/:cityName/about',
         exact: true,
         component: PageAbout,
+        type: '',
         code: 200
     },
     {
         path: '/:cityName/jobs',
         exact: true,
         component: PageJob,
+        type: '',
         code: 200
     },
     {
         path: '/:cityName/instpayorders',
         exact: true,
         component: PageInstPay,
+        type: '',
         code: 200
     },
     {
         path: '/:cityName/publichnaya-oferta',
         exact: true,
         component: PageOferta,
+        type: '',
         code: 200
     },
     {
         path: '/:cityName/politika-konfidencialnosti',
         exact: true,
         component: PagePolitika,
+        type: '',
         code: 200
     },
     
     {
         path: '*',
         component: NotFound,
+        type: '',
         code: 404
     },
 ];
