@@ -72,11 +72,28 @@ app.use( '*', async ( req, res ) => {
         
         meta = `
             <meta property="og:title" content="${componentData.title}">
+            <meta property="og:description" content="${componentData.description}">
             <meta property="og:site_name" content="Жако роллы и пицца">
-            <meta property="og:type" content=“article”>
+            <meta property="og:type" content="website">
             <meta property="og:url" content="https://jacofood.ru${req.originalUrl}">
-            <meta property="og:description" content="${componentData.description}">`;
+            `;
         
+        if( matchRoute.type == 'item' ){  
+            
+            //componentData.allItems.find( (item) => item.link == '' )
+            
+            /*meta += `
+                <meta property="og:image" content="https://jacofood.ru/src/img/items/Set_Taiti.jpg">
+                <meta property="og:image:width" content="300" />
+                
+            
+                <meta name="twitter:card" content="summary_large_image" /> 
+                <meta name="twitter:title" content="${componentData.title}" /> 
+                <meta name="twitter:desсription" content="${componentData.description}" /> 
+                <meta name="twitter:image" content="https://jacofood.ru/src/img/items/Set_Taiti.jpg" /> 
+            `;*/
+        }
+            
         indexHTML = indexHTML.replace('<!-- meta -->', `${meta}`);
         
         componentData.cats.forEach(element => {
@@ -127,10 +144,10 @@ app.use( '*', async ( req, res ) => {
         //indexHTML = indexHTML.replace('<h1 class="MuiTypography-root MuiTypography-h5"></h1>', `<h1 class="MuiTypography-root MuiTypography-h5">${componentData.page_h}</h1>`);
         
         // set value of `initial_state` global variable
-        /*indexHTML = indexHTML.replace(
+        indexHTML = indexHTML.replace(
             'var initial_state = null;',
-            `var initial_state = ${ JSON.stringify( componentData ) };`
-        );*/
+            `var initial_state = ${ JSON.stringify( matchRoute ) };`
+        );
 
         // set header and status
         res.contentType( 'text/html' );
