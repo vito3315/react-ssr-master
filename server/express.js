@@ -31,6 +31,10 @@ app.use("/",function (request, response) {
 // for any other requests, send `index.html` as a response
 app.use( '*', async ( req, res ) => {
 
+    if( req.originalUrl == '/' || req.originalUrl == '' ){
+        return res.redirect("/togliatti")
+    }
+    
     // get matched route
     const matchRoute = routes.find( route => matchPath( req.originalUrl, route ) );
 
