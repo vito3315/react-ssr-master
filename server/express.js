@@ -31,6 +31,9 @@ app.use( '*', async ( req, res ) => {
         return res.redirect("/togliatti")
     }
     
+    let city = req.originalUrl.split('/');
+    city = city[1];
+    
     // get matched route
     const matchRoute = routes.find( route => matchPath( req.originalUrl, route ) );
 
@@ -113,7 +116,7 @@ app.use( '*', async ( req, res ) => {
         indexHTML = indexHTML.replace('<!-- meta -->', `${meta}`);
         
         componentData.cats.forEach(element => {
-            header += `<a href="${req.originalUrl}/menu/${element.link}">${element.name}</a>`;
+            header += `<a href="${city}/menu/${element.link}">${element.name}</a>`;
         });
         
         if( matchRoute.type == 'home' ){
@@ -123,7 +126,7 @@ app.use( '*', async ( req, res ) => {
                 body += '<div style="display: flex; flex-wrap: wrap;">';
                 
                 element.items.forEach(item => {
-                    body += `<a href="${req.originalUrl}/menu/${element.link}/item/${item.link}"> <div style="width: 25%;"> <h3>${item.name}</h3> <span>Состав: ${item.tmp_desc}</span> <span>Цена: ${item.price}р</span> </div> </a>`;
+                    body += `<a href="${city}/menu/${element.link}/item/${item.link}"> <div style="width: 25%;"> <h3>${item.name}</h3> <span>Состав: ${item.tmp_desc}</span> <span>Цена: ${item.price}р</span> </div> </a>`;
                 })
                 
                 body += '</div>';
@@ -139,10 +142,10 @@ app.use( '*', async ( req, res ) => {
             `<div id="app">
             
                 <header>
-                    <a href="${req.originalUrl}">Главная</a>
+                    <a href="${city}">Главная</a>
                     ${header}
-                    <a href="${req.originalUrl}/actii">Акции</a>
-                    <a href="${req.originalUrl}/contact">Контакты</a>
+                    <a href="${city}/actii">Акции</a>
+                    <a href="${city}/contact">Контакты</a>
                 </header>
                 <body>
                     <h1 class="MuiTypography-root MuiTypography-h5">${componentData.page.page_h}</h1>
