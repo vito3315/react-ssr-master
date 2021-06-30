@@ -51,19 +51,19 @@ module.exports = [
     {
         path: '/:cityName/menu/:itemLink',
         component: Item,
-        type: '',
+        type: 'item',
         code: 200
     },
     {
         path: '/:cityName/item/:itemLink',
         component: Home,
-        type: 'home',
+        type: 'item',
         code: 200
     },
     {
         path: '/:cityName/menu/:catLink/item/:itemId',
         component: Home,
-        type: 'home',
+        type: 'item',
         code: 200
     },
     {
