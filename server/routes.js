@@ -14,7 +14,7 @@ const { PagePolitika } = require( '../src/components/pagePolitika' );
 
 module.exports = [
     {
-        path: '/:cityName/',
+        path: '/:cityName',
         exact: true,
         component: Home,
         code: 200
@@ -46,6 +46,16 @@ module.exports = [
     {
         path: '/:cityName/menu/:itemLink',
         component: Item,
+        code: 200
+    },
+    {
+        path: '/:cityName/item/:itemLink',
+        component: Home,
+        code: 200
+    },
+    {
+        path: '/:cityName/menu/:catLink/item/:itemId',
+        component: Home,
         code: 200
     },
     {
