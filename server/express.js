@@ -24,8 +24,8 @@ app.use((req, res, next) => {
     next()
 })
 
-app.post('/',function(req,res,next){
-    res.redirect('/togliatti');
+app.use("/",function (request, response) {
+    response.redirect("togliatti")
 });
 
 // for any other requests, send `index.html` as a response
