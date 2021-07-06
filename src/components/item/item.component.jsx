@@ -288,8 +288,6 @@ export class Item extends React.Component {
             window.scrollTo(0, 0);
             itemsStore.setPage('item');
         }
-        
-        
     }
     
     add(){
