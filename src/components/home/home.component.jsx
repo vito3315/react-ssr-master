@@ -457,11 +457,17 @@ export class Home extends React.Component {
                 
                 let checkItem = hash.split('/item/');
                 
+                console.log( 'checkItem', checkItem )
+                
                 if( checkItem.length > 1 ){
                     
                     let allItems = itemsStore.getAllItems();
                     let act_id = checkItem[1];
                     let item = allItems.find( (item) => item.link == act_id );
+                    
+                    console.log( 'checkItem allItems', allItems )
+                    console.log( 'checkItem act_id', act_id )
+                    console.log( 'checkItem item', item )
                     
                     if( window.innerWidth <= 400 ){
                         this.openItem(item.id);
