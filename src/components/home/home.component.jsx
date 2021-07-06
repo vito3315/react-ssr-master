@@ -356,7 +356,8 @@ export class Home extends React.Component {
         let data = {
             type: 'get_page_info', 
             city_id: get_city(propsData),
-            page: '' 
+            page: '',
+            link: propsData
         };
         
         return axios({
