@@ -88,6 +88,8 @@ app.use( '*', async ( req, res ) => {
             
             let link = req.originalUrl.split("/item/")[1];
             
+            console.log('ttt', req.originalUrl)
+            
             componentData.allItems.forEach(element => {
                 element.items.forEach(item => {
                     if( item.link == link ){
