@@ -120,13 +120,17 @@ app.use( '*', async ( req, res ) => {
         
         if( matchRoute.type == 'home' ){
             componentData.allItems.forEach(element => {
-                body += '<h2>'+element.name+'</h2>';
                 
-                body += '<div style="display: flex; flex-wrap: wrap;">';
+                if( element.link == 'rolly' ){
                 
-                element.items.forEach(item => {
-                    body += `<a href="/${city}/item/${item.link}"> <div style="width: 25%;"> <h3>${item.name}</h3> <span>Состав: ${item.tmp_desc}</span> <span>Цена: ${item.price}р</span> </div> </a>`;
-                })
+                    body += '<h2>'+element.name+'</h2>';
+                    
+                    body += '<div style="display: flex; flex-wrap: wrap;">';
+                    
+                    element.items.forEach(item => {
+                        body += `<a href="/${city}/item/${item.link}"> <div style="width: 25%;"> <h3>${item.name}</h3> <span>Состав: ${item.tmp_desc}</span> <span>Цена: ${item.price}р</span> </div> </a>`;
+                    })
+                }
                 
                 body += '</div>';
             });
