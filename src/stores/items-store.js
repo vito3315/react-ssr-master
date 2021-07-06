@@ -178,9 +178,9 @@ class ItemsStore {
       point_id_pic = parseInt( orderInfo.orderPic ) ?? 0;
     }
     
-    let this_date = moment(by_time).format("YYYY-MM-DD"),
-        this_time = moment(by_time).format("H:mm"),
-        this_dow = parseInt(moment(by_time).format("E"));
+    let this_date = '',
+        this_time = '',
+        this_dow = '';
     
     if( by_time == 0 ){
       this_date = moment(new Date()).format("YYYY-MM-DD");
@@ -579,14 +579,14 @@ class ItemsStore {
       let count_ = 0;
       
       if( cart_info ){
-        count_ = cart_info.count;
+        count_ = parseInt(cart_info.count);
       }
       
       let item_info = all_items.find( (item) => item.id == id );
       
       if(item_info){
         let count = count_ + 1,
-            price = item_info['price'];
+            price = parseInt(item_info['price']);
           
         let max_count = itemsStore.check_max_count( parseInt(id) );    
         
@@ -639,7 +639,7 @@ class ItemsStore {
       
       let item_info = all_items.find( (item) => item.id == id ),
           count = parseInt(cart_info.count) - 1,
-          price = item_info['price'];
+          price = parseInt(item_info['price']);
       
       if( count <= 0 ){
         count = 0;

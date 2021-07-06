@@ -432,24 +432,6 @@ export class Home extends React.Component {
             page: '' 
         };
         
-        axios({
-            method: 'POST',
-            url:'https://jacofood.ru/src/php/test_app.php',
-            headers: { 'content-type': 'application/x-www-form-urlencoded' },
-            data: queryString.stringify(data)
-        }).then(response => {
-            if(response['status'] === 200){
-                var json = response['data'];
-                
-                console.log( 'fetchData', json )
-                
-                
-            } 
-        }).catch(function (error) {
-            console.log(error);
-        });
-      
-      
         if (typeof window !== 'undefined') {
             setTimeout(() => {
                 if( localStorage.getItem('goTo') ){
@@ -476,12 +458,15 @@ export class Home extends React.Component {
                 let checkItem = hash.split('/item/');
                 
                 if( checkItem.length > 1 ){
+                    
+                    let allItems = itemsStore.getAllItems();
                     let act_id = checkItem[1];
+                    let item = allItems.find( (item) => item.link == act_id );
                     
                     if( window.innerWidth <= 400 ){
-                        this.openItem(act_id);
+                        this.openItem(item.id);
                     }else{
-                        this.openItemPC(act_id);
+                        this.openItemPC(item.id);
                     }
                     
                     let str = window.location.pathname;
