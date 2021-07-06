@@ -121,7 +121,7 @@ app.use( '*', async ( req, res ) => {
         if( matchRoute.type == 'home' ){
             componentData.allItems.forEach(element => {
                 
-                if( element.link == 'rolly' ){
+                if( element.main_link == 'rolly' ){
                 
                     body += '<h2>'+element.name+'</h2>';
                     
