@@ -309,7 +309,7 @@ export class App extends React.Component {
                         <Route
                             path='/:cityName/menu/:itemLink'
                             exact={ true }
-                            component={ Item }
+                            component={ Home }
                         />
                         <Route
                             path='/:cityName/cart'

@@ -481,7 +481,7 @@ export class Home extends React.Component {
                     this.props.history.replace({ pathname: checkItem[0] })
                 }
                 
-                return ;
+                /*return ;
                 
                 if( hash.length > 0 ){
                     let act_id = hash.split('?item_')[1];
@@ -493,7 +493,7 @@ export class Home extends React.Component {
                     }
                     
                     this.props.history.replace({ pathname: window.location.pathname })
-                }
+                }*/
             }, 1300);
         }
         
