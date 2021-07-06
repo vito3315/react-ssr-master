@@ -88,9 +88,6 @@ app.use( '*', async ( req, res ) => {
             
             let link = req.originalUrl.split("/item/")[1];
             
-            console.log('ttt', req.originalUrl)
-            console.log('ttt 111', matchRoute)
-            
             componentData.allItems.forEach(element => {
                 element.items.forEach(item => {
                     if( item.link == link ){
@@ -128,7 +125,7 @@ app.use( '*', async ( req, res ) => {
                 body += '<div style="display: flex; flex-wrap: wrap;">';
                 
                 element.items.forEach(item => {
-                    body += `<a href="/${city}/menu/${element.link}/item/${item.link}"> <div style="width: 25%;"> <h3>${item.name}</h3> <span>Состав: ${item.tmp_desc}</span> <span>Цена: ${item.price}р</span> </div> </a>`;
+                    body += `<a href="/${city}/item/${item.link}"> <div style="width: 25%;"> <h3>${item.name}</h3> <span>Состав: ${item.tmp_desc}</span> <span>Цена: ${item.price}р</span> </div> </a>`;
                 })
                 
                 body += '</div>';
@@ -149,13 +146,13 @@ app.use( '*', async ( req, res ) => {
                     <a href="/${city}/actii">Акции</a>
                     <a href="/${city}/contact">Контакты</a>
                 </header>
-                <body>
+                <div>
                     <h1 class="MuiTypography-root MuiTypography-h5">${componentData.page.page_h}</h1>
                     
                     <div>
                         ${body}
                     </div>
-                </body>
+                </div>
             
                 
                 ${componentData.page.content}
