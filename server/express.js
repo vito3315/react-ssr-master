@@ -51,9 +51,9 @@ app.use( '*', async ( req, res ) => {
 
         // get HTML string from the `App` component
         let appHTML = ReactDOMServer.renderToString(
-            
-                <App location={ req.originalUrl } data={ componentData } />
-            
+            <StaticRouter location={ req.originalUrl }>
+                <App { ...componentData } />
+            </StaticRouter>
         );
 
         const helmet = Helmet.renderStatic();
