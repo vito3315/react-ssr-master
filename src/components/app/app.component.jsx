@@ -293,18 +293,21 @@ export class App extends React.Component {
                         <Route
                             path='/:cityName/menu'
                             exact={ true }
-                            component={ Home }
-                        />
+                        >
+                            <Home />
+                        </Route>
                         <Route
                             path='/:cityName'
                             exact={ true }
-                            component={ Home }
-                        />
+                        >
+                            <Home />
+                        </Route>
                         <Route
                             path='/:cityName/item/:id'
                             exact={ true }
-                            component={ Home }
-                        />
+                        >
+                            <Home />
+                        </Route>
                         <Route 
                             exact 
                             path='/:cityName/profile/'
@@ -313,8 +316,9 @@ export class App extends React.Component {
                         <Route
                             path='/:cityName/menu/:itemLink'
                             exact={ true }
-                            component={ Home }
-                        />
+                        >
+                            <Home />
+                        </Route>
                         <Route
                             path='/:cityName/cart'
                             exact={ true }

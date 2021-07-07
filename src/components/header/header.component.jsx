@@ -750,7 +750,6 @@ export class Header extends React.Component {
                                 </Grid>
                                 
                                 {this.state.categoryItemsNew.map((item, key) => 
-                                
                                     <Grid item>
                                         <Link 
                                             style={{ padding: '4px 8px' }}
