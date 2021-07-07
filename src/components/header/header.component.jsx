@@ -413,7 +413,7 @@ export class Header extends React.Component {
             categoryItems: this.props.data.all.other.cats.arr,
             cartItems: [],
             activePage: '',
-            is_load: true,
+            is_load: false,
             openCity: false,
             cityName: this.props.city,
             testData: [1, 2, 3, 4],
@@ -482,7 +482,7 @@ export class Header extends React.Component {
     }
     
     load(){
-        //if( !this.is_load ){
+        if( !this.is_load ){
             this.is_load = true;
             
             if( itemsStore.getCity() && this.state.categoryItems.length == 0 ){
@@ -521,7 +521,7 @@ export class Header extends React.Component {
             }else{
                 this.is_load = false;
             }
-        //}
+        }
     }  
     
     openCity(){
@@ -750,7 +750,16 @@ export class Header extends React.Component {
                                 </Grid>
                                 
                                 {this.state.categoryItemsNew.map((item, key) => 
-                                    <a key={key} href={"/"+this.state.cityName+"/menu/"+item.link}>{item.name}</a>    
+                                
+                                    <Grid item>
+                                        <Link 
+                                            style={{ padding: '4px 8px' }}
+                                            to={"/"+this.state.cityName+"/menu/"+item.link} 
+                                            className={"catLink"}
+                                        >
+                                            <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
+                                        </Link>    
+                                    </Grid>    
                                 )}
                                 
                                 <Grid item>
@@ -811,7 +820,7 @@ export class Header extends React.Component {
                                     <img alt="Жако доставка роллов и пиццы" src="https://jacochef.ru/src/img/Bely_fon_logo.png" />
                                 </Link> 
                             </Grid>
-                            <>
+                            <Hidden mdDown>
                                 
                                 <Grid item className="CityProfileNav">
                                     <Typography className="cat" variant="h5" component="span" onClick={this.openCity.bind(this)} style={{ display: 'flex', flexDirection: 'row' }}>{itemsStore.getCityRU()} <ArrowDropDownIcon /></Typography>
@@ -936,7 +945,7 @@ export class Header extends React.Component {
                                 <Grid item style={{ marginLeft: 'auto' }}>
                                     <SimplePopover openLogin={this.openLogin.bind(this)} />
                                 </Grid>
-                            </>
+                            </Hidden>
                         </Grid>
                     
                         <Hidden lgUp>
