@@ -824,7 +824,7 @@ export class Header extends React.Component {
                                 <div style={{ display: 'flex', alignItems: 'baseline', flexDirection: 'row', width: '100%' }}>
                                     {this.props.data.all.other.cats.main_cat.map((item, key) => 
                                         <Grid item key={key}>
-                                            {this.state.activePage == 'home' ?
+                                            {false ?
                                                 item.cats.length > 0 ?
                                                     <>
                                                         <Link id={'link_'+item.id} to={"/"+this.state.cityName+"/"} className="catLink" style={{ padding: '4px 0.5vw' }} onClick={this.handleClick.bind(this)}>
