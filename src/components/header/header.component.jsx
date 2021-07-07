@@ -406,7 +406,7 @@ export class Header extends React.Component {
             activePage: '',
             is_load: false,
             openCity: false,
-            cityName: '',
+            cityName: this.props.city,
             testData: [1, 2, 3, 4],
             cityList: [],
             
