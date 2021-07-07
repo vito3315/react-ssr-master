@@ -52,7 +52,7 @@ app.use( '*', async ( req, res ) => {
         // get HTML string from the `App` component
         let appHTML = ReactDOMServer.renderToString(
             <StaticRouter location={ req.originalUrl }>
-                <App location={ req.originalUrl } />
+                <App location={ req.originalUrl } data={ componentData } />
             </StaticRouter>
         );
 
@@ -142,14 +142,8 @@ app.use( '*', async ( req, res ) => {
         }
         
         
-        
-        
-        // populate `#app` element with `appHTML`
-        indexHTML = indexHTML.replace( 
-            '<div id="app"></div>', 
-            `<div id="app">
-            
-                <div>
+        /*
+        <div>
                     <div>
                         <a href="/${city}">Главная</a>
                         ${header}
@@ -166,6 +160,14 @@ app.use( '*', async ( req, res ) => {
                         ${componentData.page.content}
                     </div>
                 </div>
+        */
+        
+        // populate `#app` element with `appHTML`
+        indexHTML = indexHTML.replace( 
+            '<div id="app"></div>', 
+            `<div id="app">
+            
+                
                 
                 
                 ${ appHTML }
