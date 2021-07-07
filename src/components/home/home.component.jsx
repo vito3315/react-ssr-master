@@ -324,6 +324,138 @@ class CardItem extends React.Component {
     }
 }
 
+class CardItemBot extends React.Component {
+    _isMounted = false;
+    
+    constructor(props) {
+        super(props);
+        
+        this.state = {   
+            city: this.props.city,   
+            item: this.props.data, 
+            count: 0 
+        };
+    }
+    
+    componentDidMount(){
+        this._isMounted = true; 
+        let my_cart = itemsStore.getItems();
+            
+        let item = my_cart.find( (item) => item.item_id == this.state.item['id'] );
+  
+        if( item ){
+            this.setState({ 
+              count: item.count,
+            })
+        }
+        
+        autorun(() => {
+            if( this._isMounted ){
+                let my_cart = itemsStore.getItems();
+                let item = my_cart.find( (item) => item.item_id == this.state.item['id'] );
+          
+                if( item ){
+                    this.setState({ 
+                      count: item.count,
+                    })
+                }else{
+                    this.setState({ 
+                      count: 0,
+                    })
+                }
+            }
+        })
+    }
+    
+    componentWillUnmount(){
+        this._isMounted = false;
+    }
+    
+    add(){
+        if(this._isMounted){
+            itemsStore.AddItem(this.state.item['id']);
+        }
+    }
+    
+    minus(){
+        if(this._isMounted){
+            itemsStore.MinusItem(this.state.item['id']);
+        }
+    }
+    
+    shouldComponentUpdate(nextProps, nextState) {
+        return (
+            this.state.count !== nextState.count ||
+            this.state.item.price !== nextState.item.price
+        );
+    }
+    
+    render() {
+        return (
+            <Card elevation={0} className="CardItem">
+                <a href={'/'+this.state.city+'/menu/item/'+this.state.item.link}>
+                    <CardContent style={{ cursor: 'pointer', position: 'relative' }} onClick={ () => this.props.openItem(this.state.item.id)}>
+                        <picture>
+                            <source 
+                                srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
+                                type="image/webp" 
+                            />
+                            <img 
+                                src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
+                                alt={this.state.item.name}
+                                title={this.state.item.name}
+                                style={{ minHeight: 150 }}
+                            />
+                        </picture>
+                        
+                        { parseInt(this.state.item.is_new) == 0 ? null :
+                            <img 
+                                src='/assets/is_new.png'
+                                style={{ position: 'absolute', width: 70, top: 0, right: 0 }}
+                            />
+                        }
+                        
+                        <CardContent style={{ padding: '1.2vw', paddingBottom: 0, paddingTop: 0 }}>
+                            <Typography className="CardNameItem" gutterBottom variant="h5" component="span">{this.state.item.name}</Typography>
+                            <Typography gutterBottom className="CardInfoWeiItem" component="p">{this.state.item.info_weight}</Typography>
+                            <Typography className="CardInfoItem" component="p">{this.state.item.tmp_desc}</Typography>
+                        </CardContent>
+                    </CardContent>
+                    
+                    <CardActions className="CardAction">
+                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginLeft: 0, width: '100%' }}>
+                            <div><Typography className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <Ruble /></Typography></div>
+                            {this.state.count == 0 ?
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder fohover">
+                                    <Button variant="contained" className="BtnCardMain CardInCardItem NONHOVERED" onClick={this.add.bind(this)}>
+                                        <ShoppingCartOutlinedIcon color='inherit'  />
+                                    </Button>
+                                    <Button variant="contained" className="BtnCardMain CardInCardItem HOVERED" onClick={this.add.bind(this)}>В корзину</Button>
+                                </ButtonGroup>
+                                    :
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder count">
+                                    <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this)}>
+                                        <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
+                                    </Button>
+                                    <Button variant="contained" className="BtnCardMain" >
+                                        <Typography className="CardCountItem" component="span">{this.state.count}</Typography>
+                                    </Button>
+                                    <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this)}> 
+                                        <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
+                                    </Button>
+                                </ButtonGroup>
+                            }
+                        
+                        </div>
+                
+                        
+                    </CardActions>
+                </a>
+            </Card>
+        )
+    }
+}
+
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -336,7 +468,7 @@ export class Home extends React.Component {
         
         this.state = {      
             allItems: [],  
-            is_load: true,
+            is_load: false,
             testData: [1, 2, 3, 4, 5, 6, 7, 8],
             openItem: null,
             openModal: false,
@@ -712,39 +844,26 @@ export class Home extends React.Component {
     }
     
     render() {
-        if( itemsStore.getAllItemsCat().length == 0 ){
+        if( this.state.is_load === false ){
             return (
                 <Element name="myScrollToElement" className="Category">
                     
-                    <Hidden xsDown>
-                        <div style={{ width: '79.3vw', marginLeft: '9.6vw', borderRadius: 10, height: 300, marginTop: 80, marginBottom: 50, backgroundColor: 'rgb(229, 229, 229)' }} />
                     
-                        <div>
+                    {itemsStore.getAllItemsCat().map((cat, key) => 
+                        <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
+                            <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%', paddingBottom: 40 }} className="MainItems mainContainer">
+                                <Typography variant="h5" component="h3">{ cat.name }</Typography>
+                            </Grid>
                             <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
-                                {this.state.testData.map((it, k) => (
-                                    <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '10px 8px'}}>
-                                        <Hidden xsDown>
-                                            <div style={{ width: 260, height: 170, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
-                                            <div style={{ width: 120, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
-                                            <div style={{ width: 260, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
-                                            <div style={{ width: 260, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
-                                            <div style={{ width: 260, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
-                                        </Hidden>
-                                        <Hidden smUp>
-                                            <div style={{ width: '79.3vw', marginLeft: 15, height: 170, marginBottom: 10, backgroundColor: '#e5e5e5' }} />
-                                            <div style={{ marginLeft: 15}}>
-                                                <div style={{ width: 100, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
-                                                <div style={{ width: 150, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
-                                                <div style={{ width: 150, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
-                                                <div style={{ width: 150, height: 20, backgroundColor: '#e5e5e5', marginBottom: 10 }} />
-                                            </div>
-                                        </Hidden>
+                                {cat.items.map((it, k) => (
+                                    <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '10px 8px', display: 'flex'}}>
+                                        <CardItemBot city={this.state.city_name} data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
                                     </Grid>
                                 ))}
                             </Grid>
                         </div>
-                        
-                    </Hidden>
+                    )}
+                    
                     <Hidden smUp>
                         <Backdrop style={{ zIndex: 4, color: '#fff' }} open={true}>
                             <CircularProgress color="inherit" />
@@ -787,9 +906,12 @@ export class Home extends React.Component {
                         <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
                             {cat.items.map((it, k) => (
                                 <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '10px 8px', display: 'flex'}}>
-                                    
+                                    <Hidden xsDown>
                                         <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
-                                    
+                                    </Hidden>
+                                    <Hidden smUp>
+                                        <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
+                                    </Hidden>
                                 </Grid>
                             ))}
                         </Grid>
