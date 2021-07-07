@@ -11,6 +11,7 @@ const app = express();
 
 // import App component
 const { App } = require( '../src/components/app' );
+const { itemsStore } = require( '../src/stores/items-store' );
 
 // import routes
 const routes = require( './routes' );
@@ -53,6 +54,9 @@ app.use( '*', async ( req, res ) => {
             data: componentData,
             city: city
         }
+        
+        itemsStore.setAllItemsCatNew(componentData.other.cats.main_cat);
+        itemsStore.setBanners(componentData.all.other.cats.baners)
         
         // get HTML string from the `App` component
         let appHTML = ReactDOMServer.renderToString(

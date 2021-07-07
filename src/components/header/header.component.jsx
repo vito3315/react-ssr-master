@@ -397,8 +397,8 @@ export class Header extends React.Component {
         pathname = pathname.split('/');
         pathname = pathname[0];*/
         
-        itemsStore.setAllItemsCatNew(this.props.data.all.other.cats.main_cat);
-        itemsStore.setBanners(this.props.data.all.other.cats.baners)
+        //itemsStore.setAllItemsCatNew(this.props.data.all.other.cats.main_cat);
+        //itemsStore.setBanners(this.props.data.all.other.cats.baners)
         
         this.state = {      
             
