@@ -149,22 +149,25 @@ app.use( '*', async ( req, res ) => {
             '<div id="app"></div>', 
             `<div id="app">
             
-                <header>
-                    <a href="/${city}">Главная</a>
-                    ${header}
-                    <a href="/${city}/actii">Акции</a>
-                    <a href="/${city}/contact">Контакты</a>
-                </header>
                 <div>
-                    <h1 class="MuiTypography-root MuiTypography-h5">${componentData.page.page_h}</h1>
-                    
                     <div>
-                        ${body}
+                        <a href="/${city}">Главная</a>
+                        ${header}
+                        <a href="/${city}/actii">Акции</a>
+                        <a href="/${city}/contact">Контакты</a>
+                    </div>
+                    <div>
+                        <h1 class="MuiTypography-root MuiTypography-h5">${componentData.page.page_h}</h1>
+                        
+                        <div>
+                            ${body}
+                        </div>
+                        
+                        ${componentData.page.content}
                     </div>
                 </div>
-            
                 
-                ${componentData.page.content}
+                
                 ${ appHTML }
             </div>` );
 
