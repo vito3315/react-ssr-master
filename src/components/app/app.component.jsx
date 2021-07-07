@@ -215,7 +215,7 @@ class StickyFooter extends React.Component{
     }
 }
 
-const initialState = !process.env.IS_SERVER ? window.__INITIAL_DATA__ : {};
+//const initialState = !process.env.IS_SERVER ? window.__INITIAL_DATA__ : {};
 
 export class App extends React.Component {
     constructor(props) {
@@ -223,7 +223,7 @@ export class App extends React.Component {
         
         console.log( this.props )
         console.log( props )
-        console.log( 'initialState', initialState )
+        //console.log( 'initialState', initialState )
         
         this.state = {      
             categoryItems: [],  

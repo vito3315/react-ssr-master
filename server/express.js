@@ -118,8 +118,8 @@ app.use( '*', async ( req, res ) => {
             header += `<a href="/${city}/menu/${element.link}">${element.name}</a>`;
         });
         
-        console.log( 'type', matchRoute.type )
-        console.log( 'componentData.allItems', componentData.allItems )
+        //console.log( 'type', matchRoute.type )
+        //console.log( 'componentData.allItems', componentData.allItems )
         
         if( matchRoute.type == 'home' ){
             componentData.allItems.forEach(element => {
@@ -178,7 +178,7 @@ app.use( '*', async ( req, res ) => {
         // set value of `initial_state` global variable
         indexHTML = indexHTML.replace(
             'var initial_state = null;',
-            `var initial_state = ${ JSON.stringify( componentData ) };`
+            `window.__INITIAL_DATA__ = ${ JSON.stringify( componentData ) };`
         );
 
         // set header and status
