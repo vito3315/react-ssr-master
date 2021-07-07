@@ -343,13 +343,13 @@ export class Home extends React.Component {
             openModalPC: false,
             banners_pc: [],
             banners_mobile: [],
-            city_name: props.match.params.cityName,
+            city_name: this.props.city,
             page: null,
             title: '',
             description: ''
         };
         
-        itemsStore.setCity(props.match.params.cityName);
+        itemsStore.setCity(this.props.city);
     }
 
     static fetchData(propsData) {
