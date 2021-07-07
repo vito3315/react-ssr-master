@@ -119,6 +119,7 @@ app.use( '*', async ( req, res ) => {
         });
         
         console.log( 'type', matchRoute.type )
+        console.log( 'componentData.allItems', componentData.allItems )
         
         if( matchRoute.type == 'home' ){
             componentData.allItems.forEach(element => {
