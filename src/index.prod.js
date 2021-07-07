@@ -6,4 +6,4 @@ import { BrowserRouter } from 'react-router-dom';
 import { App } from './components/app';
 
 // compile App component in `#app` HTML element
-ReactDOM.hydrate( <BrowserRouter><App /></BrowserRouter>, document.getElementById( 'app' ) );
+ReactDOM.hydrate( <BrowserRouter><App globalState={GLOBAL_STATE} /></BrowserRouter>, document.getElementById( 'app' ) );
