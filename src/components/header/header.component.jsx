@@ -822,7 +822,7 @@ export class Header extends React.Component {
                                 </Grid>
                                 
                                 <div style={{ display: 'flex', alignItems: 'baseline', flexDirection: 'row', width: '100%' }}>
-                                    {this.state.categoryItemsNew.map((item, key) => 
+                                    {this.props.data.all.other.cats.main_cat.map((item, key) => 
                                         <Grid item key={key}>
                                             {this.state.activePage == 'home' ?
                                                 item.cats.length > 0 ?
