@@ -118,6 +118,8 @@ app.use( '*', async ( req, res ) => {
             header += `<a href="/${city}/menu/${element.link}">${element.name}</a>`;
         });
         
+        console.log( 'type', matchRoute.type )
+        
         if( matchRoute.type == 'home' ){
             componentData.allItems.forEach(element => {
                 
