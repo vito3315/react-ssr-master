@@ -26,8 +26,9 @@ module.exports = {
     // output files and chunks
     output: {
         path: path.resolve( __dirname, 'dist' ),
-        filename: 'build/[name].js',
-        publicPath: '/'
+        publicPath: '/',
+        filename: '[name].[contenthash].js',
+        clean: true,
     },
 
     // module/loaders configuration
@@ -98,26 +99,22 @@ module.exports = {
 
     // resolve files configuration
     resolve: {
-        
-        // file extensions
         extensions: [ '.js', '.jsx', '.scss', '.css' ],
     },
 
     // webpack optimizations
     optimization: {
-        runtimeChunk: false,
+        moduleIds: 'deterministic',
+        runtimeChunk: 'single',
         splitChunks: {
             cacheGroups: {
-                default: false,
-                vendors: false,
-                
                 vendor: {
-                    chunks: 'all', // both : consider sync + async chunks for evaluation
-                    name: 'vendor', // name of chunk file
-                    test: /node_modules/, // test regular expression
-                }
-            }
-        }
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendors',
+                    chunks: 'all',
+                },
+            },
+       },
     },
     
     // development server configuration
@@ -127,7 +124,7 @@ module.exports = {
     },
 
     // generate source map
-    //devtool: ( 'development' === process.env.NODE_ENV ? 'eval-source-map' : 'eval' ),
-    devtool: 'source-map'
+    devtool: ( process.env.NODE_ENV === 'development' ? 'source-map' : 'eval-source-map' ),
+    //devtool: 'source-map'
 
 };
