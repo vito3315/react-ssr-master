@@ -148,23 +148,6 @@ app.use( '*', async ( req, res ) => {
         indexHTML = indexHTML.replace( 
             '<div id="app"></div>', 
             `<div id="app">
-            
-                <header>
-                    <a href="/${city}">Главная</a>
-                    ${header}
-                    <a href="/${city}/actii">Акции</a>
-                    <a href="/${city}/contact">Контакты</a>
-                </header>
-                <div>
-                    <h1 class="MuiTypography-root MuiTypography-h5">${componentData.page.page_h}</h1>
-                    
-                    <div>
-                        ${body}
-                    </div>
-                </div>
-            
-                
-                ${componentData.page.content}
                 ${ appHTML }
             </div>` );
 
