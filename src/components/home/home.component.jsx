@@ -787,12 +787,9 @@ export class Home extends React.Component {
                         <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
                             {cat.items.map((it, k) => (
                                 <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '10px 8px', display: 'flex'}}>
-                                    <Hidden xsDown>
+                                    
                                         <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
-                                    </Hidden>
-                                    <Hidden smUp>
-                                        <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
-                                    </Hidden>
+                                    
                                 </Grid>
                             ))}
                         </Grid>
