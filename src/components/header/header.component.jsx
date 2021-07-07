@@ -407,7 +407,7 @@ export class Header extends React.Component {
         
         
         this.state = {      
-            
+            this_link: this.props.this_link,
             categoryItemsNew: this.props.data.all.other.cats.main_cat,
             
             categoryItems: this.props.data.all.other.cats.arr,
@@ -546,7 +546,7 @@ export class Header extends React.Component {
     }
     
     getNewLink(city){
-        let this_addr = window.location.pathname;
+        let this_addr = this.state.this_link;
         return this_addr.replace(this.state.cityName, city);
     }
 
