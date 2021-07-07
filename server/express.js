@@ -49,10 +49,14 @@ app.use( '*', async ( req, res ) => {
             encoding: 'utf8',
         } );
 
+        const GLOBAL_STATE = {
+            data: componentData,
+        }
+        
         // get HTML string from the `App` component
         let appHTML = ReactDOMServer.renderToString(
             <StaticRouter location={ req.originalUrl }>
-                <App { ...componentData } />
+                <App globalState={GLOBAL_STATE} />
             </StaticRouter>
         );
 
@@ -172,13 +176,13 @@ app.use( '*', async ( req, res ) => {
                 
                 ${ appHTML }
             </div>` );
-
+            //GLOBAL_STATE = ${JSON.stringify(GLOBAL_STATE)};
         //indexHTML = indexHTML.replace('<h1 class="MuiTypography-root MuiTypography-h5"></h1>', `<h1 class="MuiTypography-root MuiTypography-h5">${componentData.page_h}</h1>`);
         
         // set value of `initial_state` global variable
         indexHTML = indexHTML.replace(
             'var initial_state = null;',
-            `window.__INITIAL_DATA__ = ${ JSON.stringify( componentData ) };`
+            `GLOBAL_STATE = ${JSON.stringify(GLOBAL_STATE)};`
         );
 
         // set header and status

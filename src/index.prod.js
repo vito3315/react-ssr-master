@@ -5,9 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 // import App components
 import { App } from './components/app';
 
-const DATA = {
-    text: 'Hello World!'
-}
+
 
 // compile App component in `#app` HTML element
-ReactDOM.hydrate( <BrowserRouter><App { ...DATA } /></BrowserRouter>, document.getElementById( 'app' ) );
+ReactDOM.hydrate( <BrowserRouter><App globalState={GLOBAL_STATE} /></BrowserRouter>, document.getElementById( 'app' ) );
