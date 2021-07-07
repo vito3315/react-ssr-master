@@ -220,6 +220,7 @@ export class App extends React.Component {
         super(props);
         
         console.log( this.props )
+        console.log( props )
         
         this.state = {      
             categoryItems: [],  

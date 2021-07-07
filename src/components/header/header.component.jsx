@@ -389,6 +389,9 @@ export class Header extends React.Component {
     constructor(props) {
         super(props);
         
+        console.log( this.props )
+        console.log( props )
+        
         /*let pathname = window.location.pathname;
         
         pathname = pathname.split('/');
