@@ -51,7 +51,7 @@ module.exports = [
     {
         path: '/:cityName/menu/:itemLink',
         component: Home,
-        type: 'Home',
+        type: 'home',
         code: 200
     },
     {
