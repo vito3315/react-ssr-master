@@ -397,6 +397,9 @@ export class Header extends React.Component {
         pathname = pathname.split('/');
         pathname = pathname[0];*/
         
+        itemsStore.setAllItemsCatNew(this.props.data.all.other.cats.main_cat);
+        itemsStore.setBanners(this.props.data.all.other.cats.baners)
+        
         this.state = {      
             
             categoryItemsNew: this.props.data.all.other.cats.main_cat,
@@ -495,9 +498,9 @@ export class Header extends React.Component {
                     itemsStore.setDops(json.need_dop);
                     itemsStore.setAllItems(json.all_items);
                     itemsStore.setAllItemsCat(json.arr);
-                    itemsStore.setAllItemsCatNew(json.main_cat);
+                    //itemsStore.setAllItemsCatNew(json.main_cat);
                     itemsStore.setFreeItems(json.free_items);
-                    itemsStore.setBanners(json.baners)
+                    //itemsStore.setBanners(json.baners)
                     itemsStore.setCityRU(json.this_city_name_ru);
                     
                     this.setState({
