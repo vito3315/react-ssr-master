@@ -277,7 +277,7 @@ export class App extends React.Component {
             <Provider { ...stores }>
                 <div className="home">
                                
-                    <Header data={this.props.globalState.data} />        
+                    <Header data={this.props.globalState.data} city={this.props.globalState.city} />        
                     
                     <Switch>
                         <Route

@@ -51,6 +51,7 @@ app.use( '*', async ( req, res ) => {
 
         const GLOBAL_STATE = {
             data: componentData,
+            city: city
         }
         
         // get HTML string from the `App` component
