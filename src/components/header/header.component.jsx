@@ -722,7 +722,7 @@ export class Header extends React.Component {
     
     render() {
         
-        if( this.state.is_load === false ){
+        /*if( this.state.is_load === false ){
             return (
                 <AppBar position="fixed" className="header" style={{ zIndex: 2 }}>
                     <Toolbar className="sub_header">
@@ -791,7 +791,7 @@ export class Header extends React.Component {
                     }
                 </AppBar>
             )
-        }
+        }*/
         
         return (
             <div>
