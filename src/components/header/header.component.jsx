@@ -399,7 +399,7 @@ export class Header extends React.Component {
         
         this.state = {      
             
-            categoryItemsNew: this.props.data.cats,
+            categoryItemsNew: this.props.data.all.other.cats.main_cat,
             
             categoryItems: [],  
             cartItems: [],
@@ -503,7 +503,7 @@ export class Header extends React.Component {
                     this.setState({
                         cityList: json.city_list,
                         categoryItems: json.arr, 
-                        categoryItemsNew: json.main_cat,
+                        //categoryItemsNew: json.main_cat,
                         is_load: true,
                     });
                     this.is_load = false
