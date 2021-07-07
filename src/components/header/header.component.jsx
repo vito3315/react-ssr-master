@@ -398,6 +398,9 @@ export class Header extends React.Component {
         pathname = pathname[0];*/
         
         this.state = {      
+            
+            categoryItemsNew: this.props.data.cats,
+            
             categoryItems: [],  
             cartItems: [],
             activePage: '',
