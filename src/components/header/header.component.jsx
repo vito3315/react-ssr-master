@@ -741,10 +741,8 @@ export class Header extends React.Component {
                                 </Grid>
                                 
                                 {this.state.categoryItemsNew.map((item, key) => 
-                                    <Grid item key={key}>
-                                        <a href={"/"+this.state.cityName+"/menu/"+item.link}>{item.name}</a>    
-                                    </Grid>)
-                                }
+                                    <a key={key} href={"/"+this.state.cityName+"/menu/"+item.link}>{item.name}</a>    
+                                )}
                                 
                                 <Grid item>
                                     <Link 
