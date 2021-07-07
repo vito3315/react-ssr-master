@@ -390,7 +390,7 @@ export class Header extends React.Component {
         super(props);
         
         console.log( this.props )
-        console.log( props )
+        
         
         /*let pathname = window.location.pathname;
         
@@ -503,7 +503,7 @@ export class Header extends React.Component {
                     this.setState({
                         cityList: json.city_list,
                         categoryItems: json.arr, 
-                        //categoryItemsNew: json.main_cat,
+                        categoryItemsNew: json.main_cat,
                         is_load: true,
                     });
                     this.is_load = false
@@ -721,6 +721,78 @@ export class Header extends React.Component {
     };
     
     render() {
+        
+        if( this.state.is_load === false ){
+            return (
+                <AppBar position="fixed" className="header" style={{ zIndex: 2 }}>
+                    <Toolbar className="sub_header">
+                        
+                        <Grid>
+                            <Grid item style={{ marginRight: 15 }}>
+                                <Link to={"/"+this.state.cityName+"/"}>
+                                    <img alt="Жако доставка роллов и пиццы" src="https://jacochef.ru/src/img/Bely_fon_logo.png" />
+                                </Link> 
+                            </Grid>
+                            <Hidden mdDown>
+                                
+                                <Grid item className="CityProfileNav">
+                                    <Typography className="cat" variant="h5" component="span" onClick={this.openCity.bind(this)} style={{ display: 'flex', flexDirection: 'row' }}>{itemsStore.getCityRU()} <ArrowDropDownIcon /></Typography>
+                                    <Typography className="cat" variant="h5" component="span" onClick={this.openLogin.bind(this)}>Войти</Typography>
+                                </Grid>
+                                
+                                {this.state.categoryItemsNew.map((item, key) => 
+                                    <Grid item key={key}>
+                                        <a href={"/"+this.state.cityName+"/menu/"+item.link}>{item.name}</a>    
+                                    </Grid>)
+                                }
+                                
+                                <Grid item>
+                                    <Link 
+                                        style={{ padding: '4px 8px' }}
+                                        to={"/"+this.state.cityName+"/actii"} 
+                                        className={ this.state.activePage == 'actii' ? "catLink activeCat" : "catLink"}
+                                    >
+                                        <Typography className="cat" variant="h5" component="span">Акции</Typography>
+                                    </Link>    
+                                </Grid>
+                                <Grid item>
+                                    <Link 
+                                        style={{ padding: '4px 8px' }}
+                                        to={"/"+this.state.cityName+"/contact"} 
+                                        className={ this.state.activePage == 'contact' ? "catLink activeCat" : "catLink"}
+                                    >
+                                        <Typography className="cat" variant="h5" component="span">Контакты</Typography>
+                                    </Link>    
+                                </Grid>
+                                <Grid item>
+                                    <SimplePopover openLogin={this.openLogin.bind(this)} />
+                                </Grid>
+                            </Hidden>
+                        </Grid>
+                    
+                        <Hidden lgUp>
+                            <Typography variant="h5" component="span" className="thisCity" onClick={this.openCity.bind(this)}><FontAwesomeIcon icon={ faMapMarkerAlt } /> {itemsStore.getCityRU()}</Typography>
+                        </Hidden>
+                                
+                    </Toolbar>
+                    
+                    {this.state.activePage == 'home' ?
+                        <Grid className="scrollCat">
+                            <Hidden lgUp>
+                                {this.state.testData.map((item, key) => 
+                                    <Grid item key={key}>
+                                        <div style={{ width: 120, height: 28, marginRight: 12, backgroundColor: '#e5e5e5' }} />    
+                                    </Grid>)
+                                }
+                            </Hidden>
+                        </Grid>
+                            :
+                        null
+                    }
+                </AppBar>
+            )
+        }
+        
         return (
             <div>
                 <AppBar position="fixed" className="header" style={{ zIndex: 2 }}>
@@ -732,7 +804,7 @@ export class Header extends React.Component {
                                     <img alt="Жако доставка роллов и пиццы" src="https://jacochef.ru/src/img/Bely_fon_logo.png" />
                                 </Link> 
                             </Grid>
-                            <>
+                            <Hidden mdDown>
                                 
                                 <Grid item className="CityProfileNav">
                                     <Typography className="cat" variant="h5" component="span" onClick={this.openCity.bind(this)} style={{ display: 'flex', flexDirection: 'row' }}>{itemsStore.getCityRU()} <ArrowDropDownIcon /></Typography>
@@ -750,9 +822,9 @@ export class Header extends React.Component {
                                 </Grid>
                                 
                                 <div style={{ display: 'flex', alignItems: 'baseline', flexDirection: 'row', width: '100%' }}>
-                                    {this.props.data.all.other.cats.main_cat.map((item, key) => 
+                                    {this.state.categoryItemsNew.map((item, key) => 
                                         <Grid item key={key}>
-                                            {false ?
+                                            {this.state.activePage == 'home' ?
                                                 item.cats.length > 0 ?
                                                     <>
                                                         <Link id={'link_'+item.id} to={"/"+this.state.cityName+"/"} className="catLink" style={{ padding: '4px 0.5vw' }} onClick={this.handleClick.bind(this)}>
@@ -857,7 +929,7 @@ export class Header extends React.Component {
                                 <Grid item style={{ marginLeft: 'auto' }}>
                                     <SimplePopover openLogin={this.openLogin.bind(this)} />
                                 </Grid>
-                            </>
+                            </Hidden>
                         </Grid>
                     
                         <Hidden lgUp>
