@@ -458,6 +458,11 @@ export class Header extends React.Component {
                     }
                 }
             }
+            
+            this.setState({
+                is_load: true
+            })
+            
         }, 300)
         
         autorun(() => {
