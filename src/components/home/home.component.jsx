@@ -859,13 +859,13 @@ export class Home extends React.Component {
         link = link.split('/');
         let mainLink = '';
         
-        let check = link.find('menu');
+        let check = link.find( (item) => item == 'menu');
         
         if( check && check.length > 0 ){
-            let check2 = link.find('item');
+            let check2 = link.find( (item) => item == 'item');
             
             if( !check2 ){
-                let index = link.findIndex('menu');
+                let index = link.findIndex( (item) => item == 'menu');
                 mainLink = link[ index+1 ];
             }
         }
