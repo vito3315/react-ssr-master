@@ -399,7 +399,7 @@ export class App extends React.Component {
                             </Hidden>
                         }
                         
-                        <StickyFooter cityName={ this.state.cityName } />
+                        <StickyFooter cityName={ this.props.globalState.city } />
                     </div>
                 
             </Provider>
