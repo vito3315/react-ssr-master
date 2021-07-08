@@ -880,7 +880,7 @@ export class Home extends React.Component {
                         
                         
                         {itemsStore.getAllItemsCat().map((cat, key) => 
-                            { mainLink == '' || mainLink == cat.main_link ?
+                            mainLink == '' || mainLink == cat.main_link ?
                                 <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
                                     <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%', paddingBottom: 40 }} className="MainItems mainContainer">
                                         <Typography variant="h5" component="h3">{ cat.name }</Typography>
@@ -895,7 +895,7 @@ export class Home extends React.Component {
                                 </div>
                                     :
                                 null
-                            }
+                            
                         )}
                         
                         <Hidden smUp>
@@ -930,7 +930,7 @@ export class Home extends React.Component {
                         </Hidden>
                         
                         {itemsStore.getAllItemsCat().map((cat, key) => 
-                            { mainLink == '' || mainLink == cat.main_link ?
+                            mainLink == '' || mainLink == cat.main_link ?
                                 <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
                                     <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%', paddingBottom: 40 }} className="MainItems mainContainer">
                                         <Typography variant="h5" component="h3">{ cat.name }</Typography>
@@ -950,7 +950,7 @@ export class Home extends React.Component {
                                 </div>
                                     :
                                 null
-                            }
+                            
                         )}
                         
                         {this.state.openItem ?
