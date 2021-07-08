@@ -1,7 +1,4 @@
 import React from 'react';
-
-import { CSSTransitionGroup } from 'react-transition-group'
-
 import { NavLink as Link, Switch, Route, Redirect } from 'react-router-dom';
 
 import { Home } from '../home';
@@ -282,7 +279,7 @@ export class App extends React.Component {
         
         return (
             <Provider { ...stores }>
-                <CSSTransitionGroup component="div" transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300} >
+                
                     <div className="home">
                                    
                         <Header 
@@ -373,7 +370,7 @@ export class App extends React.Component {
                             />
                         </Switch>
                         
-                    
+                     
                         {this.state.activePage == 'cart' ?
                             <Hidden lgUp>
                                 <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 72+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
@@ -404,7 +401,7 @@ export class App extends React.Component {
                         
                         <StickyFooter cityName={ this.state.cityName } />
                     </div>
-                </CSSTransitionGroup>
+                
             </Provider>
         );
     }
