@@ -481,9 +481,137 @@ export class Home extends React.Component {
             description: ''
         };
         
+        this.loadBanners( this.props.data.all.other.cats.baners );
         itemsStore.setCity(this.props.city);
     }
 
+    loadBanners(banners){
+        let banners_pc = [],
+            banners_mobile = [];
+        
+        banners.map((item, key) => {
+            if( item.aktia_id && parseInt(item.aktia_id) > 0 ){
+                banners_pc.push(
+                    <Link
+                        to={'/'+itemsStore.getCity()+'/actii#act'+item.aktia_id}
+                        exact={ true }
+                        style={{ width: 'inherit', height: 'auto', borderRadius: 15 }}
+                    >
+                        <picture style={{ width: 'inherit', height: 'auto' }}>
+                            <source 
+                                srcSet={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"3700х1000.webp?"+item.img_new_update} 
+                                type="image/webp" 
+                            />
+                            <img 
+                                src={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"3700х1000.jpg?"+item.img_new_update} 
+                                //alt={this.state.item.name}
+                                //title={this.state.item.name}
+                                style={{ width: 'inherit', height: 'auto', minHeight: 250, borderRadius: 15 }}
+                                onDragStart={handleDragStart}
+                            />
+                        </picture>
+                    </Link>
+                )
+                
+                banners_mobile.push(
+                    <Link
+                        to={'/'+itemsStore.getCity()+'/actii#act'+item.aktia_id}
+                        exact={ true }
+                        style={{ width: 'inherit', height: 'auto', borderRadius: 15 }}
+                    >
+                        <picture style={{ width: 'inherit', height: 'auto' }}>
+                            <source 
+                                srcSet={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"1000х500.webp?"+item.img_new_update} 
+                                type="image/webp" 
+                            />
+                            <img 
+                                src={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"1000х500.jpg?"+item.img_new_update} 
+                                //alt={this.state.item.name}
+                                //title={this.state.item.name}
+                                style={{ width: 'inherit', height: 'auto', borderRadius: 15 }}
+                                onDragStart={handleDragStart}
+                            />
+                        </picture>
+                    </Link>
+                )
+                
+            }else{
+                if( item.item && parseInt(item.item) > 0 ){
+                    banners_pc.push(
+                        <picture style={{ width: 'inherit', height: 'auto' }}>
+                            <source 
+                                srcSet={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"3700х1000.webp?"+item.img_new_update} 
+                                type="image/webp" 
+                            />
+                            <img 
+                                src={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"3700х1000.jpg?"+item.img_new_update} 
+                                //alt={this.state.item.name}
+                                //title={this.state.item.name}
+                                style={{ width: 'inherit', height: 'auto', minHeight: 250, borderRadius: 15 }}
+                                onDragStart={handleDragStart}
+                                onClick={this.openItemPC.bind(this, item.item)}
+                            />
+                        </picture>
+                    )
+                    
+                    banners_mobile.push(
+                        <picture style={{ width: 'inherit', height: 'auto' }}>
+                            <source 
+                                srcSet={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"1000х500.webp?"+item.img_new_update} 
+                                type="image/webp" 
+                            />
+                            <img 
+                                src={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"1000х500.jpg?"+item.img_new_update} 
+                                //alt={this.state.item.name}
+                                //title={this.state.item.name}
+                                style={{ width: 'inherit', height: 'auto', borderRadius: 15 }}
+                                onDragStart={handleDragStart}
+                                onClick={this.openItem.bind(this, item.item)}
+                            />
+                        </picture>
+                    )
+                }else{
+                    banners_pc.push(
+                        <picture style={{ width: 'inherit', height: 'auto' }}>
+                            <source 
+                                srcSet={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"3700х1000.webp?"+item.img_new_update} 
+                                type="image/webp" 
+                            />
+                            <img 
+                                src={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"3700х1000.jpg?"+item.img_new_update} 
+                                //alt={this.state.item.name}
+                                //title={this.state.item.name}
+                                style={{ width: 'inherit', height: 'auto', minHeight: 250, borderRadius: 15 }}
+                                onDragStart={handleDragStart}
+                            />
+                        </picture>
+                    )
+                    
+                    banners_mobile.push(
+                        <picture style={{ width: 'inherit', height: 'auto' }}>
+                            <source 
+                                srcSet={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"1000х500.webp?"+item.img_new_update} 
+                                type="image/webp" 
+                            />
+                            <img 
+                                src={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"1000х500.jpg?"+item.img_new_update} 
+                                //alt={this.state.item.name}
+                                //title={this.state.item.name}
+                                style={{ width: 'inherit', height: 'auto', borderRadius: 15 }}
+                                onDragStart={handleDragStart}
+                            />
+                        </picture>
+                    )
+                }
+            }
+        })
+        
+        this.setState({ 
+            banners_pc: banners_pc,
+            banners_mobile: banners_mobile
+        });
+    }
+    
     static fetchData(propsData) {
         let data = {
             type: 'get_page_info', 
@@ -656,130 +784,7 @@ export class Home extends React.Component {
                 allItems: itemsStore.getAllItemsCat()
             })
             
-            let banners_pc = [],
-                banners_mobile = [];
-            
-            itemsStore.getBanners().map((item, key) => {
-                if( item.aktia_id && parseInt(item.aktia_id) > 0 ){
-                    banners_pc.push(
-                        <Link
-                            to={'/'+itemsStore.getCity()+'/actii#act'+item.aktia_id}
-                            exact={ true }
-                            style={{ width: 'inherit', height: 'auto', borderRadius: 15 }}
-                        >
-                            <picture style={{ width: 'inherit', height: 'auto' }}>
-                                <source 
-                                    srcSet={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"3700х1000.webp?"+item.img_new_update} 
-                                    type="image/webp" 
-                                />
-                                <img 
-                                    src={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"3700х1000.jpg?"+item.img_new_update} 
-                                    //alt={this.state.item.name}
-                                    //title={this.state.item.name}
-                                    style={{ width: 'inherit', height: 'auto', minHeight: 250, borderRadius: 15 }}
-                                    onDragStart={handleDragStart}
-                                />
-                            </picture>
-                        </Link>
-                    )
-                    
-                    banners_mobile.push(
-                        <Link
-                            to={'/'+itemsStore.getCity()+'/actii#act'+item.aktia_id}
-                            exact={ true }
-                            style={{ width: 'inherit', height: 'auto', borderRadius: 15 }}
-                        >
-                            <picture style={{ width: 'inherit', height: 'auto' }}>
-                                <source 
-                                    srcSet={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"1000х500.webp?"+item.img_new_update} 
-                                    type="image/webp" 
-                                />
-                                <img 
-                                    src={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"1000х500.jpg?"+item.img_new_update} 
-                                    //alt={this.state.item.name}
-                                    //title={this.state.item.name}
-                                    style={{ width: 'inherit', height: 'auto', borderRadius: 15 }}
-                                    onDragStart={handleDragStart}
-                                />
-                            </picture>
-                        </Link>
-                    )
-                    
-                }else{
-                    if( item.item && parseInt(item.item) > 0 ){
-                        banners_pc.push(
-                            <picture style={{ width: 'inherit', height: 'auto' }}>
-                                <source 
-                                    srcSet={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"3700х1000.webp?"+item.img_new_update} 
-                                    type="image/webp" 
-                                />
-                                <img 
-                                    src={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"3700х1000.jpg?"+item.img_new_update} 
-                                    //alt={this.state.item.name}
-                                    //title={this.state.item.name}
-                                    style={{ width: 'inherit', height: 'auto', minHeight: 250, borderRadius: 15 }}
-                                    onDragStart={handleDragStart}
-                                    onClick={this.openItemPC.bind(this, item.item)}
-                                />
-                            </picture>
-                        )
-                        
-                        banners_mobile.push(
-                            <picture style={{ width: 'inherit', height: 'auto' }}>
-                                <source 
-                                    srcSet={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"1000х500.webp?"+item.img_new_update} 
-                                    type="image/webp" 
-                                />
-                                <img 
-                                    src={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"1000х500.jpg?"+item.img_new_update} 
-                                    //alt={this.state.item.name}
-                                    //title={this.state.item.name}
-                                    style={{ width: 'inherit', height: 'auto', borderRadius: 15 }}
-                                    onDragStart={handleDragStart}
-                                    onClick={this.openItem.bind(this, item.item)}
-                                />
-                            </picture>
-                        )
-                    }else{
-                        banners_pc.push(
-                            <picture style={{ width: 'inherit', height: 'auto' }}>
-                                <source 
-                                    srcSet={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"3700х1000.webp?"+item.img_new_update} 
-                                    type="image/webp" 
-                                />
-                                <img 
-                                    src={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"3700х1000.jpg?"+item.img_new_update} 
-                                    //alt={this.state.item.name}
-                                    //title={this.state.item.name}
-                                    style={{ width: 'inherit', height: 'auto', minHeight: 250, borderRadius: 15 }}
-                                    onDragStart={handleDragStart}
-                                />
-                            </picture>
-                        )
-                        
-                        banners_mobile.push(
-                            <picture style={{ width: 'inherit', height: 'auto' }}>
-                                <source 
-                                    srcSet={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"1000х500.webp?"+item.img_new_update} 
-                                    type="image/webp" 
-                                />
-                                <img 
-                                    src={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"1000х500.jpg?"+item.img_new_update} 
-                                    //alt={this.state.item.name}
-                                    //title={this.state.item.name}
-                                    style={{ width: 'inherit', height: 'auto', borderRadius: 15 }}
-                                    onDragStart={handleDragStart}
-                                />
-                            </picture>
-                        )
-                    }
-                }
-            })
-            
-            this.setState({ 
-                banners_pc: banners_pc,
-                banners_mobile: banners_mobile
-            });
+            this.loadBanners(itemsStore.getBanners());
         })
     }
 

@@ -297,19 +297,19 @@ export class App extends React.Component {
                             path='/:cityName/menu'
                             exact={ true }
                         >
-                            <Home city={this.props.globalState.city}  />
+                            <Home data={this.props.globalState.data} city={this.props.globalState.city}  />
                         </Route>
                         <Route
                             path='/:cityName'
                             exact={ true }
                         >
-                            <Home city={this.props.globalState.city}  />
+                            <Home data={this.props.globalState.data} city={this.props.globalState.city}  />
                         </Route>
                         <Route
                             path='/:cityName/item/:id'
                             exact={ true }
                         >
-                            <Home city={this.props.globalState.city}  />
+                            <Home data={this.props.globalState.data} city={this.props.globalState.city}  />
                         </Route>
                         <Route 
                             exact 
@@ -320,7 +320,7 @@ export class App extends React.Component {
                             path='/:cityName/menu/:itemLink'
                             exact={ true }
                         >
-                            <Home city={this.props.globalState.city}  />
+                            <Home data={this.props.globalState.data} city={this.props.globalState.city}  />
                         </Route>
                         <Route
                             path='/:cityName/cart'
