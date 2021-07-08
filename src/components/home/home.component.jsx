@@ -855,6 +855,24 @@ export class Home extends React.Component {
     
     render() {
         
+        let link = this.props.this_link;
+        link = link.split('/');
+        let mainLink = '';
+        
+        let check = link.find('menu');
+        
+        if( check && check.length > 0 ){
+            let check2 = link.find('item');
+            
+            if( !check2 ){
+                let index = link.findIndex('menu');
+                mainLink = link[ index+1 ];
+            }
+        }
+        
+        console.log( 'itemsStore.getAllItemsCat()', itemsStore.getAllItemsCat() );
+        console.log( 'mainLink', mainLink );
+        
         return (
             <CSSTransition component="div" transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300} >
                 {this.state.is_load === false ?

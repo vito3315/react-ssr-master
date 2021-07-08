@@ -302,19 +302,19 @@ export class App extends React.Component {
                                 path='/:cityName/menu'
                                 exact={ true }
                             >
-                                <Home data={this.props.globalState.data} city={this.props.globalState.city}  />
+                                <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
                             </Route>
                             <Route
                                 path='/:cityName'
                                 exact={ true }
                             >
-                                <Home data={this.props.globalState.data} city={this.props.globalState.city}  />
+                                <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
                             </Route>
                             <Route
                                 path='/:cityName/item/:id'
                                 exact={ true }
                             >
-                                <Home data={this.props.globalState.data} city={this.props.globalState.city}  />
+                                <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
                             </Route>
                             <Route 
                                 exact 
@@ -325,7 +325,7 @@ export class App extends React.Component {
                                 path='/:cityName/menu/:itemLink'
                                 exact={ true }
                             >
-                                <Home data={this.props.globalState.data} city={this.props.globalState.city}  />
+                                <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
                             </Route>
                             <Route
                                 path='/:cityName/cart'
