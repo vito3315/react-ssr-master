@@ -686,6 +686,10 @@ export class Home extends React.Component {
                     time = Date.now();
                 }
             });
+            
+            this.setState({
+                is_load: true
+            })
         }, 300 )
         
         let data = {
