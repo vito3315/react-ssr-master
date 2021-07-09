@@ -497,8 +497,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export class Home extends React.Component {
     startMove = 0;
     
+    
+    
     constructor(props) {
         super(props);
+        
+        console.log( this.props )
         
         this.state = {      
             allItems: [],  
