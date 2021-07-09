@@ -294,10 +294,7 @@ class CardItem extends React.Component {
                                     </Button>
                                 </ButtonGroup>
                             }
-                        
                         </div>
-                
-                        
                     </CardActions>
                 </Card>
             )
@@ -307,17 +304,12 @@ class CardItem extends React.Component {
             return (
                 <Grid item container xs={12} className="CardItem_mobile">
                     <Grid style={{ position: 'relative' }} item xs={5} sm={5} md={5} xl={5} onClick={ () => this.props.openItem(this.state.item.id)}>
-                        <picture>
-                            <source 
-                                srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.webp?"+this.state.item.img_new_update} 
-                                type="image/webp" 
-                            />
-                            <img 
-                                src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.jpg?"+this.state.item.img_new_update} 
-                                alt={this.state.item.name}
-                                title={this.state.item.name}
-                            />
-                        </picture>
+                        
+                        <Image 
+                            srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.webp?"+this.state.item.img_new_update}   
+                            src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.jpg?"+this.state.item.img_new_update}
+                            name={this.state.item.name}
+                        />
                         
                         { parseInt(this.state.item.is_new) == 0 ? null :
                             <img 
@@ -897,121 +889,114 @@ export class Home extends React.Component {
         //console.log( 'mainLink', mainLink );
         
         return (
-            <CSSTransition component="div" transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300} >
-                {this.state.is_load === false ?
-                    <Element name="myScrollToElement" className="Category">
-                        
-                        
-                        {itemsStore.getAllItemsCat().map((cat, key) => 
-                            mainLink == '' || mainLink == cat.main_link ?
-                                <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
-                                    <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%', paddingBottom: 40 }} className="MainItems mainContainer">
-                                        <Typography variant="h5" component="h3">{ cat.name }</Typography>
-                                    </Grid>
-                                    <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
-                                        {cat.items.map((it, k) => (
-                                            <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '10px 8px', display: 'flex'}}>
-                                                <CardItemBot city={this.state.city_name} data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
-                                            </Grid>
-                                        ))}
-                                    </Grid>
-                                </div>
-                                    :
-                                null
-                            
-                        )}
-                        
-                        <Hidden smUp>
-                            <Backdrop style={{ zIndex: 4, color: '#fff' }} open={true}>
-                                <CircularProgress color="inherit" />
-                            </Backdrop>
-                        </Hidden>
-                    </Element>
-                        :
-                    <Element name="myScrollToElement" className="Category">
-                
-                        <Helmet>
-                            <title>{this.state.title}</title>
-                            <meta name="description" content={this.state.description} />
-                        </Helmet>
-                        
-                        <Hidden xsDown>
-                            { this.state.banners_pc.length == 0 ? null :
-                                <CoverFlowCarousel
-                                    type="pc"
-                                    data={this.state.banners_pc}
-                                />
-                            }
-                        </Hidden>
-                        <Hidden smUp>
-                            { this.state.banners_mobile.length == 0 ? null :
-                                <CoverFlowCarousel
-                                    type="mobile"
-                                    data={this.state.banners_mobile}
-                                />
-                            }
-                        </Hidden>
-                        
-                        {itemsStore.getAllItemsCat().map((cat, key) => 
-                            mainLink == '' || mainLink == cat.main_link ?
-                                <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
-                                    <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%', paddingBottom: 40 }} className="MainItems mainContainer">
-                                        <Typography variant="h5" component="h3">{ cat.name }</Typography>
-                                    </Grid>
-                                    <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
-                                        {cat.items.map((it, k) => (
-                                            <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '10px 8px', display: 'flex'}}>
-                                                <Hidden xsDown>
-                                                    <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
-                                                </Hidden>
-                                                <Hidden smUp>
-                                                    <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
-                                                </Hidden>
-                                            </Grid>
-                                        ))}
-                                    </Grid>
-                                </div>
-                                    :
-                                null
-                            
-                        )}
-                        
-                        {this.state.openItem ?
-                            <Dialog fullScreen open={this.state.openModal} className="ItemDialog" onClose={this.handleClose.bind(this)} TransitionComponent={Transition}>
-                                <MuiDialogTitle disableTypography style={{ margin: 0, padding: 8 }}>
-                                    <IconButton aria-label="close" style={{ position: 'absolute', top: 0, right: 0 }} onClick={this.handleClose.bind(this)}>
-                                        <FontAwesomeIcon icon={faTimes} style={{ fontSize: '1.8rem', color: '#e5e5e5' }} />
-                                    </IconButton>
-                                </MuiDialogTitle>
-                                <div>
-                                    <Item itemId={this.state.openItem.id} item={this.state.openItem} />
-                                </div>
-                            </Dialog>
+            
+            this.state.is_load === false ?
+                <Element name="myScrollToElement" className="Category">
+                    {itemsStore.getAllItemsCat().map((cat, key) => 
+                        mainLink == '' || mainLink == cat.main_link ?
+                            <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
+                                <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%', paddingBottom: 40 }} className="MainItems mainContainer">
+                                    <Typography variant="h5" component="h3">{ cat.name }</Typography>
+                                </Grid>
+                                <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
+                                    {cat.items.map((it, k) => (
+                                        <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '10px 8px', display: 'flex'}}>
+                                            <CardItemBot city={this.state.city_name} data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
+                                        </Grid>
+                                    ))}
+                                </Grid>
+                            </div>
                                 :
                             null
+                    )}
+                    
+                    <Hidden smUp>
+                        <Backdrop style={{ zIndex: 4, color: '#fff' }} open={true}>
+                            <CircularProgress color="inherit" />
+                        </Backdrop>
+                    </Hidden>
+                </Element>
+                    :
+                <Element name="myScrollToElement" className="Category">
+            
+                    <Helmet>
+                        <title>{this.state.title}</title>
+                        <meta name="description" content={this.state.description} />
+                    </Helmet>
+                    
+                    <Hidden xsDown>
+                        { this.state.banners_pc.length == 0 ? null :
+                            <CoverFlowCarousel
+                                type="pc"
+                                data={this.state.banners_pc}
+                            />
                         }
-                        
-                        {this.state.openItem ?
-                            <Dialog maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item" open={this.state.openModalPC}>
-                                <MuiDialogTitle disableTypography style={{ margin: 0, padding: 8 }}>
-                                    <IconButton aria-label="close" style={{ position: 'absolute', top: 0, right: 50 }} onClick={this.handleClosePC.bind(this)}>
-                                        <FontAwesomeIcon icon={faTimes} style={{ fontSize: '1.8rem', color: '#CC0033' }} />
-                                    </IconButton>
-                                </MuiDialogTitle>
-                                
-                                <MuiDialogContent className="modalActiiContent">
-                                    <Item itemId={this.state.openItem.id} item={this.state.openItem} />
-                                </MuiDialogContent>
-                            </Dialog>
+                    </Hidden>
+                    <Hidden smUp>
+                        { this.state.banners_mobile.length == 0 ? null :
+                            <CoverFlowCarousel
+                                type="mobile"
+                                data={this.state.banners_mobile}
+                            />
+                        }
+                    </Hidden>
+                    
+                    {itemsStore.getAllItemsCat().map((cat, key) => 
+                        mainLink == '' || mainLink == cat.main_link ?
+                            <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
+                                <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%', paddingBottom: 40 }} className="MainItems mainContainer">
+                                    <Typography variant="h5" component="h3">{ cat.name }</Typography>
+                                </Grid>
+                                <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
+                                    {cat.items.map((it, k) => (
+                                        <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '10px 8px', display: 'flex'}}>
+                                            <Hidden xsDown>
+                                                <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
+                                            </Hidden>
+                                            <Hidden smUp>
+                                                <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
+                                            </Hidden>
+                                        </Grid>
+                                    ))}
+                                </Grid>
+                            </div>
                                 :
                             null
-                        }
                         
-                    </Element>
-                }
-            </CSSTransition>
+                    )}
+                    
+                    {this.state.openItem ?
+                        <Dialog fullScreen open={this.state.openModal} className="ItemDialog" onClose={this.handleClose.bind(this)} TransitionComponent={Transition}>
+                            <MuiDialogTitle disableTypography style={{ margin: 0, padding: 8 }}>
+                                <IconButton aria-label="close" style={{ position: 'absolute', top: 0, right: 0 }} onClick={this.handleClose.bind(this)}>
+                                    <FontAwesomeIcon icon={faTimes} style={{ fontSize: '1.8rem', color: '#e5e5e5' }} />
+                                </IconButton>
+                            </MuiDialogTitle>
+                            <div>
+                                <Item itemId={this.state.openItem.id} item={this.state.openItem} />
+                            </div>
+                        </Dialog>
+                            :
+                        null
+                    }
+                    
+                    {this.state.openItem ?
+                        <Dialog maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item" open={this.state.openModalPC}>
+                            <MuiDialogTitle disableTypography style={{ margin: 0, padding: 8 }}>
+                                <IconButton aria-label="close" style={{ position: 'absolute', top: 0, right: 50 }} onClick={this.handleClosePC.bind(this)}>
+                                    <FontAwesomeIcon icon={faTimes} style={{ fontSize: '1.8rem', color: '#CC0033' }} />
+                                </IconButton>
+                            </MuiDialogTitle>
+                            
+                            <MuiDialogContent className="modalActiiContent">
+                                <Item itemId={this.state.openItem.id} item={this.state.openItem} />
+                            </MuiDialogContent>
+                        </Dialog>
+                            :
+                        null
+                    }
+                    
+                </Element>
         )
-        
-        
     }
 }
