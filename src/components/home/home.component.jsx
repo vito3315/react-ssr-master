@@ -394,8 +394,9 @@ class CardItemBot extends React.Component {
     render() {
         return (
             <Card elevation={0} className="CardItem">
-                <a href={'/'+this.state.city+'/menu/item/'+this.state.item.link}>
-                    <CardContent style={{ cursor: 'pointer', position: 'relative' }} onClick={ () => this.props.openItem(this.state.item.id)}>
+                
+                <CardContent style={{ cursor: 'pointer', position: 'relative' }} onClick={ () => this.props.openItem(this.state.item.id)}>
+                    <a href={'/'+this.state.city+'/menu/item/'+this.state.item.link}>
                         <picture>
                             <source 
                                 srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
@@ -421,37 +422,34 @@ class CardItemBot extends React.Component {
                             <Typography gutterBottom className="CardInfoWeiItem" component="p">{this.state.item.info_weight}</Typography>
                             <Typography className="CardInfoItem" component="p">{this.state.item.tmp_desc}</Typography>
                         </CardContent>
-                    </CardContent>
+                    </a>
+                </CardContent>
                     
-                    <CardActions className="CardAction">
-                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginLeft: 0, width: '100%' }}>
-                            <div><Typography className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <Ruble /></Typography></div>
-                            {this.state.count == 0 ?
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder fohover">
-                                    <Button variant="contained" className="BtnCardMain CardInCardItem NONHOVERED" onClick={this.add.bind(this)}>
-                                        <ShoppingCartOutlinedIcon color='inherit'  />
-                                    </Button>
-                                    <Button variant="contained" className="BtnCardMain CardInCardItem HOVERED" onClick={this.add.bind(this)}>В корзину</Button>
-                                </ButtonGroup>
-                                    :
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder count">
-                                    <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this)}>
-                                        <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
-                                    </Button>
-                                    <Button variant="contained" className="BtnCardMain" >
-                                        <Typography className="CardCountItem" component="span">{this.state.count}</Typography>
-                                    </Button>
-                                    <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this)}> 
-                                        <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
-                                    </Button>
-                                </ButtonGroup>
-                            }
-                        
-                        </div>
-                
-                        
-                    </CardActions>
-                </a>
+                <CardActions className="CardAction">
+                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginLeft: 0, width: '100%' }}>
+                        <div><Typography className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <Ruble /></Typography></div>
+                        {this.state.count == 0 ?
+                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder fohover">
+                                <Button variant="contained" className="BtnCardMain CardInCardItem NONHOVERED" onClick={this.add.bind(this)}>
+                                    <ShoppingCartOutlinedIcon color='inherit'  />
+                                </Button>
+                                <Button variant="contained" className="BtnCardMain CardInCardItem HOVERED" onClick={this.add.bind(this)}>В корзину</Button>
+                            </ButtonGroup>
+                                :
+                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder count">
+                                <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this)}>
+                                    <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
+                                </Button>
+                                <Button variant="contained" className="BtnCardMain" >
+                                    <Typography className="CardCountItem" component="span">{this.state.count}</Typography>
+                                </Button>
+                                <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this)}> 
+                                    <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
+                                </Button>
+                            </ButtonGroup>
+                        }
+                    </div>
+                </CardActions>
             </Card>
         )
     }
