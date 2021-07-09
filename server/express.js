@@ -21,7 +21,7 @@ const routes = require( './routes' );
 app.get( /\.(js|css|map|ico|png|svg|htaccess)$/, express.static( path.resolve( __dirname, '../dist' ) ) );
 
 app.use((req, res, next) => {
-    res.set('Cache-Control', 'max-age=604800')
+    res.set('Cache-Control', 'public, max-age=604800')
     res.set('Set-Cookie', 'SameSite=None')
     res.set('Accept-Encoding', 'gzip, compress, br')
     next()
