@@ -967,14 +967,14 @@ export class Header extends React.Component {
                                         to={"cat"+item.id} 
                                         spy={true} 
                                         onSetActive={(el) => { 
-                                            /*if( document.querySelector('.activeCat') ){
+                                            if( document.querySelector('.activeCat') ){
                                                 document.querySelector('.activeCat').classList.remove('activeCat');
                                             }
                                             document.querySelector('#link_'+item.id).classList.add('activeCat');
                                             
                                             document.getElementById('link_'+item.id).scrollIntoView(true);
                                             
-                                            if( document.querySelector('.scrollCat') ){
+                                            /*if( document.querySelector('.scrollCat') ){
                                                 document.querySelector('.scrollCat').animate({
                                                     scrollLeft: 200
                                                 }, 100);
