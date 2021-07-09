@@ -9,6 +9,7 @@ const {Helmet} = require("react-helmet");
 const compression = require('compression');
 // create express application
 const app = express();
+app.use(compression());
 
 // import App component
 const { App } = require( '../src/components/app' );
@@ -18,8 +19,6 @@ const routes = require( './routes' );
 
 // serve static assets
 app.get( /\.(js|css|map|ico|png|svg|htaccess)$/, express.static( path.resolve( __dirname, '../dist' ) ) );
-
-app.use(compression());
 
 app.use((req, res, next) => {
     res.set('Cache-Control', 'max-age=604800')
@@ -60,7 +59,7 @@ app.use( '*', async ( req, res ) => {
         }
         
         // get HTML string from the `App` component
-        let appHTML = ReactDOMServer.renderToNodeStream(
+        let appHTML = ReactDOMServer.renderToString(
             <StaticRouter location={ req.originalUrl }>
                 <App globalState={GLOBAL_STATE} />
             </StaticRouter>
