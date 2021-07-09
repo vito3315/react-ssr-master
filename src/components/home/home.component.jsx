@@ -250,11 +250,20 @@ class CardItem extends React.Component {
                 <Card elevation={0} className="CardItem">
                     
                     <CardContent style={{ cursor: 'pointer', position: 'relative' }} onClick={ () => this.props.openItem(this.state.item.id)}>
-                        <Image 
-                            srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update}  
-                            src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update}
-                            name={this.state.item.name}
-                        />
+                        <picture>
+                            <source 
+                                srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
+                                type="image/webp" 
+                                //ref={el => this.elementSource = el}
+                            />
+                            <img 
+                                //ref={el => this.elementImg = el}
+                                src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
+                                alt={this.state.item.name}
+                                title={this.state.item.name}
+                                style={{ minHeight: 150 }}
+                            />
+                        </picture>
                         
                         { parseInt(this.state.item.is_new) == 0 ? null :
                             <img 
@@ -305,11 +314,20 @@ class CardItem extends React.Component {
                 <Grid item container xs={12} className="CardItem_mobile">
                     <Grid style={{ position: 'relative' }} item xs={5} sm={5} md={5} xl={5} onClick={ () => this.props.openItem(this.state.item.id)}>
                         
-                        <Image 
-                            srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.webp?"+this.state.item.img_new_update}   
-                            src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.jpg?"+this.state.item.img_new_update}
-                            name={this.state.item.name}
-                        />
+                        <picture>
+                            <source 
+                                srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.webp?"+this.state.item.img_new_update} 
+                                type="image/webp" 
+                                //ref={el => this.elementSource = el}
+                            />
+                            <img 
+                                //ref={el => this.elementImg = el}
+                                src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.jpg?"+this.state.item.img_new_update} 
+                                alt={this.state.item.name}
+                                title={this.state.item.name}
+                                style={{ minHeight: 150 }}
+                            />
+                        </picture>
                         
                         { parseInt(this.state.item.is_new) == 0 ? null :
                             <img 
@@ -885,11 +903,7 @@ export class Home extends React.Component {
             }
         }
         
-        //console.log( 'itemsStore.getAllItemsCat()', itemsStore.getAllItemsCat() );
-        //console.log( 'mainLink', mainLink );
-        
         return (
-            
             this.state.is_load === false ?
                 <Element name="myScrollToElement" className="Category">
                     {itemsStore.getAllItemsCat().map((cat, key) => 
