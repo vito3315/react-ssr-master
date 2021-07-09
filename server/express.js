@@ -6,6 +6,7 @@ const ReactDOMServer = require( 'react-dom/server' );
 const { StaticRouter, matchPath } = require( 'react-router-dom' );
 const {Helmet} = require("react-helmet");
 
+const compression = require('compression');
 // create express application
 const app = express();
 
@@ -16,7 +17,9 @@ const { App } = require( '../src/components/app' );
 const routes = require( './routes' );
 
 // serve static assets
-app.get( /\.(js|css|map|ico|png|svg)$/, express.static( path.resolve( __dirname, '../dist' ) ) );
+app.get( /\.(js|css|map|ico|png|svg|htaccess)$/, express.static( path.resolve( __dirname, '../dist' ) ) );
+
+app.use(compression());
 
 app.use((req, res, next) => {
     res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private, max-age=10800')
