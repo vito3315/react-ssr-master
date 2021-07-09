@@ -274,7 +274,7 @@ class CardItem extends React.Component {
                         }
                         
                         <CardContent style={{ padding: '1.2vw', paddingBottom: 0, paddingTop: 0 }}>
-                            <Typography className="CardNameItem" gutterBottom variant="h5" component="span">{this.state.item.name}</Typography>
+                            <Typography className="CardNameItem" gutterBottom variant="h5" component="h3">{this.state.item.name}</Typography>
                             <Typography gutterBottom className="CardInfoWeiItem" component="p">{this.state.item.info_weight}</Typography>
                             <Typography className="CardInfoItem" component="p">{this.state.item.tmp_desc}</Typography>
                         </CardContent>
@@ -338,7 +338,7 @@ class CardItem extends React.Component {
                         }
                     </Grid>
                     <Grid item xs={7} sm={7} md={7} xl={7} className="SecondBox">
-                        <Typography className="CardNameItem" gutterBottom variant="h5" component="span" onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>
+                        <Typography className="CardNameItem" gutterBottom variant="h5" component="h3" onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>
                         <Typography className="CardInfoItem" component="p" onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.tmp_desc}</Typography>
                         <div>
                             <Typography gutterBottom className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <Ruble width="20" viewBox="200 -200 400 600" /></Typography>
@@ -442,8 +442,6 @@ class CardItemBot extends React.Component {
                 
                 <CardContent style={{ cursor: 'pointer', position: 'relative' }} onClick={ () => this.props.openItem(this.state.item.id)}>
                     <a href={'/'+this.state.city+'/menu/item/'+this.state.item.link}>
-                        
-                        
                         { parseInt(this.state.item.is_new) == 0 ? null :
                             <img 
                                 src='/assets/is_new.png'
@@ -453,7 +451,7 @@ class CardItemBot extends React.Component {
                         }
                         
                         <CardContent style={{ padding: '1.2vw', paddingBottom: 0, paddingTop: 0 }}>
-                            <Typography className="CardNameItem" gutterBottom variant="h5" component="span">{this.state.item.name}</Typography>
+                            <Typography className="CardNameItem" gutterBottom variant="h5" component="h3">{this.state.item.name}</Typography>
                             <Typography gutterBottom className="CardInfoWeiItem" component="p">{this.state.item.info_weight}</Typography>
                             <Typography className="CardInfoItem" component="p">{this.state.item.tmp_desc}</Typography>
                         </CardContent>
@@ -910,11 +908,14 @@ export class Home extends React.Component {
         return (
             this.state.is_load === false ?
                 <Element name="myScrollToElement" className="Category">
+                    
+                    <Typography variant="h5" component="h1">{ this.props.data.page.page_h }</Typography>
+                    
                     {itemsStore.getAllItemsCat().map((cat, key) => 
                         mainLink == '' || mainLink == cat.main_link ?
                             <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
                                 <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%', paddingBottom: 40 }} className="MainItems mainContainer">
-                                    <Typography variant="h5" component="h3">{ cat.name }</Typography>
+                                    <Typography variant="h5" component="h2">{ cat.name }</Typography>
                                 </Grid>
                                 <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
                                     {cat.items.map((it, k) => (
@@ -959,11 +960,13 @@ export class Home extends React.Component {
                         }
                     </Hidden>
                     
+                    <Typography variant="h5" component="h1">{ this.props.data.page.page_h }</Typography>
+                    
                     {itemsStore.getAllItemsCat().map((cat, key) => 
                         mainLink == '' || mainLink == cat.main_link ?
                             <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
                                 <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%', paddingBottom: 40 }} className="MainItems mainContainer">
-                                    <Typography variant="h5" component="h3">{ cat.name }</Typography>
+                                    <Typography variant="h5" component="h2">{ cat.name }</Typography>
                                 </Grid>
                                 <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
                                     {cat.items.map((it, k) => (
