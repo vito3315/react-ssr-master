@@ -202,9 +202,6 @@ class CardItem extends React.Component {
     }
     
     render() {
-        
-        //  <FontAwesomeIcon icon={faRubleSign} />
-        
         if( this.props.type == 'pc' ){
             return (
                 <Card elevation={0} className="CardItem">
@@ -226,6 +223,7 @@ class CardItem extends React.Component {
                         { parseInt(this.state.item.is_new) == 0 ? null :
                             <img 
                                 src='/assets/is_new.png'
+                                alt="Новинка"
                                 style={{ position: 'absolute', width: 70, top: 0, right: 0 }}
                             />
                         }
