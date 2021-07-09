@@ -286,6 +286,7 @@ class CardItem extends React.Component {
                         { parseInt(this.state.item.is_new) == 0 ? null :
                             <img 
                                 src='/assets/is_new.png'
+                                alt="Новинка"
                                 style={{ position: 'absolute', width: 70, top: 0, right: 0 }}
                             />
                         }
@@ -411,6 +412,7 @@ class CardItemBot extends React.Component {
                         { parseInt(this.state.item.is_new) == 0 ? null :
                             <img 
                                 src='/assets/is_new.png'
+                                alt="Новинка"
                                 style={{ position: 'absolute', width: 70, top: 0, right: 0 }}
                             />
                         }
