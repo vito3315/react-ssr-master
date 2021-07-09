@@ -22,7 +22,7 @@ app.get( /\.(js|css|map|ico|png|svg|htaccess)$/, express.static( path.resolve( _
 app.use(compression());
 
 app.use((req, res, next) => {
-    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private, max-age=10800')
+    res.set('Cache-Control', 'max-age=604800')
     res.set('Set-Cookie', 'SameSite=None')
     res.set('Accept-Encoding', 'gzip, compress, br')
     next()
