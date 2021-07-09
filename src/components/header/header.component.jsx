@@ -974,9 +974,11 @@ export class Header extends React.Component {
                                             
                                             document.getElementById('link_'+item.id).scrollIntoView(true);
                                             
-                                            document.querySelector('.scrollCat').animate({
-                                                scrollLeft: 200
-                                            }, 100);
+                                            if( document.querySelector('.scrollCat') ){
+                                                document.querySelector('.scrollCat').animate({
+                                                    scrollLeft: 200
+                                                }, 100);
+                                            }
                                         }} 
                                         smooth={true} 
                                         offset={-60} 
