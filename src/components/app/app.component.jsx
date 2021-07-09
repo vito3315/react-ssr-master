@@ -1,37 +1,20 @@
 import React from 'react';
 import { NavLink as Link, Switch, Route, Redirect } from 'react-router-dom';
 
-import loadable from '@loadable/component';
-
-const Home = loadable(() => import('../home'))
-const Item = loadable(() => import('../item'))
-const Contact = loadable(() => import('../contact'))
-const Actii = loadable(() => import('../actii'))
-const Profile = loadable(() => import('../profile'))
-const Cart = loadable(() => import('../cart'))
-
-const PageAbout = loadable(() => import('../pageAbout'))
-const PageJob = loadable(() => import('../pageJob'))
-const PageInstPay = loadable(() => import('../pageInstPay'))
-const PageOferta = loadable(() => import('../pageOferta'))
-const PagePolitika = loadable(() => import('../pagePolitika'))
-
-const Header = loadable(() => import('../header'))
-
-/*import { Home } from '../home';
+import { Home } from '../home';
 import { Item } from '../item';
 import { Contact } from '../contact';
 import { Actii } from '../actii';
 import { Profile } from '../profile';
-import { Cart } from '../cart';*/
+import { Cart } from '../cart';
 
-/*import { PageAbout } from '../pageAbout';
+import { PageAbout } from '../pageAbout';
 import { PageJob } from '../pageJob';
 import { PageInstPay } from '../pageInstPay';
 import { PageOferta } from '../pageOferta';
-import { PagePolitika } from '../pagePolitika';*/
+import { PagePolitika } from '../pagePolitika';
 
-//import { Header } from '../header';
+import { Header } from '../header';
 
 import Grid from '@material-ui/core/Grid';
 

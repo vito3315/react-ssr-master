@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CompressionPlugin = require("compression-webpack-plugin");
-const LoadablePlugin = require('@loadable/webpack-plugin')
+
 
 
 const webpack = require('webpack');
@@ -61,8 +61,6 @@ module.exports = {
 
     // webpack plugins
     plugins: [
-        new LoadablePlugin(),
-        
         new CompressionPlugin(),
         
         new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /ru/),
@@ -94,10 +92,6 @@ module.exports = {
                 {
                     from: path.resolve( __dirname, 'src/assets' ),
                     to: path.resolve( __dirname, 'dist/assets' )
-                },
-                {
-                    from: path.resolve( __dirname, 'src/.htaccess' ),
-                    to: path.resolve( __dirname, 'dist' )
                 }
             ]
         } ),
