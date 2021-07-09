@@ -156,7 +156,7 @@ class Image extends React.PureComponent {
             }
         );
 
-        this.observer.observe(this.element);
+        this.observer.observe(this.elementImg);
     }
 
     render() {
