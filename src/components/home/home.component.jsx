@@ -136,6 +136,49 @@ function get_city(path){
 
 import { Item } from '../item';
 
+class Image extends React.PureComponent {
+	componentDidMount() {
+        this.observer = new IntersectionObserver(
+            entries => {
+                entries.forEach(entry => {
+                    const { isIntersecting } = entry;
+
+                    if (isIntersecting) {
+                        this.elementSource.srcSet = this.props.srcSet;
+                        this.elementImg.src = this.props.src;
+                        this.observer = this.observer.disconnect();
+                    }
+                });
+            },
+            {
+              	root: document.querySelector(".container"),
+                rootMargin: "0px 0px 200px 0px"
+            }
+        );
+
+        this.observer.observe(this.element);
+    }
+
+    render() {
+        return (
+            <picture>
+                <source 
+                    //srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
+                    type="image/webp" 
+                    ref={el => this.elementSource = el}
+                />
+                <img 
+                    ref={el => this.elementImg = el}
+                    //src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
+                    alt={this.state.item.name}
+                    title={this.state.item.name}
+                    style={{ minHeight: 150 }}
+                />
+            </picture>
+        )
+    }
+}
+
 class CardItem extends React.Component {
     _isMounted = false;
     
@@ -207,18 +250,10 @@ class CardItem extends React.Component {
                 <Card elevation={0} className="CardItem">
                     
                     <CardContent style={{ cursor: 'pointer', position: 'relative' }} onClick={ () => this.props.openItem(this.state.item.id)}>
-                        <picture>
-                            <source 
-                                srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
-                                type="image/webp" 
-                            />
-                            <img 
-                                src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
-                                alt={this.state.item.name}
-                                title={this.state.item.name}
-                                style={{ minHeight: 150 }}
-                            />
-                        </picture>
+                        <Image 
+                            srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update}  
+                            src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update}
+                        />
                         
                         { parseInt(this.state.item.is_new) == 0 ? null :
                             <img 
