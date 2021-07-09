@@ -1,0 +1,506 @@
+{
+  "hash": "d26cb97a08cd7b6b9257",
+  "publicPath": "/",
+  "outputPath": "/Users/user/my_app/test1/siteJaco/react-ssr-master/dist",
+  "assetsByChunkName": {
+    "main": [
+      "build/styles.css",
+      "main.a8cb5e970811667e75ce.js"
+    ],
+    "runtime": [
+      "runtime.b783bc4f800afe46887a.js"
+    ],
+    "home": [
+      "build/177.styles.css",
+      "home.3deef07f18488fc91650.js"
+    ],
+    "item": [
+      "build/178.styles.css"
+    ],
+    "contact": [
+      "build/631.styles.css",
+      "contact.3f84b058edc9d0f37c93.js"
+    ],
+    "actii": [
+      "build/158.styles.css",
+      "actii.f2231edfa83a2ed37080.js"
+    ],
+    "profile": [
+      "build/845.styles.css",
+      "profile.49e3a676fa53c1edb5b6.js"
+    ],
+    "cart": [
+      "build/511.styles.css",
+      "cart.3e42f1a8dc47a3ad0931.js"
+    ],
+    "pageAbout": [
+      "build/147.styles.css",
+      "pageAbout.f56b9ae53870570390d2.js"
+    ],
+    "pageJob": [
+      "build/831.styles.css",
+      "pageJob.ed363a3b74173716cfb3.js"
+    ],
+    "pageInstPay": [
+      "build/284.styles.css",
+      "pageInstPay.36d6dd7fb93bd15faaec.js"
+    ],
+    "pageOferta": [
+      "build/669.styles.css",
+      "pageOferta.aa8f9dc07452e7f46221.js"
+    ],
+    "pagePolitika": [
+      "build/761.styles.css",
+      "pagePolitika.e9eaa5da046f81411818.js"
+    ],
+    "header": [
+      "build/19.styles.css",
+      "header.796838d9119ac4faf012.js"
+    ],
+    "vendors": [
+      "vendors.fb47d985360de134bc38.js"
+    ]
+  },
+  "assets": [
+    {
+      "type": "assets by status",
+      "cached": true,
+      "filteredChildren": 38,
+      "size": 1425304
+    }
+  ],
+  "namedChunkGroups": {
+    "main": {
+      "name": "main",
+      "chunks": [
+        666,
+        216,
+        179
+      ],
+      "assets": [
+        {
+          "name": "runtime.b783bc4f800afe46887a.js"
+        },
+        {
+          "name": "vendors.fb47d985360de134bc38.js"
+        },
+        {
+          "name": "build/styles.css"
+        },
+        {
+          "name": "main.a8cb5e970811667e75ce.js"
+        }
+      ],
+      "filteredAssets": 0,
+      "assetsSize": null,
+      "filteredAuxiliaryAssets": 4,
+      "auxiliaryAssetsSize": null,
+      "children": {},
+      "childAssets": {}
+    },
+    "home": {
+      "name": "home",
+      "chunks": [
+        216,
+        660,
+        177
+      ],
+      "assets": [
+        {
+          "name": "vendors.fb47d985360de134bc38.js"
+        },
+        {
+          "name": "660.578b492e6e8596454885.js"
+        },
+        {
+          "name": "build/177.styles.css"
+        },
+        {
+          "name": "home.3deef07f18488fc91650.js"
+        }
+      ],
+      "filteredAssets": 0,
+      "assetsSize": null,
+      "filteredAuxiliaryAssets": 4,
+      "auxiliaryAssetsSize": null,
+      "children": {},
+      "childAssets": {}
+    },
+    "item": {
+      "name": "item",
+      "chunks": [
+        216,
+        660,
+        178
+      ],
+      "assets": [
+        {
+          "name": "vendors.fb47d985360de134bc38.js"
+        },
+        {
+          "name": "660.578b492e6e8596454885.js"
+        },
+        {
+          "name": "build/178.styles.css"
+        }
+      ],
+      "filteredAssets": 0,
+      "assetsSize": null,
+      "filteredAuxiliaryAssets": 3,
+      "auxiliaryAssetsSize": null,
+      "children": {},
+      "childAssets": {}
+    },
+    "contact": {
+      "name": "contact",
+      "chunks": [
+        216,
+        631
+      ],
+      "assets": [
+        {
+          "name": "vendors.fb47d985360de134bc38.js"
+        },
+        {
+          "name": "build/631.styles.css"
+        },
+        {
+          "name": "contact.3f84b058edc9d0f37c93.js"
+        }
+      ],
+      "filteredAssets": 0,
+      "assetsSize": null,
+      "filteredAuxiliaryAssets": 3,
+      "auxiliaryAssetsSize": null,
+      "children": {},
+      "childAssets": {}
+    },
+    "actii": {
+      "name": "actii",
+      "chunks": [
+        216,
+        158
+      ],
+      "assets": [
+        {
+          "name": "vendors.fb47d985360de134bc38.js"
+        },
+        {
+          "name": "build/158.styles.css"
+        },
+        {
+          "name": "actii.f2231edfa83a2ed37080.js"
+        }
+      ],
+      "filteredAssets": 0,
+      "assetsSize": null,
+      "filteredAuxiliaryAssets": 3,
+      "auxiliaryAssetsSize": null,
+      "children": {},
+      "childAssets": {}
+    },
+    "profile": {
+      "name": "profile",
+      "chunks": [
+        216,
+        845
+      ],
+      "assets": [
+        {
+          "name": "vendors.fb47d985360de134bc38.js"
+        },
+        {
+          "name": "build/845.styles.css"
+        },
+        {
+          "name": "profile.49e3a676fa53c1edb5b6.js"
+        }
+      ],
+      "filteredAssets": 0,
+      "assetsSize": null,
+      "filteredAuxiliaryAssets": 3,
+      "auxiliaryAssetsSize": null,
+      "children": {},
+      "childAssets": {}
+    },
+    "cart": {
+      "name": "cart",
+      "chunks": [
+        216,
+        511
+      ],
+      "assets": [
+        {
+          "name": "vendors.fb47d985360de134bc38.js"
+        },
+        {
+          "name": "build/511.styles.css"
+        },
+        {
+          "name": "cart.3e42f1a8dc47a3ad0931.js"
+        }
+      ],
+      "filteredAssets": 0,
+      "assetsSize": null,
+      "filteredAuxiliaryAssets": 3,
+      "auxiliaryAssetsSize": null,
+      "children": {},
+      "childAssets": {}
+    },
+    "pageAbout": {
+      "name": "pageAbout",
+      "chunks": [
+        216,
+        147
+      ],
+      "assets": [
+        {
+          "name": "vendors.fb47d985360de134bc38.js"
+        },
+        {
+          "name": "build/147.styles.css"
+        },
+        {
+          "name": "pageAbout.f56b9ae53870570390d2.js"
+        }
+      ],
+      "filteredAssets": 0,
+      "assetsSize": null,
+      "filteredAuxiliaryAssets": 3,
+      "auxiliaryAssetsSize": null,
+      "children": {},
+      "childAssets": {}
+    },
+    "pageJob": {
+      "name": "pageJob",
+      "chunks": [
+        216,
+        831
+      ],
+      "assets": [
+        {
+          "name": "vendors.fb47d985360de134bc38.js"
+        },
+        {
+          "name": "build/831.styles.css"
+        },
+        {
+          "name": "pageJob.ed363a3b74173716cfb3.js"
+        }
+      ],
+      "filteredAssets": 0,
+      "assetsSize": null,
+      "filteredAuxiliaryAssets": 3,
+      "auxiliaryAssetsSize": null,
+      "children": {},
+      "childAssets": {}
+    },
+    "pageInstPay": {
+      "name": "pageInstPay",
+      "chunks": [
+        216,
+        284
+      ],
+      "assets": [
+        {
+          "name": "vendors.fb47d985360de134bc38.js"
+        },
+        {
+          "name": "build/284.styles.css"
+        },
+        {
+          "name": "pageInstPay.36d6dd7fb93bd15faaec.js"
+        }
+      ],
+      "filteredAssets": 0,
+      "assetsSize": null,
+      "filteredAuxiliaryAssets": 3,
+      "auxiliaryAssetsSize": null,
+      "children": {},
+      "childAssets": {}
+    },
+    "pageOferta": {
+      "name": "pageOferta",
+      "chunks": [
+        216,
+        669
+      ],
+      "assets": [
+        {
+          "name": "vendors.fb47d985360de134bc38.js"
+        },
+        {
+          "name": "build/669.styles.css"
+        },
+        {
+          "name": "pageOferta.aa8f9dc07452e7f46221.js"
+        }
+      ],
+      "filteredAssets": 0,
+      "assetsSize": null,
+      "filteredAuxiliaryAssets": 3,
+      "auxiliaryAssetsSize": null,
+      "children": {},
+      "childAssets": {}
+    },
+    "pagePolitika": {
+      "name": "pagePolitika",
+      "chunks": [
+        216,
+        761
+      ],
+      "assets": [
+        {
+          "name": "vendors.fb47d985360de134bc38.js"
+        },
+        {
+          "name": "build/761.styles.css"
+        },
+        {
+          "name": "pagePolitika.e9eaa5da046f81411818.js"
+        }
+      ],
+      "filteredAssets": 0,
+      "assetsSize": null,
+      "filteredAuxiliaryAssets": 3,
+      "auxiliaryAssetsSize": null,
+      "children": {},
+      "childAssets": {}
+    },
+    "header": {
+      "name": "header",
+      "chunks": [
+        216,
+        19
+      ],
+      "assets": [
+        {
+          "name": "vendors.fb47d985360de134bc38.js"
+        },
+        {
+          "name": "build/19.styles.css"
+        },
+        {
+          "name": "header.796838d9119ac4faf012.js"
+        }
+      ],
+      "filteredAssets": 0,
+      "assetsSize": null,
+      "filteredAuxiliaryAssets": 3,
+      "auxiliaryAssetsSize": null,
+      "children": {},
+      "childAssets": {}
+    }
+  },
+  "generator": "loadable-components",
+  "chunks": [
+    {
+      "id": 179,
+      "files": [
+        "build/styles.css",
+        "main.a8cb5e970811667e75ce.js"
+      ]
+    },
+    {
+      "id": 666,
+      "files": [
+        "runtime.b783bc4f800afe46887a.js"
+      ]
+    },
+    {
+      "id": 177,
+      "files": [
+        "build/177.styles.css",
+        "home.3deef07f18488fc91650.js"
+      ]
+    },
+    {
+      "id": 178,
+      "files": [
+        "build/178.styles.css"
+      ]
+    },
+    {
+      "id": 631,
+      "files": [
+        "build/631.styles.css",
+        "contact.3f84b058edc9d0f37c93.js"
+      ]
+    },
+    {
+      "id": 158,
+      "files": [
+        "build/158.styles.css",
+        "actii.f2231edfa83a2ed37080.js"
+      ]
+    },
+    {
+      "id": 845,
+      "files": [
+        "build/845.styles.css",
+        "profile.49e3a676fa53c1edb5b6.js"
+      ]
+    },
+    {
+      "id": 511,
+      "files": [
+        "build/511.styles.css",
+        "cart.3e42f1a8dc47a3ad0931.js"
+      ]
+    },
+    {
+      "id": 147,
+      "files": [
+        "build/147.styles.css",
+        "pageAbout.f56b9ae53870570390d2.js"
+      ]
+    },
+    {
+      "id": 831,
+      "files": [
+        "build/831.styles.css",
+        "pageJob.ed363a3b74173716cfb3.js"
+      ]
+    },
+    {
+      "id": 284,
+      "files": [
+        "build/284.styles.css",
+        "pageInstPay.36d6dd7fb93bd15faaec.js"
+      ]
+    },
+    {
+      "id": 669,
+      "files": [
+        "build/669.styles.css",
+        "pageOferta.aa8f9dc07452e7f46221.js"
+      ]
+    },
+    {
+      "id": 761,
+      "files": [
+        "build/761.styles.css",
+        "pagePolitika.e9eaa5da046f81411818.js"
+      ]
+    },
+    {
+      "id": 19,
+      "files": [
+        "build/19.styles.css",
+        "header.796838d9119ac4faf012.js"
+      ]
+    },
+    {
+      "id": 216,
+      "files": [
+        "vendors.fb47d985360de134bc38.js"
+      ]
+    },
+    {
+      "id": 660,
+      "files": [
+        "660.578b492e6e8596454885.js"
+      ]
+    }
+  ]
+}
