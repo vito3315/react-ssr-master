@@ -170,8 +170,8 @@ class Image extends React.PureComponent {
                 <img 
                     ref={el => this.elementImg = el}
                     //src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
-                    alt={this.state.item.name}
-                    title={this.state.item.name}
+                    alt={this.props.name}
+                    title={this.props.name}
                     style={{ minHeight: 150 }}
                 />
             </picture>
@@ -253,6 +253,7 @@ class CardItem extends React.Component {
                         <Image 
                             srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update}  
                             src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update}
+                            name={this.state.item.name}
                         />
                         
                         { parseInt(this.state.item.is_new) == 0 ? null :
@@ -892,8 +893,8 @@ export class Home extends React.Component {
             }
         }
         
-        console.log( 'itemsStore.getAllItemsCat()', itemsStore.getAllItemsCat() );
-        console.log( 'mainLink', mainLink );
+        //console.log( 'itemsStore.getAllItemsCat()', itemsStore.getAllItemsCat() );
+        //console.log( 'mainLink', mainLink );
         
         return (
             <CSSTransition component="div" transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300} >
