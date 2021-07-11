@@ -1513,7 +1513,7 @@ export class Cart extends React.Component {
                 itemsStore.setItems([]);
                 
                 let data = {
-                    orderType: '0',
+                    orderType: 0,
                     orderAddr: '',
                     orderPic: 0,
                     orderComment: '',

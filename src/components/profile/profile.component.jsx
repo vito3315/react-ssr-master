@@ -996,6 +996,9 @@ export class Profile extends React.Component {
                             { this.state.showOrder.order.promo_name == null || this.state.showOrder.order.promo_name.length == 0 ? null :
                                 <Typography variant="h6" component="span" className="noSpace">{this.state.showOrder.order.promo_text}</Typography>
                             }
+                            { this.state.showOrder.order.sdacha == null || this.state.showOrder.order.sdacha.length == 0 ? null :
+                                <Typography variant="h6" component="span">Сдача с: {this.state.showOrder.order.sdacha}</Typography>
+                            }
                             <Typography variant="h5" component="span" className="CardPriceItem">Сумма закза: {this.state.showOrder.order.sum_order} <Ruble width="20" viewBox="0 0 700 300" /></Typography>
                             
                             <table className="tableOrderCheck">

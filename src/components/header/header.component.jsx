@@ -441,7 +441,7 @@ export class Header extends React.Component {
         itemsStore.setAllItemsCatNew(this.props.data.all.other.cats.main_cat);
         itemsStore.setFreeItems(this.props.data.all.other.cats.free_items);
         itemsStore.setBanners(this.props.data.all.other.cats.baners)
-        //itemsStore.setCityRU(json.this_city_name_ru);
+        itemsStore.setCityRU(this.props.data.all.other.cats.this_city_name_ru);
         
         
         this.state = {      
@@ -472,7 +472,8 @@ export class Header extends React.Component {
             
             soc_link: null,
             
-            anchorEl: null
+            anchorEl: null,
+            cityNameRu: this.props.data.all.other.cats.this_city_name_ru && this.props.data.all.other.cats.this_city_name_ru.length > 0 ? this.props.data.all.other.cats.this_city_name_ru : 'Город'
         };
     }
     
@@ -550,13 +551,14 @@ export class Header extends React.Component {
                     //itemsStore.setAllItemsCatNew(json.main_cat);
                     //itemsStore.setFreeItems(json.free_items);
                     //itemsStore.setBanners(json.baners)
-                    itemsStore.setCityRU(json.this_city_name_ru);
+                    //itemsStore.setCityRU(json.this_city_name_ru);
                     
                     this.setState({
                         //cityList: json.city_list,
                         //categoryItems: json.arr, 
                         //categoryItemsNew: json.main_cat,
                         is_load: true,
+                        //cityNameRu: json.this_city_name_ru
                     });
                     this.is_load = false
                 })
@@ -865,7 +867,7 @@ export class Header extends React.Component {
                             <Hidden mdDown>
                                 
                                 <Grid item className="CityProfileNav">
-                                    <Typography className="cat" variant="h5" component="span" onClick={this.openCity.bind(this)} style={{ display: 'flex', flexDirection: 'row' }}>{itemsStore.getCityRU()} <ArrowDropDownIcon /></Typography>
+                                    <Typography className="cat" variant="h5" component="span" onClick={this.openCity.bind(this)} style={{ display: 'flex', flexDirection: 'row' }}>{this.state.cityNameRu} <ArrowDropDownIcon /></Typography>
                                     
                                     {itemsStore.getToken() ?
                                         itemsStore.getUserName() && itemsStore.getUserName().length > 0 ?
