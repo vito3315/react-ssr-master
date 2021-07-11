@@ -1493,7 +1493,7 @@ export class Cart extends React.Component {
             headers: {
                 'Content-Type':'application/x-www-form-urlencoded'},
             body: queryString.stringify({
-                type: 'trueOrder', 
+                type: 'trueOrder_web', 
                 city_id: this.state.city_name,
                 user_id: itemsStore.getToken(),
                 

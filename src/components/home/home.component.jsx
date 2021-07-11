@@ -495,12 +495,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export class Home extends React.Component {
     startMove = 0;
     
-    
-    
     constructor(props) {
         super(props);
-        
-        console.log( this.props )
         
         this.state = {      
             allItems: [],  
@@ -665,8 +661,6 @@ export class Home extends React.Component {
             if(response['status'] === 200){
                 var json = response['data'];
                 
-                console.log( 'fetchData', json )
-                
                 return {
                     title: json.page.title,
                     description: json.page.description,
@@ -759,17 +753,11 @@ export class Home extends React.Component {
                 
                 let checkItem = hash.split('/item/');
                 
-                console.log( 'checkItem', checkItem )
-                
                 if( checkItem.length > 1 ){
                     
                     let allItems = itemsStore.getAllItems();
                     let act_id = checkItem[1];
                     let item = allItems.find( (item) => item.link == act_id );
-                    
-                    console.log( 'checkItem allItems', allItems )
-                    console.log( 'checkItem act_id', act_id )
-                    console.log( 'checkItem item', item )
                     
                     if( window.innerWidth <= 400 ){
                         this.openItem(item.id);
@@ -782,20 +770,6 @@ export class Home extends React.Component {
                     
                     this.props.history.replace({ pathname: checkItem[0] })
                 }
-                
-                /*return ;
-                
-                if( hash.length > 0 ){
-                    let act_id = hash.split('?item_')[1];
-                    
-                    if( window.innerWidth <= 400 ){
-                        this.openItem(act_id);
-                    }else{
-                        this.openItemPC(act_id);
-                    }
-                    
-                    this.props.history.replace({ pathname: window.location.pathname })
-                }*/
             }, 1300);
         }
         

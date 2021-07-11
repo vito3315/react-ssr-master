@@ -437,9 +437,6 @@ class ItemsStore {
           });
         });
         
-        console.log( 'cart_new_promo', cart_new_promo )
-        console.log( 'promo_info.items_add', promo_info.items_add )
-        
         tmp = 0;
         allPrice = 0;
         
