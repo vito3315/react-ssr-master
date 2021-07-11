@@ -26,6 +26,16 @@ class ItemsStore {
   free_items = '';
   cart_data = '';
     
+  mainLink = '';
+  
+  setMainLink = (items) => {
+    this.mainLink = items;
+  };
+
+  getMainLink(){
+    return this.mainLink;
+  };
+  
   setSumDiv = (items) => {
     this.sum_div = parseInt( items );
   };

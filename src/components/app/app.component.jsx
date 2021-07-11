@@ -221,6 +221,8 @@ export class App extends React.Component {
     constructor(props) {
         super(props);
         
+        itemsStore.setMainLink(this.props.globalState.this_link)
+        
         this.state = {      
             categoryItems: [],  
             cartItems: [],
@@ -249,6 +251,9 @@ export class App extends React.Component {
     }
 
     componentDidMount = () => {
+        
+        itemsStore.setMainLink(this.props.globalState.this_link)
+        
         autorun(() => {
             this.setState({
                 activePage: itemsStore.getPage()

@@ -466,7 +466,8 @@ export class Home extends React.Component {
             city_name: this.props.city,
             page: null,
             title: '',
-            description: ''
+            description: '',
+            mainLink: this.props.this_link
         };
         
         this.loadBanners( this.props.data.all.other.cats.baners );
@@ -751,7 +752,8 @@ export class Home extends React.Component {
         
         autorun(() => {
             this.setState({
-                allItems: itemsStore.getAllItemsCat()
+                allItems: itemsStore.getAllItemsCat(),
+                mainLink: itemsStore.getMainLink()
             })
             
             this.loadBanners(itemsStore.getBanners());
@@ -819,8 +821,7 @@ export class Home extends React.Component {
     }
     
     render() {
-        
-        let link = this.props.this_link;
+        let link = this.state.mainLink;
         link = link.split('/');
         let mainLink = '';
         
