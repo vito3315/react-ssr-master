@@ -1402,6 +1402,7 @@ export class Cart extends React.Component {
                     comment: this.state.orderComment,//
                     addrDev: this.state.orderAddr ? JSON.stringify(this.state.orderAddr) : '', //
                     pay: payFull.title, //
+                    sdacha: this.state.orderSdacha,
                     payFull: JSON.stringify(payFull), //
                     cart: JSON.stringify(new_cart),//
                     promo_name: this.state.orderPromo//
