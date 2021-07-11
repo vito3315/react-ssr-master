@@ -836,6 +836,8 @@ export class Home extends React.Component {
             }
         }
         
+        console.log( 'mainLink', mainLink, this.state.mainLink )
+        
         return (
             this.state.is_load === false ?
                 <Element name="myScrollToElement" className="Category">
