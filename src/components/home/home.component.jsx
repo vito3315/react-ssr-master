@@ -136,49 +136,6 @@ function get_city(path){
 
 import { Item } from '../item';
 
-class Image extends React.PureComponent {
-	componentDidMount() {
-        this.observer = new IntersectionObserver(
-            entries => {
-                entries.forEach(entry => {
-                    const { isIntersecting } = entry;
-
-                    if (isIntersecting) {
-                        this.elementSource.srcSet = this.props.srcSet;
-                        this.elementImg.src = this.props.src;
-                        this.observer = this.observer.disconnect();
-                    }
-                });
-            },
-            {
-              	root: document.querySelector(".container"),
-                rootMargin: "0px 0px 200px 0px"
-            }
-        );
-
-        this.observer.observe(this.elementImg);
-    }
-
-    render() {
-        return (
-            <picture>
-                <source 
-                    //srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
-                    type="image/webp" 
-                    ref={el => this.elementSource = el}
-                />
-                <img 
-                    ref={el => this.elementImg = el}
-                    //src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
-                    alt={this.props.name}
-                    title={this.props.name}
-                    style={{ minHeight: 150 }}
-                />
-            </picture>
-        )
-    }
-}
-
 class CardItem extends React.Component {
     _isMounted = false;
     
@@ -312,7 +269,7 @@ class CardItem extends React.Component {
         if( this.props.type == 'mobile' ){
             return (
                 <Grid item container xs={12} className="CardItem_mobile">
-                    <Grid style={{ position: 'relative' }} item xs={5} sm={5} md={5} xl={5} onClick={ () => this.props.openItem(this.state.item.id)}>
+                    <Grid style={{ position: 'relative' }} item xs={7} sm={7} md={7} xl={7} onClick={ () => this.props.openItem(this.state.item.id)}>
                         
                         <picture>
                             <source 
@@ -325,7 +282,6 @@ class CardItem extends React.Component {
                                 src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.jpg?"+this.state.item.img_new_update} 
                                 alt={this.state.item.name}
                                 title={this.state.item.name}
-                                style={{ minHeight: 150 }}
                             />
                         </picture>
                         
@@ -337,7 +293,7 @@ class CardItem extends React.Component {
                             />
                         }
                     </Grid>
-                    <Grid item xs={7} sm={7} md={7} xl={7} className="SecondBox">
+                    <Grid item xs={5} sm={5} md={5} xl={5} className="SecondBox">
                         <Typography className="CardNameItem" gutterBottom variant="h5" component="h3" onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>
                         <Typography className="CardInfoItem" component="p" onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.tmp_desc}</Typography>
                         <div>

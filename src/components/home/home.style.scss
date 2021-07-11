@@ -41,8 +41,8 @@ $colorMain: #CC0033;
         text-align: center;
     }
     & h3{
-        @include fons(1.8rem, $Ubuntu);
-        text-transform: uppercase;
+        @include fons(1.2rem, $Ubuntu);
+        font-weight: bold;
     }
 }
 .ItemDialog{
