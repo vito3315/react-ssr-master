@@ -171,21 +171,27 @@ class SimplePopover extends React.Component{
         this._isMounted = true;
         
         let cartItems = itemsStore.getItems();
+        let promoItems = itemsStore.getItemsPromo();
+        let newCart = [];
         
-        if( cartItems.length > 0 ){
-            
-            let newCart = [];
-            
-            cartItems.map((item) => {
-                if( item.count > 0 ){
-                    newCart.push(item)
-                }
-            })
-            
-            this.setState({
-                cartItems: cartItems
-            })
-        }
+        cartItems.map((item) => {
+            if( item.count > 0 ){
+                item.type == 'us';
+                newCart.push(item)
+            }
+        })
+        
+        promoItems.map((item) => {
+            if( item.count > 0 ){
+                item.type == 'promo';
+                newCart.push(item)
+            }
+        })
+        
+        this.setState({
+            cartItems: cartItems
+        })
+        
         
         autorun(() => {
             if( this._isMounted ){
