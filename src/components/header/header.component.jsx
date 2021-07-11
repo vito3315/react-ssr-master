@@ -781,6 +781,8 @@ export class Header extends React.Component {
             }
         }
         
+        console.log( "this.state.activePage == 'home' && !check", this.state.activePage == 'home' && !check )
+        
         if( this.state.is_load === false ){
             return (
                 <AppBar position="fixed" className="header" style={{ zIndex: 2 }}>
