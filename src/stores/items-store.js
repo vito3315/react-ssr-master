@@ -196,7 +196,7 @@ class ItemsStore {
       if( !promo_info.status_promo ){
         return {
           st: false,
-          text: promo_info.promo_text.false
+          text: 'Данный промокод уже активирован или не найден'
         }
       }
       
@@ -436,6 +436,9 @@ class ItemsStore {
             name: this_item['name'],
           });
         });
+        
+        console.log( 'cart_new_promo', cart_new_promo )
+        console.log( 'promo_info.items_add', promo_info.items_add )
         
         tmp = 0;
         allPrice = 0;
