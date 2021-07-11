@@ -1052,24 +1052,24 @@ export class Cart extends React.Component {
     }
     
     checkPromo(){
-        if( this.state.orderPromo.length == 0 ){
-            this.setState({
-                orderPromoText: ''
+        fetch('https://jacofood.ru/src/php/test_app.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'},
+            body: queryString.stringify({
+                type: 'get_promo_web', 
+                city_id: itemsStore.getCity(),
+                promo_name: this.state.orderPromo
             })
-        }else{
-            fetch('https://jacofood.ru/src/php/test_app.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type':'application/x-www-form-urlencoded'},
-                body: queryString.stringify({
-                    type: 'get_promo_web', 
-                    city_id: itemsStore.getCity(),
-                    promo_name: this.state.orderPromo
+        }).then(res => res.json()).then(json => {
+            itemsStore.setPromo( JSON.stringify(json), this.state.orderPromo );
+            let check_promo = itemsStore.checkPromo();
+              
+            if( this.state.orderPromo.length == 0 ){
+                this.setState({
+                    orderPromoText: ''
                 })
-            }).then(res => res.json()).then(json => {
-                itemsStore.setPromo( JSON.stringify(json), this.state.orderPromo );
-                let check_promo = itemsStore.checkPromo();
-                  
+            }else{
                 if( check_promo.st === false ){
                     localStorage.removeItem('promo_name')
                 }
@@ -1077,8 +1077,8 @@ export class Cart extends React.Component {
                 this.setState({
                     orderPromoText: check_promo.text
                 })
-            })
-        }
+            }
+        })
     }
     
     saveData(){
