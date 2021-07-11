@@ -867,7 +867,7 @@ export class Header extends React.Component {
                         
                         <Grid style={{ width: '100%' }}>
                             <Grid item style={{ marginRight: 15 }}>
-                                <Link to={"/"+this.state.cityName+"/"} onClick={ () => { window.scrollTo({ top: 0, behavior: 'smooth', }) } }>
+                                <Link to={"/"+this.state.cityName} onClick={ () => { window.scrollTo({ top: 0, behavior: 'smooth', }) } }>
                                     <img alt="Жако доставка роллов и пиццы" src="https://jacochef.ru/src/img/Bely_fon_logo.png" />
                                 </Link> 
                             </Grid>
@@ -963,7 +963,7 @@ export class Header extends React.Component {
                                                         <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
                                                     </ScrollLink>
                                                     :
-                                                <Link to={"/"+this.state.cityName} className="catLink" style={{ padding: '4px 0.5vw' }} onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
+                                                <Link to={"/"+this.state.cityName} className="catLink" style={{ padding: '4px 0.5vw' }} >
                                                     <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
                                                 </Link> 
                                             }
