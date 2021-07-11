@@ -653,7 +653,7 @@ export class Home extends React.Component {
             type: 'get_page_info', 
             city_id: get_city(propsData),
             page: '',
-            link: propsData
+            link: propsData,
         };
         
         return axios({

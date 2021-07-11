@@ -529,7 +529,7 @@ export class Header extends React.Component {
         if( !this.is_load ){
             this.is_load = true;
             
-            if( itemsStore.getCity() && this.state.categoryItems.length == 0 ){
+            if( itemsStore.getCity() ){
                 fetch('https://jacofood.ru/src/php/test_app.php', {
                     method: 'POST',
                     headers: {
