@@ -272,136 +272,128 @@ export class App extends React.Component {
     }
     
     render() {
-        //{!itemsStore.getToken() && this.state.cityName ? <Redirect push to={"/"+this.state.cityName+"/"} /> : <Profile />}
-        
-        
-                    
-        
         return (
             <Provider { ...stores }>
-                
-                    <div className="home">
-                                   
-                        <Header 
-                            data={this.props.globalState.data} 
-                            city={this.props.globalState.city} 
-                            this_link={this.props.globalState.this_link} />        
+                <div className="home">
+                    <Header 
+                        data={this.props.globalState.data} 
+                        city={this.props.globalState.city} 
+                        this_link={this.props.globalState.this_link} />        
+                    
+                    <Switch>
+                        <Route
+                            path='/:cityName/contact'
+                            exact={ true }
+                            component={ Contact }
+                        />
+                        <Route
+                            path='/:cityName/actii'
+                            exact={ true }
+                            component={ Actii }
+                        />
+                        <Route
+                            path='/:cityName/menu'
+                            exact={ true }
+                        >
+                            <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                        </Route>
+                        <Route
+                            path='/:cityName'
+                            exact={ true }
+                        >
+                            <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                        </Route>
+                        <Route
+                            path='/:cityName/item/:id'
+                            exact={ true }
+                        >
+                            <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                        </Route>
+                        <Route 
+                            exact 
+                            path='/:cityName/profile/'
+                            component={ Profile }
+                        />
+                        <Route
+                            path='/:cityName/menu/:itemLink'
+                            exact={ true }
+                        >
+                            <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                        </Route>
+                        <Route
+                            path='/:cityName/cart'
+                            exact={ true }
+                            component={ Cart }
+                        />
+                        <Route
+                            path='/:cityName/about'
+                            exact={ true }
+                            component={ PageAbout }
+                        />
+                        <Route
+                            path='/:cityName/jobs'
+                            exact={ true }
+                            component={ PageJob }
+                        />
+                        <Route
+                            path='/:cityName/instpayorders'
+                            exact={ true }
+                            component={ PageInstPay }
+                        />
+                        <Route
+                            path='/:cityName/publichnaya-oferta'
+                            exact={ true }
+                            component={ PageOferta }
+                        />
+                        <Route
+                            path='/:cityName/politika-konfidencialnosti'
+                            exact={ true }
+                            component={ PagePolitika }
+                        />
+                        <Route
+                            path='/'
+                        >
+                            <Redirect push
+                                to={"/togliatti"}
+                            />
+                        </Route>
                         
-                        <Switch>
-                            <Route
-                                path='/:cityName/contact'
-                                exact={ true }
-                                component={ Contact }
-                            />
-                            <Route
-                                path='/:cityName/actii'
-                                exact={ true }
-                                component={ Actii }
-                            />
-                            <Route
-                                path='/:cityName/menu'
-                                exact={ true }
-                            >
-                                <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
-                            </Route>
-                            <Route
-                                path='/:cityName'
-                                exact={ true }
-                            >
-                                <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
-                            </Route>
-                            <Route
-                                path='/:cityName/item/:id'
-                                exact={ true }
-                            >
-                                <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
-                            </Route>
-                            <Route 
-                                exact 
-                                path='/:cityName/profile/'
-                                component={ Profile }
-                            />
-                            <Route
-                                path='/:cityName/menu/:itemLink'
-                                exact={ true }
-                            >
-                                <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
-                            </Route>
-                            <Route
-                                path='/:cityName/cart'
-                                exact={ true }
-                                component={ Cart }
-                            />
-                            <Route
-                                path='/:cityName/about'
-                                exact={ true }
-                                component={ PageAbout }
-                            />
-                            <Route
-                                path='/:cityName/jobs'
-                                exact={ true }
-                                component={ PageJob }
-                            />
-                            <Route
-                                path='/:cityName/instpayorders'
-                                exact={ true }
-                                component={ PageInstPay }
-                            />
-                            <Route
-                                path='/:cityName/publichnaya-oferta'
-                                exact={ true }
-                                component={ PageOferta }
-                            />
-                            <Route
-                                path='/:cityName/politika-konfidencialnosti'
-                                exact={ true }
-                                component={ PagePolitika }
-                            />
-                            <Route
-                                path='/'
-                            >
-                                <Redirect push
-                                    to={"/togliatti"}
-                                />
-                            </Route>
-                            
-                            <Route
-                                component={ NotFound }
-                            />
-                        </Switch>
-                        
-                     
-                        {this.state.activePage == 'cart' ?
-                            <Hidden lgUp>
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 72+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 69+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 66+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 63+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.04 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 60+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.05 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 57+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.06 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 54+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.07 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 51+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 48+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 45+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
-                            </Hidden>
-                                :
-                            <Hidden lgUp>
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 72, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 69, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 66, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 63, zIndex: 0, backgroundColor: '#bababa', opacity: 0.04 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 60, zIndex: 0, backgroundColor: '#bababa', opacity: 0.05 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 57, zIndex: 0, backgroundColor: '#bababa', opacity: 0.06 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 54, zIndex: 0, backgroundColor: '#bababa', opacity: 0.07 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 51, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 48, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 45, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
-                            </Hidden>
-                        }
-                        
-                        <StickyFooter cityName={ this.props.globalState.city } />
-                    </div>
-                
+                        <Route
+                            component={ NotFound }
+                        />
+                    </Switch>
+                    
+                 
+                    {this.state.activePage == 'cart' ?
+                        <Hidden lgUp>
+                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 72+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 69+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 66+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 63+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.04 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 60+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.05 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 57+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.06 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 54+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.07 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 51+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 48+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 45+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
+                        </Hidden>
+                            :
+                        <Hidden lgUp>
+                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 72, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 69, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 66, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 63, zIndex: 0, backgroundColor: '#bababa', opacity: 0.04 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 60, zIndex: 0, backgroundColor: '#bababa', opacity: 0.05 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 57, zIndex: 0, backgroundColor: '#bababa', opacity: 0.06 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 54, zIndex: 0, backgroundColor: '#bababa', opacity: 0.07 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 51, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 48, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
+                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 45, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
+                        </Hidden>
+                    }
+                    
+                    <StickyFooter cityName={ this.props.globalState.city } />
+                </div>
             </Provider>
         );
     }
