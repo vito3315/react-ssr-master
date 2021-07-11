@@ -234,6 +234,7 @@ $colorMain: #CC0033;
     & .SecondBox{
         display: flex;
         flex-direction: column;
+        z-index: 1;
         & > div{
             margin-top: auto;
             display: flex;
@@ -297,6 +298,9 @@ $colorMain: #CC0033;
     margin-right: 10px;
     left: -18%!important;
     width: 130%!important;
+    display: block;
+    position: relative;
+    z-index: 1;
 }
 .alice-carousel{
     margin-top: 50px!important;
