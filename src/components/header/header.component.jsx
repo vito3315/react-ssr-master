@@ -766,6 +766,21 @@ export class Header extends React.Component {
     
     render() {
         
+        let link = this.props.this_link;
+        link = link.split('/');
+        let mainLink = '';
+        
+        let check = link.find( (item) => item == 'menu');
+        
+        if( check && check.length > 0 ){
+            let check2 = link.find( (item) => item == 'item');
+            
+            if( !check2 ){
+                let index = link.findIndex( (item) => item == 'menu');
+                mainLink = link[ index+1 ];
+            }
+        }
+        
         if( this.state.is_load === false ){
             return (
                 <AppBar position="fixed" className="header" style={{ zIndex: 2 }}>
@@ -773,7 +788,7 @@ export class Header extends React.Component {
                         
                         <Grid>
                             <Grid item style={{ marginRight: 15 }}>
-                                <Link to={"/"+this.state.cityName+"/"}>
+                                <Link to={"/"+this.state.cityName}>
                                     <img alt="Жако доставка роллов и пиццы" src="https://jacochef.ru/src/img/Bely_fon_logo.png" />
                                 </Link> 
                             </Grid>
@@ -874,10 +889,10 @@ export class Header extends React.Component {
                                 <div style={{ display: 'flex', alignItems: 'baseline', flexDirection: 'row', width: '100%' }}>
                                     {this.state.categoryItemsNew.map((item, key) => 
                                         <Grid item key={key}>
-                                            {this.state.activePage == 'home' ?
+                                            {this.state.activePage == 'home' && !check ?
                                                 item.cats.length > 0 ?
                                                     <>
-                                                        <Link id={'link_'+item.id} to={"/"+this.state.cityName+"/"} className="catLink" style={{ padding: '4px 0.5vw' }} onClick={this.handleClick.bind(this)}>
+                                                        <Link id={'link_'+item.id} to={"/"+this.state.cityName} className="catLink" style={{ padding: '4px 0.5vw' }} onClick={this.handleClick.bind(this)}>
                                                             <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
                                                         </Link> 
                                                         
@@ -946,7 +961,7 @@ export class Header extends React.Component {
                                                         <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
                                                     </ScrollLink>
                                                     :
-                                                <Link to={"/"+this.state.cityName+"/"} className="catLink" style={{ padding: '4px 0.5vw' }} onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
+                                                <Link to={"/"+this.state.cityName} className="catLink" style={{ padding: '4px 0.5vw' }} onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
                                                     <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
                                                 </Link> 
                                             }
