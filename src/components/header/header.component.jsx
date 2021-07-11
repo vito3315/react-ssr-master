@@ -435,6 +435,7 @@ export class Header extends React.Component {
         itemsStore.setBanners(this.props.data.all.other.cats.baners)
         itemsStore.setCityRU(this.props.data.all.other.cats.this_city_name_ru);
         
+        itemsStore.setMainLink(this.props.this_link)
         
         this.state = {      
             this_link: this.props.this_link,

@@ -836,7 +836,7 @@ export class Home extends React.Component {
             }
         }
         
-        console.log( 'mainLink', mainLink, this.state.mainLink )
+        console.log( 'mainLink', mainLink, this.state.mainLink, itemsStore.getMainLink() )
         
         return (
             this.state.is_load === false ?
