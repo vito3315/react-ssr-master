@@ -175,6 +175,9 @@ body{
     &:hover{
         background-color: #fff!important;
     }
+    &.PROMO svg{
+        color: #bababa!important;
+    }
 }
 .BtnBorder{
     border: 2px solid $colorMain;

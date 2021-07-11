@@ -328,13 +328,13 @@ class SimplePopover extends React.Component{
                                             <td className="TableMiniName">{item.name}</td>
                                             <td>
                                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderWOBorder">
-                                                    <Button variant="contained" className="BtnCardMain">
+                                                    <Button variant="contained" className="BtnCardMain PROMO">
                                                         <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
                                                     </Button>
                                                     <Button variant="contained" className="BtnCardMain" >
                                                         <Typography component="span" className="CardCountItem">{item.count}</Typography>
                                                     </Button>
-                                                    <Button variant="contained" className="BtnCardMain"> 
+                                                    <Button variant="contained" className="BtnCardMain PROMO"> 
                                                         <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
                                                     </Button>
                                                 </ButtonGroup>

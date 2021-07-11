@@ -433,6 +433,7 @@ class ItemsStore {
             count: el.count,
             one_price: this_item['price'],
             all_price: el.price,
+            name: this_item['name'],
           });
         });
         
