@@ -230,11 +230,7 @@ $colorMain: #CC0033;
         margin-right: 10px;
         width: calc(100% - 10px);
     }
-    & #cat10 img, #cat13 img, #cat12 img, #cat9 img, #cat5 img, #cat6 img, #cat7 img{
-        margin-right: 10px;
-        left: -18%!important;
-        width: 130%!important;
-    }
+    
     & .SecondBox{
         display: flex;
         flex-direction: column;
@@ -291,6 +287,17 @@ $colorMain: #CC0033;
         align-items: center;
     }
 } 
+#cat10 .CardItem_mobile img, 
+#cat13 .CardItem_mobile img, 
+#cat12 .CardItem_mobile img, 
+#cat9 .CardItem_mobile img, 
+#cat5 .CardItem_mobile img, 
+#cat6 .CardItem_mobile img, 
+#cat7 .CardItem_mobile img{
+    margin-right: 10px;
+    left: -18%!important;
+    width: 130%!important;
+}
 .alice-carousel{
     margin-top: 50px!important;
     height: max-content;
