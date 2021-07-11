@@ -836,6 +836,28 @@ export class Home extends React.Component {
             }
         }
         
+        if( typeof window !== 'undefined' ){
+            let location = window.location.href;
+            
+            if( this.state.mainLink != location ){
+                
+                link = location;
+                link = link.split('/');
+                mainLink = '';
+                
+                check = link.find( (item) => item == 'menu');
+                
+                if( check && check.length > 0 ){
+                    let check2 = link.find( (item) => item == 'item');
+                    
+                    if( !check2 ){
+                        let index = link.findIndex( (item) => item == 'menu');
+                        mainLink = link[ index+1 ];
+                    }
+                }
+            }
+        }
+        
         console.log( 'mainLink', mainLink, this.state.mainLink, itemsStore.getMainLink(), this.props.this_link )
         
         return (

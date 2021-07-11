@@ -435,7 +435,6 @@ export class Header extends React.Component {
         itemsStore.setBanners(this.props.data.all.other.cats.baners)
         itemsStore.setCityRU(this.props.data.all.other.cats.this_city_name_ru);
         
-        itemsStore.setMainLink(this.props.this_link)
         
         this.state = {      
             this_link: this.props.this_link,
@@ -964,7 +963,7 @@ export class Header extends React.Component {
                                                         <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
                                                     </ScrollLink>
                                                     :
-                                                <Link to={"/"+this.state.cityName} className="catLink" style={{ padding: '4px 0.5vw' }} >
+                                                <Link to={"/"+this.state.cityName} className="catLink" style={{ padding: '4px 0.5vw' }} onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
                                                     <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
                                                 </Link> 
                                             }
