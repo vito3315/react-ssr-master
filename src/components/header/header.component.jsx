@@ -201,14 +201,14 @@ class SimplePopover extends React.Component{
                 
                 cartItems.map((item) => {
                     if( item.count > 0 ){
-                        item.type == 'us';
+                        item.type = 'us';
                         newCart.push(item)
                     }
                 })
                 
                 promoItems.map((item) => {
                     if( item.count > 0 ){
-                        item.type == 'promo';
+                        item.type = 'promo';
                         newCart.push(item)
                     }
                 })
