@@ -194,12 +194,12 @@ class CardItem extends React.Component {
         }
     }
     
-    shouldComponentUpdate(nextProps, nextState) {
+    /*shouldComponentUpdate(nextProps, nextState) {
         return (
             this.state.count !== nextState.count ||
             this.state.item.price !== nextState.item.price
         );
-    }
+    }*/
     
     render() {
         if( this.props.type == 'pc' ){
