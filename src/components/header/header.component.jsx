@@ -190,10 +190,19 @@ class SimplePopover extends React.Component{
         autorun(() => {
             if( this._isMounted ){
                 let cartItems = itemsStore.getItems();
+                let promoItems = itemsStore.setItemsPromo();
                 let newCart = [];
                 
                 cartItems.map((item) => {
                     if( item.count > 0 ){
+                        item.type == 'us';
+                        newCart.push(item)
+                    }
+                })
+                
+                promoItems.map((item) => {
+                    if( item.count > 0 ){
+                        item.type == 'promo';
                         newCart.push(item)
                     }
                 })
@@ -292,27 +301,50 @@ class SimplePopover extends React.Component{
                         <table className="TableMini">
                             <tbody>
                                 {this.state.cartItems.map((item, key) => 
-                                    <tr key={key}>
-                                        <td className="TableMiniName">{item.name}</td>
-                                        <td>
-                                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderWOBorder">
-                                                <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this, item.item_id)}>
-                                                    <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
-                                                </Button>
-                                                <Button variant="contained" className="BtnCardMain" >
-                                                    <Typography component="span" className="CardCountItem">{item.count}</Typography>
-                                                </Button>
-                                                <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this, item.item_id)}> 
-                                                    <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
-                                                </Button>
-                                            </ButtonGroup>
-                                        </td>
-                                        <td style={{ width: '30%' }}> 
-                                            <div className="TableMiniPrice">
-                                                {item.all_price} <Ruble viewBox="0 220 700 300" width="20" />
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    item.type == 'us' ?
+                                        <tr key={key}>
+                                            <td className="TableMiniName">{item.name}</td>
+                                            <td>
+                                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderWOBorder">
+                                                    <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this, item.item_id)}>
+                                                        <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
+                                                    </Button>
+                                                    <Button variant="contained" className="BtnCardMain" >
+                                                        <Typography component="span" className="CardCountItem">{item.count}</Typography>
+                                                    </Button>
+                                                    <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this, item.item_id)}> 
+                                                        <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
+                                                    </Button>
+                                                </ButtonGroup>
+                                            </td>
+                                            <td style={{ width: '30%' }}> 
+                                                <div className="TableMiniPrice">
+                                                    {item.all_price} <Ruble viewBox="0 220 700 300" width="20" />
+                                                </div>
+                                            </td>
+                                        </tr>
+                                            :
+                                        <tr key={key}>
+                                            <td className="TableMiniName">{item.name}</td>
+                                            <td>
+                                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderWOBorder">
+                                                    <Button variant="contained" className="BtnCardMain">
+                                                        <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
+                                                    </Button>
+                                                    <Button variant="contained" className="BtnCardMain" >
+                                                        <Typography component="span" className="CardCountItem">{item.count}</Typography>
+                                                    </Button>
+                                                    <Button variant="contained" className="BtnCardMain"> 
+                                                        <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
+                                                    </Button>
+                                                </ButtonGroup>
+                                            </td>
+                                            <td style={{ width: '30%' }}> 
+                                                <div className="TableMiniPrice">
+                                                    {item.all_price} <Ruble viewBox="0 220 700 300" width="20" />
+                                                </div>
+                                            </td>
+                                        </tr>
                                 )}
                             </tbody>
                             <tfoot>
