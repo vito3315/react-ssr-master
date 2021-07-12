@@ -448,6 +448,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
+export class HomeCat extends React.Component{
+    render(){
+        return (
+            <Home data={this.props.data} city={this.props.city} this_link={this.props.this_link} />
+        )
+    }
+}
+
 export class Home extends React.Component {
     startMove = 0;
     

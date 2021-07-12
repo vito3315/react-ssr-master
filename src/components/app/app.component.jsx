@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink as Link, Switch, Route, Redirect } from 'react-router-dom';
 
 import { Home } from '../home';
+import { HomeCat } from '../home';
 import { Item } from '../item';
 import { Contact } from '../contact';
 import { Actii } from '../actii';
@@ -314,7 +315,7 @@ export class App extends React.Component {
                             path='/:cityName/menu/:itemLink'
                             exact={ true }
                         >
-                            <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                            <HomeCat data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
                         </Route>
                         <Route
                             path='/:cityName/cart'

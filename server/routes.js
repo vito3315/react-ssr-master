@@ -1,4 +1,5 @@
 const { Home } = require( '../src/components/home' );
+const { HomeCat } = require( '../src/components/home' );
 const { Item } = require( '../src/components/item' );
 const { Contact } = require( '../src/components/contact' );
 const { Actii } = require( '../src/components/actii' );
@@ -50,7 +51,7 @@ module.exports = [
     },
     {
         path: '/:cityName/menu/:itemLink',
-        component: Home,
+        component: HomeCat,
         type: 'home',
         code: 200
     },
@@ -62,7 +63,7 @@ module.exports = [
     },
     {
         path: '/:cityName/menu/:catLink/item/:itemId',
-        component: Home,
+        component: HomeCat,
         type: 'item',
         code: 200
     },
