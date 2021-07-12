@@ -780,12 +780,8 @@ export class Home extends React.Component {
                 
                 let check = link.find( (item) => item == 'menu');
                 
-                console.log( 'check 1', check, window.location.pathname )
-                
                 if( check && check.length > 0 ){
                     let check2 = link.find( (item) => item == 'item');
-                    
-                    console.log( 'check2 2', check2 )
                     
                     if( !check2 ){
                         let index = link.findIndex( (item) => item == 'menu');
@@ -794,8 +790,6 @@ export class Home extends React.Component {
                         if( document.querySelector('.activeCat') ){
                             document.querySelector('.activeCat').classList.remove('activeCat');
                         }
-                        
-                        console.log( '[name="'+mainLink+'"]', document.querySelector('[name="'+mainLink+'"]') )
                         
                         if( document.querySelector('[name="'+mainLink+'"]') ){
                             document.querySelector('[name="'+mainLink+'"]').classList.add('activeCat')
@@ -932,8 +926,6 @@ export class Home extends React.Component {
                 }
             }
         }
-        
-        console.log( 'mainLink', mainLink, this.state.mainLink, itemsStore.getMainLink(), this.props.this_link )
         
         return (
             this.state.is_load === false ?

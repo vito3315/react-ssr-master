@@ -435,27 +435,28 @@ export class Header extends React.Component {
     constructor(props) {
         super(props);
         
-        itemsStore.setDops(this.props.data.all.other.cats.need_dop);
-        itemsStore.setAllItems(this.props.data.all.other.cats.all_items);
-        itemsStore.setAllItemsCat(this.props.data.all.other.cats.arr);
-        itemsStore.setAllItemsCatNew(this.props.data.all.other.cats.main_cat);
-        itemsStore.setFreeItems(this.props.data.all.other.cats.free_items);
-        itemsStore.setBanners(this.props.data.all.other.cats.baners)
-        itemsStore.setCityRU(this.props.data.all.other.cats.this_city_name_ru);
-        
+        if( this.props && this.props.data ){
+            itemsStore.setDops(this.props.data.all.other.cats.need_dop);
+            itemsStore.setAllItems(this.props.data.all.other.cats.all_items);
+            itemsStore.setAllItemsCat(this.props.data.all.other.cats.arr);
+            itemsStore.setAllItemsCatNew(this.props.data.all.other.cats.main_cat);
+            itemsStore.setFreeItems(this.props.data.all.other.cats.free_items);
+            itemsStore.setBanners(this.props.data.all.other.cats.baners)
+            itemsStore.setCityRU(this.props.data.all.other.cats.this_city_name_ru);
+        }
         
         this.state = {      
-            this_link: this.props.this_link,
-            categoryItemsNew: this.props.data.all.other.cats.main_cat,
+            this_link: this.props.this_link ? this.props.this_link : '',
+            categoryItemsNew: this.props.data ? this.props.data.all.other.cats.main_cat : [],
             
-            categoryItems: this.props.data.all.other.cats.arr,
+            categoryItems: this.props.data ? this.props.data.all.other.cats.arr : [],
             cartItems: [],
             activePage: '',
             is_load: false,
             openCity: false,
-            cityName: this.props.city,
+            cityName: this.props.city ? this.props.city : '',
             testData: [1, 2, 3, 4],
-            cityList: this.props.data.all.other.cats.city_list,
+            cityList: this.props.data ? this.props.data.all.other.cats.city_list : [],
             
             openLogin: false,
             userLogin: '',
@@ -473,7 +474,7 @@ export class Header extends React.Component {
             soc_link: null,
             
             anchorEl: null,
-            cityNameRu: this.props.data.all.other.cats.this_city_name_ru && this.props.data.all.other.cats.this_city_name_ru.length > 0 ? this.props.data.all.other.cats.this_city_name_ru : 'Город'
+            cityNameRu: this.props.data ? this.props.data.all.other.cats.this_city_name_ru && this.props.data.all.other.cats.this_city_name_ru.length > 0 ? this.props.data.all.other.cats.this_city_name_ru : 'Город' : 'Город'
         };
     }
     
@@ -543,20 +544,20 @@ export class Header extends React.Component {
                     
                     itemsStore.setUserName(json.user_name);
                     
-                    //itemsStore.setDops(json.need_dop);
-                    //itemsStore.setAllItems(json.all_items);
-                    //itemsStore.setAllItemsCat(json.arr);
-                    //itemsStore.setAllItemsCatNew(json.main_cat);
-                    //itemsStore.setFreeItems(json.free_items);
-                    //itemsStore.setBanners(json.baners)
-                    //itemsStore.setCityRU(json.this_city_name_ru);
+                    itemsStore.setDops(json.need_dop);
+                    itemsStore.setAllItems(json.all_items);
+                    itemsStore.setAllItemsCat(json.arr);
+                    itemsStore.setAllItemsCatNew(json.main_cat);
+                    itemsStore.setFreeItems(json.free_items);
+                    itemsStore.setBanners(json.baners)
+                    itemsStore.setCityRU(json.this_city_name_ru);
                     
                     this.setState({
-                        //cityList: json.city_list,
-                        //categoryItems: json.arr, 
-                        //categoryItemsNew: json.main_cat,
+                        cityList: json.city_list,
+                        categoryItems: json.arr, 
+                        categoryItemsNew: json.main_cat,
                         is_load: true,
-                        //cityNameRu: json.this_city_name_ru
+                        cityNameRu: json.this_city_name_ru
                     });
                     this.is_load = false
                 })
@@ -810,9 +811,6 @@ export class Header extends React.Component {
                 }
             }
         }
-        
-        console.log( "this.state.activePage == 'home' && !check", this.state.activePage == 'home' && !check )
-        console.log( "this.state.activePage == 'home' && check", this.state.activePage == 'home' && check )
         
         if( this.state.is_load === false ){
             return (
