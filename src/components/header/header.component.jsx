@@ -1063,7 +1063,7 @@ export class Header extends React.Component {
                                             offset={-100} 
                                             activeClass="activeCat" 
                                             id={'link_'+item.id} 
-                                            name={item.link}
+                                            name={item.main_link}
                                             style={{ padding: '3px 5px' }}
                                         >
                                             <Link to={"/"+this.state.cityName} style={{ padding: '3px 5px' }} className="catLink" onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>

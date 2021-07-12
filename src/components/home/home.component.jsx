@@ -745,7 +745,7 @@ export class Home extends React.Component {
                             smooth: "easeInOutQuart",
                             offset: document.getElementById('cat'+hash).getBoundingClientRect()['y'] - offset
                         });
-                    }, 300)
+                    }, 150)
                     
                     
                 }
@@ -773,7 +773,31 @@ export class Home extends React.Component {
                     
                     this.props.history.replace({ pathname: checkItem[0] })
                 }
-            }, 1300);
+                
+                let link = this.state.mainLink;
+                link = link.split('/');
+                let mainLink = '';
+                
+                let check = link.find( (item) => item == 'menu');
+                
+                if( check && check.length > 0 ){
+                    let check2 = link.find( (item) => item == 'item');
+                    
+                    if( !check2 ){
+                        let index = link.findIndex( (item) => item == 'menu');
+                        mainLink = link[ index+1 ];
+                        
+                        document.querySelector('div[name="'+mainLink+'"]')
+                        
+                        if( document.querySelector('.activeCat') ){
+                            document.querySelector('.activeCat').classList.remove('activeCat');
+                        }
+                        if( document.querySelector('div[name="'+mainLink+'"]') ){
+                            document.querySelector('div[name="'+mainLink+'"]').classList.add('activeCat')
+                        }
+                    }
+                }
+            }, 750);
         }
         
         Home.fetchData('/'+this.state.city_name).then( data => {
