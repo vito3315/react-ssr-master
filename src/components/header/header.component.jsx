@@ -925,7 +925,7 @@ export class Header extends React.Component {
                                             {this.state.activePage == 'home' && !check ?
                                                 item.cats.length > 0 ?
                                                     <>
-                                                        <Link id={'link_'+item.id} to={"/"+this.state.cityName} className="catLink" style={{ padding: '4px 0.5vw' }} onClick={this.handleClick.bind(this)}>
+                                                        <Link id={'link_'+item.id} name={item.main_link} to={"/"+this.state.cityName} className="catLink" style={{ padding: '4px 0.5vw' }} onClick={this.handleClick.bind(this)}>
                                                             <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
                                                         </Link> 
                                                         
@@ -989,6 +989,7 @@ export class Header extends React.Component {
                                                         offset={-60} 
                                                         activeClass="activeCat" 
                                                         id={'link_'+item.id} 
+                                                        name={item.main_link}
                                                         style={{ width: 'max-content', display: 'flex', whiteSpace: 'nowrap', padding: '4px 0.5vw' }}
                                                     >
                                                         <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
