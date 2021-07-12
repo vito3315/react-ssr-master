@@ -216,8 +216,6 @@ class StickyFooter extends React.Component{
     }
 }
 
-//const initialState = !process.env.IS_SERVER ? window.__INITIAL_DATA__ : {};
-
 export class App extends React.Component {
     constructor(props) {
         super(props);
@@ -272,81 +270,137 @@ export class App extends React.Component {
         return (
             <Provider { ...stores }>
                 <div className="home">
-                    <Header 
-                        data={this.props.globalState.data} 
-                        city={this.props.globalState.city} 
-                        this_link={this.props.globalState.this_link} />        
-                    
                     <Switch>
                         <Route
                             path='/:cityName/contact'
                             exact={ true }
-                            component={ Contact }
-                        />
+                        >
+                            <Header 
+                                data={this.props.globalState.data} 
+                                city={this.props.globalState.city} 
+                                this_link={this.props.globalState.this_link} />   
+                            <Contact data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                        </Route>
                         <Route
                             path='/:cityName/actii'
                             exact={ true }
-                            component={ Actii }
-                        />
+                        >
+                            <Header 
+                                data={this.props.globalState.data} 
+                                city={this.props.globalState.city} 
+                                this_link={this.props.globalState.this_link} />  
+                            <Actii data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                        </Route>
                         <Route
                             path='/:cityName/menu'
                             exact={ true }
                         >
+                            <Header 
+                                data={this.props.globalState.data} 
+                                city={this.props.globalState.city} 
+                                this_link={this.props.globalState.this_link} />  
                             <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
                         </Route>
                         <Route
                             path='/:cityName'
                             exact={ true }
                         >
+                            <Header 
+                                data={this.props.globalState.data} 
+                                city={this.props.globalState.city} 
+                                this_link={this.props.globalState.this_link} />  
                             <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
                         </Route>
                         <Route
                             path='/:cityName/item/:id'
                             exact={ true }
                         >
+                            <Header 
+                                data={this.props.globalState.data} 
+                                city={this.props.globalState.city} 
+                                this_link={this.props.globalState.this_link} />  
                             <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
                         </Route>
                         <Route 
                             exact 
                             path='/:cityName/profile/'
-                            component={ Profile }
-                        />
+                        >
+                            <Header 
+                                data={this.props.globalState.data} 
+                                city={this.props.globalState.city} 
+                                this_link={this.props.globalState.this_link} />  
+                            <Profile data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                        </Route>
                         <Route
                             path='/:cityName/menu/:itemLink'
                             exact={ true }
                         >
+                            <Header 
+                                data={this.props.globalState.data} 
+                                city={this.props.globalState.city} 
+                                this_link={this.props.globalState.this_link} />  
                             <HomeCat data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
                         </Route>
                         <Route
                             path='/:cityName/cart'
                             exact={ true }
-                            component={ Cart }
-                        />
+                        >
+                            <Header 
+                                data={this.props.globalState.data} 
+                                city={this.props.globalState.city} 
+                                this_link={this.props.globalState.this_link} />  
+                            <Cart data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                        </Route>
                         <Route
                             path='/:cityName/about'
                             exact={ true }
-                            component={ PageAbout }
-                        />
+                        >
+                            <Header 
+                                data={this.props.globalState.data} 
+                                city={this.props.globalState.city} 
+                                this_link={this.props.globalState.this_link} />  
+                            <PageAbout data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                        </Route>
                         <Route
                             path='/:cityName/jobs'
                             exact={ true }
-                            component={ PageJob }
-                        />
+                        >
+                            <Header 
+                                data={this.props.globalState.data} 
+                                city={this.props.globalState.city} 
+                                this_link={this.props.globalState.this_link} />  
+                            <PageJob data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                        </Route>
                         <Route
                             path='/:cityName/instpayorders'
                             exact={ true }
-                            component={ PageInstPay }
-                        />
+                        >
+                            <Header 
+                                data={this.props.globalState.data} 
+                                city={this.props.globalState.city} 
+                                this_link={this.props.globalState.this_link} />  
+                            <PageInstPay data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                        </Route>
                         <Route
                             path='/:cityName/publichnaya-oferta'
                             exact={ true }
-                            component={ PageOferta }
-                        />
+                        >
+                            <Header 
+                                data={this.props.globalState.data} 
+                                city={this.props.globalState.city} 
+                                this_link={this.props.globalState.this_link} />  
+                            <PageOferta data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                        </Route>
                         <Route
                             path='/:cityName/politika-konfidencialnosti'
                             exact={ true }
-                            component={ PagePolitika }
-                        />
+                        >
+                            <Header 
+                                data={this.props.globalState.data} 
+                                city={this.props.globalState.city} 
+                                this_link={this.props.globalState.this_link} />  
+                            <PagePolitika data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                        </Route>
                         <Route
                             path='/'
                         >
