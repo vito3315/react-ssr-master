@@ -732,12 +732,18 @@ export class Home extends React.Component {
                     
                     localStorage.removeItem('goTo');
                     
+                    let offset = 50;
+                    
+                    if( document.querySelector('.scrollCat.mobile') ){
+                        offset += 50;
+                    }
+                    
                     setTimeout(()=>{
                         scroller.scrollTo("myScrollToElement", {
                             duration: 800,
                             delay: 800,
                             smooth: "easeInOutQuart",
-                            offset: document.getElementById('cat'+hash).getBoundingClientRect()['y'] - 50
+                            offset: document.getElementById('cat'+hash).getBoundingClientRect()['y'] - offset
                         });
                     }, 300)
                     

@@ -1037,7 +1037,7 @@ export class Header extends React.Component {
                     </Toolbar>
                     
                     {this.state.activePage == 'home' ?
-                        <Grid className="scrollCat">
+                        <Grid className="scrollCat mobile">
                             <Hidden lgUp>
                                 {this.state.categoryItems.map((item, key) => 
                                     check && check.length > 0 ?
