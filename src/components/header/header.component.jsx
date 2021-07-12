@@ -1006,38 +1006,50 @@ export class Header extends React.Component {
                     </Toolbar>
                     
                     {this.state.activePage == 'home' ?
-                        <Grid className="scrollCat">
-                            <Hidden lgUp>
-                                {this.state.categoryItems.map((item, key) => 
-                                    <ScrollLink 
-                                        key={key}
-                                        to={"cat"+item.id} 
-                                        spy={true} 
-                                        onSetActive={(el) => { 
-                                            if( document.querySelector('.activeCat') ){
-                                                document.querySelector('.activeCat').classList.remove('activeCat');
-                                            }
-                                            document.querySelector('#link_'+item.id).classList.add('activeCat');
+                        !check ?
+                            <Grid className="scrollCat">
+                                <Hidden lgUp>
+                                    {this.state.categoryItems.map((item, key) => 
+                                        <ScrollLink 
+                                            key={key}
+                                            to={"cat"+item.id} 
+                                            spy={true} 
+                                            onSetActive={(el) => { 
+                                                if( document.querySelector('.activeCat') ){
+                                                    document.querySelector('.activeCat').classList.remove('activeCat');
+                                                }
+                                                document.querySelector('#link_'+item.id).classList.add('activeCat');
+                                                
+                                                document.getElementById('link_'+item.id).scrollIntoView(true);
+                                                
+                                                /*if( document.querySelector('.scrollCat') ){
+                                                    document.querySelector('.scrollCat').animate({
+                                                        scrollLeft: 200
+                                                    }, 100);
+                                                }*/
+                                            }} 
+                                            smooth={true} 
+                                            offset={-100} 
+                                            activeClass="activeCat" 
+                                            id={'link_'+item.id} 
+                                        >
+                                            <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
+                                        </ScrollLink>    
                                             
-                                            document.getElementById('link_'+item.id).scrollIntoView(true);
+                                    )}
+                                </Hidden>
+                            </Grid>
+                                :
+                            <Grid className="scrollCat">
+                                <Hidden lgUp>
+                                    {this.state.categoryItems.map((item, key) => 
+                                        <Link to={"/"+this.state.cityName} className="catLink" style={{ padding: '4px 0.5vw' }} onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
+                                            <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
+                                        </Link>    
                                             
-                                            /*if( document.querySelector('.scrollCat') ){
-                                                document.querySelector('.scrollCat').animate({
-                                                    scrollLeft: 200
-                                                }, 100);
-                                            }*/
-                                        }} 
-                                        smooth={true} 
-                                        offset={-60} 
-                                        activeClass="activeCat" 
-                                        id={'link_'+item.id} 
-                                    >
-                                        <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
-                                    </ScrollLink>    
-                                        
-                                )}
-                            </Hidden>
-                        </Grid>
+                                    )}
+                                </Hidden>
+                            </Grid>    
                             :
                         null
                     }
