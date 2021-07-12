@@ -510,7 +510,9 @@ export class Home extends React.Component {
             mainLink: this.props.this_link
         };
         
-        this.loadBanners( this.props.data.all.other.cats.baners );
+        if( this.props.data ){
+            this.loadBanners( this.props.data.all.other.cats.baners );
+        }
         itemsStore.setCity(this.props.city);
     }
 
