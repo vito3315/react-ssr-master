@@ -787,13 +787,11 @@ export class Home extends React.Component {
                         let index = link.findIndex( (item) => item == 'menu');
                         mainLink = link[ index+1 ];
                         
-                        document.querySelector('div[name="'+mainLink+'"]')
-                        
                         if( document.querySelector('.activeCat') ){
                             document.querySelector('.activeCat').classList.remove('activeCat');
                         }
-                        if( document.querySelector('div[name="'+mainLink+'"]') ){
-                            document.querySelector('div[name="'+mainLink+'"]').classList.add('activeCat')
+                        if( document.querySelector('[name="'+mainLink+'"]') ){
+                            document.querySelector('[name="'+mainLink+'"]').classList.add('activeCat')
                         }
                     }
                 }
