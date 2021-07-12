@@ -789,6 +789,28 @@ export class Header extends React.Component {
             }
         }
         
+        if( typeof window !== 'undefined' ){
+            let location = window.location.href;
+            
+            if( this.state.this_link != location ){
+                
+                link = location;
+                link = link.split('/');
+                mainLink = '';
+                
+                check = link.find( (item) => item == 'menu');
+                
+                if( check && check.length > 0 ){
+                    let check2 = link.find( (item) => item == 'item');
+                    
+                    if( !check2 ){
+                        let index = link.findIndex( (item) => item == 'menu');
+                        mainLink = link[ index+1 ];
+                    }
+                }
+            }
+        }
+        
         console.log( "this.state.activePage == 'home' && !check", this.state.activePage == 'home' && !check )
         console.log( "this.state.activePage == 'home' && check", this.state.activePage == 'home' && check )
         
@@ -1018,7 +1040,7 @@ export class Header extends React.Component {
                         <Grid className="scrollCat">
                             <Hidden lgUp>
                                 {this.state.categoryItems.map((item, key) => 
-                                    check ?
+                                    check.length > 0 ?
                                         <Link to={"/"+this.state.cityName} className="catLink" style={{ padding: '4px 0.5vw' }} onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
                                             <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
                                         </Link>
