@@ -50,6 +50,10 @@ app.use( '*', async ( req, res ) => {
             componentData = await matchRoute.component.fetchData(req.originalUrl);
         }
 
+        if( !componentData.title ){
+            return res.redirect("/togliatti")
+        }
+        
         // read `index.html` file
         let indexHTML = fs.readFileSync( path.resolve( __dirname, '../dist/index.html' ), {
             encoding: 'utf8',
@@ -72,7 +76,6 @@ app.use( '*', async ( req, res ) => {
         
         indexHTML = indexHTML.replace('<!-- title -->', `${componentData.title}`);
         indexHTML = indexHTML.replace('<!-- description -->', `<meta name="description" content="${componentData.description}" />`);
-        //indexHTML = indexHTML.replace('<h1 class="MuiTypography-root MuiTypography-h5"></h1>', `<h1 class="MuiTypography-root MuiTypography-h5">${componentData.page_h}</h1>`);
         
         indexHTML = indexHTML.replace(
             '<!-- title -->',
@@ -84,8 +87,6 @@ app.use( '*', async ( req, res ) => {
             `<meta name="description" content="${helmet.meta.toString()}" />`
         );
         
-        let header = '';
-        let body = '';
         let meta = '';
         
         meta = `
@@ -126,67 +127,14 @@ app.use( '*', async ( req, res ) => {
             
         indexHTML = indexHTML.replace('<!-- meta -->', `${meta}`);
         
-        componentData.cats.forEach(element => {
-            header += `<a href="/${city}/menu/${element.link}">${element.name}</a>`;
-        });
-        
-        //console.log( 'type', matchRoute.type )
-        //console.log( 'componentData.allItems', componentData.allItems )
-        
-        if( matchRoute.type == 'home' ){
-            componentData.allItems.forEach(element => {
-                
-                console.log( 'element', element )
-                
-                if( element.main_link == 'rolly' ){
-                
-                    body += '<h2>'+element.name+'</h2>';
-                    
-                    body += '<div style="display: flex; flex-wrap: wrap;">';
-                    
-                    element.items.forEach(item => {
-                        body += `<a href="/${city}/item/${item.link}"> <div style="width: 25%;"> <h3>${item.name}</h3> <span>Состав: ${item.tmp_desc}</span> <span>Цена: ${item.price}р</span> </div> </a>`;
-                    })
-                }
-                
-                body += '</div>';
-            });
-        }
-        
-        
-        /*
-        <div>
-                    <div>
-                        <a href="/${city}">Главная</a>
-                        ${header}
-                        <a href="/${city}/actii">Акции</a>
-                        <a href="/${city}/contact">Контакты</a>
-                    </div>
-                    <div>
-                        <h1 class="MuiTypography-root MuiTypography-h5">${componentData.page.page_h}</h1>
-                        
-                        <div>
-                            ${body}
-                        </div>
-                        
-                        ${componentData.page.content}
-                    </div>
-                </div>
-        */
         
         // populate `#app` element with `appHTML`
         indexHTML = indexHTML.replace( 
             '<div id="app"></div>', 
             `<div id="app">
-            
-                
-                
-                
                 ${ appHTML }
             </div>` );
-            //GLOBAL_STATE = ${JSON.stringify(GLOBAL_STATE)};
-        //indexHTML = indexHTML.replace('<h1 class="MuiTypography-root MuiTypography-h5"></h1>', `<h1 class="MuiTypography-root MuiTypography-h5">${componentData.page_h}</h1>`);
-        
+            
         // set value of `initial_state` global variable
         indexHTML = indexHTML.replace(
             'var initial_state = null;',

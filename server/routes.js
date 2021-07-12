@@ -36,14 +36,14 @@ module.exports = [
         code: 200
     },
     {
-        path: '/:cityName/contact',
+        path: '/:cityName/contacts',
         exact: true,
         component: Contact,
         type: '',
         code: 200
     },
     {
-        path: '/:cityName/actii',
+        path: '/:cityName/akcii',
         exact: true,
         component: Actii,
         type: '',

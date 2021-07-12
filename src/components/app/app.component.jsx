@@ -273,7 +273,7 @@ export class App extends React.Component {
                 <div className="home">
                     <Switch>
                         <Route
-                            path='/:cityName/contact'
+                            path='/:cityName/contacts'
                             exact={ true }
                         >
                             <Header 
@@ -283,7 +283,7 @@ export class App extends React.Component {
                             <Contact data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
                         </Route>
                         <Route
-                            path='/:cityName/actii'
+                            path='/:cityName/akcii'
                             exact={ true }
                         >
                             <Header 
