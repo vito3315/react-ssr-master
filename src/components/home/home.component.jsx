@@ -449,6 +449,38 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export class HomeCat extends React.Component{
+    
+    static fetchData(propsData) {
+        let data = {
+            type: 'get_page_info', 
+            city_id: get_city(propsData),
+            page: '',
+            link: propsData,
+        };
+        
+        return axios({
+            method: 'POST',
+            url:'https://jacofood.ru/src/php/test_app.php',
+            headers: { 'content-type': 'application/x-www-form-urlencoded' },
+            data: queryString.stringify(data)
+        }).then(response => {
+            if(response['status'] === 200){
+                var json = response['data'];
+                
+                return {
+                    title: json.page.title,
+                    description: json.page.description,
+                    page: json.page,
+                    cats: json.cats,
+                    allItems: json.allItems,
+                    all: json
+                }
+            } 
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+    
     render(){
         return (
             <Home data={this.props.data} city={this.props.city} this_link={this.props.this_link} />
