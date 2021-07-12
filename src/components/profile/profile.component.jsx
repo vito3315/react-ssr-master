@@ -166,9 +166,9 @@ export class Profile extends React.Component {
             showOrder: null
         };
         
-        if( props.location.search.length > 3 ){
+        if( window.location.search.length > 3 ){
             
-            let order_pay = props.location.search;
+            let order_pay = window.location.search;
             
             let p1 = order_pay.split('&');
     		let bank = p1[0].split('bank=');
@@ -302,7 +302,7 @@ export class Profile extends React.Component {
                         if( json.st ){
                             this.trueOrder(json.order_id, json.point_id);
                         }else{
-                            this.props.history.push(this.props.location.pathname);
+                            this.props.history.push(window.location.pathname);
                             
                             this.setState({
                                 error: {
