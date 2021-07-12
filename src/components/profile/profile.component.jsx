@@ -166,18 +166,20 @@ export class Profile extends React.Component {
             showOrder: null
         };
         
-        if( window.location.search.length > 3 ){
-            
-            let order_pay = window.location.search;
-            
-            let p1 = order_pay.split('&');
-    		let bank = p1[0].split('bank=');
-    		bank = bank[1];
+        if( typeof window !== 'undefined' ){
+            if( window.location.search.length > 3 ){
+                
+                let order_pay = window.location.search;
+                
+                let p1 = order_pay.split('&');
+        		let bank = p1[0].split('bank=');
+        		bank = bank[1];
 
-    		let order_id = p1[1].split('orderId=');
-            order_id = order_id[1];
-            
-            this.checkPay(bank, order_id);            
+        		let order_id = p1[1].split('orderId=');
+                order_id = order_id[1];
+                
+                this.checkPay(bank, order_id);            
+            }
         }
         
         itemsStore.setCity(this.props.city);
