@@ -31,6 +31,7 @@ app.use((req, res, next) => {
 app.use( '*', async ( req, res ) => {
 
     if( req.originalUrl == '/' || req.originalUrl == '' ){
+        res.status( 308 );
         return res.redirect("/togliatti")
     }
     
@@ -51,6 +52,7 @@ app.use( '*', async ( req, res ) => {
         }
 
         if( !componentData ){
+            res.status( 404 );
             return res.redirect("/togliatti")
         }
         
