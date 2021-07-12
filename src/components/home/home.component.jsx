@@ -482,6 +482,9 @@ export class HomeCat extends React.Component{
     }
     
     render(){
+        
+        console.log( 'this.props', this.props )
+        
         return (
             <Home data={this.props.data} city={this.props.city} this_link={this.props.this_link} />
         )
@@ -504,7 +507,7 @@ export class Home extends React.Component {
             banners_pc: [],
             banners_mobile: [],
             city_name: this.props.city,
-            page: null,
+            page: this.props.data ? this.props.data.page : null,
             title: '',
             description: '',
             mainLink: this.props.this_link
@@ -892,6 +895,8 @@ export class Home extends React.Component {
     }
     
     render() {
+        //this.props.data.page.page_h
+        
         let link = this.state.mainLink;
         link = link.split('/');
         let mainLink = '';
@@ -933,7 +938,7 @@ export class Home extends React.Component {
             this.state.is_load === false ?
                 <Element name="myScrollToElement" className="Category">
                     
-                    <Typography variant="h5" component="h1">{ this.props.data.page.page_h }</Typography>
+                    <Typography variant="h5" component="h1">{ this.state.page ? this.state.page.page_h : '' }</Typography>
                     
                     {itemsStore.getAllItemsCat().map((cat, key) => 
                         mainLink == '' || mainLink == cat.main_link ?
@@ -984,7 +989,7 @@ export class Home extends React.Component {
                         }
                     </Hidden>
                     
-                    <Typography variant="h5" component="h1">{ this.props.data.page.page_h }</Typography>
+                    <Typography variant="h5" component="h1">{ this.state.page ? this.state.page.page_h : '' }</Typography>
                     
                     {itemsStore.getAllItemsCat().map((cat, key) => 
                         mainLink == '' || mainLink == cat.main_link ?
