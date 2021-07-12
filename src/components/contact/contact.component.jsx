@@ -73,15 +73,15 @@ export class Contact extends React.Component {
         this.state = {      
             points: [],  
             unic_point: [],
-            
+            page: this.props.data ? this.props.data.page : null,
             title: '',
             description: '',
             
-            city_name: props.match.params.cityName,
+            city_name: this.props.city,
             is_load: false,
         };
         
-        itemsStore.setCity(props.match.params.cityName);
+        itemsStore.setCity(this.props.city);
     }
     
     dynamicallyLoadScript() {

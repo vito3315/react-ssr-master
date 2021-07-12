@@ -19,13 +19,13 @@ export class PageInstPay extends React.Component {
         
         this.state = {      
             is_load: false,
-            city_name: props.match.params.cityName,
+            city_name: this.props.city,
+            page: this.props.data ? this.props.data.page : null,
             title: '',
-            description: '',
-            page: null
+            description: ''
         };
         
-        itemsStore.setCity(props.match.params.cityName);
+        itemsStore.setCity(this.props.city);
     }
     
     static fetchData(propsData) {

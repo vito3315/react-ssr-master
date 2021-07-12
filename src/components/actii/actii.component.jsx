@@ -39,14 +39,14 @@ export class Actii extends React.Component {
             openDialog: false,
             title: '',
             description: '',
-            city_name: props.match.params.cityName,
-            
+            city_name: this.props.city,
+            page: this.props.data ? this.props.data.page : null,
             openMSG: false,
             statusMSG: false,
             textMSG: '',
         };
         
-        itemsStore.setCity(props.match.params.cityName);
+        itemsStore.setCity(this.props.city);
     }
     
     static fetchData(propsData) {

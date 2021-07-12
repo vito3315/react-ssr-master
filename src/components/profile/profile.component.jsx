@@ -121,8 +121,8 @@ export class Profile extends React.Component {
             
             title: '',
             description: '',
-            page: null,
-            city_name: props.match.params.cityName,
+            page: this.props.data ? this.props.data.page : null,
+            city_name: this.props.city,
             
             typeDel: '0',
             
@@ -180,7 +180,7 @@ export class Profile extends React.Component {
             this.checkPay(bank, order_id);            
         }
         
-        itemsStore.setCity(props.match.params.cityName);
+        itemsStore.setCity(this.props.city);
     }
     
     componentDidMount = () => {
