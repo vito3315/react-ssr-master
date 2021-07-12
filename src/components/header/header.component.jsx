@@ -418,6 +418,14 @@ class SimplePopover extends React.Component{
     }
 }
 
+export class HeaderCat extends React.Component {
+    render(){
+        return (
+            <Header data={this.props.data} city={this.props.city} this_link={this.props.this_link} />
+        )
+    }
+}
+
 export class Header extends React.Component {
     is_load = false;
     
@@ -782,6 +790,7 @@ export class Header extends React.Component {
         }
         
         console.log( "this.state.activePage == 'home' && !check", this.state.activePage == 'home' && !check )
+        console.log( "this.state.activePage == 'home' && check", this.state.activePage == 'home' && check )
         
         if( this.state.is_load === false ){
             return (

@@ -15,6 +15,7 @@ import { PageInstPay } from '../pageInstPay';
 import { PageOferta } from '../pageOferta';
 import { PagePolitika } from '../pagePolitika';
 
+import { HeaderCat } from '../header';
 import { Header } from '../header';
 
 import Grid from '@material-ui/core/Grid';
@@ -335,7 +336,7 @@ export class App extends React.Component {
                             path='/:cityName/menu/:itemLink'
                             exact={ true }
                         >
-                            <Header 
+                            <HeaderCat 
                                 data={this.props.globalState.data} 
                                 city={this.props.globalState.city} 
                                 this_link={this.props.globalState.this_link} />  
