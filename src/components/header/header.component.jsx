@@ -1006,10 +1006,14 @@ export class Header extends React.Component {
                     </Toolbar>
                     
                     {this.state.activePage == 'home' ?
-                        !check ?
-                            <Grid className="scrollCat">
-                                <Hidden lgUp>
-                                    {this.state.categoryItems.map((item, key) => 
+                        <Grid className="scrollCat">
+                            <Hidden lgUp>
+                                {this.state.categoryItems.map((item, key) => 
+                                    !check ?
+                                        <Link to={"/"+this.state.cityName} className="catLink" style={{ padding: '4px 0.5vw' }} onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
+                                            <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
+                                        </Link>
+                                            :                                        
                                         <ScrollLink 
                                             key={key}
                                             to={"cat"+item.id} 
@@ -1035,21 +1039,10 @@ export class Header extends React.Component {
                                         >
                                             <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
                                         </ScrollLink>    
-                                            
-                                    )}
-                                </Hidden>
-                            </Grid>
-                                :
-                            <Grid className="scrollCat">
-                                <Hidden lgUp>
-                                    {this.state.categoryItems.map((item, key) => 
-                                        <Link to={"/"+this.state.cityName} className="catLink" style={{ padding: '4px 0.5vw' }} onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
-                                            <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
-                                        </Link>    
-                                            
-                                    )}
-                                </Hidden>
-                            </Grid>    
+                                        
+                                )}
+                            </Hidden>
+                        </Grid>
                             :
                         null
                     }
