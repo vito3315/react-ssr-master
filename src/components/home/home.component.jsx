@@ -780,8 +780,12 @@ export class Home extends React.Component {
                 
                 let check = link.find( (item) => item == 'menu');
                 
+                console.log( 'check 1', check )
+                
                 if( check && check.length > 0 ){
                     let check2 = link.find( (item) => item == 'item');
+                    
+                    console.log( 'check2 2', check2 )
                     
                     if( !check2 ){
                         let index = link.findIndex( (item) => item == 'menu');
