@@ -995,7 +995,7 @@ export class Header extends React.Component {
                                                         <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
                                                     </ScrollLink>
                                                     :
-                                                <Link to={"/"+this.state.cityName} className="catLink" style={{ padding: '4px 0.5vw' }} onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
+                                                <Link to={"/"+this.state.cityName} name={item.main_link} className="catLink" style={{ padding: '4px 0.5vw' }} onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
                                                     <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
                                                 </Link> 
                                             }
