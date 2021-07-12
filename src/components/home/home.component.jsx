@@ -790,6 +790,9 @@ export class Home extends React.Component {
                         if( document.querySelector('.activeCat') ){
                             document.querySelector('.activeCat').classList.remove('activeCat');
                         }
+                        
+                        console.log( '[name="'+mainLink+'"]', document.querySelector('[name="'+mainLink+'"]') )
+                        
                         if( document.querySelector('[name="'+mainLink+'"]') ){
                             document.querySelector('[name="'+mainLink+'"]').classList.add('activeCat')
                         }
