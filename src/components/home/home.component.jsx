@@ -774,13 +774,13 @@ export class Home extends React.Component {
                     this.props.history.replace({ pathname: checkItem[0] })
                 }
                 
-                let link = this.state.mainLink;
+                let link = window.location.pathname;
                 link = link.split('/');
                 let mainLink = '';
                 
                 let check = link.find( (item) => item == 'menu');
                 
-                console.log( 'check 1', check, this.state.mainLink )
+                console.log( 'check 1', check, window.location.pathname )
                 
                 if( check && check.length > 0 ){
                     let check2 = link.find( (item) => item == 'item');
