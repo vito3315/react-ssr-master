@@ -1040,7 +1040,7 @@ export class Header extends React.Component {
                         <Grid className="scrollCat">
                             <Hidden lgUp>
                                 {this.state.categoryItems.map((item, key) => 
-                                    check.length > 0 ?
+                                    check && check.length > 0 ?
                                         <Link to={"/"+this.state.cityName} className="catLink" style={{ padding: '4px 0.5vw' }} onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
                                             <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
                                         </Link>
