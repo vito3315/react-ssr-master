@@ -50,7 +50,7 @@ app.use( '*', async ( req, res ) => {
             componentData = await matchRoute.component.fetchData(req.originalUrl);
         }
 
-        if( !componentData.title ){
+        if( !componentData ){
             return res.redirect("/togliatti")
         }
         
