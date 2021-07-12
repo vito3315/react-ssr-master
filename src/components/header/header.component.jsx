@@ -1041,9 +1041,33 @@ export class Header extends React.Component {
                             <Hidden lgUp>
                                 {this.state.categoryItems.map((item, key) => 
                                     check && check.length > 0 ?
-                                        <Link to={"/"+this.state.cityName} className="catLink" onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
-                                            <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
-                                        </Link>
+                                        <ScrollLink 
+                                            key={key}
+                                            to={"cat"+item.id} 
+                                            spy={true} 
+                                            onSetActive={(el) => { 
+                                                if( document.querySelector('.activeCat') ){
+                                                    document.querySelector('.activeCat').classList.remove('activeCat');
+                                                }
+                                                document.querySelector('#link_'+item.id).classList.add('activeCat');
+                                                
+                                                document.getElementById('link_'+item.id).scrollIntoView(true);
+                                                
+                                                /*if( document.querySelector('.scrollCat') ){
+                                                    document.querySelector('.scrollCat').animate({
+                                                        scrollLeft: 200
+                                                    }, 100);
+                                                }*/
+                                            }} 
+                                            smooth={true} 
+                                            offset={-100} 
+                                            activeClass="activeCat" 
+                                            id={'link_'+item.id} 
+                                        >
+                                            <Link to={"/"+this.state.cityName} className="catLink" onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
+                                                <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
+                                            </Link>
+                                        </ScrollLink>  
                                             :                                        
                                         <ScrollLink 
                                             key={key}
