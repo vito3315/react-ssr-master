@@ -320,7 +320,7 @@ export class App extends React.Component {
                                 data={this.props.globalState.data} 
                                 city={this.props.globalState.city} 
                                 this_link={this.props.globalState.this_link} />  
-                            <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                            <Item data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
                         </Route>
                         <Route 
                             exact 
