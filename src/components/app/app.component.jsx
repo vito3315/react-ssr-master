@@ -330,6 +330,24 @@ export class App extends React.Component {
                                 />
                             </div>
                         </Route>
+                        <Route
+                            path='/:cityName/menu/:catLink/:itemId'
+                            exact={ true }
+                        >
+                            <Header 
+                                data={this.props.globalState.data} 
+                                city={this.props.globalState.city} 
+                                this_link={this.props.globalState.this_link} />  
+                            <div style={{ paddingTop: 80 }}>
+                                <Item 
+                                    data={this.props.globalState.data} 
+                                    city={this.props.globalState.city} 
+                                    this_link={this.props.globalState.this_link} 
+                                    linkItem={this.props.globalState.linkItem} 
+                                    item={this.props.globalState.Item}  
+                                />
+                            </div>
+                        </Route>
                         <Route 
                             exact 
                             path='/:cityName/profile/'

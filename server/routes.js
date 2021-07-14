@@ -62,7 +62,7 @@ module.exports = [
         code: 200
     },
     {
-        path: '/:cityName/menu/:catLink/item/:itemId',
+        path: '/:cityName/menu/:catLink/:itemId',
         component: Item,
         type: 'item',
         code: 200
