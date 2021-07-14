@@ -71,14 +71,7 @@ app.use( '*', async ( req, res ) => {
             let linkItem1 = req.originalUrl.split("/");
             
             linkItem1 = linkItem1.filter( (item) => item != '' ); 
-            
-            console.log( 'linkItem1_1', linkItem1, linkItem1.length )
-            
-            linkItem1 = linkItem1[ linkItem1.length-1 ];
-            
-            console.log( 'linkItem1_2', linkItem1 )
-            
-            linkItem = req.originalUrl.split("/item/")[1];
+            linkItem = linkItem1[ linkItem1.length-1 ];
             
             componentData.allItems.forEach(element => {
                 element.items.forEach(item => {
