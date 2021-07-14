@@ -11,6 +11,8 @@ import Hidden from '@material-ui/core/Hidden';
 import { autorun } from "mobx"
 import itemsStore from '../../stores/items-store';
 
+import Box from '@material-ui/core/Box';
+
 import {Helmet} from "react-helmet";
 const queryString = require('query-string');
 import axios from 'axios';
@@ -333,7 +335,7 @@ export class Item extends React.Component {
                     <meta name="description" content={this.state.description} />
                 </Helmet>
                 
-                <>
+                <Box component="div" display={{ xs: 'block', md: 'none' }} >
                     <Grid container className="MainItem mainContainer" style={{ paddingLeft: '6%', paddingRight: '6%' }}>
                         <Grid item xs={6} style={{ paddingRight: 12, display: 'flex', alignItems: 'center', paddingTop: 60 }}>
                             <picture>
@@ -463,7 +465,7 @@ export class Item extends React.Component {
                             </div>
                         </Grid>
                     </Grid>
-                </>
+                </Box>
                 
                 <Hidden smUp>
                     <Grid container className="MainItem mainContainer" style={{ paddingLeft: '4%', paddingRight: '4%', height: '100vh' }}>
