@@ -84,7 +84,7 @@ class CustomBottomNavigation extends React.Component{
                     <FontAwesomeIcon icon={ faUtensils } style={{ color: this.state.thisPage == 'home' ? 'black' : 'gray' }} />
                 </Link>
                 <Link
-                    to={'/'+this_city+'/actii'}
+                    to={'/'+this_city+'/akcii'}
                     exact={ true }
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                 >
@@ -110,7 +110,7 @@ class CustomBottomNavigation extends React.Component{
                     </Typography>
                 }
                 <Link
-                    to={'/'+this_city+'/contact'}
+                    to={'/'+this_city+'/contacts'}
                     exact={ true }
                     className="MuiButtonBase-root MuiBottomNavigationAction-root"
                 >
@@ -846,7 +846,7 @@ export class Header extends React.Component {
                                 <Grid item>
                                     <Link 
                                         style={{ padding: '4px 8px' }}
-                                        to={"/"+this.state.cityName+"/actii"} 
+                                        to={"/"+this.state.cityName+"/akcii"} 
                                         className={ this.state.activePage == 'actii' ? "catLink activeCat" : "catLink"}
                                     >
                                         <Typography className="cat" variant="h5" component="span">Акции</Typography>
@@ -855,7 +855,7 @@ export class Header extends React.Component {
                                 <Grid item>
                                     <Link 
                                         style={{ padding: '4px 8px' }}
-                                        to={"/"+this.state.cityName+"/contact"} 
+                                        to={"/"+this.state.cityName+"/contacts"} 
                                         className={ this.state.activePage == 'contact' ? "catLink activeCat" : "catLink"}
                                     >
                                         <Typography className="cat" variant="h5" component="span">Контакты</Typography>
@@ -1006,7 +1006,7 @@ export class Header extends React.Component {
                                     <Grid item>
                                         <Link 
                                             style={{ padding: '4px 8px' }}
-                                            to={"/"+this.state.cityName+"/actii"} 
+                                            to={"/"+this.state.cityName+"/akcii"} 
                                             className={ this.state.activePage == 'actii' ? "catLink activeCat" : "catLink"}
                                         >
                                             <Typography className="cat" variant="h5" component="span">Акции</Typography>
@@ -1015,7 +1015,7 @@ export class Header extends React.Component {
                                     <Grid item>
                                         <Link 
                                             style={{ padding: '4px 8px' }}
-                                            to={"/"+this.state.cityName+"/contact"} 
+                                            to={"/"+this.state.cityName+"/contacts"} 
                                             className={ this.state.activePage == 'contact' ? "catLink activeCat" : "catLink"}
                                         >
                                             <Typography className="cat" variant="h5" component="span">Контакты</Typography>
