@@ -171,8 +171,8 @@ export class Item extends React.Component {
             count: 0,
             city_name: !this.props.item ? this.props.city : '',
             itemLink: !this.props.item ? this.props.linkItem : '',
-            title: '',
-            description: '',
+            title: this.props.data ? this.props.data.title : '',
+            description: this.props.data ? this.props.data.description : '',
             itemTab: 0
         };
         
@@ -255,12 +255,12 @@ export class Item extends React.Component {
         
         if( this.props.item ){
             
-            Item.fetchData('/'+this.state.city_name+'/menu/'+this.state.itemLink).then( data => {
+            /*Item.fetchData('/'+this.state.city_name+'/menu/'+this.state.itemLink).then( data => {
                 this.setState( {
                     title: data.page.title,
                     description: data.page.description,
                 } );
-            } );
+            } );*/
             
             if( this.state.item.items.length == 0 && (parseInt(this.state.item.type) !== 3 && parseInt(this.state.item.type) !== 4) ){
                 this.state.item.items.push({
