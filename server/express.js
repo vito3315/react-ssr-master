@@ -68,6 +68,13 @@ app.use( '*', async ( req, res ) => {
         let Item = null;
         
         if( matchRoute.type == 'item' ){  
+            let linkItem1 = req.originalUrl.split("/");
+            
+            console.log( 'linkItem1_1', linkItem1 )
+            
+            linkItem1 = linkItem1[ linkItem1.length ];
+            
+            console.log( 'linkItem1_2', linkItem1 )
             
             linkItem = req.originalUrl.split("/item/")[1];
             
