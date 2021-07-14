@@ -64,10 +64,19 @@ app.use( '*', async ( req, res ) => {
             encoding: 'utf8',
         } );
 
+        let linkItem = '';
+        
+        if( matchRoute.type == 'item' ){  
+            
+            linkItem = req.originalUrl.split("/item/")[1];
+            
+        }
+        
         const GLOBAL_STATE = {
             data: componentData,
             city: city,
-            this_link: req.originalUrl
+            this_link: req.originalUrl,
+            linkItem: linkItem
         }
         
         // get HTML string from the `App` component
