@@ -167,15 +167,15 @@ export class Item extends React.Component {
             item: this.props.item ? this.props.item : [],  
             is_load: false,
             count: 0,
-            city_name: !this.props.item ? props.match.params.cityName : '',
-            itemLink: !this.props.item ? props.match.params.itemLink : '',
+            city_name: !this.props.item ? this.props.city : '',
+            itemLink: !this.props.item ? this.props.linkItem : '',
             title: '',
             description: '',
             itemTab: 0
         };
         
         if( !this.props.item ){
-            itemsStore.setCity(props.match.params.cityName);
+            itemsStore.setCity(this.props.city);
         }
     }
     
