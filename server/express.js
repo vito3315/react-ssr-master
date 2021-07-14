@@ -43,8 +43,6 @@ app.use( '*', async ( req, res ) => {
 
     if( matchRoute ){
         
-        console.log( 'matchRoute', matchRoute )
-        
         // fetch data of the matched component
         let componentData = null;
         if( typeof matchRoute.component.fetchData === 'function' ) {
@@ -52,8 +50,10 @@ app.use( '*', async ( req, res ) => {
         }
 
         if( !componentData ){
-            res.status( 404 );
-            return res.redirect("/togliatti")
+            console.log( 'matchRoute', matchRoute )
+            console.log( 'componentData', componentData )
+            //res.status( 404 );
+            //return res.redirect("/togliatti")
         }
         
         // read `index.html` file
