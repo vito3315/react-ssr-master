@@ -49,6 +49,9 @@ app.use( '*', async ( req, res ) => {
             componentData = await matchRoute.component.fetchData(req.originalUrl);
         }
 
+        console.log( 'matchRoute', matchRoute )
+        //console.log( 'componentData', componentData )
+        
         if( !componentData ){
             console.log( 'matchRoute', matchRoute )
             console.log( 'componentData', componentData )
