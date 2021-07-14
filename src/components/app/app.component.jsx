@@ -140,7 +140,7 @@ class StickyFooter extends React.Component{
                             <Typography variant="body1">Политика конфиденциальности</Typography>
                         </Link>
                         <Link
-                            to={ '/'+this.state.cityName+'/contact' }
+                            to={ '/'+this.state.cityName+'/contacts' }
                             style={{ textDecoration: 'none' }}
                         >
                             <Typography variant="body1">Доставка и контакты</Typography>
