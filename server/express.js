@@ -83,6 +83,12 @@ app.use( '*', async ( req, res ) => {
             })
         }
         
+        console.log( 'test', {
+            city: city,
+            this_link: req.originalUrl,
+            linkItem: linkItem,
+        } )
+        
         const GLOBAL_STATE = {
             data: componentData,
             city: city,
