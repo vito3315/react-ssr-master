@@ -333,7 +333,7 @@ export class Item extends React.Component {
                     <meta name="description" content={this.state.description} />
                 </Helmet>
                 
-                <Hidden xsDown>
+                <>
                     <Grid container className="MainItem mainContainer" style={{ paddingLeft: '6%', paddingRight: '6%' }}>
                         <Grid item xs={6} style={{ paddingRight: 12, display: 'flex', alignItems: 'center', paddingTop: 60 }}>
                             <picture>
@@ -463,7 +463,7 @@ export class Item extends React.Component {
                             </div>
                         </Grid>
                     </Grid>
-                </Hidden>
+                </>
                 
                 <Hidden smUp>
                     <Grid container className="MainItem mainContainer" style={{ paddingLeft: '4%', paddingRight: '4%', height: '100vh' }}>
