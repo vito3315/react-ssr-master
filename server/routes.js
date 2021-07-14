@@ -51,18 +51,21 @@ module.exports = [
     },
     {
         path: '/:cityName/menu/:itemLink',
+        exact: true,
         component: HomeCat,
         type: 'home',
         code: 200
     },
     {
         path: '/:cityName/item/:itemLink',
+        exact: true,
         component: Item,
         type: 'item',
         code: 200
     },
     {
         path: '/:cityName/menu/:catLink/:itemId',
+        exact: true,
         component: Item,
         type: 'item',
         code: 200
