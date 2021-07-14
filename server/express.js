@@ -65,18 +65,27 @@ app.use( '*', async ( req, res ) => {
         } );
 
         let linkItem = '';
+        let Item = null;
         
         if( matchRoute.type == 'item' ){  
             
             linkItem = req.originalUrl.split("/item/")[1];
             
+            componentData.allItems.forEach(element => {
+                element.items.forEach(item => {
+                    if( item.link == linkItem ){
+                        Item = item;
+                    }
+                })
+            })
         }
         
         const GLOBAL_STATE = {
             data: componentData,
             city: city,
             this_link: req.originalUrl,
-            linkItem: linkItem
+            linkItem: linkItem,
+            Item: Item
         }
         
         // get HTML string from the `App` component

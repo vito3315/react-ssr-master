@@ -308,7 +308,7 @@ export class Item extends React.Component {
     }
     
     render() {
-        if(!this.state.is_load){
+        /*if(!this.state.is_load){
             return (
                 <Grid container spacing={3} className="MainItem mainContainer">
                     <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
@@ -324,7 +324,7 @@ export class Item extends React.Component {
                     </Grid>
                 </Grid>
             )
-        }
+        }*/
         
         return (
             <div>
