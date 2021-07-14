@@ -57,13 +57,13 @@ module.exports = [
     },
     {
         path: '/:cityName/item/:itemLink',
-        component: Home,
+        component: Item,
         type: 'item',
         code: 200
     },
     {
         path: '/:cityName/menu/:catLink/item/:itemId',
-        component: HomeCat,
+        component: Item,
         type: 'item',
         code: 200
     },
