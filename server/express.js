@@ -74,7 +74,7 @@ app.use( '*', async ( req, res ) => {
             
             console.log( 'linkItem1_1', linkItem1, linkItem1.length )
             
-            linkItem1 = linkItem1[ linkItem1.length ];
+            linkItem1 = linkItem1[ linkItem1.length-1 ];
             
             console.log( 'linkItem1_2', linkItem1 )
             
