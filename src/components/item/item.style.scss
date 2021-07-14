@@ -214,3 +214,8 @@ $colorMain: #CC0033;
         fill: #fff;
     }
 }
+.pcItem{
+    @media (max-width: 600px){
+        display: none;
+    }
+}

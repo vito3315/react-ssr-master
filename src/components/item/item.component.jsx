@@ -335,7 +335,7 @@ export class Item extends React.Component {
                     <meta name="description" content={this.state.description} />
                 </Helmet>
                 
-                <Box component="div" display={{ sm: 'none', md: 'none' }} >
+                <Box component="div" className="pcItem" >
                     <Grid container className="MainItem mainContainer" style={{ paddingLeft: '6%', paddingRight: '6%' }}>
                         <Grid item xs={6} style={{ paddingRight: 12, display: 'flex', alignItems: 'center', paddingTop: 60 }}>
                             <picture>
