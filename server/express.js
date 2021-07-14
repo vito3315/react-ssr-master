@@ -70,7 +70,9 @@ app.use( '*', async ( req, res ) => {
         if( matchRoute.type == 'item' ){  
             let linkItem1 = req.originalUrl.split("/");
             
-            console.log( 'linkItem1_1', linkItem1 )
+            linkItem1 = linkItem1.filter( (item) => item != '' ); 
+            
+            console.log( 'linkItem1_1', linkItem1, linkItem1.length )
             
             linkItem1 = linkItem1[ linkItem1.length ];
             
