@@ -445,6 +445,8 @@ export class Header extends React.Component {
             itemsStore.setCityRU(this.props.data.all.other.cats.this_city_name_ru);
         }
         
+        console.log( 'props', this.props )
+        
         this.state = {      
             this_link: this.props.this_link ? this.props.this_link : '',
             categoryItemsNew: this.props.data ? this.props.data.all.other.cats.main_cat : [],

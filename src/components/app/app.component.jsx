@@ -316,7 +316,7 @@ export class App extends React.Component {
                             path='/:cityName/item/:id'
                             exact={ true }
                         >
-                            <Header 
+                            <HeaderCat 
                                 data={this.props.globalState.data} 
                                 city={this.props.globalState.city} 
                                 this_link={this.props.globalState.this_link} />  
@@ -334,7 +334,7 @@ export class App extends React.Component {
                             path='/:cityName/menu/:catLink/:itemId'
                             exact={ true }
                         >
-                            <Header 
+                            <HeaderCat 
                                 data={this.props.globalState.data} 
                                 city={this.props.globalState.city} 
                                 this_link={this.props.globalState.this_link} />  
