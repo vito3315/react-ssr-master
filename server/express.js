@@ -37,7 +37,7 @@ app.use( '*', async ( req, res ) => {
     
     let city = req.originalUrl.split('/');
     city = city.filter( (item) => item != '' ); 
-    city = city[1];
+    city = city[0];
     
     // get matched route
     const matchRoute = routes.find( route => matchPath( req.originalUrl, route ) );
