@@ -443,6 +443,7 @@ export class Header extends React.Component {
             itemsStore.setFreeItems(this.props.data.all.other.cats.free_items);
             itemsStore.setBanners(this.props.data.all.other.cats.baners)
             itemsStore.setCityRU(this.props.data.all.other.cats.this_city_name_ru);
+            itemsStore.setCity(this.props.city)
         }
         
         console.log( 'props', this.props )
