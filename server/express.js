@@ -27,6 +27,13 @@ app.use((req, res, next) => {
     next()
 })
 
+app.use( '/sitemap.xml', async ( req, res ) => {
+    res.contentType( 'text/html' );
+    res.status( matchRoute.code );
+
+    return res.send( <h1>Hello World!</h1> );
+})
+
 // for any other requests, send `index.html` as a response
 app.use( '*', async ( req, res ) => {
 
