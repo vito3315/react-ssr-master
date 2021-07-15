@@ -36,11 +36,11 @@ app.use( '*', async ( req, res ) => {
         res.status( 200 );
 
         return res.send( <h1>Hello World!</h1> );
-    }
-    
-    if( req.originalUrl == '/' || req.originalUrl == '' ){
-        res.status( 308 );
-        return res.redirect("/togliatti")
+    }else{
+        if( req.originalUrl == '/' || req.originalUrl == '' ){
+            res.status( 308 );
+            return res.redirect("/togliatti")
+        }
     }
     
     let city = req.originalUrl.split('/');
@@ -64,8 +64,8 @@ app.use( '*', async ( req, res ) => {
         if( !componentData ){
             console.log( 'matchRoute', matchRoute )
             console.log( 'componentData', componentData )
-            res.status( 404 );
-            return res.redirect("/togliatti")
+            //res.status( 404 );
+            //return res.redirect("/togliatti")
         }
         
         // read `index.html` file
