@@ -18,7 +18,7 @@ const { App } = require( '../src/components/app' );
 const routes = require( './routes' );
 
 // serve static assets
-app.get( /\.(js|css|map|ico|png|svg|htaccess)$/, express.static( path.resolve( __dirname, '../dist' ) ) );
+app.get( /\.(js|css|map|ico|png|svg|htaccess|xml)$/, express.static( path.resolve( __dirname, '../dist' ) ) );
 
 app.use((req, res, next) => {
     res.set('Cache-Control', 'public, max-age=604800')
@@ -27,18 +27,18 @@ app.use((req, res, next) => {
     next()
 })
 
-app.use( '/sitemap.xml', async ( req, res ) => {
+/*app.use( '/sitemap.xml', async ( req, res ) => {
     console.log( '3333', req.originalUrl )
     
     return ;
-})
+})*/
 
 // for any other requests, send `index.html` as a response
 app.use( '*', async ( req, res ) => {
 
     console.log( 'test', req.originalUrl )
     
-    return ;
+    //return ;
     
     if( req.originalUrl == '/sitemap.xml' ){
         res.status( 200 );

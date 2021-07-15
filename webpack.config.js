@@ -92,6 +92,14 @@ module.exports = {
                 {
                     from: path.resolve( __dirname, 'src/assets' ),
                     to: path.resolve( __dirname, 'dist/assets' )
+                },
+                {
+                    from: path.resolve( __dirname, 'src/.htaccess' ),
+                    to: path.resolve( __dirname, 'dist/.htaccess' )
+                },
+                {
+                    from: path.resolve( __dirname, 'src/sitemap.xml' ),
+                    to: path.resolve( __dirname, 'dist/sitemap.xml' )
                 }
             ]
         } ),
