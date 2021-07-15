@@ -35,9 +35,24 @@ app.use((req, res, next) => {
     return ;
 })*/
 
-app.get('/sitemap.xml', function(req, res) {
+/*app.get('/sitemap.xml', function(req, res) {
     res.sendFile('../dist/sitemap.xml');
-});
+});*/
+
+app.get('/sitemap.xml', async function(req, res, next){
+    let xml_content = [
+      '<?xml version="1.0" encoding="UTF-8"?>',
+      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+      '  <url>',
+      '    <loc>http://www.example.com/</loc>',
+      '    <lastmod>2005-01-01</lastmod>',
+      '  </url>',
+      '</urlset>'
+    ];
+    
+    res.set('Content-Type', 'text/xml')
+    res.send(xml_content.join('\n'))
+})
 
 // for any other requests, send `index.html` as a response
 app.use( '*', async ( req, res ) => {
