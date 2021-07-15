@@ -20,6 +20,8 @@ const routes = require( './routes' );
 // serve static assets
 app.get( /\.(js|css|map|ico|png|svg|htaccess|xml)$/, express.static( path.resolve( __dirname, '../dist' ) ) );
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use((req, res, next) => {
     res.set('Cache-Control', 'public, max-age=604800')
     res.set('Set-Cookie', 'SameSite=None')
@@ -32,6 +34,10 @@ app.use((req, res, next) => {
     
     return ;
 })*/
+
+app.get('/sitemap.xml', function(req, res) {
+    res.sendFile('../dist/sitemap.xml');
+});
 
 // for any other requests, send `index.html` as a response
 app.use( '*', async ( req, res ) => {
