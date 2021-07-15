@@ -29,9 +29,13 @@ app.use((req, res, next) => {
     next()
 })
 
-/*app.get('/sitemap.xml', function(req, res) {
+app.get('/sitemap.xml', function(req, res) {
     res.sendFile('../dist/sitemap.xml');
-});*/
+});
+
+app.get('/robots.txt', function(req, res) {
+    res.sendFile('../dist/robots.txt');
+});
 
 // for any other requests, send `index.html` as a response
 app.use( '*', async ( req, res ) => {
