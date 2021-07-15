@@ -14,9 +14,6 @@ app.use(compression());
 // import App component
 const { App } = require( '../src/components/app' );
 
-const queryString = require('query-string');
-import axios from 'axios';
-
 // import routes
 const routes = require( './routes' );
 
@@ -32,56 +29,16 @@ app.use((req, res, next) => {
     next()
 })
 
-/*app.use( '/sitemap.xml', async ( req, res ) => {
-    console.log( '3333', req.originalUrl )
-    
-    return ;
-})*/
-
 /*app.get('/sitemap.xml', function(req, res) {
     res.sendFile('../dist/sitemap.xml');
 });*/
 
-app.get('/sitemap1.xml', async function(req, res, next){
-    let data = {
-        type: 'sitemap'
-    };
-    
-    axios({
-        method: 'POST',
-        url:'https://jacofood.ru/src/php/test_app.php',
-        headers: { 'content-type': 'application/x-www-form-urlencoded' },
-        data: queryString.stringify(data)
-    }).then(response => {
-        if(response['status'] === 200){
-            var json = response['data'];
-            
-            console.log( 'ttt', json )
-            
-            res.set('Content-Type', 'application/xml')
-            res.send(json)
-        } 
-    }).catch(function (error) {
-        console.log(error);
-    });
-})
-
 // for any other requests, send `index.html` as a response
 app.use( '*', async ( req, res ) => {
 
-    console.log( 'test', req.originalUrl )
-    
-    //return ;
-    
-    if( req.originalUrl == '/sitemap.xml' ){
-        res.status( 200 );
-
-        return res.send( <h1>Hello World!</h1> );
-    }else{
-        if( req.originalUrl == '/' || req.originalUrl == '' ){
-            res.status( 308 );
-            return res.redirect("/togliatti")
-        }
+    if( req.originalUrl == '/' || req.originalUrl == '' ){
+        res.status( 308 );
+        return res.redirect("/togliatti")
     }
     
     let city = req.originalUrl.split('/');
@@ -105,8 +62,8 @@ app.use( '*', async ( req, res ) => {
         if( !componentData ){
             console.log( 'matchRoute', matchRoute )
             console.log( 'componentData', componentData )
-            //res.status( 404 );
-            //return res.redirect("/togliatti")
+            res.status( 404 );
+            return res.redirect("/togliatti")
         }
         
         // read `index.html` file

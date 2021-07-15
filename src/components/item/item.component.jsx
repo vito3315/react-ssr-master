@@ -405,7 +405,7 @@ export class Item extends React.Component {
                                 { this.state.item.items.length > 1 ?
                                     <div style={{ maxHeight: 300, overflowY: 'auto', overflowX: 'hidden' }}>
                                         {this.state.item.items.map((item, key) =>
-                                            <div key={key} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                                            <div key={key} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', position: 'relative' }}>
                                                 <picture style={{ height: 'auto', width: 100, display: 'table' }}>
                                                     <source 
                                                         srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_new+"300х200.webp?"+item.img_new_update} 
