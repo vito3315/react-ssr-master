@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 // for any other requests, send `index.html` as a response
 app.use( '*', async ( req, res ) => {
 
-    if( req.originalUrl == '/' || req.originalUrl == '' ){
+    if( req.originalUrl == '/sitemap.xml' ){
         res.status( 200 );
 
         return res.send( <h1>Hello World!</h1> );
