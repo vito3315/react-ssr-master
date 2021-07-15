@@ -32,6 +32,8 @@ app.use( '*', async ( req, res ) => {
 
     console.log( 'test', req.originalUrl )
     
+    return ;
+    
     if( req.originalUrl == '/sitemap.xml' ){
         res.status( 200 );
 
