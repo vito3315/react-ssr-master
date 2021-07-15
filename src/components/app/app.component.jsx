@@ -437,6 +437,13 @@ export class App extends React.Component {
                         </Route>
                         
                         <Route
+                            path='/sitemap.xml'
+                            exact={ true }
+                        >
+                            <h1>Hello World</h1>
+                        </Route>
+                        
+                        <Route
                             component={ NotFound }
                         />
                     </Switch>
