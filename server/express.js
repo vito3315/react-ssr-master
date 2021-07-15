@@ -27,16 +27,15 @@ app.use((req, res, next) => {
     next()
 })
 
-app.use( '/sitemap.xml', async ( req, res ) => {
-    res.contentType( 'text/html' );
-    res.status( matchRoute.code );
-
-    return res.send( <h1>Hello World!</h1> );
-})
-
 // for any other requests, send `index.html` as a response
 app.use( '*', async ( req, res ) => {
 
+    if( req.originalUrl == '/' || req.originalUrl == '' ){
+        res.status( 200 );
+
+        return res.send( <h1>Hello World!</h1> );
+    }
+    
     if( req.originalUrl == '/' || req.originalUrl == '' ){
         res.status( 308 );
         return res.redirect("/togliatti")
