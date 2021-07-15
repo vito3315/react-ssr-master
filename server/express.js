@@ -59,7 +59,7 @@ app.use( '*', async ( req, res ) => {
         console.log( 'matchRoute', matchRoute )
         //console.log( 'componentData', componentData )
         
-        if( !componentData ){
+        if( !componentData || componentData.st === false ){
             console.log( 'matchRoute', matchRoute )
             console.log( 'componentData', componentData )
             res.status( 404 );
