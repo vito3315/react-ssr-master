@@ -56,24 +56,14 @@ app.get('/sitemap1.xml', async function(req, res, next){
         if(response['status'] === 200){
             var json = response['data'];
             
-            console.log( json )
+            console.log( 'ttt', json )
+            
+            res.set('Content-Type', 'application/xml')
+            res.send(json)
         } 
     }).catch(function (error) {
         console.log(error);
     });
-    
-    let xml_content = [
-      '<?xml version="1.0" encoding="UTF-8"?>',
-      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-      '  <url>',
-      '    <loc>http://www.example.com/</loc>',
-      '    <lastmod>2005-01-01</lastmod>',
-      '  </url>',
-      '</urlset>'
-    ];
-    
-    res.set('Content-Type', 'application/xml')
-    res.send(xml_content.join('\n'))
 })
 
 // for any other requests, send `index.html` as a response
