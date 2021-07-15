@@ -56,8 +56,8 @@ app.use( '*', async ( req, res ) => {
         if( !componentData ){
             console.log( 'matchRoute', matchRoute )
             console.log( 'componentData', componentData )
-            //res.status( 404 );
-            //return res.redirect("/togliatti")
+            res.status( 404 );
+            return res.redirect("/togliatti")
         }
         
         // read `index.html` file
@@ -125,11 +125,9 @@ app.use( '*', async ( req, res ) => {
         
         if( matchRoute.type == 'item' ){  
             
-            let link = req.originalUrl.split("/item/")[1];
-            
             componentData.allItems.forEach(element => {
                 element.items.forEach(item => {
-                    if( item.link == link ){
+                    if( item.link == linkItem ){
                         meta = `
                             <meta property="og:image" content="https://storage.yandexcloud.net/site-img/${item.img_new}300х200.jpg">
                             <meta property="og:image:width" content="300" />
