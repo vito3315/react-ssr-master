@@ -27,6 +27,12 @@ app.use((req, res, next) => {
     next()
 })
 
+app.use( '/sitemap.xml', async ( req, res ) => {
+    console.log( '3333', req.originalUrl )
+    
+    return ;
+})
+
 // for any other requests, send `index.html` as a response
 app.use( '*', async ( req, res ) => {
 
