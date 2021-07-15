@@ -30,6 +30,8 @@ app.use((req, res, next) => {
 // for any other requests, send `index.html` as a response
 app.use( '*', async ( req, res ) => {
 
+    console.log( 'test', req.originalUrl )
+    
     if( req.originalUrl == '/sitemap.xml' ){
         res.status( 200 );
 

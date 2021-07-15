@@ -129,6 +129,13 @@ module.exports = [
     },
     
     {
+        path: '/sitemap.xml',
+        exact: true,
+        type: 'other',
+        code: 200
+    },
+    
+    {
         path: '*',
         component: NotFound,
         type: '',
