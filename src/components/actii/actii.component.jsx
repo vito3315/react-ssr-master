@@ -24,7 +24,11 @@ import itemsStore from '../../stores/items-store';
 const queryString = require('query-string');
 
 function get_city(path){
-    return path.split('/')[1];
+    
+    path = path.split('/');
+    path = path.filter( (item) => item != '' );
+    
+    return path[ 0 ];
 }
 
 export class Actii extends React.Component {

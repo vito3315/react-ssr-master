@@ -8,7 +8,11 @@ const queryString = require('query-string');
 import axios from 'axios';
 
 function get_city(path){
-    return path.split('/')[1];
+    
+    path = path.split('/');
+    path = path.filter( (item) => item != '' );
+    
+    return path[ 0 ];
 }
 
 export class PageAbout extends React.Component {

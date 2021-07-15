@@ -63,7 +63,11 @@ function ControlledAccordions(props) {
 }
 
 function get_city(path){
-    return path.split('/')[1];
+    
+    path = path.split('/');
+    path = path.filter( (item) => item != '' );
+    
+    return path[ 0 ];
 }
 
 export class Contact extends React.Component {

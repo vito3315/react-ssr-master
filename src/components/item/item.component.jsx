@@ -171,8 +171,6 @@ export class Item extends React.Component {
     constructor(props) {
         super(props);
         
-        console.log( this.props.item )
-        
         this.state = {      
             item: this.props.item ? this.props.item : [],  
             is_load: false,
@@ -196,8 +194,6 @@ export class Item extends React.Component {
             item: get_item(propsData),
             page: 'item' 
         };
-        
-        console.log( propsData )
         
         return axios({
             method: 'POST',

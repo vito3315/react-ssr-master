@@ -90,7 +90,11 @@ function a11yProps(index) {
 }
 
 function get_city(path){
-    return path.split('/')[1];
+    
+    path = path.split('/');
+    path = path.filter( (item) => item != '' );
+    
+    return path[ 0 ];
 }
 
 function Ruble(props){

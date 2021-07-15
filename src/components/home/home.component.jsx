@@ -131,7 +131,11 @@ function Ruble(props){
 const handleDragStart = (e) => e.preventDefault();
 
 function get_city(path){
-    return path.split('/')[1];
+    
+    path = path.split('/');
+    path = path.filter( (item) => item != '' );
+    
+    return path[ 0 ];
 }
 
 import { Item } from '../item';
