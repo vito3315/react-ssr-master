@@ -14,6 +14,9 @@ app.use(compression());
 // import App component
 const { App } = require( '../src/components/app' );
 
+const queryString = require('query-string');
+import axios from 'axios';
+
 // import routes
 const routes = require( './routes' );
 
@@ -40,6 +43,25 @@ app.use((req, res, next) => {
 });*/
 
 app.get('/sitemap1.xml', async function(req, res, next){
+    let data = {
+        type: 'sitemap'
+    };
+    
+    axios({
+        method: 'POST',
+        url:'https://jacofood.ru/src/php/test_app.php',
+        headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        data: queryString.stringify(data)
+    }).then(response => {
+        if(response['status'] === 200){
+            var json = response['data'];
+            
+            console.log( json )
+        } 
+    }).catch(function (error) {
+        console.log(error);
+    });
+    
     let xml_content = [
       '<?xml version="1.0" encoding="UTF-8"?>',
       '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
