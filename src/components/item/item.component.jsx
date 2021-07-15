@@ -68,11 +68,19 @@ function a11yProps(index) {
   }
 
 function get_city(path){
-    return path.split('/')[1];
+    
+    path = path.split('/');
+    path = path.filter( (item) => item != '' );
+    
+    return path[ 0 ];
 }
 
 function get_item(path){
-    return path.split('/')[3];
+    
+    path = path.split('/');
+    path = path.filter( (item) => item != '' );
+    
+    return path[ path.length - 1 ];
 }
 
 function ItemInfoPopover(props) {
@@ -188,6 +196,8 @@ export class Item extends React.Component {
             item: get_item(propsData),
             page: 'item' 
         };
+        
+        console.log( propsData )
         
         return axios({
             method: 'POST',
