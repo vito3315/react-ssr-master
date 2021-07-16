@@ -593,9 +593,9 @@ export class Header extends React.Component {
     getNewLink(city){
         
         console.log( 'this.state.this_link', this.state.this_link )
-        console.log( 'window.location.href', window.location.href )
+        console.log( 'window.location.href', window.location.pathname )
         
-        let this_addr = this.state.this_link;
+        let this_addr = window.location.pathname;
         return this_addr.replace(this.state.cityName, city);
     }
 
