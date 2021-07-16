@@ -119,7 +119,7 @@ export class Actii extends React.Component {
                 console.log( 'hash', hash )
                 console.log( 'hash 11', hash.indexOf('act_') )
                 
-                if( hash.indexOf('act_') ){
+                if( hash.indexOf('act_') > 0 ){
                     let act_id = hash.split('act_')[1];
                     
                     let this_item = json.actii.find( (item) => item.id == act_id );

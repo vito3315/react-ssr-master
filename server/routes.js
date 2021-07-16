@@ -43,19 +43,20 @@ module.exports = [
         code: 200
     },
     {
-        path: '/:cityName/akcii',
-        //exact: true,
-        component: Actii,
-        type: '',
-        code: 200
-    },
-    {
         path: '/:cityName/akcii/:act_id',
         //exact: true,
         component: Actii,
         type: '',
         code: 200
     },
+    {
+        path: '/:cityName/akcii',
+        //exact: true,
+        component: Actii,
+        type: '',
+        code: 200
+    },
+    
     {
         path: '/:cityName/menu/:itemLink',
         //exact: true,
