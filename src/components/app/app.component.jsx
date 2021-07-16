@@ -27,7 +27,7 @@ const queryString = require('query-string');
 
 import { Provider } from 'mobx-react';
 import itemsStore from '../../stores/items-store';
-import { config } from '../../stores/config';
+import config from '../../stores/config';
 const stores = { itemsStore };
 
 import { autorun } from "mobx"
