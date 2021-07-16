@@ -2,6 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import itemsStore from '../../stores/items-store';
+import config from '../../stores/config';
 
 import {Helmet} from "react-helmet";
 const queryString = require('query-string');
@@ -41,7 +42,7 @@ export class PageInstPay extends React.Component {
         
         return axios({
             method: 'POST',
-            url:'https://jacofood.ru/src/php/test_app.php',
+            url: config.urlApi,
             headers: { 'content-type': 'application/x-www-form-urlencoded' },
             data: queryString.stringify(data)
         }).then(response => {

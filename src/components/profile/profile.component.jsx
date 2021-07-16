@@ -22,6 +22,7 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import itemsStore from '../../stores/items-store';
+import config from '../../stores/config';
 
 import TextField from '@material-ui/core/TextField';
 
@@ -217,7 +218,7 @@ export class Profile extends React.Component {
             arr_day.push(i)
         }
         
-        fetch('https://jacofood.ru/src/php/test_app.php', {
+        fetch(config.urlApi, {
             method: 'POST',
             headers: {
                 'Content-Type':'application/x-www-form-urlencoded'},
@@ -258,7 +259,7 @@ export class Profile extends React.Component {
         
         return axios({
             method: 'POST',
-            url:'https://jacofood.ru/src/php/test_app.php',
+            url: config.urlApi,
             headers: { 'content-type': 'application/x-www-form-urlencoded' },
             data: queryString.stringify(data)
         }).then(response => {
@@ -288,7 +289,7 @@ export class Profile extends React.Component {
         
         axios({
             method: 'POST',
-            url:'https://jacofood.ru/src/php/test_app.php',
+            url: config.urlApi,
             headers: { 'content-type': 'application/x-www-form-urlencoded' },
             data: queryString.stringify(data)
         }).then(response => {
@@ -327,7 +328,7 @@ export class Profile extends React.Component {
     }
     
     trueOrder(order_id, point_id){
-        fetch('https://jacofood.ru/src/php/test_app.php', {
+        fetch(config.urlApi, {
             method: 'POST',
             headers: {
                 'Content-Type':'application/x-www-form-urlencoded'},
@@ -419,7 +420,7 @@ export class Profile extends React.Component {
     changeCheck = (event) => {
         let check = event.target.checked;
         
-        fetch('https://jacofood.ru/src/php/test_app.php', {
+        fetch(config.urlApi, {
             method: 'POST',
             headers: {
                 'Content-Type':'application/x-www-form-urlencoded'},
@@ -439,7 +440,7 @@ export class Profile extends React.Component {
     }
     
     saveMail(){
-        fetch('https://jacofood.ru/src/php/test_app.php', {
+        fetch(config.urlApi, {
             method: 'POST',
             headers: {
                 'Content-Type':'application/x-www-form-urlencoded'},
@@ -481,7 +482,7 @@ export class Profile extends React.Component {
                 }
             })
             
-            fetch('https://jacofood.ru/src/php/test_app.php', {
+            fetch(config.urlApi, {
                 method: 'POST',
                 headers: {
                     'Content-Type':'application/x-www-form-urlencoded'},
@@ -492,7 +493,7 @@ export class Profile extends React.Component {
                 })
               }).then(res => res.json()).then(json => {
                 if( json['st'] ){
-                    fetch('https://jacofood.ru/src/php/test_app.php', {
+                    fetch(config.urlApi, {
                         method: 'POST',
                         headers: {
                             'Content-Type':'application/x-www-form-urlencoded'},
@@ -558,7 +559,7 @@ export class Profile extends React.Component {
     }
     
     saveName(){
-        fetch('https://jacofood.ru/src/php/test_app.php', {
+        fetch(config.urlApi, {
             method: 'POST',
             headers: {
                 'Content-Type':'application/x-www-form-urlencoded'},
@@ -591,7 +592,7 @@ export class Profile extends React.Component {
             spiner: true
         });
         
-        fetch('https://jacofood.ru/src/php/test_app.php', {
+        fetch(config.urlApi, {
             method: 'POST',
             headers: {
                 'Content-Type':'application/x-www-form-urlencoded'},
@@ -638,7 +639,7 @@ export class Profile extends React.Component {
         }
         
         if (confirm("Отменить заказ #"+this.state.showOrder.order.order_id)) {
-            fetch('https://jacofood.ru/src/php/test_app.php', {
+            fetch(config.urlApi, {
                 method: 'POST',
                 headers: {
                     'Content-Type':'application/x-www-form-urlencoded'},

@@ -9,6 +9,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import itemsStore from '../../stores/items-store';
+import config from '../../stores/config';
 
 import {Helmet} from "react-helmet";
 import axios from 'axios';
@@ -111,7 +112,7 @@ export class Contact extends React.Component {
             } );
         } );
         
-        fetch('https://jacofood.ru/src/php/test_app.php', {
+        fetch(config.urlApi, {
             method: 'POST',
             headers: {
                 'Content-Type':'application/x-www-form-urlencoded'},
@@ -168,7 +169,7 @@ export class Contact extends React.Component {
         
         return axios({
             method: 'POST',
-            url:'https://jacofood.ru/src/php/test_app.php',
+            url: config.urlApi,
             headers: { 'content-type': 'application/x-www-form-urlencoded' },
             data: queryString.stringify(data)
         }).then(response => {
@@ -228,7 +229,6 @@ export class Contact extends React.Component {
                     }, {
                         hintLayout: HintLayout,
     					iconLayout: 'default#image',
-                        //iconImageHref: 'https://jacofood.ru/src/img/other/Favikon.png',
                         iconImageHref: '/assets/img_other/Favikon.png',
     					iconImageSize: [30, 30],
     					iconImageOffset: [-12, -24],

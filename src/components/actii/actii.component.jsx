@@ -20,6 +20,7 @@ import axios from 'axios';
 import {Helmet} from "react-helmet";
 
 import itemsStore from '../../stores/items-store';
+import config from '../../stores/config';
 
 const queryString = require('query-string');
 
@@ -62,7 +63,7 @@ export class Actii extends React.Component {
         
         return axios({
             method: 'POST',
-            url:'https://jacofood.ru/src/php/test_app.php',
+            url: config.urlApi,
             headers: { 'content-type': 'application/x-www-form-urlencoded' },
             data: queryString.stringify(data)
         }).then(response => {
@@ -97,7 +98,7 @@ export class Actii extends React.Component {
             } );
         } );
         
-        fetch('https://jacofood.ru/src/php/test_app.php', {
+        fetch(config.urlApi, {
             method: 'POST',
             headers: {
                 'Content-Type':'application/x-www-form-urlencoded'},

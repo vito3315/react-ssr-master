@@ -10,6 +10,7 @@ import Popover from '@material-ui/core/Popover';
 import Hidden from '@material-ui/core/Hidden';
 import { autorun } from "mobx"
 import itemsStore from '../../stores/items-store';
+import config from '../../stores/config';
 
 import Box from '@material-ui/core/Box';
 
@@ -197,7 +198,7 @@ export class Item extends React.Component {
         
         return axios({
             method: 'POST',
-            url:'https://jacofood.ru/src/php/test_app.php',
+            url: config.urlApi,
             headers: { 'content-type': 'application/x-www-form-urlencoded' },
             data: queryString.stringify(data)
         }).then(response => {

@@ -62,6 +62,8 @@ import Input from '@material-ui/core/Input';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 import itemsStore from '../../stores/items-store';
+import config from '../../stores/config';
+
 import { autorun } from "mobx"
 
 import {Helmet} from "react-helmet";
@@ -546,7 +548,7 @@ export class Cart extends React.Component {
         
         return axios({
             method: 'POST',
-            url:'https://jacofood.ru/src/php/test_app.php',
+            url: config.urlApi,
             headers: { 'content-type': 'application/x-www-form-urlencoded' },
             data: queryString.stringify(data)
         }).then(response => {
@@ -568,7 +570,7 @@ export class Cart extends React.Component {
     }
     
     loadData(){
-        fetch('https://jacofood.ru/src/php/test_app.php', {
+        fetch(config.urlApi, {
             method: 'POST',
             headers: {
                 'Content-Type':'application/x-www-form-urlencoded'},
@@ -1059,7 +1061,7 @@ export class Cart extends React.Component {
     }
     
     checkPromo(){
-        fetch('https://jacofood.ru/src/php/test_app.php', {
+        fetch(config.urlApi, {
             method: 'POST',
             headers: {
                 'Content-Type':'application/x-www-form-urlencoded'},
@@ -1207,7 +1209,7 @@ export class Cart extends React.Component {
             });
         });
         
-        fetch('https://jacofood.ru/src/php/test_app.php', {
+        fetch(config.urlApi, {
             method: 'POST',
             headers: {
                 'Content-Type':'application/x-www-form-urlencoded'},
@@ -1391,7 +1393,7 @@ export class Cart extends React.Component {
                 }
             })
             
-            fetch('https://jacofood.ru/src/php/test_app.php', {
+            fetch(config.urlApi, {
                 method: 'POST',
                 headers: {
                     'Content-Type':'application/x-www-form-urlencoded'},
@@ -1452,7 +1454,7 @@ export class Cart extends React.Component {
         let street = document.querySelector('#newAddrStreet').value;
         
         if( street.length > 0 && this.state.newAddrHome.length > 0 ){
-            fetch('https://jacofood.ru/src/php/test_app.php', {
+            fetch(config.urlApi, {
                 method: 'POST',
                 headers: {
                     'Content-Type':'application/x-www-form-urlencoded'},
@@ -1492,7 +1494,7 @@ export class Cart extends React.Component {
     }
     
     trueOrder(){
-        fetch('https://jacofood.ru/src/php/test_app.php', {
+        fetch(config.urlApi, {
             method: 'POST',
             headers: {
                 'Content-Type':'application/x-www-form-urlencoded'},
@@ -1541,7 +1543,7 @@ export class Cart extends React.Component {
     
     delAddr(id){
         if (confirm("Удалить сохраненный адрес ?")) {
-            fetch('https://jacofood.ru/src/php/test_app.php', {
+            fetch(config.urlApi, {
                 method: 'POST',
                 headers: {
                     'Content-Type':'application/x-www-form-urlencoded'},

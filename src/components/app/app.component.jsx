@@ -77,7 +77,7 @@ class StickyFooter extends React.Component{
     
     loadPageInfo(){
         if( itemsStore.getCity() ){
-            fetch('https://jacofood.ru/src/php/test_app.php', {
+            fetch(config.urlApi, {
                 method: 'POST',
                 headers: {
                     'Content-Type':'application/x-www-form-urlencoded'},

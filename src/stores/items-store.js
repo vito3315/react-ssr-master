@@ -2,6 +2,8 @@ import { makeAutoObservable } from 'mobx';
 import moment from "moment";
 const queryString = require('query-string');
 
+import config from './config';
+
 class ItemsStore {
   // Don't need decorators now
   items = '';
@@ -115,7 +117,7 @@ class ItemsStore {
   };
 
   getInfoPromo(promoName){
-    fetch('https://jacofood.ru/src/php/test_app.php', {
+    fetch(config.urlApi, {
       method: 'POST',
       headers: {
           'Content-Type':'application/x-www-form-urlencoded'},

@@ -32,6 +32,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import InputMask from "react-input-mask";
 import Badge from '@material-ui/core/Badge';
 import itemsStore from '../../stores/items-store';
+import config from '../../stores/config';
 
 import { autorun } from "mobx"
 
@@ -247,7 +248,7 @@ class SimplePopover extends React.Component{
     }
     
     checkPromo(){
-        fetch('https://jacofood.ru/src/php/test_app.php', {
+        fetch(config.urlApi, {
             method: 'POST',
             headers: {
                 'Content-Type':'application/x-www-form-urlencoded'},
@@ -532,7 +533,7 @@ export class Header extends React.Component {
             this.is_load = true;
             
             if( itemsStore.getCity() ){
-                fetch('https://jacofood.ru/src/php/test_app.php', {
+                fetch(config.urlApi, {
                     method: 'POST',
                     headers: {
                         'Content-Type':'application/x-www-form-urlencoded'},
@@ -629,7 +630,7 @@ export class Header extends React.Component {
                 userLoginFormat: number
             })
             
-            fetch('https://jacofood.ru/src/php/test_app.php', {
+            fetch(config.urlApi, {
                 method: 'POST',
                 headers: {
                     'Content-Type':'application/x-www-form-urlencoded'},
@@ -672,7 +673,7 @@ export class Header extends React.Component {
                 errSMS: ''
             });
             
-            fetch('https://jacofood.ru/src/php/test_app.php', {
+            fetch(config.urlApi, {
                 method: 'POST',
                 headers: {
                     'Content-Type':'application/x-www-form-urlencoded'},
@@ -710,7 +711,7 @@ export class Header extends React.Component {
             errSMS: ''
         });
         
-        fetch('https://jacofood.ru/src/php/test_app.php', {
+        fetch(config.urlApi, {
             method: 'POST',
             headers: {
                 'Content-Type':'application/x-www-form-urlencoded'},
