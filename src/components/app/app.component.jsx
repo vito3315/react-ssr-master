@@ -27,6 +27,7 @@ const queryString = require('query-string');
 
 import { Provider } from 'mobx-react';
 import itemsStore from '../../stores/items-store';
+import { config } from '../../stores/config';
 const stores = { itemsStore };
 
 import { autorun } from "mobx"
@@ -249,6 +250,9 @@ export class App extends React.Component {
     }
 
     componentDidMount = () => {
+        
+        console.log( 'config', config )
+        
         autorun(() => {
             this.setState({
                 activePage: itemsStore.getPage()
