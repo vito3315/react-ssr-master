@@ -238,7 +238,7 @@ export class Actii extends React.Component {
                     <Typography variant="h5" component="h2">{ this.state.page && this.state.page.page_h ? this.state.page.page_h : '' }</Typography>
                 </Grid>
                 
-                { this.state.page && this.state.page.content ?
+                { this.state.page && this.state.page.content && false ?
                     <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer dopText" dangerouslySetInnerHTML={{__html: this.state.page.content}} />
                         :
                     null
