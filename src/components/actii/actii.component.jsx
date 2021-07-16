@@ -114,10 +114,10 @@ export class Actii extends React.Component {
             });
             
             setTimeout(() => {
-                let hash = window.location.hash;
+                let hash = window.location.pathname;
                 
-                if( hash.length > 0 ){
-                    let act_id = hash.split('#act')[1];
+                if( hash.indexOf('act_') ){
+                    let act_id = hash.split('act_')[1];
                     
                     let this_item = json.actii.find( (item) => item.id == act_id );
                     
