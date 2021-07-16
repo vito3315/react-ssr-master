@@ -16,77 +16,77 @@ const { PagePolitika } = require( '../src/components/pagePolitika' );
 module.exports = [
     {
         path: '/:cityName',
-        exact: true,
+        //exact: true,
         component: Home,
         type: 'home',
         code: 200
     },
     {
         path: '/:cityName/home',
-        exact: true,
+        //exact: true,
         component: Home,
         type: 'home',
         code: 200
     },
     {
         path: '/:cityName/menu',
-        exact: true,
+        //exact: true,
         component: Home,
         type: 'home',
         code: 200
     },
     {
         path: '/:cityName/contacts',
-        exact: true,
+        //exact: true,
         component: Contact,
         type: '',
         code: 200
     },
     {
         path: '/:cityName/akcii',
-        exact: true,
+        //exact: true,
         component: Actii,
         type: '',
         code: 200
     },
     {
         path: '/:cityName/menu/:itemLink',
-        exact: true,
+        //exact: true,
         component: HomeCat,
         type: 'home',
         code: 200
     },
     {
         path: '/:cityName/item/:itemLink',
-        exact: true,
+        //exact: true,
         component: Item,
         type: 'item',
         code: 200
     },
     {
         path: '/:cityName/menu/:catLink/:itemId',
-        exact: true,
+        //exact: true,
         component: Item,
         type: 'item',
         code: 200
     },
     {
         path: '/',
-        exact: true,
+        //exact: true,
         component: Contact,
         type: '',
         code: 200
     },
     {
         path: '/:cityName/profile',
-        exact: true,
+        //exact: true,
         component: Profile,
         type: '',
         code: 200
     },
     {
         path: '/:cityName/cart',
-        exact: true,
+        //exact: true,
         component: Cart,
         type: '',
         code: 200
@@ -94,35 +94,35 @@ module.exports = [
     
     {
         path: '/:cityName/about',
-        exact: true,
+        //exact: true,
         component: PageAbout,
         type: '',
         code: 200
     },
     {
         path: '/:cityName/jobs',
-        exact: true,
+        //exact: true,
         component: PageJob,
         type: '',
         code: 200
     },
     {
         path: '/:cityName/instpayorders',
-        exact: true,
+        //exact: true,
         component: PageInstPay,
         type: '',
         code: 200
     },
     {
         path: '/:cityName/publichnaya-oferta',
-        exact: true,
+        //exact: true,
         component: PageOferta,
         type: '',
         code: 200
     },
     {
         path: '/:cityName/politika-konfidencialnosti',
-        exact: true,
+        //exact: true,
         component: PagePolitika,
         type: '',
         code: 200
