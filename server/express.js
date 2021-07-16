@@ -20,7 +20,15 @@ const routes = require( './routes' );
 // serve static assets
 app.get( /\.(js|css|map|ico|png|svg|htaccess|xml|txt)$/, express.static( path.resolve( __dirname, '../dist' ) ) );
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.get('*.js', (req, res, next) => {
+	req.url = req.url + '.gz';
+	res.set('Content-Encoding', 'gzip');
+	next();
+});
+
+app.use(express.static('public'));
+
+//app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
     res.set('Cache-Control', 'public, max-age=604800')
