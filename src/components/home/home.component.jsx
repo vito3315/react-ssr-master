@@ -488,9 +488,6 @@ export class HomeCat extends React.Component{
     }
     
     render(){
-        
-        console.log( 'this.props', this.props )
-        
         return (
             <Home data={this.props.data} city={this.props.city} this_link={this.props.this_link} />
         )
@@ -514,8 +511,8 @@ export class Home extends React.Component {
             banners_mobile: [],
             city_name: this.props.city,
             page: this.props.data ? this.props.data.page : null,
-            title: '',
-            description: '',
+            title: this.props.data ? this.props.data.title : null,
+            description: this.props.data ? this.props.data.description : null,
             mainLink: this.props.this_link
         };
         
@@ -810,13 +807,15 @@ export class Home extends React.Component {
             }, 750);
         }
         
-        Home.fetchData('/'+this.state.city_name).then( data => {
-            this.setState( {
-                page: data.page,
-                title: data.title,
-                description: data.description,
+        if( !this.props.data ){
+            Home.fetchData('/'+this.state.city_name).then( data => {
+                this.setState( {
+                    page: data.page,
+                    title: data.title,
+                    description: data.description,
+                } );
             } );
-        } );
+        }
         
         itemsStore.setPage('home');
         
