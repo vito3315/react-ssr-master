@@ -116,20 +116,14 @@ export class Actii extends React.Component {
             setTimeout(() => {
                 let hash = window.location.pathname;
                 
-                console.log( 'hash', hash )
-                console.log( 'hash 11', hash.indexOf('act_') )
-                
                 if( hash.indexOf('act_') > 0 ){
                     let act_id = hash.split('act_')[1];
                     
                     let this_item = json.actii.find( (item) => item.id == act_id );
                     
-                    //this.openDialog(this_item);
+                    this.openDialog(this_item);
                     
-                    console.log( 'act_id', act_id )
-                    console.log( 'this_item', this_item )
-                    
-                    //this.props.history.replace({ pathname: window.location.pathname })
+                    this.props.history.replace({ pathname: '/'+this.state.city_name+'/akcii' })
                 }
             }, 300);
         })
