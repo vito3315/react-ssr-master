@@ -588,10 +588,13 @@ export class Header extends React.Component {
         setTimeout(()=>{
             //window.location.href = this_addr.replace(this.state.cityName, city);
         }, 300)
-        
     }
     
     getNewLink(city){
+        
+        console.log( 'this.state.this_link', this.state.this_link )
+        console.log( 'window.location.href', window.location.href )
+        
         let this_addr = this.state.this_link;
         return this_addr.replace(this.state.cityName, city);
     }

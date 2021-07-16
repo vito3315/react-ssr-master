@@ -62,7 +62,7 @@ app.use( '*', async ( req, res ) => {
 
         if( !componentData || componentData.st === false ){
             res.status( 404 );
-            //return res.redirect("/togliatti")
+            return res.redirect("/togliatti")
         }
         
         // read `index.html` file
