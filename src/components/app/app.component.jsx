@@ -284,6 +284,16 @@ export class App extends React.Component {
                             <Contact data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
                         </Route>
                         <Route
+                            path='/:cityName/akcii/:act_id'
+                            exact={ true }
+                        >
+                            <Header 
+                                data={this.props.globalState.data} 
+                                city={this.props.globalState.city} 
+                                this_link={this.props.globalState.this_link} />  
+                            <Actii data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                        </Route>
+                        <Route
                             path='/:cityName/akcii'
                             exact={ true }
                         >
