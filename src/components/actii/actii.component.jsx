@@ -116,6 +116,9 @@ export class Actii extends React.Component {
             setTimeout(() => {
                 let hash = window.location.pathname;
                 
+                console.log( 'hash', hash )
+                console.log( 'hash 11', hash.indexOf('act_') )
+                
                 if( hash.indexOf('act_') ){
                     let act_id = hash.split('act_')[1];
                     
