@@ -582,19 +582,7 @@ export class Header extends React.Component {
         })
     }
 
-    chooseCity(city){
-        let this_addr = window.location.href;
-        localStorage.removeItem('cartData');
-        setTimeout(()=>{
-            //window.location.href = this_addr.replace(this.state.cityName, city);
-        }, 300)
-    }
-    
     getNewLink(city){
-        
-        console.log( 'this.state.this_link', this.state.this_link )
-        console.log( 'window.location.href', window.location.pathname )
-        
         let this_addr = window.location.pathname;
         return this_addr.replace(this.state.cityName, city);
     }
