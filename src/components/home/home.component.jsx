@@ -213,20 +213,7 @@ class CardItem extends React.Component {
                 <Card elevation={0} className="CardItem">
                     
                     <CardContent style={{ cursor: 'pointer', position: 'relative' }} onClick={ () => this.props.openItem(this.state.item.id)}>
-                        <picture>
-                            <source 
-                                srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
-                                type="image/webp" 
-                                //ref={el => this.elementSource = el}
-                            />
-                            <img 
-                                //ref={el => this.elementImg = el}
-                                src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
-                                alt={this.state.item.name}
-                                title={this.state.item.name}
-                                style={{ minHeight: 150 }}
-                            />
-                        </picture>
+                        
                         
                         { parseInt(this.state.item.is_new) == 0 ? null :
                             <img 
