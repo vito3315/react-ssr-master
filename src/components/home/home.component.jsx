@@ -763,7 +763,7 @@ export class Home extends React.Component {
             }, 1000);
             
             setTimeout(() => {
-                let hash = window.location.pathname;
+                /*let hash = window.location.pathname;
                 
                 let checkItem = hash.split('/item/');
                 
@@ -783,7 +783,7 @@ export class Home extends React.Component {
                     str.replace("/item/"+act_id, '');
                     
                     this.props.history.replace({ pathname: checkItem[0] })
-                }
+                }*/
                 
                 let link = window.location.pathname;
                 link = link.split('/');

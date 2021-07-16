@@ -250,9 +250,6 @@ export class App extends React.Component {
     }
 
     componentDidMount = () => {
-        
-        console.log( 'config', config )
-        
         autorun(() => {
             this.setState({
                 activePage: itemsStore.getPage()
@@ -438,13 +435,6 @@ export class App extends React.Component {
                             <Redirect push
                                 to={"/togliatti"}
                             />
-                        </Route>
-                        
-                        <Route
-                            path='/sitemap.xml'
-                            exact={ true }
-                        >
-                            <h1>Hello World</h1>
                         </Route>
                         
                         <Route
