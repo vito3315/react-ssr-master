@@ -994,6 +994,7 @@ export class Profile extends React.Component {
                         <MuiDialogContent className="showOrderDialogContent">
                             <Typography variant="h6" component="span">{this.state.showOrder.order.type_order}: {this.state.showOrder.order.type_order_addr_new}</Typography>
                             <Typography variant="h6" component="span">{this.state.showOrder.order.time_order_name}: {this.state.showOrder.order.time_order}</Typography>
+                            <Typography variant="h6" component="span">Статус заказа: {this.state.showOrder.order.this_status_order}</Typography>
                             { parseInt(this.state.showOrder.order.is_preorder) == 1 ? null :
                                 <Typography variant="h6" component="span">{this.state.showOrder.order.text_time}{this.state.showOrder.order.time_to_client}</Typography>
                             }
