@@ -123,7 +123,7 @@ export class Actii extends React.Component {
                     
                     this.openDialog(this_item);
                     
-                    this.props.history.replace({ pathname: '/'+this.state.city_name+'/akcii' })
+                    //this.props.history.replace({ pathname: '/'+this.state.city_name+'/akcii' })
                 }
             }, 300);
         })
