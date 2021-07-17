@@ -85,8 +85,8 @@ class CoverFlowCarousel extends React.Component {
                 prevEl: ".swiper-button-prev", // arrows on the side of the slides
             } : {},
             
-            renderPrevButton: () => <button className="swiper-button-prev">Prev</button>,
-            renderNextButton: () => <button className="swiper-button-next">Next</button>
+            renderPrevButton: () => <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />,
+            renderNextButton: () => <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
         });
     }
      
