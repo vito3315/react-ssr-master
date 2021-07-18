@@ -998,27 +998,29 @@ export class Home extends React.Component {
                     <Typography variant="h5" component="h1">{ this.state.page ? this.state.page.page_h : '' }</Typography>
                     
                     {itemsStore.getAllItemsCat().map((cat, key) => 
-                        mainLink == '' || mainLink == cat.main_link ?
-                            <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
-                                <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%', paddingBottom: 40 }} className="MainItems mainContainer">
-                                    <Typography variant="h5" component="h2">{ cat.name }</Typography>
-                                </Grid>
-                                <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
-                                    {cat.items.map((it, k) => (
-                                        <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '10px 8px', display: 'flex'}}>
-                                            <Hidden xsDown>
-                                                <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
-                                            </Hidden>
-                                            <Hidden smUp>
-                                                <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
-                                            </Hidden>
-                                        </Grid>
-                                    ))}
-                                </Grid>
-                            </div>
+                        cat.items.length > 0 ?
+                            mainLink == '' || mainLink == cat.main_link ?
+                                <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
+                                    <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%', paddingBottom: 40 }} className="MainItems mainContainer">
+                                        <Typography variant="h5" component="h2">{ cat.name }</Typography>
+                                    </Grid>
+                                    <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
+                                        {cat.items.map((it, k) => (
+                                            <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '10px 8px', display: 'flex'}}>
+                                                <Hidden xsDown>
+                                                    <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
+                                                </Hidden>
+                                                <Hidden smUp>
+                                                    <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
+                                                </Hidden>
+                                            </Grid>
+                                        ))}
+                                    </Grid>
+                                </div>
+                                    :
+                                null
                                 :
                             null
-                        
                     )}
                     
                     {this.state.openItem ?
