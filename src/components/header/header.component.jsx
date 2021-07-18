@@ -769,6 +769,10 @@ export class Header extends React.Component {
     
     render() {
         
+        console.log( 'this.state.categoryItemsNew', this.state.categoryItemsNew )
+        
+        console.log( 'this.state.categoryItems', this.state.categoryItems )
+        
         let link = this.props.this_link;
         link = link.split('/');
         let mainLink = '';
