@@ -50,7 +50,7 @@ app.use( '*', async ( req, res ) => {
 
     //if( req.originalUrl == '/' || req.originalUrl == '' ){
         res.status( 302 );
-        return res.redirect("https://jacofood.ru/togliatti")
+        return res.redirect("https://jacofood.ru"+req.originalUrl)
     //}
     
     let city = req.originalUrl.split('/');
