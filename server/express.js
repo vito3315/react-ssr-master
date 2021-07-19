@@ -26,7 +26,7 @@ app.get('*.js', (req, res, next) => {
 	next();
 });
 
-//app.use(express.static('public'));
+app.use(express.static('public'));
 
 //app.use(express.static(path.join(__dirname, 'public')));
 
@@ -48,10 +48,10 @@ app.get('/robots.txt', function(req, res) {
 // for any other requests, send `index.html` as a response
 app.use( '*', async ( req, res ) => {
 
-    //if( req.originalUrl == '/' || req.originalUrl == '' ){
-        res.status( 302 );
-        return res.redirect("https://jacofood.ru"+req.originalUrl)
-    //}
+    if( req.originalUrl == '/' || req.originalUrl == '' ){
+        res.status( 308 );
+        return res.redirect("/togliatti")
+    }
     
     let city = req.originalUrl.split('/');
     city = city.filter( (item) => item != '' ); 

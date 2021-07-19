@@ -198,7 +198,8 @@ export class Profile extends React.Component {
         itemsStore.setPage('profile');
         
         if( !itemsStore.getToken() ){
-            this.props.history.replace({ pathname: '/'+this.state.city_name+'/' });
+            window.location.pathname = '/'+this.state.city_name;
+            //this.props.history.replace({ pathname: '/'+this.state.city_name+'/' });
         }
         
         Profile.fetchData('/'+this.state.city_name).then( data => {
