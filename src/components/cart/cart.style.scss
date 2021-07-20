@@ -505,7 +505,7 @@ div.boxItem .promoIcon{
             }
             & .DescPromo span{
                 @include fons(0.8rem, $Ubuntu);
-                color: rgb(187, 189, 192);
+                color: rgba(0, 0, 0, 0.87);
             }
         }
         & > div:not(.promoOrder){

@@ -151,6 +151,8 @@ class CardItem extends React.Component {
     constructor(props) {
         super(props);
         
+        console.log( 'show item', this.props.data )
+        
         this.state = {      
             item: this.props.data, 
             count: 0 
