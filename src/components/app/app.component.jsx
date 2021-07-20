@@ -441,6 +441,7 @@ export class App extends React.Component {
                         </Route>
                         <Route
                             path='/'
+                            exact={ true }
                         >
                             <Redirect push
                                 to={"/togliatti"}
