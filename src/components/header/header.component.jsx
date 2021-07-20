@@ -945,12 +945,12 @@ export class Header extends React.Component {
                                                                         to={"cat"+it.id} 
                                                                         spy={true} 
                                                                         isDynamic={true}
-                                                                        onSetActive={(el) => { 
+                                                                        /*onSetActive={(el) => { 
                                                                             if( document.querySelector('.activeCat') ){
                                                                                 document.querySelector('.activeCat').classList.remove('activeCat');
                                                                             }
                                                                             document.querySelector('#link_'+it.id).classList.add('activeCat');
-                                                                        }} 
+                                                                        }}*/
                                                                         smooth={true} 
                                                                         offset={-60} 
                                                                         activeClass="activeCat" 
