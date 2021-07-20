@@ -699,7 +699,7 @@ export class Home extends React.Component {
         setTimeout( () => {
             window.addEventListener('scroll', function() {
                 if ((time + 500 - Date.now()) < 0) {
-                    itemsStore.getAllItemsCat().map( (item, key) => {
+                    AllItemsCat.map( (item, key) => {
                         var elem = document.getElementById('cat'+item.id);
                         if( elem ){
                             var top = elem.getBoundingClientRect().top + document.body.scrollTop - 60;
@@ -709,6 +709,8 @@ export class Home extends React.Component {
                             }
                         }
                     })
+                    
+                    console.log( 'arrMax', arrMax )
                     
                     if( arrMax.length > 0 ){
                         let max = arrMax.reduce((acc, curr) => acc.b > curr.b ? acc : curr);
