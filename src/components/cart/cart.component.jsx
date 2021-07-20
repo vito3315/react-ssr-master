@@ -145,6 +145,8 @@ class CartItem extends React.Component {
         let promo_cartItems = itemsStore.getItemsPromo();
         let this_item = cartItems.find( (item) => item.item_id == this.state.item.id );
         
+        console.log( 'cartItems', this_item )
+        
         if( this_item ){
             this.setState({
                 count: this_item.count,
@@ -157,6 +159,8 @@ class CartItem extends React.Component {
             if( this._isMounted === true ){
                 let new_cartItems = itemsStore.getItems();
                 let promo_cartItems = itemsStore.getItemsPromo();
+                
+                console.log( 'new_cartItems', new_cartItems )
                 
                 if( promo_cartItems && promo_cartItems.length > 0 ){
                     let this_item = promo_cartItems.find( (item) => item.item_id == this.state.item.id );
