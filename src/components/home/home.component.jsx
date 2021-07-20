@@ -497,6 +497,7 @@ export class HomeCat extends React.Component{
 
 export class Home extends React.Component {
     startMove = 0;
+    activeID = 0;
     
     constructor(props) {
         super(props);
@@ -693,9 +694,6 @@ export class Home extends React.Component {
         const AllItemsCatNew = itemsStore.getAllItemsCatNew();
         const AllItemsCat = itemsStore.getAllItemsCat();
         
-        console.log( 'AllItemsCatNew', AllItemsCatNew )
-        console.log( 'AllItemsCat', AllItemsCat )
-        
         setTimeout( () => {
             window.addEventListener('scroll', function() {
                 if ((time + 500 - Date.now()) < 0) {
@@ -710,25 +708,21 @@ export class Home extends React.Component {
                         }
                     })
                     
-                    console.log( 'arrMax', arrMax )
-                    
                     if( arrMax.length > 0 ){
-                        //let max = arrMax.reduce((acc, curr) => acc.b > curr.b ? acc : curr);
-                        
                         let max = arrMax[ arrMax.length-1 ];
                         
                         arrMax = [];
                         
                         if( max ){
-                            
-                            console.log( 'max', max )
-                            console.log( 'max 11', document.querySelector('#link_'+max.main_id) )
-                            
-                            if( document.querySelector('.activeCat') ){
-                                document.querySelector('.activeCat').classList.remove('activeCat');
-                            }
-                            if( document.querySelector('#link_'+max.main_id) ){
-                                document.querySelector('#link_'+max.main_id).classList.add('activeCat');
+                            if( this.activeID != parseInt(max.main_id) ){
+                                if( document.querySelector('.activeCat') ){
+                                    document.querySelector('.activeCat').classList.remove('activeCat');
+                                }
+                                if( document.querySelector('#link_'+max.main_id) ){
+                                    document.querySelector('#link_'+max.main_id).classList.add('activeCat');
+                                }
+                                
+                                this.activeID = parseInt(max.main_id);
                             }
                         }
                     }
