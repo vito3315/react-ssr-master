@@ -450,6 +450,10 @@ class ItemsStore {
         
         itemsStore.setAllPrice(allPrice);
         
+        console.log( 'set my_cart', my_cart )
+      
+        this.setItems(my_cart);
+        
         return {
           st: true,
           text: promo_info.promo_text.true
