@@ -691,8 +691,10 @@ export class Home extends React.Component {
         let arrMax = [];
         
         const AllItemsCatNew = itemsStore.getAllItemsCatNew();
+        const AllItemsCat = itemsStore.getAllItemsCat();
         
         console.log( 'AllItemsCatNew', AllItemsCatNew )
+        console.log( 'AllItemsCat', AllItemsCat )
         
         setTimeout( () => {
             window.addEventListener('scroll', function() {
