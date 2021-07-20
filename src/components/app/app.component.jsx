@@ -448,9 +448,12 @@ export class App extends React.Component {
                             />
                         </Route>
                         
-                        <Route
-                            component={ NotFound }
-                        />
+                        <Route>
+                            <Redirect push
+                                to={"/togliatti"}
+                            />
+                        </Route>
+                        
                     </Switch>
                     
                  
