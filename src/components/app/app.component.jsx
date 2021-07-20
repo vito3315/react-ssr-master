@@ -449,9 +449,11 @@ export class App extends React.Component {
                         </Route>
                         
                         <Route>
-                            <Redirect push
-                                to={"/togliatti"}
-                            />
+                            <Header 
+                                data={this.props.globalState.data} 
+                                city={this.props.globalState.city} 
+                                this_link={this.props.globalState.this_link} />  
+                            <NotFound data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
                         </Route>
                         
                     </Switch>
