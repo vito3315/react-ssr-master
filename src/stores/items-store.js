@@ -341,13 +341,20 @@ class ItemsStore {
                       
                       count_sale -= (parseInt(el_cart.one_price) * parseInt(el_cart.count));
                       
+                      console.log( '1 ', count_sale, parseInt(el_cart.one_price), all_price )
+                      
                       my_cart[ key_cart ].new_one_price = parseInt(el_cart.one_price)
                       my_cart[ key_cart ].all_price = all_price;
                     }
                   }else{
                     //проценты  
                     
+                    
+                    
                     all_price = parseInt(el_cart.all_price) - ((parseInt(el_cart.all_price) / 100) * parseInt(count_sale));
+                    
+                    console.log( '2 ', count_sale, parseInt(el_cart.one_price), all_price )
+                    
                     my_cart[ key_cart ].new_one_price = parseInt(el_cart.one_price)
                     my_cart[ key_cart ].all_price = parseInt(all_price);
                   }
@@ -380,12 +387,17 @@ class ItemsStore {
                       
                       count_sale -= (parseInt(el_cart.one_price) * parseInt(el_cart.count));
                       
+                      console.log( '3 ', count_sale, parseInt(el_cart.one_price), all_price )
+                      
                       my_cart[ key_cart ].new_one_price = parseInt(el_cart.one_price)
                       my_cart[ key_cart ].all_price = all_price;
                     }
                   }else{
                     //проценты  
                     all_price = parseInt(el_cart.all_price) - ((parseInt(el_cart.all_price) / 100) * parseInt(count_sale));
+                    
+                    console.log( '4 ', count_sale, parseInt(el_cart.one_price), all_price )
+                    
                     my_cart[ key_cart ].new_one_price = parseInt(el_cart.one_price)
                     my_cart[ key_cart ].all_price = parseInt(all_price);
                   }
@@ -421,6 +433,9 @@ class ItemsStore {
               }else{
                 //проценты  
                 all_price = parseInt(el_cart.all_price) - ((parseInt(el_cart.all_price) / 100) * parseInt(count_sale));
+                
+                console.log( '5 ', count_sale, parseInt(el_cart.one_price), all_price )
+                
                 my_cart[ key_cart ].new_one_price = parseInt(el_cart.one_price)
                 my_cart[ key_cart ].all_price = parseInt(all_price);
               }
