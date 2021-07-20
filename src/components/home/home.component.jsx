@@ -713,11 +713,13 @@ export class Home extends React.Component {
                     console.log( 'arrMax', arrMax )
                     
                     if( arrMax.length > 0 ){
-                        let max = arrMax.reduce((acc, curr) => acc.b > curr.b ? acc : curr);
+                        //let max = arrMax.reduce((acc, curr) => acc.b > curr.b ? acc : curr);
+                        
+                        let max = arrMax[ arrMax.length-1 ];
                         
                         arrMax = [];
                         
-                        if( max.length > 0 ){
+                        if( max ){
                             
                             console.log( 'max', max )
                             
