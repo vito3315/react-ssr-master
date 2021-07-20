@@ -700,7 +700,7 @@ export class Home extends React.Component {
                     AllItemsCat.map( (item, key) => {
                         var elem = document.getElementById('cat'+item.id);
                         if( elem ){
-                            var top = elem.getBoundingClientRect().top + document.body.scrollTop - 60;
+                            var top = elem.getBoundingClientRect().top + document.body.scrollTop - 120;
                             
                             if(top < 0){
                                 arrMax.push({ name: item.name, Y: top, main_id: item.main_id })
