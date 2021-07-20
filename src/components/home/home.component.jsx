@@ -151,8 +151,6 @@ class CardItem extends React.Component {
     constructor(props) {
         super(props);
         
-        console.log( 'show item', this.props.data )
-        
         this.state = {      
             item: this.props.data, 
             count: 0 
@@ -845,6 +843,8 @@ export class Home extends React.Component {
     openItem(id){
         let allItems = itemsStore.getAllItems();
         let item = allItems.find( (item) => item.id == id );
+        
+        console.log( 'show item', item )
         
         this.setState({
             openItem: item,
