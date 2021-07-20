@@ -503,6 +503,8 @@ class ItemsStore {
         }
       }
       
+      console.log( 'set my_cart', my_cart )
+      
       this.setItems(my_cart);
       
       return {
