@@ -729,6 +729,11 @@ export class Profile extends React.Component {
         }, 300)
     }
     
+    logOut(){
+        localStorage.removeItem('token');
+        window.location.pathname = '/'+this.state.city_name;
+    }
+    
     render() {
         return (
             <Grid container className="Profile mainContainer MuiGrid-spacing-xs-3">
@@ -970,7 +975,7 @@ export class Profile extends React.Component {
                                     />
                                 </FormGroup>
                                 
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" onClick={this.logOut.bind(this)}>
                                     <Button variant="contained" className="BtnCardMain CardInCardItem">Выйти</Button>
                                 </ButtonGroup>
                             </div>
