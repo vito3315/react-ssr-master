@@ -369,7 +369,9 @@ export class Item extends React.Component {
                             <AppBar position="static" style={{ backgroundColor: '#fff', color: '#000', zIndex: 0, paddingTop: 10 }} elevation={0}>
                                 <Tabs aria-label="simple tabs example" className="itemTabs" value={this.state.itemTab} onChange={this.changeTab.bind(this)} style={{ justifyContent: 'center' }}>
                                     <Tab label="Состав" {...a11yProps(0)} disableRipple={true} />
-                                    <Tab label="Пищевая ценность" {...a11yProps(1)} disableRipple={true} />
+                                    {this.state.item.items.length == 0 ? null :
+                                        <Tab label="Пищевая ценность" {...a11yProps(1)} disableRipple={true} />
+                                    }
                                     {this.state.item.allergens.length == 0 ? null :
                                         <Tab label="Аллергены" {...a11yProps(2)} disableRipple={true} />
                                     }
@@ -500,7 +502,9 @@ export class Item extends React.Component {
                             <AppBar position="static" style={{ backgroundColor: '#fff', color: '#000', zIndex: 0 }} elevation={0}>
                                 <Tabs aria-label="simple tabs example" className="itemTabs" value={this.state.itemTab} onChange={this.changeTab.bind(this)} style={{ justifyContent: 'center' }}>
                                     <Tab label="Состав" {...a11yProps(0)} disableRipple={true} />
-                                    <Tab label="Пищевая ценность" {...a11yProps(1)} disableRipple={true} />
+                                    {this.state.item.items.length == 0 ? null :
+                                        <Tab label="Пищевая ценность" {...a11yProps(1)} disableRipple={true} />
+                                    }
                                     {this.state.item.allergens.length == 0 ? null :
                                         <Tab label="Аллергены" {...a11yProps(2)} disableRipple={true} />
                                     }
