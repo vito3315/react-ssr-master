@@ -714,6 +714,9 @@ export class Home extends React.Component {
                         arrMax = [];
                         
                         if( max.length > 0 ){
+                            
+                            console.log( 'max', max )
+                            
                             if( document.querySelector('.activeCat') ){
                                 document.querySelector('.activeCat').classList.remove('activeCat');
                             }
