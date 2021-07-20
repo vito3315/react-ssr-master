@@ -236,13 +236,17 @@ export class Item extends React.Component {
                     })
                     
                     if( item.items.length == 0 && (parseInt(item.type) !== 3 && parseInt(item.type) !== 4) ){
-                        item.items.push({
-                            kkal: item.kkal,
-                            protein: item.protein,
-                            fat: item.fat,
-                            carbohydrates: item.carbohydrates,
-                            name: ''
-                        })
+                        if( parseFloat(item.kkal) == 0 && parseFloat(item.protein) == 0 && parseFloat(item.fat) == 0 && parseFloat(item.carbohydrates) == 0 ){
+                            
+                        }else{
+                            item.items.push({
+                                kkal: item.kkal,
+                                protein: item.protein,
+                                fat: item.fat,
+                                carbohydrates: item.carbohydrates,
+                                name: ''
+                            })
+                        }
                     }
                     
                     this.setState({ 
