@@ -68,9 +68,9 @@ app.use( '*', async ( req, res ) => {
             componentData = await matchRoute.component.fetchData(req.originalUrl);
         }
 
-        if( !componentData || componentData.st === false ){
+        if( componentData.st === false ){
             res.status( 404 );
-            return res.redirect("/togliatti")
+            return res.redirect("/"+city)
         }
         
         // read `index.html` file
