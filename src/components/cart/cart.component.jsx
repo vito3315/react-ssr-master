@@ -1610,7 +1610,7 @@ export class Cart extends React.Component {
                             </Tabs>
                         </AppBar>
                         <TabPanel value={this.state.orderType} index={0} style={{ width: '100%' }}>
-                            <FormControl component="fieldset">
+                            <FormControl component="fieldset" style={{ width: '100%' }}>
                                 <RadioGroup name="addrs" value={ this.state.orderAddr ? this.state.orderAddr.id : 0 } onChange={this.changeAddr}>
                                     {this.state.my_addr.map((item, key) => 
                                         <div key={key} className="boxAddr">

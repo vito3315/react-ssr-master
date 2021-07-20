@@ -969,6 +969,10 @@ export class Profile extends React.Component {
                                         label="Получать сообщения с акциями" 
                                     />
                                 </FormGroup>
+                                
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
+                                    <Button variant="contained" className="BtnCardMain CardInCardItem">Выйти</Button>
+                                </ButtonGroup>
                             </div>
                                 :
                             null
