@@ -372,9 +372,6 @@ export class Item extends React.Component {
                                     {this.state.item.items.length == 0 ? null :
                                         <Tab label="Пищевая ценность" {...a11yProps(1)} disableRipple={true} />
                                     }
-                                    {this.state.item.allergens.length == 0 ? null :
-                                        <Tab label="Аллергены" {...a11yProps(2)} disableRipple={true} />
-                                    }
                                 </Tabs>
                             </AppBar>
                             <TabPanel value={this.state.itemTab} index={1} style={{ width: '100%', marginTop: 10, marginBottom: 15 }}>
@@ -442,10 +439,7 @@ export class Item extends React.Component {
                                     <Typography gutterBottom variant="h5" component="span" className="ItemDesc">{this.state.item.tmp_desc}</Typography>
                                 }
                             </TabPanel>
-                            <TabPanel value={this.state.itemTab} index={2}>
-                                        Аллергены
-                                    </TabPanel>
-                                    
+                            
                             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', position: 'absolute', bottom: -30, width: '65%' }}>
                                 
                                 <div className="newBTN" onClick={this.add.bind(this)}>
@@ -504,9 +498,6 @@ export class Item extends React.Component {
                                     <Tab label="Состав" {...a11yProps(0)} disableRipple={true} />
                                     {this.state.item.items.length == 0 ? null :
                                         <Tab label="Пищевая ценность" {...a11yProps(1)} disableRipple={true} />
-                                    }
-                                    {this.state.item.allergens.length == 0 ? null :
-                                        <Tab label="Аллергены" {...a11yProps(2)} disableRipple={true} />
                                     }
                                 </Tabs>
                             </AppBar>
@@ -586,10 +577,7 @@ export class Item extends React.Component {
                                     </div>
                                 }
                             </TabPanel>
-                            <TabPanel value={this.state.itemTab} index={2}>
-                                Аллергены
-                            </TabPanel>
-                                    
+                            
                             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                                 <div className="newBTN" onClick={this.add.bind(this)}>
                                     <Typography variant="h5" component="span" className="ItemPriceValue" style={{ paddingLeft: 5 }}>{ parseInt(this.state.count) == 0 ? parseInt(this.state.item.price) : parseInt(this.state.item.price) * parseInt(this.state.count) }</Typography>
