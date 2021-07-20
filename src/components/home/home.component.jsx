@@ -722,12 +722,13 @@ export class Home extends React.Component {
                         if( max ){
                             
                             console.log( 'max', max )
+                            console.log( 'max 11', document.querySelector('#link_'+max.main_id) )
                             
                             if( document.querySelector('.activeCat') ){
                                 document.querySelector('.activeCat').classList.remove('activeCat');
                             }
-                            if( document.querySelector('#link_'+max[0].main_id) ){
-                                document.querySelector('#link_'+max[0].main_id).classList.add('activeCat');
+                            if( document.querySelector('#link_'+max.main_id) ){
+                                document.querySelector('#link_'+max.main_id).classList.add('activeCat');
                             }
                         }
                     }
