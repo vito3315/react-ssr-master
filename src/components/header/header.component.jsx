@@ -954,7 +954,7 @@ export class Header extends React.Component {
                                                                         smooth={true} 
                                                                         offset={-60} 
                                                                         activeClass="activeCat" 
-                                                                        id={'link_'+it.id} 
+                                                                        //id={'link_'+it.id} 
                                                                         
                                                                         style={{ width: 'max-content', display: 'flex', whiteSpace: 'nowrap', padding: '4px 0.5vw', width: '100%' }}
                                                                     >
