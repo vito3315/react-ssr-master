@@ -999,7 +999,7 @@ export class Home extends React.Component {
                     
                     {itemsStore.getAllItemsCat().map((cat, key) => 
                         cat.items.length > 0 ?
-                            mainLink == '' || mainLink == cat.main_link ?
+                            mainLink == '' || mainLink == cat.main_link || mainLink == cat.link ?
                                 <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
                                     <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%', paddingBottom: 40 }} className="MainItems mainContainer">
                                         <Typography variant="h5" component="h2">{ cat.name }</Typography>
