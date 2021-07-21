@@ -1460,10 +1460,11 @@ export class Cart extends React.Component {
                 headers: {
                     'Content-Type':'application/x-www-form-urlencoded'},
                 body: queryString.stringify({
-                    type: 'save_new_addr_web_test',  
+                    type: 'save_new_addr_web_new',  
                     city_id: this.state.city_name,
                     user_id: itemsStore.getToken(),
-                    street: street+' '+this.state.newAddrHome
+                    street: street,
+                    home: this.state.newAddrHome
                 })
             }).then(res => res.json()).then(json => {
                 if( !json.st ){
