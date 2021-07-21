@@ -73,7 +73,7 @@ module.exports = [
     },
     {
         path: '/:cityName/menu/:catLink/:itemId',
-        //exact: true,
+        exact: true,
         component: Item,
         type: 'item',
         code: 200

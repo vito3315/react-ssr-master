@@ -48,6 +48,8 @@ app.get('/robots.txt', function(req, res) {
 // for any other requests, send `index.html` as a response
 app.use( '*', async ( req, res ) => {
 
+    console.log( 'req.originalUrl', req.originalUrl )
+    
     if( req.originalUrl == '/' || req.originalUrl == '' ){
         res.status( 308 );
         return res.redirect("/togliatti")
