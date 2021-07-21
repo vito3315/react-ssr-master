@@ -48,8 +48,6 @@ app.get('/robots.txt', function(req, res) {
 // for any other requests, send `index.html` as a response
 app.use( '*', async ( req, res ) => {
 
-    console.log( 'req.originalUrl', req.originalUrl )
-    
     req.originalUrl = req.originalUrl.split('?')[0];
     req.originalUrl = req.originalUrl.split('#')[0];
     
@@ -65,17 +63,7 @@ app.use( '*', async ( req, res ) => {
     // get matched route
     const matchRoute = routes.find( route => matchPath( req.originalUrl, route ) );
 
-    let countS = req.originalUrl.split('/').length;
-    
-    let routes_new = routes.filter( route => route.path.split('/').length == countS );
-    
-    console.log( 'routes_new', routes_new )
-    
-    console.log( 'matchRoute', matchRoute )
-    
     if( matchRoute ){
-        
-        // fetch data of the matched component
         let componentData = null;
         if( typeof matchRoute.component.fetchData === 'function' ) {
             componentData = await matchRoute.component.fetchData(req.originalUrl);
@@ -94,15 +82,11 @@ app.use( '*', async ( req, res ) => {
         let linkItem = '';
         let Item = null;
         
-        console.log( 'matchRoute.type', matchRoute.type )
-        
         if( matchRoute.type == 'item' ){  
             let linkItem1 = req.originalUrl.split("/");
             
             linkItem1 = linkItem1.filter( (item) => item != '' ); 
             linkItem = linkItem1[ linkItem1.length-1 ];
-            
-            console.log( 'linkItem', linkItem )
             
             componentData.allItems.forEach(element => {
                 element.items.forEach(item => {
@@ -111,8 +95,6 @@ app.use( '*', async ( req, res ) => {
                     }
                 })
             })
-            
-            console.log( 'Item', Item )
         }
         
         const GLOBAL_STATE = {
@@ -156,19 +138,13 @@ app.use( '*', async ( req, res ) => {
         `;
         
         if( matchRoute.type == 'home' ){
-            
             componentData.all.other.cats.baners.map( (item) => {
                 meta += `
                     <link rel="preload" as="image" href="https://storage.yandexcloud.net/site-home-img/${ item.img_new+"3700х1000.webp?"+item.img_new_update }" />
                     <link rel="preload" as="image" href="https://storage.yandexcloud.net/site-home-img/${ item.img_new+"3700х1000.jpg?"+item.img_new_update }" />
                 `;
             } )
-            
-            
         }
-        
-        
-        
         
         if( matchRoute.type == 'item' ){  
             

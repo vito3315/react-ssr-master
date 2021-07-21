@@ -447,6 +447,14 @@ export class App extends React.Component {
                                 to={"/togliatti"}
                             />
                         </Route>
+                        <Route
+                            path='/profile'
+                            exact={ true }
+                        >
+                            <Redirect push
+                                to={"/togliatti"}
+                            />
+                        </Route>
                         
                         <Route>
                             <Header 
