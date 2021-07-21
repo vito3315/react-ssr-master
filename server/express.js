@@ -70,6 +70,11 @@ app.use( '*', async ( req, res ) => {
         }
 
         if( !componentData || componentData.st === false ){
+            if( componentData.st === false && componentData.type == 'city' ){
+                res.status( 404 );
+                return res.redirect("/togliatti")
+            }
+            
             res.status( 404 );
             return res.redirect("/"+city)
         }
