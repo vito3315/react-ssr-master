@@ -16,7 +16,7 @@ const { PagePolitika } = require( '../src/components/pagePolitika' );
 module.exports = [
     {
         path: '/:cityName',
-        //exact: true,
+        exact: true,
         component: Home,
         type: 'home',
         code: 200
