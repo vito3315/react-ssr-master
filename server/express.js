@@ -81,11 +81,15 @@ app.use( '*', async ( req, res ) => {
         let linkItem = '';
         let Item = null;
         
+        console.log( 'matchRoute.type', matchRoute.type )
+        
         if( matchRoute.type == 'item' ){  
             let linkItem1 = req.originalUrl.split("/");
             
             linkItem1 = linkItem1.filter( (item) => item != '' ); 
             linkItem = linkItem1[ linkItem1.length-1 ];
+            
+            console.log( 'linkItem', linkItem )
             
             componentData.allItems.forEach(element => {
                 element.items.forEach(item => {
@@ -94,6 +98,8 @@ app.use( '*', async ( req, res ) => {
                     }
                 })
             })
+            
+            console.log( 'Item', Item )
         }
         
         const GLOBAL_STATE = {
