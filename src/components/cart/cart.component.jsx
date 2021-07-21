@@ -1605,12 +1605,12 @@ export class Cart extends React.Component {
                 <Hidden xsDown>
                     <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer" style={{ paddingTop: 0 }}>
                         <AppBar position="static" style={{ backgroundColor: '#fff', color: '#000', zIndex: 0 }} elevation={0}>
-                            <Tabs value={this.state.orderType} onChange={this.changeTab.bind(this)} aria-label="simple tabs example"  style={{ justifyContent: 'center' }}>
+                            <Tabs value={this.state.orderType || this.state.orderType == 0 ? this.state.orderType : 0} onChange={this.changeTab.bind(this)} aria-label="simple tabs example"  style={{ justifyContent: 'center' }}>
                                 <Tab label="Доставка" {...a11yProps(0)} disableRipple={true} />
                                 <Tab label="Самовывоз" {...a11yProps(1)} disableRipple={true} />
                             </Tabs>
                         </AppBar>
-                        <TabPanel value={this.state.orderType} index={0} style={{ width: '100%' }}>
+                        <TabPanel value={this.state.orderType || this.state.orderType == 0 ? this.state.orderType : 0} index={0} style={{ width: '100%' }}>
                             <FormControl component="fieldset" style={{ width: '100%' }}>
                                 <RadioGroup name="addrs" value={ this.state.orderAddr ? this.state.orderAddr.id : 0 } onChange={this.changeAddr}>
                                     {this.state.my_addr.map((item, key) => 
@@ -1868,12 +1868,12 @@ export class Cart extends React.Component {
                 <Hidden smUp>
                     <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer mobile">
                         <AppBar position="static" style={{ backgroundColor: '#fff', color: '#000', zIndex: 0 }} elevation={0}>
-                            <Tabs value={this.state.orderType} onChange={this.changeTab.bind(this)} aria-label="simple tabs example"  style={{ justifyContent: 'center' }}>
+                            <Tabs value={this.state.orderType || this.state.orderType == 0 ? this.state.orderType : 0} onChange={this.changeTab.bind(this)} aria-label="simple tabs example"  style={{ justifyContent: 'center' }}>
                                 <Tab label="Доставка" {...a11yProps(0)} style={{ width: '50%' }} disableRipple={true} />
                                 <Tab label="Самовывоз" {...a11yProps(1)} style={{ width: '50%' }} disableRipple={true} />
                             </Tabs>
                         </AppBar>
-                        <TabPanel value={this.state.orderType} index={0} style={{ width: '100%' }}>
+                        <TabPanel value={this.state.orderType || this.state.orderType == 0 ? this.state.orderType : 0} index={0} style={{ width: '100%' }}>
                             <div className="boxMobile" onClick={() => this.setState({ chooseAddr: true })}>
                                 <Typography variant="h5" component="span">Адрес: {this.state.orderAddr ? 
                                     this.state.orderAddr.city_name+', '+
