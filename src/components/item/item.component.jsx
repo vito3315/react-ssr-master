@@ -172,6 +172,8 @@ export class Item extends React.Component {
     constructor(props) {
         super(props);
         
+        console.log( this.props.item )
+        
         this.state = {      
             item: this.props.item ? this.props.item : [],  
             is_load: false,
@@ -273,7 +275,7 @@ export class Item extends React.Component {
                 } );
             } );*/
             
-            if( this.state.item.items.length == 0 && (parseInt(this.state.item.type) !== 3 && parseInt(this.state.item.type) !== 4) ){
+            if( this.state.item.items && this.state.item.items.length == 0 && (parseInt(this.state.item.type) !== 3 && parseInt(this.state.item.type) !== 4) ){
                 this.state.item.items.push({
                     kkal: this.state.item.kkal,
                     protein: this.state.item.protein,
@@ -369,20 +371,20 @@ export class Item extends React.Component {
                             <AppBar position="static" style={{ backgroundColor: '#fff', color: '#000', zIndex: 0, paddingTop: 10 }} elevation={0}>
                                 <Tabs aria-label="simple tabs example" className="itemTabs" value={this.state.itemTab} onChange={this.changeTab.bind(this)} style={{ justifyContent: 'center' }}>
                                     <Tab label="Состав" {...a11yProps(0)} disableRipple={true} />
-                                    {this.state.item.items.length == 0 ? null :
+                                    {this.state.item.items && this.state.item.items.length == 0 ? null :
                                         <Tab label="Пищевая ценность" {...a11yProps(1)} disableRipple={true} />
                                     }
                                 </Tabs>
                             </AppBar>
                             <TabPanel value={this.state.itemTab} index={1} style={{ width: '100%', marginTop: 10, marginBottom: 15 }}>
-                                <div style={{ maxHeight: 250, overflow: 'auto' }} className={this.state.item.items.length == 1 ? 'MainItemPopover tab MainItemPopoverOne' : 'MainItemPopover tab MainItemPopoverLot'}>
+                                <div style={{ maxHeight: 250, overflow: 'auto' }} className={this.state.item.items && this.state.item.items.length == 1 ? 'MainItemPopover tab MainItemPopoverOne' : 'MainItemPopover tab MainItemPopoverLot'}>
                                     <table>
                                         <tbody>
                                             
                                             <tr>
                                                 <td><Typography variant="h5" className="OtherMiniPopover" component="span">Пищевая ценность на 100 г</Typography></td>
                                             </tr>
-                                            {this.state.item.items.map((item, key) => 
+                                            {this.state.item.items && this.state.item.items.map((item, key) => 
                                                 <tr key={key}>
                                                     <td>
                                                         <div className="NamePopover">
@@ -412,9 +414,9 @@ export class Item extends React.Component {
                                 </div>
                             </TabPanel>
                             <TabPanel value={this.state.itemTab} index={0} style={{ marginTop: 10, marginBottom: 15 }}>
-                                { this.state.item.items.length > 1 ?
+                                { this.state.item.items && this.state.item.items.length > 1 ?
                                     <div style={{ maxHeight: 300, overflowY: 'auto', overflowX: 'hidden' }}>
-                                        {this.state.item.items.map((item, key) =>
+                                        {this.state.item.items && this.state.item.items.map((item, key) =>
                                             <div key={key} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', position: 'relative' }}>
                                                 <picture style={{ height: 'auto', width: 100, display: 'table' }}>
                                                     <source 
@@ -496,13 +498,13 @@ export class Item extends React.Component {
                             <AppBar position="static" style={{ backgroundColor: '#fff', color: '#000', zIndex: 0 }} elevation={0}>
                                 <Tabs aria-label="simple tabs example" className="itemTabs" value={this.state.itemTab} onChange={this.changeTab.bind(this)} style={{ justifyContent: 'center' }}>
                                     <Tab label="Состав" {...a11yProps(0)} disableRipple={true} />
-                                    {this.state.item.items.length == 0 ? null :
+                                    {this.state.item.items && this.state.item.items.length == 0 ? null :
                                         <Tab label="Пищевая ценность" {...a11yProps(1)} disableRipple={true} />
                                     }
                                 </Tabs>
                             </AppBar>
                             <TabPanel value={this.state.itemTab} index={1} style={{ width: '100%', marginTop: 10, marginBottom: 15, minHeight: '30vh' }}>
-                                <div style={{ maxHeight: '30vh', height: '100%', overflow: 'auto' }} className={this.state.item.items.length == 1 ? 'MainItemPopover tab MainItemPopoverOne' : 'MainItemPopover tab MainItemPopoverLot'}>
+                                <div style={{ maxHeight: '30vh', height: '100%', overflow: 'auto' }} className={this.state.item.items && this.state.item.items.length == 1 ? 'MainItemPopover tab MainItemPopoverOne' : 'MainItemPopover tab MainItemPopoverLot'}>
                                     <table>
                                         <tbody>
                                             
@@ -518,7 +520,7 @@ export class Item extends React.Component {
                                             <tr>
                                                 <td><Typography variant="h5" className="OtherMiniPopover" component="span">Пищевая ценность на 100 г</Typography></td>
                                             </tr>
-                                            {this.state.item.items.map((item, key) => 
+                                            {this.state.item.items && this.state.item.items.map((item, key) => 
                                                 <tr key={key}>
                                                     <td>
                                                         <div className="NamePopover">
@@ -548,9 +550,9 @@ export class Item extends React.Component {
                                 </div>
                             </TabPanel>
                             <TabPanel value={this.state.itemTab} index={0} style={{ marginTop: 10, marginBottom: 15, minHeight: '30vh' }}>
-                                { this.state.item.items.length > 1 ?
+                                { this.state.item.items && this.state.item.items.length > 1 ?
                                     <div style={{ maxHeight: '30vh', height: '100%', overflowY: 'auto', overflowX: 'hidden', position: 'relative' }}>
-                                        {this.state.item.items.map((item, key) =>
+                                        {this.state.item.items && this.state.item.items.map((item, key) =>
                                             <div key={key} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', margin: '10px 0px' }}>
                                                 <picture style={{ height: 'auto', width: 70, display: 'table' }}>
                                                     <source 
