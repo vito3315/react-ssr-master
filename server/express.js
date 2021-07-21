@@ -51,6 +51,7 @@ app.use( '*', async ( req, res ) => {
     console.log( 'req.originalUrl', req.originalUrl )
     
     req.originalUrl = req.originalUrl.split('?')[0];
+    req.originalUrl = req.originalUrl.split('#')[0];
     
     if( req.originalUrl == '/' || req.originalUrl == '' ){
         res.status( 308 );
