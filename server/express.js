@@ -62,6 +62,12 @@ app.use( '*', async ( req, res ) => {
     // get matched route
     const matchRoute = routes.find( route => matchPath( req.originalUrl, route ) );
 
+    let countS = req.originalUrl.split('/').length;
+    
+    let routes_new = routes.filter( route => route.path.split('/').length == countS );
+    
+    console.log( 'routes_new', routes_new )
+    
     console.log( 'matchRoute', matchRoute )
     
     if( matchRoute ){
