@@ -954,7 +954,7 @@ export class Home extends React.Component {
             this.state.is_load === false ?
                 <Element name="myScrollToElement" className="Category">
                     
-                    <Typography variant="h5" component="h1">{ this.state.page ? this.state.page.page_h : '' }</Typography>
+                    <Typography variant="h5" component="h1" style={{ paddingBottom: 20 }}>{ this.state.page ? this.state.page.page_h : '' }</Typography>
                     
                     {itemsStore.getAllItemsCat().map((cat, key) => 
                         mainLink == '' || mainLink == cat.main_link ?
@@ -1005,7 +1005,7 @@ export class Home extends React.Component {
                         }
                     </Hidden>
                     
-                    <Typography variant="h5" component="h1">{ this.state.page ? this.state.page.page_h : '' }</Typography>
+                    <Typography variant="h5" component="h1" style={{ paddingBottom: 20 }}>{ this.state.page ? this.state.page.page_h : '' }</Typography>
                     
                     {itemsStore.getAllItemsCat().map((cat, key) => 
                         cat.items.length > 0 ?
