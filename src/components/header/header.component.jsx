@@ -530,8 +530,8 @@ export class Header extends React.Component {
     }
     
     load(){
-        if( !this.is_load ){
-            this.is_load = true;
+        //if( !this.is_load ){
+        //    this.is_load = true;
             
             if( itemsStore.getCity() ){
                 fetch(config.urlApi, {
@@ -565,10 +565,10 @@ export class Header extends React.Component {
                     this.is_load = false
                 })
                 .catch(err => { });
-            }else{
-                this.is_load = false;
+        //    }else{
+        //        this.is_load = false;
             }
-        }
+        //}
     }  
     
     openCity(){
