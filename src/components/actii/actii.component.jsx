@@ -114,14 +114,20 @@ export class Actii extends React.Component {
             });
             
             setTimeout(() => {
-                let hash = window.location.pathname;
+                let hash = window.location.search;
                 
-                if( hash.indexOf('act_') > 0 ){
+                if( hash.length > 0 && hash.indexOf('act_') > 0 ){
                     let act_id = hash.split('act_')[1];
                     
                     let this_item = json.actii.find( (item) => item.id == act_id );
                     
                     this.openDialog(this_item);
+                    
+                    let state = {  },
+                        title = '',
+                        url = window.location.pathname;
+
+                    window.history.pushState(state, title, url)
                     
                     //this.props.history.replace({ pathname: '/'+this.state.city_name+'/akcii' })
                 }
@@ -131,6 +137,13 @@ export class Actii extends React.Component {
     }
     
     closeDialog(){
+        
+        let state = {  },
+            title = '',
+            url = window.location.pathname;
+
+        window.history.pushState(state, title, url)
+        
         this.setState({
             showItem: null,
             openDialog: false
@@ -144,6 +157,12 @@ export class Actii extends React.Component {
         item.items.map((act_item, key) => {
             item.items[key]['item'] = allItems.find( (item) => item.id == act_item.item_id );
         })
+        
+        let state = {  },
+            title = '',
+            url = window.location.pathname+'?act_'+item.id;
+
+        window.history.pushState(state, title, url)
         
         this.setState({
             showItem: item,
