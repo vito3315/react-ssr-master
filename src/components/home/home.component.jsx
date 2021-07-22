@@ -852,7 +852,11 @@ export class Home extends React.Component {
         let allItems = itemsStore.getAllItems();
         let item = allItems.find( (item) => item.id == id );
         
-        console.log( 'show item', item )
+        let state = { 'item_id': item.id, 'item_name': item.name },
+            title = '',
+            url = window.location.pathnam+'?showItem='+item.id;
+
+        window.history.pushState(state, title, url)
         
         this.setState({
             openItem: item,
@@ -869,6 +873,12 @@ export class Home extends React.Component {
     openItemPC(id){
         let allItems = itemsStore.getAllItems();
         let item = allItems.find( (item) => item.id == id );
+        
+        let state = { 'item_id': item.id, 'item_name': item.name },
+            title = '',
+            url = window.location.pathnam+'?showItem='+item.id;
+
+        window.history.pushState(state, title, url)
         
         this.setState({
             openItem: item,
@@ -887,6 +897,12 @@ export class Home extends React.Component {
         el.removeEventListener("touchstart", this.touchStart.bind(this), false);
         el.removeEventListener("touchend", this.touchEnd.bind(this), false);
         
+        let state = { },
+            title = '',
+            url = window.location.pathnam;
+
+        window.history.pushState(state, title, url)
+        
         this.setState({
             openModal: false,
             openItem: null
@@ -894,6 +910,13 @@ export class Home extends React.Component {
     }
     
     handleClosePC(){
+        
+        let state = { },
+            title = '',
+            url = window.location.pathnam;
+
+        window.history.pushState(state, title, url)
+        
         this.setState({
             openModalPC: false,
             openItem: null
