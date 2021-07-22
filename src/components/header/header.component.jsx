@@ -485,7 +485,13 @@ export class Header extends React.Component {
     
     componentDidMount = () => {
         
-        window.history.push('/samara');
+        //window.history.push('/samara');
+        
+        const state = { 'page_id': 1, 'user_id': 5 }
+        const title = ''
+        const url = '/samara'
+
+        window.history.pushState(state, title, url)
         
         setTimeout(() => {
             let cartData = itemsStore.getCartData();
