@@ -854,7 +854,7 @@ export class Home extends React.Component {
         
         let state = { 'item_id': item.id, 'item_name': item.name },
             title = '',
-            url = window.location.pathnam+'?showItem='+item.id;
+            url = window.location.pathname+'?showItem='+item.id;
 
         window.history.pushState(state, title, url)
         
@@ -876,7 +876,7 @@ export class Home extends React.Component {
         
         let state = { 'item_id': item.id, 'item_name': item.name },
             title = '',
-            url = window.location.pathnam+'?showItem='+item.id;
+            url = window.location.pathname+'?showItem='+item.id;
 
         window.history.pushState(state, title, url)
         
@@ -899,7 +899,7 @@ export class Home extends React.Component {
         
         let state = { },
             title = '',
-            url = window.location.pathnam;
+            url = window.location.pathname;
 
         window.history.pushState(state, title, url)
         
@@ -913,7 +913,7 @@ export class Home extends React.Component {
         
         let state = { },
             title = '',
-            url = window.location.pathnam;
+            url = window.location.pathname;
 
         window.history.pushState(state, title, url)
         
