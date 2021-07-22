@@ -1639,6 +1639,7 @@ export class Cart extends React.Component {
                                         <Autocomplete
                                             freeSolo
                                             id="newAddrStreet"
+                                            size="small"
                                             onBlur={this.checkNewAddr.bind(this)}
                                             options={this.state.all_addr.map((option) => option.value)}
                                             renderInput={(params) => (
@@ -1647,6 +1648,7 @@ export class Cart extends React.Component {
                                         />
                                         <TextField 
                                             label="Дом" 
+                                            size="small"
                                             variant="outlined" 
                                             value={this.state.newAddrHome} 
                                             onChange={ event => this.setState({ newAddrHome: event.target.value }) }
@@ -1657,6 +1659,8 @@ export class Cart extends React.Component {
                                         <TextField 
                                             label="Подъезд" 
                                             variant="outlined" 
+                                            size="small"
+                                            style={{ width: '100%' }}
                                             value={this.state.newAddrPD} 
                                             onChange={ event => this.setState({ newAddrPD: event.target.value }) }
                                             onBlur={this.saveDataCustomAddr.bind(this)}
@@ -1664,6 +1668,8 @@ export class Cart extends React.Component {
                                         <TextField 
                                             label="Этаж" 
                                             variant="outlined" 
+                                            size="small"
+                                            style={{ width: '100%' }}
                                             value={this.state.newAddrET} 
                                             onChange={ event => this.setState({ newAddrET: event.target.value }) }
                                             onBlur={this.saveDataCustomAddr.bind(this)}
@@ -1671,6 +1677,8 @@ export class Cart extends React.Component {
                                         <TextField 
                                             label="Квартира" 
                                             variant="outlined" 
+                                            size="small"
+                                            style={{ width: '100%' }}
                                             value={this.state.newAddrKV} 
                                             onChange={ event => this.setState({ newAddrKV: event.target.value }) }
                                             onBlur={this.saveDataCustomAddr.bind(this)}
@@ -2062,6 +2070,7 @@ export class Cart extends React.Component {
                             <Autocomplete
                                 freeSolo
                                 id="newAddrStreet"
+                                size="small"
                                 style={{ width: '100%' }}
                                 onBlur={this.checkNewAddr.bind(this)}
                                 options={this.state.all_addr.map((option) => option.value)}
@@ -2071,6 +2080,7 @@ export class Cart extends React.Component {
                             />
                             <TextField 
                                 label="Дом" 
+                                size="small"
                                 //variant="outlined" 
                                 style={{ width: '100%' }}
                                 value={this.state.newAddrHome} 
@@ -2079,6 +2089,7 @@ export class Cart extends React.Component {
                             />
                             <TextField 
                                 label="Подъезд" 
+                                size="small"
                                 //variant="outlined" 
                                 style={{ width: '100%' }}
                                 value={this.state.newAddrPD} 
@@ -2087,6 +2098,7 @@ export class Cart extends React.Component {
                             />
                             <TextField 
                                 label="Этаж" 
+                                size="small"
                                 //variant="outlined" 
                                 style={{ width: '100%' }}
                                 value={this.state.newAddrET} 
@@ -2095,6 +2107,7 @@ export class Cart extends React.Component {
                             />
                             <TextField 
                                 label="Квартира" 
+                                size="small"
                                 //variant="outlined" 
                                 style={{ width: '100%' }}
                                 value={this.state.newAddrKV} 
