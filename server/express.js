@@ -69,8 +69,6 @@ app.use( '*', async ( req, res ) => {
             componentData = await matchRoute.component.fetchData(req.originalUrl);
         }
 
-        console.log( 'componentData', componentData )
-        
         if( !componentData || componentData.st === false ){
             if( !componentData ){
                 res.status( 404 );
