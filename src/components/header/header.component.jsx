@@ -438,6 +438,8 @@ export class Header extends React.Component {
         
         console.log( this.props )
         
+        window.history.push('/samara');
+        
         if( this.props && this.props.data ){
             this.is_load = true;
             itemsStore.setDops(this.props.data.all.other.cats.need_dop);
