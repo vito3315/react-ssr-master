@@ -12,7 +12,7 @@ const app = express();
 app.use(compression());
 
 // import App component
-//const { App } = require( '../src/components/app' );
+const { App } = require( '../src/components/app' );
 
 // import routes
 const routes = require( './routes' );
