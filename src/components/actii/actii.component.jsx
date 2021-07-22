@@ -122,14 +122,6 @@ export class Actii extends React.Component {
                     let this_item = json.actii.find( (item) => item.id == act_id );
                     
                     this.openDialog(this_item);
-                    
-                    let state = {  },
-                        title = '',
-                        url = window.location.pathname;
-
-                    window.history.pushState(state, title, url)
-                    
-                    //this.props.history.replace({ pathname: '/'+this.state.city_name+'/akcii' })
                 }
             }, 300);
         })

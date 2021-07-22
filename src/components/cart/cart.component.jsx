@@ -1537,7 +1537,7 @@ export class Cart extends React.Component {
                 itemsStore.saveCartData(data);
                 
                 setTimeout(()=>{
-                    window.location.pathname = '/'+this.state.city_name+'/profile';
+                    window.location.pathname = '/'+this.state.city_name+'/profile?trueOrder';
                     //this.props.history.push('/'+this.state.city_name+'/profile');
                 }, 300)
             }
