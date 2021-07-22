@@ -532,7 +532,7 @@ export class Home extends React.Component {
             if( item.aktia_id && parseInt(item.aktia_id) > 0 ){
                 banners_pc.push(
                     <Link
-                        to={'/'+itemsStore.getCity()+'/actii?act_'+item.aktia_id}
+                        to={'/'+itemsStore.getCity()+'/akcii?act_'+item.aktia_id}
                         exact={ true }
                         style={{ width: 'inherit', height: 'auto', borderRadius: 15 }}
                     >
@@ -554,7 +554,7 @@ export class Home extends React.Component {
                 
                 banners_mobile.push(
                     <Link
-                        to={'/'+itemsStore.getCity()+'/actii?act_'+item.aktia_id}
+                        to={'/'+itemsStore.getCity()+'/akcii?act_'+item.aktia_id}
                         exact={ true }
                         style={{ width: 'inherit', height: 'auto', borderRadius: 15 }}
                     >
