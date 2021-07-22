@@ -779,12 +779,12 @@ export class Home extends React.Component {
                     
                     let allItems = itemsStore.getAllItems();
                     let act_id = checkItem[1];
-                    let item = allItems.find( (item) => item.link == act_id );
+                    //let item = allItems.find( (item) => item.id == act_id );
                     
                     if( window.innerWidth <= 400 ){
-                        this.openItem(item.id);
+                        this.openItem(act_id);
                     }else{
-                        this.openItemPC(item.id);
+                        this.openItemPC(act_id);
                     }
                     
                     //let str = window.location.pathname;
