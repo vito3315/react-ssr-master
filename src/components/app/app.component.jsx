@@ -278,6 +278,8 @@ export class App extends React.Component {
                             exact={ true }
                         >
                             <Header 
+                                test={ this.props }
+                                test1={ this }
                                 data={this.props.globalState.data} 
                                 city={this.props.globalState.city} 
                                 this_link={this.props.globalState.this_link} />   
