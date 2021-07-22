@@ -769,11 +769,13 @@ export class Home extends React.Component {
             }, 1000);
             
             setTimeout(() => {
-                /*let hash = window.location.pathname;
+                let search = window.location.search;
                 
-                let checkItem = hash.split('/item/');
+                //
                 
-                if( checkItem.length > 1 ){
+                if( search.length > 0 ){
+                    
+                    let checkItem = hash.split('?showItem=');
                     
                     let allItems = itemsStore.getAllItems();
                     let act_id = checkItem[1];
@@ -785,11 +787,14 @@ export class Home extends React.Component {
                         this.openItemPC(item.id);
                     }
                     
-                    let str = window.location.pathname;
-                    str.replace("/item/"+act_id, '');
+                    //let str = window.location.pathname;
+                    //str.replace("/item/"+act_id, '');
                     
-                    this.props.history.replace({ pathname: checkItem[0] })
-                }*/
+                    //this.props.history.replace({ pathname: checkItem[0] })
+                }
+                
+                
+                
                 
                 let link = window.location.pathname;
                 link = link.split('/');
