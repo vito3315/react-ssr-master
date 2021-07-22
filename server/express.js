@@ -12,7 +12,7 @@ const app = express();
 app.use(compression());
 
 // import App component
-const { App } = require( '../src/components/app' );
+//const { App } = require( '../src/components/app' );
 
 // import routes
 const routes = require( './routes' );
@@ -48,6 +48,9 @@ app.get('/robots.txt', function(req, res) {
 // for any other requests, send `index.html` as a response
 app.use( '*', async ( req, res ) => {
 
+    res.status( 302 );
+    return res.redirect("https://jacofood.ru"+req.originalUrl)
+    
     req.originalUrl = req.originalUrl.split('?')[0];
     req.originalUrl = req.originalUrl.split('#')[0];
     
