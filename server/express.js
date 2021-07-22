@@ -48,14 +48,11 @@ app.get('/robots.txt', function(req, res) {
 // for any other requests, send `index.html` as a response
 app.use( '*', async ( req, res ) => {
 
-    res.status( 302 );
-    return res.redirect("https://jacofood.ru"+req.originalUrl)
-    
     req.originalUrl = req.originalUrl.split('?')[0];
     req.originalUrl = req.originalUrl.split('#')[0];
     
     if( req.originalUrl == '/' || req.originalUrl == '' ){
-        res.status( 308 );
+        res.status( 302 );
         return res.redirect("/togliatti")
     }
     
