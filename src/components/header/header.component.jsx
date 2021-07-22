@@ -491,7 +491,7 @@ export class Header extends React.Component {
         const title = ''
         const url = '/samara'
 
-        window.history.pushState(state, title, url)
+        window.history.pushState('/samara')
         
         setTimeout(() => {
             let cartData = itemsStore.getCartData();
