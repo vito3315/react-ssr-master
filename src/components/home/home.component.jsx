@@ -775,7 +775,7 @@ export class Home extends React.Component {
                 
                 if( search.length > 0 ){
                     
-                    let checkItem = hash.split('?showItem=');
+                    let checkItem = search.split('?showItem=');
                     
                     let allItems = itemsStore.getAllItems();
                     let act_id = checkItem[1];
