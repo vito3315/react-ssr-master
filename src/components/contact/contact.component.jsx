@@ -210,10 +210,10 @@ export class Contact extends React.Component {
                 myMap2.geoObjects.add(
                     new ymaps.Polygon([zone], {
     					//hintContent: "Зона доставки"
-                        address: points[ key ]['addr'],
+                        address: points[ key ]['addr'], 
     				}, {
                         hintLayout: HintLayout,
-    					fillColor: 'rgba(187, 0, 37, 0)',
+    					fillColor: 'rgba(187, 0, 37, 0.25)',
     					strokeColor: 'rgb(187, 0, 37)',
     					strokeWidth: 5
     				})
