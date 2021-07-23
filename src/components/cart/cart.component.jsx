@@ -2298,6 +2298,10 @@ export class Cart extends React.Component {
                                 null
                             }
                             
+                            { parseInt( this.state.orderType ) == 0 ? null :
+                                <Typography variant="h5" component="span" className="orderCheckText" style={{ color: '#c03' }}>Забрать заказ можно только в маске</Typography>
+                            }
+                            
                             <table className="tableOrderCheck">
                                 <tbody>
                                     {itemsStore.getItems().map((item, key) => 
