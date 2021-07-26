@@ -72,6 +72,7 @@ class StickyFooter extends React.Component{
             soc_link: null,
             cityName: this.props.cityName,
             is_load: false,
+            page: ''
         };
     }
     
@@ -97,9 +98,18 @@ class StickyFooter extends React.Component{
     }
     
     componentDidMount = () => {
+        
+        this.setState({
+            page: itemsStore.getPage()
+        })
+        
         autorun(() => {
             this.setState({
                 cityName: itemsStore.getCity()
+            })
+            
+            this.setState({
+                page: itemsStore.getPage()
             })
             
             this.loadPageInfo();
@@ -108,7 +118,7 @@ class StickyFooter extends React.Component{
     
     render(){
         return (
-            <footer className="footer">
+            <footer className={"footer "+this.state.page}>
                 <Grid container className="mainContainer">
                     <Grid item lg={3} md={3} sm={3} xl={3} xs={12} className="copy">
                         <Typography variant="body1">© Жако 2017 - {new Date().getFullYear()}</Typography>

@@ -670,11 +670,11 @@ export class Cart extends React.Component {
                         }
                     }, 300)
                 }else{
-                    if( this.state.pic_point.length > 0 ){
+                    if( this.state.pic_point.length == 1 ){
                         this.choosePic(this.state.pic_point[0]['id']);
                     }
                     
-                    if( this.state.my_addr.length > 0 ){
+                    if( this.state.my_addr.length == 1 ){
                         this.changeAddr({target: {value: this.state.my_addr[0]['id']}})
                     }
                 }
@@ -1537,7 +1537,15 @@ export class Cart extends React.Component {
                 itemsStore.saveCartData(data);
                 
                 setTimeout(()=>{
-                    window.location.pathname = '/'+this.state.city_name+'/profile?trueOrder';
+                    if( this.state.city_name.length > 0 ){
+                        window.location.pathname = '/'+this.state.city_name+'/profile?trueOrder';
+                    }else{
+                        if( this.props.city.length > 0 ){
+                            window.location.pathname = '/'+this.props.city+'/profile?trueOrder';
+                        }
+                    }
+                    
+                    //window.location.pathname = '/'+this.state.city_name+'/profile?trueOrder';
                     //this.props.history.push('/'+this.state.city_name+'/profile');
                 }, 300)
             }

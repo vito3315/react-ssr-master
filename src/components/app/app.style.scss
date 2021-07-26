@@ -454,3 +454,10 @@ body{
 .MuiBadge-badge{
     @include fons(0.75rem, $Ubuntu);
 }
+
+.footer.cart{
+    @media (max-width: 400px) {
+        height: 127px!important;
+        overflow: hidden!important;
+    }
+}

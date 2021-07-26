@@ -9,3 +9,6 @@ $mainColor: #CC0033;
 .MuiMenu-list span{
     @include fons(1rem, $Ubuntu);
 }
+.ModalContent_1_2 input:disabled{
+    color: #000!important;
+}
