@@ -823,9 +823,6 @@ class ItemsStore {
       
       let check_free = free_items.find( (item) => parseInt(item['this_item_id']) == parseInt(item_cart['item_id']) );
       
-      console.log( 'item_cart', item_cart )
-      console.log( 'check_free', check_free )
-      
       if( check_free.max_count ){
         all_max_count += parseInt(check_free.max_count);
       }
@@ -843,6 +840,8 @@ class ItemsStore {
     });
     
     console.log( 'all_max_count', all_max_count, 'my_free_count', my_free_count )
+    
+    return 1;
     
     unic_id = [...new Set(unic_id)];
     
