@@ -843,7 +843,7 @@ class ItemsStore {
         //my_free_count += parseInt(item_cart['count']);
       //}
       
-      if( parseInt(item_info.type) == 3 ){
+      if( parseInt(item_info.id) == 17 || parseInt(item_info.id) == 237 ){
         my_free_count += parseInt(item_cart['count']);
       }
       
