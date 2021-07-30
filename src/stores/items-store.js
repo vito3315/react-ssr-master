@@ -631,12 +631,7 @@ class ItemsStore {
         count_ = parseInt(cart_info.count);
       }
       
-      //console.log( 'cart_info', cart_info )
-      
-      
       let item_info = all_items.find( (item) => item.id == id );
-      
-      //console.log( 'item_info', item_info )
       
       if(item_info){
         let count = count_ + 1,
@@ -815,11 +810,9 @@ class ItemsStore {
     
     let check_item = all_items.find( (item) => parseInt(item.id) == parseInt(item_id) );
     
-    if( parseInt(check_item.type) != 3 || (parseInt(check_item.id) !== 17 && parseInt(check_item.id) !== 19) ){
+    if( parseInt(check_item.type) != 3 || (parseInt(check_item.id) !== 17 && parseInt(check_item.id) !== 237) ){
       return 99;
     }
-    
-    console.log( 'my_cart', my_cart )
     
     if( !free_items ){
       return 99;
@@ -833,17 +826,11 @@ class ItemsStore {
       let item_info = all_items.find( (item) => parseInt(item.id) == parseInt(item_cart['item_id']) );
       let check_free = free_items.find( (item) => parseInt(item['this_item_id']) == parseInt(item_cart['item_id']) );
       
-      console.log( 'check_free', check_free )
-      
       if( check_free && check_free.max_count && parseInt(item_info.type) != 3 ){
         all_max_count += parseInt(check_free.max_count);
       }
       
-      //if( parseInt(item_info.type) != 3 ){
-        //my_free_count += parseInt(item_cart['count']);
-      //}
-      
-      if( parseInt(item_info.id) == 17 || parseInt(item_info.id) == 19 ){
+      if( parseInt(item_info.id) == 17 || parseInt(item_info.id) == 237 ){
         my_free_count += parseInt(item_cart['count']);
       }
       
@@ -856,8 +843,6 @@ class ItemsStore {
         }
       });
     });
-    
-    console.log( 'all_max_count', all_max_count, 'my_free_count', my_free_count )
     
     unic_id = [...new Set(unic_id)];
     
@@ -888,25 +873,11 @@ class ItemsStore {
     
     let max_count = 99;
     
-    console.log( 'new_free_dop', new_free_dop )
-    
     if( new_free_dop.length > 0 ){
-      /*new_free_dop.forEach(el => {
-        if( parseInt( el['item_id'] ) == parseInt(item_id) ){
-          max_count = parseInt(el['count']);
-        }
-      });*/
-      
-      //console.log( 'max_count', max_count )
       
       max_count = new_free_dop.find( (item) => parseInt(item['item_id']) == 17 );
       if( max_count ){
-        
-        console.log( 'max_count __ 11', max_count )
-        
         max_count = parseInt(max_count['count']);
-        
-        //max_count = all_max_count - parseInt(max_count['count_in_cart']);
         
         if( my_free_count >= max_count ){
           return max_count - my_free_count;
@@ -914,8 +885,6 @@ class ItemsStore {
         
       }
     }
-    
-    console.log( 'max_count', max_count )
     
     return max_count;
   }

@@ -796,9 +796,6 @@ export class Cart extends React.Component {
                     let cart_item = cartItems_new.find( (item_) => parseInt(item_.id) == parseInt(item.id) );
                     let thisitem = allItems.find( (item_) => parseInt(item_.id) == parseInt(item.id) );
                     
-                    console.log( 'item', item )
-                    console.log( 'thisitem', thisitem )
-                    
                     if( !cart_item ){
                         dop_new.push({
                             id: item.id,
@@ -1343,7 +1340,7 @@ export class Cart extends React.Component {
                     check_need_dop = true;
                 }
                 
-                if( parseInt(item.item_id) == 17 && parseInt(item.count) > 0 ){
+                if( (parseInt(item.item_id) == 17 && parseInt(item.count) > 0) || (parseInt(item.item_id) == 237 && parseInt(item.count) > 0) ){
                     check_dop_17 = true;
                 }
                 
