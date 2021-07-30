@@ -839,9 +839,9 @@ class ItemsStore {
       });
     });
     
-    console.log( 'all_max_count', all_max_count, 'my_free_count', my_free_count )
+    //console.log( 'all_max_count', all_max_count, 'my_free_count', my_free_count )
     
-    return 1;
+    //return 1;
     
     unic_id = [...new Set(unic_id)];
     
@@ -870,6 +870,8 @@ class ItemsStore {
     });
     
     let max_count = 99;
+    
+    console.log( 'new_free_dop', new_free_dop )
     
     new_free_dop.forEach(el => {
       if( parseInt( el['item_id'] ) == parseInt(item_id) ){
