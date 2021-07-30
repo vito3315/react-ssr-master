@@ -900,9 +900,9 @@ class ItemsStore {
         
         console.log( 'max_count __ 11', max_count )
         
-        max_count = max_count['count'];
+        //max_count = max_count['count'];
         
-        max_count = max_count - all_max_count;
+        max_count = all_max_count - parseInt(max_count['count_in_cart']);
         
         if( max_count <= 0 ){
           max_count = 0;
