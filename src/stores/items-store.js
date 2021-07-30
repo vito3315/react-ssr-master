@@ -909,7 +909,7 @@ class ItemsStore {
         //max_count = all_max_count - parseInt(max_count['count_in_cart']);
         
         if( my_free_count >= max_count ){
-          return max_count;
+          return max_count - my_free_count;
         }
         
       }
