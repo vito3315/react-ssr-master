@@ -888,6 +888,9 @@ class ItemsStore {
       });
       
       max_count = new_free_dop.find( (item) => parseInt(item['item_id']) == 17 );
+      if( max_count ){
+        max_count = max_count['count'];
+      }
     }
     
     console.log( 'max_count', max_count )
