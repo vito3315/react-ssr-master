@@ -631,12 +631,12 @@ class ItemsStore {
         count_ = parseInt(cart_info.count);
       }
       
-      console.log( 'cart_info', cart_info )
+      //console.log( 'cart_info', cart_info )
       
       
       let item_info = all_items.find( (item) => item.id == id );
       
-      console.log( 'item_info', item_info )
+      //console.log( 'item_info', item_info )
       
       if(item_info){
         let count = count_ + 1,
@@ -812,6 +812,8 @@ class ItemsStore {
     let my_cart = itemsStore.getItems();
     let free_items = itemsStore.getFreeItems();
     
+    console.log( 'my_cart', my_cart )
+    
     if( !free_items ){
       return 99;
     }
@@ -827,6 +829,7 @@ class ItemsStore {
         all_max_count += parseInt(check_free.max_count);
       }
       
+      if( type )
       my_free_count += parseInt(item_cart['count']);
       
       free_items.forEach( (item) => {
