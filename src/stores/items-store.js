@@ -815,7 +815,7 @@ class ItemsStore {
     
     let check_item = all_items.find( (item) => parseInt(item.id) == parseInt(item_id) );
     
-    if( parseInt(check_item.type) != 3 || (parseInt(check_item.id) !== 17 && parseInt(check_item.id) !== 237) ){
+    if( parseInt(check_item.type) != 3 || (parseInt(check_item.id) !== 17 && parseInt(check_item.id) !== 19) ){
       return 99;
     }
     
@@ -843,7 +843,7 @@ class ItemsStore {
         //my_free_count += parseInt(item_cart['count']);
       //}
       
-      if( parseInt(item_info.id) == 17 || parseInt(item_info.id) == 237 ){
+      if( parseInt(item_info.id) == 17 || parseInt(item_info.id) == 19 ){
         my_free_count += parseInt(item_cart['count']);
       }
       
