@@ -813,6 +813,11 @@ class ItemsStore {
     let free_items = itemsStore.getFreeItems();
     let all_items = itemsStore.getAllItems();
     
+    let check_item = all_items.find( (item) => parseInt(item.id) == parseInt(item_id) );
+    
+    if( parseInt(check_item.type) != 3 ){
+      return 99;
+    }
     
     console.log( 'my_cart', my_cart )
     
