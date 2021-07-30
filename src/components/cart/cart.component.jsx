@@ -796,6 +796,8 @@ export class Cart extends React.Component {
                     let cart_item = cartItems_new.find( (item_) => parseInt(item_.id) == parseInt(item.id) );
                     let thisitem = allItems.find( (item_) => parseInt(item_.id) == parseInt(item.id) );
                     
+                    console.log( 'item', item )
+                    
                     if( !cart_item ){
                         dop_new.push({
                             id: item.id,
