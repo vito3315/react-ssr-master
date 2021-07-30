@@ -644,7 +644,7 @@ class ItemsStore {
           
         let max_count = itemsStore.check_max_count( parseInt(id) );    
         
-        if( parseInt(max_count) <= count ){
+        if( parseInt(max_count) >= count ){
           let check_in_cart = my_cart.some( (item) => item.item_id == id );
             if( !check_in_cart ){
               my_cart.push({
@@ -818,7 +818,7 @@ class ItemsStore {
     
     my_cart.forEach((item_cart, key) => {
       
-      let check_free = free_items.filter( (item) => parseInt(item['this_item_id']) == parseInt(item_cart['item_id']) );
+      let check_free = free_items.find( (item) => parseInt(item['this_item_id']) == parseInt(item_cart['item_id']) );
       
       console.log( 'item_cart', item_cart )
       console.log( 'check_free', check_free )
