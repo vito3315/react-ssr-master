@@ -631,7 +631,12 @@ class ItemsStore {
         count_ = parseInt(cart_info.count);
       }
       
+      console.log( 'cart_info', cart_info )
+      
+      
       let item_info = all_items.find( (item) => item.id == id );
+      
+      console.log( 'item_info', item_info )
       
       if(item_info){
         let count = count_ + 1,
@@ -639,7 +644,7 @@ class ItemsStore {
           
         let max_count = itemsStore.check_max_count( parseInt(id) );    
         
-        if( parseInt(max_count) >= count ){
+        if( parseInt(max_count) <= count ){
           let check_in_cart = my_cart.some( (item) => item.item_id == id );
             if( !check_in_cart ){
               my_cart.push({

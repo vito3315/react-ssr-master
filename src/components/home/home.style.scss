@@ -39,6 +39,7 @@ $colorMain: #CC0033;
     & h1, h2{
         @include fons(2rem, $Futuris);
         text-align: center;
+        width: 100%;
     }
     & h3{
         @include fons(1.2rem, $Ubuntu);
