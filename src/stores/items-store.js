@@ -815,7 +815,8 @@ class ItemsStore {
       
       let check_free = free_items.filter( (item) => parseInt(item['this_item_id']) == parseInt(item_cart['item_id']) );
       
-      console.log( check_free )
+      console.log( 'item_cart', item_cart )
+      console.log( 'check_free', check_free )
       
       free_items.forEach( (item) => {
         if( parseInt(item_cart['item_id']) == parseInt(item['this_item_id']) ){
