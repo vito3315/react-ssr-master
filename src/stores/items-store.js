@@ -815,7 +815,7 @@ class ItemsStore {
     
     let check_item = all_items.find( (item) => parseInt(item.id) == parseInt(item_id) );
     
-    if( parseInt(check_item.type) != 3 ){
+    if( parseInt(check_item.type) != 3 || (parseInt(check_item.id) !== 17 && parseInt(check_item.id) !== 237) ){
       return 99;
     }
     
@@ -908,7 +908,7 @@ class ItemsStore {
         
         //max_count = all_max_count - parseInt(max_count['count_in_cart']);
         
-        if( my_free_count >= max_count && (parseInt(check_item.id) == 17 || parseInt(check_item.id) == 237) ){
+        if( my_free_count >= max_count ){
           return my_free_count;
         }
         
