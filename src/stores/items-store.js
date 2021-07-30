@@ -839,7 +839,11 @@ class ItemsStore {
         all_max_count += parseInt(check_free.max_count);
       }
       
-      if( parseInt(item_info.type) != 3 ){
+      //if( parseInt(item_info.type) != 3 ){
+        //my_free_count += parseInt(item_cart['count']);
+      //}
+      
+      if( parseInt(item_info.type) == 3 ){
         my_free_count += parseInt(item_cart['count']);
       }
       
@@ -887,26 +891,27 @@ class ItemsStore {
     console.log( 'new_free_dop', new_free_dop )
     
     if( new_free_dop.length > 0 ){
-      new_free_dop.forEach(el => {
+      /*new_free_dop.forEach(el => {
         if( parseInt( el['item_id'] ) == parseInt(item_id) ){
           max_count = parseInt(el['count']);
         }
-      });
+      });*/
       
-      console.log( 'max_count', max_count )
+      //console.log( 'max_count', max_count )
       
       max_count = new_free_dop.find( (item) => parseInt(item['item_id']) == 17 );
       if( max_count ){
         
         console.log( 'max_count __ 11', max_count )
         
-        //max_count = max_count['count'];
+        max_count = parseInt(max_count['count']);
         
-        max_count = all_max_count - parseInt(max_count['count_in_cart']);
+        //max_count = all_max_count - parseInt(max_count['count_in_cart']);
         
-        if( max_count <= 0 ){
-          max_count = 0;
+        if( my_free_count == max_count ){
+          return my_free_count;
         }
+        
       }
     }
     
