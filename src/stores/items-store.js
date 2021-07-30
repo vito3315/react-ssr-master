@@ -886,6 +886,8 @@ class ItemsStore {
       }
     });
     
+    console.log( 'max_count', max_count )
+    
     return max_count;
   }
   
