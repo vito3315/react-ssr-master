@@ -811,6 +811,8 @@ class ItemsStore {
     
     let my_cart = itemsStore.getItems();
     let free_items = itemsStore.getFreeItems();
+    let all_items = itemsStore.getAllItems();
+    
     
     console.log( 'my_cart', my_cart )
     
@@ -829,8 +831,11 @@ class ItemsStore {
         all_max_count += parseInt(check_free.max_count);
       }
       
-      if( type )
-      my_free_count += parseInt(item_cart['count']);
+      let item_info = all_items.find( (item) => parseInt(item.id) == parseInt(item_cart['item_id']) );
+      
+      if( parseInt(item_info.type) != 3 ){
+        my_free_count += parseInt(item_cart['count']);
+      }
       
       free_items.forEach( (item) => {
         if( parseInt(item_cart['item_id']) == parseInt(item['this_item_id']) ){
@@ -842,7 +847,7 @@ class ItemsStore {
       });
     });
     
-    //console.log( 'all_max_count', all_max_count, 'my_free_count', my_free_count )
+    console.log( 'all_max_count', all_max_count, 'my_free_count', my_free_count )
     
     unic_id = [...new Set(unic_id)];
     
