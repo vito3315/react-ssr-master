@@ -880,11 +880,15 @@ class ItemsStore {
     
     console.log( 'new_free_dop', new_free_dop )
     
-    new_free_dop.forEach(el => {
-      if( parseInt( el['item_id'] ) == parseInt(item_id) ){
-        max_count = parseInt(el['count']);
-      }
-    });
+    if( new_free_dop.length > 0 ){
+      new_free_dop.forEach(el => {
+        if( parseInt( el['item_id'] ) == parseInt(item_id) ){
+          max_count = parseInt(el['count']);
+        }
+      });
+      
+      max_count = new_free_dop.find( (item) => parseInt(item['item_id']) == 17 );
+    }
     
     console.log( 'max_count', max_count )
     
