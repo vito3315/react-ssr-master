@@ -841,8 +841,6 @@ class ItemsStore {
     
     //console.log( 'all_max_count', all_max_count, 'my_free_count', my_free_count )
     
-    //return 1;
-    
     unic_id = [...new Set(unic_id)];
     
     let new_free_dop = [];
