@@ -825,13 +825,12 @@ class ItemsStore {
     
     my_cart.forEach((item_cart, key) => {
       
+      let item_info = all_items.find( (item) => parseInt(item.id) == parseInt(item_cart['item_id']) );
       let check_free = free_items.find( (item) => parseInt(item['this_item_id']) == parseInt(item_cart['item_id']) );
       
-      if( check_free.max_count ){
+      if( check_free.max_count && parseInt(item_info.type) != 3 ){
         all_max_count += parseInt(check_free.max_count);
       }
-      
-      let item_info = all_items.find( (item) => parseInt(item.id) == parseInt(item_cart['item_id']) );
       
       if( parseInt(item_info.type) != 3 ){
         my_free_count += parseInt(item_cart['count']);
