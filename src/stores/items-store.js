@@ -869,6 +869,7 @@ class ItemsStore {
           if( !check ){
             new_free_dop.push({
               item_id: parseInt(unic_item),
+              count_in_cart: item_free['count_in_cart'],
               count: item_free['count_in_cart'] * item_free['max_count']
             });
           }
@@ -891,7 +892,16 @@ class ItemsStore {
       
       max_count = new_free_dop.find( (item) => parseInt(item['item_id']) == 17 );
       if( max_count ){
+        
+        console.log( 'max_count __ 11', max_count )
+        
         max_count = max_count['count'];
+        
+        max_count = max_count - all_max_count;
+        
+        if( max_count <= 0 ){
+          max_count = 0;
+        }
       }
     }
     
