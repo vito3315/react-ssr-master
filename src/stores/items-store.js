@@ -830,7 +830,7 @@ class ItemsStore {
       
       console.log( 'check_free', check_free )
       
-      if( check_free.max_count && parseInt(item_info.type) != 3 ){
+      if( check_free && check_free.max_count && parseInt(item_info.type) != 3 ){
         all_max_count += parseInt(check_free.max_count);
       }
       
@@ -886,6 +886,8 @@ class ItemsStore {
           max_count = parseInt(el['count']);
         }
       });
+      
+      console.log( 'max_count', max_count )
       
       max_count = new_free_dop.find( (item) => parseInt(item['item_id']) == 17 );
       if( max_count ){
