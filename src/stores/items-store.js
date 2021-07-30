@@ -828,6 +828,8 @@ class ItemsStore {
       let item_info = all_items.find( (item) => parseInt(item.id) == parseInt(item_cart['item_id']) );
       let check_free = free_items.find( (item) => parseInt(item['this_item_id']) == parseInt(item_cart['item_id']) );
       
+      console.log( 'check_free', check_free )
+      
       if( check_free.max_count && parseInt(item_info.type) != 3 ){
         all_max_count += parseInt(check_free.max_count);
       }
