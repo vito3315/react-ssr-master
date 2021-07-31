@@ -1537,13 +1537,18 @@ export class Cart extends React.Component {
                 itemsStore.saveCartData(data);
                 
                 setTimeout(()=>{
-                    if( this.state.city_name.length > 0 ){
+                    
+                    let city = get_city( window.location.pathname )
+                    
+                    window.location.pathname = '/'+city+'/profile?trueOrder';
+                    
+                    /*if( this.state.city_name.length > 0 ){
                         window.location.pathname = '/'+this.state.city_name+'/profile?trueOrder';
                     }else{
                         if( this.props.city.length > 0 ){
                             window.location.pathname = '/'+this.props.city+'/profile?trueOrder';
                         }
-                    }
+                    }*/
                     
                     //window.location.pathname = '/'+this.state.city_name+'/profile?trueOrder';
                     //this.props.history.push('/'+this.state.city_name+'/profile');
