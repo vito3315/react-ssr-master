@@ -1540,7 +1540,7 @@ export class Cart extends React.Component {
                     
                     let city = get_city( window.location.pathname )
                     
-                    window.location.pathname = '/'+city+'/profile';
+                    window.location.href = window.location.origin + '/'+city+'/profile?trueOrder';
                     
                     /*if( this.state.city_name.length > 0 ){
                         window.location.pathname = '/'+this.state.city_name+'/profile?trueOrder';
