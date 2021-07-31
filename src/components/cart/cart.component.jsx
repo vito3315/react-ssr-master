@@ -1591,6 +1591,15 @@ export class Cart extends React.Component {
         }
     }
     
+    enterPromoMobile = (event) => {
+        if(event.key === 'Enter'){
+            //NextPromo
+            if( document.querySelector('#PromoMobile') ){
+                document.querySelector('#PromoMobile').blur()
+            }
+        }
+    }
+    
     render() {
         let this_pay = this.state.renderPay.find( (item) => item.type == this.state.orderPay );
         
@@ -1920,10 +1929,12 @@ export class Cart extends React.Component {
                                     onBlur={this.checkPromo.bind(this)}
                                     value={this.state.orderPromo}
                                     onChange={ event => this.setState({ orderPromo: event.target.value }) }
+                                    onKeyPress={this.enterPromoMobile}
+                                    id="PromoMobile"
                                     placeholder="Промокод"
                                 />
                                 <Divider orientation="vertical" />
-                                <IconButton color="primary" aria-label="directions" onClick={this.checkPromo.bind(this)}>
+                                <IconButton color="primary" id="NextPromo" aria-label="directions" onClick={this.checkPromo.bind(this)}>
                                     <CheckOutlinedIcon />
                                 </IconButton>
                             </Paper>
