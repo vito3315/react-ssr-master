@@ -861,7 +861,7 @@ export class Profile extends React.Component {
                                                         </div>
                                                         <div style={{ width: '100%', paddingTop: 10 }}>
                                                             <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" style={{ width: '100%' }} onClick={this.activePromo.bind(this, item.info, item.promo_name)}>
-                                                                <Button variant="contained" className="BtnCardMain CardInCardItem" style={{ width: '100%' }}>Активирывать промокод</Button>
+                                                                <Button variant="contained" className="BtnCardMain CardInCardItem" style={{ width: '100%' }}>Применить промокод</Button>
                                                             </ButtonGroup>
                                                         </div>
                                                     </td>
