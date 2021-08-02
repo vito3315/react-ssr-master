@@ -892,7 +892,7 @@ export class Header extends React.Component {
                                     <img alt="Жако доставка роллов и пиццы" src="https://jacochef.ru/src/img/Bely_fon_logo.png" />
                                 </Link> 
                             </Grid>
-                            <Hidden mdDown>
+                            <Hidden smDown>
                                 
                                 <Grid item className="CityProfileNav">
                                     <Typography className="cat" variant="h5" component="span" onClick={this.openCity.bind(this)} style={{ display: 'flex', flexDirection: 'row' }}>{this.state.cityNameRu} <ArrowDropDownIcon /></Typography>
@@ -1203,7 +1203,7 @@ export class Header extends React.Component {
                 </Dialog>
                 
                 {this.state.activePage == 'home' ?
-                    <Hidden lgUp>
+                    <Hidden mdUp>
                         <div style={{ width: '100%', height: 3, position: 'fixed', top: 85, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
                         <div style={{ width: '100%', height: 3, position: 'fixed', top: 88, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
                         <div style={{ width: '100%', height: 3, position: 'fixed', top: 91, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
@@ -1219,7 +1219,7 @@ export class Header extends React.Component {
                     null
                 }    
                 
-                <Hidden lgUp>
+                <Hidden mdUp>
                     <CustomBottomNavigation login={ this.openLogin.bind(this) } />
                 </Hidden>
             </div>
