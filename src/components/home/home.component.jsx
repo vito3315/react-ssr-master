@@ -1002,7 +1002,7 @@ export class Home extends React.Component {
                             null
                     )}
                     
-                    <Hidden smUp>
+                    <Hidden mdUp>
                         <Backdrop style={{ zIndex: 4, color: '#fff' }} open={true}>
                             <CircularProgress color="inherit" />
                         </Backdrop>
@@ -1016,7 +1016,7 @@ export class Home extends React.Component {
                         <meta name="description" content={this.state.description} />
                     </Helmet>
                     
-                    <Hidden xsDown>
+                    <Hidden smDown>
                         { this.state.banners_pc.length == 0 ? null :
                             <CoverFlowCarousel
                                 type="pc"
@@ -1024,7 +1024,7 @@ export class Home extends React.Component {
                             />
                         }
                     </Hidden>
-                    <Hidden smUp>
+                    <Hidden mdUp>
                         { this.state.banners_mobile.length == 0 ? null :
                             <CoverFlowCarousel
                                 type="mobile"
