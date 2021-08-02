@@ -2326,6 +2326,13 @@ export class Cart extends React.Component {
                                 <Typography variant="h5" component="span" className="orderCheckText" style={{ color: '#c03' }}>Забрать заказ можно только в маске</Typography>
                             }
                             
+                            { this.state.newOrderData && this.state.newOrderData.dop_text && this.state.newOrderData.dop_text.length > 0 ?
+                                <Typography variant="h5" component="span" className="orderCheckText" style={{ fontWeight: 'bold' }}>{this.state.newOrderData.dop_text}</Typography>
+                                    :
+                                null
+                            }
+                            
+                            
                             <table className="tableOrderCheck">
                                 <tbody>
                                     {itemsStore.getItems().map((item, key) => 
