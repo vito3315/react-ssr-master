@@ -858,7 +858,7 @@ export class Header extends React.Component {
                             </>
                         </Grid>
                     
-                        <Hidden lgUp>
+                        <Hidden mdUp>
                             <Typography variant="h5" component="span" className="thisCity" onClick={this.openCity.bind(this)}><FontAwesomeIcon icon={ faMapMarkerAlt } /> {itemsStore.getCityRU()}</Typography>
                         </Hidden>
                                 
@@ -866,7 +866,7 @@ export class Header extends React.Component {
                     
                     {this.state.activePage == 'home' ?
                         <Grid className="scrollCat">
-                            <Hidden lgUp>
+                            <Hidden mdUp>
                                 {this.state.testData.map((item, key) => 
                                     <Grid item key={key}>
                                         <div style={{ width: 120, height: 28, marginRight: 12, backgroundColor: '#e5e5e5' }} />    
@@ -1021,7 +1021,7 @@ export class Header extends React.Component {
                             </Hidden>
                         </Grid>
                     
-                        <Hidden lgUp>
+                        <Hidden mdUp>
                             <Typography variant="h5" component="span" className="thisCity" onClick={this.openCity.bind(this)}><FontAwesomeIcon icon={ faMapMarkerAlt } /> {itemsStore.getCityRU()}</Typography>
                         </Hidden>
                                 
@@ -1029,7 +1029,7 @@ export class Header extends React.Component {
                     
                     {this.state.activePage == 'home' ?
                         <Grid className="scrollCat mobile">
-                            <Hidden lgUp>
+                            <Hidden mdUp>
                                 {this.state.categoryItems.map((item, key) => 
                                     check && check.length > 0 ?
                                         <ScrollLink 
