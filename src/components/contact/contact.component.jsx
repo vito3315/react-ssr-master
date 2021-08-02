@@ -202,7 +202,7 @@ export class Contact extends React.Component {
 			let HintLayout = ymaps.templateLayoutFactory.createClass( 
                 "<div class='my-hint'>" +
                     "<b>{{ properties.address }}</b><br />" +
-                    "График работы: c 10:00 до 21:30" +
+                    "График работы: c 10:00 до 21:30<br />" +
                     "Стоимость доставки: {{ properties.sum_div }} руб." +
                 "</div>"
             );
@@ -212,6 +212,7 @@ export class Contact extends React.Component {
                     new ymaps.Polygon([zone], {
     					//hintContent: "Зона доставки"
                         address: points[ key ]['addr'], 
+                        sum_div: points[ key ]['sum_div'], 
     				}, {
                         hintLayout: HintLayout,
     					fillColor: 'rgba(187, 0, 37, 0.25)',
@@ -227,6 +228,7 @@ export class Contact extends React.Component {
     					//hintContent: point['addr'],
     					//balloonContent: point['addr'],
                         address: point['addr'],
+                        sum_div: point['sum_div'], 
                     }, {
                         hintLayout: HintLayout,
     					iconLayout: 'default#image',
