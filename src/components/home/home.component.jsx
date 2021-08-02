@@ -586,7 +586,7 @@ export class Home extends React.Component {
                                 src={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"3700х1000.jpg?"+item.img_new_update} 
                                 //alt={this.state.item.name}
                                 //title={this.state.item.name}
-                                style={{ width: 'inherit', height: 'auto', minHeight: 250, borderRadius: 15 }}
+                                style={{ width: 'inherit', height: 'auto', minHeight: 200, borderRadius: 15 }}
                                 onDragStart={handleDragStart}
                                 onClick={this.openItemPC.bind(this, item.item)}
                             />
@@ -620,7 +620,7 @@ export class Home extends React.Component {
                                 src={"https://storage.yandexcloud.net/site-home-img/"+item.img_new+"3700х1000.jpg?"+item.img_new_update} 
                                 //alt={this.state.item.name}
                                 //title={this.state.item.name}
-                                style={{ width: 'inherit', height: 'auto', minHeight: 250, borderRadius: 15 }}
+                                style={{ width: 'inherit', height: 'auto', minHeight: 200, borderRadius: 15 }}
                                 onDragStart={handleDragStart}
                             />
                         </picture>
