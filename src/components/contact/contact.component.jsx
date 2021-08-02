@@ -203,6 +203,7 @@ export class Contact extends React.Component {
                 "<div class='my-hint'>" +
                     "<b>{{ properties.address }}</b><br />" +
                     "График работы: c 10:00 до 21:30" +
+                    "Стоимость доставки: {{ properties.sum_div }} руб." +
                 "</div>"
             );
 			
@@ -252,11 +253,6 @@ export class Contact extends React.Component {
                     <Typography variant="h5" component="h1">Контакты</Typography>
                 </Grid>
                 <Grid item lg={4} md={4} xl={4} sm={12} xs={12} className="mainContainer">
-                    {this.state.points[0] ?
-                        <Typography variant="h5" component="span" className="p20">Стоимость доставки: {this.state.points[0].sum_div} руб.</Typography>
-                            :
-                        null
-                    }
                     <Typography variant="h5" component="h2">Режим работы</Typography>
                     <Typography variant="h5" component="span" className="p20">Работаем ежедневно с 10:00 до 21:30</Typography>
                     <Typography variant="h5" component="h2">Телефон контакт-центра:</Typography>
