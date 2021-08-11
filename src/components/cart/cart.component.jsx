@@ -589,6 +589,20 @@ export class Cart extends React.Component {
         
         console.log( error )
         console.log( info )
+        
+        fetch(config.urlApi, {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'},
+            body: queryString.stringify({
+                type: 'save_log_err', 
+                page: 'cart',
+                error: JSON.stringify(error),
+                info: JSON.stringify(info),
+            })
+        }).then(res => res.json()).then(json => {
+            
+        });
     }
     
     loadData(){
@@ -720,6 +734,8 @@ export class Cart extends React.Component {
     
     componentDidMount = () => {
         this._isMounted = true; 
+        
+        throw "ошибка 11";
         
         if( document.querySelector('.activeCat') ){
             document.querySelector('.activeCat').classList.remove('activeCat');
@@ -1639,7 +1655,7 @@ export class Cart extends React.Component {
             );
         }
         
-        let this_pay = this.state.renderPay.find( (item) => item.type == this.state.orderPay+1 )[11];
+        let this_pay = this.state.renderPay.find( (item) => item.type == this.state.orderPay );
         
         return (
             <Grid container className="Cart mainContainer MuiGrid-spacing-xs-3">
@@ -1959,7 +1975,7 @@ export class Cart extends React.Component {
                             <Typography variant="h5" component="span">Приготовим: {this.state.orderTimes == 1 ? 'как можно быстрее' : this.state.orderPredDay+' '+this.state.orderPredTime}</Typography>
                         </div>
                         <div className="boxMobile" onClick={() => this.setState({ choosePayDialog: true })}>
-                            <Typography variant="h5" component="span">Оплачу: { this_pay['title'] }</Typography>
+                            <Typography variant="h5" component="span">Оплачу: { this_pay ? this_pay['title'] : '' }</Typography>
                         </div>
                         <div style={{ marginTop: 15 }}>
                             <Paper component="div" className="SpacePromo">
