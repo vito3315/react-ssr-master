@@ -573,7 +573,8 @@ export class Cart extends React.Component {
     
     static getDerivedStateFromError(error) {
         // Обновите состояние так, чтобы следующий рендер показал запасной интерфейс.
-        return { hasError: true };
+        //return { hasError: true };
+        this.setState({ hasError: true })
     }
     
     componentDidCatch(error, info) {
@@ -589,6 +590,8 @@ export class Cart extends React.Component {
         
         console.log( error )
         console.log( info )
+        
+        this.setState({ hasError: true })
         
         fetch(config.urlApi, {
             method: 'POST',
@@ -736,14 +739,6 @@ export class Cart extends React.Component {
         this._isMounted = true; 
         
         try{
-            //add(a, b);
-            
-            throw "ошибка 11";
-            
-        
-        
-        
-        
             if( document.querySelector('.activeCat') ){
                 document.querySelector('.activeCat').classList.remove('activeCat');
             }
@@ -907,6 +902,8 @@ export class Cart extends React.Component {
             //document.write('Text error');
             
             console.log( e )
+            
+            this.setState({ hasError: true })
             
             fetch(config.urlApi, {
                 method: 'POST',
