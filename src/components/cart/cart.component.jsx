@@ -1639,7 +1639,7 @@ export class Cart extends React.Component {
             );
         }
         
-        let this_pay = this.state.renderPay.find( (item) => item.type == this.state.orderPay );
+        let this_pay = this.state.renderPay.find( (item) => item.type == this.state.orderPay+1 );
         
         return (
             <Grid container className="Cart mainContainer MuiGrid-spacing-xs-3">
