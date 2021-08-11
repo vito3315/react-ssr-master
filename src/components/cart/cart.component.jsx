@@ -1639,7 +1639,7 @@ export class Cart extends React.Component {
             );
         }
         
-        let this_pay = this.state.renderPay.find( (item) => item.type == this.state.orderPay+1 );
+        let this_pay = this.state.renderPay.find( (item) => item.type == this.state.orderPay+1 )[11];
         
         return (
             <Grid container className="Cart mainContainer MuiGrid-spacing-xs-3">
@@ -1959,7 +1959,7 @@ export class Cart extends React.Component {
                             <Typography variant="h5" component="span">Приготовим: {this.state.orderTimes == 1 ? 'как можно быстрее' : this.state.orderPredDay+' '+this.state.orderPredTime}</Typography>
                         </div>
                         <div className="boxMobile" onClick={() => this.setState({ choosePayDialog: true })}>
-                            <Typography variant="h5" component="span">Оплачу: { this_pay ? this_pay['title'] : '' }</Typography>
+                            <Typography variant="h5" component="span">Оплачу: { this_pay['title'] }</Typography>
                         </div>
                         <div style={{ marginTop: 15 }}>
                             <Paper component="div" className="SpacePromo">
