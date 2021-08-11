@@ -735,6 +735,15 @@ export class Cart extends React.Component {
     componentDidMount = () => {
         this._isMounted = true; 
         
+        try{
+            //add(a, b);
+        } catch (e) {
+            //document.write('Text error');
+            
+            console.log( e )
+            //console.log( info )
+        }
+        
         throw "ошибка 11";
         
         if( document.querySelector('.activeCat') ){
