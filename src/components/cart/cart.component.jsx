@@ -740,85 +740,38 @@ export class Cart extends React.Component {
             
             throw "ошибка 11";
             
-        } catch (e) {
-            //document.write('Text error');
-            
-            console.log( e )
-            //console.log( info )
-        }
         
         
         
-        if( document.querySelector('.activeCat') ){
-            document.querySelector('.activeCat').classList.remove('activeCat');
-        }
-        window.scrollTo(0, 0);
-        itemsStore.setPage('cart');
         
-        if( !itemsStore.getToken() ){
-            if (typeof window !== 'undefined') {
-                window.location.pathname = '/'+this.state.city_name;
+            if( document.querySelector('.activeCat') ){
+                document.querySelector('.activeCat').classList.remove('activeCat');
             }
-        }
-        
-        this.loadData();
-        
-        Cart.fetchData('/'+this.state.city_name).then( data => {
-            this.setState( {
-                title: data.page.title,
-                description: data.page.description,
-            } );
-        } );
-        
-        let cartItems = itemsStore.getItems();
-        let allItems = itemsStore.getAllItems();
-        let promoItems = itemsStore.getItemsPromo();
-        
-        let cartItems_new = [];
-        
-        if( cartItems.length > 0 && allItems.length > 0 ){
-            cartItems.map((item) => {
-                let thisitem = allItems.find( (item_) => item_.id == item.item_id );
-                
-                if(thisitem){
-                    cartItems_new.push({
-                        id: item.item_id,
-                        cat_id: thisitem.cat_id,
-                        name: item.name,
-                        desc: thisitem.tmp_desc,
-                        count: item.count,
-                        allPrice: item.all_price,
-                        img: thisitem.img_new,
-                        imgUpdate: thisitem.img_new_update,
-                    })
+            window.scrollTo(0, 0);
+            itemsStore.setPage('cart');
+            
+            if( !itemsStore.getToken() ){
+                if (typeof window !== 'undefined') {
+                    window.location.pathname = '/'+this.state.city_name;
                 }
-            })
+            }
             
-            let main = cartItems_new.filter( (item_) => parseInt(item_.cat_id) !== 7 );
-            let dop = cartItems_new.filter( (item_) => parseInt(item_.cat_id) == 7 );
-            let need_dop = itemsStore.check_need_dops();
+            this.loadData();
             
-            this.setState({
-                cartItems_main: main,
-                cartItems_dop: dop,
-                cartItems_need_dop: need_dop,
-                
-                sumDiv: itemsStore.getSumDiv(),
-                allPrice: itemsStore.getAllPrice()
-            })
-        }
-        
-        autorun(() => {
-            if( this._isMounted === true ){
-                
-                let cartItems = itemsStore.getItems();
-                let allItems = itemsStore.getAllItems();
-                let need_dop = itemsStore.check_need_dops();
-                let promoItems = itemsStore.getItemsPromo();
-                
-                let cartItems_new = [];
-                let cartPromoItems = [];
-                
+            Cart.fetchData('/'+this.state.city_name).then( data => {
+                this.setState( {
+                    title: data.page.title,
+                    description: data.page.description,
+                } );
+            } );
+            
+            let cartItems = itemsStore.getItems();
+            let allItems = itemsStore.getAllItems();
+            let promoItems = itemsStore.getItemsPromo();
+            
+            let cartItems_new = [];
+            
+            if( cartItems.length > 0 && allItems.length > 0 ){
                 cartItems.map((item) => {
                     let thisitem = allItems.find( (item_) => item_.id == item.item_id );
                     
@@ -836,77 +789,141 @@ export class Cart extends React.Component {
                     }
                 })
                 
-                
-                
                 let main = cartItems_new.filter( (item_) => parseInt(item_.cat_id) !== 7 );
                 let dop = cartItems_new.filter( (item_) => parseInt(item_.cat_id) == 7 );
-                
-                let dop_new = [];
-                
-                need_dop.map((item) => {
-                    let cart_item = cartItems_new.find( (item_) => parseInt(item_.id) == parseInt(item.id) );
-                    let thisitem = allItems.find( (item_) => parseInt(item_.id) == parseInt(item.id) );
-                    
-                    if( !cart_item ){
-                        dop_new.push({
-                            id: item.id,
-                            cat_id: item.cat_id,
-                            name: item.name,
-                            desc: item.tmp_desc,
-                            count: 0,
-                            allPrice: 0,
-                            img: thisitem.img_new,
-                            imgUpdate: thisitem.img_new_update,
-                        })
-                    }else{
-                        dop_new.push({
-                            id: item.id,
-                            cat_id: item.cat_id,
-                            name: item.name,
-                            desc: item.tmp_desc,
-                            count: cart_item.count,
-                            allPrice: cart_item.allPrice,
-                            img: thisitem.img_new,
-                            imgUpdate: thisitem.img_new_update,
-                        })
-                    }
-                })
-                
-                promoItems.map((item) => {
-                    let thisitem = allItems.find( (item_) => item_.id == item.item_id );
-                    
-                    if(thisitem){
-                        cartPromoItems.push({
-                            id: item.item_id,
-                            cat_id: thisitem.cat_id,
-                            name: thisitem.name,
-                            desc: thisitem.tmp_desc,
-                            count: item.count,
-                            allPrice: item.all_price,
-                            img: thisitem.img_new,
-                            imgUpdate: thisitem.img_new_update,
-                        })
-                    }
-                })
-                
-                this.setState({
-                    cartItems_dop: []
-                })
-                
-                this.setState({
-                    cartItems_dop: dop_new,
-                })
+                let need_dop = itemsStore.check_need_dops();
                 
                 this.setState({
                     cartItems_main: main,
+                    cartItems_dop: dop,
                     cartItems_need_dop: need_dop,
-                    cartItems_promo: cartPromoItems,
                     
                     sumDiv: itemsStore.getSumDiv(),
                     allPrice: itemsStore.getAllPrice()
                 })
             }
-        })
+            
+            autorun(() => {
+                if( this._isMounted === true ){
+                    
+                    let cartItems = itemsStore.getItems();
+                    let allItems = itemsStore.getAllItems();
+                    let need_dop = itemsStore.check_need_dops();
+                    let promoItems = itemsStore.getItemsPromo();
+                    
+                    let cartItems_new = [];
+                    let cartPromoItems = [];
+                    
+                    cartItems.map((item) => {
+                        let thisitem = allItems.find( (item_) => item_.id == item.item_id );
+                        
+                        if(thisitem){
+                            cartItems_new.push({
+                                id: item.item_id,
+                                cat_id: thisitem.cat_id,
+                                name: item.name,
+                                desc: thisitem.tmp_desc,
+                                count: item.count,
+                                allPrice: item.all_price,
+                                img: thisitem.img_new,
+                                imgUpdate: thisitem.img_new_update,
+                            })
+                        }
+                    })
+                    
+                    
+                    
+                    let main = cartItems_new.filter( (item_) => parseInt(item_.cat_id) !== 7 );
+                    let dop = cartItems_new.filter( (item_) => parseInt(item_.cat_id) == 7 );
+                    
+                    let dop_new = [];
+                    
+                    need_dop.map((item) => {
+                        let cart_item = cartItems_new.find( (item_) => parseInt(item_.id) == parseInt(item.id) );
+                        let thisitem = allItems.find( (item_) => parseInt(item_.id) == parseInt(item.id) );
+                        
+                        if( !cart_item ){
+                            dop_new.push({
+                                id: item.id,
+                                cat_id: item.cat_id,
+                                name: item.name,
+                                desc: item.tmp_desc,
+                                count: 0,
+                                allPrice: 0,
+                                img: thisitem.img_new,
+                                imgUpdate: thisitem.img_new_update,
+                            })
+                        }else{
+                            dop_new.push({
+                                id: item.id,
+                                cat_id: item.cat_id,
+                                name: item.name,
+                                desc: item.tmp_desc,
+                                count: cart_item.count,
+                                allPrice: cart_item.allPrice,
+                                img: thisitem.img_new,
+                                imgUpdate: thisitem.img_new_update,
+                            })
+                        }
+                    })
+                    
+                    promoItems.map((item) => {
+                        let thisitem = allItems.find( (item_) => item_.id == item.item_id );
+                        
+                        if(thisitem){
+                            cartPromoItems.push({
+                                id: item.item_id,
+                                cat_id: thisitem.cat_id,
+                                name: thisitem.name,
+                                desc: thisitem.tmp_desc,
+                                count: item.count,
+                                allPrice: item.all_price,
+                                img: thisitem.img_new,
+                                imgUpdate: thisitem.img_new_update,
+                            })
+                        }
+                    })
+                    
+                    this.setState({
+                        cartItems_dop: []
+                    })
+                    
+                    this.setState({
+                        cartItems_dop: dop_new,
+                    })
+                    
+                    this.setState({
+                        cartItems_main: main,
+                        cartItems_need_dop: need_dop,
+                        cartItems_promo: cartPromoItems,
+                        
+                        sumDiv: itemsStore.getSumDiv(),
+                        allPrice: itemsStore.getAllPrice()
+                    })
+                }
+            })
+        
+        } catch (e) {
+            //document.write('Text error');
+            
+            console.log( e )
+            
+            fetch(config.urlApi, {
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/x-www-form-urlencoded'},
+                body: queryString.stringify({
+                    type: 'save_log_err', 
+                    page: 'cart',
+                    error: JSON.stringify(e),
+                    info: '',
+                })
+            }).then(res => res.json()).then(json => {
+                
+            });
+            
+            //console.log( info )
+        }
     }
     
     componentWillUnmount(){
