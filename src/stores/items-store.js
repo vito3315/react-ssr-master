@@ -620,12 +620,17 @@ class ItemsStore {
 
   AddItem(id){
     let my_cart = itemsStore.getItems();
+    let my_cart_promo = itemsStore.getItemsPromo();
     let all_items = itemsStore.getAllItems();
     let promo = itemsStore.getPromo();
     
     if( all_items.length > 0 ){
       let cart_info = my_cart.find( (item) => item.item_id == id );
       let count_ = 0;
+      
+      if( !cart_info ){
+        cart_info = my_cart_promo.find( (item) => item.item_id == id );
+      }
       
       if( cart_info ){
         count_ = parseInt(cart_info.count);
@@ -703,6 +708,19 @@ class ItemsStore {
         } )
         
         itemsStore.setItems(my_cart)
+        
+        setTimeout( () => {
+          my_cart.map( (item, key) => {
+            max_count = itemsStore.check_max_count(item.item_id)
+            
+            if( parseInt(max_count) < 0 ){
+              my_cart[key]['count'] = parseInt(item.count) + parseInt(max_count);
+              my_cart[key]['all_price'] = ( parseInt(item.count) + parseInt(max_count) ) * parseInt(item.one_price);
+            }
+          })
+          
+          itemsStore.setItems(my_cart)
+        }, 300 )
       }
     
       if( promo ){
@@ -876,6 +894,7 @@ class ItemsStore {
     if( new_free_dop.length > 0 ){
       
       max_count = new_free_dop.find( (item) => parseInt(item['item_id']) == 17 );
+      
       if( max_count ){
         max_count = parseInt(max_count['count']);
         
