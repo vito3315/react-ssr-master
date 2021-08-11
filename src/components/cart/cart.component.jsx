@@ -455,7 +455,9 @@ export class Cart extends React.Component {
     constructor(props) {
         super(props);
         
-        this.state = {      
+        this.state = {    
+            hasError: false,
+            
             is_load: false,
             city_name: this.props.city,
             page: this.props.data ? this.props.data.page : null,
@@ -567,6 +569,26 @@ export class Cart extends React.Component {
         }).catch(function (error) {
             console.log(error);
         });
+    }
+    
+    static getDerivedStateFromError(error) {
+        // Обновите состояние так, чтобы следующий рендер показал запасной интерфейс.
+        return { hasError: true };
+    }
+    
+    componentDidCatch(error, info) {
+      
+    
+    
+        // Пример "componentStack":
+        //   in ComponentThatThrows (created by App)
+        //   in ErrorBoundary (created by App)
+        //   in div (created by App)
+        //   in App
+        //logComponentStackToMyService(info.componentStack);
+        
+        console.log( error )
+        console.log( info )
     }
     
     loadData(){
@@ -706,8 +728,9 @@ export class Cart extends React.Component {
         itemsStore.setPage('cart');
         
         if( !itemsStore.getToken() ){
-            window.location.pathname = '/'+this.state.city_name;
-            //this.props.history.push('/'+this.state.city_name);
+            if (typeof window !== 'undefined') {
+                window.location.pathname = '/'+this.state.city_name;
+            }
         }
         
         this.loadData();
@@ -727,7 +750,7 @@ export class Cart extends React.Component {
         
         if( cartItems.length > 0 && allItems.length > 0 ){
             cartItems.map((item) => {
-                let thisitem = allItems.filter( (item_) => item_.id == item.item_id )[0];
+                let thisitem = allItems.find( (item_) => item_.id == item.item_id );
                 
                 if(thisitem){
                     cartItems_new.push({
@@ -1606,6 +1629,16 @@ export class Cart extends React.Component {
     }
     
     render() {
+        
+        if(this.state.hasError){
+            return (
+                <>
+                    <Typography variant="h5" component="h1">Корзина</Typography>
+                    <a href={'https://jacofood.ru/'+this.state.city_name}>На главную</a>
+                </>
+            );
+        }
+        
         let this_pay = this.state.renderPay.find( (item) => item.type == this.state.orderPay );
         
         return (
