@@ -737,6 +737,9 @@ export class Cart extends React.Component {
         
         try{
             //add(a, b);
+            
+            throw "ошибка 11";
+            
         } catch (e) {
             //document.write('Text error');
             
@@ -744,7 +747,7 @@ export class Cart extends React.Component {
             //console.log( info )
         }
         
-        throw "ошибка 11";
+        
         
         if( document.querySelector('.activeCat') ){
             document.querySelector('.activeCat').classList.remove('activeCat');
