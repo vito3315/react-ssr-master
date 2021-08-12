@@ -598,13 +598,15 @@ class ItemsStore {
       
       let originalItem = allItems.find( (it) => parseInt(it.id) == parseInt(item.item_id) )
       
-      new_cart.push({
-        name: item.name,
-        item_id: item.item_id,
-        count: item.count,
-        one_price: parseInt( originalItem.price ),
-        all_price: parseInt( originalItem.price ) * parseInt( item.count )
-      })
+      if( originalItem ){
+        new_cart.push({
+          name: item.name,
+          item_id: item.item_id,
+          count: item.count,
+          one_price: parseInt( originalItem.price ),
+          all_price: parseInt( originalItem.price ) * parseInt( item.count )
+        })
+      }
     });
     
     this.setItems( new_cart );
