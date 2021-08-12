@@ -711,6 +711,8 @@ class ItemsStore {
         
         itemsStore.setItems(my_cart)
         
+        let max_count = 0;
+        
         setTimeout( () => {
           my_cart.map( (item, key) => {
             max_count = itemsStore.check_max_count(item.item_id)
