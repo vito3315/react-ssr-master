@@ -1145,7 +1145,7 @@ export class Header extends React.Component {
                                 onChange={ event => this.state.stage_1 ? this.setState({ userLogin: event.target.value }) : {} }
                             />
                             {this.state.stage_2 ?
-                                <Typography variant="h5" component="span" className="changeNumber" onClick={this.changeNumber.bind(this)}>Изменеить номер</Typography>
+                                <Typography variant="h5" component="span" className="changeNumber" onClick={this.changeNumber.bind(this)}>Изменить номер</Typography>
                                     :
                                 null
                             }
