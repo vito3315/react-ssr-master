@@ -152,7 +152,7 @@ export class Profile extends React.Component {
             radiogroup_options: [
                 {id: '0', label: 'Решили отредактировать заказ', value: 0 },
                 {id: '1', label: 'Не устраивает время ожидания', value: 0 },
-                {id: '2', label: 'Изминились планы', value: 0 },
+                {id: '2', label: 'Изменились планы', value: 0 },
                 {id: '3', label: 'Недостаточно средств', value: 0 },
                 {id: '4', label: 'Другое', value: 0 },
             ],
