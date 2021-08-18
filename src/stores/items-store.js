@@ -622,32 +622,16 @@ class ItemsStore {
 
   AddItem(id){
     let my_cart = itemsStore.getItems();
-    let my_cart_promo = itemsStore.getItemsPromo();
     let all_items = itemsStore.getAllItems();
     let promo = itemsStore.getPromo();
-    
-    console.log( 'my_cart_promo', my_cart_promo )
     
     if( all_items.length > 0 ){
       let cart_info = my_cart.find( (item) => parseInt(item.item_id) == parseInt(id) );
       let count_ = 0;
       
-      console.log( 'cart_info 1', cart_info )
-      
-      if( !cart_info ){
-        cart_info = my_cart_promo.find( (item) => parseInt(item.item_id) == parseInt(id) );
-        console.log( 'cart_info 20', cart_info )
-      }
-      
-      console.log( 'cart_info 2', cart_info )
-      
       if( cart_info ){
         count_ = parseInt(cart_info.count);
       }
-      
-      let alt_max_count = itemsStore.check_max_count( parseInt(id) );
-        
-      console.log( 'alt ', alt_max_count )
       
       let item_info = all_items.find( (item) => item.id == id );
       
@@ -838,6 +822,7 @@ class ItemsStore {
     let unic_id = [];
     
     let my_cart = itemsStore.getItems();
+    let my_cart_promo = itemsStore.getItemsPromo();
     let free_items = itemsStore.getFreeItems();
     let all_items = itemsStore.getAllItems();
     
@@ -855,6 +840,29 @@ class ItemsStore {
     let my_free_count = 0;
     
     my_cart.forEach((item_cart, key) => {
+      
+      let item_info = all_items.find( (item) => parseInt(item.id) == parseInt(item_cart['item_id']) );
+      let check_free = free_items.find( (item) => parseInt(item['this_item_id']) == parseInt(item_cart['item_id']) );
+      
+      if( check_free && check_free.max_count && parseInt(item_info.type) != 3 ){
+        all_max_count += parseInt(check_free.max_count);
+      }
+      
+      if( parseInt(item_info.id) == 17 || parseInt(item_info.id) == 237 ){
+        my_free_count += parseInt(item_cart['count']);
+      }
+      
+      free_items.forEach( (item) => {
+        if( parseInt(item_cart['item_id']) == parseInt(item['this_item_id']) ){
+          item['count_in_cart'] = parseInt(item_cart['count']);
+          
+          free_dops_in_cart.push( item );
+          unic_id.push( parseInt(item['item_id']) );
+        }
+      });
+    });
+    
+    my_cart_promo.forEach((item_cart, key) => {
       
       let item_info = all_items.find( (item) => parseInt(item.id) == parseInt(item_cart['item_id']) );
       let check_free = free_items.find( (item) => parseInt(item['this_item_id']) == parseInt(item_cart['item_id']) );
