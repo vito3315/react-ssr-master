@@ -629,12 +629,16 @@ class ItemsStore {
     console.log( 'my_cart_promo', my_cart_promo )
     
     if( all_items.length > 0 ){
-      let cart_info = my_cart.find( (item) => item.item_id == id );
+      let cart_info = my_cart.find( (item) => parseInt(item.item_id) == parseInt(id) );
       let count_ = 0;
       
+      console.log( 'cart_info 1', cart_info )
+      
       if( !cart_info ){
-        cart_info = my_cart_promo.find( (item) => item.item_id == id );
+        cart_info = my_cart_promo.find( (item) => parseInt(item.item_id) == parseInt(id) );
       }
+      
+      console.log( 'cart_info 2', cart_info )
       
       if( cart_info ){
         count_ = parseInt(cart_info.count);
