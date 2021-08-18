@@ -626,6 +626,8 @@ class ItemsStore {
     let all_items = itemsStore.getAllItems();
     let promo = itemsStore.getPromo();
     
+    console.log( 'my_cart_promo', my_cart_promo )
+    
     if( all_items.length > 0 ){
       let cart_info = my_cart.find( (item) => item.item_id == id );
       let count_ = 0;
