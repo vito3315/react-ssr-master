@@ -682,6 +682,10 @@ class ItemsStore {
         }
         
         return count - 1;
+      }else{
+        let max_count = itemsStore.check_max_count( parseInt(id) );
+        
+        console.log( 'alt ', max_count )
       }
     }else{
       return 0;
