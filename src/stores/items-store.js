@@ -636,6 +636,7 @@ class ItemsStore {
       
       if( !cart_info ){
         cart_info = my_cart_promo.find( (item) => parseInt(item.item_id) == parseInt(id) );
+        console.log( 'cart_info 20', cart_info )
       }
       
       console.log( 'cart_info 2', cart_info )
