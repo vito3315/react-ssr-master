@@ -645,6 +645,10 @@ class ItemsStore {
         count_ = parseInt(cart_info.count);
       }
       
+      let alt_max_count = itemsStore.check_max_count( parseInt(id) );
+        
+      console.log( 'alt ', alt_max_count )
+      
       let item_info = all_items.find( (item) => item.id == id );
       
       if(item_info){
@@ -682,10 +686,6 @@ class ItemsStore {
         }
         
         return count - 1;
-      }else{
-        let max_count = itemsStore.check_max_count( parseInt(id) );
-        
-        console.log( 'alt ', max_count )
       }
     }else{
       return 0;
