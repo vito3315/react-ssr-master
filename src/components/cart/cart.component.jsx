@@ -1158,6 +1158,8 @@ export class Cart extends React.Component {
     }
     
     checkPromo(){
+        itemsStore.free_drive = 0;
+        
         fetch(config.urlApi, {
             method: 'POST',
             headers: {
@@ -1178,7 +1180,7 @@ export class Cart extends React.Component {
             }else{
                 if( check_promo.st === false ){
                     localStorage.removeItem('promo_name')
-                    itemsStore.free_drive = 0;
+                    
                 }
                 
                 this.setState({
