@@ -654,7 +654,7 @@ export class Cart extends React.Component {
                             this.loadTimePred();   
                         }, 300)
                     }else{
-                        let data = {
+                        /*let data = {
                             orderType: cartData.orderType,
                             orderAddr: '',
                             orderPic: cartData.orderPic,
@@ -671,7 +671,7 @@ export class Cart extends React.Component {
                         
                         console.log( 'load cartData 2' )
                         
-                        itemsStore.saveCartData(data);
+                        itemsStore.saveCartData(data);*/
                     }
                     
                     setTimeout(() => {
