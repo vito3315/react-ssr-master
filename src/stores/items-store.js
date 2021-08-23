@@ -30,6 +30,8 @@ class ItemsStore {
     
   mainLink = '';
   
+  free_drive = 0;
+  
   setMainLink = (items) => {
     this.mainLink = items;
   };

@@ -647,6 +647,8 @@ export class Cart extends React.Component {
                         orderSdacha: cartData.orderSdacha
                     })
                     
+                    console.log( 'load cartData 1' )
+                    
                     if( parseInt(cartData.orderTimes) == 2 && cartData.orderPredDay != '' && ((cartData.orderAddr && cartData.orderAddr.id !== -1) || parseInt( cartData.orderPic ) > 0) ){
                         setTimeout(() => {
                             this.loadTimePred();   
@@ -666,6 +668,8 @@ export class Cart extends React.Component {
                             orderSdacha: cartData.orderSdacha,
                             
                         };
+                        
+                        console.log( 'load cartData 2' )
                         
                         itemsStore.saveCartData(data);
                     }
