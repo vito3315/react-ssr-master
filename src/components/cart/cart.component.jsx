@@ -1148,6 +1148,18 @@ export class Cart extends React.Component {
     checkPromo(){
         itemsStore.free_drive = 0;
         
+        let promo_name = '';
+        
+        if( document.getElementById('PROMONAME') ){
+            promo_name = document.getElementById('PROMONAME').value;
+        }else{
+            if( document.getElementById('PromoMobile') ){
+                promo_name = document.getElementById('PromoMobile').value;
+            }else{
+                promo_name = this.state.orderPromo;
+            }
+        }
+        
         fetch(config.urlApi, {
             method: 'POST',
             headers: {
@@ -1155,20 +1167,19 @@ export class Cart extends React.Component {
             body: queryString.stringify({
                 type: 'get_promo_web', 
                 city_id: itemsStore.getCity(),
-                promo_name: this.state.orderPromo
+                promo_name: promo_name
             })
         }).then(res => res.json()).then(json => {
-            itemsStore.setPromo( JSON.stringify(json), this.state.orderPromo );
+            itemsStore.setPromo( JSON.stringify(json), promo_name );
             let check_promo = itemsStore.checkPromo();
               
-            if( this.state.orderPromo.length == 0 ){
+            if( promo_name.length == 0 ){
                 this.setState({
                     orderPromoText: ''
                 })
             }else{
                 if( check_promo.st === false ){
                     localStorage.removeItem('promo_name')
-                    
                 }
                 
                 this.setState({
@@ -1968,6 +1979,7 @@ export class Cart extends React.Component {
                                         value={this.state.orderPromo}
                                         onChange={ event => this.setState({ orderPromo: event.target.value }) }
                                         placeholder="Промокод"
+                                        id="PROMONAME"
                                     />
                                     <Divider orientation="vertical" />
                                     <IconButton color="primary" aria-label="directions" onClick={this.checkPromo.bind(this)}>
