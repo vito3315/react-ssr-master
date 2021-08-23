@@ -811,12 +811,18 @@ export class Cart extends React.Component {
                               
                             if( parseInt(cartData.orderAddr ? cartData.orderAddr.free_drive : 0) == 1 || parseInt(itemsStore.free_drive) == 1 ){
                               if( parseInt(allPrice) > 0 ){
-                                  itemsStore.setSumDiv(0);
+                                      
+                                    console.log( 'update 0' )  
+                                    itemsStore.setSumDiv(0);
                               }else{
+                                console.log( 'update 1' )    
+                                
                                 itemsStore.setSumDiv(1);
                               }
                             }else{
-                              itemsStore.setSumDiv(parseInt(cartData.orderAddr ? cartData.orderAddr.sum_div : 0));
+                                
+                                console.log( 'update 11 ', parseInt(cartData.orderAddr ? cartData.orderAddr.sum_div : 0) )  
+                                itemsStore.setSumDiv(parseInt(cartData.orderAddr ? cartData.orderAddr.sum_div : 0));
                             }
                         }
                         
