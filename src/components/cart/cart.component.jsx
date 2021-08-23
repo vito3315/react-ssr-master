@@ -629,6 +629,8 @@ export class Cart extends React.Component {
             setTimeout(() => {
                 let cartData = itemsStore.getCartData();
     
+                console.log( 'load cartData', cartData )
+                
                 if( cartData.orderType || cartData.orderType == 0 ){
                     
                     this.setState({
