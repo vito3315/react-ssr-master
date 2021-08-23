@@ -809,6 +809,8 @@ export class Cart extends React.Component {
                         if( cartData.orderType || cartData.orderType == 0 ){
                             let allPrice = itemsStore.getAllPrice();
                               
+                            console.log( 'update 01 ', parseInt(cartData.orderAddr ? cartData.orderAddr.free_drive : 0), parseInt(itemsStore.free_drive) )  
+                            
                             if( parseInt(cartData.orderAddr ? cartData.orderAddr.free_drive : 0) == 1 || parseInt(itemsStore.free_drive) == 1 ){
                               if( parseInt(allPrice) > 0 ){
                                       
