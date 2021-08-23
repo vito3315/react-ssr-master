@@ -817,7 +817,7 @@ export class Cart extends React.Component {
                         }
                     }
                     
-                    console.log( 'update' )
+                    console.log( 'update ', cartData )
                     
                     let cartItems = itemsStore.getItems();
                     let allItems = itemsStore.getAllItems();
