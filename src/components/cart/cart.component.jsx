@@ -677,7 +677,7 @@ export class Cart extends React.Component {
                     if( cartData.orderType == 0 && cartData.orderAddr && cartData.orderAddr.id && cartData.orderAddr.id !== -1 ){
                         let allPrice = itemsStore.getAllPrice();
                         
-                        if( parseInt(cartData.orderAddr.free_drive) == 1 ){
+                        if( parseInt(cartData.orderAddr.free_drive) == 1 || parseInt(itemsStore.free_drive) == 1 ){
                             if( parseInt(allPrice) > 0 ){
                                 itemsStore.setSumDiv(0);
                             }else{
@@ -938,7 +938,7 @@ export class Cart extends React.Component {
             let allPrice = itemsStore.getAllPrice();
         
             if(thisitem){
-                if( parseInt(thisitem.free_drive) == 1 ){
+                if( parseInt(thisitem.free_drive) == 1 || parseInt(itemsStore.free_drive) == 1 ){
                     if( parseInt(allPrice) > 0 ){
                         itemsStore.setSumDiv(0);
                     }else{
@@ -994,7 +994,7 @@ export class Cart extends React.Component {
         let thisitem = this.state.my_addr.find( (item) => item.id == event.target.value );
         let allPrice = itemsStore.getAllPrice();
         
-        if( parseInt(thisitem.free_drive) == 1 ){
+        if( parseInt(thisitem.free_drive) == 1 || parseInt(itemsStore.free_drive) == 1 ){
             if( parseInt(allPrice) > 0 ){
                 itemsStore.setSumDiv(0);
             }else{
@@ -1147,6 +1147,7 @@ export class Cart extends React.Component {
             }else{
                 if( check_promo.st === false ){
                     localStorage.removeItem('promo_name')
+                    itemsStore.free_drive = 0;
                 }
                 
                 this.setState({
@@ -1218,7 +1219,7 @@ export class Cart extends React.Component {
             //let thisitem = this.state.my_addr.find( (item) => item.id == event.target.value );
             let allPrice = itemsStore.getAllPrice();
             
-            if( parseInt(this.state.newAddrInfo ? this.state.newAddrInfo.free_drive : 0) == 1 ){
+            if( parseInt(this.state.newAddrInfo ? this.state.newAddrInfo.free_drive : 0) == 1 || parseInt(itemsStore.free_drive) == 1 ){
                 if( parseInt(allPrice) > 0 ){
                     itemsStore.setSumDiv(0);
                 }else{

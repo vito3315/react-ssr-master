@@ -311,6 +311,7 @@ class ItemsStore {
       }
       //
       
+      itemsStore.free_drive = parseInt(promo_info.limits.free_drive);
       
       let all_price = 0,
           count_sale = 0,
