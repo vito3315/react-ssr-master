@@ -803,7 +803,7 @@ export class Cart extends React.Component {
             autorun(() => {
                 if( this._isMounted === true ){
                     
-                    setTimeout( () => {
+                    /*setTimeout( () => {
                         let cartData = itemsStore.getCartData();
                         
                         if( cartData.orderType || cartData.orderType == 0 ){
@@ -823,7 +823,7 @@ export class Cart extends React.Component {
                         if( parseInt(cartData.orderType) == 0 ){
                             itemsStore.setSumDiv(0);
                         }
-                    }, 500 )
+                    }, 500 )*/
                     
                     
                     let cartItems = itemsStore.getItems();
