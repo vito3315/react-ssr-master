@@ -1019,25 +1019,13 @@ export class Cart extends React.Component {
         let thisitem = this.state.my_addr.find( (item) => item.id == event.target.value );
         let allPrice = itemsStore.getAllPrice();
         
-        console.log( 'free_drive -1', parseInt(itemsStore.free_drive) )
-        
         if( parseInt(thisitem.free_drive) == 1 || parseInt(itemsStore.free_drive) == 1 ){
-            
-            console.log( 'free_drive' )
-            
             if( parseInt(allPrice) > 0 ){
-                
-                console.log( 'free_drive 0' )
-                
                 itemsStore.setSumDiv(0);
             }else{
-                console.log( 'free_drive 1' )
-                
                 itemsStore.setSumDiv(1);
             }
         }else{
-            console.log( 'free_drive ', parseInt(thisitem.sum_div) )
-            
             itemsStore.setSumDiv(parseInt(thisitem.sum_div));
         }
         
@@ -1071,6 +1059,10 @@ export class Cart extends React.Component {
         })
         
         this.saveData();
+        
+        setTimeout( () => {
+            this.checkPromo();
+        }, 300 )
     }
     
     choosePic(pointId){
@@ -1092,6 +1084,10 @@ export class Cart extends React.Component {
         })
         
         this.saveData();
+        
+        setTimeout( () => {
+            this.checkPromo();
+        }, 300 )
     }
     
     changeComment = (event) => {
