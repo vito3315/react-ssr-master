@@ -1019,6 +1019,8 @@ export class Cart extends React.Component {
         let thisitem = this.state.my_addr.find( (item) => item.id == event.target.value );
         let allPrice = itemsStore.getAllPrice();
         
+        console.log( 'free_drive -1', parseInt(itemsStore.free_drive) )
+        
         if( parseInt(thisitem.free_drive) == 1 || parseInt(itemsStore.free_drive) == 1 ){
             
             console.log( 'free_drive' )
