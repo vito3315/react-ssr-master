@@ -686,6 +686,8 @@ export class Cart extends React.Component {
                         }else{
                             itemsStore.setSumDiv(parseInt(cartData.orderAddr.sum_div));
                         }
+                    }else{
+                        itemsStore.setSumDiv(0);
                     }
                     
                     setTimeout(()=>{
