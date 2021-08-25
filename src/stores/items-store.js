@@ -236,6 +236,9 @@ class ItemsStore {
         }
       }
       
+      console.log( 'promo_info.limits.point_id', promo_info.limits.point_id );
+      console.log( 'type_order', type_order, 'point_id_dev', point_id_dev, 'point_id_pic', point_id_pic );
+      
       if( promo_info.limits.point_id != 0 ){
         if( (type_order == 0 && point_id_dev == promo_info.limits.point_id) || (type_order == 1 && point_id_pic == promo_info.limits.point_id) ){
           
