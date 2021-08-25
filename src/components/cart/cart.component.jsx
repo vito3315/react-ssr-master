@@ -818,7 +818,9 @@ export class Cart extends React.Component {
                             }else{
                                 itemsStore.setSumDiv(parseInt(cartData.orderAddr ? cartData.orderAddr.sum_div : 0));
                             }
-                        }else{
+                        }
+                        
+                        if( parseInt(cartData.orderType) == 0 ){
                             itemsStore.setSumDiv(0);
                         }
                     }, 500 )
