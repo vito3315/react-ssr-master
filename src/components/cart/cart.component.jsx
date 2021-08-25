@@ -697,7 +697,7 @@ export class Cart extends React.Component {
                         if( type_order == 0 ){
                             if( type == 1 ){
                                 this.setState({
-                                    renderPay: cartData.orderAddr && parseInt(cartData.orderAddr.pay_active) == 1 ? this.state.pays.dev : this.state.pays.dev_mini,
+                                    renderPay: this.state.pays.dev
                                 })
                             }else{
                                 this.setState({
@@ -992,7 +992,7 @@ export class Cart extends React.Component {
         if( type_order == 0 ){
             if( type == 1 ){
                 this.setState({
-                    renderPay: thisitem && parseInt(thisitem.pay_active) == 1 ? this.state.pays.dev : this.state.pays.dev_mini,
+                    renderPay: this.state.pays.dev,
                 })
                 def_type = 'cash';
             }else{
@@ -1035,7 +1035,7 @@ export class Cart extends React.Component {
         if( type_order == 0 ){
             if( type == 1 ){
                 this.setState({
-                    renderPay: thisitem && parseInt(thisitem.pay_active) == 1 ? this.state.pays.dev : this.state.pays.dev_mini,
+                    renderPay: this.state.pays.dev,
                 })
             }else{
                 this.setState({
@@ -1119,7 +1119,7 @@ export class Cart extends React.Component {
         if( type_order == 0 ){
             if( type == 1 ){
                 this.setState({
-                    renderPay: this.state.orderAddr && parseInt(this.state.orderAddr.pay_active) == 1 ? this.state.pays.dev : this.state.pays.dev_mini,
+                    renderPay: this.state.pays.dev,
                 });
                 def_type = 'cash';
             }else{
@@ -1304,7 +1304,7 @@ export class Cart extends React.Component {
             if( type_order == 0 ){
                 if( type == 1 ){
                     this.setState({
-                        renderPay: this.state.newAddrInfo && parseInt(this.state.newAddrInfo.pay_active) == 1 ? this.state.pays.dev : this.state.pays.dev_mini,
+                        renderPay: this.state.pays.dev,
                     })
                 }else{
                     this.setState({
@@ -1407,7 +1407,7 @@ export class Cart extends React.Component {
             
             if( type_order == 0 ){
                 this.setState({
-                    renderPay: this.state.orderAddr && parseInt(this.state.orderAddr.pay_active) == 1 ? this.state.pays.dev : this.state.pays.dev_mini,
+                    renderPay: this.state.pays.dev,
                 });
             }else{
                 this.setState({
