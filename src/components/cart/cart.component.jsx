@@ -1212,7 +1212,7 @@ export class Cart extends React.Component {
                             }
                         }
                         
-                        if( parseInt(cartData.orderType) == 0 ){
+                        if( parseInt(cartData.orderType) == 1 ){
                             itemsStore.setSumDiv(0);
                         }
                     }, 500 )
