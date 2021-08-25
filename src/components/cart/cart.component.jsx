@@ -1020,12 +1020,22 @@ export class Cart extends React.Component {
         let allPrice = itemsStore.getAllPrice();
         
         if( parseInt(thisitem.free_drive) == 1 || parseInt(itemsStore.free_drive) == 1 ){
+            
+            console.log( 'free_drive' )
+            
             if( parseInt(allPrice) > 0 ){
+                
+                console.log( 'free_drive 0' )
+                
                 itemsStore.setSumDiv(0);
             }else{
+                console.log( 'free_drive 1' )
+                
                 itemsStore.setSumDiv(1);
             }
         }else{
+            console.log( 'free_drive ', parseInt(thisitem.sum_div) )
+            
             itemsStore.setSumDiv(parseInt(thisitem.sum_div));
         }
         
