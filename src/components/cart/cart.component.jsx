@@ -1196,10 +1196,6 @@ export class Cart extends React.Component {
                 this.setState({
                     orderPromoText: check_promo.text
                 })
-                
-                //if( check_promo.st === true ){
-                    
-                //}
             }
             
             setTimeout( () => {
