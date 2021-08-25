@@ -154,6 +154,7 @@ class ItemsStore {
   checkPromo(){
     let orderInfo = itemsStore.getCartData();
     itemsStore.setItemsPromo([]);
+    itemsStore.free_drive = 0;
     
     let tmp = 0,
         allPrice = 0,
