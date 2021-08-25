@@ -1166,13 +1166,16 @@ export class Cart extends React.Component {
         
         let promo_name = '';
         
-        if( document.getElementById('PROMONAME') ){
+        if( document.getElementById('PROMONAME') && document.getElementById('PROMONAME').value.length > 0 ){
             promo_name = document.getElementById('PROMONAME').value;
+            console.log( 'checkPromo 1' )
         }else{
-            if( document.getElementById('PromoMobile') ){
+            if( document.getElementById('PromoMobile') && document.getElementById('PromoMobile').value.length > 0 ){
                 promo_name = document.getElementById('PromoMobile').value;
+                console.log( 'checkPromo 2' )
             }else{
                 promo_name = this.state.orderPromo;
+                console.log( 'checkPromo 3' )
             }
         }
         
