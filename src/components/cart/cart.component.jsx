@@ -1059,10 +1059,6 @@ export class Cart extends React.Component {
         })
         
         this.saveData();
-        
-        setTimeout( () => {
-            this.checkPromo();
-        }, 300 )
     }
     
     choosePic(pointId){
@@ -1084,10 +1080,6 @@ export class Cart extends React.Component {
         })
         
         this.saveData();
-        
-        setTimeout( () => {
-            this.checkPromo();
-        }, 300 )
     }
     
     changeComment = (event) => {
@@ -1250,6 +1242,10 @@ export class Cart extends React.Component {
             };
             
             itemsStore.saveCartData(data);
+            
+            setTimeout( () => {
+                this.checkPromo();
+            }, 300 )
         }, 500)
     }
     
