@@ -674,7 +674,7 @@ export class Cart extends React.Component {
                         }
                     }, 300)
                     
-                    if( cartData.orderType == 0 && cartData.orderAddr && cartData.orderAddr.id && cartData.orderAddr.id !== -1 ){
+                    if( parseInt( cartData.orderType ) == 0 && cartData.orderAddr && cartData.orderAddr.id && cartData.orderAddr.id !== -1 ){
                         let allPrice = itemsStore.getAllPrice();
                         
                         if( parseInt(cartData.orderAddr.free_drive) == 1 || parseInt(itemsStore.free_drive) == 1 ){
@@ -1060,6 +1060,8 @@ export class Cart extends React.Component {
     }
     
     choosePic(pointId){
+        itemsStore.setSumDiv(0);
+        
         if( document.querySelector('.boxPic.active') ){
             document.querySelector('.boxPic.active').classList.remove('active');
         }
