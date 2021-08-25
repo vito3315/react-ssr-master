@@ -1197,30 +1197,32 @@ export class Cart extends React.Component {
                     orderPromoText: check_promo.text
                 })
                 
-                if( check_promo.st === true ){
-                    setTimeout( () => {
-                        let cartData = itemsStore.getCartData();
-                        
-                        if( cartData.orderType || cartData.orderType == 0 ){
-                            let allPrice = itemsStore.getAllPrice();
-                              
-                            if( parseInt(cartData.orderAddr ? cartData.orderAddr.free_drive : 0) == 1 || parseInt(itemsStore.free_drive) == 1 ){
-                                if( parseInt(allPrice) > 0 ){
-                                    itemsStore.setSumDiv(0);
-                                }else{
-                                    itemsStore.setSumDiv(1);
-                                }
-                            }else{
-                                itemsStore.setSumDiv(parseInt(cartData.orderAddr ? cartData.orderAddr.sum_div : 0));
-                            }
-                        }
-                        
-                        if( parseInt(cartData.orderType) == 1 ){
-                            itemsStore.setSumDiv(0);
-                        }
-                    }, 500 )
-                }
+                //if( check_promo.st === true ){
+                    
+                //}
             }
+            
+            setTimeout( () => {
+                let cartData = itemsStore.getCartData();
+                
+                if( cartData.orderType || cartData.orderType == 0 ){
+                    let allPrice = itemsStore.getAllPrice();
+                      
+                    if( parseInt(cartData.orderAddr ? cartData.orderAddr.free_drive : 0) == 1 || parseInt(itemsStore.free_drive) == 1 ){
+                        if( parseInt(allPrice) > 0 ){
+                            itemsStore.setSumDiv(0);
+                        }else{
+                            itemsStore.setSumDiv(1);
+                        }
+                    }else{
+                        itemsStore.setSumDiv(parseInt(cartData.orderAddr ? cartData.orderAddr.sum_div : 0));
+                    }
+                }
+                
+                if( parseInt(cartData.orderType) == 1 ){
+                    itemsStore.setSumDiv(0);
+                }
+            }, 500 )
         })
     }
     
