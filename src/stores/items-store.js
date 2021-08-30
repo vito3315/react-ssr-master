@@ -33,73 +33,73 @@ class ItemsStore {
   free_drive = 0;
   
   setMainLink = (items) => {
-    this.mainLink = items;
+    itemsStore.mainLink = items;
   };
 
   getMainLink(){
-    return this.mainLink;
+    return itemsStore.mainLink;
   };
   
   setSumDiv = (items) => {
-    this.sum_div = parseInt( items );
+    itemsStore.sum_div = parseInt( items );
   };
 
   getSumDiv(){
-    return this.sum_div;
+    return itemsStore.sum_div;
   };
   
   setDops = (items) => {
-    this.need_dops = JSON.stringify(items);
+    itemsStore.need_dops = JSON.stringify(items);
   };
 
   getDops(){
-    return this.need_dops.length == 0 ? [] : JSON.parse(this.need_dops, true);
+    return itemsStore.need_dops.length == 0 ? [] : JSON.parse(itemsStore.need_dops, true);
   };
   
   setFreeItems = (items) => {
-    this.free_items = JSON.stringify(items);
+    itemsStore.free_items = JSON.stringify(items);
   };
 
   getFreeItems(){
-    return this.free_items.length == 0 ? [] : JSON.parse(this.free_items, true);
+    return itemsStore.free_items.length == 0 ? [] : JSON.parse(itemsStore.free_items, true);
   };
   
   setCityRU = (city) => {
-    this.cityNameRU = city;
+    itemsStore.cityNameRU = city;
   };
   
   getCityRU(){
-    //return this.cityNameRU;
-    return this.cityNameRU && this.cityNameRU.length > 0 ? this.cityNameRU : 'Город';
+    //return itemsStore.cityNameRU;
+    return itemsStore.cityNameRU && itemsStore.cityNameRU.length > 0 ? itemsStore.cityNameRU : 'Город';
   };
 
   setCity = (city) => {
-    this.cityName = city;
+    itemsStore.cityName = city;
   };
   
   getCity(){
-    return this.cityName;
+    return itemsStore.cityName;
   };
 
   setAllPrice = (price) => {
-    this.AllPrice = price;
+    itemsStore.AllPrice = price;
   };
   
   getAllPrice(){
-    return this.AllPrice;
+    return itemsStore.AllPrice;
   };
 
   setPage = (activePage) => {
-    this.activePage = activePage;
+    itemsStore.activePage = activePage;
   };
   
   getPage(){
-    return this.activePage;
+    return itemsStore.activePage;
   };
 
   setToken = (userToken, userName) => {
-    this.userToken = userToken;
-    this.setUserName(userName);
+    itemsStore.userToken = userToken;
+    itemsStore.setUserName(userName);
     
     if (typeof window !== 'undefined') {
       localStorage.setItem('token', userToken);
@@ -107,15 +107,15 @@ class ItemsStore {
   };
   
   getUserName(){
-    return this.userName && this.userName.length > 0 ? this.userName : '';
+    return itemsStore.userName && itemsStore.userName.length > 0 ? itemsStore.userName : '';
   }
   
   setUserName(userName){
-    this.userName = userName;
+    itemsStore.userName = userName;
   }
   
   getToken(){
-    return this.userToken;
+    return itemsStore.userToken;
   };
 
   getInfoPromo(promoName){
@@ -141,14 +141,13 @@ class ItemsStore {
   }
   
   setPromo = (promo, name) => {
-    this.promo = promo;
+    itemsStore.promo = promo;
     
     localStorage.setItem('promo_name', name);
   };
   
   getPromo(){
-    return JSON.parse(this.promo, true);
-    //localStorage.setItem('my_cart', this.items);
+    return JSON.parse(itemsStore.promo, true);
   };
 
   checkPromo(){
@@ -160,9 +159,9 @@ class ItemsStore {
         allPrice = 0,
         by_time = !orderInfo.orderTimes || parseInt( orderInfo.orderTimes ) == 1 ? 0 : orderInfo.orderPredDay + ' ' + orderInfo.orderPredTime;   
         
-    let promo_info = this.getPromo();
-    let my_cart = this.getItems();  
-    let allItems = this.getAllItems();
+    let promo_info = itemsStore.getPromo();
+    let my_cart = itemsStore.getItems();  
+    let allItems = itemsStore.getAllItems();
       
     let new_my_cart = [];
       
@@ -178,7 +177,7 @@ class ItemsStore {
     
     my_cart = new_my_cart;  
       
-    this.setItems(my_cart);  
+    itemsStore.setItems(my_cart);  
       
     let cart_new_promo = [];    
     allPrice = my_cart.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
@@ -444,7 +443,7 @@ class ItemsStore {
         
         itemsStore.setAllPrice(allPrice);
         
-        this.setItems(my_cart);
+        itemsStore.setItems(my_cart);
         
         return {
           st: true,
@@ -499,7 +498,7 @@ class ItemsStore {
         }
       }
       
-      this.setItems(my_cart);
+      itemsStore.setItems(my_cart);
       
       return {
         st: true,
@@ -515,42 +514,42 @@ class ItemsStore {
   }
 
   setBanners = (items) => {
-    this.banners = JSON.stringify(items);
+    itemsStore.banners = JSON.stringify(items);
   };
 
   getBanners(){
-    return this.banners.length == 0 ? [] : JSON.parse(this.banners, true);
+    return itemsStore.banners.length == 0 ? [] : JSON.parse(itemsStore.banners, true);
   };
   
   setItemsPromo = (items) => {
-    this.itemsPromo = JSON.stringify(items);
+    itemsStore.itemsPromo = JSON.stringify(items);
   };
 
   getItemsPromo(){
-    return this.itemsPromo.length == 0 ? [] : JSON.parse(this.itemsPromo, true);
+    return itemsStore.itemsPromo.length == 0 ? [] : JSON.parse(itemsStore.itemsPromo, true);
   };
 
   setAllItemsCat = (items) => {
-    this.allItemsCat = JSON.stringify(items);
+    itemsStore.allItemsCat = JSON.stringify(items);
   };
   
   setAllItemsCatNew = (items) => {
-    this.allItemsCatNew = JSON.stringify(items);
+    itemsStore.allItemsCatNew = JSON.stringify(items);
   };
 
   getAllItemsCat(){
-    return this.allItemsCat.length == 0 ? [] : JSON.parse(this.allItemsCat, true);
+    return itemsStore.allItemsCat.length == 0 ? [] : JSON.parse(itemsStore.allItemsCat, true);
   };
 
   getAllItemsCatNew(){
-    return this.allItemsCatNew.length == 0 ? [] : JSON.parse(this.allItemsCatNew, true);
+    return itemsStore.allItemsCatNew.length == 0 ? [] : JSON.parse(itemsStore.allItemsCatNew, true);
   };
   
   setItems = (items) => {
     let tmp = 0,
         allPrice = 0;
     
-    let cart_new_promo = this.getItemsPromo();
+    let cart_new_promo = itemsStore.getItemsPromo();
         
     allPrice = items.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
     
@@ -558,9 +557,9 @@ class ItemsStore {
         
     allPrice += cart_new_promo.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
     
-    this.setAllPrice(allPrice);
+    itemsStore.setAllPrice(allPrice);
     
-    this.items = JSON.stringify(items);
+    itemsStore.items = JSON.stringify(items);
     if (typeof window !== 'undefined') {
       let my_cart = items.filter( (item) => item.count > 0 );
       my_cart = JSON.stringify(my_cart);
@@ -571,7 +570,7 @@ class ItemsStore {
   
   saveCartData = (items) => {
     let cartData = JSON.stringify(items);
-    this.cart_data = cartData;
+    itemsStore.cart_data = cartData;
     if (typeof window !== 'undefined') {
       localStorage.setItem('cartData', cartData);
     }
@@ -588,14 +587,14 @@ class ItemsStore {
   };
   
   setAllItems = (items) => {
-    this.allItems = JSON.stringify(items);
+    itemsStore.allItems = JSON.stringify(items);
     
-    this.checkCart();
+    itemsStore.checkCart();
   };
 
   checkCart(){
-    let cart = this.getItems();
-    let allItems = this.getAllItems();
+    let cart = itemsStore.getItems();
+    let allItems = itemsStore.getAllItems();
     let new_cart = [];
     
     cart.forEach(item => {
@@ -613,15 +612,15 @@ class ItemsStore {
       }
     });
     
-    this.setItems( new_cart );
+    itemsStore.setItems( new_cart );
   }
   
   getItems(){
-    return this.items.length == 0 ? [] : JSON.parse(this.items, true);
+    return itemsStore.items.length == 0 ? [] : JSON.parse(itemsStore.items, true);
   };
   
   getAllItems(){
-    return this.allItems.length == 0 ? [] : JSON.parse(this.allItems, true);
+    return itemsStore.allItems.length == 0 ? [] : JSON.parse(itemsStore.allItems, true);
   };
 
   AddItem(id){
@@ -951,17 +950,17 @@ class ItemsStore {
           })
         });
         
-        this.setItems( new_cart );
+        itemsStore.setItems( new_cart );
       }
       if( localStorage.getItem('token') ){
-        this.setToken( localStorage.getItem('token') );
+        itemsStore.setToken( localStorage.getItem('token') );
       }
       if( localStorage.getItem('cartData') ){
-        this.cartData = localStorage.getItem('cartData');
+        itemsStore.cartData = localStorage.getItem('cartData');
       }
       if( localStorage.getItem('promo_name') ){
         setTimeout(()=>{
-          this.getInfoPromo( localStorage.getItem('promo_name') )
+          itemsStore.getInfoPromo( localStorage.getItem('promo_name') )
         }, 300)
       }
     }
