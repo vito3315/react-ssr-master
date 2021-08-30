@@ -950,17 +950,17 @@ class ItemsStore {
           })
         });
         
-        itemsStore.setItems( new_cart );
+        this.setItems( new_cart );
       }
       if( localStorage.getItem('token') ){
-        itemsStore.setToken( localStorage.getItem('token') );
+        this.setToken( localStorage.getItem('token') );
       }
       if( localStorage.getItem('cartData') ){
-        itemsStore.cartData = localStorage.getItem('cartData');
+        this.cartData = localStorage.getItem('cartData');
       }
       if( localStorage.getItem('promo_name') ){
         setTimeout(()=>{
-          itemsStore.getInfoPromo( localStorage.getItem('promo_name') )
+          this.getInfoPromo( localStorage.getItem('promo_name') )
         }, 300)
       }
     }
