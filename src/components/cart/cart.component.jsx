@@ -1467,10 +1467,12 @@ export class Cart extends React.Component {
             check_tea.map( (item, key) => {
                 cartItems_dop_tea.push({
                     name: item.name,
-                    item_id: item.id,
+                    id: item.id,
                     count: 0,
                     one_price: 0,
-                    all_price: 0
+                    all_price: 0,
+                    img: item.img_new,
+                    imgUpdate: item.img_new_update,
                 })
             } )
             
@@ -1542,7 +1544,7 @@ export class Cart extends React.Component {
                     this.setState({
                         orderCheckDopTea: true,
                         spiner: false,
-                        cartItems_dop_tea: check_tea
+                        cartItems_dop_tea: cartItems_dop_tea
                     })
                     
                     setTimeout(()=>{

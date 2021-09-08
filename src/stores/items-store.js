@@ -832,6 +832,10 @@ class ItemsStore {
     
     let check_item = all_items.find( (item) => parseInt(item.id) == parseInt(item_id) );
     
+    if( parseInt(check_item.id) == 231 || parseInt(check_item.id) == 232 ){
+      return 1;
+    }
+    
     if( parseInt(check_item.type) != 3 || (parseInt(check_item.id) !== 17 && parseInt(check_item.id) !== 237) ){
       return 99;
     }
