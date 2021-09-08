@@ -215,6 +215,8 @@ app.use( '*', async ( req, res ) => {
         res.contentType( 'text/html' );
         res.status( matchRoute.code );
 
+        console.log( 'matchRoute render', matchRoute )
+        
         return res.send( indexHTML );
     }
 } );
