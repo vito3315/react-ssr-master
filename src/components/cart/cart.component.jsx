@@ -1535,12 +1535,12 @@ export class Cart extends React.Component {
                 
                 if( parseInt(this.state.orderType)+1 == 2 ){
                     console.log( 'this.state.orderPic', this.state.orderPic )
-                    if( this.state.orderPic == 3 || this.state.orderPic == 6 ){
+                    if( parseInt(this.state.orderPic) == 3 || parseInt(this.state.orderPic) == 6 ){
                         check == true;
                     }
                 }else{
                     console.log( 'this.state.orderAddr', this.state.orderAddr )
-                    if( this.state.orderAddr.point_id == 3 || this.state.orderAddr.point_id == 6 ){
+                    if( parseInt(this.state.orderAddr.point_id) == 3 || parseInt(this.state.orderAddr.point_id) == 6 ){
                         check == true;
                     }
                 }
