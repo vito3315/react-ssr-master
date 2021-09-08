@@ -1530,12 +1530,17 @@ export class Cart extends React.Component {
                 
                 let check = false;
                 
+                console.log( 'this.state.orderType', this.state.orderType )
+                
+                
                 if( this.state.orderType == 1 ){
                     if( this.state.orderPic == 3 || this.state.orderPic == 6 ){
                         check == true;
+                        console.log( 'this.state.orderPic', this.state.orderPic )
                     }else{
                         if( this.state.orderAddr.point_id == 3 || this.state.orderAddr.point_id == 6 ){
                             check == true;
+                            console.log( 'this.state.orderAddr', this.state.orderAddr )
                         }
                     }
                 }
