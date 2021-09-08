@@ -52,6 +52,9 @@ app.use( '*', async ( req, res ) => {
     req.originalUrl = req.originalUrl.split('#')[0];
     
     if( req.originalUrl == '/' || req.originalUrl == '' ){
+        
+        console.log( 'go to 302', "/togliatti" )
+        
         res.status( 302 );
         return res.redirect("/togliatti")
     }
