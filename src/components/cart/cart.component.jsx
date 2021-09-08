@@ -1473,6 +1473,7 @@ export class Cart extends React.Component {
                     all_price: 0,
                     img: item.img_new,
                     imgUpdate: item.img_new_update,
+                    cat_id: item.cat_id
                 })
             } )
             
