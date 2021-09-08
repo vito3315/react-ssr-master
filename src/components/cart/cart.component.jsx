@@ -1530,24 +1530,17 @@ export class Cart extends React.Component {
                 
                 let check = false;
                 
-                console.log( 'this.state.orderType', this.state.orderType )
-                
-                
                 if( parseInt(this.state.orderType)+1 == 2 ){
-                    console.log( 'this.state.orderPic', this.state.orderPic )
                     if( parseInt(this.state.orderPic) == 3 || parseInt(this.state.orderPic) == 6 ){
                         check = true;
                     }
                 }else{
-                    console.log( 'this.state.orderAddr', this.state.orderAddr )
                     if( parseInt(this.state.orderAddr.point_id) == 3 || parseInt(this.state.orderAddr.point_id) == 6 ){
                         check = true;
                     }
                 }
                 
-                console.log( check, check_dop_231, check_dop_232 )
-                
-                if( check && (check_dop_231 == false || check_dop_232 == false) ){
+                if( cartItems_dop_tea.length > 0 && (check && (check_dop_231 == false || check_dop_232 == false)) ){
                     this.setState({
                         orderCheckDopTea: true,
                         spiner: false,

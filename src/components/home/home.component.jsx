@@ -496,6 +496,7 @@ export class HomeCat extends React.Component{
 }
 
 export class Home extends React.Component {
+    _isMounted = false;
     startMove = 0;
     activeID = 0;
     
@@ -682,11 +683,16 @@ export class Home extends React.Component {
         });
     }
     
+    componentWillUnmount(){
+        this._isMounted = false;
+    }
+    
     componentDidUmount(){
         window.removeEventListener('scroll');
     }
     
     componentDidMount = () => {
+        this._isMounted = true; 
         var time = Date.now();
         
         let arrMax = [];
@@ -696,38 +702,40 @@ export class Home extends React.Component {
         
         setTimeout( () => {
             window.addEventListener('scroll', function() {
-                if ((time + 500 - Date.now()) < 0) {
-                    AllItemsCat.map( (item, key) => {
-                        var elem = document.getElementById('cat'+item.id);
-                        if( elem ){
-                            var top = elem.getBoundingClientRect().top + document.body.scrollTop - 200;
-                            
-                            if(top < 0){
-                                arrMax.push({ name: item.name, Y: top, main_id: item.main_id })
-                            }
-                        }
-                    })
-                    
-                    if( arrMax.length > 0 ){
-                        let max = arrMax[ arrMax.length-1 ];
-                        
-                        arrMax = [];
-                        
-                        if( max ){
-                            if( this.activeID != parseInt(max.main_id) && parseInt(max.main_id) != 0 ){
-                                if( document.querySelector('.activeCat') ){
-                                    document.querySelector('.activeCat').classList.remove('activeCat');
-                                }
-                                if( document.querySelector('#link_'+max.main_id) ){
-                                    document.querySelector('#link_'+max.main_id).classList.add('activeCat');
-                                }
+                if( this._isMounted ){
+                    if ((time + 500 - Date.now()) < 0) {
+                        AllItemsCat.map( (item, key) => {
+                            var elem = document.getElementById('cat'+item.id);
+                            if( elem ){
+                                var top = elem.getBoundingClientRect().top + document.body.scrollTop - 200;
                                 
-                                this.activeID = parseInt(max.main_id);
+                                if(top < 0){
+                                    arrMax.push({ name: item.name, Y: top, main_id: item.main_id })
+                                }
+                            }
+                        })
+                        
+                        if( arrMax.length > 0 ){
+                            let max = arrMax[ arrMax.length-1 ];
+                            
+                            arrMax = [];
+                            
+                            if( max ){
+                                if( this.activeID != parseInt(max.main_id) && parseInt(max.main_id) != 0 ){
+                                    if( document.querySelector('.activeCat') ){
+                                        document.querySelector('.activeCat').classList.remove('activeCat');
+                                    }
+                                    if( document.querySelector('#link_'+max.main_id) ){
+                                        document.querySelector('#link_'+max.main_id).classList.add('activeCat');
+                                    }
+                                    
+                                    this.activeID = parseInt(max.main_id);
+                                }
                             }
                         }
+                        
+                        time = Date.now();
                     }
-                    
-                    time = Date.now();
                 }
             });
             
@@ -844,12 +852,14 @@ export class Home extends React.Component {
         //}
         
         autorun(() => {
-            this.setState({
-                allItems: itemsStore.getAllItemsCat(),
-                mainLink: itemsStore.getMainLink()
-            })
-            
-            this.loadBanners(itemsStore.getBanners());
+            if( this._isMounted ){
+                this.setState({
+                    allItems: itemsStore.getAllItemsCat(),
+                    mainLink: itemsStore.getMainLink()
+                })
+                
+                this.loadBanners(itemsStore.getBanners());
+            }
         })
     }
 
