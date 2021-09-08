@@ -551,6 +551,12 @@ export class Cart extends React.Component {
             page: 'cart' 
         };
         
+        console.log( 'cart fetchData(propsData)', {
+            type: 'get_page_info', 
+            city_id: get_city(propsData),
+            page: 'cart' 
+        } )
+        
         return axios({
             method: 'POST',
             url: config.urlApi,
@@ -559,6 +565,8 @@ export class Cart extends React.Component {
         }).then(response => {
             if(response['status'] === 200){
                 var json = response['data'];
+                
+                conosle.log( 'cart json', json )
                 
                 return {
                     title: json.page.title,
