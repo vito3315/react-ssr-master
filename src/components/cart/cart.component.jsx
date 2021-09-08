@@ -1458,6 +1458,9 @@ export class Cart extends React.Component {
             
             let check_tea = allItems.filter( (item) => parseInt(item.id) == 231 || parseInt(item.id) == 232 );
             
+            console.log( 'allItems', allItems )
+            console.log( 'check_tea', check_tea )
+            
             check_tea.map( (item, key) => {
                 cartItems_dop_tea.push({
                     name: item.name,
@@ -1558,6 +1561,7 @@ export class Cart extends React.Component {
             
             this.setState({ 
                 orderCheckDop: false,
+                orderCheckDopTea: false,
                 spiner: true
             })
             
