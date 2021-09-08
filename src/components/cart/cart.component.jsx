@@ -759,11 +759,14 @@ export class Cart extends React.Component {
             window.scrollTo(0, 0);
             itemsStore.setPage('cart');
             
-            if( !itemsStore.getToken() ){
-                if (typeof window !== 'undefined') {
-                    window.location.pathname = '/'+this.state.city_name;
+            setTimeout( () => {
+                if( !itemsStore.getToken() ){
+                    if (typeof window !== 'undefined') {
+                        window.location.pathname = '/'+this.state.city_name;
+                    }
                 }
-            }
+            }, 300 )
+            
             
             this.loadData();
             

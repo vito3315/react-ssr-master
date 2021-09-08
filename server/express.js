@@ -52,14 +52,14 @@ app.use( '*', async ( req, res ) => {
         express.static( path.resolve( __dirname, '../dist' ) );
     }
     
-    console.log( 'req.originalUrl', req.originalUrl )
+    //console.log( 'req.originalUrl', req.originalUrl )
     
     req.originalUrl = req.originalUrl.split('?')[0];
     req.originalUrl = req.originalUrl.split('#')[0];
     
     if( req.originalUrl == '/' || req.originalUrl == '' ){
         
-        console.log( 'go to 302', "/togliatti" )
+        //console.log( 'go to 302', "/togliatti" )
         
         res.status( 302 );
         return res.redirect("/togliatti")
@@ -72,7 +72,7 @@ app.use( '*', async ( req, res ) => {
     // get matched route
     const matchRoute = routes.find( route => matchPath( req.originalUrl, route ) );
 
-    console.log( 'matchRoute', matchRoute )
+    //console.log( 'matchRoute', matchRoute )
     
     if( matchRoute ){
         let componentData = null;
@@ -80,18 +80,18 @@ app.use( '*', async ( req, res ) => {
             componentData = await matchRoute.component.fetchData(req.originalUrl);
         }
 
-        console.log( 'componentData', componentData.st )
+        //console.log( 'componentData', componentData )
         
-        if( componentData.st === false ){
+        if( !componentData || componentData.st === false ){
             if( !componentData ){
                 
-                console.log( 'go to ', "/togliatti" )
+                //console.log( 'go to ', "/togliatti" )
                 
                 res.status( 404 );
                 return res.redirect("/togliatti")
             }
             
-            console.log( 'go to city ', "/"+city )
+            //console.log( 'go to city ', "/"+city )
             
             res.status( 404 );
             return res.redirect("/"+city)
@@ -215,8 +215,6 @@ app.use( '*', async ( req, res ) => {
         res.contentType( 'text/html' );
         res.status( matchRoute.code );
 
-        console.log( 'matchRoute render', matchRoute )
-        
         return res.send( indexHTML );
     }
 } );
