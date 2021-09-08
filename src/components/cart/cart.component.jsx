@@ -1528,7 +1528,19 @@ export class Cart extends React.Component {
                 return;
             }else{
                 
-                if( check_dop_17 == false || check_dop_19 == false ){
+                let check = false;
+                
+                if( this.state.orderType == 1 ){
+                    if( this.state.orderPic == 3 || this.state.orderPic == 6 ){
+                        check == true;
+                    }else{
+                        if( this.state.orderAddr.point_id == 3 || this.state.orderAddr.point_id == 6 ){
+                            check == true;
+                        }
+                    }
+                }
+                
+                if( check && (check_dop_17 == false || check_dop_19 == false) ){
                     this.setState({
                         orderCheckDopTea: true,
                         spiner: false,
@@ -1572,6 +1584,8 @@ export class Cart extends React.Component {
                     })
                 }
             })
+            
+            
             
             fetch(config.urlApi, {
                 method: 'POST',
