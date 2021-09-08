@@ -1545,7 +1545,7 @@ export class Cart extends React.Component {
                     }
                 }
                 
-                if( check && (check_dop_17 == false || check_dop_19 == false) ){
+                if( check && (check_dop_231 == false || check_dop_232 == false) ){
                     this.setState({
                         orderCheckDopTea: true,
                         spiner: false,
