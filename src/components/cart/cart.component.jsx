@@ -378,9 +378,6 @@ class CartItemMobile extends React.Component {
     }
     
     render() {
-        
-        console.log( this.state.count , parseInt(this.state.item.cat_id), parseInt(this.state.item.cat_id) )
-        
         if( this.state.count > 0 || (parseInt(this.state.item.cat_id) == 7 || parseInt(this.state.item.cat_id) == 6) ){
             return (
                 <div className="boxItem">
@@ -1166,14 +1163,11 @@ export class Cart extends React.Component {
         
         if( document.getElementById('PROMONAME') && document.getElementById('PROMONAME').value.length > 0 ){
             promo_name = document.getElementById('PROMONAME').value;
-            console.log( 'checkPromo 1' )
         }else{
             if( document.getElementById('PromoMobile') && document.getElementById('PromoMobile').value.length > 0 ){
                 promo_name = document.getElementById('PromoMobile').value;
-                console.log( 'checkPromo 2' )
             }else{
                 promo_name = this.state.orderPromo;
-                console.log( 'checkPromo 3' )
             }
         }
         
@@ -1461,9 +1455,6 @@ export class Cart extends React.Component {
             
             let check_tea = allItems.filter( (item) => parseInt(item.id) == 231 || parseInt(item.id) == 232 );
             
-            console.log( 'allItems', allItems )
-            console.log( 'check_tea', check_tea )
-            
             check_tea.map( (item, key) => {
                 cartItems_dop_tea.push({
                     name: item.name,
@@ -1476,10 +1467,6 @@ export class Cart extends React.Component {
                     cat_id: item.cat_id
                 })
             } )
-            
-            
-            
-            //cartItems_dop_tea
             
             let check_need_dop = false;
             let check_dop_17 = false;
@@ -2478,8 +2465,8 @@ export class Cart extends React.Component {
                     onClose={this.startOrderNext.bind(this)}
                     className="DialogOrderCheckDopDialog"
                 >
-                    <Typography variant="h5" component="span" className="orderCheckTitle">Согреваем, чаем угощаем.</Typography>
-                    <Typography variant="h5" component="span" className="orderCheckTitle">Две индивидуальные упаковки ягодно-фруктового чая вам в подарок.</Typography>
+                    <Typography variant="h5" component="span" className="orderCheckTitle">Согреваем, чаем угощаем!</Typography>
+                    <Typography variant="h5" component="span" className="orderCheckTitle">Две индивидуальные упаковки ягодно-фруктового чая вам в подарок</Typography>
                     <FontAwesomeIcon className="closeDialog" onClick={this.startOrderNext.bind(this)} icon={faTimes}/>
                     <DialogContent>
                         <div className="tableMobile OrderCheckDopDialog">
