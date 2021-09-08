@@ -466,6 +466,8 @@ export class Cart extends React.Component {
             title: '',
             description: '',
             
+            orderCheckDopTea: false,
+            
             chooseAddr: false,
             choosePicDialog: false,
             chooseTimeDialog: false,
@@ -504,6 +506,7 @@ export class Cart extends React.Component {
             cartItems_dop: [],
             cartItems_need_dop: [],
             cartItems_promo: [],
+            cartItems_dop_tea: [],
             
             timePred: [],
             
@@ -1439,6 +1442,7 @@ export class Cart extends React.Component {
             let new_cart = [];
             let cartItems = itemsStore.getItems();
             let allItems = itemsStore.getAllItems();
+            let cartItems_dop_tea = [];
             
             cartItems.forEach( (item) => {
                 if( item.count > 0 ){
@@ -1452,9 +1456,28 @@ export class Cart extends React.Component {
                 }
             })
             
+            let check_tea = allItems.filter( (item) => parseInt(item.id) == 231 || parseInt(item.id) == 232 );
+            
+            check_tea.map( (item, key) => {
+                cartItems_dop_tea.push({
+                    name: item.name,
+                    item_id: item.id,
+                    count: 0,
+                    one_price: 0,
+                    all_price: 0
+                })
+            } )
+            
+            
+            
+            //cartItems_dop_tea
+            
             let check_need_dop = false;
             let check_dop_17 = false;
             let check_dop_19 = false;
+            
+            let check_dop_231 = false;
+            let check_dop_232 = false;
             
             new_cart.forEach( (item) => {
                 if( 
@@ -1482,6 +1505,17 @@ export class Cart extends React.Component {
                 if( parseInt(item.item_id) == 19 && parseInt(item.count) > 0 ){
                     check_dop_19 = true;
                 }
+                
+                
+                if( (parseInt(item.item_id) == 231 && parseInt(item.count) > 0) ){
+                    check_dop_231 = true;
+                }
+                
+                if( parseInt(item.item_id) == 232 && parseInt(item.count) > 0 ){
+                    check_dop_232 = true;
+                }
+                
+                
             });
               
             if( (check_need_dop && check_dop_17 == false) || (check_need_dop && check_dop_19 == false) ){
@@ -1497,8 +1531,21 @@ export class Cart extends React.Component {
                 
                 return;
             }else{
-                this.clickOrderStart = false;  
-                this.startOrderNext(); 
+                
+                if( check_dop_17 == false || check_dop_19 == false ){
+                    this.setState({
+                        orderCheckDopTea: true,
+                        spiner: false,
+                        cartItems_dop_tea: cartItems_dop_tea
+                    })
+                    
+                    setTimeout(()=>{
+                        this.clickOrderStart = false;    
+                    }, 300)
+                }else{
+                    this.clickOrderStart = false;  
+                    this.startOrderNext(); 
+                }
             }
         }
     }
@@ -2404,6 +2451,29 @@ export class Cart extends React.Component {
                     <DialogContent>
                         <div className="tableMobile OrderCheckDopDialog">
                             {this.state.cartItems_dop.map((item, key) =>
+                                <CartItemMobile key={key} item={item} type="dop" />
+                            )}
+                        </div>
+                    </DialogContent>
+                    <DialogActions style={{ padding: '12px 24px', paddingBottom: 24 }}>
+                        <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" style={{ width: '100%' }} onClick={this.startOrderNext.bind(this)}>
+                            <Button variant="contained" style={{ width: '100%' }} className="BtnCardMain CardInCardItem">Продолжить</Button>
+                        </ButtonGroup>
+                    </DialogActions>
+                </Dialog>
+                
+                <Dialog
+                    open={this.state.orderCheckDopTea}
+                    fullWidth={true}
+                    onClose={this.startOrderNext.bind(this)}
+                    className="DialogOrderCheckDopDialog"
+                >
+                    <Typography variant="h5" component="span" className="orderCheckTitle">Согреваем, чаем угощаем.</Typography>
+                    <Typography variant="h5" component="span" className="orderCheckTitle">Две индивидуальные упаковки ягодно-фруктового чая вам в подарок.</Typography>
+                    <FontAwesomeIcon className="closeDialog" onClick={this.startOrderNext.bind(this)} icon={faTimes}/>
+                    <DialogContent>
+                        <div className="tableMobile OrderCheckDopDialog">
+                            {this.state.cartItems_dop_tea.map((item, key) =>
                                 <CartItemMobile key={key} item={item} type="dop" />
                             )}
                         </div>
