@@ -1533,7 +1533,7 @@ export class Cart extends React.Component {
                 console.log( 'this.state.orderType', this.state.orderType )
                 
                 
-                if( this.state.orderType == 1 ){
+                if( parseInt(this.state.orderType)+1 == 1 ){
                     if( this.state.orderPic == 3 || this.state.orderPic == 6 ){
                         check == true;
                         console.log( 'this.state.orderPic', this.state.orderPic )
