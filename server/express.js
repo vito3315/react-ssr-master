@@ -69,13 +69,18 @@ app.use( '*', async ( req, res ) => {
             componentData = await matchRoute.component.fetchData(req.originalUrl);
         }
 
-        console.log( 'componentData', componentData )
+        //console.log( 'componentData', componentData )
         
         if( !componentData || componentData.st === false ){
             if( !componentData ){
+                
+                console.log( 'go to ', "/togliatti" )
+                
                 res.status( 404 );
                 return res.redirect("/togliatti")
             }
+            
+            console.log( 'go to city ', "/"+city )
             
             res.status( 404 );
             return res.redirect("/"+city)
