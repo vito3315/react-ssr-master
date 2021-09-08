@@ -566,7 +566,7 @@ export class Cart extends React.Component {
             if(response['status'] === 200){
                 var json = response['data'];
                 
-                console.log( 'cart json', json )
+                console.log( 'cart json', json.page.title )
                 
                 return {
                     title: json.page.title,
@@ -574,7 +574,8 @@ export class Cart extends React.Component {
                     page: json.page,
                     cats: json.cats,
                     allItems: json.allItems,
-                    all: json
+                    all: json,
+                    st: json.st,
                 }
             } 
         }).catch(function (error) {
