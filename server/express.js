@@ -68,6 +68,8 @@ app.use( '*', async ( req, res ) => {
     // get matched route
     const matchRoute = routes.find( route => matchPath( req.originalUrl, route ) );
 
+    console.log( 'matchRoute', matchRoute )
+    
     if( matchRoute ){
         let componentData = null;
         if( typeof matchRoute.component.fetchData === 'function' ) {
