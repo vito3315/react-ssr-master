@@ -82,7 +82,7 @@ app.use( '*', async ( req, res ) => {
 
         console.log( 'componentData', componentData.st )
         
-        if( !componentData || componentData.st === false ){
+        if( componentData.st === false ){
             if( !componentData ){
                 
                 console.log( 'go to ', "/togliatti" )
