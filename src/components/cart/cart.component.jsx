@@ -381,7 +381,7 @@ class CartItemMobile extends React.Component {
         
         console.log( this.state.count , parseInt(this.state.item.cat_id), parseInt(this.state.item.cat_id) )
         
-        if( this.state.count > 0 || (parseInt(this.state.item.cat_id) == 7 || parseInt(this.state.item.cat_id) == 4) ){
+        if( this.state.count > 0 || (parseInt(this.state.item.cat_id) == 7 || parseInt(this.state.item.cat_id) == 6) ){
             return (
                 <div className="boxItem">
                     <picture style={{ width: '40%' }}>
