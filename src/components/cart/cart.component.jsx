@@ -1539,7 +1539,7 @@ export class Cart extends React.Component {
                     this.setState({
                         orderCheckDopTea: true,
                         spiner: false,
-                        cartItems_dop_tea: cartItems_dop_tea
+                        cartItems_dop_tea: check_tea
                     })
                     
                     setTimeout(()=>{
