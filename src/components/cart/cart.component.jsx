@@ -566,7 +566,7 @@ export class Cart extends React.Component {
             if(response['status'] === 200){
                 var json = response['data'];
                 
-                conosle.log( 'cart json', json )
+                console.log( 'cart json', json )
                 
                 return {
                     title: json.page.title,
