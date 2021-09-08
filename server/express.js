@@ -80,7 +80,7 @@ app.use( '*', async ( req, res ) => {
             componentData = await matchRoute.component.fetchData(req.originalUrl);
         }
 
-        //console.log( 'componentData', componentData )
+        console.log( 'componentData', componentData.st )
         
         if( !componentData || componentData.st === false ){
             if( !componentData ){
