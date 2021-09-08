@@ -216,10 +216,12 @@ export class Profile extends React.Component {
         window.scrollTo(0, 0);
         itemsStore.setPage('profile');
         
-        if( !itemsStore.getToken() ){
-            window.location.pathname = '/'+this.state.city_name;
-            //this.props.history.replace({ pathname: '/'+this.state.city_name+'/' });
-        }
+        setTimeout( () => {
+            if( !itemsStore.getToken() ){
+                window.location.pathname = '/'+this.state.city_name;
+                //this.props.history.replace({ pathname: '/'+this.state.city_name+'/' });
+            }
+        }, 300 )
         
         Profile.fetchData('/'+this.state.city_name).then( data => {
             this.setState( {
