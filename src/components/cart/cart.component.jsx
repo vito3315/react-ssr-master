@@ -1517,13 +1517,13 @@ export class Cart extends React.Component {
                 }
                 
                 
-                if( (parseInt(item.item_id) == 231 && parseInt(item.count) > 0) ){
+                /*if( (parseInt(item.item_id) == 231 && parseInt(item.count) > 0) ){
                     check_dop_231 = true;
                 }
                 
                 if( parseInt(item.item_id) == 232 && parseInt(item.count) > 0 ){
                     check_dop_232 = true;
-                }
+                }*/
                 
                 
             });
@@ -1542,9 +1542,9 @@ export class Cart extends React.Component {
                 return;
             }else{
                 
-                let check = false;
+                //let check = false;
                 
-                if( parseInt(this.state.orderType)+1 == 2 ){
+                /*if( parseInt(this.state.orderType)+1 == 2 ){
                     if( parseInt(this.state.orderPic) == 3 || parseInt(this.state.orderPic) == 6 ){
                         check = true;
                     }
@@ -1552,9 +1552,9 @@ export class Cart extends React.Component {
                     if( parseInt(this.state.orderAddr.point_id) == 3 || parseInt(this.state.orderAddr.point_id) == 6 ){
                         check = true;
                     }
-                }
+                }*/
                 
-                if( cartItems_dop_tea.length > 0 && (check && (check_dop_231 == false || check_dop_232 == false)) ){
+                /*if( cartItems_dop_tea.length > 0 && (check && (check_dop_231 == false || check_dop_232 == false)) ){
                     this.setState({
                         orderCheckDopTea: true,
                         spiner: false,
@@ -1564,10 +1564,10 @@ export class Cart extends React.Component {
                     setTimeout(()=>{
                         this.clickOrderStart = false;    
                     }, 300)
-                }else{
+                }else{*/
                     this.clickOrderStart = false;  
                     this.startOrderNext(); 
-                }
+                //}
             }
         }
     }
