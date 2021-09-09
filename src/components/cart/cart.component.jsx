@@ -621,132 +621,134 @@ export class Cart extends React.Component {
     }
     
     loadData(){
-        fetch(config.urlApi, {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/x-www-form-urlencoded'},
-            body: queryString.stringify({
-                type: 'get_by_mi_web', 
-                city_id: this.state.city_name,
-                user_id: itemsStore.getToken()
-            })
-        }).then(res => res.json()).then(json => {
-            this.setState({
-                pic_point: json.get_addr_pic.points,
-                my_addr: json.get_my_addr,
-                all_addr: json.get_addr,
-                date_pred: json.date_pred
-            })
-            
-            setTimeout(() => {
-                let cartData = itemsStore.getCartData();
-    
-                if( cartData.orderType || cartData.orderType == 0 ){
-                    
-                    this.setState({
-                        orderType: cartData.orderType,
-                        orderAddr: cartData.orderAddr && cartData.orderAddr.id == -1 ? null : cartData.orderAddr,
-                        orderPic: cartData.orderPic,
-                        orderComment: cartData.orderComment,
+        setTimeout( () => {
+            fetch(config.urlApi, {
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/x-www-form-urlencoded'},
+                body: queryString.stringify({
+                    type: 'get_by_mi_web', 
+                    city_id: this.state.city_name,
+                    user_id: itemsStore.getToken()
+                })
+            }).then(res => res.json()).then(json => {
+                this.setState({
+                    pic_point: json.get_addr_pic.points,
+                    my_addr: json.get_my_addr,
+                    all_addr: json.get_addr,
+                    date_pred: json.date_pred
+                })
+                
+                setTimeout(() => {
+                    let cartData = itemsStore.getCartData();
+        
+                    if( cartData.orderType || cartData.orderType == 0 ){
                         
-                        orderTimes: cartData.orderTimes,
-                        orderPredDay: cartData.orderPredDay,
-                        orderPredTime: cartData.orderPredTime,                
-                        
-                        orderPay: cartData.orderPay,
-                        orderSdacha: cartData.orderSdacha
-                    })
-                    
-                    if( parseInt(cartData.orderTimes) == 2 && cartData.orderPredDay != '' && ((cartData.orderAddr && cartData.orderAddr.id !== -1) || parseInt( cartData.orderPic ) > 0) ){
-                        setTimeout(() => {
-                            this.loadTimePred();   
-                        }, 300)
-                    }else{
-                        /*let data = {
+                        this.setState({
                             orderType: cartData.orderType,
-                            orderAddr: '',
+                            orderAddr: cartData.orderAddr && cartData.orderAddr.id == -1 ? null : cartData.orderAddr,
                             orderPic: cartData.orderPic,
                             orderComment: cartData.orderComment,
                             
                             orderTimes: cartData.orderTimes,
-                            orderPredDay: '',
-                            orderPredTime: '',
+                            orderPredDay: cartData.orderPredDay,
+                            orderPredTime: cartData.orderPredTime,                
                             
                             orderPay: cartData.orderPay,
-                            orderSdacha: cartData.orderSdacha,
-                            
-                        };
+                            orderSdacha: cartData.orderSdacha
+                        })
                         
-                        itemsStore.saveCartData(data);*/
-                    }
-                    
-                    setTimeout(() => {
-                        if( parseInt( cartData.orderType ) == 1 && parseInt( cartData.orderPic ) > 0 ){
-                            this.choosePic(cartData.orderPic);
-                        }
-                    }, 300)
-                    
-                    if( parseInt( cartData.orderType ) == 0 && cartData.orderAddr && cartData.orderAddr.id && cartData.orderAddr.id !== -1 ){
-                        let allPrice = itemsStore.getAllPrice();
-                        
-                        if( parseInt(cartData.orderAddr.free_drive) == 1 || parseInt(itemsStore.free_drive) == 1 ){
-                            if( parseInt(allPrice) > 0 ){
-                                itemsStore.setSumDiv(0);
-                            }else{
-                                itemsStore.setSumDiv(1);
-                            }
-                        }else{
-                            itemsStore.setSumDiv(parseInt(cartData.orderAddr.sum_div));
-                        }
-                    }else{
-                        itemsStore.setSumDiv(0);
-                    }
-                    
-                    setTimeout(()=>{
-                        let type = cartData.orderTimes,
-                            type_order = cartData.orderType;
-                        
-                        if( type_order == 0 ){
-                            if( type == 1 ){
-                                this.setState({
-                                    renderPay: this.state.pays.dev
-                                })
-                            }else{
-                                this.setState({
-                                    renderPay: this.state.pays.dev_mini,
-                                })
-                            }
-                        }else{
-                            this.setState({
-                                renderPay: this.state.pays.pic,
-                            })
-                        }
-                    }, 300)
-                }else{
-                    if( this.state.pic_point.length == 1 ){
-                        this.choosePic(this.state.pic_point[0]['id']);
-                    }
-                    
-                    if( this.state.my_addr.length == 1 ){
-                        this.changeAddr({target: {value: this.state.my_addr[0]['id']}})
-                    }
-                }
-                
-                if (typeof window !== 'undefined') {
-                    setTimeout(()=>{
-                        if( localStorage.getItem('promo_name') ){
-                            this.setState({
-                                orderPromo: localStorage.getItem('promo_name')
-                            })
-                            
-                            setTimeout(()=>{
-                                this.checkPromo();
+                        if( parseInt(cartData.orderTimes) == 2 && cartData.orderPredDay != '' && ((cartData.orderAddr && cartData.orderAddr.id !== -1) || parseInt( cartData.orderPic ) > 0) ){
+                            setTimeout(() => {
+                                this.loadTimePred();   
                             }, 300)
+                        }else{
+                            /*let data = {
+                                orderType: cartData.orderType,
+                                orderAddr: '',
+                                orderPic: cartData.orderPic,
+                                orderComment: cartData.orderComment,
+                                
+                                orderTimes: cartData.orderTimes,
+                                orderPredDay: '',
+                                orderPredTime: '',
+                                
+                                orderPay: cartData.orderPay,
+                                orderSdacha: cartData.orderSdacha,
+                                
+                            };
+                            
+                            itemsStore.saveCartData(data);*/
                         }
-                    }, 1000)
-                }
-            }, 300)
-        });
+                        
+                        setTimeout(() => {
+                            if( parseInt( cartData.orderType ) == 1 && parseInt( cartData.orderPic ) > 0 ){
+                                this.choosePic(cartData.orderPic);
+                            }
+                        }, 300)
+                        
+                        if( parseInt( cartData.orderType ) == 0 && cartData.orderAddr && cartData.orderAddr.id && cartData.orderAddr.id !== -1 ){
+                            let allPrice = itemsStore.getAllPrice();
+                            
+                            if( parseInt(cartData.orderAddr.free_drive) == 1 || parseInt(itemsStore.free_drive) == 1 ){
+                                if( parseInt(allPrice) > 0 ){
+                                    itemsStore.setSumDiv(0);
+                                }else{
+                                    itemsStore.setSumDiv(1);
+                                }
+                            }else{
+                                itemsStore.setSumDiv(parseInt(cartData.orderAddr.sum_div));
+                            }
+                        }else{
+                            itemsStore.setSumDiv(0);
+                        }
+                        
+                        setTimeout(()=>{
+                            let type = cartData.orderTimes,
+                                type_order = cartData.orderType;
+                            
+                            if( type_order == 0 ){
+                                if( type == 1 ){
+                                    this.setState({
+                                        renderPay: this.state.pays.dev
+                                    })
+                                }else{
+                                    this.setState({
+                                        renderPay: this.state.pays.dev_mini,
+                                    })
+                                }
+                            }else{
+                                this.setState({
+                                    renderPay: this.state.pays.pic,
+                                })
+                            }
+                        }, 300)
+                    }else{
+                        if( this.state.pic_point.length == 1 ){
+                            this.choosePic(this.state.pic_point[0]['id']);
+                        }
+                        
+                        if( this.state.my_addr.length == 1 ){
+                            this.changeAddr({target: {value: this.state.my_addr[0]['id']}})
+                        }
+                    }
+                    
+                    if (typeof window !== 'undefined') {
+                        setTimeout(()=>{
+                            if( localStorage.getItem('promo_name') ){
+                                this.setState({
+                                    orderPromo: localStorage.getItem('promo_name')
+                                })
+                                
+                                setTimeout(()=>{
+                                    this.checkPromo();
+                                }, 300)
+                            }
+                        }, 1000)
+                    }
+                }, 300)
+            });
+        }, 300 )
     }
     
     componentDidMount = () => {

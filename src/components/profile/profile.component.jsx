@@ -240,36 +240,38 @@ export class Profile extends React.Component {
             arr_day.push(i)
         }
         
-        fetch(config.urlApi, {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/x-www-form-urlencoded'},
-            body: queryString.stringify({
-                type: 'get_user_web', 
-                city_id: this.state.city_name,
-                user_id: itemsStore.getToken()
+        setTimeout( () => {
+            fetch(config.urlApi, {
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/x-www-form-urlencoded'},
+                body: queryString.stringify({
+                    type: 'get_user_web', 
+                    city_id: this.state.city_name,
+                    user_id: itemsStore.getToken()
+                })
+            }).then(res => res.json()).then(json => {
+                
+                let check_reload = json.orders.my_orders.filter( (item) => parseInt(item.status_order) != 6 && parseInt(item.is_delete) == 0 );
+                
+                this.setState({ 
+                    info: json, 
+                    is_load: true,
+                    arr_day: arr_day,
+                    userMail: json.user.mail,
+                    spam: json.user.spam,
+                    userName: json.user.name
+                });
+                
+                if( check_reload.length > 0 ){
+                    setTimeout(()=>{
+                        this.loadData();
+                    }, 6000)
+                }
+                
             })
-        }).then(res => res.json()).then(json => {
-            
-            let check_reload = json.orders.my_orders.filter( (item) => parseInt(item.status_order) != 6 && parseInt(item.is_delete) == 0 );
-            
-            this.setState({ 
-                info: json, 
-                is_load: true,
-                arr_day: arr_day,
-                userMail: json.user.mail,
-                spam: json.user.spam,
-                userName: json.user.name
-            });
-            
-            if( check_reload.length > 0 ){
-                setTimeout(()=>{
-                    this.loadData();
-                }, 6000)
-            }
-            
-        })
-        .catch(err => { });
+            .catch(err => { });
+        }, 300 )
     }
     
     static fetchData(propsData) {
