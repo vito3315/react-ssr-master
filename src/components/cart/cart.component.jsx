@@ -2136,7 +2136,7 @@ export class Cart extends React.Component {
                         </TabPanel>
                         <TabPanel value={this.state.orderType} index={1} style={{ width: '100%' }}>
                             <div className="boxMobile" onClick={() => this.setState({ choosePicDialog: true })}>
-                            <Typography variant="h5" component="span">Адрес: { this.state.orderPic > 0 && this.state.pic_point.length > 0 ? this.state.pic_point.find( (item) => item.id == this.state.orderPic )['addr'] : '' }</Typography>
+                            <Typography variant="h5" component="span">Адрес: { this.state.orderPic > 0 && this.state.pic_point.length > 0 ? this.state.pic_point.find( (item) => item.id == this.state.orderPic )['addr'] ?? '' : '' }</Typography>
                             </div>
                         </TabPanel>
                         
