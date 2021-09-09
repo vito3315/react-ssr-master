@@ -1825,6 +1825,14 @@ export class Cart extends React.Component {
         
         let this_pay = this.state.renderPay.find( (item) => item.type == this.state.orderPay );
         
+        let this_pic_point = this.state.pic_point.find( (item) => item.id == this.state.orderPic );
+        
+        if( this_pic_point ){
+            this_pic_point = this_pic_point['addr'];
+        }else{
+            this_pic_point = '';
+        }
+        
         return (
             <Grid container className="Cart mainContainer MuiGrid-spacing-xs-3">
                 
@@ -2136,7 +2144,7 @@ export class Cart extends React.Component {
                         </TabPanel>
                         <TabPanel value={this.state.orderType} index={1} style={{ width: '100%' }}>
                             <div className="boxMobile" onClick={() => this.setState({ choosePicDialog: true })}>
-                            <Typography variant="h5" component="span">Адрес: { this.state.orderPic > 0 && this.state.pic_point.length > 0 ? this.state.pic_point.find( (item) => item.id == this.state.orderPic )['addr'] ?? '' : '' }</Typography>
+                            <Typography variant="h5" component="span">Адрес: { this.state.orderPic > 0 && this.state.pic_point.length > 0 ? this_pic_point : '' }</Typography>
                             </div>
                         </TabPanel>
                         
