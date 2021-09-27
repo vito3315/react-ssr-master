@@ -600,7 +600,7 @@ export class Header extends React.Component {
     }
     
     sendSMS(){
-        if( this.sms1 === false ){
+        if( this.sms1 == false ){
             this.sms1 = true;
             
             this.setState({
@@ -614,6 +614,7 @@ export class Header extends React.Component {
             number = number.split('(').join('');
             number = number.split(')').join('');
             number = number.split('-').join('');
+            number = number.split('_').join('');
             
             number = number.slice(1);
             
@@ -630,8 +631,6 @@ export class Header extends React.Component {
                     number: number
                 })
             }).then(res => res.json()).then(json => {
-                this.sms1 = false;
-                
                 if( json['st'] ){
                     this.setState({ 
                         stage_1: false,
@@ -652,6 +651,10 @@ export class Header extends React.Component {
                       errPhone: json.text
                     });
                 }
+                
+                setTimeout( () => {
+                    this.sms1 = false;
+                }, 300 )
             });
         }
     }
@@ -1141,7 +1144,7 @@ export class Header extends React.Component {
                                 placeholder="8 (999) 999-99-99" 
                                 disabled={!this.state.stage_1}
                                 value={this.state.userLogin}
-                                onKeyPress={this.handleKeyPress}
+                                //onKeyPress={this.handleKeyPress}
                                 onChange={ event => this.state.stage_1 ? this.setState({ userLogin: event.target.value }) : {} }
                             />
                             {this.state.stage_2 ?

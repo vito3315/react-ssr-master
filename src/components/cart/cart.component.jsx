@@ -522,7 +522,7 @@ export class Cart extends React.Component {
             newAddrET: '',
             newAddrKV: '',
             newAddrHome: '',
-            newAddrDom: false,
+            newAddrDom: true,
             
             orderType: 0,
             orderAddr: null,
@@ -551,12 +551,6 @@ export class Cart extends React.Component {
             page: 'cart' 
         };
         
-        console.log( 'cart fetchData(propsData)', {
-            type: 'get_page_info', 
-            city_id: get_city(propsData),
-            page: 'cart' 
-        } )
-        
         return axios({
             method: 'POST',
             url: config.urlApi,
@@ -565,8 +559,6 @@ export class Cart extends React.Component {
         }).then(response => {
             if(response['status'] === 200){
                 var json = response['data'];
-                
-                console.log( 'cart json', json.page.title )
                 
                 return {
                     title: json.page.title,
@@ -1645,6 +1637,13 @@ export class Cart extends React.Component {
                             })
                         }, this.startOrderInterval * 1000)
                     }else{
+                        
+                        if( json.type && json.type == 'new_pred' ){
+                            this.setState({
+                                timePred: json.times
+                            })
+                        }
+                        
                         this.setState({
                             error: {
                                 title: 'Предупреждение', 
