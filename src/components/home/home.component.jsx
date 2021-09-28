@@ -249,7 +249,7 @@ class CardItem extends React.Component {
                             <div>
                                 <Typography className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <Ruble /></Typography>
                             </div>
-                            <Typography className="CardPriceItem_old" variant="h5" component="span">{this.state.item.price}</Typography>
+                            <Typography className="CardPriceItem_old" variant="h5" component="span">{this.state.item.price} <Ruble /></Typography>
                             {this.state.count == 0 ?
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder fohover">
                                     <Button variant="contained" className="BtnCardMain CardInCardItem NONHOVERED" onClick={this.add.bind(this)}>
