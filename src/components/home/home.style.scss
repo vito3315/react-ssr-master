@@ -217,16 +217,16 @@ $colorMain: #CC0033;
         align-items: flex-end;
         font-weight: bold;
         position: relative;
-        & > :before {
-            border-bottom: 2px solid red;
-            position: absolute;
-            top: -2px;
-            content: "";
-            width: 50%;
-            right: 19px;
-            height: 50%;
-            transform: rotate(15deg);
-        }
+    }
+    & .CardPriceItem_old:before {
+        border-bottom: 2px solid red;
+        position: absolute;
+        top: -2px;
+        content: "";
+        width: 50%;
+        right: 19px;
+        height: 50%;
+        transform: rotate(15deg);
     }
     & .CardInCardItem{
         width: 100%;
