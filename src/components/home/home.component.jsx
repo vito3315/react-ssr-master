@@ -172,6 +172,8 @@ class CardItem extends React.Component {
             
             let city = itemsStore.getCity();
             
+            console.log( 'city', city ) 
+            
             if( city == 'samara' && parseInt(this.state.item['id']) == 188 ){
                 this.setState({
                     old_price: 715,
