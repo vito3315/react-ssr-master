@@ -285,23 +285,24 @@ $colorMain: #CC0033;
         @include fons(1rem, $Ubuntu);
         display: flex;
         align-items: center;
-        font-weight: bold;
+        font-weight: 100;
         position: relative;
-        right: 15%;
+        left: 25%;
         color: #bbbdc0;
         & > svg{
             padding-bottom: 5px;
             font-size: 1rem;
             padding-left: 2px;
+            fill: #bbbdc0;
         }
     }
     & .CardPriceItem_old:before {
         border-bottom: 2px solid #bbbdc0;
         position: absolute;
-        top: -2px;
+        top: -1px;
         content: "";
-        width: 140%;
-        right: -9px;
+        width: 80%;
+        right: 16px;
         height: 50%;
         transform: rotate(15deg);
     }
