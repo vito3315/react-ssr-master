@@ -217,16 +217,22 @@ $colorMain: #CC0033;
         align-items: center;
         font-weight: bold;
         position: relative;
-        right: 15%;
+        right: 10%;
         color: #bbbdc0;
+        & > svg{
+            padding-bottom: 4px;
+            font-size: 1.2rem;
+            padding-left: 2px;
+            fill: #bbbdc0;
+        }
     }
     & .CardPriceItem_old:before {
         border-bottom: 2px solid #bbbdc0;
         position: absolute;
-        top: -2px;
+        top: 0px;
         content: "";
-        width: 140%;
-        right: -9px;
+        width: 60%;
+        right: 34px;
         height: 50%;
         transform: rotate(15deg);
     }
