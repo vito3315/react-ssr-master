@@ -282,7 +282,7 @@ $colorMain: #CC0033;
         }
     }
     & .CardPriceItem_old{
-        @include fons(1rem, $Ubuntu);
+        @include fons(0.8rem, $Ubuntu);
         display: flex;
         align-items: center;
         font-weight: 100;
