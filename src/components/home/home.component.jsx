@@ -308,7 +308,7 @@ class CardItem extends React.Component {
                         <Typography className="CardInfoItem" component="p" onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.tmp_desc}</Typography>
                         <div>
                             <div>
-                                <Typography className="CardPriceItem_old" variant="h5" component="span">{this.state.item.price}</Typography>
+                                <Typography gutterBottom className="CardPriceItem_old" variant="h5" component="span">{this.state.item.price} <Ruble width="20" viewBox="200 -200 400 600" /></Typography>
                                 <Typography gutterBottom className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <Ruble width="20" viewBox="200 -200 400 600" /></Typography>
                             </div>
                             {this.state.count == 0 ?

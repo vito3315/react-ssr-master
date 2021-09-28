@@ -289,6 +289,11 @@ $colorMain: #CC0033;
         position: relative;
         right: 15%;
         color: #bbbdc0;
+        & > svg{
+            padding-bottom: 5px;
+            font-size: 1rem;
+            padding-left: 2px;
+        }
     }
     & .CardPriceItem_old:before {
         border-bottom: 2px solid #bbbdc0;
