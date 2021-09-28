@@ -174,13 +174,15 @@ class CardItem extends React.Component {
             
             if( city == 'samara' && parseInt(this.state.item['id']) == 188 ){
                 this.setState({
-                    old_price: 715
+                    old_price: 715,
+                    is_old_price: true
                 })
             }
             
             if( city == 'togliatti' && parseInt(this.state.item['id']) == 188 ){
                 this.setState({
-                    old_price: 675
+                    old_price: 675,
+                    is_old_price: true
                 })
             }
         }
