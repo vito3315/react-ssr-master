@@ -174,14 +174,14 @@ class CardItem extends React.Component {
             
             console.log( 'city', city ) 
             
-            if( city == 'samara' && parseInt(this.state.item['id']) == 188 ){
+            if( city == 'samara' && parseInt(this.props.item['id']) == 188 ){
                 this.setState({
                     old_price: 715,
                     is_old_price: true
                 })
             }
             
-            if( city == 'togliatti' && parseInt(this.state.item['id']) == 188 ){
+            if( city == 'togliatti' && parseInt(this.props.item['id']) == 188 ){
                 this.setState({
                     old_price: 675,
                     is_old_price: true
@@ -191,6 +191,25 @@ class CardItem extends React.Component {
         
         autorun(() => {
             if( this._isMounted ){
+                
+                let city = itemsStore.getCity();
+            
+                console.log( 'city', city ) 
+                
+                if( city == 'samara' && parseInt(this.props.item['id']) == 188 ){
+                    this.setState({
+                        old_price: 715,
+                        is_old_price: true
+                    })
+                }
+                
+                if( city == 'togliatti' && parseInt(this.props.item['id']) == 188 ){
+                    this.setState({
+                        old_price: 675,
+                        is_old_price: true
+                    })
+                }
+                
                 let my_cart = itemsStore.getItems();
                 let item = my_cart.find( (item) => item.item_id == this.state.item['id'] );
           
