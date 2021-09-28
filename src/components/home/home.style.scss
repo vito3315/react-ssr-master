@@ -297,12 +297,12 @@ $colorMain: #CC0033;
         }
     }
     & .CardPriceItem_old:before {
-        border-bottom: 2px solid #bbbdc0;
+        border-bottom: 1px solid #bbbdc0;
         position: absolute;
-        top: -1px;
+        top: 0px;
         content: "";
-        width: 80%;
-        right: 16px;
+        width: 70%;
+        right: 20px;
         height: 50%;
         transform: rotate(15deg);
     }
