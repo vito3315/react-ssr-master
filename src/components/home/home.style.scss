@@ -281,6 +281,25 @@ $colorMain: #CC0033;
             padding-left: 2px;
         }
     }
+    & .CardPriceItem_old{
+        @include fons(1rem, $Ubuntu);
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+        position: relative;
+        right: 15%;
+        color: #bbbdc0;
+    }
+    & .CardPriceItem_old:before {
+        border-bottom: 2px solid #bbbdc0;
+        position: absolute;
+        top: -2px;
+        content: "";
+        width: 140%;
+        right: -9px;
+        height: 50%;
+        transform: rotate(15deg);
+    }
     & .CardInCardItem{
         width: 100%;
         text-align: center;
