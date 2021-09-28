@@ -307,8 +307,10 @@ class CardItem extends React.Component {
                         <Typography className="CardNameItem" gutterBottom variant="h5" component="h3" onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>
                         <Typography className="CardInfoItem" component="p" onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.tmp_desc}</Typography>
                         <div>
-                            <Typography className="CardPriceItem_old" variant="h5" component="span">{this.state.item.price}</Typography>
-                            <Typography gutterBottom className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <Ruble width="20" viewBox="200 -200 400 600" /></Typography>
+                            <div>
+                                <Typography className="CardPriceItem_old" variant="h5" component="span">{this.state.item.price}</Typography>
+                                <Typography gutterBottom className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <Ruble width="20" viewBox="200 -200 400 600" /></Typography>
+                            </div>
                             {this.state.count == 0 ?
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
                                     <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={this.add.bind(this)}>
