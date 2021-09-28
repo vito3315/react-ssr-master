@@ -211,6 +211,23 @@ $colorMain: #CC0033;
             padding-left: 2px;
         }
     }
+    & .CardPriceItem_old{
+        @include fons(1.2rem, $Ubuntu);
+        display: flex;
+        align-items: flex-end;
+        font-weight: bold;
+        position: relative;
+        & > :before {
+            border-bottom: 2px solid red;
+            position: absolute;
+            top: -2px;
+            content: "";
+            width: 50%;
+            right: 19px;
+            height: 50%;
+            transform: rotate(15deg);
+        }
+    }
     & .CardInCardItem{
         width: 100%;
         text-align: center;

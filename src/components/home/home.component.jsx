@@ -246,7 +246,10 @@ class CardItem extends React.Component {
                     
                     <CardActions className="CardAction">
                         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginLeft: 0, width: '100%' }}>
-                            <div><Typography className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <Ruble /></Typography></div>
+                            <div>
+                                <Typography className="CardPriceItem_old" variant="h5" component="span">{this.state.item.price}</Typography>
+                                <Typography className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <Ruble /></Typography>
+                            </div>
                             {this.state.count == 0 ?
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder fohover">
                                     <Button variant="contained" className="BtnCardMain CardInCardItem NONHOVERED" onClick={this.add.bind(this)}>
