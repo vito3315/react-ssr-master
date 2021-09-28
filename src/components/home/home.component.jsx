@@ -153,7 +153,9 @@ class CardItem extends React.Component {
         
         this.state = {      
             item: this.props.data, 
-            count: 0 
+            count: 0,
+            is_old_price: false,
+            old_price: 0
         };
     }
     
@@ -167,6 +169,20 @@ class CardItem extends React.Component {
             this.setState({ 
               count: item.count,
             })
+            
+            let city = itemsStore.getCity();
+            
+            if( city == 'samara' && parseInt(this.state.item['id']) == 188 ){
+                this.setState({
+                    old_price: 715
+                })
+            }
+            
+            if( city == 'togliatti' && parseInt(this.state.item['id']) == 188 ){
+                this.setState({
+                    old_price: 675
+                })
+            }
         }
         
         autorun(() => {
@@ -249,7 +265,9 @@ class CardItem extends React.Component {
                             <div>
                                 <Typography className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <Ruble /></Typography>
                             </div>
-                            <Typography className="CardPriceItem_old" variant="h5" component="span">{this.state.item.price} <Ruble /></Typography>
+                            { this.state.is_old_price === false ? null :
+                                <Typography className="CardPriceItem_old" variant="h5" component="span">{this.state.old_price} <Ruble /></Typography>
+                            }
                             {this.state.count == 0 ?
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder fohover">
                                     <Button variant="contained" className="BtnCardMain CardInCardItem NONHOVERED" onClick={this.add.bind(this)}>
@@ -308,7 +326,9 @@ class CardItem extends React.Component {
                         <Typography className="CardInfoItem" component="p" onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.tmp_desc}</Typography>
                         <div>
                             <div>
-                                <Typography gutterBottom className="CardPriceItem_old" variant="h5" component="span">{this.state.item.price} <Ruble width="20" viewBox="100 -100 800 300" /></Typography>
+                                { this.state.is_old_price === false ? null :
+                                    <Typography gutterBottom className="CardPriceItem_old" variant="h5" component="span">{this.state.old_price} <Ruble width="20" viewBox="100 -100 800 300" /></Typography>
+                                }
                                 <Typography gutterBottom className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <Ruble width="20" viewBox="200 -200 400 600" /></Typography>
                             </div>
                             {this.state.count == 0 ?
