@@ -245,9 +245,8 @@ class CardItem extends React.Component {
                     </CardContent>
                     
                     <CardActions className="CardAction">
-                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginLeft: 0, width: '100%' }}>
+                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginLeft: 0, width: '100%' }}>
                             <div>
-                                
                                 <Typography className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <Ruble /></Typography>
                             </div>
                             <Typography className="CardPriceItem_old" variant="h5" component="span">{this.state.item.price}</Typography>

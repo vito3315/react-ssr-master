@@ -212,19 +212,21 @@ $colorMain: #CC0033;
         }
     }
     & .CardPriceItem_old{
-        @include fons(1.2rem, $Ubuntu);
+        @include fons(1rem, $Ubuntu);
         display: flex;
-        align-items: flex-end;
+        align-items: center;
         font-weight: bold;
         position: relative;
+        right: 15%;
+        color: #bbbdc0;
     }
     & .CardPriceItem_old:before {
-        border-bottom: 2px solid red;
+        border-bottom: 2px solid #bbbdc0;
         position: absolute;
         top: -2px;
         content: "";
-        width: 50%;
-        right: 19px;
+        width: 140%;
+        right: -9px;
         height: 50%;
         transform: rotate(15deg);
     }
