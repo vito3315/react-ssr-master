@@ -2582,7 +2582,7 @@ export class Cart extends React.Component {
                                 <Typography variant="h5" component="span" className="orderCheckText" style={{ color: '#c03' }}>Забрать заказ можно только в маске</Typography>
                             }
                             
-                            { parseInt( this.state.orderType ) == 1 && parseInt(this.state.orderAddr.point_id) == 3 ?
+                            { parseInt( this.state.orderType ) == 0 && parseInt(this.state.orderAddr.point_id) == 3 ?
                                 <>
                                     <Typography variant="h5" component="span" className="orderCheckText">Дорогие жители шлюзового района! В связи с ремонтом моста и затруднённой ситуацией на дорогах, доставка займёт больше времени, чем обычно.</Typography>
                                     <Typography variant="h5" component="span" className="orderCheckText">Благодарим за понимание!</Typography>
