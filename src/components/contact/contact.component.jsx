@@ -203,6 +203,7 @@ export class Contact extends React.Component {
                 "<div class='my-hint'>" +
                     "<b>{{ properties.address }}</b><br />" +
                     "График работы: c 10:00 до 21:30<br />" +
+                    "Стоимость доставки: {{ properties.sum_div }} руб." +
                 "</div>"
             );
 			
