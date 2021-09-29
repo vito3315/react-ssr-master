@@ -1654,6 +1654,14 @@ export class Cart extends React.Component {
                     }
                 }, 1000)
             })
+            .catch(err => { 
+                setTimeout( () => {
+                    this.setState({
+                        spiner: false
+                    })
+                }, 300 )
+                console.log( err )
+            });
         }
     }
     
@@ -2572,6 +2580,15 @@ export class Cart extends React.Component {
                             
                             { parseInt( this.state.orderType ) == 0 ? null :
                                 <Typography variant="h5" component="span" className="orderCheckText" style={{ color: '#c03' }}>Забрать заказ можно только в маске</Typography>
+                            }
+                            
+                            { parseInt( this.state.orderType ) == 1 && parseInt(this.state.orderAddr.point_id) == 3 ?
+                                <>
+                                    <Typography variant="h5" component="span" className="orderCheckText">Дорогие жители шлюзового района! В связи с ремонтом моста и затруднённой ситуацией на дорогах, доставка займёт больше времени, чем обычно.</Typography>
+                                    <Typography variant="h5" component="span" className="orderCheckText">Благодарим за понимание!</Typography>
+                                </>
+                                    :
+                                null
                             }
                             
                             { this.state.newOrderData && this.state.newOrderData.dop_text && this.state.newOrderData.dop_text.length > 0 ?
