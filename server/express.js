@@ -154,9 +154,7 @@ app.use( '*', async ( req, res ) => {
             <meta property="og:url" content="https://jacofood.ru${req.originalUrl}">
         `;
         
-        if( !findItem ){
-            meta += `<meta name="robots" content="noindex" />`;
-        }
+        
         
         if( matchRoute.type == 'home' ){
             componentData.all.other.cats.baners.map( (item) => {
@@ -188,6 +186,10 @@ app.use( '*', async ( req, res ) => {
                             <meta name="twitter:desсription" content="${item.tmp_desc}" /> 
                             <meta name="twitter:image" content="https://storage.yandexcloud.net/site-img/${item.img_new}300х200.jpg" /> 
                         `;
+                        
+                        if( !findItem ){
+                            meta += `<meta name="robots" content="noindex" />`;
+                        }
                     }
                 })
             });
