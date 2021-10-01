@@ -45,10 +45,6 @@ app.get('/robots.txt', function(req, res) {
     res.sendFile('../dist/robots.txt');
 });
 
-app.get(/^(.*?[^\/]+)$/, function (req, res) {
-    res.redirect(301, req.params[0])
-})
-
 // for any other requests, send `index.html` as a response
 app.use( '*', async ( req, res ) => {
 
@@ -67,6 +63,13 @@ app.use( '*', async ( req, res ) => {
         
         res.status( 302 );
         return res.redirect("/togliatti")
+    }
+    
+    let lastChar = req.originalUrl.substr(req.originalUrl.length - 1);
+    
+    if( lastChar == '/' ){
+        res.status( 301 );
+        return res.redirect( req.originalUrl.substring(0, req.originalUrl.length - 1) )
     }
     
     let city = req.originalUrl.split('/');
