@@ -52,7 +52,7 @@ app.use( '*', async ( req, res ) => {
         express.static( path.resolve( __dirname, '../dist' ) );
     }
     
-    console.log( 'url', req )
+    //console.log( 'url', req )
     
     req.originalUrl = req.originalUrl.split('?')[0];
     req.originalUrl = req.originalUrl.split('#')[0];
