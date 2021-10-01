@@ -45,6 +45,10 @@ app.get('/robots.txt', function(req, res) {
     res.sendFile('../dist/robots.txt');
 });
 
+app.get(/^(.*?[^\/]+)$/, function (req, res) {
+    res.redirect(301, req.params[0])
+})
+
 // for any other requests, send `index.html` as a response
 app.use( '*', async ( req, res ) => {
 
