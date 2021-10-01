@@ -52,15 +52,10 @@ app.use( '*', async ( req, res ) => {
         express.static( path.resolve( __dirname, '../dist' ) );
     }
     
-    //console.log( 'req.originalUrl', req.originalUrl )
-    
     req.originalUrl = req.originalUrl.split('?')[0];
     req.originalUrl = req.originalUrl.split('#')[0];
     
     if( req.originalUrl == '/' || req.originalUrl == '' ){
-        
-        //console.log( 'go to 302', "/togliatti" )
-        
         res.status( 302 );
         return res.redirect("/togliatti")
     }
@@ -76,35 +71,24 @@ app.use( '*', async ( req, res ) => {
     city = city.filter( (item) => item != '' ); 
     city = city[0];
     
-    // get matched route
     const matchRoute = routes.find( route => matchPath( req.originalUrl, route ) );
 
-    //console.log( 'matchRoute', matchRoute )
-    
     if( matchRoute ){
         let componentData = null;
         if( typeof matchRoute.component.fetchData === 'function' ) {
             componentData = await matchRoute.component.fetchData(req.originalUrl);
         }
 
-        //console.log( 'componentData', componentData )
-        
         if( !componentData || componentData.st === false ){
             if( !componentData ){
-                
-                //console.log( 'go to ', "/togliatti" )
-                
                 res.status( 404 );
                 return res.redirect("/togliatti")
             }
-            
-            //console.log( 'go to city ', "/"+city )
             
             res.status( 404 );
             return res.redirect("/"+city)
         }
         
-        // read `index.html` file
         let indexHTML = fs.readFileSync( path.resolve( __dirname, '../dist/index.html' ), {
             encoding: 'utf8',
         } );
@@ -112,8 +96,12 @@ app.use( '*', async ( req, res ) => {
         let linkItem = '';
         let Item = null;
         
+        let findItem = null;
+        
         if( matchRoute.type == 'item' ){  
             let linkItem1 = req.originalUrl.split("/");
+            
+            findItem = linkItem1.find( (item) => item == 'item' );
             
             linkItem1 = linkItem1.filter( (item) => item != '' ); 
             linkItem = linkItem1[ linkItem1.length-1 ];
@@ -135,7 +123,6 @@ app.use( '*', async ( req, res ) => {
             Item: Item
         }
         
-        // get HTML string from the `App` component
         let appHTML = ReactDOMServer.renderToString(
             <StaticRouter location={ req.originalUrl }>
                 <App globalState={GLOBAL_STATE} />
@@ -166,6 +153,10 @@ app.use( '*', async ( req, res ) => {
             <meta property="og:type" content="website">
             <meta property="og:url" content="https://jacofood.ru${req.originalUrl}">
         `;
+        
+        if( !findItem ){
+            meta += `<meta name="robots" content="noindex" />`;
+        }
         
         if( matchRoute.type == 'home' ){
             componentData.all.other.cats.baners.map( (item) => {
@@ -204,21 +195,17 @@ app.use( '*', async ( req, res ) => {
             
         indexHTML = indexHTML.replace('<!-- meta -->', `${meta}`);
         
-        
-        // populate `#app` element with `appHTML`
         indexHTML = indexHTML.replace( 
             '<div id="app"></div>', 
             `<div id="app">
                 ${ appHTML }
             </div>` );
             
-        // set value of `initial_state` global variable
         indexHTML = indexHTML.replace(
             'var initial_state = null;',
             `GLOBAL_STATE = ${JSON.stringify(GLOBAL_STATE)};`
         );
 
-        // set header and status
         res.contentType( 'text/html' );
         res.status( matchRoute.code );
 
