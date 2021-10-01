@@ -54,6 +54,12 @@ app.use( '*', async ( req, res ) => {
     
     //console.log( 'url', req )
     
+    let ckeck_no_index = false;
+    
+    if( req.originalUrl.split('?')[1] ){
+        ckeck_no_index = true;
+    }
+    
     req.originalUrl = req.originalUrl.split('?')[0];
     req.originalUrl = req.originalUrl.split('#')[0];
     
@@ -156,7 +162,9 @@ app.use( '*', async ( req, res ) => {
             <meta property="og:url" content="https://jacofood.ru${req.originalUrl}">
         `;
         
-        
+        if( ckeck_no_index ){
+            meta += `<meta name="robots" content="noindex" />`;
+        }
         
         if( matchRoute.type == 'home' ){
             componentData.all.other.cats.baners.map( (item) => {
