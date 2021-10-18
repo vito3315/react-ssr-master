@@ -1591,6 +1591,17 @@ export class Cart extends React.Component {
                 }
             })
             
+            if( parseInt(this.state.orderType) == 0 ){
+                let addr = this.state.orderAddr ? JSON.stringify(this.state.orderAddr) : '';
+                
+                console.log( 'addr', addr )
+            }
+            
+            if( parseInt(this.state.orderType) == 1 ){
+                let pic = this.state.orderPic;
+                
+                console.log( 'pic', pic )
+            }
             
             
             fetch(config.urlApi, {
