@@ -1604,7 +1604,11 @@ export class Cart extends React.Component {
                             },
                             errorOpen: true
                         })
+                        
+                        this.clickOrderStart = false;
                     }, 300)
+                    
+                    return;
                 }
             }
             
@@ -1621,7 +1625,11 @@ export class Cart extends React.Component {
                             },
                             errorOpen: true
                         })
+                        
+                        this.clickOrderStart = false;
                     }, 300)
+                    
+                    return;
                 }
             }
             
