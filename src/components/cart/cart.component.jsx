@@ -1594,13 +1594,35 @@ export class Cart extends React.Component {
             if( parseInt(this.state.orderType) == 0 ){
                 let addr = this.state.orderAddr ? JSON.stringify(this.state.orderAddr) : '';
                 
-                console.log( 'addr', addr )
+                if( !addr || addr == '' ){
+                    setTimeout(()=>{
+                        this.setState({
+                            spiner: false,
+                            error: {
+                                title: 'Предупреждение', 
+                                text: 'Нет адреса для доставки'
+                            },
+                            errorOpen: true
+                        })
+                    }, 300)
+                }
             }
             
             if( parseInt(this.state.orderType) == 1 ){
                 let pic = this.state.orderPic;
                 
-                console.log( 'pic', pic )
+                if( !pic || pic == 0 ){
+                    setTimeout(()=>{
+                        this.setState({
+                            spiner: false,
+                            error: {
+                                title: 'Предупреждение', 
+                                text: 'Не выбрана точка для самовывоза'
+                            },
+                            errorOpen: true
+                        })
+                    }, 300)
+                }
             }
             
             
