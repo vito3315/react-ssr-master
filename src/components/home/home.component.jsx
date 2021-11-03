@@ -59,14 +59,12 @@ class CoverFlowCarousel extends React.Component {
         let count = 2;
         
         if(this.state.type == 'pc'){
-            count = this.state.data.length >= 3 ? 2 : 1;
+            count = this.state.data.length >= 3 ? 2 : 0;
         }else{
-            count = this.state.data.length >= 3 ? 2 : 1;
+            count = this.state.data.length >= 3 ? 2 : 0;
         }
         
-        if( this.state.data.length == 1 ){
-            //count = 0;
-        }
+        
         
         this.swiper = new Swiper(".swiper-container", {
             grabCursor: true,
