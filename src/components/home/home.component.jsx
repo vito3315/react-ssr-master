@@ -65,7 +65,7 @@ class CoverFlowCarousel extends React.Component {
         }
         
         if( this.state.data.length == 1 ){
-            count = 0;
+            //count = 0;
         }
         
         this.swiper = new Swiper(".swiper-container", {
@@ -76,7 +76,7 @@ class CoverFlowCarousel extends React.Component {
             autoHeight: true,
             spaceBetween: 100,
             centeredSlides: true,
-            slidesPerView: this.state.type == 'pc' ? 2 : 2,
+            slidesPerView: count,
             
             autoplay: true,
             autoplay: {
