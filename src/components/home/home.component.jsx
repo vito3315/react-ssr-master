@@ -59,9 +59,9 @@ class CoverFlowCarousel extends React.Component {
         let count = 2;
         
         if(this.state.type == 'pc'){
-            count = this.state.data.length >= 3 ? 2 : 0;
+            count = this.state.data.length >= 3 ? 2 : 1;
         }else{
-            count = this.state.data.length >= 3 ? 2 : 0;
+            count = this.state.data.length >= 3 ? 2 : 1;
         }
         
         
