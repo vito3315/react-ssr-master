@@ -56,6 +56,14 @@ class CoverFlowCarousel extends React.Component {
     }
     
     componentDidMount() {
+        let count = 2;
+        
+        if(this.state.type == 'pc'){
+            count = this.state.data.length >= 3 ? 2 : 1;
+        }else{
+            count = this.state.data.length >= 3 ? 2 : 1;
+        }
+        
         this.swiper = new Swiper(".swiper-container", {
             grabCursor: true,
             loop: true,
@@ -176,15 +184,15 @@ class CardItem extends React.Component {
             
             if( city == 'samara' && parseInt(this.state.item['id']) == 238 ){
                 this.setState({
-                    old_price: 715,
-                    is_old_price: true
+                    //old_price: 715,
+                    //is_old_price: true
                 })
             }
             
             if( city == 'togliatti' && parseInt(this.state.item['id']) == 238 ){
                 this.setState({
-                    old_price: 675,
-                    is_old_price: true
+                    //old_price: 675,
+                    //is_old_price: true
                 })
             }
         }
