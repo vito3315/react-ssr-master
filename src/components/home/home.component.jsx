@@ -68,12 +68,12 @@ class CoverFlowCarousel extends React.Component {
         
         
         this.swiper = new Swiper(".swiper-container", {
-            grabCursor: true,
-            loop: true,
+            grabCursor: this_count == 1 ? false : true,
+            loop: this_count == 1 ? false : true,
             centeredSlidesBounds: false,
-            setWrapperSize: true,
+            setWrapperSize: this_count == 1 ? false : true,
             autoHeight: true,
-            spaceBetween: this_count == 1 ? 0 : 100,
+            spaceBetween: 100,
             centeredSlides: true,
             slidesPerView: count,
             
