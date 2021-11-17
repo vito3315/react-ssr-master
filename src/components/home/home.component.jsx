@@ -73,7 +73,7 @@ class CoverFlowCarousel extends React.Component {
             centeredSlidesBounds: false,
             setWrapperSize: true,
             autoHeight: true,
-            spaceBetween: 100,
+            spaceBetween: this_count == 1 ? 0 : 100,
             centeredSlides: true,
             slidesPerView: count,
             
