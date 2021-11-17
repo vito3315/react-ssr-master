@@ -112,7 +112,7 @@ class CoverFlowCarousel extends React.Component {
     render() {
         return (
             <div className={"swiper-container swiper_"+this.state.type+" _h1_"}>
-                <div className="swiper-wrapper _h2_">
+                <div className={"swiper-wrapper _h2_ _count_"+this.state.data.length}>
                     {this.state.data.map((item, key) => 
                         <div className={"swiper-slide _h3_ "+key} key={key}>
                             {item}

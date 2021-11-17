@@ -79,7 +79,7 @@ $colorMain: #CC0033;
         width: calc(80vw - 0px) !important;
         margin-left: -43vw !important;
     }
-    & .swiper-slide-active{
+    & ._h2_:not(._count_1) .swiper-slide-active{
         width: calc(80vw - 0px )!important;
         margin-right: 5vw!important;
     }
@@ -97,7 +97,7 @@ $colorMain: #CC0033;
         width: calc(80vw - 0px) !important;
         margin-left: -48.5vw !important;
     }
-    & .swiper-slide-active{
+    & ._h2_:not(._count_1) .swiper-slide-active{
         width: calc(80vw - 0px )!important;
         margin-right: 5vw!important;
     }
