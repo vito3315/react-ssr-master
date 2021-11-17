@@ -57,6 +57,7 @@ class CoverFlowCarousel extends React.Component {
     
     componentDidMount() {
         let count = 2;
+        let this_count = this.state.data.length;
         
         if(this.state.type == 'pc'){
             count = this.state.data.length >= 3 ? 2 : 1;
@@ -76,13 +77,13 @@ class CoverFlowCarousel extends React.Component {
             centeredSlides: true,
             slidesPerView: count,
             
-            autoplay: true,
+            autoplay: this_count == 1 ? false : true,
             autoplay: {
                 delay: 5000,
             },
             
-            pagination: this.state.type == 'pc' ? true : true,
-            pagination: this.state.type == 'pc' ? {
+            pagination: this_count == 1 ? false : this.state.type == 'pc' ? true : true,
+            pagination: this_count == 1 ? {} : this.state.type == 'pc' ? {
                 el: ".swiper-pagination",
                 clickable: true,
                 type: 'bullets',
@@ -90,7 +91,7 @@ class CoverFlowCarousel extends React.Component {
                     return '<span class="' + className + '">' + (index + 1) + '</span>';
                 },
             } : {},
-            navigation: this.state.type == 'pc' ? {
+            navigation: this_count == 1 ? {} : this.state.type == 'pc' ? {
                 nextEl: ".swiper-button-next", // arrows on the side of the slides
                 prevEl: ".swiper-button-prev", // arrows on the side of the slides
             } : {},
@@ -119,7 +120,7 @@ class CoverFlowCarousel extends React.Component {
                     )}
                 </div>
                     
-                {this.state.type == 'pc' ?
+                { this.state.data.length == 1 ? null : this.state.type == 'pc' ?
                     <>
                         <div className="swiper-pagination" />
                         <div className="swiper-button-prev" onClick={this.prev.bind(this)} />
