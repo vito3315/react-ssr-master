@@ -1,4 +1,14 @@
 @charset "utf-8"; 
+
+@font-face {
+    font-family: "FuturaFuturisC";
+    //font-style: normal;
+    //font-weight: 400;
+    /* Браузер сначала попробует найти шрифт локально */
+    src: local("FuturaFuturisC"),
+         url("https://jacochef.ru/src/css/fonts/FuturaFuturisC-Bold.ttf") format("ttf");
+  }
+
 $Ubuntu: 'Ubuntu';
 $Futuris: 'FuturaFuturisC';
 $colorMain: #CC0033;
