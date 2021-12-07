@@ -26,7 +26,7 @@ module.exports = {
     // output files and chunks
     output: {
         path: path.resolve( __dirname, 'dist' ),
-        publicPath: 'http://151.248.124.219/',
+        publicPath: '/',
         filename: '[name].[contenthash].js',
         clean: true,
     },
