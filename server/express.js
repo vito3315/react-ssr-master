@@ -51,6 +51,10 @@ app.use( '*', async ( req, res ) => {
     if( req.originalUrl.indexOf('.js') ){
         express.static( path.resolve( __dirname, '../dist' ) );
     }
+
+    if( req.originalUrl.indexOf('b3ce5e32a5e236fccfae.ttf') ){
+        express.static( path.resolve( __dirname, '../dist/b3ce5e32a5e236fccfae.ttf' ) );
+    }
     
     //console.log( 'url', req )
     
