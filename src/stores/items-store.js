@@ -164,6 +164,10 @@ class ItemsStore {
     let my_cart = this.getItems();  
     let allItems = this.getAllItems();
       
+    if( allItems.length == 0 || !allItems ){
+      return ; 
+    }
+
     let new_my_cart = [];
       
     my_cart.forEach( (el_cart, key_cart) => {
@@ -199,11 +203,11 @@ class ItemsStore {
     
     if( by_time == 0 ){
       this_date = moment(new Date()).format("YYYY-MM-DD");
-      this_time = moment(new Date()).format("H:mm");
+      this_time = moment(new Date()).format("HH:mm");
       this_dow = parseInt(moment(new Date()).format("E"));
     }else{
       this_date = moment(by_time).format("YYYY-MM-DD");
-      this_time = moment(by_time).format("H:mm");
+      this_time = moment(by_time).format("HH:mm");
       this_dow = parseInt(moment(by_time).format("E"));
     }
     

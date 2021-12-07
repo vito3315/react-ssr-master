@@ -41,7 +41,7 @@ import Hidden from '@material-ui/core/Hidden';
 import Swiper from "swiper";
 import SwiperCore, { Pagination, Navigation, A11y, Autoplay } from 'swiper';
 SwiperCore.use([Navigation, Pagination, A11y, Autoplay]);
-import "swiper/swiper.min.css";
+//import "swiper/swiper.min.css";
 
 class CoverFlowCarousel extends React.Component {
     swiper = null;

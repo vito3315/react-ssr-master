@@ -1860,6 +1860,44 @@ export class Cart extends React.Component {
         }
     }
     
+    changePayMobile(){
+        if( this.state.orderType+1 == 1 && parseInt(this.state.orderTimes) == 1 ){
+            if( !this.state.orderAddr || !this.state.orderAddr.point_id ){
+                this.setState({
+                    error: {
+                        title: 'Предупреждение', 
+                        text: 'Адрес доставки или точка самовывоза не выбрана'
+                    },
+                    errorOpen: true,
+                    orderTimes: '1'
+                })
+                
+                return;
+            }
+        }
+
+        this.setState({ choosePayDialog: true })
+    }
+
+    changeTimeMobile(){
+        if( this.state.orderType+1 == 1 && parseInt(this.state.orderTimes) == 1 ){
+            if( !this.state.orderAddr || !this.state.orderAddr.point_id ){
+                this.setState({
+                    error: {
+                        title: 'Предупреждение', 
+                        text: 'Адрес доставки или точка самовывоза не выбрана'
+                    },
+                    errorOpen: true,
+                    orderTimes: '1'
+                })
+                
+                return;
+            }
+        }
+
+        this.setState({ chooseTimeDialog: true })
+    }
+
     render() {
         
         if(this.state.hasError){
@@ -2196,10 +2234,10 @@ export class Cart extends React.Component {
                             </div>
                         </TabPanel>
                         
-                        <div className="boxMobile" onClick={() => this.setState({ chooseTimeDialog: true })}>
+                        <div className="boxMobile" onClick={ this.changeTimeMobile.bind(this) }>
                             <Typography variant="h5" component="span">Приготовим: {this.state.orderTimes == 1 ? 'как можно быстрее' : this.state.orderPredDay+' '+this.state.orderPredTime}</Typography>
                         </div>
-                        <div className="boxMobile" onClick={() => this.setState({ choosePayDialog: true })}>
+                        <div className="boxMobile" onClick={ this.changePayMobile.bind(this) }>
                             <Typography variant="h5" component="span">Оплачу: { this_pay ? this_pay['title'] : '' }</Typography>
                         </div>
                         <div style={{ marginTop: 15 }}>
