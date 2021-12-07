@@ -1,12 +1,12 @@
 @charset "utf-8"; 
 @font-face {
-	font-family: Futuris Bold; /* Гарнитура шрифта */
+	font-family: FuturaFuturisC; /* Гарнитура шрифта */
 	src: url('/src/assets/fonts/FuturaFuturisC-Bold.ttf'); /* Для IE5-8 */
 	src: local(FuturaFuturisC-Bold), url('/src/assets/fonts/FuturaFuturisC-Bold.ttf'); /* Для остальных браузеров */
 }
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 $Ubuntu: 'Ubuntu';
-$Futuris: 'Futuris Bold';
+$Futuris: 'FuturaFuturisC';
 $colorMain: #CC0033;
 @mixin fons($size: 1rem, $family: $Ubuntu) {
     font-size: $size;
