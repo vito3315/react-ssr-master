@@ -477,7 +477,7 @@ export class App extends React.Component {
                     </Switch>
                     
                     {this.state.activePage == 'cart' ?
-                        <Hidden mdDown>
+                        <Hidden mdUp>
                             <Hidden only="xs">
                                 <div className="456" style={{ width: '100%', height: 3, position: 'fixed', bottom: 72, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
                                 <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 69, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
