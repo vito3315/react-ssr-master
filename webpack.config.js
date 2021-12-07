@@ -104,6 +104,10 @@ module.exports = {
                 {
                     from: path.resolve( __dirname, 'src/robots.txt' ),
                     to: path.resolve( __dirname, 'dist/robots.txt' )
+                },
+                {
+                    from: path.resolve( __dirname, 'src/FuturaFuturisC-Bold.ttf' ),
+                    to: path.resolve( __dirname, 'dist/FuturaFuturisC-Bold.ttf' )
                 }
             ]
         } ),
