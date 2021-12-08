@@ -1133,7 +1133,7 @@ export class Cart extends React.Component {
                 def_type = 'cash';
             }else{
                 this.setState({
-                    renderPay: this.state.pays.dev_mini,
+                    renderPay: this.state.pays.dev,
                 });
                 def_type = 'cash';
             }
