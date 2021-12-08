@@ -1438,7 +1438,19 @@ export class Cart extends React.Component {
         if( this.clickOrderStart == false ){
             this.clickOrderStart = true;
             
-            console.log( 'orderTimes', parseInt( this.state.orderTimes ), 'orderPredDay', this.state.orderPredDay , 'orderPredTime', this.state.orderPredTime )
+            if( parseInt( this.state.orderTimes ) == 2 && (this.state.orderPredDay == '' || this.state.orderPredTime == '') ){
+                this.setState({
+                    error: {
+                        title: 'Предупреждение', 
+                        text: 'Дата или время предзаказа не указано'
+                    },
+                    errorOpen: true,
+                    orderTimes: '1'
+                })
+                
+                this.clickOrderStart = false;
+                return;
+            }
 
             if( this.state.orderType+1 == 1 && parseInt(this.state.orderTimes) == 1 ){
                 if( !this.state.orderAddr || !this.state.orderAddr.point_id ){
