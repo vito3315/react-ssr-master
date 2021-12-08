@@ -1126,17 +1126,17 @@ export class Cart extends React.Component {
             def_type = 'cash';
         
         if( type_order == 0 ){
-            if( type == 1 ){
+            //if( type == 1 ){
                 this.setState({
                     renderPay: this.state.pays.dev,
                 });
-                def_type = 'cash';
-            }else{
+                def_type = this.state.orderPay == '' || this.state.orderPay == 'in' ? 'cash' : this.state.orderPay;
+            /*}else{
                 this.setState({
                     renderPay: this.state.pays.dev,
                 });
-                def_type = 'cash';
-            }
+                def_type = this.state.orderPay == '' || this.state.orderPay == 'in' ? 'cash' : this.state.orderPay;
+            }*/
         }else{
             this.setState({
                 renderPay: this.state.pays.pic,
