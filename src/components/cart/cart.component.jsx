@@ -700,15 +700,15 @@ export class Cart extends React.Component {
                                 type_order = cartData.orderType;
                             
                             if( type_order == 0 ){
-                                if( type == 1 ){
+                                //if( type == 1 ){
                                     this.setState({
                                         renderPay: this.state.pays.dev
                                     })
-                                }else{
+                                /*}else{
                                     this.setState({
                                         renderPay: this.state.pays.dev_mini,
                                     })
-                                }
+                                }*/
                             }else{
                                 this.setState({
                                     renderPay: this.state.pays.pic,
@@ -999,17 +999,17 @@ export class Cart extends React.Component {
             def_type = 'cash';
         
         if( type_order == 0 ){
-            if( type == 1 ){
+            //if( type == 1 ){
                 this.setState({
                     renderPay: this.state.pays.dev,
                 })
-                def_type = 'cash';
-            }else{
+                def_type = this.state.orderPay == '' || this.state.orderPay == 'in' ? 'cash' : this.state.orderPay;
+            /*}else{
                 this.setState({
                     renderPay: this.state.pays.dev_mini,
                 })
                 def_type = 'cash';
-            }
+            }*/
         }else{
             this.setState({
                 renderPay: this.state.pays.pic,
@@ -1042,15 +1042,15 @@ export class Cart extends React.Component {
             type_order = this.state.orderType;
         
         if( type_order == 0 ){
-            if( type == 1 ){
+            //if( type == 1 ){
                 this.setState({
                     renderPay: this.state.pays.dev,
                 })
-            }else{
+            /*}else{
                 this.setState({
                     renderPay: this.state.pays.dev_mini,
                 })
-            }
+            }*/
         }else{
             this.setState({
                 renderPay: this.state.pays.pic,
@@ -1308,15 +1308,15 @@ export class Cart extends React.Component {
                 type_order = this.state.orderType;
             
             if( type_order == 0 ){
-                if( type == 1 ){
+                //if( type == 1 ){
                     this.setState({
                         renderPay: this.state.pays.dev,
                     })
-                }else{
+                /*}else{
                     this.setState({
                         renderPay: this.state.pays.dev_mini,
                     })
-                }
+                }*/
             }else{
                 this.setState({
                     renderPay: this.state.pays.pic,
@@ -1390,8 +1390,8 @@ export class Cart extends React.Component {
             
             if( type_order == 0 ){
                 this.setState({
-                    renderPay: this.state.pays.dev_mini,
-                    orderPay: 'cash'
+                    renderPay: this.state.pays.dev,
+                    //orderPay: 'cash'
                 });
             }else{
                 this.setState({
