@@ -2,7 +2,8 @@
 @font-face {
 	font-family: FuturaFuturisC; /* Гарнитура шрифта */
 	src: url('/src/assets/fonts/FuturaFuturisC-Bold.ttf'); /* Для IE5-8 */
-	src: local(FuturaFuturisC-Bold), url('/src/assets/fonts/FuturaFuturisC-Bold.ttf'); /* Для остальных браузеров */
+	src: local(FuturaFuturisC-Bold), 
+        url('/src/assets/fonts/FuturaFuturisC-Bold.ttf') format('truetype'); /* Для остальных браузеров */
 }
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 $Ubuntu: 'Ubuntu';
