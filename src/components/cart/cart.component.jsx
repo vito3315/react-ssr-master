@@ -1907,7 +1907,7 @@ export class Cart extends React.Component {
         }
     }
     
-    changePayMobile(){
+    changePayMobile_new(){
         if( this.state.orderType+1 == 1 && parseInt(this.state.orderTimes) == 1 ){
             if( !this.state.orderAddr || !this.state.orderAddr.point_id ){
                 this.setState({
@@ -2284,7 +2284,7 @@ export class Cart extends React.Component {
                         <div className="boxMobile" onClick={ this.changeTimeMobile.bind(this) }>
                             <Typography variant="h5" component="span">Приготовим: {this.state.orderTimes == 1 ? 'как можно быстрее' : this.state.orderPredDay+' '+this.state.orderPredTime}</Typography>
                         </div>
-                        <div className="boxMobile" onClick={ this.changePayMobile.bind(this) }>
+                        <div className="boxMobile" onClick={ this.changePayMobile_new.bind(this) }>
                             <Typography variant="h5" component="span">Оплачу: { this_pay ? this_pay['title'] : '' }</Typography>
                         </div>
                         <div style={{ marginTop: 15 }}>
