@@ -1438,6 +1438,11 @@ export class Cart extends React.Component {
         if( this.clickOrderStart == false ){
             this.clickOrderStart = true;
             
+            let payFull = this.state.renderPay.find( (item) => item.type == this.state.orderPay );
+
+            console.log( payFull )
+            console.log( this.state.orderPay )
+
             if( parseInt( this.state.orderTimes ) == 2 && (this.state.orderPredDay == '' || this.state.orderPredTime == '') ){
                 this.setState({
                     error: {
