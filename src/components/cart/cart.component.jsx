@@ -1438,6 +1438,21 @@ export class Cart extends React.Component {
         if( this.clickOrderStart == false ){
             this.clickOrderStart = true;
             
+            if( this.state.orderType+1 == 1 && parseInt(this.state.orderTimes) == 1 ){
+                if( !this.state.orderAddr || !this.state.orderAddr.point_id ){
+                    this.setState({
+                        error: {
+                            title: 'Предупреждение', 
+                            text: 'Адрес доставки или точка самовывоза не выбрана'
+                        },
+                        errorOpen: true,
+                        orderTimes: '1'
+                    })
+                    
+                    return;
+                }
+            }
+
             this.setState({
                 spiner: true
             })
