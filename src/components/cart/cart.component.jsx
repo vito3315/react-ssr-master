@@ -1440,8 +1440,18 @@ export class Cart extends React.Component {
             
             let payFull = this.state.renderPay.find( (item) => item.type == this.state.orderPay );
 
-            console.log( payFull )
-            console.log( this.state.orderPay )
+            if( !payFull ){
+                this.setState({
+                    error: {
+                        title: 'Предупреждение', 
+                        text: 'Тип оплаты не выбран'
+                    },
+                    errorOpen: true
+                })
+                
+                this.clickOrderStart = false;
+                return;
+            }
 
             if( parseInt( this.state.orderTimes ) == 2 && (this.state.orderPredDay == '' || this.state.orderPredTime == '') ){
                 this.setState({
@@ -1449,8 +1459,7 @@ export class Cart extends React.Component {
                         title: 'Предупреждение', 
                         text: 'Дата или время предзаказа не указано'
                     },
-                    errorOpen: true,
-                    orderTimes: '1'
+                    errorOpen: true
                 })
                 
                 this.clickOrderStart = false;
@@ -1464,8 +1473,7 @@ export class Cart extends React.Component {
                             title: 'Предупреждение', 
                             text: 'Адрес доставки или точка самовывоза не выбрана'
                         },
-                        errorOpen: true,
-                        orderTimes: '1'
+                        errorOpen: true
                     })
                     
                     this.clickOrderStart = false;
