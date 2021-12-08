@@ -1438,6 +1438,8 @@ export class Cart extends React.Component {
         if( this.clickOrderStart == false ){
             this.clickOrderStart = true;
             
+            console.log( 'orderTimes', parseInt( this.state.orderTimes ), 'orderPredDay', this.state.orderPredDay , 'orderPredTime', this.state.orderPredTime )
+
             if( this.state.orderType+1 == 1 && parseInt(this.state.orderTimes) == 1 ){
                 if( !this.state.orderAddr || !this.state.orderAddr.point_id ){
                     this.setState({
@@ -1449,6 +1451,7 @@ export class Cart extends React.Component {
                         orderTimes: '1'
                     })
                     
+                    this.clickOrderStart = false;
                     return;
                 }
             }
