@@ -1,6 +1,6 @@
 @charset "utf-8"; 
 @font-face {
-    font-family: 'FuturaFuturisC';
+    font-family: 'FuturaFuturisC Bold';
     src: url('/src/assets/fonts/FuturaFuturisC-Bold.eot');
     src: local('FuturaFuturisC Bold'), local('FuturaFuturisC-Bold'),
         url('/src/assets/fonts/FuturaFuturisC-Bold.eot?#iefix') format('embedded-opentype'),
@@ -13,7 +13,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 $Ubuntu: 'Ubuntu';
-$Futuris: 'FuturaFuturisC';
+$Futuris: 'FuturaFuturisC Bold';
 $colorMain: #CC0033;
 @mixin fons($size: 1rem, $family: $Ubuntu) {
     font-size: $size;
