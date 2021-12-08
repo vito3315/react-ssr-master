@@ -3,7 +3,7 @@ $Futuris: 'FuturaFuturisC';
 $colorMain: #CC0033;
 @mixin fons($size: 1rem, $family: $Ubuntu) {
     font-size: $size;
-    font-family: $family !important;
+    font-family: $family, sans-serif !important;
 }
 @mixin fons_new($size: 1rem, $family: $Ubuntu) {
     font-size: $size !important;
