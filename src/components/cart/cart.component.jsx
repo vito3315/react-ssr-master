@@ -1113,6 +1113,9 @@ export class Cart extends React.Component {
     }
     
     changePayMobile(type){
+
+        console.log( 'changePayMobile', type )
+
         this.setState({
             orderPay: type,
             choosePayDialog: false
