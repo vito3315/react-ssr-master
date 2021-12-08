@@ -492,6 +492,7 @@ export class Cart extends React.Component {
                 ],
                 dev_mini: [
                     {type: 'cash', title: 'Наличными курьеру'},
+                    {type: 'card', title: 'Онлайн'},
                 ],
                 pic: [
                     {type: 'in', title: 'В кафе'},
