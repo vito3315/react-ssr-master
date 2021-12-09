@@ -2221,10 +2221,11 @@ export class Cart extends React.Component {
                             null
                         }
                         <div>
-                            <FormGroup row>
+                            <FormGroup component="fieldset">
+                                <FormLabel component="legend">Уведомление</FormLabel>
                                 <FormControlLabel
                                     control={<Checkbox checked={this.state.showNotif} onChange={ this.showNotif.bind(this) } name="checkedA" />}
-                                    label="Secondary"
+                                    label="Уведомить о готовности заказа"
                                 />
                             </FormGroup>
                         </div>
