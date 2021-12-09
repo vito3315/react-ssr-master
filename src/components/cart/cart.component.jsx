@@ -776,7 +776,7 @@ export class Cart extends React.Component {
               const app = initializeApp(firebaseConfig);
               const analytics = getAnalytics(app);
               
-              
+              //let check = messaging.isSupported() ? true : false;
 
             if( document.querySelector('.activeCat') ){
                 document.querySelector('.activeCat').classList.remove('activeCat');
@@ -1977,11 +1977,15 @@ export class Cart extends React.Component {
 
     testBTN(){
 
-        let check = firebase.messaging.isSupported() ? true : false;
+        
 
-        console.log( 'isSupported', check )
+        
 
         const messaging = getMessaging();
+
+        let check = messaging.isSupported() ? true : false;
+
+        console.log( 'isSupported', check )
 
         getToken(messaging, { vapidKey: 'BJmoVaG5ijS0CXc126Y47xmkjxv92stPrkQDfLql5hirvoWvAcy2N4xR1CPKVnCzUVai3ZqkzvVAjOyHGUWhogA' }).then((currentToken) => {
             if (currentToken) {
