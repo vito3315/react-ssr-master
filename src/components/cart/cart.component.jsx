@@ -1945,6 +1945,24 @@ export class Cart extends React.Component {
         this.setState({ chooseTimeDialog: true })
     }
 
+    testBTN(){
+        getToken(messaging, { vapidKey: 'BJmoVaG5ijS0CXc126Y47xmkjxv92stPrkQDfLql5hirvoWvAcy2N4xR1CPKVnCzUVai3ZqkzvVAjOyHGUWhogA' }).then((currentToken) => {
+            if (currentToken) {
+                console.log( currentToken )
+                localStorage.setItem('appToken', currentToken)
+                // Send the token to your server and update the UI if necessary
+                // ...
+            } else {
+                // Show permission request UI
+                console.log('No registration token available. Request permission to generate one.');
+                // ...
+            }
+        }).catch((err) => {
+            console.log('An error occurred while retrieving token. ', err);
+              // ...
+        });
+    }
+
     render() {
         
         if(this.state.hasError){
@@ -1979,7 +1997,7 @@ export class Cart extends React.Component {
                 </Backdrop>
                 
                 <Grid item xs={12}>
-                    <Typography variant="h5" component="h1">Корзина</Typography>
+                    <Typography variant="h5" component="h1" onClick={this.testBTN.bind(this)}>Корзина</Typography>
                 </Grid>
                 
                 <Hidden xsDown>
