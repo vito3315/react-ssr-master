@@ -13,6 +13,13 @@ import { faTimes, faPlus, faMinus, faRubleSign, faCreditCard, faMoneyBill, faCas
 
 import Hidden from '@material-ui/core/Hidden';
 
+import FormGroup from '@material-ui/core/FormGroup';
+import Checkbox from '@material-ui/core/Checkbox';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import Favorite from '@material-ui/icons/Favorite';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
@@ -560,7 +567,9 @@ export class Cart extends React.Component {
             isSafari: false,
             isIE: false,
             isEdge: false,
-            isChrome: false
+            isChrome: false,
+
+            showNotif: false
         };
         
         itemsStore.setCity(this.props.city);
@@ -783,16 +792,14 @@ export class Cart extends React.Component {
             // Chrome 1 - 71
             const isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
 
-            
-
-            setTimeout( () => {
-                console.log( 'isOpera', isOpera )
-                console.log( 'isSafari', isSafari )
-                console.log( 'isFirefox', isFirefox )
-                console.log( 'isIE', isIE )
-                console.log( 'isEdge', isEdge )
-                console.log( 'isChrome', isChrome )
-            }, 300 )
+            this.setState({
+                isOpera: isOpera,
+                isSafari: isSafari,
+                isFirefox: isFirefox,
+                isIE: isIE,
+                isEdge: isEdge,
+                isChrome: isChrome
+            })
             
             
             
@@ -2011,16 +2018,6 @@ export class Cart extends React.Component {
     }
 
     testBTN(){
-
-
-
-        //console.log( 'firebaseAPP', firebaseAPP )
-
-        //let check = isWindowSupported() ? true : false;
-
-        //console.log( 'isWindowSupported', check )
-        //console.log( 'isWindowSupported', isWindowSupported() )
-
         const messaging = getMessaging();
 
         
@@ -2199,6 +2196,14 @@ export class Cart extends React.Component {
                                 :
                             null
                         }
+                        <div>
+                            <FormGroup row>
+                                <FormControlLabel
+                                    control={<Checkbox checked={this.state.showNotif} onChange={ (event, data) => {console.log( event, data )} } name="checkedA" />}
+                                    label="Secondary"
+                                />
+                            </FormGroup>
+                        </div>
                         <div>
                             <FormControl component="fieldset">
                                 <FormLabel component="legend">Оплата</FormLabel>
