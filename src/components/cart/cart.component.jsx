@@ -568,7 +568,6 @@ export class Cart extends React.Component {
             isIE: false,
             isEdge: false,
             isChrome: false,
-            isSupport: false,
 
             showNotif: false,
             appToken: ''
@@ -820,15 +819,7 @@ export class Cart extends React.Component {
             // Initialize Firebase
             firebaseAPP = initializeApp(firebaseConfig);
             const analytics = getAnalytics(firebaseAPP);
-            const messaging = getMessaging();
-
-            let check = messaging.isSupported() ? true : false;
-
-            this.setState({
-                isSupport: check
-            })
-
-
+            
             if( document.querySelector('.activeCat') ){
                 document.querySelector('.activeCat').classList.remove('activeCat');
             }
@@ -2231,7 +2222,7 @@ export class Cart extends React.Component {
                                 :
                             null
                         }
-                        { this.state.isSupport === true && this.state.isSafari === false && this.state.isIE == false ?
+                        { this.state.isSafari === false && this.state.isIE == false ?
                             <div>
                                 <FormGroup component="fieldset">
                                     <FormLabel component="legend">Уведомление</FormLabel>
