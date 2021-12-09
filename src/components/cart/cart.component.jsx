@@ -1979,6 +1979,8 @@ export class Cart extends React.Component {
 
     testBTN(){
 
+        console.log( 'firebaseAPP', firebaseAPP )
+
         let check = firebaseAPP.messaging.isSupported() ? true : false;
 
         console.log( 'isSupported', check )
