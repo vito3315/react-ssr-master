@@ -457,6 +457,8 @@ class CartItemMobile extends React.Component {
     }
 }
 
+let firebaseAPP = null;
+
 export class Cart extends React.Component {
     _isMounted = false;
     clickOrderStart = false
@@ -773,8 +775,8 @@ export class Cart extends React.Component {
               };
               
               // Initialize Firebase
-              const app = initializeApp(firebaseConfig);
-              const analytics = getAnalytics(app);
+              firebaseAPP = initializeApp(firebaseConfig);
+              const analytics = getAnalytics(firebaseAPP);
               
               //let check = messaging.isSupported() ? true : false;
 
@@ -1977,7 +1979,7 @@ export class Cart extends React.Component {
 
     testBTN(){
 
-        let check = firebase.messaging.isSupported() ? true : false;
+        let check = firebaseAPP.messaging.isSupported() ? true : false;
 
         console.log( 'isSupported', check )
 
