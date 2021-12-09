@@ -553,7 +553,14 @@ export class Cart extends React.Component {
             orderPromo: '',
             orderPromoText: '',
             
-            newOrderData: null
+            newOrderData: null,
+
+            isOpera: false,
+            isFirefox: false,
+            isSafari: false,
+            isIE: false,
+            isEdge: false,
+            isChrome: false
         };
         
         itemsStore.setCity(this.props.city);
@@ -763,6 +770,26 @@ export class Cart extends React.Component {
         
         try{
 
+            this.setState({
+                isOpera: (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0,
+                isSafari: /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification)),
+                isFirefox: typeof InstallTrigger !== 'undefined',
+                isIE: /*@cc_on!@*/false || !!document.documentMode,
+                isEdge: !isIE && !!window.StyleMedia,
+                isChrome: !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime)
+            })
+
+            setTimeout( () => {
+                console.log( 'isOpera', isOpera )
+                console.log( 'isSafari', isSafari )
+                console.log( 'isFirefox', isFirefox )
+                console.log( 'isIE', isIE )
+                console.log( 'isEdge', isEdge )
+                console.log( 'isChrome', isChrome )
+            }, 300 )
+            
+            
+            
             const firebaseConfig = {
                 apiKey: "AIzaSyAK8l7m2URB6kFbBzC5iv67W34cuEzPKYc",
                 authDomain: "macro-thinker-288611.firebaseapp.com",
@@ -1978,6 +2005,8 @@ export class Cart extends React.Component {
     }
 
     testBTN(){
+
+
 
         //console.log( 'firebaseAPP', firebaseAPP )
 
