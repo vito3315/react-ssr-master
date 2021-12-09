@@ -11,6 +11,18 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'FuturaFuturisC';
+    src: url('/src/assets/fonts/FuturaFuturisC-Bold.eot');
+    src: local('FuturaFuturisC Bold'), local('FuturaFuturisC-Bold'),
+        url('/src/assets/fonts/FuturaFuturisC-Bold.eot?#iefix') format('embedded-opentype'),
+        url('/src/assets/fonts/FuturaFuturisC-Bold.woff2') format('woff2'),
+        url('/src/assets/fonts/FuturaFuturisC-Bold.woff') format('woff'),
+        url('/src/assets/fonts/FuturaFuturisC-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 $Ubuntu: 'Ubuntu';
 $Futuris: 'FuturaFuturisC Bold';
