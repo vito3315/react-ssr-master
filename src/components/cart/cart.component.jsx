@@ -72,7 +72,7 @@ const queryString = require('query-string');
 import axios from 'axios';
 
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+import { firebase, initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getMessaging, getToken } from "firebase/messaging";
 
@@ -1977,15 +1977,11 @@ export class Cart extends React.Component {
 
     testBTN(){
 
-        
-
-        
-
-        const messaging = getMessaging();
-
-        let check = messaging.isSupported() ? true : false;
+        let check = firebase.messaging.isSupported() ? true : false;
 
         console.log( 'isSupported', check )
+
+        const messaging = getMessaging();
 
         getToken(messaging, { vapidKey: 'BJmoVaG5ijS0CXc126Y47xmkjxv92stPrkQDfLql5hirvoWvAcy2N4xR1CPKVnCzUVai3ZqkzvVAjOyHGUWhogA' }).then((currentToken) => {
             if (currentToken) {
