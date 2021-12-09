@@ -1988,25 +1988,7 @@ export class Cart extends React.Component {
 
         const messaging = getMessaging();
 
-        messaging.requestPermission()
-            .then(function(){
-                console.log('I am in here');
-            
-                //console
-
-                return messaging.getToken()
-            .then(function(currentToken) {
-                console.log(currentToken);
-            })
-            .catch(function(err) {
-                console.log('An error occurred while retrieving token. ', err);
-                //showToken('Error retrieving Instance ID token. ', err);
-                //setTokenSentToServer(false);
-            });
-
-            }).catch(function(err){
-                console.log('Error');
-            });
+        
 
         getToken(messaging, { vapidKey: 'BJmoVaG5ijS0CXc126Y47xmkjxv92stPrkQDfLql5hirvoWvAcy2N4xR1CPKVnCzUVai3ZqkzvVAjOyHGUWhogA' }).then((currentToken) => {
             if (currentToken) {
