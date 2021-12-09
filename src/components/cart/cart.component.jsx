@@ -2066,6 +2066,8 @@ export class Cart extends React.Component {
 
     render() {
         
+        console.log( 'isSupported', isSupported(), 'isSafari', this.state.isSafari, 'isIE', this.state.isIE )
+
         if(this.state.hasError){
             return (
                 <>
