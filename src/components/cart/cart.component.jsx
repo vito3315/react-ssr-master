@@ -1976,6 +1976,11 @@ export class Cart extends React.Component {
     }
 
     testBTN(){
+
+        let check = firebase.messaging.isSupported() ? true : false;
+
+        console.log( 'isSupported', check )
+
         const messaging = getMessaging();
 
         getToken(messaging, { vapidKey: 'BJmoVaG5ijS0CXc126Y47xmkjxv92stPrkQDfLql5hirvoWvAcy2N4xR1CPKVnCzUVai3ZqkzvVAjOyHGUWhogA' }).then((currentToken) => {
