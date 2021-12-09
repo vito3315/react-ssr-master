@@ -3,11 +3,11 @@ $Futuris: 'FuturaFuturisC Bold';
 $colorMain: #CC0033;
 @mixin fons($size: 1rem, $family: $Ubuntu) {
     font-size: $size;
-    font-family: $family, sans-serif !important;
+    font-family: $family !important;
 }
 @mixin fons_new($size: 1rem, $family: $Ubuntu) {
     font-size: $size !important;
-    font-family: $family !important;
+    font-family: $family, bold !important;
 }
 
 .swiper-wrapper._h2_{
@@ -37,7 +37,7 @@ $colorMain: #CC0033;
 }
 .Category{
     & h1, h2{
-        @include fons(2rem, $Futuris);
+        @include fons_new(2rem, $Futuris);
         text-align: center;
         width: 100%;
     }
@@ -425,6 +425,6 @@ $colorMain: #CC0033;
         @include fons_new(0.8rem, $Futuris);
     }
     & .ItemDesc{
-        @include fons_new(0.7rem, $Ubuntu);
+        @include fons(0.7rem, $Ubuntu);
     }
 }
