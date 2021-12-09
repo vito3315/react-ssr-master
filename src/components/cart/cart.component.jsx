@@ -569,7 +569,8 @@ export class Cart extends React.Component {
             isEdge: false,
             isChrome: false,
 
-            showNotif: false
+            showNotif: false,
+            appToken: ''
         };
         
         itemsStore.setCity(this.props.city);
@@ -2020,23 +2021,46 @@ export class Cart extends React.Component {
     testBTN(){
         const messaging = getMessaging();
 
-        
-
         getToken(messaging, { vapidKey: 'BJmoVaG5ijS0CXc126Y47xmkjxv92stPrkQDfLql5hirvoWvAcy2N4xR1CPKVnCzUVai3ZqkzvVAjOyHGUWhogA' }).then((currentToken) => {
             if (currentToken) {
                 console.log( currentToken )
                 localStorage.setItem('appToken', currentToken)
-              // Send the token to your server and update the UI if necessary
-              // ...
             } else {
-              // Show permission request UI
-              console.log('No registration token available. Request permission to generate one.');
-              // ...
+                console.log('No registration token available. Request permission to generate one.');
             }
-          }).catch((err) => {
+        }).catch((err) => {
             console.log('An error occurred while retrieving token. ', err);
-            // ...
-          });
+        });
+    }
+
+    showNotif(event, data){
+        this.setState({
+            showNotif: data
+        })
+
+        if( data === true ){
+            const messaging = getMessaging();
+
+            getToken(messaging, { vapidKey: 'BJmoVaG5ijS0CXc126Y47xmkjxv92stPrkQDfLql5hirvoWvAcy2N4xR1CPKVnCzUVai3ZqkzvVAjOyHGUWhogA' }).then((currentToken) => {
+                if (currentToken) {
+                    console.log( currentToken )
+                    localStorage.setItem('appToken', currentToken)
+
+                    this.setState({
+                        appToken: currentToken
+                    })
+
+                } else {
+                    console.log('No registration token available. Request permission to generate one.');
+                }
+            }).catch((err) => {
+                console.log('An error occurred while retrieving token. ', err);
+            });
+        }else{
+            this.setState({
+                appToken: ''
+            })
+        }
     }
 
     render() {
@@ -2199,7 +2223,7 @@ export class Cart extends React.Component {
                         <div>
                             <FormGroup row>
                                 <FormControlLabel
-                                    control={<Checkbox checked={this.state.showNotif} onChange={ (event, data) => {console.log( event, data )} } name="checkedA" />}
+                                    control={<Checkbox checked={this.state.showNotif} onChange={ this.showNotif.bind(this) } name="checkedA" />}
                                     label="Secondary"
                                 />
                             </FormGroup>
