@@ -18,7 +18,7 @@ const { App } = require( '../src/components/app' );
 const routes = require( './routes' );
 
 // serve static assets
-app.get( /\.(js|css|map|ico|png|svg|htaccess|xml|txt|ttf)$/, express.static( path.resolve( __dirname, '../dist' ) ) );
+app.get( /\.(js|css|map|ico|png|svg|htaccess|xml|txt|ttf|woff|woff2)$/, express.static( path.resolve( __dirname, '../dist' ) ) );
 
 /*app.get('*.js', (req, res, next) => {
 	req.url = req.url + '.gz';
@@ -52,13 +52,13 @@ app.use( '*', async ( req, res ) => {
         express.static( path.resolve( __dirname, '../dist' ) );
     }
 
-    if( req.originalUrl.indexOf('b3ce5e32a5e236fccfae.ttf') ){
+    /*if( req.originalUrl.indexOf('b3ce5e32a5e236fccfae.ttf') ){
         express.static( path.resolve( __dirname, '../dist/b3ce5e32a5e236fccfae.ttf' ) );
     }
 
     if( req.originalUrl.indexOf('FuturaFuturisC-Bold.ttf') ){
         express.static( path.resolve( __dirname, '../dist/FuturaFuturisC-Bold.ttf' ) );
-    }
+    }*/
     
     //console.log( 'url', req )
     
