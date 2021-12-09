@@ -35,6 +35,29 @@ import { autorun } from "mobx"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInstagram, faFacebookF, faOdnoklassniki, faVk, faTelegramPlane } from '@fortawesome/free-brands-svg-icons'
 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAK8l7m2URB6kFbBzC5iv67W34cuEzPKYc",
+  authDomain: "macro-thinker-288611.firebaseapp.com",
+  databaseURL: "https://macro-thinker-288611.firebaseio.com",
+  projectId: "macro-thinker-288611",
+  storageBucket: "macro-thinker-288611.appspot.com",
+  messagingSenderId: "989415800368",
+  appId: "1:989415800368:web:5baae6a54f5b8cb43177f5",
+  measurementId: "${config.measurementId}"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
 function Status({ code, children }) {
   return (
     <Route
