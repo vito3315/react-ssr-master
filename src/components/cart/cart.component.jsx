@@ -71,6 +71,8 @@ import {Helmet} from "react-helmet";
 const queryString = require('query-string');
 import axios from 'axios';
 
+const messaging = getMessaging(); 
+
 function get_city(path){
     
     path = path.split('/');
