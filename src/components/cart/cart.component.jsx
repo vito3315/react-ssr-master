@@ -1946,7 +1946,8 @@ export class Cart extends React.Component {
     }
 
     testBTN(){
-        test123();
+        console.log( this.props.test )
+        //test123();
     }
 
     render() {
