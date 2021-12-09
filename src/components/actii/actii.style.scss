@@ -1,9 +1,14 @@
 $Ubuntu: 'Ubuntu';
-$Futuris: 'FuturaFuturisC';
+$Futuris: 'FuturaFuturisC Bold';
 @mixin fons($size: 1rem, $family: $Ubuntu) {
     font-size: $size;
     font-family: $family !important;
 }
+@mixin fons_new($size: 1rem, $family: $Ubuntu) {
+    font-size: $size !important;
+    font-family: $family, bold !important;
+}
+
 .MuiSnackbarContent-root.MuiPaper-elevation6{
     box-shadow: none;
 }
@@ -37,7 +42,7 @@ $Futuris: 'FuturaFuturisC';
 .Actii{
     margin-top: 64px!important;
     & h1, h2{
-        @include fons(2rem, $Futuris);
+        @include fons_new(2rem, $Futuris);
         text-align: center;
     }
     & .mainContainer{
@@ -57,7 +62,7 @@ $Futuris: 'FuturaFuturisC';
             padding-left: 34px!important;
         }
         & h1{
-            @include fons(1.7rem, $Futuris);
+            @include fons_new(1.7rem, $Futuris);
             text-align: center;
         }
     }
@@ -92,7 +97,7 @@ $Futuris: 'FuturaFuturisC';
 .modalActii{
     & h6{
         text-align: center;
-        @include fons(1.6rem, $Futuris);
+        @include fons_new(1.6rem, $Futuris);
     }
     & .modalActiiContent{
         padding-top: 0!important;

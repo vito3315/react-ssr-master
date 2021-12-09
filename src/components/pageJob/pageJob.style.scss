@@ -1,18 +1,22 @@
 $Ubuntu: 'Ubuntu';
-$Futuris: 'FuturaFuturisC';
+$Futuris: 'FuturaFuturisC Bold';
 $colorMain: #BB0025;
 @mixin fons($size: 1rem, $family: $Ubuntu) {
     font-size: $size;
     font-family: $family !important;
 }
+@mixin fons_new($size: 1rem, $family: $Ubuntu) {
+    font-size: $size !important;
+    font-family: $family, bold !important;
+}
 .PAGEjob{
     margin-top: 64px!important;
     & h1{
-        @include fons(1.3rem, $Futuris);
+        @include fons_new(1.3rem, $Futuris);
         text-align: center;
     }
     & h2{
-        @include fons(1.3rem, $Futuris);
+        @include fons_new(1.3rem, $Futuris);
     }
     & .mainContainer{
         padding-top: 0!important; 
@@ -44,7 +48,7 @@ $colorMain: #BB0025;
             padding-left: 48px!important;
         }
         & h1{
-            @include fons(1.3rem, $Futuris);
+            @include fons_new(1.3rem, $Futuris);
             text-align: center;
         }
     }

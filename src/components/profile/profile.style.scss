@@ -1,16 +1,20 @@
 $Ubuntu: 'Ubuntu';
-$Futuris: 'FuturaFuturisC';
+$Futuris: 'FuturaFuturisC Bold';
 $mainColor: #CC0033;
 @mixin fons($size: 1rem, $family: $Ubuntu) {
     font-size: $size;
     font-family: $family !important;
+}
+@mixin fons_new($size: 1rem, $family: $Ubuntu) {
+    font-size: $size !important;
+    font-family: $family, bold !important;
 }
 .MuiSnackbarContent-root.MuiPaper-elevation6{
     box-shadow: none;
 }
 .showOrderDialog{
     & h6{
-        @include fons(1.3rem, $Futuris);
+        @include fons_new(1.3rem, $Futuris);
         text-align: center;
     }
     & .showOrderDialogContent{
@@ -98,7 +102,7 @@ $mainColor: #CC0033;
 .Profile{
     margin-top: 64px!important;
     & h1{
-        @include fons(2rem, $Futuris);
+        @include fons_new(2rem, $Futuris);
         text-align: center;
     }
     & .mainContainer{
@@ -118,7 +122,7 @@ $mainColor: #CC0033;
             padding-left: 34px!important;
         }
         & h1{
-            @include fons(1.7rem, $Futuris);
+            @include fons_new(1.7rem, $Futuris);
             text-align: center;
         }
     }
@@ -130,7 +134,7 @@ $mainColor: #CC0033;
 .modalProfile{
     & h6{
         text-align: center;
-        @include fons(1.6rem, $Futuris);
+        @include fons_new(1.6rem, $Futuris);
     }
     & .modalProfileContent{
         padding-top: 0!important;
@@ -188,7 +192,7 @@ $mainColor: #CC0033;
         & tr{
             border-bottom: 1px solid #e5e5e5;
             & div > span:first-child{
-                @include fons(1.1rem, $Futuris);
+                @include fons_new(1.1rem, $Futuris);
             }
             & div > span:last-child{
                 @include fons(1.1rem, $Ubuntu);

@@ -1,5 +1,5 @@
 $Ubuntu: 'Ubuntu';
-$Futuris: 'FuturaFuturisC';
+$Futuris: 'FuturaFuturisC Bold';
 $colorMain: #CC0033;
 @mixin fons($size: 1rem, $family: $Ubuntu) {
     font-size: $size;
@@ -7,7 +7,7 @@ $colorMain: #CC0033;
 }
 @mixin fons_new($size: 1rem, $family: $Ubuntu) {
     font-size: $size !important;
-    font-family: $family !important;
+    font-family: $family, bold !important;
 }
 
 
@@ -39,10 +39,10 @@ $colorMain: #CC0033;
     padding: 0!important;
 }
 .ItemPriceLabel{
-    @include fons_new(1.2rem, $Ubuntu);
+    @include fons(1.2rem, $Ubuntu);
 }
 .ItemPriceValue{
-    @include fons_new(1.2rem, $Ubuntu);
+    @include fons(1.2rem, $Ubuntu);
     font-weight: bold!important;
 }
 
@@ -105,7 +105,7 @@ $colorMain: #CC0033;
     padding: 0 20px;
     padding-bottom: 20px;
     & h1{
-        @include fons(1.7rem, $Futuris);
+        @include fons_new(1.7rem, $Futuris);
     }
     & img{
         max-width: 400px;
@@ -193,7 +193,7 @@ $colorMain: #CC0033;
         @include fons_new(0.8rem, $Futuris);
     }
     & .ItemDesc{
-        @include fons_new(0.7rem, $Ubuntu);
+        @include fons(0.7rem, $Ubuntu);
     }
 }
 .newBTN{
