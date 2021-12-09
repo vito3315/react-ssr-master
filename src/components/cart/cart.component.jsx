@@ -1772,7 +1772,8 @@ export class Cart extends React.Component {
                     sdacha: this.state.orderSdacha,
                     payFull: JSON.stringify(payFull), //
                     cart: JSON.stringify(new_cart),//
-                    promo_name: this.state.orderPromo//
+                    promo_name: this.state.orderPromo,//
+                    app_token: this.state.appToken
                 })
             }).then(res => res.json()).then(json => {
                 
@@ -2220,15 +2221,19 @@ export class Cart extends React.Component {
                                 :
                             null
                         }
-                        <div>
-                            <FormGroup component="fieldset">
-                                <FormLabel component="legend">Уведомление</FormLabel>
-                                <FormControlLabel
-                                    control={<Checkbox checked={this.state.showNotif} onChange={ this.showNotif.bind(this) } name="checkedA" />}
-                                    label="Уведомить о готовности заказа"
-                                />
-                            </FormGroup>
-                        </div>
+                        { isSupported() === true && this.state.isSafari === false && this.state.isIE == false ?
+                            <div>
+                                <FormGroup component="fieldset">
+                                    <FormLabel component="legend">Уведомление</FormLabel>
+                                    <FormControlLabel
+                                        control={<Checkbox checked={this.state.showNotif} onChange={ this.showNotif.bind(this) } />}
+                                        label="Уведомить о готовности заказа"
+                                    />
+                                </FormGroup>
+                            </div>
+                                :
+                            null
+                        }
                         <div>
                             <FormControl component="fieldset">
                                 <FormLabel component="legend">Оплата</FormLabel>
