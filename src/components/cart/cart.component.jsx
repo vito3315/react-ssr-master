@@ -568,6 +568,7 @@ export class Cart extends React.Component {
             isIE: false,
             isEdge: false,
             isChrome: false,
+            isSupport: false,
 
             showNotif: false,
             appToken: ''
@@ -804,6 +805,7 @@ export class Cart extends React.Component {
             
             
             
+            
             const firebaseConfig = {
                 apiKey: "AIzaSyAK8l7m2URB6kFbBzC5iv67W34cuEzPKYc",
                 authDomain: "macro-thinker-288611.firebaseapp.com",
@@ -813,13 +815,19 @@ export class Cart extends React.Component {
                 messagingSenderId: "989415800368",
                 appId: "1:989415800368:web:5baae6a54f5b8cb43177f5",
                 //measurementId: "${config.measurementId}"
-              };
+            };
               
-              // Initialize Firebase
-              firebaseAPP = initializeApp(firebaseConfig);
-              const analytics = getAnalytics(firebaseAPP);
-              
-              //let check = messaging.isSupported() ? true : false;
+            // Initialize Firebase
+            firebaseAPP = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(firebaseAPP);
+            const messaging = getMessaging();
+
+            let check = messaging.isSupported() ? true : false;
+
+            this.setState({
+                isSupport: check
+            })
+
 
             if( document.querySelector('.activeCat') ){
                 document.querySelector('.activeCat').classList.remove('activeCat');
@@ -2066,7 +2074,7 @@ export class Cart extends React.Component {
 
     render() {
         
-        console.log( 'isSupported', isSupported(), 'isSafari', this.state.isSafari, 'isIE', this.state.isIE )
+        console.log( 'isSupported', this.state.isSupport, 'isSafari', this.state.isSafari, 'isIE', this.state.isIE )
 
         if(this.state.hasError){
             return (
@@ -2223,7 +2231,7 @@ export class Cart extends React.Component {
                                 :
                             null
                         }
-                        { isSupported() === true && this.state.isSafari === false && this.state.isIE == false ?
+                        { this.state.isSupport === true && this.state.isSafari === false && this.state.isIE == false ?
                             <div>
                                 <FormGroup component="fieldset">
                                     <FormLabel component="legend">Уведомление</FormLabel>
