@@ -71,8 +71,6 @@ import {Helmet} from "react-helmet";
 const queryString = require('query-string');
 import axios from 'axios';
 
-const messaging = getMessaging(); 
-
 function get_city(path){
     
     path = path.split('/');
@@ -1948,21 +1946,7 @@ export class Cart extends React.Component {
     }
 
     testBTN(){
-        getToken(messaging, { vapidKey: 'BJmoVaG5ijS0CXc126Y47xmkjxv92stPrkQDfLql5hirvoWvAcy2N4xR1CPKVnCzUVai3ZqkzvVAjOyHGUWhogA' }).then((currentToken) => {
-            if (currentToken) {
-                console.log( currentToken )
-                localStorage.setItem('appToken', currentToken)
-                // Send the token to your server and update the UI if necessary
-                // ...
-            } else {
-                // Show permission request UI
-                console.log('No registration token available. Request permission to generate one.');
-                // ...
-            }
-        }).catch((err) => {
-            console.log('An error occurred while retrieving token. ', err);
-              // ...
-        });
+        test123();
     }
 
     render() {
