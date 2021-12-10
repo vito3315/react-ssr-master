@@ -786,29 +786,6 @@ export class Cart extends React.Component {
             const analytics = getAnalytics(firebaseAPP);
             
 
-            setTimeout( () => {
-
-                const phoneNumber = '89879340391';
-                //
-                var auth = getAuth(firebaseAPP);
-                // 'recaptcha-container' is the ID of an element in the DOM.
-                var applicationVerifier = new RecaptchaVerifier('recaptcha-container');
-
-                firebase.auth().signInWithPhoneNumber(phoneNumber, applicationVerifier).then(function(confirmationResult) {
-                    var verificationCode = window.prompt('Please enter the verification ' +
-                        'code that was sent to your mobile device.');
-
-                        return confirmationResult.confirm(verificationCode);
-                    })
-                    .catch(function(error) {
-                        console.log( 'error', error )
-                    // Handle Errors here.
-                    });
-            }, 300 )
-
-            
-
-
             if( document.querySelector('.activeCat') ){
                 document.querySelector('.activeCat').classList.remove('activeCat');
             }
@@ -2006,46 +1983,6 @@ export class Cart extends React.Component {
         this.setState({ chooseTimeDialog: true })
     }
 
-    test123(){
-        const auth = getAuth();
-
-        window.recaptchaVerifier = new RecaptchaVerifier('testBTM', {
-            'size': 'invisible',
-            'callback': (response) => {
-                console.log( response )
-                // reCAPTCHA solved, allow signInWithPhoneNumber.
-                //onSignInSubmit();
-                this.testBTN();
-            },
-            'expired-callback': () => {
-                console.log( 'expired-callback' )
-                // Response expired. Ask user to solve reCAPTCHA again.
-                // ...
-            }
-        }, auth);
-    }
-
-    testBTN1(){
-        const phoneNumber = '89879340391';
-        const appVerifier = window.recaptchaVerifier;
-
-        const auth = getAuth();
-        signInWithPhoneNumber(auth, phoneNumber, appVerifier)
-            .then((confirmationResult) => {
-
-                console.log( confirmationResult )
-
-                // SMS sent. Prompt user to type the code from the message, then sign the
-                // user in with confirmationResult.confirm(code).
-                window.confirmationResult = confirmationResult;
-                // ...
-            }).catch((error) => {
-                console.log( error )
-                // Error; SMS not sent
-                // ...
-            });
-    }
-
     render() {
         
         if(this.state.hasError){
@@ -2083,10 +2020,6 @@ export class Cart extends React.Component {
                     <Typography variant="h5" component="h1">Корзина</Typography>
                 </Grid>
                 
-                <Grid item xs={12}>
-                    <Button variant="contained" className="BtnCardMain CardInCardItem" id="recaptcha-container">test124</Button>
-                </Grid>
-
                 <Hidden xsDown>
                     <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer" style={{ paddingTop: 0 }}>
                         <AppBar position="static" style={{ backgroundColor: '#fff', color: '#000', zIndex: 0 }} elevation={0}>
