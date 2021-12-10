@@ -784,15 +784,15 @@ export class Cart extends React.Component {
             // Initialize Firebase
             firebaseAPP = initializeApp(firebaseConfig);
             const analytics = getAnalytics(firebaseAPP);
-            var auth = getAuth(firebaseAPP);
+            
 
             setTimeout( () => {
 
                 const phoneNumber = '89879340391';
                 //
-
+                var auth = getAuth(firebaseAPP);
                 // 'recaptcha-container' is the ID of an element in the DOM.
-                var applicationVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+                var applicationVerifier = new RecaptchaVerifier('recaptcha-container');
 
                 firebase.auth().signInWithPhoneNumber(phoneNumber, applicationVerifier).then(function(confirmationResult) {
                     var verificationCode = window.prompt('Please enter the verification ' +
