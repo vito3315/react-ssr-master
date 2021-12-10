@@ -81,7 +81,7 @@ import axios from 'axios';
 // Import the functions you need from the SDKs you need
 import { firebase, initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getMessaging, getToken, isSupported } from "firebase/messaging";
+import { getAuth, RecaptchaVerifier } from "firebase/auth";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -561,16 +561,6 @@ export class Cart extends React.Component {
             orderPromoText: '',
             
             newOrderData: null,
-
-            isOpera: false,
-            isFirefox: false,
-            isSafari: false,
-            isIE: false,
-            isEdge: false,
-            isChrome: false,
-
-            showNotif: false,
-            appToken: ''
         };
         
         itemsStore.setCity(this.props.city);
@@ -780,31 +770,6 @@ export class Cart extends React.Component {
         
         try{
 
-            // Opera 8.0+
-            const isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
-            // Firefox 1.0+
-            const isFirefox = typeof InstallTrigger !== 'undefined';
-            // Safari 3.0+ "[object HTMLElementConstructor]"
-            const isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
-            // Internet Explorer 6-11
-            const isIE = /*@cc_on!@*/false || !!document.documentMode;
-            // Edge 20+
-            const isEdge = !isIE && !!window.StyleMedia;
-            // Chrome 1 - 71
-            const isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
-
-            this.setState({
-                isOpera: isOpera,
-                isSafari: isSafari,
-                isFirefox: isFirefox,
-                isIE: isIE,
-                isEdge: isEdge,
-                isChrome: isChrome
-            })
-            
-            
-            
-            
             const firebaseConfig = {
                 apiKey: "AIzaSyAK8l7m2URB6kFbBzC5iv67W34cuEzPKYc",
                 authDomain: "macro-thinker-288611.firebaseapp.com",
@@ -820,6 +785,21 @@ export class Cart extends React.Component {
             firebaseAPP = initializeApp(firebaseConfig);
             const analytics = getAnalytics(firebaseAPP);
             
+            const auth = getAuth();
+
+            window.recaptchaVerifier = new RecaptchaVerifier('sign-in-button', {
+                'size': 'invisible',
+                'callback': (response) => {
+                    console.log( response )
+                    // reCAPTCHA solved, allow signInWithPhoneNumber.
+                    onSignInSubmit();
+                },
+                'expired-callback': () => {
+                    // Response expired. Ask user to solve reCAPTCHA again.
+                    // ...
+                }
+            }, auth);
+
             if( document.querySelector('.activeCat') ){
                 document.querySelector('.activeCat').classList.remove('activeCat');
             }
@@ -1771,8 +1751,7 @@ export class Cart extends React.Component {
                     sdacha: this.state.orderSdacha,
                     payFull: JSON.stringify(payFull), //
                     cart: JSON.stringify(new_cart),//
-                    promo_name: this.state.orderPromo,//
-                    app_token: this.state.appToken
+                    promo_name: this.state.orderPromo//
                 })
             }).then(res => res.json()).then(json => {
                 
@@ -2019,88 +1998,28 @@ export class Cart extends React.Component {
     }
 
     testBTN(){
+        const phoneNumber = '89879340391';
+        const appVerifier = window.recaptchaVerifier;
 
-        navigator.serviceWorker.ready.then(function(reg) {
-            reg.pushManager.subscribe({userVisibleOnly: true}).then(function(subscription) {
-              console.log(subscription.endpoint);
-          
-                // At this point you would most likely send the subscription
-                // endpoint to your server, save it, then use it to send a
-                // push message at a later date
-            })
-          })
+        const auth = getAuth();
+        signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+            .then((confirmationResult) => {
 
-        if (!("Notification" in window)) {
-            alert("This browser does not support desktop notification");
-          }
-        
-          // Let's check whether notification permissions have already been granted
-          else if (Notification.permission === "granted") {
-            // If it's okay let's create a notification
-            var notification = new Notification("Hi there! granted");
-          }
-        
-          // Otherwise, we need to ask the user for permission
-          else if (Notification.permission !== "denied") {
-            Notification.requestPermission().then(function (permission) {
+                console.log( confirmationResult )
 
-                console.log('permission', permission)
-
-              // If the user accepts, let's create a notification
-              if (permission === "granted") {
-                var notification = new Notification("Hi there!");
-              }
+                // SMS sent. Prompt user to type the code from the message, then sign the
+                // user in with confirmationResult.confirm(code).
+                window.confirmationResult = confirmationResult;
+                // ...
+            }).catch((error) => {
+                console.log( error )
+                // Error; SMS not sent
+                // ...
             });
-          }
-
-        const messaging = getMessaging();
-
-        getToken(messaging, { vapidKey: 'BJmoVaG5ijS0CXc126Y47xmkjxv92stPrkQDfLql5hirvoWvAcy2N4xR1CPKVnCzUVai3ZqkzvVAjOyHGUWhogA' }).then((currentToken) => {
-            if (currentToken) {
-                console.log( currentToken )
-                localStorage.setItem('appToken', currentToken)
-            } else {
-                console.log('No registration token available. Request permission to generate one.');
-            }
-        }).catch((err) => {
-            console.log('An error occurred while retrieving token. ', err);
-        });
-    }
-
-    showNotif(event, data){
-        this.setState({
-            showNotif: data
-        })
-
-        if( data === true ){
-            const messaging = getMessaging();
-
-            getToken(messaging, { vapidKey: 'BJmoVaG5ijS0CXc126Y47xmkjxv92stPrkQDfLql5hirvoWvAcy2N4xR1CPKVnCzUVai3ZqkzvVAjOyHGUWhogA' }).then((currentToken) => {
-                if (currentToken) {
-                    console.log( currentToken )
-                    localStorage.setItem('appToken', currentToken)
-
-                    this.setState({
-                        appToken: currentToken
-                    })
-
-                } else {
-                    console.log('No registration token available. Request permission to generate one.');
-                }
-            }).catch((err) => {
-                console.log('An error occurred while retrieving token. ', err);
-            });
-        }else{
-            this.setState({
-                appToken: ''
-            })
-        }
     }
 
     render() {
         
-        console.log( 'isSupported', this.state.isSupport, 'isSafari', this.state.isSafari, 'isIE', this.state.isIE )
-
         if(this.state.hasError){
             return (
                 <>
@@ -2133,7 +2052,7 @@ export class Cart extends React.Component {
                 </Backdrop>
                 
                 <Grid item xs={12}>
-                    <Typography variant="h5" component="h1" onClick={this.testBTN.bind(this)}>Корзина</Typography>
+                    <Typography variant="h5" component="h1">Корзина</Typography>
                 </Grid>
                 
                 <Hidden xsDown>
@@ -2342,7 +2261,7 @@ export class Cart extends React.Component {
                                         <td colSpan='3'>
                                             <Typography gutterBottom variant="h5" component="span" className="">Соевый соус, имбирь и васаби приобретаются отдельно!</Typography>
                                             <br />
-                                            <Typography gutterBottom variant="h5" component="span" className="">Не забудь добавить нужные позиции в корзину.</Typography>
+                                            <Typography gutterBottom variant="h5" component="span" className="">Не забудьте добавить нужные позиции в корзину.</Typography>
                                         </td>
                                     </tr>
                                     {this.state.cartItems_dop.map((item, key) =>
