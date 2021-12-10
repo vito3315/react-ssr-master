@@ -2020,6 +2020,16 @@ export class Cart extends React.Component {
 
     testBTN(){
 
+        navigator.serviceWorker.ready.then(function(reg) {
+            reg.pushManager.subscribe({userVisibleOnly: true}).then(function(subscription) {
+              console.log(subscription.endpoint);
+          
+                // At this point you would most likely send the subscription
+                // endpoint to your server, save it, then use it to send a
+                // push message at a later date
+            })
+          })
+
         if (!("Notification" in window)) {
             alert("This browser does not support desktop notification");
           }
@@ -2027,12 +2037,15 @@ export class Cart extends React.Component {
           // Let's check whether notification permissions have already been granted
           else if (Notification.permission === "granted") {
             // If it's okay let's create a notification
-            var notification = new Notification("Hi there!");
+            var notification = new Notification("Hi there! granted");
           }
         
           // Otherwise, we need to ask the user for permission
           else if (Notification.permission !== "denied") {
             Notification.requestPermission().then(function (permission) {
+
+                console.log('permission', permission)
+
               // If the user accepts, let's create a notification
               if (permission === "granted") {
                 var notification = new Notification("Hi there!");
