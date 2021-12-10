@@ -631,7 +631,7 @@ export class Header extends React.Component {
                         body: queryString.stringify({
                             type: 'create_profile', 
                             number: number,
-                            token: token
+                            token: token 
                         })
                     }).then(res => res.json()).then(json => {
                         if( json['st'] ){
