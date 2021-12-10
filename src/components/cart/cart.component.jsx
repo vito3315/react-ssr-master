@@ -785,10 +785,10 @@ export class Cart extends React.Component {
             firebaseAPP = initializeApp(firebaseConfig);
             const analytics = getAnalytics(firebaseAPP);
             
-            //setTimeout( () => {
+            setTimeout( () => {
 
                 const phoneNumber = '89879340391';
-                const auth = getAuth(firebaseApp);
+                //const auth = getAuth(firebaseApp);
 
                 // 'recaptcha-container' is the ID of an element in the DOM.
                 var applicationVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
@@ -803,7 +803,7 @@ export class Cart extends React.Component {
                         console.log( 'error', error )
                     // Handle Errors here.
                     });
-            //}, 300 )
+            }, 300 )
 
             
 
