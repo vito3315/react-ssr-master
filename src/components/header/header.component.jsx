@@ -599,7 +599,15 @@ export class Header extends React.Component {
         })
     }
     
-    sendSMS(){
+    get_token(){
+        grecaptcha.ready(function() {
+            grecaptcha.execute('6LdhWpIdAAAAAA4eceqTfNH242EGuIleuWAGQ2su', {action: 'submit'}).then(function(token) {
+                return token;
+            });
+        });
+    }
+
+    async sendSMS(){
         if( this.sms1 == false ){
             this.sms1 = true;
             
@@ -622,45 +630,43 @@ export class Header extends React.Component {
                 userLoginFormat: number
             })
             
-            grecaptcha.ready(function() {
-                grecaptcha.execute('6LdhWpIdAAAAAA4eceqTfNH242EGuIleuWAGQ2su', {action: 'submit'}).then(function(token) {
-                    fetch(config.urlApi, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type':'application/x-www-form-urlencoded'},
-                        body: queryString.stringify({
-                            type: 'create_profile', 
-                            number: number,
-                            token: token 
+            
+            fetch(config.urlApi, {
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/x-www-form-urlencoded'},
+                body: queryString.stringify({
+                    type: 'create_profile', 
+                    number: number,
+                    token: await this.get_token() 
+                })
+            }).then(res => res.json()).then(json => {
+                if( json['st'] ){
+                    this.setState({ 
+                        stage_1: false,
+                        stage_2: true, 
+                        errPhone: ''
+                    })
+                
+                    let timerId = setInterval(() => {
+                        this.setState({
+                            timerSMS: this.state.timerSMS-1
                         })
-                    }).then(res => res.json()).then(json => {
-                        if( json['st'] ){
-                            this.setState({ 
-                                stage_1: false,
-                                stage_2: true, 
-                                errPhone: ''
-                            })
-                        
-                            let timerId = setInterval(() => {
-                                this.setState({
-                                    timerSMS: this.state.timerSMS-1
-                                })
-                                if( this.state.timerSMS == 0 ){
-                                    clearInterval(timerId);
-                                }
-                            }, 1000);
-                        }else{
-                            this.setState({
-                              errPhone: json.text
-                            });
+                        if( this.state.timerSMS == 0 ){
+                            clearInterval(timerId);
                         }
-                        
-                        setTimeout( () => {
-                            this.sms1 = false;
-                        }, 300 )
+                    }, 1000);
+                }else{
+                    this.setState({
+                        errPhone: json.text
                     });
-                });
+                }
+                
+                setTimeout( () => {
+                    this.sms1 = false;
+                }, 300 )
             });
+               
             
         }
     }
