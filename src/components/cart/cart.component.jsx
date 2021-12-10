@@ -785,22 +785,6 @@ export class Cart extends React.Component {
             firebaseAPP = initializeApp(firebaseConfig);
             const analytics = getAnalytics(firebaseAPP);
             
-            const auth = getAuth();
-
-            window.recaptchaVerifier = new RecaptchaVerifier('testBTM', {
-                'size': 'invisible',
-                'callback': (response) => {
-                    console.log( response )
-                    // reCAPTCHA solved, allow signInWithPhoneNumber.
-                    //onSignInSubmit();
-                    this.testBTN();
-                },
-                'expired-callback': () => {
-                    // Response expired. Ask user to solve reCAPTCHA again.
-                    // ...
-                }
-            }, auth);
-
             if( document.querySelector('.activeCat') ){
                 document.querySelector('.activeCat').classList.remove('activeCat');
             }
@@ -1998,6 +1982,25 @@ export class Cart extends React.Component {
         this.setState({ chooseTimeDialog: true })
     }
 
+    test123(){
+        const auth = getAuth();
+
+        window.recaptchaVerifier = new RecaptchaVerifier('testBTM', {
+            'size': 'invisible',
+            'callback': (response) => {
+                console.log( response )
+                // reCAPTCHA solved, allow signInWithPhoneNumber.
+                //onSignInSubmit();
+                this.testBTN();
+            },
+            'expired-callback': () => {
+                console.log( 'expired-callback' )
+                // Response expired. Ask user to solve reCAPTCHA again.
+                // ...
+            }
+        }, auth);
+    }
+
     testBTN(){
         const phoneNumber = '89879340391';
         const appVerifier = window.recaptchaVerifier;
@@ -2053,9 +2056,13 @@ export class Cart extends React.Component {
                 </Backdrop>
                 
                 <Grid item xs={12}>
-                    <Typography variant="h5" component="h1" id="testBTM" name="testBTM">Корзина</Typography>
+                    <Typography variant="h5" component="h1">Корзина</Typography>
                 </Grid>
                 
+                <Grid item xs={12}>
+                    <Button variant="contained" className="BtnCardMain CardInCardItem" id="testBTM" name="testBTM" onClick={this.test123.bind(this)}>test124</Button>
+                </Grid>
+
                 <Hidden xsDown>
                     <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer" style={{ paddingTop: 0 }}>
                         <AppBar position="static" style={{ backgroundColor: '#fff', color: '#000', zIndex: 0 }} elevation={0}>
