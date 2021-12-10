@@ -787,12 +787,13 @@ export class Cart extends React.Component {
             
             const auth = getAuth();
 
-            window.recaptchaVerifier = new RecaptchaVerifier('sign-in-button', {
+            window.recaptchaVerifier = new RecaptchaVerifier('testBTM', {
                 'size': 'invisible',
                 'callback': (response) => {
                     console.log( response )
                     // reCAPTCHA solved, allow signInWithPhoneNumber.
-                    onSignInSubmit();
+                    //onSignInSubmit();
+                    this.testBTN();
                 },
                 'expired-callback': () => {
                     // Response expired. Ask user to solve reCAPTCHA again.
@@ -2052,7 +2053,7 @@ export class Cart extends React.Component {
                 </Backdrop>
                 
                 <Grid item xs={12}>
-                    <Typography variant="h5" component="h1">Корзина</Typography>
+                    <Typography variant="h5" component="h1" id="testBTM" name="testBTM">Корзина</Typography>
                 </Grid>
                 
                 <Hidden xsDown>
