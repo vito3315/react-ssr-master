@@ -2060,7 +2060,7 @@ export class Cart extends React.Component {
                 </Grid>
                 
                 <Grid item xs={12}>
-                    <Button variant="contained" className="BtnCardMain CardInCardItem" id="testBTM" name="testBTM" onClick={this.test123.bind(this)}>test124</Button>
+                    <Button variant="contained" className="BtnCardMain CardInCardItem" id="testBTM" name="testBTM" onClick={this.testBTN.bind(this)}>test124</Button>
                 </Grid>
 
                 <Hidden xsDown>
