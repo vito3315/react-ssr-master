@@ -630,43 +630,45 @@ export class Header extends React.Component {
                 userLoginFormat: number
             })
             
-            
-            fetch(config.urlApi, {
-                method: 'POST',
-                headers: {
-                    'Content-Type':'application/x-www-form-urlencoded'},
-                body: queryString.stringify({
-                    type: 'create_profile', 
-                    number: number,
-                    token: await this.get_token() 
-                })
-            }).then(res => res.json()).then(json => {
-                if( json['st'] ){
-                    this.setState({ 
-                        stage_1: false,
-                        stage_2: true, 
-                        errPhone: ''
-                    })
-                
-                    let timerId = setInterval(() => {
-                        this.setState({
-                            timerSMS: this.state.timerSMS-1
+            grecaptcha.ready(() => {
+                grecaptcha.execute('6LdhWpIdAAAAAA4eceqTfNH242EGuIleuWAGQ2su', {action: 'submit'}).then( (token) => {
+                    fetch(config.urlApi, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type':'application/x-www-form-urlencoded'},
+                        body: queryString.stringify({
+                            type: 'create_profile', 
+                            number: number,
+                            token: token 
                         })
-                        if( this.state.timerSMS == 0 ){
-                            clearInterval(timerId);
+                    }).then(res => res.json()).then(json => {
+                        if( json['st'] ){
+                            this.setState({ 
+                                stage_1: false,
+                                stage_2: true, 
+                                errPhone: ''
+                            })
+                        
+                            let timerId = setInterval(() => {
+                                this.setState({
+                                    timerSMS: this.state.timerSMS-1
+                                })
+                                if( this.state.timerSMS == 0 ){
+                                    clearInterval(timerId);
+                                }
+                            }, 1000);
+                        }else{
+                            this.setState({
+                              errPhone: json.text
+                            });
                         }
-                    }, 1000);
-                }else{
-                    this.setState({
-                        errPhone: json.text
+                        
+                        setTimeout( () => {
+                            this.sms1 = false;
+                        }, 300 )
                     });
-                }
-                
-                setTimeout( () => {
-                    this.sms1 = false;
-                }, 300 )
+                });
             });
-               
             
         }
     }
