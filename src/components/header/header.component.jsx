@@ -604,6 +604,8 @@ export class Header extends React.Component {
             this.sms1 = true;
             
             this.setState({
+                stage_1: false,
+                stage_2: true, 
                 errPhone: '',
                 errSMS: ''
             });
@@ -636,8 +638,6 @@ export class Header extends React.Component {
                     }).then(res => res.json()).then(json => {
                         if( json['st'] ){
                             this.setState({ 
-                                stage_1: false,
-                                stage_2: true, 
                                 errPhone: ''
                             })
                         
