@@ -283,10 +283,6 @@ export class App extends React.Component {
         const analytics = getAnalytics(firebaseAPP);
         const perf = getPerformance(firebaseAPP);
 
-        getCLS(console.log);
-        getFID(console.log);
-        getLCP(console.log);
-
         autorun(() => {
             this.setState({
                 activePage: itemsStore.getPage()
