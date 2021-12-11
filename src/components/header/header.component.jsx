@@ -599,15 +599,7 @@ export class Header extends React.Component {
         })
     }
     
-    get_token(){
-        grecaptcha.ready(function() {
-            grecaptcha.execute('6LdhWpIdAAAAAA4eceqTfNH242EGuIleuWAGQ2su', {action: 'submit'}).then(function(token) {
-                return token;
-            });
-        });
-    }
-
-    async sendSMS(){
+    sendSMS(){
         if( this.sms1 == false ){
             this.sms1 = true;
             
@@ -681,35 +673,40 @@ export class Header extends React.Component {
                 errSMS: ''
             });
             
-            fetch(config.urlApi, {
-                method: 'POST',
-                headers: {
-                    'Content-Type':'application/x-www-form-urlencoded'},
-                body: queryString.stringify({
-                    type: 'repeat_sms', 
-                    number: this.state.userLoginFormat
-                })
-            }).then(res => res.json()).then(json => {
-                this.sms2 = false;
-                
-                if( json['st'] ){
-                    this.setState({
-                        timerSMS: 59
-                    })
-                
-                    let timerId = setInterval(() => {
-                        this.setState({
-                            timerSMS: this.state.timerSMS-1
+            grecaptcha.ready(() => {
+                grecaptcha.execute('6LdhWpIdAAAAAA4eceqTfNH242EGuIleuWAGQ2su', {action: 'submit'}).then( (token) => {
+                    fetch(config.urlApi, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type':'application/x-www-form-urlencoded'},
+                        body: queryString.stringify({
+                            type: 'repeat_sms', 
+                            number: this.state.userLoginFormat,
+                            token: token
                         })
-                        if( this.state.timerSMS == 0 ){
-                            clearInterval(timerId);
+                    }).then(res => res.json()).then(json => {
+                        this.sms2 = false;
+                        
+                        if( json['st'] ){
+                            this.setState({
+                                timerSMS: 59
+                            })
+                        
+                            let timerId = setInterval(() => {
+                                this.setState({
+                                    timerSMS: this.state.timerSMS-1
+                                })
+                                if( this.state.timerSMS == 0 ){
+                                    clearInterval(timerId);
+                                }
+                            }, 1000);
+                        }else{
+                            this.setState({
+                                errSMS: json.text
+                            });
                         }
-                    }, 1000);
-                }else{
-                    this.setState({
-                        errSMS: json.text
                     });
-                }
+                });
             });
         }
     }
