@@ -33,7 +33,8 @@
     "react-scroll": "^1.8.4",
     "react-transition-group": "^4.4.2",
     "swiper": "^6.6.2",
-    "url-loader": "^4.1.1"
+    "url-loader": "^4.1.1",
+    "web-vitals": "^2.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
