@@ -35,6 +35,11 @@ import { autorun } from "mobx"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInstagram, faFacebookF, faOdnoklassniki, faVk, faTelegramPlane } from '@fortawesome/free-brands-svg-icons'
 
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+
+var firebaseAPP = null;
+
 function Status({ code, children }) {
   return (
     <Route
@@ -260,6 +265,20 @@ export class App extends React.Component {
     }
 
     componentDidMount = () => {
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyChAHowCT2C7GRwfcxwt1Pi4SCV4CaVpP4",
+            authDomain: "jacofoodsite.firebaseapp.com",
+            projectId: "jacofoodsite",
+            storageBucket: "jacofoodsite.appspot.com",
+            messagingSenderId: "692082803779",
+            appId: "1:692082803779:web:39a39963cd8bff927000f6"
+        };
+          
+        // Initialize Firebase
+        firebaseAPP = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(firebaseAPP);
+
         autorun(() => {
             this.setState({
                 activePage: itemsStore.getPage()

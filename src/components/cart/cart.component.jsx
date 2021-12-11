@@ -6,19 +6,10 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 
-import { NavLink as Link, Switch, Route, Redirect } from 'react-router-dom';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes, faPlus, faMinus, faRubleSign, faCreditCard, faMoneyBill, faCashRegister, faGift } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faPlus, faMinus, faCreditCard, faMoneyBill, faCashRegister, faGift } from '@fortawesome/free-solid-svg-icons'
 
 import Hidden from '@material-ui/core/Hidden';
-
-import FormGroup from '@material-ui/core/FormGroup';
-import Checkbox from '@material-ui/core/Checkbox';
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import Favorite from '@material-ui/icons/Favorite';
-import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
@@ -77,18 +68,6 @@ import {Helmet} from "react-helmet";
 
 const queryString = require('query-string');
 import axios from 'axios';
-
-// Import the functions you need from the SDKs you need
-import { firebase, initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
 
 function get_city(path){
     
@@ -464,8 +443,6 @@ class CartItemMobile extends React.Component {
     }
 }
 
-let firebaseAPP = null;
-
 export class Cart extends React.Component {
     _isMounted = false;
     clickOrderStart = false
@@ -769,22 +746,6 @@ export class Cart extends React.Component {
         this._isMounted = true; 
         
         try{
-
-            const firebaseConfig = {
-                apiKey: "AIzaSyAK8l7m2URB6kFbBzC5iv67W34cuEzPKYc",
-                authDomain: "macro-thinker-288611.firebaseapp.com",
-                databaseURL: "https://macro-thinker-288611.firebaseio.com",
-                projectId: "macro-thinker-288611",
-                storageBucket: "macro-thinker-288611.appspot.com",
-                messagingSenderId: "989415800368",
-                appId: "1:989415800368:web:5baae6a54f5b8cb43177f5",
-                //measurementId: "${config.measurementId}"
-            };
-              
-            // Initialize Firebase
-            firebaseAPP = initializeApp(firebaseConfig);
-            const analytics = getAnalytics(firebaseAPP);
-            
 
             if( document.querySelector('.activeCat') ){
                 document.querySelector('.activeCat').classList.remove('activeCat');
@@ -2136,19 +2097,6 @@ export class Cart extends React.Component {
                                         variant="outlined"
                                     />
                                 </form>
-                            </div>
-                                :
-                            null
-                        }
-                        { this.state.isSafari === false && this.state.isIE == false ?
-                            <div>
-                                <FormGroup component="fieldset">
-                                    <FormLabel component="legend">Уведомление</FormLabel>
-                                    <FormControlLabel
-                                        control={<Checkbox checked={this.state.showNotif} onChange={ this.showNotif.bind(this) } />}
-                                        label="Уведомить о готовности заказа"
-                                    />
-                                </FormGroup>
                             </div>
                                 :
                             null
