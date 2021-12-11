@@ -37,10 +37,6 @@ import { faInstagram, faFacebookF, faOdnoklassniki, faVk, faTelegramPlane } from
 
 import {getLCP, getFID, getCLS} from 'web-vitals';
 
-getCLS(console.log);
-getFID(console.log);
-getLCP(console.log);
-
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getPerformance } from "firebase/performance";
@@ -286,6 +282,10 @@ export class App extends React.Component {
         firebaseAPP = initializeApp(firebaseConfig);
         const analytics = getAnalytics(firebaseAPP);
         const perf = getPerformance(firebaseAPP);
+
+        getCLS(console.log);
+        getFID(console.log);
+        getLCP(console.log);
 
         autorun(() => {
             this.setState({
