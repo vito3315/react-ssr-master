@@ -982,7 +982,7 @@ export class Profile extends React.Component {
                                         </div>
                                     }
                                     <TextField 
-                                        label="Почта" 
+                                        label="E-mail" 
                                         className="input" 
                                         value={this.state.userMail} 
                                         onChange={this.changeMail.bind(this)} 
