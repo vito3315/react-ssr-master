@@ -37,6 +37,7 @@ import { faInstagram, faFacebookF, faOdnoklassniki, faVk, faTelegramPlane } from
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getPerformance } from "firebase/performance";
 
 var firebaseAPP = null;
 
@@ -278,6 +279,7 @@ export class App extends React.Component {
         // Initialize Firebase
         firebaseAPP = initializeApp(firebaseConfig);
         const analytics = getAnalytics(firebaseAPP);
+        const perf = getPerformance(firebaseAPP);
 
         autorun(() => {
             this.setState({
