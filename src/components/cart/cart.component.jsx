@@ -2202,7 +2202,7 @@ export class Cart extends React.Component {
                             </table>
                         </div>
                         
-                        {this.state.orderType == 0 ?
+                        {this.state.orderType == 0 && this.state.orderPay == 'cash' ?
                             <div className="orderSdacha">
                                 <div>
                                     <FormControl>
