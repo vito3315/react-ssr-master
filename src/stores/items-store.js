@@ -722,6 +722,9 @@ class ItemsStore {
 
           let check_dop = my_cart.filter( (item, key) => parseInt(item.count) > 0 && (parseInt(item.item_id) == 17 || parseInt(item.item_id) == 237) );
 
+          console.log( 'my_cart', my_cart )
+          console.log( 'check_dop', check_dop )
+
           if( count(check_dop) == 0 ){
             check_dop = 1;
           }
