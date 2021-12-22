@@ -734,6 +734,9 @@ class ItemsStore {
             
             console.log( 'item', item )
             console.log( 'max_count', max_count )
+            console.log( 'check_dop', check_dop )
+
+            console.log( 'res', max_count / check_dop )
 
             max_count = max_count / check_dop;
 
