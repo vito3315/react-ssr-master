@@ -727,6 +727,8 @@ class ItemsStore {
 
           if( check_dop.length == 0 ){
             check_dop = 1;
+          }else{
+            check_dop = check_dop.length;
           }
 
           my_cart.map( (item, key) => {
