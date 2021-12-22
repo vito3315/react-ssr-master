@@ -728,13 +728,13 @@ class ItemsStore {
             console.log( 'item', item )
             console.log( 'max_count', max_count )
 
-            max_count = max_count / check_dop;
+            max_count = max_count / count(check_dop);
 
             console.log( 'max_count_new', max_count )
 
             if( parseInt(max_count) < 0 ){
 
-              console.log( 'count_new', parseInt(item.count) + parseInt(max_count) >= 0 ? parseInt(item.count) + parseInt(max_count) : 0 )
+              console.log( 'count_new', parseInt(item.count), parseInt(max_count) >= 0 ? parseInt(item.count) + parseInt(max_count) : 0 )
 
               my_cart[key]['count'] = parseInt(item.count) + parseInt(max_count) >= 0 ? parseInt(item.count) + parseInt(max_count) : 0;
               my_cart[key]['all_price'] = ( parseInt(item.count) + parseInt(max_count) ) * parseInt(item.one_price) >= 0 ? ( parseInt(item.count) + parseInt(max_count) ) * parseInt(item.one_price) : 0;
