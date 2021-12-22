@@ -1,6 +1,5 @@
 import React from 'react';
-import { CSSTransition } from 'react-transition-group';
-import { NavLink as Link, useParams } from 'react-router-dom';
+import { NavLink as Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -11,7 +10,6 @@ import Typography from '@material-ui/core/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faMinus, faTimes } from '@fortawesome/free-solid-svg-icons'
 import * as Scroll from 'react-scroll';
-//import { Link, Button, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 
 var Element  = Scroll.Element;
 var Events  = Scroll.Events;
