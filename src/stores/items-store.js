@@ -722,9 +722,6 @@ class ItemsStore {
 
           let check_dop = my_cart.filter( (item, key) => parseInt(item.count) > 0 && (parseInt(item.item_id) == 17 || parseInt(item.item_id) == 237) );
 
-          console.log( 'my_cart', my_cart )
-          console.log( 'check_dop', check_dop )
-
           if( check_dop.length == 0 ){
             check_dop = 1;
           }else{
@@ -734,12 +731,6 @@ class ItemsStore {
           my_cart.map( (item, key) => {
             max_count = itemsStore.check_max_count(item.item_id)
             
-            console.log( 'item', item )
-            console.log( 'max_count', max_count )
-            console.log( 'check_dop', check_dop )
-
-            console.log( 'res', max_count / check_dop )
-
             max_count = max_count / check_dop;
 
             if( max_count > 0 && max_count < 1 ){
@@ -748,12 +739,7 @@ class ItemsStore {
               max_count = parseInt(max_count);
             }
 
-            console.log( 'max_count_new', max_count )
-
             if( parseInt(max_count) < 0 ){
-
-              console.log( 'count_new', parseInt(item.count), parseInt(max_count) >= 0 ? parseInt(item.count) + parseInt(max_count) : 0 )
-
               my_cart[key]['count'] = parseInt(item.count) + parseInt(max_count) >= 0 ? parseInt(item.count) + parseInt(max_count) : 0;
               my_cart[key]['all_price'] = ( parseInt(item.count) + parseInt(max_count) ) * parseInt(item.one_price) >= 0 ? ( parseInt(item.count) + parseInt(max_count) ) * parseInt(item.one_price) : 0;
             }

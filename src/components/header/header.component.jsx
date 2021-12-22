@@ -262,7 +262,7 @@ class SimplePopover extends React.Component{
             let check_promo = itemsStore.checkPromo();
               
             if( check_promo.st === false ){
-                localStorage.removeItem('promo_name')
+                //localStorage.removeItem('promo_name')
             }
             
             if( this.state.promoName.length == 0 ){

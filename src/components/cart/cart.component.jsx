@@ -1199,7 +1199,7 @@ export class Cart extends React.Component {
                 })
             }else{
                 if( check_promo.st === false ){
-                    localStorage.removeItem('promo_name')
+                    //localStorage.removeItem('promo_name')
                 }
                 
                 this.setState({
