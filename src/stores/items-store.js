@@ -725,7 +725,7 @@ class ItemsStore {
           console.log( 'my_cart', my_cart )
           console.log( 'check_dop', check_dop )
 
-          if( count(check_dop) == 0 ){
+          if( check_dop.length == 0 ){
             check_dop = 1;
           }
 
