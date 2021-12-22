@@ -716,17 +716,23 @@ class ItemsStore {
         
         let max_count = 0;
         
+        
+
         setTimeout( () => {
+
+          let check_dop = my_cart.filter( (item, key) => parseInt(item.count) > 0 && (parseInt(item.item_id) == 17 || parseInt(item.item_id) == 237) );
+
           my_cart.map( (item, key) => {
             max_count = itemsStore.check_max_count(item.item_id)
             
             console.log( 'item', item )
             console.log( 'max_count', max_count )
 
+            max_count = max_count / check_dop;
 
             if( parseInt(max_count) < 0 ){
-              my_cart[key]['count'] = parseInt(item.count) + parseInt(max_count);
-              my_cart[key]['all_price'] = ( parseInt(item.count) + parseInt(max_count) ) * parseInt(item.one_price);
+              my_cart[key]['count'] = parseInt(item.count) + parseInt(max_count) >= 0 ? parseInt(item.count) + parseInt(max_count) : 0;
+              my_cart[key]['all_price'] = ( parseInt(item.count) + parseInt(max_count) ) * parseInt(item.one_price) >= 0 ? ( parseInt(item.count) + parseInt(max_count) ) * parseInt(item.one_price) : 0;
             }
           })
           
