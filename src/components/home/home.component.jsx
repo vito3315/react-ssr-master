@@ -887,7 +887,7 @@ export class Home extends React.Component {
             }, 750);
         }
         
-        if( !this.props.data ){
+        //if( !this.props.data ){
             Home.fetchData('/'+this.state.city_name).then( data => {
                 this.setState( {
                     page: data.page,
@@ -895,7 +895,7 @@ export class Home extends React.Component {
                     description: data.description,
                 } );
             } );
-        }
+        //}
         
         itemsStore.setPage('home');
         
