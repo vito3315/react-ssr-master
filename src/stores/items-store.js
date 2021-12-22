@@ -742,6 +742,12 @@ class ItemsStore {
 
             max_count = max_count / check_dop;
 
+            if( max_count > 0 && max_count < 1 ){
+              max_count = 1;
+            }else{
+              max_count = parseInt(max_count);
+            }
+
             console.log( 'max_count_new', max_count )
 
             if( parseInt(max_count) < 0 ){
