@@ -722,13 +722,17 @@ class ItemsStore {
 
           let check_dop = my_cart.filter( (item, key) => parseInt(item.count) > 0 && (parseInt(item.item_id) == 17 || parseInt(item.item_id) == 237) );
 
+          if( count(check_dop) == 0 ){
+            check_dop = 1;
+          }
+
           my_cart.map( (item, key) => {
             max_count = itemsStore.check_max_count(item.item_id)
             
             console.log( 'item', item )
             console.log( 'max_count', max_count )
 
-            max_count = max_count / count(check_dop);
+            max_count = max_count / check_dop;
 
             console.log( 'max_count_new', max_count )
 
