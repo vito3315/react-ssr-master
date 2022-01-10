@@ -488,20 +488,21 @@ export class Header extends React.Component {
             let token = itemsStore.getToken();
 
             if( userName.length == 0 && token.length != 0 ){
-                //get_user_data
+                console.log( 'need_load_user' )
 
                 fetch(config.urlApi, {
                     method: 'POST',
                     headers: {
                         'Content-Type':'application/x-www-form-urlencoded'},
                     body: queryString.stringify({
-                        type: 'get_cat_web', 
-                        city_id: itemsStore.getCity(),
+                        type: 'get_user_data', 
                         user_id: itemsStore.getToken()
                     })
                 }).then(res => res.json()).then(json => {
                     itemsStore.setUserName(json);
                     this.is_load = false;
+
+                    console.log( 'need_load_user', json )
 
                     this.setState({
                         userName: json
