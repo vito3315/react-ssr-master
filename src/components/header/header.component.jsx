@@ -483,6 +483,40 @@ export class Header extends React.Component {
     
     componentDidMount = () => {
         setTimeout(() => {
+
+            let userName = itemsStore.getUserName();
+            let token = itemsStore.getToken();
+
+            if( userName.length == 0 && token.length != 0 ){
+                //get_user_data
+
+                fetch(config.urlApi, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type':'application/x-www-form-urlencoded'},
+                    body: queryString.stringify({
+                        type: 'get_cat_web', 
+                        city_id: itemsStore.getCity(),
+                        user_id: itemsStore.getToken()
+                    })
+                }).then(res => res.json()).then(json => {
+                    itemsStore.setUserName(json);
+                    this.is_load = false;
+
+                    this.setState({
+                        userName: json
+                    })
+                })
+                .catch(err => { });
+            }
+
+            if( userName.length > 0 ){
+                this.setState({
+                    userName: userName
+                })
+            }
+
+
             let cartData = itemsStore.getCartData();
 
             if( cartData.orderType || cartData.orderType == 0 ){
@@ -559,7 +593,8 @@ export class Header extends React.Component {
                         categoryItems: json.arr, 
                         categoryItemsNew: json.main_cat,
                         is_load: true,
-                        cityNameRu: json.this_city_name_ru
+                        cityNameRu: json.this_city_name_ru,
+                        userName: json.user_name
                     });
                     this.is_load = false
                 })
@@ -912,8 +947,8 @@ export class Header extends React.Component {
                                     <Typography className="cat" variant="h5" component="span" onClick={this.openCity.bind(this)} style={{ display: 'flex', flexDirection: 'row' }}>{this.state.cityNameRu} <ArrowDropDownIcon /></Typography>
                                     
                                     {itemsStore.getToken() ?
-                                        itemsStore.getUserName() && itemsStore.getUserName().length > 0 ?
-                                            <Link to={"/"+this.state.cityName+"/profile"} className="cat">{itemsStore.getUserName()}</Link> 
+                                        this.state.userName.length > 0 ?
+                                            <Link to={"/"+this.state.cityName+"/profile"} className="cat">{this.state.userName}</Link> 
                                                 :
                                             <Link to={"/"+this.state.cityName+"/profile"}>
                                                 <Typography className="cat" variant="h5" component="span">Профиль</Typography>

@@ -980,11 +980,13 @@ class ItemsStore {
         
         this.setItems( new_cart );
       }
+
       if( localStorage.getItem('token') ){
         setTimeout( () => {
-          this.setToken( localStorage.getItem('token') );  
+          this.setToken( localStorage.getItem('token'), '' );  
         }, 300 )
       }
+
       if( localStorage.getItem('cartData') ){
         this.cartData = localStorage.getItem('cartData');
       }
