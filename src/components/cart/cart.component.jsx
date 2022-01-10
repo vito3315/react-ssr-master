@@ -7,7 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes, faPlus, faMinus, faCreditCard, faMoneyBill, faCashRegister, faGift } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faPlus, faMinus, faCreditCard, faMoneyBill, faCashRegister, faGift, faQrcode } from '@fortawesome/free-solid-svg-icons'
 
 import Hidden from '@material-ui/core/Hidden';
 
@@ -19,6 +19,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined';
+
 
 import Dialog from '@material-ui/core/Dialog';
 
@@ -2706,8 +2707,15 @@ export class Cart extends React.Component {
                             { parseInt( this.state.orderType ) == 0 ? null :
                                 <Typography variant="h5" component="span" className="orderCheckText" style={{ color: '#c03' }}>Забрать заказ можно только в маске</Typography>
                             }
+
+                            { parseInt( this.state.orderType ) == 0 ? null :
+                                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                                    <FontAwesomeIcon icon={ faQrcode } className="promoIcon" />
+                                    <Typography variant="h5" component="span" className="orderCheckText" style={{ color: '#c03' }}>Уважаемые посетители кафе "Жако", посадка в зал осуществляется только при наличии qr - кода и документа, удостоверяющего личность, ссылка на Постановление губернатора Самарской области от 6.11.2021 г.</Typography>
+                                </div>
+                            }
                             
-                            { parseInt( this.state.orderType ) == 0 && parseInt(this.state.orderAddr.point_id) == 3 ?
+                            { parseInt( this.state.orderType ) == 0 && parseInt(this.state.orderAddr.point_id) == 3 && false ?
                                 <>
                                     <Typography variant="h5" component="span" className="orderCheckText">Дорогие жители шлюзового района! В связи с ремонтом моста и затруднённой ситуацией на дорогах, доставка займёт больше времени, чем обычно.</Typography>
                                     <Typography variant="h5" component="span" className="orderCheckText">Благодарим за понимание!</Typography>

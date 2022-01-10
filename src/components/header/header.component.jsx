@@ -488,8 +488,6 @@ export class Header extends React.Component {
             let token = itemsStore.getToken();
 
             if( userName.length == 0 && token.length != 0 ){
-                console.log( 'need_load_user' )
-
                 fetch(config.urlApi, {
                     method: 'POST',
                     headers: {
@@ -501,8 +499,6 @@ export class Header extends React.Component {
                 }).then(res => res.json()).then(json => {
                     itemsStore.setUserName(json);
                     this.is_load = false;
-
-                    console.log( 'need_load_user', json )
 
                     this.setState({
                         userName: json
