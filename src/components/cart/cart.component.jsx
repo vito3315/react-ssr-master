@@ -2709,7 +2709,7 @@ export class Cart extends React.Component {
                             }
 
                             { parseInt( this.state.orderType ) == 0 ? null :
-                                <Typography variant="h5" component="span" className="orderCheckText" style={{ color: '#c03' }}><FontAwesomeIcon icon={ faQrcode } /> Уважаемые посетители кафе "Жако", посадка в зал осуществляется только при наличии qr - кода и документа, удостоверяющего личность, ссылка на Постановление губернатора Самарской области от 6.11.2021 г.</Typography>
+                                <Typography variant="h5" component="span" className="orderCheckText"><FontAwesomeIcon icon={ faQrcode } /> Уважаемые посетители кафе "Жако", посадка в зал осуществляется только при наличии qr - кода и документа, удостоверяющего личность, ссылка на Постановление губернатора Самарской области от 6.11.2021 г.</Typography>
                             }
                             
                             { parseInt( this.state.orderType ) == 0 && parseInt(this.state.orderAddr.point_id) == 3 && false ?
