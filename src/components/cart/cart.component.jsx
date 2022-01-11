@@ -578,7 +578,21 @@ export class Cart extends React.Component {
     static getDerivedStateFromError(error) {
         // Обновите состояние так, чтобы следующий рендер показал запасной интерфейс.
         //return { hasError: true };
-        this.setState({ hasError: true })
+        //this.setState({ hasError: true })
+
+        fetch(config.urlApi, {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'},
+            body: queryString.stringify({
+                type: 'save_log_err', 
+                page: 'cart',
+                error: JSON.stringify(error),
+                info: '',
+            })
+        }).then(res => res.json()).then(json => {
+            
+        });
     }
     
     componentDidCatch(error, info) {
@@ -595,7 +609,7 @@ export class Cart extends React.Component {
         console.log( error )
         console.log( info )
         
-        this.setState({ hasError: true })
+        //this.setState({ hasError: true })
         
         fetch(config.urlApi, {
             method: 'POST',

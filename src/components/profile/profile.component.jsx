@@ -173,37 +173,40 @@ export class Profile extends React.Component {
         
         if( typeof window !== 'undefined' ){
             
-            let search = window.location.search;
+            setTimeout( () => {
+                let search = window.location.search;
             
-            if( search.length > 0 ){
-                
-                if(search.indexOf('orderId') > 0){
-                    let order_pay = window.location.search;
-                
-                    let p1 = order_pay.split('&');
-            		let bank = p1[0].split('bank=');
-            		bank = bank[1];
-
-            		let order_id = p1[1].split('orderId=');
-                    order_id = order_id[1];
+                if( search.length > 0 ){
                     
-                    this.checkPay(bank, order_id);
+                    if(search.indexOf('orderId') > 0){
+                        let order_pay = window.location.search;
                     
-                    let state = { },
-                        title = '',
-                        url = window.location.pathname;
-
-                    window.history.pushState(state, title, url)
+                        let p1 = order_pay.split('&');
+                        let bank = p1[0].split('bank=');
+                        bank = bank[1];
+    
+                        let order_id = p1[1].split('orderId=');
+                        order_id = order_id[1];
+                        
+                        this.checkPay(bank, order_id);
+                        
+                        let state = { },
+                            title = '',
+                            url = window.location.pathname;
+    
+                        window.history.pushState(state, title, url)
+                    }
+                    
+                    if(search.indexOf('trueOrder') > 0){
+                        let state = { },
+                            title = '',
+                            url = window.location.pathname;
+    
+                        window.history.pushState(state, title, url)
+                    }
                 }
-                
-                if(search.indexOf('trueOrder') > 0){
-                    let state = { },
-                        title = '',
-                        url = window.location.pathname;
-
-                    window.history.pushState(state, title, url)
-                }
-            }
+            }, 300 )
+            
         }
         
         itemsStore.setCity(this.props.city);
