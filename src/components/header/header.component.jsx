@@ -487,17 +487,20 @@ export class Header extends React.Component {
             let userName = itemsStore.getUserName();
             let token = itemsStore.getToken();
 
-            if( userName.length == 0 && token.length != 0 ){
+            if( token.length == 0 && localStorage.getItem('token') && localStorage.getItem('token').length > 0 ){
+                this.setToken( localStorage.getItem('token'), '' ); 
+                
                 fetch(config.urlApi, {
                     method: 'POST',
                     headers: {
                         'Content-Type':'application/x-www-form-urlencoded'},
                     body: queryString.stringify({
                         type: 'get_user_data', 
-                        user_id: itemsStore.getToken()
+                        user_id: localStorage.getItem('token')
                     })
                 }).then(res => res.json()).then(json => {
-                    itemsStore.setUserName(json);
+                    itemsStore.setToken( localStorage.getItem('token'), json ); 
+
                     this.is_load = false;
 
                     this.setState({
@@ -505,13 +508,35 @@ export class Header extends React.Component {
                     })
                 })
                 .catch(err => { });
+            }else{
+                if( userName.length == 0 && token.length != 0 ){
+                    fetch(config.urlApi, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type':'application/x-www-form-urlencoded'},
+                        body: queryString.stringify({
+                            type: 'get_user_data', 
+                            user_id: itemsStore.getToken()
+                        })
+                    }).then(res => res.json()).then(json => {
+                        itemsStore.setUserName(json);
+                        this.is_load = false;
+
+                        this.setState({
+                            userName: json
+                        })
+                    })
+                    .catch(err => { });
+                }
+
+                if( userName.length > 0 ){
+                    this.setState({
+                        userName: userName
+                    })
+                } 
             }
 
-            if( userName.length > 0 ){
-                this.setState({
-                    userName: userName
-                })
-            }
+            
 
 
             let cartData = itemsStore.getCartData();
