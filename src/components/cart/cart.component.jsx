@@ -2730,7 +2730,7 @@ export class Cart extends React.Component {
                                     <Link
                                         to={{ pathname: "https://pravo.samregion.ru/wp-content/uploads/sites/2/2021/11/pgso291.pdf" }}
                                         target="_blank"
-                                        style={{ textDecoration: 'none' }}
+                                        style={{ textDecoration: 'none', color: 'inherit', paddingBottom: 10, marginTop: -10 }}
                                     >
                                         <Typography variant="h5" component="span" className="orderCheckText">Постановление губернатора Самарской области от 6.11.2021 г.</Typography>
                                     </Link>
