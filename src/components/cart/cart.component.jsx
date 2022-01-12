@@ -2723,7 +2723,7 @@ export class Cart extends React.Component {
                             }
 
                             { parseInt( this.state.orderType ) == 0 ? null :
-                                <Typography variant="h5" component="span" className="orderCheckText"><FontAwesomeIcon icon={ faQrcode } /> Уважаемые посетители кафе "Жако", посадка в зал осуществляется только при наличии qr - кода и документа, удостоверяющего личность, ссылка на Постановление губернатора Самарской области от 6.11.2021 г.</Typography>
+                                <Typography variant="h5" component="span" className="orderCheckText"><FontAwesomeIcon icon={ faQrcode } /> Уважаемые посетители кафе "Жако", посадка в зал осуществляется только при наличии qr - кода и документа, удостоверяющего личность. <а href="https://pravo.samregion.ru/wp-content/uploads/sites/2/2021/11/pgso291.pdf" target="_blank" style={{ textDecoration: 'none', color: '#000' }}>Постановление губернатора Самарской области от 6.11.2021 г.</а></Typography>
                             }
                             
                             { parseInt( this.state.orderType ) == 0 && parseInt(this.state.orderAddr.point_id) == 3 && false ?
