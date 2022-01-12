@@ -1,6 +1,8 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 
+import { NavLink as Link } from 'react-router-dom';
+
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import IconButton from '@material-ui/core/IconButton';
@@ -2723,7 +2725,16 @@ export class Cart extends React.Component {
                             }
 
                             { parseInt( this.state.orderType ) == 0 ? null :
-                                <Typography variant="h5" component="span" className="orderCheckText"><FontAwesomeIcon icon={ faQrcode } /> Уважаемые посетители кафе "Жако", посадка в зал осуществляется только при наличии qr - кода и документа, удостоверяющего личность. </Typography>
+                                <>
+                                    <Typography variant="h5" component="span" className="orderCheckText"><FontAwesomeIcon icon={ faQrcode } /> Уважаемые посетители кафе "Жако", посадка в зал осуществляется только при наличии qr - кода и документа, удостоверяющего личность. </Typography>
+                                    <Link
+                                        to={{ pathname: "https://pravo.samregion.ru/wp-content/uploads/sites/2/2021/11/pgso291.pdf" }}
+                                        target="_blank"
+                                        style={{ textDecoration: 'none' }}
+                                    >
+                                        <Typography variant="h5" component="span" className="orderCheckText">Постановление губернатора Самарской области от 6.11.2021 г.</Typography>
+                                    </Link>
+                                </>
                             }
                             
                             { parseInt( this.state.orderType ) == 0 && parseInt(this.state.orderAddr.point_id) == 3 && false ?
