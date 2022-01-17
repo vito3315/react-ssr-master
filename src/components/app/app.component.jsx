@@ -151,7 +151,7 @@ class StickyFooter extends React.Component{
 
                         { this.state.is_load && this.state.soc_link && this.state.soc_link.link_allergens.length ?
                             <Link
-                                to={ this.state.soc_link.link_allergens }
+                                to={{ pathname: this.state.soc_link.link_allergens }}
                                 target="_blank"
                                 style={{ textDecoration: 'none' }}
                             >
