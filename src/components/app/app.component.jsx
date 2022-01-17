@@ -148,6 +148,18 @@ class StickyFooter extends React.Component{
                         >
                             <Typography variant="body1">Публичная оферта</Typography>
                         </Link>
+
+                        { this.state.is_load && this.state.soc_link && this.state.soc_link.link_allergens.length ?
+                            <Link
+                                to={ this.state.soc_link.link_allergens }
+                                target="_blank"
+                                style={{ textDecoration: 'none' }}
+                            >
+                                <Typography variant="body1">Аллергены</Typography>
+                            </Link>
+                                :
+                            null
+                        }
                     </Grid>
                     <Grid item lg={3} md={3} sm={3} xl={3} xs={12}>
                         <Link
