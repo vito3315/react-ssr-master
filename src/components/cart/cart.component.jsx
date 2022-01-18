@@ -22,9 +22,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined';
 
-
 import Dialog from '@material-ui/core/Dialog';
-
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -34,7 +32,6 @@ import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-
 
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
@@ -1961,6 +1958,18 @@ export class Cart extends React.Component {
         this.setState({ chooseTimeDialog: true })
     }
 
+    checkSaveData(event, type){
+        let value = event.target.value;
+
+        if( isNaN(value) ){
+            return ;
+        }
+
+        this.setState({
+            [type]: value
+        })
+    }
+
     render() {
         
         if(this.state.hasError){
@@ -2058,7 +2067,7 @@ export class Cart extends React.Component {
                                             size="small"
                                             style={{ width: '100%' }}
                                             value={this.state.newAddrPD} 
-                                            onChange={ event => this.setState({ newAddrPD: event.target.value }) }
+                                            onChange={ event => this.checkSaveData(event, 'newAddrPD') }
                                             onBlur={this.saveDataCustomAddr.bind(this)}
                                         />
                                         <TextField 
@@ -2067,7 +2076,7 @@ export class Cart extends React.Component {
                                             size="small"
                                             style={{ width: '100%' }}
                                             value={this.state.newAddrET} 
-                                            onChange={ event => this.setState({ newAddrET: event.target.value }) }
+                                            onChange={ event => this.checkSaveData(event, 'newAddrET') }
                                             onBlur={this.saveDataCustomAddr.bind(this)}
                                         />
                                         <TextField 
@@ -2076,7 +2085,7 @@ export class Cart extends React.Component {
                                             size="small"
                                             style={{ width: '100%' }}
                                             value={this.state.newAddrKV} 
-                                            onChange={ event => this.setState({ newAddrKV: event.target.value }) }
+                                            onChange={ event => this.checkSaveData(event, 'newAddrKV') }
                                             onBlur={this.saveDataCustomAddr.bind(this)}
                                         />  
                                     </div>
@@ -2492,7 +2501,7 @@ export class Cart extends React.Component {
                                 //variant="outlined" 
                                 style={{ width: '100%' }}
                                 value={this.state.newAddrPD} 
-                                onChange={ event => this.setState({ newAddrPD: event.target.value }) }
+                                onChange={ event => this.checkSaveData(event, 'newAddrPD') }
                                 onBlur={this.saveDataCustomAddr.bind(this)}
                             />
                             <TextField 
@@ -2501,7 +2510,7 @@ export class Cart extends React.Component {
                                 //variant="outlined" 
                                 style={{ width: '100%' }}
                                 value={this.state.newAddrET} 
-                                onChange={ event => this.setState({ newAddrET: event.target.value }) }
+                                onChange={ event => this.checkSaveData(event, 'newAddrET') }
                                 onBlur={this.saveDataCustomAddr.bind(this)}
                             />
                             <TextField 
@@ -2510,7 +2519,7 @@ export class Cart extends React.Component {
                                 //variant="outlined" 
                                 style={{ width: '100%' }}
                                 value={this.state.newAddrKV} 
-                                onChange={ event => this.setState({ newAddrKV: event.target.value }) }
+                                onChange={ event => this.checkSaveData(event, 'newAddrKV') }
                                 onBlur={this.saveDataCustomAddr.bind(this)}
                             />  
                             <ButtonGroup disableElevation variant="contained" className="chooseDomTrue">

@@ -473,6 +473,7 @@ export class Header extends React.Component {
             errPhone: '',
             errSMS: '',
             userName: '',
+            token: '',
             
             soc_link: null,
             
@@ -486,6 +487,10 @@ export class Header extends React.Component {
 
             let userName = itemsStore.getUserName();
             let token = itemsStore.getToken();
+
+            this.setState({
+                token: localStorage.getItem('token').length == 0 ? '' : localStorage.getItem('token')
+            })
 
             if( token.length == 0 && localStorage.getItem('token') && localStorage.getItem('token').length > 0 ){
                 this.setToken( localStorage.getItem('token'), '' ); 
@@ -504,7 +509,8 @@ export class Header extends React.Component {
                     this.is_load = false;
 
                     this.setState({
-                        userName: json
+                        userName: json,
+                        token: localStorage.getItem('token')
                     })
                 })
                 .catch(err => { });
@@ -568,6 +574,10 @@ export class Header extends React.Component {
                 activePage: itemsStore.getPage()
             })
             
+            this.setState({
+                token: localStorage.getItem('token').length == 0 ? '' : localStorage.getItem('token')
+            })
+
             if( itemsStore.getCity() !== this.state.cityName ){
                 this.setState({
                     cityName: itemsStore.getCity()
@@ -968,7 +978,7 @@ export class Header extends React.Component {
                                 <Grid item className="CityProfileNav">
                                     <Typography className="cat" variant="h5" component="span" onClick={this.openCity.bind(this)} style={{ display: 'flex', flexDirection: 'row' }}>{this.state.cityNameRu} <ArrowDropDownIcon /></Typography>
                                     
-                                    {itemsStore.getToken() ?
+                                    {this.state.token.length > 0 ?
                                         this.state.userName.length > 0 ?
                                             <Link to={"/"+this.state.cityName+"/profile"} className="cat">{this.state.userName}</Link> 
                                                 :
