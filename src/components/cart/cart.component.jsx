@@ -2024,9 +2024,9 @@ export class Cart extends React.Component {
                                                 item.city_name+', '+
                                                 item.street+' '+
                                                 item.home+
-                                                ( parseInt(item.pd) == 0 ? '' : ', Пд. '+item.pd )+
-                                                ( parseInt(item.et) == 0 ? '' : ', Эт. '+item.et )+
-                                                ( parseInt(item.kv) == 0 ? '' : ', Кв. '+item.kv ) } />
+                                                ( item.pd.length == 0 ? '' : ', Пд. '+item.pd )+
+                                                ( item.et.length == 0 ? '' : ', Эт. '+item.et )+
+                                                ( item.kv.length == 0 ? '' : ', Кв. '+item.kv ) } />
                                             <FontAwesomeIcon onClick={this.delAddr.bind(this, item.id)} icon={faTimes}/>
                                         </div>
                                     )}
@@ -2452,11 +2452,11 @@ export class Cart extends React.Component {
                                             item.city_name+', '+
                                             item.street+' '+
                                             item.home+
-                                            ( parseInt(item.pd) == 0 ? '' : ', Пд. '+item.pd )+
-                                            ( parseInt(item.et) == 0 ? '' : ', Эт. '+item.et )+
-                                            ( parseInt(item.kv) == 0 ? '' : ', Кв. '+item.kv )
+                                            ( item.pd.length == 0 ? '' : ', Пд. '+item.pd )+
+                                            ( item.et.length == 0 ? '' : ', Эт. '+item.et )+
+                                            ( item.kv.length == 0 ? '' : ', Кв. '+item.kv )
                                         } />
-                                        <FontAwesomeIcon icon={faTimes}/>
+                                        <FontAwesomeIcon onClick={this.delAddr.bind(this, item.id)} icon={faTimes}/>
                                     </div>
                                 )}
                             </RadioGroup>
@@ -2696,9 +2696,9 @@ export class Cart extends React.Component {
                                     this.state.orderAddr.city_name+', '+
                                     this.state.orderAddr.street+' '+
                                     this.state.orderAddr.home+
-                                    ( parseInt(this.state.orderAddr.pd) == 0 ? '' : ', Пд. '+this.state.orderAddr.pd )+
-                                    ( parseInt(this.state.orderAddr.et) == 0 ? '' : ', Эт. '+this.state.orderAddr.et )+
-                                    ( parseInt(this.state.orderAddr.kv) == 0 ? '' : ', Кв. '+this.state.orderAddr.kv )
+                                    ( this.state.orderAddr.pd.length == 0 ? '' : ', Пд. '+this.state.orderAddr.pd )+
+                                    ( this.state.orderAddr.et.length == 0 ? '' : ', Эт. '+this.state.orderAddr.et )+
+                                    ( this.state.orderAddr.kv.length == 0 ? '' : ', Кв. '+this.state.orderAddr.kv )
                                         :
                                     null
                                 }</Typography>
