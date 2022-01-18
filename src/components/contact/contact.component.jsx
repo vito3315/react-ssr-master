@@ -225,13 +225,9 @@ export class Contact extends React.Component {
 			points.map(function(point){
 				myMap2.geoObjects.add(
                     new ymaps.Placemark( [point['xy_point']['latitude'], point['xy_point']['longitude']], {
-    					//hintContent: point['addr'],
-    					//balloonContent: point['addr'],
-                        address: point['addr'],
-                        sum_div: point['sum_div'], 
+    				
                     }, {
-                        hintLayout: HintLayout,
-    					iconLayout: 'default#image',
+                        iconLayout: 'default#image',
                         iconImageHref: '/assets/img_other/Favikon.png',
     					iconImageSize: [30, 30],
     					iconImageOffset: [-12, -24],
