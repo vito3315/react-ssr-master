@@ -25,6 +25,11 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
+import { initializeApp } from "firebase/app";
+import { getAnalytics, logEvent } from "firebase/analytics";
+
+var firebaseAPP = null;
+
 function Ruble(props){
     return (
         <svg width={ props.width ? props.width : "50"} height="20" viewBox={ props.viewBox ? props.viewBox : "0 0 1500 300"} xmlns="http://www.w3.org/2000/svg">
@@ -168,7 +173,8 @@ export class Item extends React.Component {
     swiper = null;
     
     startMove = 0;
-    
+    firebaseAnalitic = null;
+
     constructor(props) {
         super(props);
         
@@ -226,6 +232,19 @@ export class Item extends React.Component {
     componentDidMount(){
         this._isMounted = true; 
         
+        const firebaseConfig = {
+            apiKey: "AIzaSyChAHowCT2C7GRwfcxwt1Pi4SCV4CaVpP4",
+            authDomain: "jacofoodsite.firebaseapp.com",
+            projectId: "jacofoodsite",
+            storageBucket: "jacofoodsite.appspot.com",
+            messagingSenderId: "692082803779",
+            appId: "1:692082803779:web:39a39963cd8bff927000f6"
+        };
+          
+        // Initialize Firebase
+        firebaseAPP = initializeApp(firebaseConfig);
+        this.firebaseAnalitic = getAnalytics(firebaseAPP);
+
         autorun(() => {
             if( this._isMounted ){
                 let item = itemsStore.getAllItems().find( (item) => item.link == this.state.itemLink );
@@ -305,11 +324,25 @@ export class Item extends React.Component {
     }
     
     add(){
+
+        logEvent(this.firebaseAnalitic, 'add_to_cart', {
+            content_type: 'add_cart',
+            content_id: this.state.item['id'],
+            items: [{ name: this.state.item.name }]
+        });
+
         let count = itemsStore.AddItem(this.state.item['id']);
         this.setState({ count: count })
     }
     
     minus(){
+
+        logEvent(this.firebaseAnalitic, 'remove_from_cart', {
+            content_type: 'remove_cart',
+            content_id: this.state.item['id'],
+            items: [{ name: this.state.item.name }]
+        });
+
         let count = itemsStore.MinusItem(this.state.item['id']);
         this.setState({ count: count })
     }

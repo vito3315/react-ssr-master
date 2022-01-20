@@ -69,6 +69,11 @@ import {Helmet} from "react-helmet";
 const queryString = require('query-string');
 import axios from 'axios';
 
+import { initializeApp } from "firebase/app";
+import { getAnalytics, logEvent } from "firebase/analytics";
+
+var firebaseAPP = null;
+
 function get_city(path){
     
     path = path.split('/');
@@ -122,10 +127,13 @@ function a11yProps(index) {
 
 class CartItem extends React.Component {
     _isMounted = false;
-    
+    firebaseAnalitic = null;
+
     constructor(props) {
         super(props);
         
+        this.firebaseAnalitic = this.props.firebaseAnalitic;
+
         this.state = {  
             item: this.props.item,
             type: this.props.type,
@@ -196,10 +204,22 @@ class CartItem extends React.Component {
     }
     
     add(item_id){
+        logEvent(this.firebaseAnalitic, 'add_to_cart', {
+            content_type: 'add_cart',
+            content_id: item_id,
+            items: [{ name: this.state.item.name }]
+        });
+
         itemsStore.AddItem(item_id);
     }
     
     minus(item_id){
+        logEvent(this.firebaseAnalitic, 'remove_from_cart', {
+            content_type: 'remove_cart',
+            content_id: item_id,
+            items: [{ name: this.state.item.name }]
+        });
+
         itemsStore.MinusItem(item_id);
     }
     
@@ -286,10 +306,13 @@ class CartItem extends React.Component {
 
 class CartItemMobile extends React.Component {
     _isMounted = false;
-    
+    firebaseAnalitic = null;
+
     constructor(props) {
         super(props);
         
+        this.firebaseAnalitic = this.props.firebaseAnalitic;
+
         this.state = {  
             item: this.props.item,
             type: this.props.type,
@@ -359,10 +382,22 @@ class CartItemMobile extends React.Component {
     }
     
     add(item_id){
+        logEvent(this.firebaseAnalitic, 'add_to_cart', {
+            content_type: 'add_cart',
+            content_id: item_id,
+            items: [{ name: this.state.item.name }]
+        });
+
         itemsStore.AddItem(item_id);
     }
     
     minus(item_id){
+        logEvent(this.firebaseAnalitic, 'remove_from_cart', {
+            content_type: 'remove_cart',
+            content_id: item_id,
+            items: [{ name: this.state.item.name }]
+        });
+
         itemsStore.MinusItem(item_id);
     }
     
@@ -450,6 +485,8 @@ export class Cart extends React.Component {
     startOrderInterval = 90;
     startOrderIntervalTimer = null;
     
+    firebaseAnalitic = null;
+
     constructor(props) {
         super(props);
         
@@ -759,6 +796,19 @@ export class Cart extends React.Component {
     componentDidMount = () => {
         this._isMounted = true; 
         
+        const firebaseConfig = {
+            apiKey: "AIzaSyChAHowCT2C7GRwfcxwt1Pi4SCV4CaVpP4",
+            authDomain: "jacofoodsite.firebaseapp.com",
+            projectId: "jacofoodsite",
+            storageBucket: "jacofoodsite.appspot.com",
+            messagingSenderId: "692082803779",
+            appId: "1:692082803779:web:39a39963cd8bff927000f6"
+        };
+          
+        // Initialize Firebase
+        firebaseAPP = initializeApp(firebaseConfig);
+        this.firebaseAnalitic = getAnalytics(firebaseAPP);
+
         try{
 
             if( document.querySelector('.activeCat') ){
@@ -2190,10 +2240,10 @@ export class Cart extends React.Component {
                             <table className="tableCart">
                                 <tbody>
                                     {this.state.cartItems_main.map((item, key) =>
-                                        <CartItem key={key} item={item} type="item" />
+                                        <CartItem key={key} item={item} type="item" firebaseAnalitic={this.firebaseAnalitic} />
                                     )}
                                     {this.state.cartItems_promo.map((item, key) =>
-                                        <CartItem key={key} item={item} type="promo" />
+                                        <CartItem key={key} item={item} type="promo" firebaseAnalitic={this.firebaseAnalitic} />
                                     )}
                                     
                                     <tr className="rowAboutDop">
@@ -2204,7 +2254,7 @@ export class Cart extends React.Component {
                                         </td>
                                     </tr>
                                     {this.state.cartItems_dop.map((item, key) =>
-                                        <CartItem key={key} item={item} type="dop" />
+                                        <CartItem key={key} item={item} type="dop" firebaseAnalitic={this.firebaseAnalitic} />
                                     )}
                                 </tbody>
                                 <tfoot>
@@ -2377,11 +2427,11 @@ export class Cart extends React.Component {
                         <div>
                             <div className="tableMobile">
                                 {this.state.cartItems_main.map((item, key) =>
-                                    <CartItemMobile key={key} item={item} type="item" />
+                                    <CartItemMobile key={key} item={item} type="item" firebaseAnalitic={this.firebaseAnalitic} />
                                 )}
                                 
                                 {this.state.cartItems_promo.map((item, key) =>
-                                    <CartItemMobile key={key} item={item} type="promo" />
+                                    <CartItemMobile key={key} item={item} type="promo" firebaseAnalitic={this.firebaseAnalitic} />
                                 )}
                                 
                                 <div className="boxItem rowAboutDop">
@@ -2391,7 +2441,7 @@ export class Cart extends React.Component {
                                 </div>
                                 
                                 {this.state.cartItems_dop.map((item, key) =>
-                                    <CartItemMobile key={key} item={item} type="dop" />
+                                    <CartItemMobile key={key} item={item} type="dop" firebaseAnalitic={this.firebaseAnalitic} />
                                 )}
                                 
                                 
@@ -2642,7 +2692,7 @@ export class Cart extends React.Component {
                     <DialogContent>
                         <div className="tableMobile OrderCheckDopDialog">
                             {this.state.cartItems_dop.map((item, key) =>
-                                <CartItemMobile key={key} item={item} type="dop" />
+                                <CartItemMobile key={key} item={item} type="dop" firebaseAnalitic={this.firebaseAnalitic} />
                             )}
                         </div>
                     </DialogContent>
@@ -2665,7 +2715,7 @@ export class Cart extends React.Component {
                     <DialogContent>
                         <div className="tableMobile OrderCheckDopDialog">
                             {this.state.cartItems_dop_tea.map((item, key) =>
-                                <CartItemMobile key={key} item={item} type="dop" />
+                                <CartItemMobile key={key} item={item} type="dop" firebaseAnalitic={this.firebaseAnalitic} />
                             )}
                         </div>
                     </DialogContent>

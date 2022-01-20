@@ -36,6 +36,11 @@ import Dialog from '@material-ui/core/Dialog';
 import Slide from '@material-ui/core/Slide';
 import Hidden from '@material-ui/core/Hidden';
 
+import { initializeApp } from "firebase/app";
+import { getAnalytics, logEvent } from "firebase/analytics";
+
+var firebaseAPP = null;
+
 import Swiper from "swiper";
 import SwiperCore, { Pagination, Navigation, A11y, Autoplay } from 'swiper';
 SwiperCore.use([Navigation, Pagination, A11y, Autoplay]);
@@ -557,7 +562,8 @@ export class Home extends React.Component {
     _isMounted = false;
     startMove = 0;
     activeID = 0;
-    
+    firebaseAnalitic = null;
+
     constructor(props) {
         super(props);
         
@@ -755,6 +761,19 @@ export class Home extends React.Component {
         
         let arrMax = [];
         
+        const firebaseConfig = {
+            apiKey: "AIzaSyChAHowCT2C7GRwfcxwt1Pi4SCV4CaVpP4",
+            authDomain: "jacofoodsite.firebaseapp.com",
+            projectId: "jacofoodsite",
+            storageBucket: "jacofoodsite.appspot.com",
+            messagingSenderId: "692082803779",
+            appId: "1:692082803779:web:39a39963cd8bff927000f6"
+        };
+          
+        // Initialize Firebase
+        firebaseAPP = initializeApp(firebaseConfig);
+        this.firebaseAnalitic = getAnalytics(firebaseAPP);
+
         const AllItemsCatNew = itemsStore.getAllItemsCatNew();
         const AllItemsCat = itemsStore.getAllItemsCat();
         
@@ -929,6 +948,12 @@ export class Home extends React.Component {
             title = '',
             url = window.location.pathname+'?showItem='+item.id;
 
+        logEvent(this.firebaseAnalitic, 'open_item', {
+            content_type: 'item',
+            content_id: item.id,
+            items: [{ name: item.name }]
+        });
+
         window.history.pushState(state, title, url)
         
         this.setState({
@@ -950,6 +975,12 @@ export class Home extends React.Component {
         let state = { 'item_id': item.id, 'item_name': item.name },
             title = '',
             url = window.location.pathname+'?showItem='+item.id;
+
+        logEvent(this.firebaseAnalitic, 'open_item', {
+            content_type: 'item',
+            content_id: item.id,
+            items: [{ name: item.name }]
+        });
 
         window.history.pushState(state, title, url)
         
