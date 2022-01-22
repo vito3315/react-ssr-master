@@ -730,7 +730,7 @@ export class Profile extends React.Component {
         
         let data = {
             orderType: parseInt(this.state.showOrder.order.type_order_) - 1,
-            orderAddr: this.state.showOrder.street.name,
+            orderAddr: parseInt(this.state.showOrder.order.type_order_) == 1 ? this.state.showOrder.street.name : null,
             orderPic: parseInt(this.state.showOrder.order.point_id),
             orderComment: '',
             
