@@ -155,7 +155,7 @@ class StickyFooter extends React.Component{
                                 target="_blank"
                                 style={{ textDecoration: 'none' }}
                             >
-                                <Typography variant="body1">Аллергены</Typography>
+                                <Typography variant="body1">Калорийность, состав и аллергены</Typography>
                             </Link>
                                 :
                             null
