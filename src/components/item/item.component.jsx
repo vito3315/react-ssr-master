@@ -508,7 +508,7 @@ export class Item extends React.Component {
                 </Box>
                 
                 <Hidden smUp>
-                    <Grid container className="MainItem mainContainer" style={{ paddingLeft: '4%', paddingRight: '4%', height: '100vh' }}>
+                    <Grid container className="MainItem mainContainer" style={{ paddingLeft: '4%', paddingRight: '4%', height: '100%' }}>
                         <Grid item xs={12} style={{ paddingRight: 12 }}>
                             <picture id="forSwiper">
                                 <source 
