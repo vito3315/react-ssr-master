@@ -864,6 +864,8 @@ export class Home extends React.Component {
                     
                     let allItems = itemsStore.getAllItems();
                     let act_id = checkItem[1];
+
+                    act_id = act_id.split('&')[0];
                     //let item = allItems.find( (item) => item.id == act_id );
                     
                     if( window.innerWidth <= 400 ){
