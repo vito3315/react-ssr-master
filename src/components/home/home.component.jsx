@@ -868,7 +868,7 @@ export class Home extends React.Component {
                     act_id = act_id.split('&')[0];
                     //let item = allItems.find( (item) => item.id == act_id );
                     
-                    if( window.innerWidth <= 400 ){
+                    if( window.innerWidth <= 500 ){
                         this.openItem(act_id);
                     }else{
                         this.openItemPC(act_id);
