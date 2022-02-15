@@ -224,17 +224,31 @@ class CardItem extends React.Component {
             
                 console.log( 'city', city ) 
                 
-                if( city == 'samara' && parseInt(this.state.item['id']) == 238 ){
+                if( city == 'samara' && (parseInt(this.state.item['id']) == 70 || parseInt(this.state.item['id']) == 71 || parseInt(this.state.item['id']) == 7) ){
                     this.setState({
-                        //old_price: 715,
-                        //is_old_price: true
+                        old_price: 205,
+                        is_old_price: true
+                    })
+                }
+    
+                if( city == 'samara' && parseInt(this.state.item['id']) == 4 ){
+                    this.setState({
+                        old_price: 135,
+                        is_old_price: true
                     })
                 }
                 
-                if( city == 'togliatti' && parseInt(this.state.item['id']) == 238 ){
+                if( city == 'togliatti' && (parseInt(this.state.item['id']) == 70 || parseInt(this.state.item['id']) == 71 || parseInt(this.state.item['id']) == 7) ){
                     this.setState({
-                        //old_price: 675,
-                        //is_old_price: true
+                        old_price: 195,
+                        is_old_price: true
+                    })
+                }
+    
+                if( city == 'togliatti' && parseInt(this.state.item['id']) == 4 ){
+                    this.setState({
+                        old_price: 135,
+                        is_old_price: true
                     })
                 }
                 
