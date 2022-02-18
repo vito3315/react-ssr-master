@@ -190,29 +190,29 @@ class CardItem extends React.Component {
             
             if( city == 'samara' && (parseInt(this.state.item['id']) == 70 || parseInt(this.state.item['id']) == 71 || parseInt(this.state.item['id']) == 7) ){
                 this.setState({
-                    old_price: 205,
-                    is_old_price: true
+                    //old_price: 205,
+                    //is_old_price: true
                 })
             }
 
             if( city == 'samara' && parseInt(this.state.item['id']) == 4 ){
                 this.setState({
-                    old_price: 135,
-                    is_old_price: true
+                    //old_price: 135,
+                    //is_old_price: true
                 })
             }
             
             if( city == 'togliatti' && (parseInt(this.state.item['id']) == 70 || parseInt(this.state.item['id']) == 71 || parseInt(this.state.item['id']) == 7) ){
                 this.setState({
-                    old_price: 195,
-                    is_old_price: true
+                    //old_price: 195,
+                    //is_old_price: true
                 })
             }
 
             if( city == 'togliatti' && parseInt(this.state.item['id']) == 4 ){
                 this.setState({
-                    old_price: 135,
-                    is_old_price: true
+                    //old_price: 135,
+                    //is_old_price: true
                 })
             }
         }
@@ -226,29 +226,29 @@ class CardItem extends React.Component {
                 
                 if( city == 'samara' && (parseInt(this.state.item['id']) == 70 || parseInt(this.state.item['id']) == 71 || parseInt(this.state.item['id']) == 7) ){
                     this.setState({
-                        old_price: 205,
-                        is_old_price: true
+                        //old_price: 205,
+                        //is_old_price: true
                     })
                 }
     
                 if( city == 'samara' && parseInt(this.state.item['id']) == 4 ){
                     this.setState({
-                        old_price: 135,
-                        is_old_price: true
+                        //old_price: 135,
+                        //is_old_price: true
                     })
                 }
                 
                 if( city == 'togliatti' && (parseInt(this.state.item['id']) == 70 || parseInt(this.state.item['id']) == 71 || parseInt(this.state.item['id']) == 7) ){
                     this.setState({
-                        old_price: 195,
-                        is_old_price: true
+                        //old_price: 195,
+                        //is_old_price: true
                     })
                 }
     
                 if( city == 'togliatti' && parseInt(this.state.item['id']) == 4 ){
                     this.setState({
-                        old_price: 135,
-                        is_old_price: true
+                        //old_price: 135,
+                        //is_old_price: true
                     })
                 }
                 
