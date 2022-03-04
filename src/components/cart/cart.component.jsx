@@ -2783,7 +2783,7 @@ export class Cart extends React.Component {
                                 <Typography variant="h5" component="span" className="orderCheckText" style={{ color: '#c03' }}>Забрать заказ можно только в маске</Typography>
                             }
 
-                            { parseInt( this.state.orderType ) == -1 ? null :
+                            { parseInt( this.state.orderType ) != -1 ? null :
                                 <>
                                     <Typography variant="h5" component="span" className="orderCheckText"><FontAwesomeIcon icon={ faQrcode } /> Уважаемые посетители кафе "Жако", посадка в зал осуществляется только при наличии qr - кода и документа, удостоверяющего личность. </Typography>
                                     <Link
