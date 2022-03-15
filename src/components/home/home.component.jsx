@@ -186,8 +186,6 @@ class CardItem extends React.Component {
             
             let city = itemsStore.getCity();
             
-            console.log( 'city', city ) 
-            
             if( city == 'samara' && (parseInt(this.state.item['id']) == 70 || parseInt(this.state.item['id']) == 71 || parseInt(this.state.item['id']) == 7) ){
                 this.setState({
                     //old_price: 205,
@@ -222,8 +220,6 @@ class CardItem extends React.Component {
                 
                 let city = itemsStore.getCity();
             
-                console.log( 'city', city ) 
-                
                 if( city == 'samara' && (parseInt(this.state.item['id']) == 70 || parseInt(this.state.item['id']) == 71 || parseInt(this.state.item['id']) == 7) ){
                     this.setState({
                         //old_price: 205,

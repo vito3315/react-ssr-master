@@ -489,7 +489,7 @@ export class Header extends React.Component {
             let token = itemsStore.getToken();
 
             this.setState({
-                token: localStorage.getItem('token').length == 0 ? '' : localStorage.getItem('token')
+                token: !localStorage.getItem('token') || localStorage.getItem('token').length == 0 ? '' : localStorage.getItem('token')
             })
 
             if( token.length == 0 && localStorage.getItem('token') && localStorage.getItem('token').length > 0 ){
@@ -575,7 +575,7 @@ export class Header extends React.Component {
             })
             
             this.setState({
-                token: localStorage.getItem('token').length == 0 ? '' : localStorage.getItem('token')
+                token: !localStorage.getItem('token') || localStorage.getItem('token').length == 0 ? '' : localStorage.getItem('token')
             })
 
             if( itemsStore.getCity() !== this.state.cityName ){
