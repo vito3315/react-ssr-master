@@ -296,8 +296,6 @@ export class App extends React.Component {
         const perf = getPerformance(firebaseAPP);
 
         autorun(() => {
-            console.log( 'test', this.props.globalState.test )
-            console.log( 'all', this.props.globalState )
             this.setState({
                 activePage: itemsStore.getPage()
             })
