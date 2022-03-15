@@ -279,6 +279,8 @@ export class App extends React.Component {
 
     componentDidMount = () => {
 
+        
+
         const firebaseConfig = {
             apiKey: "AIzaSyChAHowCT2C7GRwfcxwt1Pi4SCV4CaVpP4",
             authDomain: "jacofoodsite.firebaseapp.com",
@@ -294,6 +296,8 @@ export class App extends React.Component {
         const perf = getPerformance(firebaseAPP);
 
         autorun(() => {
+            console.log( 'test', this.props.globalState.test )
+            console.log( 'all', this.props.globalState )
             this.setState({
                 activePage: itemsStore.getPage()
             })

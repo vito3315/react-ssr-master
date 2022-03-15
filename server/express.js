@@ -136,7 +136,8 @@ app.use( '*', async ( req, res ) => {
             city: city,
             this_link: req.originalUrl,
             linkItem: linkItem,
-            Item: Item
+            Item: Item,
+            test: localStorage
         }
         
         let appHTML = ReactDOMServer.renderToString(
