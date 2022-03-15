@@ -655,9 +655,37 @@ export class Header extends React.Component {
     }
 
     openLogin(){
-        this.setState({
-            openLogin: true
-        })
+        console.log('city', this.state.cityName);
+
+        if( localStorage.getItem('token') && localStorage.getItem('token').length > 0 ){
+            fetch(config.urlApi, {
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/x-www-form-urlencoded'},
+                body: queryString.stringify({
+                    type: 'get_user_data', 
+                    user_id: localStorage.getItem('token')
+                })
+            }).then(res => res.json()).then(json => {
+                itemsStore.setToken( localStorage.getItem('token'), json ); 
+
+                this.is_load = false;
+
+                this.setState({
+                    userName: json,
+                    token: localStorage.getItem('token')
+                })
+
+                if (typeof window !== 'undefined') {
+                    window.location.pathname = '/'+this.state.cityName+'/profile';
+                }
+            })
+            .catch(err => { });
+        }else{
+            this.setState({
+                openLogin: true
+            })
+        }
     }
     
     closeLogin(){

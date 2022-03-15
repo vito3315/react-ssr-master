@@ -278,9 +278,6 @@ export class App extends React.Component {
     }
 
     componentDidMount = () => {
-
-        
-
         const firebaseConfig = {
             apiKey: "AIzaSyChAHowCT2C7GRwfcxwt1Pi4SCV4CaVpP4",
             authDomain: "jacofoodsite.firebaseapp.com",
