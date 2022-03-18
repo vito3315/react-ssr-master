@@ -116,7 +116,7 @@ export class Contact extends React.Component {
         window.scrollTo(0, 0);
         itemsStore.setPage('contact');
         
-        this.dynamicallyLoadScript();
+        //this.dynamicallyLoadScript();
         
         Contact.fetchData('/'+this.state.city_name).then( data => {
             this.setState( {
