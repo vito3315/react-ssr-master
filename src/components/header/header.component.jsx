@@ -515,7 +515,7 @@ export class Header extends React.Component {
                 })
                 .catch(err => { });
             }else{
-                if( userName.length == 0 && token.length != 0 ){
+                if( userName && userName.length == 0 && token && token.length != 0 ){
                     fetch(config.urlApi, {
                         method: 'POST',
                         headers: {
