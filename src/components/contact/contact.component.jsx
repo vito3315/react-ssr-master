@@ -208,8 +208,6 @@ export class Contact extends React.Component {
         
         ymaps.ready(function () {
 
-            console.log( 'is_load_script ymaps' )
-
             myMap2 = new ymaps.Map('ForMap', {
 				center: [ points[0]['xy_center_map']['latitude'], points[0]['xy_center_map']['longitude'] ],
 				zoom: 10.8

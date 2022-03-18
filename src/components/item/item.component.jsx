@@ -249,6 +249,8 @@ export class Item extends React.Component {
             if( this._isMounted ){
                 let item = itemsStore.getAllItems().find( (item) => item.link == this.state.itemLink );
                 
+                console.log( item.name, item )
+
                 if( item ){
                     this.setState({
                         item: item
