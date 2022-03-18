@@ -94,6 +94,8 @@ export class Contact extends React.Component {
         script.src = 'https://api-maps.yandex.ru/2.1/?apikey=ae2bad1f-486e-442b-a9f7-d84fff6296db&lang=ru_RU';  // set its src to the provided URL
 
         document.head.appendChild(script);  // add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
+
+        console.log( document.head )
     }
     
     componentDidMount = () => {
