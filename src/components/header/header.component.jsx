@@ -492,7 +492,7 @@ export class Header extends React.Component {
                 token: !localStorage.getItem('token') || localStorage.getItem('token').length == 0 ? '' : localStorage.getItem('token')
             })
 
-            if( token.length == 0 && localStorage.getItem('token') && localStorage.getItem('token').length > 0 ){
+            if( token && token.length == 0 && localStorage.getItem('token') && localStorage.getItem('token').length > 0 ){
                 this.setToken( localStorage.getItem('token'), '' ); 
                 
                 fetch(config.urlApi, {
