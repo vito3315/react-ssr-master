@@ -86,19 +86,26 @@ export class Contact extends React.Component {
             
             city_name: this.props.city,
             is_load: false,
+
+            is_load_script: false
         };
         
         itemsStore.setCity(this.props.city);
     }
     
     dynamicallyLoadScript() {
-        if( this.is_load_script === false ){
+        if( this.state.is_load_script === false ){
+
+            console.log( 'is_load_script' )
+
             var script = document.createElement("script");  // create a script DOM node
             script.src = 'https://api-maps.yandex.ru/2.1/?apikey=ae2bad1f-486e-442b-a9f7-d84fff6296db&lang=ru_RU';  // set its src to the provided URL
 
             document.head.appendChild(script);  // add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
 
-            this.is_load_script = true;
+            this.setState({
+                is_load_script: true
+            })
         }
     }
     
@@ -200,6 +207,9 @@ export class Contact extends React.Component {
         let myMap2;
         
         ymaps.ready(function () {
+
+            console.log( 'is_load_script ymaps' )
+
             myMap2 = new ymaps.Map('ForMap', {
 				center: [ points[0]['xy_center_map']['latitude'], points[0]['xy_center_map']['longitude'] ],
 				zoom: 10.8
