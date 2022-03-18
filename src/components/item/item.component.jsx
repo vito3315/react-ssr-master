@@ -249,7 +249,7 @@ export class Item extends React.Component {
             if( this._isMounted ){
                 let item = itemsStore.getAllItems().find( (item) => item.link == this.state.itemLink );
                 
-                console.log( item.name, item )
+                console.log( item )
 
                 if( item ){
                     this.setState({
@@ -287,6 +287,8 @@ export class Item extends React.Component {
         
         if( this.props.item ){
             
+            console.log( this.props.item )
+
             /*Item.fetchData('/'+this.state.city_name+'/menu/'+this.state.itemLink).then( data => {
                 this.setState( {
                     title: data.page.title,
