@@ -295,7 +295,7 @@ class CardItem extends React.Component {
                 <Card elevation={0} className="CardItem">
                     
                     <CardContent style={{ cursor: 'pointer', position: 'relative' }} onClick={ () => this.props.openItem(this.state.item.id)}>
-                        <LazyLoad once>
+                        <LazyLoad once height={150}>
                             <picture>
                                 <source 
                                     srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
@@ -363,20 +363,21 @@ class CardItem extends React.Component {
             return (
                 <Grid item container xs={12} className="CardItem_mobile">
                     <Grid style={{ position: 'relative' }} item xs={6} sm={6} md={6} xl={6} onClick={ () => this.props.openItem(this.state.item.id)}>
-                        
-                        <picture>
-                            <source 
-                                srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.webp?"+this.state.item.img_new_update} 
-                                type="image/webp" 
-                                //ref={el => this.elementSource = el}
-                            />
-                            <img 
-                                //ref={el => this.elementImg = el}
-                                src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.jpg?"+this.state.item.img_new_update} 
-                                alt={this.state.item.name}
-                                title={this.state.item.name}
-                            />
-                        </picture>
+                        <LazyLoad once height={150}>
+                            <picture>
+                                <source 
+                                    srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.webp?"+this.state.item.img_new_update} 
+                                    type="image/webp" 
+                                    //ref={el => this.elementSource = el}
+                                />
+                                <img 
+                                    //ref={el => this.elementImg = el}
+                                    src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.jpg?"+this.state.item.img_new_update} 
+                                    alt={this.state.item.name}
+                                    title={this.state.item.name}
+                                />
+                            </picture>
+                        </LazyLoad>
                         
                         { parseInt(this.state.item.is_new) == 0 ? null :
                             <img 

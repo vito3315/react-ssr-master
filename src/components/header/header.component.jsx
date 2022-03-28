@@ -461,6 +461,9 @@ export class Header extends React.Component {
             testData: [1, 2, 3, 4],
             cityList: this.props.data ? this.props.data.all.other.cats.city_list : [],
             
+            openLoginNew: false,
+            pwd: '',
+
             openLogin: false,
             userLogin: '',
             userLoginFormat: '',
@@ -683,7 +686,7 @@ export class Header extends React.Component {
             .catch(err => { });
         }else{
             this.setState({
-                openLogin: true
+                openLoginNew: true
             })
         }
     }
@@ -1308,7 +1311,101 @@ export class Header extends React.Component {
                         null
                     }
                 </Dialog>
+
+
+
+
+                <Dialog
+                    open={this.state.openLoginNew}
+                    fullWidth={true}
+                    maxWidth={'xs'}
+                    onClose={this.closeLogin.bind(this)}
+                    className="ModalAuth"
+                >
+                    <DialogTitle>Авторизация</DialogTitle>
+                    <DialogContent className="ModalContent_1_1">
+                        <div className="ModalContent_1_2">
+                            <Typography variant="h5" component="span" className="ModalLabel">Номер телефона</Typography>
+                            <InputMask 
+                                className="InputMask"
+                                mask="8 (999) 999-99-99" 
+                                placeholder="8 (999) 999-99-99" 
+                                disabled={!this.state.stage_1}
+                                value={this.state.userLogin}
+                                //onKeyPress={this.handleKeyPress}
+                                onChange={ event => this.state.stage_1 ? this.setState({ userLogin: event.target.value }) : {} }
+                            />
+                            <TextField 
+                                className="InputMask"
+                                label="Пароль" 
+                                size="small"
+                                variant="outlined" 
+                                type="password"
+                                value={this.state.pwd} 
+                                disabled={!this.state.stage_1}
+                                onChange={ event => this.setState({ pwd: event.target.value }) }
+                            />
+                            {this.state.stage_2 ?
+                                <Typography variant="h5" component="span" className="changeNumber" onClick={this.changeNumber.bind(this)}>Изменить номер</Typography>
+                                    :
+                                null
+                            }
+                            {this.state.errPhone.length > 0 ?
+                                <div style={{ marginTop: 10, padding: 16, backgroundColor: '#BB0025', borderRadius: 4 }}>
+                                    <Typography variant="h5" component="span" style={{ fontSize: '1.1rem', color: '#fff' }}>{this.state.errPhone}</Typography>
+                                </div>
+                                    :
+                                null
+                            }
+                        </div>
+                        {this.state.stage_2 ?
+                            <div className="ModalContent_1_3">
+                                <Typography variant="h5" component="span" className="ModalLabel">Код из смс</Typography>
+                                <div className="ModalContent_1_2">
+                                    <InputMask 
+                                        className="InputMask"
+                                        mask="9999" 
+                                        value={this.state.userCode}
+                                        //onChange={ (event) => { this.changeCode.bind(this, event.target.value) } }
+                                        onChange={ this.changeCode.bind(this) }
+                                    />
+                                    {this.state.timerSMS > 0 ?
+                                        <Typography variant="h5" component="span" style={{ fontSize: '0.8rem', paddingTop: 10 }}>{'Новое смс доступно через '+this.state.timerSMS+' сек.'}</Typography>
+                                            :
+                                        <Typography variant="h5" component="span" style={{ fontSize: '0.8rem', paddingTop: 10, cursor: 'pointer', width: 'fit-content' }} onClick={this.repeatSMS.bind(this)}>Получить новый код</Typography>
+                                    }
+                                </div>
+                                {this.state.errSMS.length > 0 ?
+                                    <div style={{ marginTop: 10, padding: 16, backgroundColor: '#BB0025', borderRadius: 4 }}>
+                                        <Typography variant="h5" component="span" style={{ fontSize: '1.1rem', color: '#fff' }}>{this.state.errSMS}</Typography>
+                                    </div>
+                                        :
+                                    null
+                                }
+                            </div>
+                                :
+                            null
+                        }
+                    </DialogContent>
+                    {this.state.stage_1 ?
+                        <DialogActions style={{ padding: '12px 24px' }}>
+                            <Button onClick={this.sendSMS.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Выслать код</Button>
+                        </DialogActions>
+                            :
+                        null
+                    }
+                    {this.state.stage_2 ?
+                        <DialogActions style={{ padding: '12px 24px' }}>
+                            <Button onClick={this.checkCode.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Подтвердить код</Button>
+                        </DialogActions>
+                            :
+                        null
+                    }
+                </Dialog>
                 
+
+
+
                 {this.state.activePage == 'home' ?
                     <Hidden mdUp>
                         <div style={{ width: '100%', height: 3, position: 'fixed', top: 85, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
