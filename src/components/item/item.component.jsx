@@ -249,8 +249,6 @@ export class Item extends React.Component {
             if( this._isMounted ){
                 let item = itemsStore.getAllItems().find( (item) => item.link == this.state.itemLink );
                 
-                console.log( item )
-
                 if( item ){
                     this.setState({
                         item: item
@@ -287,8 +285,6 @@ export class Item extends React.Component {
         
         if( this.props.item ){
             
-            console.log( this.props.item )
-
             /*Item.fetchData('/'+this.state.city_name+'/menu/'+this.state.itemLink).then( data => {
                 this.setState( {
                     title: data.page.title,
@@ -405,7 +401,9 @@ export class Item extends React.Component {
                             
                             <AppBar position="static" style={{ backgroundColor: '#fff', color: '#000', zIndex: 0, paddingTop: 10 }} elevation={0}>
                                 <Tabs aria-label="simple tabs example" className="itemTabs" value={this.state.itemTab} onChange={this.changeTab.bind(this)} style={{ justifyContent: 'center' }}>
-                                    <Tab label="Состав" {...a11yProps(0)} disableRipple={true} />
+                                    {this.state.item.items && this.state.item.items.length == 0 && this.state.item.tmp_desc.length == 0 ? null :
+                                        <Tab label="Состав" {...a11yProps(0)} disableRipple={true} />
+                                    }
                                     {this.state.item.items && this.state.item.items.length == 0 ? null :
                                         <Tab label="Пищевая ценность" {...a11yProps(1)} disableRipple={true} />
                                     }

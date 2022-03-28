@@ -629,9 +629,6 @@ export class Profile extends React.Component {
                 point_id: point_id
             })
         }).then(res => res.json()).then(json => {
-            
-            console.log( json )
-            
             setTimeout(()=>{
                 this.setState({ 
                     showOrder: json,
@@ -678,8 +675,6 @@ export class Profile extends React.Component {
                     ans: deltype.label
                 })
             }).then(res => res.json()).then(json => {
-                console.log( json )
-                
                 setTimeout(() => {
                     if( json['st'] ){
                         this.setState({
