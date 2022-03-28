@@ -659,8 +659,6 @@ export class Header extends React.Component {
     }
 
     openLogin(){
-        console.log('city', this.state.cityName);
-
         if( localStorage.getItem('token') && localStorage.getItem('token').length > 0 ){
             fetch(config.urlApi, {
                 method: 'POST',
@@ -698,6 +696,43 @@ export class Header extends React.Component {
         })
     }
     
+    logIn(){
+        let number = this.state.userLogin;
+            
+        number = number.split(' ').join('');
+        number = number.split('(').join('');
+        number = number.split(')').join('');
+        number = number.split('-').join('');
+        number = number.split('_').join('');
+        
+        number = number.slice(1);
+
+        fetch(config.urlApi, {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'},
+            body: queryString.stringify({
+                type: 'site_login',
+                number: number,
+                token: this.state.pwd 
+            })
+        }).then(res => res.json()).then(json => {
+            itemsStore.setToken( localStorage.getItem('token'), json ); 
+
+            this.is_load = false;
+
+            this.setState({
+                userName: json,
+                token: localStorage.getItem('token')
+            })
+
+            if (typeof window !== 'undefined') {
+                window.location.pathname = '/'+this.state.cityName+'/profile';
+            }
+        })
+        .catch(err => { });
+    }
+
     sendSMS(){
         if( this.sms1 == false ){
             this.sms1 = true;
@@ -1336,19 +1371,16 @@ export class Header extends React.Component {
                                 //onKeyPress={this.handleKeyPress}
                                 onChange={ event => this.state.stage_1 ? this.setState({ userLogin: event.target.value }) : {} }
                             />
-                            <Typography variant="h5" component="span" className="ModalLabel">Пароль</Typography>
+                            <Typography variant="h5" component="span" className="ModalLabel" style={{ marginTop: 20 }}>Пароль</Typography>
                             <TextField 
+                                size="small"
                                 variant="outlined" 
                                 type="password"
                                 value={this.state.pwd} 
                                 disabled={!this.state.stage_1}
                                 onChange={ event => this.setState({ pwd: event.target.value }) }
                             />
-                            {this.state.stage_2 ?
-                                <Typography variant="h5" component="span" className="changeNumber" onClick={this.changeNumber.bind(this)}>Изменить номер</Typography>
-                                    :
-                                null
-                            }
+                            
                             {this.state.errPhone.length > 0 ?
                                 <div style={{ marginTop: 10, padding: 16, backgroundColor: '#BB0025', borderRadius: 4 }}>
                                     <Typography variant="h5" component="span" style={{ fontSize: '1.1rem', color: '#fff' }}>{this.state.errPhone}</Typography>
@@ -1357,49 +1389,11 @@ export class Header extends React.Component {
                                 null
                             }
                         </div>
-                        {this.state.stage_2 ?
-                            <div className="ModalContent_1_3">
-                                <Typography variant="h5" component="span" className="ModalLabel">Код из смс</Typography>
-                                <div className="ModalContent_1_2">
-                                    <InputMask 
-                                        className="InputMask"
-                                        mask="9999" 
-                                        value={this.state.userCode}
-                                        //onChange={ (event) => { this.changeCode.bind(this, event.target.value) } }
-                                        onChange={ this.changeCode.bind(this) }
-                                    />
-                                    {this.state.timerSMS > 0 ?
-                                        <Typography variant="h5" component="span" style={{ fontSize: '0.8rem', paddingTop: 10 }}>{'Новое смс доступно через '+this.state.timerSMS+' сек.'}</Typography>
-                                            :
-                                        <Typography variant="h5" component="span" style={{ fontSize: '0.8rem', paddingTop: 10, cursor: 'pointer', width: 'fit-content' }} onClick={this.repeatSMS.bind(this)}>Получить новый код</Typography>
-                                    }
-                                </div>
-                                {this.state.errSMS.length > 0 ?
-                                    <div style={{ marginTop: 10, padding: 16, backgroundColor: '#BB0025', borderRadius: 4 }}>
-                                        <Typography variant="h5" component="span" style={{ fontSize: '1.1rem', color: '#fff' }}>{this.state.errSMS}</Typography>
-                                    </div>
-                                        :
-                                    null
-                                }
-                            </div>
-                                :
-                            null
-                        }
+                        
                     </DialogContent>
-                    {this.state.stage_1 ?
-                        <DialogActions style={{ padding: '12px 24px' }}>
-                            <Button onClick={this.sendSMS.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Выслать код</Button>
-                        </DialogActions>
-                            :
-                        null
-                    }
-                    {this.state.stage_2 ?
-                        <DialogActions style={{ padding: '12px 24px' }}>
-                            <Button onClick={this.checkCode.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Подтвердить код</Button>
-                        </DialogActions>
-                            :
-                        null
-                    }
+                    <DialogActions style={{ padding: '12px 24px' }}>
+                        <Button onClick={this.logIn.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Подтвердить код</Button>
+                    </DialogActions>
                 </Dialog>
                 
 
