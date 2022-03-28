@@ -717,18 +717,25 @@ export class Header extends React.Component {
                 token: this.state.pwd 
             })
         }).then(res => res.json()).then(json => {
-            itemsStore.setToken( localStorage.getItem('token'), json ); 
 
-            this.is_load = false;
+            if( json.st === false ){
+                alert( json.text )
+            }else{
+                itemsStore.setToken( localStorage.getItem('token'), json ); 
 
-            this.setState({
-                userName: json,
-                token: localStorage.getItem('token')
-            })
+                this.is_load = false;
 
-            if (typeof window !== 'undefined') {
-                window.location.pathname = '/'+this.state.cityName+'/profile';
+                this.setState({
+                    userName: json,
+                    token: localStorage.getItem('token')
+                })
+
+                if (typeof window !== 'undefined') {
+                    window.location.pathname = '/'+this.state.cityName+'/profile';
+                }
             }
+
+            
         })
         .catch(err => { });
     }
