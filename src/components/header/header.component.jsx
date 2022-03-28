@@ -1388,6 +1388,8 @@ export class Header extends React.Component {
                                 onChange={ event => this.setState({ pwd: event.target.value }) }
                             />
                             
+                            <Typography variant="h5" component="span" className="changeNumber" onClick={this.LoginBySMS.bind(this)}>Войти по смс</Typography>
+
                             {this.state.errPhone.length > 0 ?
                                 <div style={{ marginTop: 10, padding: 16, backgroundColor: '#BB0025', borderRadius: 4 }}>
                                     <Typography variant="h5" component="span" style={{ fontSize: '1.1rem', color: '#fff' }}>{this.state.errPhone}</Typography>
@@ -1399,7 +1401,7 @@ export class Header extends React.Component {
                         
                     </DialogContent>
                     <DialogActions style={{ padding: '12px 24px' }}>
-                        <Button onClick={this.logIn.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Подтвердить код</Button>
+                        <Button onClick={this.logIn.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Войти</Button>
                     </DialogActions>
                 </Dialog>
                 
