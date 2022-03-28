@@ -938,6 +938,10 @@ export class Header extends React.Component {
         })
     }
 
+    sendsmsrp(){
+        
+    }
+
     render() {
         let link = this.props.this_link;
         link = link.split('/');
@@ -1485,7 +1489,14 @@ export class Header extends React.Component {
                         
                     </DialogContent>
                     <DialogActions style={{ padding: '12px 24px' }}>
-                        <Button onClick={this.logIn.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Войти</Button>
+                        { this.state.ResPWD === false ?
+                            <Button onClick={this.logIn.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Войти</Button>
+                                :
+                                this.state.NeedCode === false ?
+                                    <Button onClick={this.sendsmsrp.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Выслать смс</Button>
+                                        :
+                                    <Button onClick={this.sendsmsrp.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Подтвердить</Button>
+                        }
                     </DialogActions>
                 </Dialog>
                 
