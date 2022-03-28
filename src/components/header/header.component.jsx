@@ -464,6 +464,8 @@ export class Header extends React.Component {
             
             openLoginNew: false,
             pwd: '',
+            ResPWD: false,
+            NeedCode: false,
 
             openLogin: false,
             userLogin: '',
@@ -692,7 +694,9 @@ export class Header extends React.Component {
     
     closeLogin(){
         this.setState({
-            openLogin: false
+            openLogin: false,
+            ResPWD: false,
+            NeedCode: false
         })
     }
     
@@ -719,7 +723,9 @@ export class Header extends React.Component {
         }).then(res => res.json()).then(json => {
 
             if( json.st === false ){
-                alert( json.text )
+                this.setState({
+                    errPhone: json.text
+                });
             }else{
                 itemsStore.setToken( localStorage.getItem('token'), json ); 
 
@@ -922,7 +928,14 @@ export class Header extends React.Component {
     };
     
     LoginBySMS(){
-        
+
+    }
+
+    ResPWD(){
+        this.setState({
+            ResPWD: true,
+            NeedCode: false
+        })
     }
 
     render() {
@@ -1369,31 +1382,98 @@ export class Header extends React.Component {
                     onClose={this.closeLogin.bind(this)}
                     className="ModalAuth"
                 >
-                    <DialogTitle>Авторизация</DialogTitle>
+                    <DialogTitle>{this.state.ResPWD === false ? 'Авторизация' : 'Восстановление пароля'}</DialogTitle>
                     <DialogContent className="ModalContent_1_1">
                         <div className="ModalContent_1_2">
-                            <Typography variant="h5" component="span" className="ModalLabel">Номер телефона</Typography>
-                            <InputMask 
-                                className="InputMask"
-                                mask="8 (999) 999-99-99" 
-                                placeholder="8 (999) 999-99-99" 
-                                disabled={!this.state.stage_1}
-                                value={this.state.userLogin}
-                                //onKeyPress={this.handleKeyPress}
-                                onChange={ event => this.state.stage_1 ? this.setState({ userLogin: event.target.value }) : {} }
-                            />
-                            <Typography variant="h5" component="span" className="ModalLabel" style={{ marginTop: 20 }}>Пароль</Typography>
-                            <TextField 
-                                size="small"
-                                variant="outlined" 
-                                type="password"
-                                value={this.state.pwd} 
-                                disabled={!this.state.stage_1}
-                                onChange={ event => this.setState({ pwd: event.target.value }) }
-                            />
-                            
-                            <Typography variant="h5" component="span" className="changeNumber" onClick={this.LoginBySMS.bind(this)}>Войти по смс</Typography>
+                            { this.state.ResPWD === false ?
+                                <>
+                                    <Typography variant="h5" component="span" className="ModalLabel">Номер телефона</Typography>
+                                    <InputMask 
+                                        className="InputMask"
+                                        mask="8 (999) 999-99-99" 
+                                        placeholder="8 (999) 999-99-99" 
+                                        disabled={!this.state.stage_1}
+                                        value={this.state.userLogin}
+                                        //onKeyPress={this.handleKeyPress}
+                                        onChange={ event => this.state.stage_1 ? this.setState({ userLogin: event.target.value }) : {} }
+                                    />
+                                    <Typography variant="h5" component="span" className="ModalLabel" style={{ marginTop: 20 }}>Пароль</Typography>
+                                    <TextField 
+                                        size="small"
+                                        variant="outlined" 
+                                        type="password"
+                                        value={this.state.pwd} 
+                                        disabled={!this.state.stage_1}
+                                        onChange={ event => this.setState({ pwd: event.target.value }) }
+                                    />
+                                    
+                                    <Typography variant="h5" component="span" className="changeNumber" onClick={this.LoginBySMS.bind(this)}>Войти по смс</Typography>
 
+                                    <Typography variant="h5" component="span" className="changeNumber" onClick={this.ResPWD.bind(this)}>Восстановить пароль</Typography>
+                                </>
+                                    :
+                                <>
+                                    { this.state.ResPWD === true && this.state.NeedCode === false ?
+                                        <>
+                                            <Typography variant="h5" component="span" className="ModalLabel">Номер телефона</Typography>
+                                            <InputMask 
+                                                className="InputMask"
+                                                mask="8 (999) 999-99-99" 
+                                                placeholder="8 (999) 999-99-99" 
+                                                disabled={!this.state.stage_1}
+                                                value={this.state.userLogin}
+                                                //onKeyPress={this.handleKeyPress}
+                                                onChange={ event => this.state.stage_1 ? this.setState({ userLogin: event.target.value }) : {} }
+                                            />
+
+                                            <Typography variant="h5" component="span" className="ModalLabel" style={{ marginTop: 20 }}>Новый пароль</Typography>
+                                            <TextField 
+                                                size="small"
+                                                variant="outlined" 
+                                                type="password"
+                                                value={this.state.pwd} 
+                                                disabled={!this.state.stage_1}
+                                                onChange={ event => this.setState({ pwd: event.target.value }) }
+                                            />
+                                        </>
+                                            :
+                                        <div className="ModalContent_1_3">
+                                            <Typography variant="h5" component="span" className="ModalLabel">Номер телефона</Typography>
+                                            <InputMask 
+                                                className="InputMask"
+                                                mask="8 (999) 999-99-99" 
+                                                placeholder="8 (999) 999-99-99" 
+                                                disabled={true}
+                                                value={this.state.userLogin}
+                                            />
+
+                                            <div className="ModalContent_1_2">
+                                                <Typography variant="h5" component="span" className="ModalLabel" style={{ marginTop: 20 }}>Код из смс</Typography>
+                                                <InputMask 
+                                                    className="InputMask"
+                                                    mask="9999" 
+                                                    value={this.state.userCode}
+                                                    //onChange={ (event) => { this.changeCode.bind(this, event.target.value) } }
+                                                    onChange={ this.changeCode.bind(this) }
+                                                />
+                                                {this.state.timerSMS > 0 ?
+                                                    <Typography variant="h5" component="span" style={{ fontSize: '0.8rem', paddingTop: 10 }}>{'Новое смс доступно через '+this.state.timerSMS+' сек.'}</Typography>
+                                                        :
+                                                    <Typography variant="h5" component="span" style={{ fontSize: '0.8rem', paddingTop: 10, cursor: 'pointer', width: 'fit-content' }} onClick={this.repeatSMS.bind(this)}>Получить новый код</Typography>
+                                                }
+                                            </div>
+                                            {this.state.errSMS.length > 0 ?
+                                                <div style={{ marginTop: 10, padding: 16, backgroundColor: '#BB0025', borderRadius: 4 }}>
+                                                    <Typography variant="h5" component="span" style={{ fontSize: '1.1rem', color: '#fff' }}>{this.state.errSMS}</Typography>
+                                                </div>
+                                                    :
+                                                null
+                                            }
+                                        </div>
+                                        
+                                    }
+                                </>
+                            }
                             {this.state.errPhone.length > 0 ?
                                 <div style={{ marginTop: 10, padding: 16, backgroundColor: '#BB0025', borderRadius: 4 }}>
                                     <Typography variant="h5" component="span" style={{ fontSize: '1.1rem', color: '#fff' }}>{this.state.errPhone}</Typography>
