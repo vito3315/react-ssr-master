@@ -382,18 +382,7 @@ export class Item extends React.Component {
                 <Box component="div" className="pcItem" >
                     <Grid container className="MainItem mainContainer" style={{ paddingLeft: '6%', paddingRight: '6%' }}>
                         <Grid item xs={6} style={{ paddingRight: 12, display: 'flex', alignItems: 'center', paddingTop: 60 }}>
-                            <picture>
-                                <source 
-                                    srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
-                                    type="image/webp" 
-                                />
-                                <img 
-                                    src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
-                                    alt={this.state.item.name}
-                                    title={this.state.item.name}
-                                    style={{ minHeight: 150 }}
-                                />
-                            </picture>
+                            
                         </Grid>
                         <Grid item xs={6} style={{ paddingLeft: 12, position: 'relative' }}>
                             <Typography variant="h5" component="h1">{this.state.item.name}</Typography>
@@ -451,18 +440,7 @@ export class Item extends React.Component {
                                     <div style={{ maxHeight: 300, overflowY: 'auto', overflowX: 'hidden' }}>
                                         {this.state.item.items && this.state.item.items.map((item, key) =>
                                             <div key={key} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', position: 'relative' }}>
-                                                <picture style={{ height: 'auto', width: 100, display: 'table' }}>
-                                                    <source 
-                                                        srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_new+"300х200.webp?"+item.img_new_update} 
-                                                        type="image/webp" 
-                                                    />
-                                                    <img 
-                                                        src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"300х200.jpg?"+item.img_new_update} 
-                                                        alt={item.name}
-                                                        title={item.name}
-                                                        style={{ height: 'auto', width: 65 }}
-                                                    />
-                                                </picture>
+                                                
                                                 <div className="itemMiniText">
                                                     <Typography variant="h5" component="span" className="dopItemName">{item.name}</Typography>
                                                     <Typography variant="h5" component="span" className="ItemDesc">{item.tmp_desc}</Typography>
@@ -512,18 +490,7 @@ export class Item extends React.Component {
                 <Hidden smUp>
                     <Grid container className="MainItem mainContainer" style={{ paddingLeft: '4%', paddingRight: '4%', height: '100%' }}>
                         <Grid item xs={12} style={{ paddingRight: 12 }}>
-                            <picture id="forSwiper">
-                                <source 
-                                    srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
-                                    type="image/webp" 
-                                />
-                                <img 
-                                    src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
-                                    alt={this.state.item.name}
-                                    title={this.state.item.name}
-                                    style={{ height: 'auto', width: '100%', paddingTop: 20 }}
-                                />
-                            </picture>
+                            
                             
                             <Typography variant="h5" component="h1" style={{ textAlign: 'center' }}>{this.state.item.name}</Typography>
                         </Grid>
@@ -587,18 +554,7 @@ export class Item extends React.Component {
                                     <div style={{ maxHeight: '30vh', height: '100%', overflowY: 'auto', overflowX: 'hidden', position: 'relative' }}>
                                         {this.state.item.items && this.state.item.items.map((item, key) =>
                                             <div key={key} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', margin: '10px 0px' }}>
-                                                <picture style={{ height: 'auto', width: 70, display: 'table' }}>
-                                                    <source 
-                                                        srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_new+"300х200.webp?"+item.img_new_update} 
-                                                        type="image/webp" 
-                                                    />
-                                                    <img 
-                                                        src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"300х200.jpg?"+item.img_new_update} 
-                                                        alt={item.name}
-                                                        title={item.name}
-                                                        style={{ height: 'auto', width: '100%' }}
-                                                    />
-                                                </picture>
+                                                
                                                 <div className="itemMiniText" style={{ overflow: 'hidden', flexWrap: 'wrap', paddingRight: 15 }}>
                                                     <Typography variant="h5" component="span" className="dopItemName" style={{ width: '100%' }}>{item.name}</Typography>
                                                     <Typography variant="h5" component="span" className="ItemDesc" style={{ width: '100%', wordWrap: 'normal' }}>{item.tmp_desc}</Typography>
