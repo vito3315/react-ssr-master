@@ -123,13 +123,24 @@ module.exports = {
         moduleIds: 'deterministic',
         runtimeChunk: 'single',
         splitChunks: {
+
+            chunks: 'async',
             cacheGroups: {
-                vendor: {
-                    test: /[\\/]node_modules[\\/]/,
-                    name: 'vendors',
-                    chunks: 'all',
+
+                default: {
+                    minChunks: 2,
+                    reuseExistingChunk: true,
+                },
+
+                vendor_react: {
+                    test: /.*\/node_modules\/react\/index\.js/,
+                    name: 'vendor-react',
+                    chunks: 'initial',
+                    enforce: true,
                 },
             },
+
+            
        },
     },
     

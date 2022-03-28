@@ -1225,8 +1225,6 @@ export class Header extends React.Component {
                             >
                                 <Typography variant="h5" component="span" className={"ModalLabel"}>{item.name}</Typography>
                             </Link> 
-                        
-                            
                         )}
                     </DialogContent>
                 </Dialog>
