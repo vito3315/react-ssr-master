@@ -1336,10 +1336,8 @@ export class Header extends React.Component {
                                 //onKeyPress={this.handleKeyPress}
                                 onChange={ event => this.state.stage_1 ? this.setState({ userLogin: event.target.value }) : {} }
                             />
+                            <Typography variant="h5" component="span" className="ModalLabel">Пароль</Typography>
                             <TextField 
-                                className="InputMask"
-                                label="Пароль" 
-                                size="small"
                                 variant="outlined" 
                                 type="password"
                                 value={this.state.pwd} 
