@@ -921,6 +921,10 @@ export class Header extends React.Component {
         })
     };
     
+    LoginBySMS(){
+        
+    }
+
     render() {
         let link = this.props.this_link;
         link = link.split('/');
