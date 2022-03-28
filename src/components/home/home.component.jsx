@@ -295,7 +295,7 @@ class CardItem extends React.Component {
                 <Card elevation={0} className="CardItem">
                     
                     <CardContent style={{ cursor: 'pointer', position: 'relative' }} onClick={ () => this.props.openItem(this.state.item.id)}>
-                        <LazyLoad once height={210}>
+                        <LazyLoad once>
                             <picture>
                                 <source 
                                     srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
