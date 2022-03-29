@@ -1014,6 +1014,47 @@ export class Header extends React.Component {
         }
     }
 
+    checkcoderp(){
+        fetch(config.urlApi, {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'},
+            body: queryString.stringify({
+                type: 'sendsmsrp', 
+                number: number,
+                code: this.state.userCode
+            })
+        }).then(res => res.json()).then(json => {
+            if( json['st'] ){
+                this.setState({ 
+                    errPhone: '',
+                    NeedCode: true
+                })
+            
+                itemsStore.setToken( localStorage.getItem('token'), json ); 
+
+                this.is_load = false;
+
+                this.setState({
+                    userName: json,
+                    token: localStorage.getItem('token')
+                })
+
+                if (typeof window !== 'undefined') {
+                    window.location.pathname = '/'+this.state.cityName+'/profile';
+                }
+            }else{
+                this.setState({
+                  errPhone: json.text
+                });
+            }
+            
+            setTimeout( () => {
+                this.sms1 = false;
+            }, 300 )
+        });
+    }
+
     render() {
         let link = this.props.this_link;
         link = link.split('/');
@@ -1566,7 +1607,7 @@ export class Header extends React.Component {
                                 this.state.NeedCode === false ?
                                     <Button onClick={this.sendsmsrp.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Выслать смс</Button>
                                         :
-                                    <Button onClick={this.sendsmsrp.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Подтвердить</Button>
+                                    <Button onClick={this.checkcoderp.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Подтвердить</Button>
                         }
                     </DialogActions>
                 </Dialog>
