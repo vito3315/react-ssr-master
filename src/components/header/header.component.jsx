@@ -1021,7 +1021,7 @@ export class Header extends React.Component {
                 'Content-Type':'application/x-www-form-urlencoded'},
             body: queryString.stringify({
                 type: 'sendsmsrp', 
-                number: number,
+                number: this.state.userLoginFormat,
                 code: this.state.userCode
             })
         }).then(res => res.json()).then(json => {
