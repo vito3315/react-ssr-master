@@ -1020,7 +1020,7 @@ export class Header extends React.Component {
             headers: {
                 'Content-Type':'application/x-www-form-urlencoded'},
             body: queryString.stringify({
-                type: 'sendsmsrp', 
+                type: 'checkcoderp', 
                 number: this.state.userLoginFormat,
                 code: this.state.userCode
             })
