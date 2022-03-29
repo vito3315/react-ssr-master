@@ -908,6 +908,14 @@ export class Header extends React.Component {
         }
     }
 
+    changeCodeNew(code){
+        code = code.target.value
+        
+        this.setState({
+            userCode: code
+        })
+    }
+
     handleKeyPress = (event) => {
         if(event.key === 'Enter'){
             this.sendSMS()
@@ -939,7 +947,71 @@ export class Header extends React.Component {
     }
 
     sendsmsrp(){
-        
+        if( this.sms1 == false ){
+            this.sms1 = true;
+            
+            this.setState({
+                //stage_1: false,
+                //stage_2: true, 
+                errPhone: '',
+                errSMS: ''
+            });
+            
+            let number = this.state.userLogin;
+            
+            number = number.split(' ').join('');
+            number = number.split('(').join('');
+            number = number.split(')').join('');
+            number = number.split('-').join('');
+            number = number.split('_').join('');
+            
+            number = number.slice(1);
+            
+            this.setState({
+                userLoginFormat: number
+            })
+            
+            grecaptcha.ready(() => {
+                grecaptcha.execute('6LdhWpIdAAAAAA4eceqTfNH242EGuIleuWAGQ2su', {action: 'submit'}).then( (token) => {
+                    fetch(config.urlApi, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type':'application/x-www-form-urlencoded'},
+                        body: queryString.stringify({
+                            type: 'sendsmsrp', 
+                            number: number,
+                            pwd: this.state.pwd,
+                            token: token 
+                        })
+                    }).then(res => res.json()).then(json => {
+                        if( json['st'] ){
+                            this.setState({ 
+                                errPhone: '',
+                                NeedCode: true
+                            })
+                        
+                            let timerId = setInterval(() => {
+                                this.setState({
+                                    timerSMS: this.state.timerSMS-1
+                                })
+                                if( this.state.timerSMS == 0 ){
+                                    clearInterval(timerId);
+                                }
+                            }, 1000);
+                        }else{
+                            this.setState({
+                              errPhone: json.text
+                            });
+                        }
+                        
+                        setTimeout( () => {
+                            this.sms1 = false;
+                        }, 300 )
+                    });
+                });
+            });
+            
+        }
     }
 
     render() {
@@ -1457,8 +1529,7 @@ export class Header extends React.Component {
                                                     className="InputMask"
                                                     mask="9999" 
                                                     value={this.state.userCode}
-                                                    //onChange={ (event) => { this.changeCode.bind(this, event.target.value) } }
-                                                    onChange={ this.changeCode.bind(this) }
+                                                    onChange={ this.changeCodeNew.bind(this) }
                                                 />
                                                 {this.state.timerSMS > 0 ?
                                                     <Typography variant="h5" component="span" style={{ fontSize: '0.8rem', paddingTop: 10 }}>{'Новое смс доступно через '+this.state.timerSMS+' сек.'}</Typography>
