@@ -1525,7 +1525,7 @@ export class Header extends React.Component {
                     <DialogTitle>{this.state.ResPWD === false ? 'Авторизация' : 'Восстановление пароля'}</DialogTitle>
                     <DialogContent className="ModalContent_1_1 newContent">
 
-                        <Backdrop open={this.state.is_load_new}>
+                        <Backdrop open={this.state.is_load_new} style={{ zIndex: 999 }}>
                             <CircularProgress color="inherit" />
                         </Backdrop>
 
