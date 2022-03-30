@@ -391,6 +391,14 @@ body{
         color: $colorMain;
         border-bottom: 1px dotted $colorMain;
     }
+    & .changeNumberGray{
+        @include fons(0.8rem, $Ubuntu);
+        padding-top: 10px; 
+        cursor: pointer;
+        width: fit-content;
+        color: #bababa;
+        border-bottom: 1px dotted #bababa;
+    }
     & .InputMask{
         border: 1px solid #000;
         border-radius: 4px;
