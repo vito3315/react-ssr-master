@@ -695,6 +695,7 @@ export class Header extends React.Component {
     closeLogin(){
         this.setState({
             openLogin: false,
+            openLoginNew: false,
             ResPWD: false,
             NeedCode: false
         })
@@ -1050,9 +1051,9 @@ export class Header extends React.Component {
                     token: json.token
                 })
 
-                if (typeof window !== 'undefined') {
-                    window.location.pathname = '/'+this.state.cityName+'/profile';
-                }
+                //if (typeof window !== 'undefined') {
+                //    window.location.pathname = '/'+this.state.cityName+'/profile';
+                //}
             }else{
                 this.setState({
                   errPhone: json.text
