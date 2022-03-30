@@ -697,7 +697,11 @@ export class Header extends React.Component {
             openLogin: false,
             openLoginNew: false,
             ResPWD: false,
-            NeedCode: false
+            NeedCode: false,
+            userLogin: '',
+            userLoginFormat: '',
+            userCode: '',
+            pwd: ''
         })
     }
     
