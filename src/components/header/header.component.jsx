@@ -11,6 +11,9 @@ import TextField from '@material-ui/core/TextField';
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import IconButton from '@material-ui/core/IconButton';
@@ -457,6 +460,7 @@ export class Header extends React.Component {
             cartItems: [],
             activePage: '',
             is_load: false,
+            is_load_new: false,
             openCity: false,
             cityName: this.props.city ? this.props.city : '',
             testData: [1, 2, 3, 4],
@@ -969,7 +973,8 @@ export class Header extends React.Component {
                 //stage_1: false,
                 //stage_2: true, 
                 errPhone: '',
-                errSMS: ''
+                errSMS: '',
+                is_load_new: true
             });
             
             let number = this.state.userLogin;
@@ -1021,6 +1026,9 @@ export class Header extends React.Component {
                         
                         setTimeout( () => {
                             this.sms1 = false;
+                            this.setState({
+                                is_load_new: false
+                            })
                         }, 300 )
                     });
                 });
@@ -1516,6 +1524,11 @@ export class Header extends React.Component {
                 >
                     <DialogTitle>{this.state.ResPWD === false ? 'Авторизация' : 'Восстановление пароля'}</DialogTitle>
                     <DialogContent className="ModalContent_1_1 newContent">
+
+                        <Backdrop open={this.state.is_load_new}>
+                            <CircularProgress color="inherit" />
+                        </Backdrop>
+
                         <div className="ModalContent_1_2">
                             { this.state.ResPWD === false ?
                                 <>
