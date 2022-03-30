@@ -938,7 +938,15 @@ export class Header extends React.Component {
     };
     
     LoginBySMS(){
+        this.setState({
+            openLoginNew: false,
+            openLogin: true
+        })
 
+        this.is_load = false;
+    
+        this.sms1 = false;
+        this.sms2 = false;
     }
 
     ResPWD(){
