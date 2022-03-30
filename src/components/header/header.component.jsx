@@ -1515,7 +1515,7 @@ export class Header extends React.Component {
                     className="ModalAuth"
                 >
                     <DialogTitle>{this.state.ResPWD === false ? 'Авторизация' : 'Восстановление пароля'}</DialogTitle>
-                    <DialogContent className="ModalContent_1_1">
+                    <DialogContent className="ModalContent_1_1 newContent">
                         <div className="ModalContent_1_2">
                             { this.state.ResPWD === false ?
                                 <>
