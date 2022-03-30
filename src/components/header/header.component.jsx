@@ -722,18 +722,20 @@ export class Header extends React.Component {
             })
         }).then(res => res.json()).then(json => {
 
+            console.log( json )
+
             if( json.st === false ){
                 this.setState({
                     errPhone: json.text
                 });
             }else{
-                itemsStore.setToken( localStorage.getItem('token'), json ); 
+                itemsStore.setToken( json.token, json.name ); 
 
                 this.is_load = false;
 
                 this.setState({
-                    userName: json,
-                    token: localStorage.getItem('token')
+                    userName: json.name,
+                    token: json.token
                 })
 
                 if (typeof window !== 'undefined') {
