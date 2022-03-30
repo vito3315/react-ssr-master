@@ -1539,8 +1539,6 @@ export class Header extends React.Component {
                                         onChange={ event => this.setState({ pwd: event.target.value }) }
                                     />
                                     
-                                    <Typography variant="h5" component="span" className="changeNumber" onClick={this.LoginBySMS.bind(this)}>Войти по смс</Typography>
-
                                     <Typography variant="h5" component="span" className="changeNumber" onClick={this.ResPWD.bind(this)}>Восстановить пароль</Typography>
                                 </>
                                     :
@@ -1617,7 +1615,13 @@ export class Header extends React.Component {
                     </DialogContent>
                     <DialogActions style={{ padding: '12px 24px' }}>
                         { this.state.ResPWD === false ?
-                            <Button onClick={this.logIn.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Войти</Button>
+                            <div style={{ display: 'flex', flexDirection: 'row' }}>
+                                <Typography variant="h5" component="span" className="changeNumber" onClick={this.LoginBySMS.bind(this)}>Войти по смс</Typography>
+
+                                <Button onClick={this.logIn.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Войти</Button>
+                            </div>
+
+                            
                                 :
                                 this.state.NeedCode === false ?
                                     <Button onClick={this.sendsmsrp.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Выслать смс</Button>
