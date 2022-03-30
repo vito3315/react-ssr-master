@@ -718,7 +718,7 @@ export class Header extends React.Component {
             body: queryString.stringify({
                 type: 'site_login',
                 number: number,
-                token: this.state.pwd 
+                pwd: this.state.pwd 
             })
         }).then(res => res.json()).then(json => {
 
