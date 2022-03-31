@@ -1071,6 +1071,8 @@ export class Header extends React.Component {
                     token: json.token
                 })
 
+                this.closeLogin();
+
                 //if (typeof window !== 'undefined') {
                 //    window.location.pathname = '/'+this.state.cityName+'/profile';
                 //}
@@ -1533,7 +1535,7 @@ export class Header extends React.Component {
                     <DialogTitle>{this.state.ResPWD === false ? 'Авторизация' : 'Восстановление пароля'}</DialogTitle>
                     <DialogContent className="ModalContent_1_1 newContent">
 
-                        <Backdrop open={this.state.is_load_new} style={{ zIndex: 999 }}>
+                        <Backdrop open={this.state.is_load_new} style={{ zIndex: 999, color: '#fff' }}>
                             <CircularProgress color="inherit" />
                         </Backdrop>
 
