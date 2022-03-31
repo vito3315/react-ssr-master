@@ -1493,9 +1493,6 @@ export class Header extends React.Component {
                     maxWidth={'xs'}
                     onClose={this.closeLogin.bind(this)}
                     className="ModalAuth"
-                    style={{
-                        marginBottom: 300
-                    }}
                 >
                     <DialogTitle id="alert-dialog-title">Вход на сайт</DialogTitle>
                     <DialogContent className="ModalContent_1_1">
@@ -1577,9 +1574,6 @@ export class Header extends React.Component {
                     maxWidth={'xs'}
                     onClose={this.closeLogin.bind(this)}
                     className="ModalAuth"
-                    style={{
-                        marginBottom: 300
-                    }}
                 >
                     <DialogTitle style={{ display: 'none' }}>{this.state.ResPWD === false ? 'Авторизация' : 'Восстановление пароля'}</DialogTitle>
                     <DialogContent className="ModalContent_1_1 newContent">
