@@ -1582,12 +1582,12 @@ export class Header extends React.Component {
                             value={this.state.typeLogin}
                             onChange={ (event, value) => { this.setState({ typeLogin: value, ResPWD: value == 0 ? false : true }) } }
                             indicatorColor="primary"
-                            textColor="primary"
+                            //textColor="primary"
                             variant="fullWidth"
                             style={{ backgroundColor: '#fff', color: '#000' }}
                         >
-                            <Tab label="Авторизация" {...a11yProps(0)} />
-                            <Tab label="Регистрация" {...a11yProps(1)} />
+                            <Tab style={{ color: '#000' }} label="Авторизация" {...a11yProps(0)} />
+                            <Tab style={{ color: '#000' }} label="Регистрация" {...a11yProps(1)} />
                         </Tabs>
 
                         <div className="ModalContent_1_2">
