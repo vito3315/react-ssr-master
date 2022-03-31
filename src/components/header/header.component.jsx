@@ -1570,6 +1570,9 @@ export class Header extends React.Component {
                     maxWidth={'xs'}
                     onClose={this.closeLogin.bind(this)}
                     className="ModalAuth"
+                    style={{
+                        marginBottom: 300
+                    }}
                 >
                     <DialogTitle style={{ display: 'none' }}>{this.state.ResPWD === false ? 'Авторизация' : 'Восстановление пароля'}</DialogTitle>
                     <DialogContent className="ModalContent_1_1 newContent">
@@ -1584,7 +1587,7 @@ export class Header extends React.Component {
                             indicatorColor="primary"
                             //textColor="primary"
                             variant="fullWidth"
-                            style={{ backgroundColor: '#fff', color: '#000' }}
+                            style={{ backgroundColor: '#fff', color: '#000', marginBottom: 20 }}
                         >
                             <Tab style={{ color: '#000' }} label="Авторизация" {...a11yProps(0)} />
                             <Tab style={{ color: '#000' }} label="Регистрация" {...a11yProps(1)} />
@@ -1630,7 +1633,7 @@ export class Header extends React.Component {
                                                 onChange={ event => this.state.stage_1 ? this.setState({ userLogin: event.target.value }) : {} }
                                             />
 
-                                            <Typography variant="h5" component="span" className="ModalLabel" style={{ marginTop: 20 }}>Новый пароль</Typography>
+                                            <Typography variant="h5" component="span" className="ModalLabel" style={{ marginTop: 20 }}>{ this.state.typeLogin == 0 ? 'Новый пароль' : 'Придумай пароль' }</Typography>
                                             <TextField 
                                                 size="small"
                                                 variant="outlined" 
