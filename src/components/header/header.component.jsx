@@ -996,7 +996,9 @@ export class Header extends React.Component {
     LoginBySMS(){
         this.setState({
             openLoginNew: false,
-            openLogin: true
+            openLogin: true,
+            errPhone: '', 
+            errSMS: ''
         })
 
         this.is_load = false;
@@ -1054,7 +1056,9 @@ export class Header extends React.Component {
                         if( json['st'] ){
                             this.setState({ 
                                 errPhone: '',
-                                NeedCode: true
+                                NeedCode: true,
+                                errPhone: '', 
+                                errSMS: ''
                             })
                         
                             let timerId = setInterval(() => {
@@ -1107,7 +1111,9 @@ export class Header extends React.Component {
 
                 this.setState({
                     userName: json.name,
-                    token: json.token
+                    token: json.token,
+                    errPhone: '', 
+                    errSMS: ''
                 })
 
                 this.closeLogin();
@@ -1486,9 +1492,10 @@ export class Header extends React.Component {
                     fullWidth={true}
                     maxWidth={'xs'}
                     onClose={this.closeLogin.bind(this)}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
                     className="ModalAuth"
+                    style={{
+                        marginBottom: 300
+                    }}
                 >
                     <DialogTitle id="alert-dialog-title">Вход на сайт</DialogTitle>
                     <DialogContent className="ModalContent_1_1">
@@ -1583,7 +1590,7 @@ export class Header extends React.Component {
 
                         <Tabs
                             value={this.state.typeLogin}
-                            onChange={ (event, value) => { this.setState({ typeLogin: value, ResPWD: value == 0 ? false : true }) } }
+                            onChange={ (event, value) => { this.setState({ typeLogin: value, ResPWD: value == 0 ? false : true, errPhone: '', errSMS: '' }) } }
                             indicatorColor="primary"
                             //textColor="primary"
                             variant="fullWidth"
