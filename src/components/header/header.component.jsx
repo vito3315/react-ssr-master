@@ -14,6 +14,11 @@ import Divider from '@material-ui/core/Divider';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+import PropTypes from 'prop-types';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Box from '@material-ui/core/Box';
+
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import IconButton from '@material-ui/core/IconButton';
@@ -431,6 +436,39 @@ export class HeaderCat extends React.Component {
     }
 }
 
+function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+  
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`full-width-tabpanel-${index}`}
+        aria-labelledby={`full-width-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box p={3}>
+            {children}
+          </Box>
+        )}
+      </div>
+    );
+  }
+  
+  TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.any.isRequired,
+    value: PropTypes.any.isRequired,
+  };
+  
+  function a11yProps(index) {
+    return {
+      id: `full-width-tab-${index}`,
+      'aria-controls': `full-width-tabpanel-${index}`,
+    };
+  }
+
 export class Header extends React.Component {
     is_load = false;
     
@@ -470,6 +508,7 @@ export class Header extends React.Component {
             pwd: '',
             ResPWD: false,
             NeedCode: false,
+            typeLogin: 0,
 
             openLogin: false,
             userLogin: '',
@@ -1539,6 +1578,17 @@ export class Header extends React.Component {
                             <CircularProgress color="inherit" />
                         </Backdrop>
 
+                        <Tabs
+                            value={this.state.typeLogin}
+                            onChange={ (event, value) => { this.setState({ typeLogin: value }) } }
+                            indicatorColor="primary"
+                            textColor="primary"
+                            variant="fullWidth"
+                            >
+                            <Tab label="Авторизация" {...a11yProps(0)} />
+                            <Tab label="Регистрация" {...a11yProps(1)} />
+                        </Tabs>
+
                         <div className="ModalContent_1_2">
                             { this.state.ResPWD === false ?
                                 <>
@@ -1647,9 +1697,9 @@ export class Header extends React.Component {
                             
                                 :
                                 this.state.NeedCode === false ?
-                                    <Button onClick={this.sendsmsrp.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Выслать смс</Button>
+                                    <Button onClick={this.sendsmsrp.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Подтвердить номер</Button>
                                         :
-                                    <Button onClick={this.checkcoderp.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Подтвердить</Button>
+                                    <Button onClick={this.checkcoderp.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Авторизоваться</Button>
                         }
                     </DialogActions>
                 </Dialog>
