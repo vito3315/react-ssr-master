@@ -479,7 +479,7 @@ export class Header extends React.Component {
             stage_1: true,
             stage_2: false,
             
-            timerSMS: 59,
+            timerSMS: 89,
             errPhone: '',
             errSMS: '',
             userName: '',
@@ -847,7 +847,7 @@ export class Header extends React.Component {
                         
                         if( json['st'] ){
                             this.setState({
-                                timerSMS: 59
+                                timerSMS: 89
                             })
                         
                             let timerId = setInterval(() => {
