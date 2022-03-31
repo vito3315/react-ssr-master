@@ -82,7 +82,9 @@ module.exports = {
 
         // extract css to external stylesheet file
         new MiniCssExtractPlugin( {
-            filename: 'build/styles.css',
+            //filename: 'build/styles.css',
+            filename: "[name].[contenthash].css",
+            chunkFilename: "[id].[contenthash].css",
             experimentalUseImportModule: true
         } ),
 
@@ -137,6 +139,13 @@ module.exports = {
                 default: {
                     minChunks: 2,
                     reuseExistingChunk: true,
+                },
+
+                styles: {
+                    name: "styles",
+                    type: "css/mini-extract",
+                    chunks: "all",
+                    enforce: true,
                 },
 
                 vendor_react: {
