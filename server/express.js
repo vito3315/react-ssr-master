@@ -30,12 +30,12 @@ app.get( /\.(js|css|map|ico|png|svg|htaccess|xml|txt|ttf|woff|woff2)$/, express.
 
 //app.use(express.static(path.join(__dirname, 'public')));
 
-/*app.use((req, res, next) => {
+app.use((req, res, next) => {
     res.set('Cache-Control', 'public, max-age=604800')
     res.set('Set-Cookie', 'SameSite=None')
     res.set('Accept-Encoding', 'gzip, compress, br')
     next()
-})*/
+})
 
 app.get('/sitemap.xml', function(req, res) {
     res.sendFile('../dist/sitemap.xml');
@@ -225,6 +225,11 @@ app.use( '*', async ( req, res ) => {
             'var initial_state = null;',
             `GLOBAL_STATE = ${JSON.stringify(GLOBAL_STATE)};`
         );
+
+
+        res.set('Cache-Control', 'public, max-age=604800')
+        res.set('Set-Cookie', 'SameSite=None')
+        res.set('Accept-Encoding', 'gzip, compress, br')
 
         res.contentType( 'text/html' );
         res.status( matchRoute.code );
