@@ -554,7 +554,7 @@ export class Header extends React.Component {
                     })
                 }).then(res => res.json()).then(json => {
                     itemsStore.setToken( localStorage.getItem('token'), json ); 
-
+                    itemsStore.setUserName(json);
                     this.is_load = false;
 
                     this.setState({
@@ -585,6 +585,7 @@ export class Header extends React.Component {
                 }
 
                 if( userName.length > 0 ){
+                    itemsStore.setUserName(userName);
                     this.setState({
                         userName: userName
                     })
@@ -634,6 +635,7 @@ export class Header extends React.Component {
                 
                 this.load();
             }
+            
             
             this.setState({
                 userName: itemsStore.userName
@@ -715,6 +717,7 @@ export class Header extends React.Component {
                 })
             }).then(res => res.json()).then(json => {
                 itemsStore.setToken( localStorage.getItem('token'), json ); 
+                itemsStore.setUserName(json);
 
                 this.is_load = false;
 
@@ -778,6 +781,7 @@ export class Header extends React.Component {
                 });
             }else{
                 itemsStore.setToken( json.token, json.name ); 
+                itemsStore.setUserName(json.name);
 
                 this.is_load = false;
 
@@ -786,9 +790,9 @@ export class Header extends React.Component {
                     token: json.token
                 })
 
-                if (typeof window !== 'undefined') {
-                    window.location.pathname = '/'+this.state.cityName+'/profile';
-                }
+                //if (typeof window !== 'undefined') {
+                //    window.location.pathname = '/'+this.state.cityName+'/profile';
+                //}
             }
 
             
@@ -1106,6 +1110,7 @@ export class Header extends React.Component {
                 })
             
                 itemsStore.setToken( json.token, json.name ); 
+                itemsStore.setUserName(json.name);
 
                 this.is_load = false;
 
@@ -1590,7 +1595,7 @@ export class Header extends React.Component {
                             variant="fullWidth"
                             style={{ backgroundColor: '#fff', color: '#000', marginBottom: 20 }}
                         >
-                            <Tab style={{ color: '#000' }} label="Авторизация" {...a11yProps(0)} />
+                            <Tab style={{ color: '#000' }} label="Вход" {...a11yProps(0)} />
                             <Tab style={{ color: '#000' }} label="Регистрация" {...a11yProps(1)} />
                         </Tabs>
 
@@ -1634,7 +1639,7 @@ export class Header extends React.Component {
                                                 onChange={ event => this.state.stage_1 ? this.setState({ userLogin: event.target.value }) : {} }
                                             />
 
-                                            <Typography variant="h5" component="span" className="ModalLabel" style={{ marginTop: 20 }}>{ this.state.typeLogin == 0 ? 'Новый пароль' : 'Придумай пароль' }</Typography>
+                                            <Typography variant="h5" component="span" className="ModalLabel" style={{ marginTop: 20 }}>{ this.state.typeLogin == 0 ? 'Новый пароль' : 'Придумайте пароль' }</Typography>
                                             <TextField 
                                                 size="small"
                                                 variant="outlined" 
