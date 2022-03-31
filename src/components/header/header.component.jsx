@@ -690,6 +690,8 @@ export class Header extends React.Component {
                     itemsStore.setBanners(json.baners)
                     itemsStore.setCityRU(json.this_city_name_ru);
                     
+                    console.log( 'load get_cat_web', json.user_name )
+
                     this.setState({
                         cityList: json.city_list,
                         categoryItems: json.arr, 
