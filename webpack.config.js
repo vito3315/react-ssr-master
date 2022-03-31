@@ -44,8 +44,15 @@ module.exports = {
                 use: [ MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader' ]
             },
             {
+                //test: /\.css$/,
+                //use: [ MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader' ]
+
                 test: /\.css$/,
-                use: [ MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader' ]
+                //include: path.resolve(__dirname, 'src'),
+                //exclude: /node_modules/,
+                use: [
+                    MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'
+                ]
             },
             {
                 test: /\.(jpg|png|svg|otf|ttf|webp|woff|woff2)$/,
