@@ -828,7 +828,8 @@ export class Header extends React.Component {
             this.sms2 = true;
             
             this.setState({
-                errSMS: ''
+                errSMS: '',
+                is_load_new: true
             });
             
             grecaptcha.ready(() => {
@@ -863,6 +864,13 @@ export class Header extends React.Component {
                                 errSMS: json.text
                             });
                         }
+
+                        setTimeout( () => {
+                            this.setState({
+                                is_load_new: false
+                            });
+                        }, 300 )
+                        
                     });
                 });
             });
