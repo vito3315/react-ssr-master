@@ -628,6 +628,7 @@ export class Header extends React.Component {
                 is_load: true
             })
             
+            this.load();
         }, 300)
         
         autorun(() => {
@@ -661,7 +662,7 @@ export class Header extends React.Component {
             
         })
         
-        this.load();
+        
     }
     
     load(){
