@@ -537,6 +537,8 @@ export class Header extends React.Component {
             let userName = itemsStore.getUserName();
             let token = itemsStore.getToken();
 
+            console.log( 'componentDidMount setTimeout', userName )
+
             this.setState({
                 token: !localStorage.getItem('token') || localStorage.getItem('token').length == 0 ? '' : localStorage.getItem('token')
             })
@@ -636,7 +638,8 @@ export class Header extends React.Component {
                 this.load();
             }
             
-            
+            console.log( 'componentDidMount autorun', itemsStore.userName, itemsStore.getUserName() )
+
             this.setState({
                 userName: itemsStore.userName
             })
@@ -789,6 +792,8 @@ export class Header extends React.Component {
                     userName: json.name,
                     token: json.token
                 })
+
+                this.closeLogin();
 
                 //if (typeof window !== 'undefined') {
                 //    window.location.pathname = '/'+this.state.cityName+'/profile';
