@@ -537,8 +537,6 @@ export class Header extends React.Component {
             let userName = itemsStore.getUserName();
             let token = itemsStore.getToken();
 
-            console.log( 'componentDidMount setTimeout', userName )
-
             this.setState({
                 token: !localStorage.getItem('token') || localStorage.getItem('token').length == 0 ? '' : localStorage.getItem('token')
             })
@@ -561,8 +559,6 @@ export class Header extends React.Component {
 
                     this.is_load = false;
 
-                    console.log( 'componentDidMount setTimeout get_user_data', json )
-
                     this.setState({
                         userName: json,
                         token: localStorage.getItem('token')
@@ -584,18 +580,33 @@ export class Header extends React.Component {
                     itemsStore.setUserName(json);
                     this.is_load = false;
 
-                    console.log( 'componentDidMount setTimeout get_user_data 2', json )
-
                     this.setState({
                         userName: json
                     })
                 })
                 .catch(err => { });
+
+
+                fetch(config.urlApi, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type':'application/x-www-form-urlencoded'},
+                    body: queryString.stringify({
+                        type: 'get_user_data_test', 
+                        user_id: itemsStore.getToken()
+                    })
+                }).then(res => res.json()).then(json => {
+                    
+                    console.log( json )
+
+                    this.is_load = false;
+
+                   
+                })
+                .catch(err => { });
             }
 
             if( userName.length > 0 ){
-                console.log( 'componentDidMount setTimeout setUserName', userName )
-
                 itemsStore.setUserName(userName);
                 this.setState({
                     userName: userName
@@ -653,16 +664,12 @@ export class Header extends React.Component {
             if( !user_name || user_name.length == 0 ){
 
             }else{
-                console.log( 'componentDidMount autorun', user_name )
-
                 this.setState({
                     userName: user_name
                 })
             }
             
         })
-        
-        
     }
     
     load(){
@@ -691,8 +698,6 @@ export class Header extends React.Component {
                     itemsStore.setBanners(json.baners)
                     itemsStore.setCityRU(json.this_city_name_ru);
                     
-                    console.log( 'load get_cat_web', json.user_name )
-
                     this.setState({
                         cityList: json.city_list,
                         categoryItems: json.arr, 
@@ -794,9 +799,6 @@ export class Header extends React.Component {
                 pwd: this.state.pwd 
             })
         }).then(res => res.json()).then(json => {
-
-            console.log( json )
-
             if( json.st === false ){
                 this.setState({
                     errPhone: json.text
