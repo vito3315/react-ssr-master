@@ -1571,7 +1571,7 @@ export class Header extends React.Component {
                     onClose={this.closeLogin.bind(this)}
                     className="ModalAuth"
                 >
-                    <DialogTitle>{this.state.ResPWD === false ? 'Авторизация' : 'Восстановление пароля'}</DialogTitle>
+                    <DialogTitle style={{ display: 'none' }}>{this.state.ResPWD === false ? 'Авторизация' : 'Восстановление пароля'}</DialogTitle>
                     <DialogContent className="ModalContent_1_1 newContent">
 
                         <Backdrop open={this.state.is_load_new} style={{ zIndex: 999, color: '#fff' }}>
@@ -1590,7 +1590,7 @@ export class Header extends React.Component {
                         </Tabs>
 
                         <div className="ModalContent_1_2">
-                            { this.state.ResPWD === false ?
+                            { this.state.ResPWD === false || parseInt(this.state.typeLogin) == 0 ?
                                 <>
                                     <Typography variant="h5" component="span" className="ModalLabel">Номер телефона</Typography>
                                     <InputMask 
