@@ -1168,27 +1168,29 @@ export class Home extends React.Component {
                     {itemsStore.getAllItemsCat().map((cat, key) => 
                         cat.items.length > 0 ?
                             mainLink == '' || mainLink == cat.main_link || mainLink == cat.link ?
-                                <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
-                                    <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%', paddingBottom: 40 }} className="MainItems mainContainer">
-                                        <Typography variant="h5" component="h2">{ cat.name }</Typography>
-                                    </Grid>
-                                    <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
-                                        {cat.items.map((it, k) => (
-                                            <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '10px 8px', display: 'flex'}}>
-                                                <Hidden xsDown>
-                                                    <LazyLoad once height={150}>
+                                <LazyLoad once>
+                                    <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
+                                        <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%', paddingBottom: 40 }} className="MainItems mainContainer">
+                                            <Typography variant="h5" component="h2">{ cat.name }</Typography>
+                                        </Grid>
+                                        <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
+                                            {cat.items.map((it, k) => (
+                                                <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '10px 8px', display: 'flex'}}>
+                                                    <Hidden xsDown>
+                                                        
                                                         <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
-                                                    </LazyLoad>
-                                                </Hidden>
-                                                <Hidden smUp>
-                                                    <LazyLoad once height={150}>
-                                                        <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
-                                                    </LazyLoad>
-                                                </Hidden>
-                                            </Grid>
-                                        ))}
-                                    </Grid>
-                                </div>
+                                                        
+                                                    </Hidden>
+                                                    <Hidden smUp>
+                                                        
+                                                            <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
+                                                        
+                                                    </Hidden>
+                                                </Grid>
+                                            ))}
+                                        </Grid>
+                                    </div>
+                                </LazyLoad>
                                     :
                                 null
                                 :
