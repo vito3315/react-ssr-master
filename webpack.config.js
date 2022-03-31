@@ -141,12 +141,7 @@ module.exports = {
                     reuseExistingChunk: true,
                 },
 
-                styles: {
-                    name: "styles",
-                    type: "css/mini-extract",
-                    chunks: "all",
-                    enforce: true,
-                },
+                
 
                 vendor_react: {
                     test: /.*\/node_modules\/react\/index\.js/,
