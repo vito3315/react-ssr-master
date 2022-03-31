@@ -544,7 +544,7 @@ export class Header extends React.Component {
             if( token && token.length == 0 && localStorage.getItem('token') && localStorage.getItem('token').length > 0 ){
                 this.setToken( localStorage.getItem('token'), '' ); 
                 
-                fetch(config.urlApi, {
+                /*fetch(config.urlApi, {
                     method: 'POST',
                     headers: {
                         'Content-Type':'application/x-www-form-urlencoded'},
@@ -564,10 +564,10 @@ export class Header extends React.Component {
                         token: localStorage.getItem('token')
                     })
                 })
-                .catch(err => { });
+                .catch(err => { });*/
             }
 
-            if( !userName || userName.length == 0 ){
+            /*if( !userName || userName.length == 0 ){
                 fetch(config.urlApi, {
                     method: 'POST',
                     headers: {
@@ -587,24 +587,8 @@ export class Header extends React.Component {
                 .catch(err => { });
 
 
-                fetch(config.urlApi, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type':'application/x-www-form-urlencoded'},
-                    body: queryString.stringify({
-                        type: 'get_user_data_test', 
-                        user_id: itemsStore.getToken()
-                    })
-                }).then(res => res.json()).then(json => {
-                    
-                    console.log( json )
-
-                    this.is_load = false;
-
-                   
-                })
-                .catch(err => { });
-            }
+                
+            }*/
 
             if( userName.length > 0 ){
                 itemsStore.setUserName(userName);
