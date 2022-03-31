@@ -93,6 +93,7 @@ module.exports = {
             filename: 'index.html',
             template: path.resolve( __dirname, 'src/index.html' ),
             minify: false,
+            title: 'Caching'
         } ),
 
         // copy static files from `src` to `dist`
