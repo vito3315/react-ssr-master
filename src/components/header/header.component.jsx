@@ -569,38 +569,39 @@ export class Header extends React.Component {
                     })
                 })
                 .catch(err => { });
-            }else{
-                if( userName && userName.length == 0 && token && token.length != 0 ){
-                    fetch(config.urlApi, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type':'application/x-www-form-urlencoded'},
-                        body: queryString.stringify({
-                            type: 'get_user_data', 
-                            user_id: itemsStore.getToken()
-                        })
-                    }).then(res => res.json()).then(json => {
-                        itemsStore.setUserName(json);
-                        this.is_load = false;
-
-                        console.log( 'componentDidMount setTimeout get_user_data 2', json )
-
-                        this.setState({
-                            userName: json
-                        })
-                    })
-                    .catch(err => { });
-                }
-
-                if( userName.length > 0 ){
-                    console.log( 'componentDidMount setTimeout setUserName', userName )
-
-                    itemsStore.setUserName(userName);
-                    this.setState({
-                        userName: userName
-                    })
-                } 
             }
+
+            if( !userName || userName.length == 0 ){
+                fetch(config.urlApi, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type':'application/x-www-form-urlencoded'},
+                    body: queryString.stringify({
+                        type: 'get_user_data', 
+                        user_id: itemsStore.getToken()
+                    })
+                }).then(res => res.json()).then(json => {
+                    itemsStore.setUserName(json);
+                    this.is_load = false;
+
+                    console.log( 'componentDidMount setTimeout get_user_data 2', json )
+
+                    this.setState({
+                        userName: json
+                    })
+                })
+                .catch(err => { });
+            }
+
+            if( userName.length > 0 ){
+                console.log( 'componentDidMount setTimeout setUserName', userName )
+
+                itemsStore.setUserName(userName);
+                this.setState({
+                    userName: userName
+                })
+            } 
+            
 
             
 
