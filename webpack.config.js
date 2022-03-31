@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CompressionPlugin = require("compression-webpack-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+
 
 
 const webpack = require('webpack');
@@ -127,11 +127,6 @@ module.exports = {
 
     // webpack optimizations
     optimization: {
-        minimizer: [
-            // For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line
-            // `...`,
-            new CssMinimizerPlugin(),
-        ],
         moduleIds: 'deterministic',
         runtimeChunk: 'single',
         splitChunks: {
