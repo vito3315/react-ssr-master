@@ -744,8 +744,8 @@ export class Header extends React.Component {
             .catch(err => { });
         }else{
             this.setState({
-                //openLoginNew: true
-                openLogin: true
+                openLoginNew: true
+                //openLogin: true
             })
         }
     }
