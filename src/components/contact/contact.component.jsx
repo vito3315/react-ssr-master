@@ -274,7 +274,7 @@ export class Contact extends React.Component {
                         null
                     }
 
-                    <Typography variant="h5" component="span" className="p20">Уважаемые клиенты, к сожалению, в работе нашей горячей линии наблюдаются сбои по техническим причинам. Оформляйте заказ онлайн на сайте. Благодарим за понимание. </Typography>
+                    <Typography variant="h5" component="span" className="p20" style={{ width: '100%' }}>Уважаемые клиенты, к сожалению, в работе нашей горячей линии наблюдаются сбои по техническим причинам. Оформляйте заказ онлайн на сайте. Благодарим за понимание. </Typography>
 
                     <Typography variant="h5" component="h2">Адреса кафе:</Typography>
                     <ControlledAccordions points={this.state.unic_point}/>
