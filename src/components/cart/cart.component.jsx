@@ -2779,7 +2779,7 @@ export class Cart extends React.Component {
                                 null
                             }
                             
-                            { parseInt( this.state.orderType ) == 0 ? null :
+                            { parseInt( this.state.orderType ) != -1 ? null :
                                 <Typography variant="h5" component="span" className="orderCheckText" style={{ color: '#c03' }}>Забрать заказ можно только в маске</Typography>
                             }
 
