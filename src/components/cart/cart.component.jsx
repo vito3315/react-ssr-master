@@ -564,7 +564,7 @@ export class Cart extends React.Component {
             orderAddr: null,
             orderPic: 0,
             orderComment: '',
-            orderPay: 'cash',
+            orderPay: '',
             
             orderTimes: '1',
             orderPredDay: '',
@@ -1082,7 +1082,7 @@ export class Cart extends React.Component {
         }
         
         this.setState({
-            orderPay: def_type,
+            //orderPay: def_type,
         })
         
         this.saveData();
@@ -1177,8 +1177,6 @@ export class Cart extends React.Component {
     
     changePayMobile(type){
 
-        console.log( 'changePayMobile', type )
-
         this.setState({
             orderPay: type,
             choosePayDialog: false
@@ -1213,7 +1211,7 @@ export class Cart extends React.Component {
         
         this.setState({
             orderTimes: type,
-            orderPay: def_type,
+            //orderPay: def_type,
         })
         
         this.loadTimePred();
@@ -1463,7 +1461,7 @@ export class Cart extends React.Component {
             }else{
                 this.setState({
                     renderPay: this.state.pays.pic,
-                    orderPay: 'in'
+                    //orderPay: 'in'
                 })
             }
             
@@ -1485,7 +1483,7 @@ export class Cart extends React.Component {
             }else{
                 this.setState({
                     renderPay: this.state.pays.pic,
-                    orderPay: 'in'
+                    //orderPay: 'in'
                 })
             }
         }
