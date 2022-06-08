@@ -523,11 +523,11 @@ export class Cart extends React.Component {
             pays: {
                 dev: [
                     {type: 'cash', title: 'Наличными курьеру'},
-                    {type: 'card', title: 'Онлайн'},
+                    {type: 'card', title: 'Онлайн на сайте'},
                 ],
                 dev_mini: [
                     {type: 'cash', title: 'Наличными курьеру'},
-                    {type: 'card', title: 'Онлайн'},
+                    {type: 'card', title: 'Онлайн на сайте'},
                 ],
                 pic: [
                     {type: 'in', title: 'В кафе'},
@@ -535,7 +535,7 @@ export class Cart extends React.Component {
             },
             renderPay: [
                 {type: 'cash', title: 'Наличными курьеру'},
-                {type: 'card', title: 'Онлайн'},
+                {type: 'card', title: 'Онлайн на сайте'},
             ],
             
             cartItems_main: [],
