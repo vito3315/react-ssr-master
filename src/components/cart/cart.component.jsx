@@ -1509,7 +1509,7 @@ export class Cart extends React.Component {
                 this.setState({
                     error: {
                         title: 'Предупреждение', 
-                        text: 'Тип оплаты не выбран'
+                        text: 'Выберите способ оплаты: онлайн на сайте или наличными при получении.'
                     },
                     errorOpen: true
                 })
