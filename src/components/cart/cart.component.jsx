@@ -2074,7 +2074,9 @@ export class Cart extends React.Component {
                                                 item.home+
                                                 ( parseInt(item.pd) == 0 || item.pd.length == 0 ? '' : ', Пд. '+item.pd )+
                                                 ( parseInt(item.et) == 0 || item.et.length == 0 ? '' : ', Эт. '+item.et )+
-                                                ( parseInt(item.kv) == 0 || item.kv.length == 0 ? '' : ', Кв. '+item.kv ) } />
+                                                ( parseInt(item.kv) == 0 || item.kv.length == 0 ? '' : ', Кв. '+item.kv )+
+                                                ( parseInt(item.dom_true) == 0 ? ' Домофон не работает' : '' )
+                                            } />
                                             <FontAwesomeIcon onClick={this.delAddr.bind(this, item.id)} icon={faTimes}/>
                                         </div>
                                     )}
@@ -2502,7 +2504,8 @@ export class Cart extends React.Component {
                                             item.home+
                                             ( parseInt(item.pd) == 0 || item.pd.length == 0 ? '' : ', Пд. '+item.pd )+
                                             ( parseInt(item.et) == 0 || item.et.length == 0 ? '' : ', Эт. '+item.et )+
-                                            ( parseInt(item.kv) == 0 || item.kv.length == 0 ? '' : ', Кв. '+item.kv )
+                                            ( parseInt(item.kv) == 0 || item.kv.length == 0 ? '' : ', Кв. '+item.kv )+
+                                            ( parseInt(item.dom_true) == 0 ? ' Домофон не работает' : '' )
                                         } />
                                         <FontAwesomeIcon onClick={this.delAddr.bind(this, item.id)} icon={faTimes}/>
                                     </div>
