@@ -2023,25 +2023,38 @@ export class Cart extends React.Component {
     checkDomTrue(type, event){
         console.log( event, type, this.state.orderAddr )
 
-        /*fetch(config.urlApi, {
+        fetch(config.urlApi, {
             method: 'POST',
             headers: {
                 'Content-Type':'application/x-www-form-urlencoded'},
             body: queryString.stringify({
-                type: 'trueOrder_web', 
+                type: 'checkDomTrue', 
                 city_id: this.state.city_name,
                 user_id: itemsStore.getToken(),
                 
-                order_id: this.state.newOrderData.order_id,
-                point_id: this.state.newOrderData.point_id,
+                addr_id: this.state.orderAddr.id,
+                dom_true: type === true ? 1 : 0
             })
         }).then(res => res.json()).then(json => {
             
-        });*/
+        });
+
+        let orderAddr = this.state.orderAddr;
+
+        orderAddr.dom_true = type === true ? 1 : 0;
+
+
+
 
         this.setState({
+            newAddrDom: type === true ? 1 : 0,
+            orderAddr: orderAddr,
             CheckDomTrue: true
         })
+
+        setTimeout( () => {
+            this.saveData();
+        }, 300 )
     }
 
     render() {
