@@ -1330,7 +1330,7 @@ export class Cart extends React.Component {
                     kv: this.state.newAddrKV,
                     pd: this.state.newAddrPD,
                     et: this.state.newAddrET,
-                    dom_true: this.state.newAddrDom ? 0 : 1,
+                    dom_true: this.state.newAddrDom ? 1 : 0,
                     free_drive: this.state.newAddrInfo ? this.state.newAddrInfo.free_drive : 0,
                     sum_div: this.state.newAddrInfo ? this.state.newAddrInfo.sum_div : 0,
                     point_id: this.state.newAddrInfo ? this.state.newAddrInfo.point_id : 0,
@@ -2754,7 +2754,7 @@ export class Cart extends React.Component {
                                 <Typography variant="h5" component="span" className="orderCheckText">Заберу: {this.state.picPointInfo ? this.state.picPointInfo.addr : ''}</Typography>
                             }
                             { parseInt( this.state.orderType ) == 0 ?
-                                this.state.orderAddr && parseInt(this.state.orderAddr.dom_true) == 1 ?
+                                this.state.orderAddr && parseInt(this.state.orderAddr.dom_true) == 0 ?
                                     <Typography variant="h5" component="span" className="orderCheckText">Домофон не работает</Typography>
                                         :
                                     null
