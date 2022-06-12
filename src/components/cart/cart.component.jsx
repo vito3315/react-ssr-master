@@ -2021,8 +2021,6 @@ export class Cart extends React.Component {
     }
 
     checkDomTrue(type, event){
-        console.log( event, type, this.state.orderAddr )
-
         fetch(config.urlApi, {
             method: 'POST',
             headers: {
