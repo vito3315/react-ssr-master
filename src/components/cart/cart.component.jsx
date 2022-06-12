@@ -2042,14 +2042,12 @@ export class Cart extends React.Component {
         let orderAddr = this.state.orderAddr;
 
         orderAddr.dom_true = type === true ? 1 : 0;
-
-
-
+        orderAddr.check_dom_true = 1;
 
         this.setState({
             newAddrDom: type === true ? 1 : 0,
             orderAddr: orderAddr,
-            CheckDomTrue: true
+            CheckDomTrue: false
         })
 
         setTimeout( () => {
