@@ -2020,8 +2020,24 @@ export class Cart extends React.Component {
         })
     }
 
-    checkDomTrue(event, type){
-        console.log( event, type )
+    checkDomTrue(type, event){
+        console.log( event, type, this.state.orderAddr )
+
+        /*fetch(config.urlApi, {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'},
+            body: queryString.stringify({
+                type: 'trueOrder_web', 
+                city_id: this.state.city_name,
+                user_id: itemsStore.getToken(),
+                
+                order_id: this.state.newOrderData.order_id,
+                point_id: this.state.newOrderData.point_id,
+            })
+        }).then(res => res.json()).then(json => {
+            
+        });*/
 
         this.setState({
             CheckDomTrue: true
@@ -2497,9 +2513,6 @@ export class Cart extends React.Component {
                                 }
                         </DialogContentText>
                     </DialogContent>
-                    
-
-
                     <DialogActions>
                         <ButtonGroup disableElevation variant="contained" className="chooseDomTrue" style={{ width: '100%' }}>
                             <Button style={{ width: '50%' }} onClick={ this.checkDomTrue.bind(this, true) }>Домофон работает</Button>
