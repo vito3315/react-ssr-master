@@ -2484,11 +2484,26 @@ export class Cart extends React.Component {
                     className="CheckDomTrue"
                 >
                     <Typography variant="h5" component="span" className="orderCheckTitle">Подтвердите работоспособность домофона</Typography>
-                     
+                    <DialogContent>
+                        <DialogContentText className="DialogErrText">{this.state.orderAddr ?
+                                    this.state.orderAddr.city_name+', '+
+                                    this.state.orderAddr.street+' '+
+                                    this.state.orderAddr.home+
+                                    ( parseInt(this.state.orderAddr.pd) == 0 || this.state.orderAddr.pd.length == 0 ? '' : ', Пд. '+this.state.orderAddr.pd )+
+                                    ( parseInt(this.state.orderAddr.et) == 0 || this.state.orderAddr.et.length == 0 ? '' : ', Эт. '+this.state.orderAddr.et )+
+                                    ( parseInt(this.state.orderAddr.kv) == 0 || this.state.orderAddr.kv.length == 0 ? '' : ', Кв. '+this.state.orderAddr.kv )
+                                :
+                                    ''
+                                }
+                        </DialogContentText>
+                    </DialogContent>
+                    
+
+
                     <DialogActions>
-                        <ButtonGroup disableElevation variant="contained" className="chooseDomTrue">
-                            <Button className={ '' } onClick={ this.checkDomTrue.bind(this, true) }>Домофон работает</Button>
-                            <Button className={ '' } onClick={ this.checkDomTrue.bind(this, false) }>Домофон не работает</Button>
+                        <ButtonGroup disableElevation variant="contained" className="chooseDomTrue" style={{ width: '100%' }}>
+                            <Button style={{ width: '50%' }} onClick={ this.checkDomTrue.bind(this, true) }>Домофон работает</Button>
+                            <Button style={{ width: '50%' }} onClick={ this.checkDomTrue.bind(this, false) }>Домофон не работает</Button>
                         </ButtonGroup>
                     </DialogActions>
                 </Dialog>
