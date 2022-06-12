@@ -575,6 +575,8 @@ export class Cart extends React.Component {
             orderPromoText: '',
             
             newOrderData: null,
+
+            CheckDomTrue: false
         };
         
         itemsStore.setCity(this.props.city);
@@ -1092,6 +1094,13 @@ export class Cart extends React.Component {
         let thisitem = this.state.my_addr.find( (item) => item.id == event.target.value );
         let allPrice = itemsStore.getAllPrice();
         
+        //проверка домофона
+        if( parseInt(thisitem.check_dom_true) == 0 ){
+            this.setState({
+                CheckDomTrue: true
+            })
+        }
+
         if( parseInt(thisitem.free_drive) == 1 || parseInt(itemsStore.free_drive) == 1 ){
             if( parseInt(allPrice) > 0 ){
                 itemsStore.setSumDiv(0);
@@ -1102,19 +1111,12 @@ export class Cart extends React.Component {
             itemsStore.setSumDiv(parseInt(thisitem.sum_div));
         }
         
-        let type = this.state.orderTimes,
-            type_order = this.state.orderType;
+        let type_order = this.state.orderType;
         
         if( type_order == 0 ){
-            //if( type == 1 ){
-                this.setState({
-                    renderPay: this.state.pays.dev,
-                })
-            /*}else{
-                this.setState({
-                    renderPay: this.state.pays.dev_mini,
-                })
-            }*/
+            this.setState({
+                renderPay: this.state.pays.dev,
+            })
         }else{
             this.setState({
                 renderPay: this.state.pays.pic,
@@ -2018,6 +2020,14 @@ export class Cart extends React.Component {
         })
     }
 
+    checkDomTrue(event, type){
+        console.log( event, type )
+
+        this.setState({
+            CheckDomTrue: true
+        })
+    }
+
     render() {
         
         if(this.state.hasError){
@@ -2468,6 +2478,21 @@ export class Cart extends React.Component {
                     </Grid>
                 </Hidden>
                 
+                <Dialog
+                    open={this.state.CheckDomTrue}
+                    onClose={() => this.setState({ CheckDomTrue: false })}
+                    className="CheckDomTrue"
+                >
+                    <Typography variant="h5" component="span" className="orderCheckTitle">Подтвердите работоспособность домофона</Typography>
+                     
+                    <DialogActions>
+                        <ButtonGroup disableElevation variant="contained" className="chooseDomTrue">
+                            <Button className={ '' } onClick={ this.checkDomTrue.bind(this, true) }>Домофон работает</Button>
+                            <Button className={ '' } onClick={ this.checkDomTrue.bind(this, false) }>Домофон не работает</Button>
+                        </ButtonGroup>
+                    </DialogActions>
+                </Dialog>
+
                 <Dialog
                     open={this.state.errorOpen}
                     onClose={() => this.setState({ errorOpen: false })}
