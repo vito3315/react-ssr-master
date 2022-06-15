@@ -78,7 +78,7 @@ class CoverFlowCarousel extends React.Component {
             centeredSlidesBounds: false,
             setWrapperSize: this_count == 1 ? false : true,
             autoHeight: true,
-            spaceBetween: 100,
+            //spaceBetween: 100,
             centeredSlides: true,
             slidesPerView: count,
             
@@ -628,7 +628,7 @@ export class Home extends React.Component {
                     <Link
                         to={'/'+itemsStore.getCity()+'/akcii?act_'+item.aktia_id}
                         exact={ true }
-                        style={{ width: 'inherit', height: 'auto', borderRadius: 15 }}
+                        style={{ width: 'inherit', height: 'auto'/*, borderRadius: 15*/ }}
                     >
                         <picture style={{ width: 'inherit', height: 'auto' }}>
                             <source 
@@ -650,7 +650,7 @@ export class Home extends React.Component {
                     <Link
                         to={'/'+itemsStore.getCity()+'/akcii?act_'+item.aktia_id}
                         exact={ true }
-                        style={{ width: 'inherit', height: 'auto', borderRadius: 15 }}
+                        style={{ width: 'inherit', height: 'auto'/*, borderRadius: 15*/ }}
                     >
                         <picture style={{ width: 'inherit', height: 'auto' }}>
                             <source 
