@@ -1,12 +1,14 @@
 import React from 'react';
 import { NavLink as Link } from 'react-router-dom';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Typography from '@material-ui/core/Typography';
+
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import Typography from '@mui/material/Typography';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faMinus, faTimes } from '@fortawesome/free-solid-svg-icons'
 import * as Scroll from 'react-scroll';
@@ -19,21 +21,22 @@ import axios from 'axios';
 
 import {Helmet} from "react-helmet";
 
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
 
-import IconButton from '@material-ui/core/IconButton';
-import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
+import IconButton from '@mui/material/IconButton';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 import itemsStore from '../../stores/items-store';
 import config from '../../stores/config';
 
 import { autorun } from "mobx"
-import Dialog from '@material-ui/core/Dialog';
-import Slide from '@material-ui/core/Slide';
+
+//import Slide from '@material-ui/core/Slide';
 import Hidden from '@material-ui/core/Hidden';
 
 import LazyLoad from 'react-lazyload';
@@ -543,9 +546,9 @@ class CardItemBot extends React.Component {
     }
 }
 
-const Transition = React.forwardRef(function Transition(props, ref) {
+/*const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
-});
+});*/
 
 export class HomeCat extends React.Component{
     
@@ -1198,12 +1201,12 @@ export class Home extends React.Component {
                     )}
                     
                     {this.state.openItem ?
-                        <Dialog fullScreen open={this.state.openModal} className="ItemDialog" onClose={this.handleClose.bind(this)} TransitionComponent={Transition}>
-                            <MuiDialogTitle disableTypography style={{ margin: 0, padding: 8 }}>
+                        <Dialog fullScreen open={this.state.openModal} className="ItemDialog" onClose={this.handleClose.bind(this)}>
+                            <DialogTitle disableTypography style={{ margin: 0, padding: 8 }}>
                                 <IconButton aria-label="close" style={{ position: 'absolute', top: 0, right: 0 }} onClick={this.handleClose.bind(this)}>
                                     <FontAwesomeIcon icon={faTimes} style={{ fontSize: '1.8rem', color: '#e5e5e5' }} />
                                 </IconButton>
-                            </MuiDialogTitle>
+                            </DialogTitle>
                             <div>
                                 <Item itemId={this.state.openItem.id} item={this.state.openItem} />
                             </div>
@@ -1214,15 +1217,15 @@ export class Home extends React.Component {
                     
                     {this.state.openItem ?
                         <Dialog maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item" open={this.state.openModalPC}>
-                            <MuiDialogTitle disableTypography style={{ margin: 0, padding: 8 }}>
+                            <DialogTitle disableTypography style={{ margin: 0, padding: 8 }}>
                                 <IconButton aria-label="close" style={{ position: 'absolute', top: 0, right: 50 }} onClick={this.handleClosePC.bind(this)}>
                                     <FontAwesomeIcon icon={faTimes} style={{ fontSize: '1.8rem', color: '#CC0033' }} />
                                 </IconButton>
-                            </MuiDialogTitle>
+                            </DialogTitle>
                             
-                            <MuiDialogContent className="modalActiiContent">
+                            <DialogContent className="modalActiiContent">
                                 <Item itemId={this.state.openItem.id} item={this.state.openItem} />
-                            </MuiDialogContent>
+                            </DialogContent>
                         </Dialog>
                             :
                         null
