@@ -1214,8 +1214,8 @@ export class Home extends React.Component {
                     }
                     
                     {this.state.openItem ?
-                        <Dialog maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item" open={this.state.openModalPC}>
-                            <IconButton aria-label="close" style={{ position: 'absolute', top: -33, right: 50, zIndex: 1500 }} onClick={this.handleClosePC.bind(this)}>
+                        <Dialog maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC" open={this.state.openModalPC}>
+                            <IconButton aria-label="close" style={{ position: 'absolute', top: -54, left: 28, zIndex: 1500 }} onClick={this.handleClosePC.bind(this)}>
                                 <FontAwesomeIcon icon={faTimes} style={{ fontSize: '1.8rem', color: '#CC0033' }} />
                             </IconButton>
                             

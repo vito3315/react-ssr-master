@@ -430,3 +430,7 @@ $colorMain: #CC0033;
         @include fons(0.7rem, $Ubuntu);
     }
 }
+
+.OpenItemPC .MuiDialog-paper{
+    overflow-y: visible!important;
+}
