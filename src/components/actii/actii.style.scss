@@ -115,10 +115,10 @@ $Futuris: 'FuturaFuturisC Bold';
         @include fons_new(1.6rem, $Futuris);
     }
     & .modalActiiContent{
-        padding-top: 40px!important;
-        padding-bottom: 40px!important;
-        padding-left: 110px!important;
-        padding-right: 110px!important;
+        padding-top: 1.5%!important;
+        padding-bottom: 1.5%!important;
+        padding-left: 4%!important;
+        padding-right: 4%!important;
         & span:not(.dopItemName):not(.ItemDesc), p:not(.dopItemName):not(.ItemDesc), b:not(.dopItemName):not(.ItemDesc){
             @include fons(1rem, $Ubuntu);
         }
