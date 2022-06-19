@@ -1219,19 +1219,30 @@ export class Home extends React.Component {
                     
                     {this.state.openItem ?
 
-                        
-                           
-                        <Dialog maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC" open={this.state.openModalPC}>
-                            <IconButton aria-label="close" style={{ position: 'absolute', top: -63, left: -119, zIndex: 1500 }} onClick={this.handleClosePC.bind(this)}>
-                                <FontAwesomeIcon icon={faTimes} style={{ width: '10%', height: 'auto', color: '#fff' }} />
-                            </IconButton>
-                            
-                            <MuiDialogContent className="modalActiiContent">
-                                <Item2 itemId={this.state.openItem.id} item={this.state.openItem} />
-                            </MuiDialogContent>
-                        </Dialog>
-                            
-                        
+                        <>
+                            <Hidden xlUp>
+                                <Dialog maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC" open={this.state.openModalPC}>
+                                    <IconButton aria-label="close" style={{ position: 'absolute', top: -63, left: -119, zIndex: 1500 }} onClick={this.handleClosePC.bind(this)}>
+                                        <FontAwesomeIcon icon={faTimes} style={{ width: '10%', height: 'auto', color: '#fff' }} />
+                                    </IconButton>
+                                    
+                                    <MuiDialogContent className="modalActiiContent">
+                                        <Item2 itemId={this.state.openItem.id} item={this.state.openItem} />
+                                    </MuiDialogContent>
+                                </Dialog>
+                            </Hidden>
+                            <Hidden mdDown>
+                                <Dialog maxWidth={'xl'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC" open={this.state.openModalPC}>
+                                    <IconButton aria-label="close" style={{ position: 'absolute', top: -63, left: -119, zIndex: 1500 }} onClick={this.handleClosePC.bind(this)}>
+                                        <FontAwesomeIcon icon={faTimes} style={{ width: '10%', height: 'auto', color: '#fff' }} />
+                                    </IconButton>
+                                    
+                                    <MuiDialogContent className="modalActiiContent">
+                                        <Item2 itemId={this.state.openItem.id} item={this.state.openItem} />
+                                    </MuiDialogContent>
+                                </Dialog>
+                            </Hidden>
+                        </>
                             :
                         null
                     }
