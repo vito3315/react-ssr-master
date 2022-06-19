@@ -1215,11 +1215,9 @@ export class Home extends React.Component {
                     
                     {this.state.openItem ?
                         <Dialog maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item" open={this.state.openModalPC}>
-                            <MuiDialogTitle disableTypography style={{ margin: 0, padding: 8 }}>
-                                <IconButton aria-label="close" style={{ position: 'absolute', top: 0, right: 50 }} onClick={this.handleClosePC.bind(this)}>
-                                    <FontAwesomeIcon icon={faTimes} style={{ fontSize: '1.8rem', color: '#CC0033' }} />
-                                </IconButton>
-                            </MuiDialogTitle>
+                            <IconButton aria-label="close" style={{ position: 'absolute', top: -33, right: 50, zIndex: 1500 }} onClick={this.handleClosePC.bind(this)}>
+                                <FontAwesomeIcon icon={faTimes} style={{ fontSize: '1.8rem', color: '#CC0033' }} />
+                            </IconButton>
                             
                             <MuiDialogContent className="modalActiiContent">
                                 <Item itemId={this.state.openItem.id} item={this.state.openItem} />
