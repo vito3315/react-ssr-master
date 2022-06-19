@@ -1150,7 +1150,7 @@ export class Home extends React.Component {
                         <meta name="description" content={this.state.description} />
                     </Helmet>
                     
-                    <Box sx={{ display: { sm: 'none', xs: 'none' } }}>
+                    <Box sx={{ display: { sm: 'none', xs: 'none', md: 'block', lg: 'block', xl: 'block' } }}>
                     
                         { this.state.banners_pc.length == 0 ? null :
                             <CoverFlowCarousel
@@ -1161,7 +1161,7 @@ export class Home extends React.Component {
                     
                     </Box>
 
-                    <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
+                    <Box sx={{ display: { sm: 'block', xs: 'block', md: 'none', lg: 'none', xl: 'none' } }}>
                     
                         { this.state.banners_mobile.length == 0 ? null :
                             <CoverFlowCarousel
