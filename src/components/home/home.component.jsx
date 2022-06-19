@@ -1150,26 +1150,22 @@ export class Home extends React.Component {
                         <meta name="description" content={this.state.description} />
                     </Helmet>
                     
-                    <Box sx={{ display: { sm: 'none', xs: 'none', md: 'block', lg: 'block', xl: 'block' } }}>
-                    
+                    <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block', lg: 'block', xl: 'block' } }}>
                         { this.state.banners_pc.length == 0 ? null :
                             <CoverFlowCarousel
                                 type="pc"
                                 data={this.state.banners_pc}
                             />
                         }
-                    
                     </Box>
 
-                    <Box sx={{ display: { sm: 'block', xs: 'block', md: 'none', lg: 'none', xl: 'none' } }}>
-                    
+                    <Box sx={{ display: { xs: 'block', sm: 'block', md: 'none', lg: 'none', xl: 'none' } }}>
                         { this.state.banners_mobile.length == 0 ? null :
                             <CoverFlowCarousel
                                 type="mobile"
                                 data={this.state.banners_mobile}
                             />
                         }
-                    
                     </Box>
 
                     <Typography variant="h5" component="h1" style={{ paddingBottom: 20 }}>{ this.state.page ? this.state.page.page_h : '' }</Typography>
@@ -1185,16 +1181,12 @@ export class Home extends React.Component {
                                         <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
                                             {cat.items.map((it, k) => (
                                                 <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '10px 8px', display: 'flex'}}>
-                                                    <Hidden xsDown>
-                                                        
+                                                    <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block', lg: 'block', xl: 'block' } }}>
                                                         <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
-                                                        
-                                                    </Hidden>
-                                                    <Hidden smUp>
-                                                        
+                                                    </Box>
+                                                    <Box sx={{ display: { xs: 'block', sm: 'block', md: 'none', lg: 'none', xl: 'none' } }}>
                                                         <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
-                                                        
-                                                    </Hidden>
+                                                    </Box>
                                                 </Grid>
                                             ))}
                                         </Grid>
