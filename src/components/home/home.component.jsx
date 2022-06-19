@@ -339,7 +339,7 @@ class CardItem extends React.Component {
                             {this.state.count == 0 ?
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder fohover">
                                     <Button variant="contained" className="BtnCardMain CardInCardItem NONHOVERED" onClick={this.add.bind(this)}>
-                                        <ShoppingCartOutlinedIcon color='inherit'  />
+                                        <ShoppingCartOutlinedIcon color='#c03'  />
                                     </Button>
                                     <Button variant="contained" className="BtnCardMain CardInCardItem HOVERED" onClick={this.add.bind(this)}>В корзину</Button>
                                 </ButtonGroup>
