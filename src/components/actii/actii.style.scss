@@ -94,13 +94,31 @@ $Futuris: 'FuturaFuturisC Bold';
         }
     }
 }
-.modalActii{
+.modalActii:not(.OpenItemPC){
     & h6{
         text-align: center;
         @include fons_new(1.6rem, $Futuris);
     }
     & .modalActiiContent{
         padding-top: 0!important;
+        & span:not(.dopItemName):not(.ItemDesc), p:not(.dopItemName):not(.ItemDesc), b:not(.dopItemName):not(.ItemDesc){
+            @include fons(1rem, $Ubuntu);
+        }
+    }
+    & .MuiDialog-paper{
+        margin: 12px!important;
+    }
+}
+.modalActii.OpenItemPC{
+    & h6{
+        text-align: center;
+        @include fons_new(1.6rem, $Futuris);
+    }
+    & .modalActiiContent{
+        padding-top: 40px!important;
+        padding-bottom: 40px!important;
+        padding-left: 110px!important;
+        padding-right: 110px!important;
         & span:not(.dopItemName):not(.ItemDesc), p:not(.dopItemName):not(.ItemDesc), b:not(.dopItemName):not(.ItemDesc){
             @include fons(1rem, $Ubuntu);
         }
