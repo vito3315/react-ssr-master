@@ -38,6 +38,7 @@ import { autorun } from "mobx"
 
 //import Slide from '@material-ui/core/Slide';
 import Hidden from '@material-ui/core/Hidden';
+import Box from '@mui/material/Box';
 
 import LazyLoad from 'react-lazyload';
 
@@ -1149,23 +1150,28 @@ export class Home extends React.Component {
                         <meta name="description" content={this.state.description} />
                     </Helmet>
                     
-                    <Hidden smDown>
+                    <Box sx={{ display: { sm: 'none', xs: 'none' } }}>
+                    
                         { this.state.banners_pc.length == 0 ? null :
                             <CoverFlowCarousel
                                 type="pc"
                                 data={this.state.banners_pc}
                             />
                         }
-                    </Hidden>
-                    <Hidden mdUp>
+                    
+                    </Box>
+
+                    <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
+                    
                         { this.state.banners_mobile.length == 0 ? null :
                             <CoverFlowCarousel
                                 type="mobile"
                                 data={this.state.banners_mobile}
                             />
                         }
-                    </Hidden>
                     
+                    </Box>
+
                     <Typography variant="h5" component="h1" style={{ paddingBottom: 20 }}>{ this.state.page ? this.state.page.page_h : '' }</Typography>
                     
                     {itemsStore.getAllItemsCat().map((cat, key) => 
@@ -1186,7 +1192,7 @@ export class Home extends React.Component {
                                                     </Hidden>
                                                     <Hidden smUp>
                                                         
-                                                            <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
+                                                        <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
                                                         
                                                     </Hidden>
                                                 </Grid>
