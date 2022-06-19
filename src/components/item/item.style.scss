@@ -47,9 +47,9 @@ $colorMain: #CC0033;
 }
 
 .MainItem{
-    margin-bottom: 50px!important;
+    /*margin-bottom: 50px!important;
     padding-left: 10%;
-    padding-right: 10%;
+    padding-right: 10%;*/
     & h1{
         @include fons(2rem, $Ubuntu);
         font-weight: bold;

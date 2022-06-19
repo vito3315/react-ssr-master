@@ -836,7 +836,7 @@ export class Item2 extends React.Component {
     
     render() {
         return (
-            <div>
+            <>
                 <Helmet>
                     <title>{this.state.title}</title>
                     <meta name="description" content={this.state.description} />
@@ -1107,7 +1107,7 @@ export class Item2 extends React.Component {
                         </Grid>
                     </Grid>
                 </Hidden>
-            </div>
+            </>
         )
     }
 }
