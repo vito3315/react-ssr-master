@@ -844,7 +844,7 @@ export class Item2 extends React.Component {
                 
                 <Box component="div" className="pcItem" >
                     <Grid container className="MainItem mainContainer" style={{  }}>
-                        <Grid item style={{ width: '59%', marginLeft: '4%', marginRight: '4%', border: '1px solid red' }}>
+                        <Grid item style={{ width: '59%', marginLeft: '4%', marginRight: '4%', border: '1px solid red', marginTop: 30, marginBottom: 30 }}>
                             <picture>
                                 <source 
                                     srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
@@ -858,7 +858,7 @@ export class Item2 extends React.Component {
                                 />
                             </picture>
                         </Grid>
-                        <Grid item style={{ width: '29%', border: '1px solid red' }}>
+                        <Grid item style={{ width: '29%', border: '1px solid red', marginTop: 30, marginBottom: 30 }}>
                             <Typography variant="h5" component="h1">{this.state.item.name}</Typography>
                             <Typography variant="h5" className="OtherMiniPopover" component="span">{this.state.item.info_weight}</Typography>
                             
