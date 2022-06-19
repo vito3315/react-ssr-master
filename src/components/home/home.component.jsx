@@ -988,6 +988,8 @@ export class Home extends React.Component {
 
         window.history.pushState(state, title, url)
         
+        console.log( item )
+
         this.setState({
             openItem: item,
             openModal: true
