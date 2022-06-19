@@ -160,7 +160,7 @@ function get_city(path){
     return path[ 0 ];
 }
 
-import { Item } from '../item';
+import { Item, Item2 } from '../item';
 
 class CardItem extends React.Component {
     _isMounted = false;
@@ -1220,7 +1220,7 @@ export class Home extends React.Component {
                             </IconButton>
                             
                             <MuiDialogContent className="modalActiiContent">
-                                <Item itemId={this.state.openItem.id} item={this.state.openItem} />
+                                <Item2 itemId={this.state.openItem.id} item={this.state.openItem} />
                             </MuiDialogContent>
                         </Dialog>
                             :

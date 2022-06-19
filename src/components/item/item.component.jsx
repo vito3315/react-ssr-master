@@ -648,3 +648,466 @@ export class Item extends React.Component {
         )
     }
 }
+
+export class Item2 extends React.Component {
+    _isMounted = false;
+    swiper = null;
+    
+    startMove = 0;
+    firebaseAnalitic = null;
+
+    constructor(props) {
+        super(props);
+        
+        this.state = {      
+            item: this.props.item ? this.props.item : [],  
+            is_load: false,
+            count: 0,
+            city_name: !this.props.item ? this.props.city : '',
+            itemLink: !this.props.item ? this.props.linkItem : '',
+            title: this.props.data ? this.props.data.title : '',
+            description: this.props.data ? this.props.data.description : '',
+            itemTab: 0
+        };
+        
+        if( !this.props.item ){
+            itemsStore.setCity(this.props.city);
+        }
+    }
+    
+    static fetchData(propsData) {
+        let data = {
+            type: 'get_page_info', 
+            city_id: get_city(propsData),
+            item: get_item(propsData),
+            page: 'item' 
+        };
+        
+        return axios({
+            method: 'POST',
+            url: config.urlApi,
+            headers: { 'content-type': 'application/x-www-form-urlencoded' },
+            data: queryString.stringify(data)
+        }).then(response => {
+            if(response['status'] === 200){
+                var json = response['data'];
+                
+                return {
+                    title: json.page.title,
+                    description: json.page.description,
+                    page: json.page,
+                    cats: json.cats,
+                    allItems: json.allItems,
+                    all: json
+                }
+            } 
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+    
+    componentWillUnmount(){
+        this._isMounted = false; 
+    }
+    
+    componentDidMount(){
+        this._isMounted = true; 
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyChAHowCT2C7GRwfcxwt1Pi4SCV4CaVpP4",
+            authDomain: "jacofoodsite.firebaseapp.com",
+            projectId: "jacofoodsite",
+            storageBucket: "jacofoodsite.appspot.com",
+            messagingSenderId: "692082803779",
+            appId: "1:692082803779:web:39a39963cd8bff927000f6"
+        };
+          
+        // Initialize Firebase
+        firebaseAPP = initializeApp(firebaseConfig);
+        this.firebaseAnalitic = getAnalytics(firebaseAPP);
+
+        autorun(() => {
+            if( this._isMounted ){
+                let item = itemsStore.getAllItems().find( (item) => item.link == this.state.itemLink );
+                
+                if( item ){
+                    this.setState({
+                        item: item
+                    })
+                    
+                    if( item.items.length == 0 && (parseInt(item.type) !== 3 && parseInt(item.type) !== 4) ){
+                        if( parseFloat(item.kkal) == 0 && parseFloat(item.protein) == 0 && parseFloat(item.fat) == 0 && parseFloat(item.carbohydrates) == 0 ){
+                            
+                        }else{
+                            item.items.push({
+                                kkal: item.kkal,
+                                protein: item.protein,
+                                fat: item.fat,
+                                carbohydrates: item.carbohydrates,
+                                name: ''
+                            })
+                        }
+                    }
+                    
+                    this.setState({ 
+                        is_load: true,
+                    });
+                    
+                    let my_cart = itemsStore.getItems();
+                    
+                    let item_cart = my_cart.filter( (item) => item.item_id == item['id'] )[0];
+              
+                    this.setState({ 
+                        count: item_cart ? item_cart.count : 0,
+                    })
+                }
+            }
+        })
+        
+        if( this.props.item ){
+            
+            /*Item.fetchData('/'+this.state.city_name+'/menu/'+this.state.itemLink).then( data => {
+                this.setState( {
+                    title: data.page.title,
+                    description: data.page.description,
+                } );
+            } );*/
+            
+            if( this.state.item.items && this.state.item.items.length == 0 && (parseInt(this.state.item.type) !== 3 && parseInt(this.state.item.type) !== 4) ){
+                this.state.item.items.push({
+                    kkal: this.state.item.kkal,
+                    protein: this.state.item.protein,
+                    fat: this.state.item.fat,
+                    carbohydrates: this.state.item.carbohydrates,
+                    name: ''
+                })
+            }
+            
+            this.setState({ 
+                is_load: true,
+            });
+            
+            let my_cart = itemsStore.getItems();
+            let item = my_cart.find( (item) => item.item_id == this.state.item['id'] );
+      
+            this.setState({ 
+                count: item ? item.count : 0,
+            })
+        }
+        
+        if( !this.props.item ){
+            if( document.querySelector('.activeCat') ){
+                document.querySelector('.activeCat').classList.remove('activeCat');
+            }
+            window.scrollTo(0, 0);
+            itemsStore.setPage('item');
+        }
+    }
+    
+    add(){
+
+        logEvent(this.firebaseAnalitic, 'add_to_cart', {
+            content_type: 'add_cart',
+            content_id: this.state.item['id'],
+            items: [{ name: this.state.item.name }]
+        });
+
+        let count = itemsStore.AddItem(this.state.item['id']);
+        this.setState({ count: count })
+    }
+    
+    minus(){
+
+        logEvent(this.firebaseAnalitic, 'remove_from_cart', {
+            content_type: 'remove_cart',
+            content_id: this.state.item['id'],
+            items: [{ name: this.state.item.name }]
+        });
+
+        let count = itemsStore.MinusItem(this.state.item['id']);
+        this.setState({ count: count })
+    }
+    
+    changeTab = (event, newValue) => {
+        this.setState({
+            itemTab: newValue
+        })
+    }
+    
+    render() {
+        return (
+            <div>
+                <Helmet>
+                    <title>{this.state.title}</title>
+                    <meta name="description" content={this.state.description} />
+                </Helmet>
+                
+                <Box component="div" className="pcItem" >
+                    <Grid container className="MainItem mainContainer" style={{  }}>
+                        <Grid item style={{ width: '62.6%', marginRight: 100 }}>
+                            <picture>
+                                <source 
+                                    srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
+                                    type="image/webp" 
+                                />
+                                <img 
+                                    src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
+                                    alt={this.state.item.name}
+                                    title={this.state.item.name}
+                                    style={{ minHeight: 150 }}
+                                />
+                            </picture>
+                        </Grid>
+                        <Grid item style={{  }}>
+                            <Typography variant="h5" component="h1">{this.state.item.name}</Typography>
+                            <Typography variant="h5" className="OtherMiniPopover" component="span">{this.state.item.info_weight}</Typography>
+                            
+                            <AppBar position="static" style={{ backgroundColor: '#fff', color: '#000', zIndex: 0, paddingTop: 10 }} elevation={0}>
+                                <Tabs aria-label="simple tabs example" className="itemTabs" value={this.state.itemTab} onChange={this.changeTab.bind(this)} style={{ justifyContent: 'center' }}>
+                                    {this.state.item.items && this.state.item.items.length == 0 && this.state.item.tmp_desc.length == 0 ? null :
+                                        <Tab label="Состав" {...a11yProps(0)} disableRipple={true} />
+                                    }
+                                    {this.state.item.items && this.state.item.items.length == 0 ? null :
+                                        <Tab label="Пищевая ценность" {...a11yProps(1)} disableRipple={true} />
+                                    }
+                                </Tabs>
+                            </AppBar>
+                            <TabPanel value={this.state.itemTab} index={1} style={{ width: '100%', marginTop: 10, marginBottom: 15 }}>
+                                <div style={{ maxHeight: 250, overflow: 'auto' }} className={this.state.item.items && this.state.item.items.length == 1 ? 'MainItemPopover tab MainItemPopoverOne' : 'MainItemPopover tab MainItemPopoverLot'}>
+                                    <table>
+                                        <tbody>
+                                            
+                                            <tr>
+                                                <td><Typography variant="h5" className="OtherMiniPopover" component="span">Пищевая ценность на 100 г</Typography></td>
+                                            </tr>
+                                            {this.state.item.items && this.state.item.items.map((item, key) => 
+                                                <tr key={key}>
+                                                    <td>
+                                                        <div className="NamePopover">
+                                                            <Typography variant="h5" component="span">{item.name}</Typography>
+                                                        </div>
+                                                        <div className="OtherPopover">
+                                                            <Typography variant="h5" component="span">Белки:</Typography>
+                                                            <Typography variant="h5" component="span">{item.protein} г</Typography>
+                                                        </div>
+                                                        <div className="OtherPopover">
+                                                            <Typography variant="h5" component="span">Жиры:</Typography>
+                                                            <Typography variant="h5" component="span">{item.fat} г</Typography>
+                                                        </div>
+                                                        <div className="OtherPopover">
+                                                            <Typography variant="h5" component="span">Углеводы:</Typography>
+                                                            <Typography variant="h5" component="span">{item.carbohydrates} г</Typography>
+                                                        </div>
+                                                        <div className="OtherPopover">
+                                                            <Typography variant="h5" component="span">Энерг. ценность:</Typography>
+                                                            <Typography variant="h5" component="span">{item.kkal} ккал</Typography>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            )}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </TabPanel>
+                            <TabPanel value={this.state.itemTab} index={0} style={{ marginTop: 10, marginBottom: 15 }}>
+                                { this.state.item.items && this.state.item.items.length > 1 ?
+                                    <div style={{ maxHeight: 300, overflowY: 'auto', overflowX: 'hidden' }}>
+                                        {this.state.item.items && this.state.item.items.map((item, key) =>
+                                            <div key={key} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', position: 'relative' }}>
+                                                <picture style={{ height: 'auto', width: 100, display: 'table' }}>
+                                                    <source 
+                                                        srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_new+"300х200.webp?"+item.img_new_update} 
+                                                        type="image/webp" 
+                                                    />
+                                                    <img 
+                                                        src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"300х200.jpg?"+item.img_new_update} 
+                                                        alt={item.name}
+                                                        title={item.name}
+                                                        style={{ height: 'auto', width: 65 }}
+                                                    />
+                                                </picture>
+                                                <div className="itemMiniText">
+                                                    <Typography variant="h5" component="span" className="dopItemName">{item.name}</Typography>
+                                                    <Typography variant="h5" component="span" className="ItemDesc">{item.tmp_desc}</Typography>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                        :
+                                    <Typography gutterBottom variant="h5" component="span" className="ItemDesc">{this.state.item.tmp_desc}</Typography>
+                                }
+                            </TabPanel>
+                            
+                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', position: 'absolute', bottom: -30, width: '65%' }}>
+                                
+                                <div className="newBTN" onClick={this.add.bind(this)}>
+                                    <Typography variant="h5" component="span" className="ItemPriceValue" style={{ paddingLeft: 5, paddingBottom: 2 }}>{ parseInt(this.state.count) == 0 ? parseInt(this.state.item.price) : parseInt(this.state.item.price) * parseInt(this.state.count) }</Typography>
+                                    <Ruble viewBox="0 0 600 300" width="20" />
+                                     
+                                    <ShoppingCartOutlinedIcon color='inherit'  />
+                                </div>
+                                
+                                { false && this.state.count == 0 ?
+                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder fohover">
+                                        <Button variant="contained" className="BtnCardMain CardInCardItem NONHOVERED" onClick={this.add.bind(this)}>
+                                            <ShoppingCartOutlinedIcon color='inherit'  />
+                                        </Button>
+                                        <Button variant="contained" className="BtnCardMain CardInCardItem HOVERED" onClick={this.add.bind(this)}>В корзину</Button>
+                                    </ButtonGroup>
+                                        :
+                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder count" style={{ border: 'none' }}>
+                                        <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this)}>
+                                            <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
+                                        </Button>
+                                        <Button variant="contained" className="BtnCardMain" >
+                                            <Typography component="span" className="CardCountItem" style={{ fontSize: '1.2rem' }}>{this.state.count}</Typography>
+                                        </Button>
+                                        <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this)}> 
+                                            <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
+                                        </Button>
+                                    </ButtonGroup>
+                                }
+                            </div>
+                        </Grid>
+                    </Grid>
+                </Box>
+                
+                <Hidden smUp>
+                    <Grid container className="MainItem mainContainer" style={{ paddingLeft: '4%', paddingRight: '4%', height: '100%' }}>
+                        <Grid item xs={12} style={{ paddingRight: 12 }}>
+                            <picture id="forSwiper">
+                                <source 
+                                    srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
+                                    type="image/webp" 
+                                />
+                                <img 
+                                    src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
+                                    alt={this.state.item.name}
+                                    title={this.state.item.name}
+                                    style={{ height: 'auto', width: '100%', paddingTop: 20 }}
+                                />
+                            </picture>
+                            
+                            <Typography variant="h5" component="h1" style={{ textAlign: 'center' }}>{this.state.item.name}</Typography>
+                        </Grid>
+                        <Grid item xs={12} style={{ position: 'relative' }}>
+                            <AppBar position="static" style={{ backgroundColor: '#fff', color: '#000', zIndex: 0 }} elevation={0}>
+                                <Tabs aria-label="simple tabs example" className="itemTabs" value={this.state.itemTab} onChange={this.changeTab.bind(this)} style={{ justifyContent: 'center' }}>
+                                    <Tab label="Состав" {...a11yProps(0)} disableRipple={true} />
+                                    {this.state.item.items && this.state.item.items.length == 0 ? null :
+                                        <Tab label="Пищевая ценность" {...a11yProps(1)} disableRipple={true} />
+                                    }
+                                </Tabs>
+                            </AppBar>
+                            <TabPanel value={this.state.itemTab} index={1} style={{ width: '100%', marginTop: 10, marginBottom: 15, minHeight: '30vh' }}>
+                                <div style={{ maxHeight: '30vh', height: '100%', overflow: 'auto' }} className={this.state.item.items && this.state.item.items.length == 1 ? 'MainItemPopover tab MainItemPopoverOne' : 'MainItemPopover tab MainItemPopoverLot'}>
+                                    <table>
+                                        <tbody>
+                                            
+                                            { this.state.item.info_weight.length > 0 ?
+                                                <tr>
+                                                    <td><Typography variant="h5" className="OtherMiniPopover" component="span">Вес: {this.state.item.info_weight}</Typography></td>
+                                                </tr>
+                                                    :
+                                                null
+                                            }
+                                            
+                                            
+                                            <tr>
+                                                <td><Typography variant="h5" className="OtherMiniPopover" component="span">Пищевая ценность на 100 г</Typography></td>
+                                            </tr>
+                                            {this.state.item.items && this.state.item.items.map((item, key) => 
+                                                <tr key={key}>
+                                                    <td>
+                                                        <div className="NamePopover">
+                                                            <Typography variant="h5" component="span">{item.name}</Typography>
+                                                        </div>
+                                                        <div className="OtherPopover">
+                                                            <Typography variant="h5" component="span">Белки:</Typography>
+                                                            <Typography variant="h5" component="span">{item.protein} г</Typography>
+                                                        </div>
+                                                        <div className="OtherPopover">
+                                                            <Typography variant="h5" component="span">Жиры:</Typography>
+                                                            <Typography variant="h5" component="span">{item.fat} г</Typography>
+                                                        </div>
+                                                        <div className="OtherPopover">
+                                                            <Typography variant="h5" component="span">Углеводы:</Typography>
+                                                            <Typography variant="h5" component="span">{item.carbohydrates} г</Typography>
+                                                        </div>
+                                                        <div className="OtherPopover">
+                                                            <Typography variant="h5" component="span">Энерг. ценность:</Typography>
+                                                            <Typography variant="h5" component="span">{item.kkal} ккал</Typography>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            )}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </TabPanel>
+                            <TabPanel value={this.state.itemTab} index={0} style={{ marginTop: 10, marginBottom: 15, minHeight: '30vh' }}>
+                                { this.state.item.items && this.state.item.items.length > 1 ?
+                                    <div style={{ maxHeight: '30vh', height: '100%', overflowY: 'auto', overflowX: 'hidden', position: 'relative' }}>
+                                        {this.state.item.items && this.state.item.items.map((item, key) =>
+                                            <div key={key} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', margin: '10px 0px' }}>
+                                                <picture style={{ height: 'auto', width: 70, display: 'table' }}>
+                                                    <source 
+                                                        srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_new+"300х200.webp?"+item.img_new_update} 
+                                                        type="image/webp" 
+                                                    />
+                                                    <img 
+                                                        src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"300х200.jpg?"+item.img_new_update} 
+                                                        alt={item.name}
+                                                        title={item.name}
+                                                        style={{ height: 'auto', width: '100%' }}
+                                                    />
+                                                </picture>
+                                                <div className="itemMiniText" style={{ overflow: 'hidden', flexWrap: 'wrap', paddingRight: 15 }}>
+                                                    <Typography variant="h5" component="span" className="dopItemName" style={{ width: '100%' }}>{item.name}</Typography>
+                                                    <Typography variant="h5" component="span" className="ItemDesc" style={{ width: '100%', wordWrap: 'normal' }}>{item.tmp_desc}</Typography>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                        :
+                                    <div style={{ maxHeight: '30vh', height: '100%', overflow: 'auto' }}>
+                                        <Typography gutterBottom variant="h5" component="span" className="ItemDesc">{this.state.item.tmp_desc}</Typography>    
+                                    </div>
+                                }
+                            </TabPanel>
+                            
+                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                <div className="newBTN" onClick={this.add.bind(this)}>
+                                    <Typography variant="h5" component="span" className="ItemPriceValue" style={{ paddingLeft: 5 }}>{ parseInt(this.state.count) == 0 ? parseInt(this.state.item.price) : parseInt(this.state.item.price) * parseInt(this.state.count) }</Typography>
+                                    <Ruble viewBox="0 0 600 300" width="20" />
+                                     
+                                    <ShoppingCartOutlinedIcon color='inherit'  />
+                                </div>
+                                
+                                {false && this.state.count == 0 ?
+                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
+                                        <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={this.add.bind(this)}>
+                                            <ShoppingCartOutlinedIcon color='inherit'  />
+                                        </Button>
+                                    </ButtonGroup>
+                                        :
+                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder count" style={{ border: 'none' }}>
+                                        <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this)}>
+                                            <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
+                                        </Button>
+                                        <Button variant="contained" className="BtnCardMain" >
+                                            <Typography component="span" className="CardCountItem">{this.state.count}</Typography>
+                                        </Button>
+                                        <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this)}> 
+                                            <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
+                                        </Button>
+                                    </ButtonGroup>
+                                }
+                            </div>
+                        </Grid>
+                    </Grid>
+                </Hidden>
+            </div>
+        )
+    }
+}
