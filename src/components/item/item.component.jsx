@@ -858,116 +858,17 @@ export class Item2 extends React.Component {
                                 />
                             </picture>
                         </Grid>
-                        <Grid item style={{ width: '29%', border: '1px solid red', marginTop: '2%', marginBottom: '2%' }}>
+                        <Grid item style={{ width: '29%', border: '1px solid red', marginTop: '2%', marginBottom: '2%', paddingTop: '8%' }}>
                             <Typography variant="h5" component="h1">{this.state.item.name}</Typography>
-                            <Typography variant="h5" className="OtherMiniPopover" component="span">{this.state.item.info_weight}</Typography>
+                            <Typography variant="h5" className="OtherMiniPopover" component="span" style={{ paddingTop: '2%', paddingBottom: '2%' }}>{this.state.item.info_weight}</Typography>
                             
-                            <AppBar position="static" style={{ backgroundColor: '#fff', color: '#000', zIndex: 0, paddingTop: 10 }} elevation={0}>
-                                <Tabs aria-label="simple tabs example" className="itemTabs" value={this.state.itemTab} onChange={this.changeTab.bind(this)} style={{ justifyContent: 'center' }}>
-                                    {this.state.item.items && this.state.item.items.length == 0 && this.state.item.tmp_desc.length == 0 ? null :
-                                        <Tab label="Состав" {...a11yProps(0)} disableRipple={true} />
-                                    }
-                                    {this.state.item.items && this.state.item.items.length == 0 ? null :
-                                        <Tab label="Пищевая ценность" {...a11yProps(1)} disableRipple={true} />
-                                    }
-                                </Tabs>
-                            </AppBar>
-                            <TabPanel value={this.state.itemTab} index={1} style={{ width: '100%', marginTop: 10, marginBottom: 15 }}>
-                                <div style={{ maxHeight: 250, overflow: 'auto' }} className={this.state.item.items && this.state.item.items.length == 1 ? 'MainItemPopover tab MainItemPopoverOne' : 'MainItemPopover tab MainItemPopoverLot'}>
-                                    <table>
-                                        <tbody>
-                                            
-                                            <tr>
-                                                <td><Typography variant="h5" className="OtherMiniPopover" component="span">Пищевая ценность на 100 г</Typography></td>
-                                            </tr>
-                                            {this.state.item.items && this.state.item.items.map((item, key) => 
-                                                <tr key={key}>
-                                                    <td>
-                                                        <div className="NamePopover">
-                                                            <Typography variant="h5" component="span">{item.name}</Typography>
-                                                        </div>
-                                                        <div className="OtherPopover">
-                                                            <Typography variant="h5" component="span">Белки:</Typography>
-                                                            <Typography variant="h5" component="span">{item.protein} г</Typography>
-                                                        </div>
-                                                        <div className="OtherPopover">
-                                                            <Typography variant="h5" component="span">Жиры:</Typography>
-                                                            <Typography variant="h5" component="span">{item.fat} г</Typography>
-                                                        </div>
-                                                        <div className="OtherPopover">
-                                                            <Typography variant="h5" component="span">Углеводы:</Typography>
-                                                            <Typography variant="h5" component="span">{item.carbohydrates} г</Typography>
-                                                        </div>
-                                                        <div className="OtherPopover">
-                                                            <Typography variant="h5" component="span">Энерг. ценность:</Typography>
-                                                            <Typography variant="h5" component="span">{item.kkal} ккал</Typography>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            )}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </TabPanel>
-                            <TabPanel value={this.state.itemTab} index={0} style={{ marginTop: 10, marginBottom: 15 }}>
-                                { this.state.item.items && this.state.item.items.length > 1 ?
-                                    <div style={{ maxHeight: 300, overflowY: 'auto', overflowX: 'hidden' }}>
-                                        {this.state.item.items && this.state.item.items.map((item, key) =>
-                                            <div key={key} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', position: 'relative' }}>
-                                                <picture style={{ height: 'auto', width: 100, display: 'table' }}>
-                                                    <source 
-                                                        srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_new+"300х200.webp?"+item.img_new_update} 
-                                                        type="image/webp" 
-                                                    />
-                                                    <img 
-                                                        src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"300х200.jpg?"+item.img_new_update} 
-                                                        alt={item.name}
-                                                        title={item.name}
-                                                        style={{ height: 'auto', width: 65 }}
-                                                    />
-                                                </picture>
-                                                <div className="itemMiniText">
-                                                    <Typography variant="h5" component="span" className="dopItemName">{item.name}</Typography>
-                                                    <Typography variant="h5" component="span" className="ItemDesc">{item.tmp_desc}</Typography>
-                                                </div>
-                                            </div>
-                                        )}
-                                    </div>
-                                        :
-                                    <Typography gutterBottom variant="h5" component="span" className="ItemDesc">{this.state.item.tmp_desc}</Typography>
-                                }
-                            </TabPanel>
-                            
-                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', position: 'absolute', bottom: -30, width: '65%' }}>
-                                
-                                <div className="newBTN" onClick={this.add.bind(this)}>
-                                    <Typography variant="h5" component="span" className="ItemPriceValue" style={{ paddingLeft: 5, paddingBottom: 2 }}>{ parseInt(this.state.count) == 0 ? parseInt(this.state.item.price) : parseInt(this.state.item.price) * parseInt(this.state.count) }</Typography>
-                                    <Ruble viewBox="0 0 600 300" width="20" />
-                                     
-                                    <ShoppingCartOutlinedIcon color='inherit'  />
-                                </div>
-                                
-                                { false && this.state.count == 0 ?
-                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder fohover">
-                                        <Button variant="contained" className="BtnCardMain CardInCardItem NONHOVERED" onClick={this.add.bind(this)}>
-                                            <ShoppingCartOutlinedIcon color='inherit'  />
-                                        </Button>
-                                        <Button variant="contained" className="BtnCardMain CardInCardItem HOVERED" onClick={this.add.bind(this)}>В корзину</Button>
-                                    </ButtonGroup>
-                                        :
-                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder count" style={{ border: 'none' }}>
-                                        <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this)}>
-                                            <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
-                                        </Button>
-                                        <Button variant="contained" className="BtnCardMain" >
-                                            <Typography component="span" className="CardCountItem" style={{ fontSize: '1.2rem' }}>{this.state.count}</Typography>
-                                        </Button>
-                                        <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this)}> 
-                                            <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
-                                        </Button>
-                                    </ButtonGroup>
-                                }
+
+                            <div style={{ width: '80%', height: 80, border: '1px solid #e5e5e5', borderRadius: 15 }}>
+
                             </div>
+
+
+                            
                         </Grid>
                     </Grid>
                 </Box>
