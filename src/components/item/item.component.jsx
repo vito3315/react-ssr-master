@@ -863,9 +863,11 @@ export class Item2 extends React.Component {
                             <Typography variant="h5" className="OtherMiniPopover" component="span" style={{ paddingTop: '4%', paddingBottom: '4%' }}>{this.state.item.info_weight}</Typography>
                             
 
-                            <div style={{ width: '80%', height: 40, border: '1px solid #e5e5e5', borderRadius: 15 }}>
+                            <div style={{ width: '80%', height: 40, border: '1px solid #e5e5e5', borderRadius: 15, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                                 <Typography variant="h5" component="span">10 роллов</Typography>
+                                <div style={{ height: '100%', borderLeft: '1px solid #e5e5e5' }} />
                                 <Typography variant="h5" component="span">80 шт.</Typography>
+                                <div style={{ height: '100%', borderLeft: '1px solid #e5e5e5' }} />
                                 <Typography variant="h5" component="span">5 999 г</Typography>
                             </div>
 
