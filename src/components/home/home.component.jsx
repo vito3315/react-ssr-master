@@ -1222,8 +1222,8 @@ export class Home extends React.Component {
                         <>
                             <Hidden only={['xs', 'lg', 'xl']}>
                                 <Dialog maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC" open={this.state.openModalPC}>
-                                    <IconButton aria-label="close" style={{ position: 'absolute', top: -63, left: -119, zIndex: 1500 }} onClick={this.handleClosePC.bind(this)}>
-                                        <FontAwesomeIcon icon={faTimes} style={{ width: '10%', height: 'auto', color: '#fff' }} />
+                                    <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -63, left: -119, zIndex: 1500 }} onClick={this.handleClosePC.bind(this)}>
+                                        <FontAwesomeIcon icon={faTimes} style={{ width: '100%', height: 'auto', color: '#fff' }} />
                                     </IconButton>
                                     
                                     <MuiDialogContent className="modalActiiContent">
