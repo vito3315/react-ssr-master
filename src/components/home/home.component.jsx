@@ -1220,7 +1220,7 @@ export class Home extends React.Component {
                     {this.state.openItem ?
 
                         <>
-                            <Hidden xlUp>
+                            <Hidden lgUp>
                                 <Dialog maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC" open={this.state.openModalPC}>
                                     <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -67, left: 16, zIndex: 1500, width: '6%' }} onClick={this.handleClosePC.bind(this)}>
                                         <FontAwesomeIcon icon={faTimes} style={{ width: '100%', height: 'auto', color: '#fff' }} />
