@@ -849,17 +849,17 @@ export class Item2 extends React.Component {
                         <Grid item style={{ width: '59%', marginLeft: '4%', marginRight: '4%', border: '1px solid red', marginTop: '2%', marginBottom: '2%' }}>
                             <picture>
                                 <source srcset={`
-                                    https://storage.yandexcloud.net/site-img/${img_name}138х138.jpeg 138w, 
-                                    https://storage.yandexcloud.net/site-img/${img_name}146х146.jpeg 146w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}183х183.jpeg 183w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}233х233.jpeg 233w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}292х292.jpeg 292w
-                                    https://storage.yandexcloud.net/site-img/${img_name}366х366.jpeg 366w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}584х584.jpeg 584w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}760х760.jpeg 760w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}1875х1875.jpeg 1875w`} 
+                                    https://storage.yandexcloud.net/site-img/${img_name}138х138.jpg 138w, 
+                                    https://storage.yandexcloud.net/site-img/${img_name}146х146.jpg 146w,
+                                    https://storage.yandexcloud.net/site-img/${img_name}183х183.jpg 183w,
+                                    https://storage.yandexcloud.net/site-img/${img_name}233х233.jpg 233w,
+                                    https://storage.yandexcloud.net/site-img/${img_name}292х292.jpg 292w
+                                    https://storage.yandexcloud.net/site-img/${img_name}366х366.jpg 366w,
+                                    https://storage.yandexcloud.net/site-img/${img_name}584х584.jpg 584w,
+                                    https://storage.yandexcloud.net/site-img/${img_name}760х760.jpg 760w,
+                                    https://storage.yandexcloud.net/site-img/${img_name}1875х1875.jpg 1875w`} 
                                     sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
-                                <img alt={this.state.item.name} title={this.state.item.name} class="img" src={`https://storage.yandexcloud.net/site-img/${img_name}138х138.jpeg`} />
+                                <img alt={this.state.item.name} title={this.state.item.name} class="img" src={`https://storage.yandexcloud.net/site-img/${img_name}138х138.jpg`} />
                             </picture>
                         </Grid>
                         <Grid item style={{ width: '29%', border: '1px solid red', marginTop: '2%', marginBottom: '2%', paddingTop: '8%' }}>
