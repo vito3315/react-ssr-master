@@ -836,6 +836,7 @@ export class Item2 extends React.Component {
     
     render() {
         const img_name = this.state.item.img_app.length > 0 ? this.state.item.img_app : this.state.item.img_new;
+        const img_type = this.state.item.img_app.length > 0 ? 'new' : 'old';
 
         return (
             <>
@@ -847,20 +848,35 @@ export class Item2 extends React.Component {
                 <Box component="div" className="pcItem" >
                     <Grid container className="MainItem mainContainer" style={{  }}>
                         <Grid item style={{ width: '59%', marginLeft: '4%', marginRight: '4%', border: '1px solid red', marginTop: '2%', marginBottom: '2%' }}>
-                            <picture>
-                                <source srcset={`
-                                    https://storage.yandexcloud.net/site-img/${img_name}276х276.jpg 138w, 
-                                    https://storage.yandexcloud.net/site-img/${img_name}292х292.jpg 146w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}366х366.jpg 183w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}466х466.jpg 233w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}585х585.jpg 292w
-                                    https://storage.yandexcloud.net/site-img/${img_name}732х732.jpg 366w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}1168х1168.jpg 584w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}1420х1420.jpg 760w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}2000х2000.jpg 1875w`} 
-                                    sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
-                                <img alt={this.state.item.name} title={this.state.item.name} class="img" src={`https://storage.yandexcloud.net/site-img/${img_name}276х276.jpg`} />
-                            </picture>
+                            {img_type == 'old' ?
+                                <picture>
+                                    <source 
+                                        srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
+                                        type="image/webp" 
+                                    />
+                                    <img 
+                                        src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
+                                        alt={this.state.item.name}
+                                        title={this.state.item.name}
+                                        style={{ minHeight: 150 }}
+                                    />
+                                </picture>
+                                    :
+                                <picture>
+                                    <source srcset={`
+                                        https://storage.yandexcloud.net/site-img/${img_name}276х276.jpg 138w, 
+                                        https://storage.yandexcloud.net/site-img/${img_name}292х292.jpg 146w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}366х366.jpg 183w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}466х466.jpg 233w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}585х585.jpg 292w
+                                        https://storage.yandexcloud.net/site-img/${img_name}732х732.jpg 366w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}1168х1168.jpg 584w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}1420х1420.jpg 760w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}2000х2000.jpg 1875w`} 
+                                        sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
+                                    <img alt={this.state.item.name} title={this.state.item.name} class="img" src={`https://storage.yandexcloud.net/site-img/${img_name}276х276.jpg`} />
+                                </picture>
+                            }
                         </Grid>
                         <Grid item style={{ width: '29%', border: '1px solid red', marginTop: '2%', marginBottom: '2%', paddingTop: '8%' }}>
                             <Typography variant="h5" component="h1">{this.state.item.name}</Typography>
