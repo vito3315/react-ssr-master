@@ -835,6 +835,8 @@ export class Item2 extends React.Component {
     }
     
     render() {
+        const img_name = this.state.item.img_app.length > 0 ? this.state.item.img_app : this.state.item.img_new;
+
         return (
             <>
                 <Helmet>
@@ -846,16 +848,18 @@ export class Item2 extends React.Component {
                     <Grid container className="MainItem mainContainer" style={{  }}>
                         <Grid item style={{ width: '59%', marginLeft: '4%', marginRight: '4%', border: '1px solid red', marginTop: '2%', marginBottom: '2%' }}>
                             <picture>
-                                <source 
-                                    srcSet={"https://storage.yandexcloud.net/site-img/"+ (this.state.item.img_app.length > 0 ? this.state.item.img_app+"600х600.webp?" : this.state.item.img_new+"600х400.webp?") + this.state.item.img_new_update} 
-                                    type="image/webp" 
-                                />
-                                <img 
-                                    src={"https://storage.yandexcloud.net/site-img/"+ (this.state.item.img_app.length > 0 ? this.state.item.img_app+"600х600.jpg?" : this.state.item.img_new+"600х400.jpg?") +this.state.item.img_new_update} 
-                                    alt={this.state.item.name}
-                                    title={this.state.item.name}
-                                    style={{ minHeight: 150 }}
-                                />
+                                <source srcset="
+                                    https://storage.yandexcloud.net/site-img/{$img_name}_138x138.jpeg 138w,
+                                    https://storage.yandexcloud.net/site-img/{$img_name}_146x146.jpeg 146w,
+                                    https://storage.yandexcloud.net/site-img/{$img_name}_183x183.jpeg 183w,
+                                    https://storage.yandexcloud.net/site-img/{$img_name}_233x233.jpeg 233w,
+                                    https://storage.yandexcloud.net/site-img/{$img_name}_292x292.jpeg 292w
+                                    https://storage.yandexcloud.net/site-img/{$img_name}_366x366.jpeg 366w,
+                                    https://storage.yandexcloud.net/site-img/{$img_name}_584x584.jpeg 584w,
+                                    https://storage.yandexcloud.net/site-img/{$img_name}_760x760.jpeg 760w,
+                                    https://storage.yandexcloud.net/site-img/{$img_name}_1875x1875.jpeg 1875w" 
+                                    sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
+                                <img alt={this.state.item.name} title={this.state.item.name} class="img" src="https://storage.yandexcloud.net/site-img/{$img_name}_138x138.jpeg" />
                             </picture>
                         </Grid>
                         <Grid item style={{ width: '29%', border: '1px solid red', marginTop: '2%', marginBottom: '2%', paddingTop: '8%' }}>
