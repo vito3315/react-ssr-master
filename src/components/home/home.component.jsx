@@ -326,7 +326,7 @@ class CardItem extends React.Component {
                                         https://storage.yandexcloud.net/site-img/${img_name}1420х1420.jpg 760w,
                                         https://storage.yandexcloud.net/site-img/${img_name}2000х2000.jpg 1875w`} 
                                         sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
-                                    <img alt={this.state.item.name} title={this.state.item.name} class="img" src={`https://storage.yandexcloud.net/site-img/${img_name}276х276.jpg`} />
+                                    <img alt={this.state.item.name} title={this.state.item.name} style={{ maxHeight: 250 }} src={`https://storage.yandexcloud.net/site-img/${img_name}276х276.jpg`} />
                                 </picture>
                             }
                         </LazyLoad>
