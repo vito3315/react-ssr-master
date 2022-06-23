@@ -1246,7 +1246,7 @@ export class Home extends React.Component {
                                         <FontAwesomeIcon icon={faTimes} style={{ width: '100%', height: 'auto', color: '#fff' }} />
                                     </IconButton>
                                     
-                                    <MuiDialogContent className="modalActiiContentNew">
+                                    <MuiDialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
                                         <Item2 itemId={this.state.openItem.id} item={this.state.openItem} />
                                     </MuiDialogContent>
                                 </Dialog>
@@ -1258,7 +1258,7 @@ export class Home extends React.Component {
                                         <FontAwesomeIcon icon={faTimes} style={{ width: '100%', height: 'auto', color: '#fff' }} />
                                     </IconButton>
                                     
-                                    <MuiDialogContent className="modalActiiContentNew">
+                                    <MuiDialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
                                         <Item2 itemId={this.state.openItem.id} item={this.state.openItem} />
                                     </MuiDialogContent>
                                 </Dialog>
