@@ -66,6 +66,7 @@ $colorMain: #CC0033;
         justify-content: flex-end;
     }
     & img{
+        object-fit: none;
         width: 70%;
         height: auto;
     }
