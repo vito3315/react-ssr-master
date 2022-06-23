@@ -880,7 +880,7 @@ export class Item2 extends React.Component {
                                 </picture>
                             }
                         </Grid>
-                        <Grid item style={{ width: '29%', border: '1px solid red', marginTop: '2%', marginBottom: '2%', paddingTop: '8%' }}>
+                        <Grid item style={{ width: '29%', border: '1px solid red', marginTop: '2%', marginBottom: '2%', justifyСontent: 'end' }}>
                             <Typography variant="h5" component="h1">{this.state.item.name}</Typography>
                             
                             
@@ -900,8 +900,8 @@ export class Item2 extends React.Component {
 
                             <Typography variant="h5" component="span" style={{ marginBottom: '4%' }}>{desc}</Typography>
                             
-                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '90%', height: 50, borderRadius: 30, border: '1px solid #F9BC23' }}>
-                                <Button variant="contained" className="" onClick={this.add.bind(this)}>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)} Р</Button>
+                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ marginBottom: '40%' }}>
+                                <Button variant="contained" style={{ width: '90%', height: 50, borderRadius: 30, border: '1px solid #F9BC23' }} onClick={this.add.bind(this)}>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)} Р</Button>
                             </ButtonGroup>
 
                         </Grid>
