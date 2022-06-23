@@ -67,6 +67,7 @@ $colorMain: #CC0033;
     }
     & img{
         object-fit: none;
+        image-rendering: auto;
         width: 70%;
         height: auto;
     }

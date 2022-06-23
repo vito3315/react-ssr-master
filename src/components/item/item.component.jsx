@@ -881,12 +881,19 @@ export class Item2 extends React.Component {
                         <Grid item style={{ width: '29%', border: '1px solid red', marginTop: '2%', marginBottom: '2%', paddingTop: '8%' }}>
                             <Typography variant="h5" component="h1">{this.state.item.name}</Typography>
                             
+                            
                             <div style={{ width: '90%', height: 40, border: '1px solid #e5e5e5', borderRadius: 15, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginTop: '4%', marginBottom: '4%' }}>
-                                <Typography variant="h5" component="span">10 роллов</Typography>
+                                { parseInt( this.state.item.cat_id ) == 4 ?
+                                    <>
+                                        <Typography variant="h5" component="span">{this.state.item.count_part_new}</Typography>
+                                        <div style={{ height: '100%', borderLeft: '1px solid #e5e5e5' }} />
+                                    </>
+                                        :
+                                    null
+                                }
+                                <Typography variant="h5" component="span">{ parseInt( this.state.item.cat_id ) == 14 ? this.state.item.size_pizza : this.state.item.count_part }</Typography>
                                 <div style={{ height: '100%', borderLeft: '1px solid #e5e5e5' }} />
-                                <Typography variant="h5" component="span">80 шт.</Typography>
-                                <div style={{ height: '100%', borderLeft: '1px solid #e5e5e5' }} />
-                                <Typography variant="h5" component="span">5 999 г</Typography>
+                                <Typography variant="h5" component="span">{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight)} г</Typography>
                             </div>
 
 
