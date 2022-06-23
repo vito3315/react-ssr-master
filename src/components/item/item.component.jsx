@@ -838,6 +838,8 @@ export class Item2 extends React.Component {
         const img_name = this.state.item.img_app.length > 0 ? this.state.item.img_app : this.state.item.img_new;
         const img_type = this.state.item.img_app.length > 0 ? 'new' : 'old';
 
+        const desc = this.state.item.marc_desc_full.length > 0 ? this.state.item.marc_desc_full : this.state.item.tmp_desc;
+
         return (
             <>
                 <Helmet>
@@ -882,7 +884,7 @@ export class Item2 extends React.Component {
                             <Typography variant="h5" component="h1">{this.state.item.name}</Typography>
                             
                             
-                            <div style={{ width: '90%', height: 40, border: '1px solid #e5e5e5', borderRadius: 15, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginTop: '4%', marginBottom: '4%' }}>
+                            <div style={{ width: parseInt( this.state.item.cat_id ) == 4 ? '90%' : '50%', height: 40, border: '1px solid #e5e5e5', borderRadius: 15, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginTop: '4%', marginBottom: '4%' }}>
                                 { parseInt( this.state.item.cat_id ) == 4 ?
                                     <>
                                         <Typography variant="h5" component="span">{this.state.item.count_part_new}</Typography>
@@ -891,13 +893,20 @@ export class Item2 extends React.Component {
                                         :
                                     null
                                 }
-                                <Typography variant="h5" component="span">{ parseInt( this.state.item.cat_id ) == 14 ? this.state.item.size_pizza : this.state.item.count_part }</Typography>
+                                <Typography variant="h5" component="span">{ parseInt( this.state.item.cat_id ) == 14 ? this.state.item.size_pizza + ' см.' : this.state.item.count_part + ' шт.' }</Typography>
                                 <div style={{ height: '100%', borderLeft: '1px solid #e5e5e5' }} />
                                 <Typography variant="h5" component="span">{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight)} г</Typography>
                             </div>
 
-
+                            <Typography variant="h5" component="span" style={{ marginBottom: '4%' }}>{desc}</Typography>
                             
+                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder fohover">
+                                <Button variant="contained" className="BtnCardMain CardInCardItem NONHOVERED" onClick={this.add.bind(this)}>
+                                    <ShoppingCartOutlinedIcon color='inherit'  />
+                                </Button>
+                                <Button variant="contained" className="BtnCardMain CardInCardItem HOVERED" onClick={this.add.bind(this)}>В корзину</Button>
+                            </ButtonGroup>
+
                         </Grid>
                     </Grid>
                 </Box>
