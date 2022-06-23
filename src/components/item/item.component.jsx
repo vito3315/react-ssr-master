@@ -904,10 +904,18 @@ export class Item2 extends React.Component {
                                 <Typography variant="h5" component="span" className='ModalItemOther'>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight)} г</Typography>
                             </div>
 
+                            { parseInt( this.state.item.cat_id ) == 4 ?
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ marginBottom: '4%' }}>
+                                    <Button variant="contained" className='ModalItemButtonCartOther' style={{ width: '90%', height: 40, borderRadius: 30, border: '1px solid #F9BC23', backgroundColor: '#fff' }}>Состав сета</Button>
+                                </ButtonGroup>
+                                    :
+                                null
+                            }
+
                             <Typography variant="h5" component="span" style={{ marginBottom: '4%' }} className='ModalItemDesc'>{desc}</Typography>
                             
                             <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ marginBottom: '40%' }}>
-                                <Button variant="contained" className='ModalItemButtonCart' style={{ width: '90%', height: 50, borderRadius: 30, border: '1px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.add.bind(this)}>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)} Р</Button>
+                                <Button variant="contained" className='ModalItemButtonCart' style={{ width: '90%', height: 60, borderRadius: 30, border: '2px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.add.bind(this)}>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)} Р</Button>
                             </ButtonGroup>
 
                         </Grid>

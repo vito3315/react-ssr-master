@@ -224,7 +224,7 @@ $colorMain: #CC0033;
 }
 .NewModal{
     & .ModalItemTitle{
-        font-family: $Robotobold!important;
+        font-family: $Roboto!important;
         font-weight: bold!important;
         color: #525252!important;
         font-size: 3rem!important;
@@ -245,6 +245,14 @@ $colorMain: #CC0033;
         font-family: $Roboto!important;
         font-weight: 400!important;
         color: #525252!important;
-        font-size: 1.7rem!important;
+        font-size: 1.4rem!important;
+        text-transform: initial!important;
+    }
+    & .ModalItemButtonCartOther{
+        font-family: $Roboto!important;
+        font-weight: 100!important;
+        color: #525252!important;
+        font-size: 1.2rem!important;
+        text-transform: initial!important;
     }
 }
