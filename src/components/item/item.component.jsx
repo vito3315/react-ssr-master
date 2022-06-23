@@ -847,7 +847,7 @@ export class Item2 extends React.Component {
                     <meta name="description" content={this.state.description} />
                 </Helmet>
                 
-                <Box component="div" className="pcItem NewModal" >
+                <Box component="div" className="pcItem" >
                     <Grid container className="MainItem mainContainer" style={{  }}>
                         <Grid item style={{ width: '59%', marginLeft: '4%', marginRight: '4%', marginTop: '2%', marginBottom: '2%' }}>
                             {img_type == 'old' ?
@@ -907,7 +907,7 @@ export class Item2 extends React.Component {
                             <Typography variant="h5" component="span" style={{ marginBottom: '4%' }} className='ModalItemDesc'>{desc}</Typography>
                             
                             <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ marginBottom: '40%' }}>
-                                <Button variant="contained" style={{ width: '90%', height: 50, borderRadius: 30, border: '1px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.add.bind(this)}>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)} Р</Button>
+                                <Button variant="contained" className='ModalItemButtonCart' style={{ width: '90%', height: 50, borderRadius: 30, border: '1px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.add.bind(this)}>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)} Р</Button>
                             </ButtonGroup>
 
                         </Grid>

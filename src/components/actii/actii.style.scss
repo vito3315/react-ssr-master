@@ -101,7 +101,7 @@ $Futuris: 'FuturaFuturisC Bold';
     }
     & .modalActiiContent{
         padding-top: 0!important;
-        & span:not(.dopItemName):not(.ItemDesc), p:not(.dopItemName):not(.ItemDesc), b:not(.dopItemName):not(.ItemDesc){
+        & span:not(.dopItemName):not(.ItemDesc):not(.ModalItemOther), p:not(.dopItemName):not(.ItemDesc), b:not(.dopItemName):not(.ItemDesc){
             @include fons(1rem, $Ubuntu);
         }
     }
@@ -115,6 +115,12 @@ $Futuris: 'FuturaFuturisC Bold';
         @include fons_new(1.6rem, $Futuris);
     }
     & .modalActiiContent{
+        padding: 0!important;
+        & span:not(.dopItemName):not(.ItemDesc):not(.ModalItemOther), p:not(.dopItemName):not(.ItemDesc), b:not(.dopItemName):not(.ItemDesc){
+            @include fons(1rem, $Ubuntu);
+        }
+    }
+    & .modalActiiContentNew{
         padding: 0!important;
         & span:not(.dopItemName):not(.ItemDesc):not(.ModalItemOther), p:not(.dopItemName):not(.ItemDesc), b:not(.dopItemName):not(.ItemDesc){
             @include fons(1rem, $Ubuntu);
