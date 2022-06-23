@@ -847,7 +847,7 @@ export class Item2 extends React.Component {
                     <meta name="description" content={this.state.description} />
                 </Helmet>
                 
-                <Box component="div" className="pcItem" >
+                <Box component="div" className="pcItem NewModal" >
                     <Grid container className="MainItem mainContainer" style={{  }}>
                         <Grid item style={{ width: '59%', marginLeft: '4%', marginRight: '4%', marginTop: '2%', marginBottom: '2%' }}>
                             {img_type == 'old' ?

@@ -122,9 +122,6 @@ $Futuris: 'FuturaFuturisC Bold';
     }
     & .modalActiiContentNew{
         padding: 0!important;
-        & span:not(.dopItemName):not(.ItemDesc):not(.ModalItemOther), p:not(.dopItemName):not(.ItemDesc), b:not(.dopItemName):not(.ItemDesc){
-            @include fons(1rem, $Ubuntu);
-        }
     }
     & .MuiDialog-paper{
         margin: 12px!important;
