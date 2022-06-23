@@ -116,7 +116,7 @@ $Futuris: 'FuturaFuturisC Bold';
     }
     & .modalActiiContent{
         padding: 0!important;
-        & span:not(.dopItemName):not(.ItemDesc), p:not(.dopItemName):not(.ItemDesc), b:not(.dopItemName):not(.ItemDesc){
+        & span:not(.dopItemName):not(.ItemDesc):not(.ModalItemOther), p:not(.dopItemName):not(.ItemDesc), b:not(.dopItemName):not(.ItemDesc){
             @include fons(1rem, $Ubuntu);
         }
     }
