@@ -880,7 +880,7 @@ export class Item2 extends React.Component {
                                 </picture>
                             }
                         </Grid>
-                        <Grid item style={{ width: '29%', marginTop: '2%', marginBottom: '2%', justifyContent: 'end' }}>
+                        <Grid item style={{ width: '29%', marginTop: '2%', marginBottom: '2%', justifyContent: 'center' }}>
                             <Typography variant="h5" component="h1" className='ModalItemTitle'>{this.state.item.name}</Typography>
                             
                             
@@ -914,7 +914,7 @@ export class Item2 extends React.Component {
 
                             <Typography variant="h5" component="span" style={{ marginBottom: '4%' }} className='ModalItemDesc'>{desc}</Typography>
                             
-                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ marginBottom: '40%' }}>
+                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{  }}>
                                 <Button variant="contained" className='ModalItemButtonCart' style={{ width: '90%', height: 60, borderRadius: 30, border: '2px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.add.bind(this)}>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)} Р</Button>
                             </ButtonGroup>
 
