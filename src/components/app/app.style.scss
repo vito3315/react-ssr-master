@@ -25,6 +25,18 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'Roboto';
+    src: 
+        local('Roboto'), 
+        local('Roboto-Regular'), 
+        url('/src/assets/fonts/Roboto.woff2') format('woff2'), 
+        url('/src/assets/fonts/Roboto.woff') format('woff'), 
+        url('/src/assets/fonts/Roboto.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 $Ubuntu: 'Ubuntu';
 $Futuris: 'FuturaFuturisC Bold';

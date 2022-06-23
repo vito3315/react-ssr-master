@@ -1,5 +1,6 @@
 $Ubuntu: 'Ubuntu';
 $Futuris: 'FuturaFuturisC Bold';
+$Roboto: 'Roboto';
 $colorMain: #CC0033;
 @mixin fons($size: 1rem, $family: $Ubuntu) {
     font-size: $size;
@@ -218,5 +219,13 @@ $colorMain: #CC0033;
 .pcItem{
     @media (max-width: 600px){
         display: none;
+    }
+}
+.NewModal{
+    & .ModalItemTitle{
+        font-family: $Roboto!important;
+        font-weight: bold!important;
+        color: #525252!important;
+        font-size: 1.6rem!important;
     }
 }
