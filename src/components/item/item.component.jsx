@@ -887,7 +887,7 @@ export class Item2 extends React.Component {
                             <div style={{ width: parseInt( this.state.item.cat_id ) == 4 ? '90%' : parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? '25%' : '50%', height: 40, border: '1px solid #e5e5e5', borderRadius: 15, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginTop: '4%', marginBottom: '4%' }}>
                                 { parseInt( this.state.item.cat_id ) == 4 ?
                                     <>
-                                        <Typography variant="h5" component="span">{this.state.item.count_part_new}</Typography>
+                                        <Typography variant="h5" component="span" className='ModalItemOther'>{this.state.item.count_part_new}</Typography>
                                         <div style={{ height: '100%', borderLeft: '1px solid #e5e5e5' }} />
                                     </>
                                         :
@@ -897,11 +897,11 @@ export class Item2 extends React.Component {
                                     null
                                         :
                                     <>
-                                        <Typography variant="h5" component="span">{ parseInt( this.state.item.cat_id ) == 14 ? this.state.item.size_pizza + ' см.' : this.state.item.count_part + ' шт.' }</Typography>
+                                        <Typography variant="h5" component="span" className='ModalItemOther'>{ parseInt( this.state.item.cat_id ) == 14 ? this.state.item.size_pizza + ' см.' : this.state.item.count_part + ' шт.' }</Typography>
                                         <div style={{ height: '100%', borderLeft: '1px solid #e5e5e5' }} />
                                     </>
                                 }
-                                <Typography variant="h5" component="span">{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight)} г</Typography>
+                                <Typography variant="h5" component="span" className='ModalItemOther'>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight)} г</Typography>
                             </div>
 
                             <Typography variant="h5" component="span" style={{ marginBottom: '4%' }}>{desc}</Typography>
