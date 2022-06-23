@@ -847,7 +847,7 @@ export class Item2 extends React.Component {
                     <meta name="description" content={this.state.description} />
                 </Helmet>
                 
-                <Box component="div" className="pcItem" >
+                <Box component="div" className="pcItem NewModal" >
                     <Grid container className="MainItem mainContainer" style={{  }}>
                         <Grid item style={{ width: '59%', marginLeft: '4%', marginRight: '4%', marginTop: '2%', marginBottom: '2%' }}>
                             {img_type == 'old' ?
@@ -881,7 +881,7 @@ export class Item2 extends React.Component {
                             }
                         </Grid>
                         <Grid item style={{ width: '29%', marginTop: '2%', marginBottom: '2%', justifyContent: 'end' }}>
-                            <Typography variant="h5" component="h1">{this.state.item.name}</Typography>
+                            <Typography variant="h5" component="h1" className='ModalItemTitle'>{this.state.item.name}</Typography>
                             
                             
                             <div style={{ width: parseInt( this.state.item.cat_id ) == 4 ? '90%' : parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? '25%' : '50%', height: 40, border: '1px solid #e5e5e5', borderRadius: 15, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginTop: '4%', marginBottom: '4%' }}>
