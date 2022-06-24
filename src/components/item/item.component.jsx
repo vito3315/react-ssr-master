@@ -887,7 +887,7 @@ export class Item2 extends React.Component {
                             <div style={{ width: parseInt( this.state.item.cat_id ) == 4 ? 230 : parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? 80 : 150, height: 40, border: '1px solid #e5e5e5', borderRadius: 15, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginTop: '4%', marginBottom: '4%' }}>
                                 { parseInt( this.state.item.cat_id ) == 4 ?
                                     <>
-                                        <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3 }}>{this.state.item.count_part_new}</Typography>
+                                        <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center' }}>{this.state.item.count_part_new}</Typography>
                                         <div style={{ height: '100%', borderLeft: '1px solid #e5e5e5' }} />
                                     </>
                                         :
@@ -897,15 +897,15 @@ export class Item2 extends React.Component {
                                     null
                                         :
                                     <>
-                                        <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: parseInt( this.state.item.cat_id ) == 4 ? 2 : 3 }}>{ parseInt( this.state.item.cat_id ) == 14 ? this.state.item.size_pizza + ' см.' : this.state.item.count_part + ' шт.' }</Typography>
+                                        <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: parseInt( this.state.item.cat_id ) == 4 ? 2 : 3, textAlign: 'center' }}>{ parseInt( this.state.item.cat_id ) == 14 ? this.state.item.size_pizza + ' см.' : this.state.item.count_part + ' шт.' }</Typography>
                                         <div style={{ height: '100%', borderLeft: '1px solid #e5e5e5' }} />
                                     </>
                                 }
-                                <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3 }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight)} г</Typography>
+                                <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight)} г</Typography>
                             </div>
 
                             { parseInt( this.state.item.cat_id ) == 4 ?
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ marginBottom: '4%' }} onClick={this.props.openSetPc.bind(this)}>
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ marginBottom: '4%' }} onClick={this.props.openSetPc.bind(this, this.state.item.items)}>
                                     <Button variant="contained" className='ModalItemButtonCartOther' style={{ width: 300, height: 40, borderRadius: 30, border: '1px solid #F9BC23', backgroundColor: '#fff' }}>Состав сета</Button>
                                 </ButtonGroup>
                                     :

@@ -1097,8 +1097,11 @@ export class Home extends React.Component {
         }
     }
     
-    openSetPc(){
-        
+    openSetPc(items){
+        this.setState({
+            openModalPCSet: true,
+            openModalPCSetItems: items
+        })
     }
 
     render() {
@@ -1284,7 +1287,7 @@ export class Home extends React.Component {
                                     </IconButton>
                                     
                                     <MuiDialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
-                                        <Item2 itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} />
+                                        <FontAwesomeIcon icon={faTimes} style={{ width: '100%', height: 'auto', color: 'red' }} />
                                     </MuiDialogContent>
                                 </Dialog>
                             </Hidden>
@@ -1296,7 +1299,7 @@ export class Home extends React.Component {
                                     </IconButton>
                                     
                                     <MuiDialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
-                                        <Item2 itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} />
+                                        <FontAwesomeIcon icon={faTimes} style={{ width: '100%', height: 'auto', color: 'red' }} />
                                     </MuiDialogContent>
                                 </Dialog>
                             </Hidden>
