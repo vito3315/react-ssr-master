@@ -622,8 +622,10 @@ export class Home extends React.Component {
             is_load: false,
             testData: [1, 2, 3, 4, 5, 6, 7, 8],
             openItem: null,
+            openItemSet: null,
             openModal: false,
             openModalPC: false,
+            openModalPCSet: false,
             banners_pc: [],
             banners_mobile: [],
             city_name: this.props.city,
@@ -964,6 +966,8 @@ export class Home extends React.Component {
                     page: data.page,
                     title: data.title,
                     description: data.description,
+
+
                 } );
             } );
         //}
@@ -1247,7 +1251,7 @@ export class Home extends React.Component {
                                     </IconButton>
                                     
                                     <MuiDialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
-                                        <Item2 itemId={this.state.openItem.id} item={this.state.openItem} />
+                                        <Item2 itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} />
                                     </MuiDialogContent>
                                 </Dialog>
                             </Hidden>
@@ -1259,7 +1263,7 @@ export class Home extends React.Component {
                                     </IconButton>
                                     
                                     <MuiDialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
-                                        <Item2 itemId={this.state.openItem.id} item={this.state.openItem} />
+                                        <Item2 itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} />
                                     </MuiDialogContent>
                                 </Dialog>
                             </Hidden>

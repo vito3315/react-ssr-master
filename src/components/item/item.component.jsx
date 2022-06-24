@@ -905,7 +905,7 @@ export class Item2 extends React.Component {
                             </div>
 
                             { parseInt( this.state.item.cat_id ) == 4 ?
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ marginBottom: '4%' }}>
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ marginBottom: '4%' }} onClick={this.props.openSetPc.bind(this)}>
                                     <Button variant="contained" className='ModalItemButtonCartOther' style={{ width: '90%', height: 40, borderRadius: 30, border: '1px solid #F9BC23', backgroundColor: '#fff' }}>Состав сета</Button>
                                 </ButtonGroup>
                                     :
