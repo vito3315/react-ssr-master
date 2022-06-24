@@ -24,6 +24,12 @@ $colorMain: #CC0033;
         //@include fons(0.8rem, $Ubuntu);
     }
 }
+.OpenItemPCSet .MuiDialog-paper{
+    overflow-y: auto !important;
+    height: 50%;
+    align-self: end;
+}
+
 .imgSVG{
     height: 30px;
     width: 20px;
