@@ -70,7 +70,7 @@ $colorMain: #CC0033;
     & img{
         object-fit: none;
         image-rendering: auto;
-        width: 70%;
+        width: 100%;
         height: auto;
     }
     & .ItemDesc{
@@ -245,7 +245,7 @@ $colorMain: #CC0033;
     }
     & .ModalItemButtonCart{
         font-family: $Roboto!important;
-        font-weight: 400!important;
+        font-weight: 500!important;
         color: #525252!important;
         font-size: 1.2rem!important;
         text-transform: initial!important;
@@ -254,7 +254,7 @@ $colorMain: #CC0033;
         font-family: $Roboto!important;
         font-weight: 100!important;
         color: #525252!important;
-        font-size: 1rem!important;
+        font-size: 1.2rem!important;
         text-transform: initial!important;
     }
 }
