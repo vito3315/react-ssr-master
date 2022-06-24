@@ -94,7 +94,7 @@ $Futuris: 'FuturaFuturisC Bold';
         }
     }
 }
-.modalActii:not(.OpenItemPC){
+.modalActii:not(.OpenItemPC):not(.OpenItemPCSet){
     & h6{
         text-align: center;
         @include fons_new(1.6rem, $Futuris);
