@@ -1336,8 +1336,45 @@ export class Home extends React.Component {
                                         <FontAwesomeIcon icon={faTimes} style={{ width: '100%', height: 'auto', color: '#fff' }} />
                                     </IconButton>
                                     
-                                    <MuiDialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
-                                        <FontAwesomeIcon icon={faTimes} style={{ width: '100%', height: 'auto', color: 'red' }} />
+                                    <MuiDialogContent className="modalActiiContentNew" style={{ display: 'flex' }}>
+                                        {this.state.openModalPCSetItems.map( (item, key) =>
+                                            <div key={key} style={{ width: '50%' }}>
+                                                <div>
+                                                    { item.img_app.length == 0 || !item.img_app ?
+                                                        <picture>
+                                                            <source 
+                                                                srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.webp?"+item.img_new_update} 
+                                                                type="image/webp" 
+                                                            />
+                                                            <img 
+                                                                src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
+                                                                alt={item.name}
+                                                                title={item.name}
+                                                                style={{ minHeight: 150 }}
+                                                            />
+                                                        </picture>
+                                                            :
+                                                        <picture>
+                                                            <source srcset={`
+                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg 138w, 
+                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_292x292.jpg 146w,
+                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_366x366.jpg 183w,
+                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_466x466.jpg 233w,
+                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_585x585.jpg 292w
+                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_732x732.jpg 366w,
+                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_1168x1168.jpg 584w,
+                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_1420x1420.jpg 760w,
+                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_2000x2000.jpg 1875w`} 
+                                                                sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
+                                                            <img alt={item.name} title={item.name} class="img" src={`https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg`} />
+                                                        </picture>
+                                                    }
+                                                </div>
+                                                <div>
+                                                    
+                                                </div>
+                                            </div>
+                                        )}
                                     </MuiDialogContent>
                                 </Dialog>
                             </Hidden>
