@@ -626,6 +626,7 @@ export class Home extends React.Component {
             openModal: false,
             openModalPC: false,
             openModalPCSet: false,
+            openModalPCSetItems: [],
             banners_pc: [],
             banners_mobile: [],
             city_name: this.props.city,
