@@ -1084,7 +1084,10 @@ export class Home extends React.Component {
         
         this.setState({
             openModalPC: false,
-            openItem: null
+            openItem: null,
+
+            openModalPCSet: false,
+            openModalPCSetItems: []
         })
     }
 
@@ -1287,7 +1290,7 @@ export class Home extends React.Component {
                                         <FontAwesomeIcon icon={faTimes} style={{ width: '100%', height: 'auto', color: '#fff' }} />
                                     </IconButton>
                                     
-                                    <MuiDialogContent className="modalActiiContentNew" style={{ display: 'flex' }}>
+                                    <MuiDialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 4%' }}>
                                         {this.state.openModalPCSetItems.map( (item, key) =>
                                             <div key={key} style={{ width: '50%' }}>
                                                 <div>
@@ -1301,7 +1304,7 @@ export class Home extends React.Component {
                                                                 src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
                                                                 alt={item.name}
                                                                 title={item.name}
-                                                                style={{ minHeight: 150 }}
+                                                                style={{ maxWidth: 280 }}
                                                             />
                                                         </picture>
                                                             :
@@ -1317,7 +1320,7 @@ export class Home extends React.Component {
                                                                 https://storage.yandexcloud.net/site-img/${item.img_app}_1420x1420.jpg 760w,
                                                                 https://storage.yandexcloud.net/site-img/${item.img_app}_2000x2000.jpg 1875w`} 
                                                                 sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
-                                                            <img alt={item.name} title={item.name} class="img" src={`https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg`} />
+                                                            <img alt={item.name} title={item.name} style={{ maxWidth: 280 }} src={`https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg`} />
                                                         </picture>
                                                     }
                                                 </div>
@@ -1336,7 +1339,7 @@ export class Home extends React.Component {
                                         <FontAwesomeIcon icon={faTimes} style={{ width: '100%', height: 'auto', color: '#fff' }} />
                                     </IconButton>
                                     
-                                    <MuiDialogContent className="modalActiiContentNew" style={{ display: 'flex' }}>
+                                    <MuiDialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 4%' }}>
                                         {this.state.openModalPCSetItems.map( (item, key) =>
                                             <div key={key} style={{ width: '50%' }}>
                                                 <div>
@@ -1350,7 +1353,7 @@ export class Home extends React.Component {
                                                                 src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
                                                                 alt={item.name}
                                                                 title={item.name}
-                                                                style={{ minHeight: 150 }}
+                                                                style={{ maxWidth: 280 }}
                                                             />
                                                         </picture>
                                                             :
@@ -1366,7 +1369,7 @@ export class Home extends React.Component {
                                                                 https://storage.yandexcloud.net/site-img/${item.img_app}_1420x1420.jpg 760w,
                                                                 https://storage.yandexcloud.net/site-img/${item.img_app}_2000x2000.jpg 1875w`} 
                                                                 sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
-                                                            <img alt={item.name} title={item.name} class="img" src={`https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg`} />
+                                                            <img alt={item.name} title={item.name} style={{ maxWidth: 280 }} src={`https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg`} />
                                                         </picture>
                                                     }
                                                 </div>
