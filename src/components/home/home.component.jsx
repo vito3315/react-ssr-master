@@ -1097,6 +1097,10 @@ export class Home extends React.Component {
         }
     }
     
+    openSetPc(){
+        
+    }
+
     render() {
         //this.props.data.page.page_h
         
@@ -1212,7 +1216,7 @@ export class Home extends React.Component {
                                                     </Hidden>
                                                     <Hidden smUp>
                                                         
-                                                            <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
+                                                        <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
                                                         
                                                     </Hidden>
                                                 </Grid>
@@ -1242,7 +1246,6 @@ export class Home extends React.Component {
                     }
                     
                     {this.state.openItem ?
-
                         <>
                             <Hidden lgUp>
                                 <Dialog maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC" open={this.state.openModalPC}>
@@ -1258,6 +1261,36 @@ export class Home extends React.Component {
                             
                             <Hidden only={['xs', 'sm', 'md']}>
                                 <Dialog maxWidth={'lg'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC" open={this.state.openModalPC}>
+                                    <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -60, left: 16, zIndex: 1500, width: '4%' }} onClick={this.handleClosePC.bind(this)}>
+                                        <FontAwesomeIcon icon={faTimes} style={{ width: '100%', height: 'auto', color: '#fff' }} />
+                                    </IconButton>
+                                    
+                                    <MuiDialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
+                                        <Item2 itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} />
+                                    </MuiDialogContent>
+                                </Dialog>
+                            </Hidden>
+                        </>
+                            :
+                        null
+                    }
+
+                    {this.state.openItem ?
+                        <>
+                            <Hidden lgUp>
+                                <Dialog maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC" open={this.state.openModalPCSet}>
+                                    <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -67, left: 16, zIndex: 1500, width: '6%' }} onClick={this.handleClosePC.bind(this)}>
+                                        <FontAwesomeIcon icon={faTimes} style={{ width: '100%', height: 'auto', color: '#fff' }} />
+                                    </IconButton>
+                                    
+                                    <MuiDialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
+                                        <Item2 itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} />
+                                    </MuiDialogContent>
+                                </Dialog>
+                            </Hidden>
+                            
+                            <Hidden only={['xs', 'sm', 'md']}>
+                                <Dialog maxWidth={'lg'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC" open={this.state.openModalPCSet}>
                                     <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -60, left: 16, zIndex: 1500, width: '4%' }} onClick={this.handleClosePC.bind(this)}>
                                         <FontAwesomeIcon icon={faTimes} style={{ width: '100%', height: 'auto', color: '#fff' }} />
                                     </IconButton>
