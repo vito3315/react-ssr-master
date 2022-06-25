@@ -260,6 +260,7 @@ $colorMain: #CC0033;
 }
 .MuiTooltip-popper{
     left: -100px!important;
+    pointer-events: auto!important;
     & > div{
         max-width: 400px!important;
         background-color: #000!important;

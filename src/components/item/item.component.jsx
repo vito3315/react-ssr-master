@@ -973,7 +973,7 @@ export class Item2 extends React.Component {
                                     <React.Fragment>
                                         <Typography style={{ textAlign: 'center', fontFamily: 'Roboto', fontSize: '1.5rem', fontWeight: 400, lineHeight: 1, paddingTop: 10, paddingBottom: 20 }}>Пищевая ценность на 100 г</Typography>
                                         
-                                        <div style={{ overflow: 'scroll' }}>
+                                        <div style={{ overflowY: 'scroll', maxHeight: 350 }}>
                                             { this.state.item.items.map( (item, key) =>
                                                 <div style={{ border: '2px solid #fff', borderRadius: 15, marginBottom: 20 }} key={key}>
                                                     <div style={{ width: '100%', display: 'flex', flexDirection: 'row', borderBottom: '2px solid #fff' }}>
