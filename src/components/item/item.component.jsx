@@ -965,7 +965,7 @@ export class Item2 extends React.Component {
                                                     <Typography>{this.state.item.name}</Typography>
                                                 </div>
                                                 <div style={{ width: '25%' }}>
-                                                    <Typography>{this.state.item.items[0].kkal}</Typography>
+                                                    <Typography>{this.state.item.kkal}</Typography>
                                                     <Typography>ккал</Typography>
                                                 </div>
                                             </div>
