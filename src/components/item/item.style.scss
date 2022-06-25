@@ -267,6 +267,7 @@ $colorMain: #CC0033;
         border-radius: 20px;
         padding: 20px;
         border: none!important;
+        z-index: 4000;
     }
 }
 .styleTooltip > div::before{
