@@ -25,6 +25,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
+import { withStyles, makeStyles } from '@material-ui/core/styles';
+import Tooltip from '@material-ui/core/Tooltip';
+
 import { initializeApp } from "firebase/app";
 import { getAnalytics, logEvent } from "firebase/analytics";
 
@@ -77,6 +80,16 @@ function IconInfoBlack() {
       </svg>
     );
 }
+
+const HtmlTooltip = withStyles((theme) => ({
+    tooltip: {
+      backgroundColor: '#f5f5f9',
+      color: 'rgba(0, 0, 0, 0.87)',
+      maxWidth: 220,
+      fontSize: theme.typography.pxToRem(12),
+      border: '1px solid #dadde9',
+    },
+  }))(Tooltip);
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -942,9 +955,21 @@ export class Item2 extends React.Component {
                                     <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight)} г</Typography>
                                 </div>
 
-                                <div style={{ width: 40, height: 40 }}>
-                                    <IconInfoWhite />
-                                </div>
+                                <HtmlTooltip
+                                    title={
+                                    <React.Fragment>
+                                        <Typography color="inherit">Tooltip with HTML</Typography>
+                                        <em>{"And here's"}</em> <b>{'some'}</b> <u>{'amazing content'}</u>.{' '}
+                                        {"It's very engaging. Right?"}
+                                    </React.Fragment>
+                                    }
+                                >
+                                    <div style={{ width: 40, height: 40 }}>
+                                        <IconInfoWhite />
+                                    </div>
+                                </HtmlTooltip>
+
+                                
                             </div>
 
                             { parseInt( this.state.item.cat_id ) == 4 ?
