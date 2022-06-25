@@ -983,19 +983,19 @@ export class Item2 extends React.Component {
                                                 </div>
                                             </div>
                                             <div style={{ width: '100%', display: 'flex', flexDirection: 'row' }}>
-                                                <div style={{ width: '50%', padding: 25, borderRight: '2px solid #fff' }}>
+                                                <div style={{ width: '50%', padding: 20, borderRight: '2px solid #fff' }}>
                                                     <Typography style={{ fontSize: '1rem', fontFamily: 'Roboto', fontWeight: 400 }}>Состав: {this.state.item.tmp_desc}</Typography>
                                                 </div>
-                                                <div style={{ width: '50%' }}>
-                                                    <div>
+                                                <div style={{ width: '50%', padding: 20 }} className='styleTooltip'>
+                                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                                                         <Typography style={{ fontSize: '1rem', fontFamily: 'Roboto', fontWeight: 400 }}>белки</Typography>
                                                         <Typography style={{ fontSize: '1rem', fontFamily: 'Roboto', fontWeight: 400 }}>{this.state.item.protein} г</Typography>
                                                     </div>
-                                                    <div>
+                                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                                                         <Typography style={{ fontSize: '1rem', fontFamily: 'Roboto', fontWeight: 400 }}>жиры</Typography>
                                                         <Typography style={{ fontSize: '1rem', fontFamily: 'Roboto', fontWeight: 400 }}>{this.state.item.fat} г</Typography>
                                                     </div>
-                                                    <div>
+                                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                                                         <Typography style={{ fontSize: '1rem', fontFamily: 'Roboto', fontWeight: 400 }}>углеводы</Typography>
                                                         <Typography style={{ fontSize: '1rem', fontFamily: 'Roboto', fontWeight: 400 }}>{this.state.item.carbohydrates} г</Typography>
                                                     </div>

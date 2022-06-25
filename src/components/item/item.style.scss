@@ -268,3 +268,10 @@ $colorMain: #CC0033;
         padding: 20px;
     }
 }
+.styleTooltip > div::before{
+    content: ''; /* Выводим линию */
+    border-bottom: 1px dashed #ccc; /* Параметры линии */
+    flex-grow: 1; /* Линия занимает всё доступное пространство */
+    order: 2; /* Выводим вторым */
+    margin: 0 5px; /* Расстояние от текста */
+}
