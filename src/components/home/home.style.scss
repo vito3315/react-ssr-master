@@ -25,10 +25,9 @@ $colorMain: #CC0033;
     }
 }
 .OpenItemPCSet .MuiDialog-paper{
-    overflow-y: auto !important;
+    overflow-y: visible;
     height: 44%;
-    align-self: end;
-    margin-bottom: 33px!important;
+    margin-top: 17%;
 }
 
 .imgSVG{
