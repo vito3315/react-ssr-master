@@ -973,16 +973,16 @@ export class Item2 extends React.Component {
                                     <React.Fragment>
                                         <Typography>Пищевая ценность на 100 г</Typography>
                                         <div>
-                                            <div style={{ width: '100%' }}>
-                                                <div style={{ width: '75%' }}>
+                                            <div style={{ width: '100%', display: 'flex', flexDirection: 'row' }}>
+                                                <div style={{ width: '75%', display: 'flex', alignItems: 'center' }}>
                                                     <Typography>{this.state.item.name}</Typography>
                                                 </div>
-                                                <div style={{ width: '25%' }}>
+                                                <div style={{ width: '25%', display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'center' }}>
                                                     <Typography>{this.state.item.kkal}</Typography>
                                                     <Typography>ккал</Typography>
                                                 </div>
                                             </div>
-                                            <div style={{ width: '100%' }}>
+                                            <div style={{ width: '100%', display: 'flex', flexDirection: 'row' }}>
                                                 <div style={{ width: '50%' }}>
                                                     <Typography>Состав: {this.state.item.tmp_desc}</Typography>
                                                 </div>
