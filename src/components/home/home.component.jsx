@@ -150,6 +150,25 @@ function Ruble(props){
     )
 }
 
+function IconClose() {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="64"
+        height="64"
+        fill="none"
+        viewBox="0 0 64 64"
+      >
+        <path
+          stroke="#fff"
+          strokeLinecap="round"
+          strokeWidth="3"
+          d="M2 2l60 60M62 2L2 62"
+        ></path>
+      </svg>
+    );
+  }
+
 const handleDragStart = (e) => e.preventDefault();
 
 function get_city(path){
@@ -1264,7 +1283,7 @@ export class Home extends React.Component {
                             <Hidden lgUp>
                                 <Dialog maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC" open={this.state.openModalPC}>
                                     <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -67, left: 16, zIndex: 1500, width: '6%' }} onClick={this.handleClosePC.bind(this)}>
-                                        <FontAwesomeIcon icon={faTimes} style={{ width: '100%', height: 'auto', color: '#fff' }} />
+                                        <IconClose />
                                     </IconButton>
                                     
                                     <MuiDialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
@@ -1276,7 +1295,7 @@ export class Home extends React.Component {
                             <Hidden only={['xs', 'sm', 'md']}>
                                 <Dialog maxWidth={'lg'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC" open={this.state.openModalPC}>
                                     <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -60, left: 16, zIndex: 1500, width: '4%' }} onClick={this.handleClosePC.bind(this)}>
-                                        <FontAwesomeIcon icon={faTimes} style={{ width: '100%', height: 'auto', color: '#fff' }} />
+                                        <IconClose />
                                     </IconButton>
                                     
                                     <MuiDialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
@@ -1294,7 +1313,7 @@ export class Home extends React.Component {
                             <Hidden lgUp>
                                 <Dialog maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePCSet.bind(this)} className="modalActii Item OpenItemPCSet" open={this.state.openModalPCSet}>
                                     <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -67, left: 16, zIndex: 2000, width: '6%' }} onClick={this.handleClosePCSet.bind(this)}>
-                                        <FontAwesomeIcon icon={faTimes} style={{ width: '100%', height: 'auto', color: '#fff' }} />
+                                        <IconClose />
                                     </IconButton>
                                     
                                     <MuiDialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 4%', alignContent: 'start' }}>
@@ -1344,7 +1363,7 @@ export class Home extends React.Component {
                             <Hidden only={['xs', 'sm', 'md']}>
                                 <Dialog maxWidth={'lg'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePCSet.bind(this)} className="modalActii Item OpenItemPCSet" open={this.state.openModalPCSet}>
                                     <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -60, left: 16, zIndex: 2000, width: '4%' }} onClick={this.handleClosePCSet.bind(this)}>
-                                        <FontAwesomeIcon icon={faTimes} style={{ width: '100%', height: 'auto', color: '#fff' }} />
+                                        <IconClose />
                                     </IconButton>
                                     
                                     <MuiDialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 4%', alignContent: 'start' }}>
