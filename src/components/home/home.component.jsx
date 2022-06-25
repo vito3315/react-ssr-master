@@ -1341,7 +1341,7 @@ export class Home extends React.Component {
                                     
                                     <MuiDialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 4%' }}>
                                         {this.state.openModalPCSetItems.map( (item, key) =>
-                                            <div key={key} style={{ width: '50%' }}>
+                                            <div key={key} style={{ width: '50%', display: 'flex', flexDirection: 'row', height: 150 }}>
                                                 <div>
                                                     { item.img_app.length == 0 || !item.img_app ?
                                                         <picture>
@@ -1353,7 +1353,7 @@ export class Home extends React.Component {
                                                                 src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
                                                                 alt={item.name}
                                                                 title={item.name}
-                                                                style={{ maxWidth: 280 }}
+                                                                style={{ width: 150, height: 150 }}
                                                             />
                                                         </picture>
                                                             :
@@ -1369,13 +1369,13 @@ export class Home extends React.Component {
                                                                 https://storage.yandexcloud.net/site-img/${item.img_app}_1420x1420.jpg 760w,
                                                                 https://storage.yandexcloud.net/site-img/${item.img_app}_2000x2000.jpg 1875w`} 
                                                                 sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
-                                                            <img alt={item.name} title={item.name} style={{ maxWidth: 280 }} src={`https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg`} />
+                                                            <img alt={item.name} title={item.name} style={{ width: 150, height: 150 }} src={`https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg`} />
                                                         </picture>
                                                     }
                                                 </div>
-                                                <div>
-                                                    <Typography variant="h5" component="span">{ item.name }</Typography>
-                                                    <Typography variant="h5" component="span">{ item.marc_desc_full.length > 0 ? item.marc_desc_full : item.marc_desc.length > 0 ? item.marc_desc : item.tmp_desc }</Typography>
+                                                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                                                    <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 500, fontSize: '1.5rem'  }}>{ item.name }</Typography>
+                                                    <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 300, fontSize: '1.2rem'  }}>{ item.marc_desc_full.length > 0 ? item.marc_desc_full : item.marc_desc.length > 0 ? item.marc_desc : item.tmp_desc }</Typography>
                                                 </div>
                                             </div>
                                         )}
