@@ -1339,9 +1339,9 @@ export class Home extends React.Component {
                                         <FontAwesomeIcon icon={faTimes} style={{ width: '100%', height: 'auto', color: '#fff' }} />
                                     </IconButton>
                                     
-                                    <MuiDialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 4%' }}>
+                                    <MuiDialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 4%', alignContent: 'start' }}>
                                         {this.state.openModalPCSetItems.map( (item, key) =>
-                                            <div key={key} style={{ width: '50%', display: 'flex', flexDirection: 'row', height: 150 }}>
+                                            <div key={key} style={{ width: '49%', display: 'flex', flexDirection: 'row', height: 150, marginRight: key == 0 || key % 2 == 0 ? '2%' : 0 }}>
                                                 <div>
                                                     { item.img_app.length == 0 || !item.img_app ?
                                                         <picture>
