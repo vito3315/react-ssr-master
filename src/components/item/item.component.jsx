@@ -958,9 +958,26 @@ export class Item2 extends React.Component {
                                 <HtmlTooltip
                                     title={
                                     <React.Fragment>
-                                        <Typography color="inherit">Tooltip with HTML</Typography>
-                                        <em>{"And here's"}</em> <b>{'some'}</b> <u>{'amazing content'}</u>.{' '}
-                                        {"It's very engaging. Right?"}
+                                        <Typography>Пищевая ценность на 100 г</Typography>
+                                        <div>
+                                            <div style={{ width: '100%' }}>
+                                                <div style={{ width: '75%' }}>
+                                                    <Typography>{this.state.item.name}</Typography>
+                                                </div>
+                                                <div style={{ width: '25%' }}>
+                                                    <Typography>{this.state.item.items[0].kkal}</Typography>
+                                                    <Typography>ккал</Typography>
+                                                </div>
+                                            </div>
+                                            <div style={{ width: '100%' }}>
+                                                <div style={{ width: '50%' }}>
+                                                    <Typography>Состав: {this.state.item.tmp_desc}</Typography>
+                                                </div>
+                                                <div style={{ width: '50%' }}>
+                                                
+                                                </div>
+                                            </div>
+                                        </div>
                                     </React.Fragment>
                                     }
                                 >
