@@ -40,6 +40,48 @@ function Ruble(props){
     )
 }
 
+function IconInfoWhite() {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="80"
+        height="80"
+        fill="none"
+        viewBox="0 0 80 80"
+      >
+        <circle cx="40" cy="40" r="39" stroke="#DADADA" strokeWidth="2"></circle>
+        <path
+          stroke="#DADADA"
+          strokeLinecap="round"
+          strokeWidth="4"
+          d="M40 34L40 62"
+        ></path>
+        <circle cx="40" cy="22.667" r="4" fill="#DADADA"></circle>
+      </svg>
+    );
+}
+
+function IconInfoBlack() {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="80"
+        height="80"
+        fill="none"
+        viewBox="0 0 80 80"
+      >
+        <circle cx="40" cy="40" r="40" fill="#000" fillOpacity="0.6"></circle>
+        <path
+          stroke="#fff"
+          strokeLinecap="round"
+          strokeWidth="4"
+          d="M40 34L40 62"
+        ></path>
+        <circle cx="40" cy="22.666" r="4" fill="#fff"></circle>
+      </svg>
+    );
+}
+
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
   
@@ -58,7 +100,7 @@ function TabPanel(props) {
         )}
       </div>
     );
-  }
+}
   
 TabPanel.propTypes = {
     children: PropTypes.node,
@@ -903,6 +945,8 @@ export class Item2 extends React.Component {
                                 }
                                 <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight)} г</Typography>
                             </div>
+
+                            <IconInfoWhite />
 
                             { parseInt( this.state.item.cat_id ) == 4 ?
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ marginBottom: '4%' }} onClick={this.props.openSetPc.bind(this, this.state.item.items)}>
