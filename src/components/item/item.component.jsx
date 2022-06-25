@@ -718,7 +718,9 @@ export class Item2 extends React.Component {
             itemLink: !this.props.item ? this.props.linkItem : '',
             title: this.props.data ? this.props.data.title : '',
             description: this.props.data ? this.props.data.description : '',
-            itemTab: 0
+            itemTab: 0,
+
+            openTooltip: false
         };
         
         if( !this.props.item ){
@@ -885,6 +887,12 @@ export class Item2 extends React.Component {
         })
     }
     
+    handleTooltip(){
+        this.setState({
+            openTooltip: !this.state.openTooltip
+        })
+    }
+
     render() {
         const img_name = this.state.item.img_app.length > 0 ? this.state.item.img_app : this.state.item.img_new;
         const img_type = this.state.item.img_app.length > 0 ? 'new' : 'old';
@@ -956,6 +964,11 @@ export class Item2 extends React.Component {
                                 </div>
 
                                 <HtmlTooltip
+                                    onClose={this.handleTooltip.bind(this)}
+                                    open={this.state.openTooltip}
+                                    disableFocusListener
+                                    disableHoverListener
+                                    disableTouchListener
                                     title={
                                     <React.Fragment>
                                         <Typography>Пищевая ценность на 100 г</Typography>
@@ -981,7 +994,7 @@ export class Item2 extends React.Component {
                                     </React.Fragment>
                                     }
                                 >
-                                    <div style={{ width: 40, height: 40 }}>
+                                    <div style={{ width: 40, height: 40 }} onClick={this.handleTooltip.bind(this)}>
                                         <IconInfoWhite />
                                     </div>
                                 </HtmlTooltip>
