@@ -1091,6 +1091,13 @@ export class Home extends React.Component {
         })
     }
 
+    handleClosePCSet(){
+        this.setState({
+            openModalPCSet: false,
+            openModalPCSetItems: []
+        })
+    }
+
     touchStart(el){
         this.startMove = el['changedTouches'][0].pageY;
     }
@@ -1285,14 +1292,14 @@ export class Home extends React.Component {
                     {this.state.openItem ?
                         <>
                             <Hidden lgUp>
-                                <Dialog maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPCSet" open={this.state.openModalPCSet}>
-                                    <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -67, left: 16, zIndex: 2000, width: '6%' }} onClick={this.handleClosePC.bind(this)}>
+                                <Dialog maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePCSet.bind(this)} className="modalActii Item OpenItemPCSet" open={this.state.openModalPCSet}>
+                                    <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -67, left: 16, zIndex: 2000, width: '6%' }} onClick={this.handleClosePCSet.bind(this)}>
                                         <FontAwesomeIcon icon={faTimes} style={{ width: '100%', height: 'auto', color: '#fff' }} />
                                     </IconButton>
                                     
                                     <MuiDialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 4%', alignContent: 'start' }}>
                                         {this.state.openModalPCSetItems.map( (item, key) =>
-                                            <div key={key} style={{ width: '49%', display: 'flex', flexDirection: 'row', height: '18vh', marginRight: key == 0 || key % 2 == 0 ? '2%' : 0 }}>
+                                            <div key={key} style={{ width: '49%', display: 'flex', flexDirection: 'row', height: '18vh', marginRight: key == 0 || key % 2 == 0 ? '2%' : 0, marginBottom: '2%' }}>
                                                 <div>
                                                     { item.img_app.length == 0 || !item.img_app ?
                                                         <picture>
@@ -1335,14 +1342,14 @@ export class Home extends React.Component {
                             </Hidden>
                             
                             <Hidden only={['xs', 'sm', 'md']}>
-                                <Dialog maxWidth={'lg'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPCSet" open={this.state.openModalPCSet}>
-                                    <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -60, left: 16, zIndex: 2000, width: '4%' }} onClick={this.handleClosePC.bind(this)}>
+                                <Dialog maxWidth={'lg'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePCSet.bind(this)} className="modalActii Item OpenItemPCSet" open={this.state.openModalPCSet}>
+                                    <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -60, left: 16, zIndex: 2000, width: '4%' }} onClick={this.handleClosePCSet.bind(this)}>
                                         <FontAwesomeIcon icon={faTimes} style={{ width: '100%', height: 'auto', color: '#fff' }} />
                                     </IconButton>
                                     
                                     <MuiDialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 4%', alignContent: 'start' }}>
                                         {this.state.openModalPCSetItems.map( (item, key) =>
-                                            <div key={key} style={{ width: '49%', display: 'flex', flexDirection: 'row', height: '18vh', marginRight: key == 0 || key % 2 == 0 ? '2%' : 0 }}>
+                                            <div key={key} style={{ width: '49%', display: 'flex', flexDirection: 'row', height: '18vh', marginRight: key == 0 || key % 2 == 0 ? '2%' : 0, marginBottom: '2%' }}>
                                                 <div>
                                                     { item.img_app.length == 0 || !item.img_app ?
                                                         <picture>
