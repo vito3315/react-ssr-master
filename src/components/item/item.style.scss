@@ -266,12 +266,13 @@ $colorMain: #CC0033;
         color: #fff!important;
         border-radius: 20px;
         padding: 20px;
+        border: none!important;
     }
 }
 .styleTooltip > div::before{
-    content: ''; /* Выводим линию */
-    border-bottom: 1px dashed #ccc; /* Параметры линии */
-    flex-grow: 1; /* Линия занимает всё доступное пространство */
-    order: 2; /* Выводим вторым */
-    margin: 0 5px; /* Расстояние от текста */
+    content: '';
+    border-bottom: 1px dashed #ccc;
+    flex-grow: 1;
+    order: 2;
+    margin: 5px 7px;
 }

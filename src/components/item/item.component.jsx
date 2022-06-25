@@ -971,7 +971,7 @@ export class Item2 extends React.Component {
                                     disableTouchListener
                                     title={
                                     <React.Fragment>
-                                        <Typography style={{ textAlign: 'center', fontFamily: 'Roboto', fontSize: '1.5rem', fontWeight: 400 }}>Пищевая ценность на 100 г</Typography>
+                                        <Typography style={{ textAlign: 'center', fontFamily: 'Roboto', fontSize: '1.5rem', fontWeight: 400, lineHeight: 1, paddingTop: 10, paddingBottom: 20 }}>Пищевая ценность на 100 г</Typography>
                                         <div style={{ border: '2px solid #fff', borderRadius: 15 }}>
                                             <div style={{ width: '100%', display: 'flex', flexDirection: 'row', borderBottom: '2px solid #fff' }}>
                                                 <div style={{ width: '75%', display: 'flex', alignItems: 'center', borderRight: '2px solid #fff', padding: '25px 10px' }}>
@@ -988,16 +988,16 @@ export class Item2 extends React.Component {
                                                 </div>
                                                 <div style={{ width: '50%', padding: 20 }} className='styleTooltip'>
                                                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                                                        <Typography style={{ fontSize: '1rem', fontFamily: 'Roboto', fontWeight: 400 }}>белки</Typography>
-                                                        <Typography style={{ fontSize: '1rem', fontFamily: 'Roboto', fontWeight: 400 }}>{this.state.item.protein} г</Typography>
+                                                        <Typography style={{ fontSize: '1rem', fontFamily: 'Roboto', fontWeight: 400, order: 1 }}>белки</Typography>
+                                                        <Typography style={{ fontSize: '1rem', fontFamily: 'Roboto', fontWeight: 400, order: 3 }}>{this.state.item.protein} г</Typography>
                                                     </div>
                                                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                                                        <Typography style={{ fontSize: '1rem', fontFamily: 'Roboto', fontWeight: 400 }}>жиры</Typography>
-                                                        <Typography style={{ fontSize: '1rem', fontFamily: 'Roboto', fontWeight: 400 }}>{this.state.item.fat} г</Typography>
+                                                        <Typography style={{ fontSize: '1rem', fontFamily: 'Roboto', fontWeight: 400, order: 1 }}>жиры</Typography>
+                                                        <Typography style={{ fontSize: '1rem', fontFamily: 'Roboto', fontWeight: 400, order: 3 }}>{this.state.item.fat} г</Typography>
                                                     </div>
                                                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                                                        <Typography style={{ fontSize: '1rem', fontFamily: 'Roboto', fontWeight: 400 }}>углеводы</Typography>
-                                                        <Typography style={{ fontSize: '1rem', fontFamily: 'Roboto', fontWeight: 400 }}>{this.state.item.carbohydrates} г</Typography>
+                                                        <Typography style={{ fontSize: '1rem', fontFamily: 'Roboto', fontWeight: 400, order: 1 }}>углеводы</Typography>
+                                                        <Typography style={{ fontSize: '1rem', fontFamily: 'Roboto', fontWeight: 400, order: 3 }}>{this.state.item.carbohydrates} г</Typography>
                                                     </div>
                                                 </div>
                                             </div>
