@@ -44,8 +44,6 @@ function IconInfoWhite() {
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="80"
-        height="80"
         fill="none"
         viewBox="0 0 80 80"
       >
@@ -65,8 +63,6 @@ function IconInfoBlack() {
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="80"
-        height="80"
         fill="none"
         viewBox="0 0 80 80"
       >
@@ -925,7 +921,7 @@ export class Item2 extends React.Component {
                         <Grid item style={{ width: '29%', marginTop: '2%', marginBottom: '2%', justifyContent: 'center' }}>
                             <Typography variant="h5" component="h1" className='ModalItemTitle'>{this.state.item.name}</Typography>
                             
-                            <div>
+                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', maxWidth: 300 }}>
                                 <div style={{ width: parseInt( this.state.item.cat_id ) == 4 ? 230 : parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? 80 : 150, height: 40, border: '1px solid #e5e5e5', borderRadius: 15, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginTop: '4%', marginBottom: '4%' }}>
                                     { parseInt( this.state.item.cat_id ) == 4 ?
                                         <>
