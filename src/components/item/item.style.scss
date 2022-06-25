@@ -258,3 +258,13 @@ $colorMain: #CC0033;
         text-transform: initial!important;
     }
 }
+.MuiTooltip-popper{
+    left: -100px!important;
+    & > div{
+        max-width: 500px!important;
+        background-color: #000!important;
+        color: #fff!important;
+        border-radius: 20px;
+        padding: 20px;
+    }
+}

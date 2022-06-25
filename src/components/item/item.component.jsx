@@ -971,15 +971,15 @@ export class Item2 extends React.Component {
                                     disableTouchListener
                                     title={
                                     <React.Fragment>
-                                        <Typography>Пищевая ценность на 100 г</Typography>
+                                        <Typography style={{ textAlign: 'center', fontFamily: 'Roboto', fontSize: '1.5rem', fontWeight: 400 }}>Пищевая ценность на 100 г</Typography>
                                         <div>
                                             <div style={{ width: '100%', display: 'flex', flexDirection: 'row' }}>
-                                                <div style={{ width: '75%', display: 'flex', alignItems: 'center' }}>
-                                                    <Typography>{this.state.item.name}</Typography>
+                                                <div style={{ width: '75%', display: 'flex', alignItems: 'center'}}>
+                                                    <Typography style={{ fontFamily: 'Roboto', fontWeight: 300, fontSize: '1.3rem' }}>{this.state.item.name}</Typography>
                                                 </div>
                                                 <div style={{ width: '25%', display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'center' }}>
-                                                    <Typography>{this.state.item.kkal}</Typography>
-                                                    <Typography>ккал</Typography>
+                                                    <Typography style={{ fontSize: '2.5rem', lineHeight: 0.8, fontFamily: 'Roboto', fontWeight: 400 }}>{this.state.item.kkal}</Typography>
+                                                    <Typography style={{ fontSize: '1rem', fontFamily: 'Roboto', fontWeight: 400 }}>ккал</Typography>
                                                 </div>
                                             </div>
                                             <div style={{ width: '100%', display: 'flex', flexDirection: 'row' }}>
