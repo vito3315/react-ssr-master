@@ -942,8 +942,8 @@ export class Item2 extends React.Component {
                         <Grid item style={{ width: '29%', marginTop: '2%', marginBottom: '2%', justifyContent: 'center' }}>
                             <Typography variant="h5" component="h1" className='ModalItemTitle'>{this.state.item.name}</Typography>
                             
-                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', maxWidth: 300 }}>
-                                <div style={{ width: parseInt( this.state.item.cat_id ) == 4 ? 230 : parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? 80 : 150, height: 40, border: '1px solid #e5e5e5', borderRadius: 15, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginTop: '4%', marginBottom: '4%' }}>
+                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', maxWidth: 300 }}>
+                                <div style={{ width: parseInt( this.state.item.cat_id ) == 4 ? 230 : parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? 80 : 150, height: 40, border: '1px solid #e5e5e5', borderRadius: 15, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginTop: '4%', marginBottom: '4%', marginRight: 25 }}>
                                     { parseInt( this.state.item.cat_id ) == 4 ?
                                         <>
                                             <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center' }}>{this.state.item.count_part_new}</Typography>
@@ -975,7 +975,7 @@ export class Item2 extends React.Component {
                                         
                                         <div style={ this.state.item.items.length > 1 ? { overflowY: 'scroll', maxHeight: 350 } : {}}>
                                             { this.state.item.items.map( (item, key) =>
-                                                <div style={{ border: '2px solid #fff', borderRadius: 15, marginBottom: 20 }} key={key}>
+                                                <div style={{ border: '2px solid #fff', borderRadius: 15, marginBottom: this.state.item.items.length == 1 ? 0 : this.state.item.items.length-1 == key ? 0 : 20 }} key={key}>
                                                     <div style={{ width: '100%', display: 'flex', flexDirection: 'row', borderBottom: '2px solid #fff' }}>
                                                         <div style={{ width: '75%', display: 'flex', alignItems: 'center', borderRight: '2px solid #fff', padding: 20 }}>
                                                             <Typography style={{ fontFamily: 'Roboto', fontWeight: 300, fontSize: '1.3rem', lineHeight: 1.25 }}>{item.name}</Typography>

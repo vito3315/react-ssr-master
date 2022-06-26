@@ -263,7 +263,8 @@ $colorMain: #CC0033;
     pointer-events: auto!important;
     & > div{
         max-width: 400px!important;
-        background-color: #000!important;
+        background-color: rgba(0,0,0, 0.7) !important;
+        backdrop-filter: blur(10px);
         color: #fff!important;
         border-radius: 20px;
         padding: 20px;
