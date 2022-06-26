@@ -361,9 +361,12 @@ class CardItem extends React.Component {
                         <CardContent style={{ padding: '1.2vw', paddingBottom: 0, paddingTop: 0 }}>
                             <Typography className="CardNameItem" gutterBottom variant="h5" component="h3">{this.state.item.name}</Typography>
 
-                            <div>
-                                <span>{ this.state.item.count_part } шт.</span>
-                                <span>{ this.state.item.weight } г</span>
+                            <div style={{ width: '100%' }}>
+                                <div style={{ width: 120, height: 30, border: '1px solid red', borderRadius: 12, display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+                                    <span>{ this.state.item.count_part } шт.</span>
+                                    <div style={{ height: 30, borderRight: '1px solid red' }} />
+                                    <span>{ this.state.item.weight } г</span>
+                                </div>
                             </div>
 
                             <Typography gutterBottom className="CardInfoWeiItem" component="p">{this.state.item.info_weight}</Typography>
