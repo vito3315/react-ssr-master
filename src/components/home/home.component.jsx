@@ -476,8 +476,8 @@ class CardItem extends React.Component {
                                 </div>
                             </div>
 
-                            <div style={{ height: 100, width: '100%', marginBottom: 10, textOverflow: 'ellipsis' }}>
-                                <Typography component="span" style={{ textAlign: 'center', fontFamily: 'Roboto', fontSize: '1rem', color: '#525252' }}>{this.state.item.tmp_desc}</Typography>
+                            <div style={{ height: 100, width: '100%', marginBottom: 10, textOverflow: 'ellipsis', textAlign: 'center', }}>
+                                <Typography component="span" style={{ fontFamily: 'Roboto', fontSize: '1rem', color: '#525252' }}>{this.state.item.tmp_desc}</Typography>
                             </div>
                         </CardContent>
                     </CardContent>
@@ -1349,7 +1349,7 @@ export class Home extends React.Component {
                                         </Grid>
                                         <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
                                             {cat.items.map((it, k) => (
-                                                <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '10px 8px', display: 'flex' }}>
+                                                <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '20px 16px', display: 'flex' }}>
                                                     <Hidden xsDown>
                                                         
                                                         <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />

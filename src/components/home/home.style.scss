@@ -415,7 +415,7 @@ $colorMain: #CC0033;
         max-height: auto;
     }
     @media (min-width: 1280px) {
-        margin-left: 8.35% !important; 
+        margin-left: 5% !important; 
     }
     @media (min-width: 960px){
         margin-left: 0;
@@ -424,10 +424,10 @@ $colorMain: #CC0033;
         flex-basis: 100%;
     }
     @media (min-width: 1280px) {
-        margin-left: 8.35% !important; 
+        margin-left: 5% !important; 
         flex-grow: 0;
-        max-width: 83.333333%;
-        flex-basis: 83.333333%;
+        max-width: 90%;
+        flex-basis: 90%;
     }
 }
 .itemMiniText{
