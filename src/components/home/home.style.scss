@@ -1,4 +1,5 @@
 $Ubuntu: 'Ubuntu';
+$Roboto: 'Roboto';
 $Futuris: 'FuturaFuturisC Bold';
 $colorMain: #CC0033;
 @mixin fons($size: 1rem, $family: $Ubuntu) {
@@ -184,9 +185,10 @@ $colorMain: #CC0033;
         padding: 0;
     }
     & img{
-        max-width: 100%;
+        /*max-width: 100%;
         width: auto;
-        padding: 0px 1.2vw;
+        padding: 0px 1.2vw;*/
+        width: 100%;
     }
     & .CardInfoItem{
         @include fons(0.7rem, $Ubuntu);
@@ -201,8 +203,9 @@ $colorMain: #CC0033;
         text-decoration: none;
     }
     & .CardNameItem{
-        @include fons(1.2rem, $Ubuntu);
-        font-weight: bold;
+        @include fons(1.7rem, $Roboto);
+        font-weight: 500;
+        text-align: center;
     }
     & .CardInfoWeiItem{
         @include fons(0.8rem, $Ubuntu);

@@ -1077,7 +1077,7 @@ export class Item2 extends React.Component {
                                             <div style={{ height: '100%', borderLeft: '1px solid #e5e5e5' }} />
                                         </>
                                     }
-                                    <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight)} г</Typography>
+                                    <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight)} { parseInt( this.state.item.cat_id ) == 6 ? 'л' : 'г' }</Typography>
                                 </div>
 
                                 <ClickAwayListener mouseEvent="onMouseDown" touchEvent="onTouchStart" onClickAway={this.handleTooltipClose.bind(this)}>
