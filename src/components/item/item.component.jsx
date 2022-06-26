@@ -1028,7 +1028,14 @@ export class Item2 extends React.Component {
                                             </React.Fragment>
                                             }
                                         >
-                                            <div style={{ width: 40, height: 40, cursor: 'pointer' }} onClick={this.handleTooltipOpen.bind(this)}><IconInfoWhite /></div>
+                                            <div style={{ width: 40, height: 40, cursor: 'pointer' }} onClick={this.handleTooltipOpen.bind(this)}>
+                                                { this.state.openTooltip === true ?
+                                                    <IconInfoBlack />
+                                                        :
+                                                    <IconInfoWhite />
+                                                }
+                                                
+                                            </div>
                                         </HtmlTooltip>
                                     </div>
                                 </ClickAwayListener>
