@@ -2,11 +2,11 @@ $Ubuntu: 'Ubuntu';
 $Roboto: 'Roboto';
 $Futuris: 'FuturaFuturisC Bold';
 $colorMain: #CC0033;
-@mixin fons($size: 1rem, $family: $Ubuntu) {
+@mixin fons($size: 1rem, $family: $Roboto) {
     font-size: $size;
     font-family: $family !important;
 }
-@mixin fons_new($size: 1rem, $family: $Ubuntu) {
+@mixin fons_new($size: 1rem, $family: $Roboto) {
     font-size: $size !important;
     font-family: $family, bold !important;
 }
@@ -44,8 +44,9 @@ $colorMain: #CC0033;
 }
 .Category{
     & h1, h2{
-        @include fons_new(2rem, $Futuris);
+        @include fons_new(2rem, $Roboto);
         text-align: center;
+        font-weight: 600;
         width: 100%;
     }
     & h3{

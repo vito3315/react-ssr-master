@@ -423,7 +423,7 @@ class CardItem extends React.Component {
             return (
                 <Card elevation={0} className="CardItem">
                     
-                    <CardContent style={{ cursor: 'pointer', position: 'relative', height: '100%' }} onClick={ () => this.props.openItem(this.state.item.id)}>
+                    <CardContent style={{ cursor: 'pointer', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }} onClick={ () => this.props.openItem(this.state.item.id)}>
                         <LazyLoad once height={480}>
                             {img_type == 'old' ?
                                 <picture>
@@ -468,8 +468,8 @@ class CardItem extends React.Component {
                             <Typography className="CardNameItem" variant="h5" component="h3">{this.state.item.name}</Typography>
 
                             <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: 10, marginBottom: 10 }}>
-                                <div style={{ width: parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 ? 75 : 135, height: 34, border: '1px solid #dadada', borderRadius: 12, display: 'flex', flexDirection: 'row' }}>
-                                    { parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 ? null :
+                                <div style={{ width: parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? 75 : 135, height: 34, border: '1px solid #dadada', borderRadius: 12, display: 'flex', flexDirection: 'row' }}>
+                                    { parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? null :
                                         <div style={{ height: 34, borderRight: '1px solid #dadada', flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                             <span style={{ fontFamily: 'Roboto', fontSize: '0.9rem', fontWeight: 400, color: '#525252' }}>{ parseInt( this.state.item.cat_id ) == 14 ? this.state.item.size_pizza : this.state.item.count_part } { parseInt( this.state.item.cat_id ) == 14 ? 'см' : parseInt( this.state.item.cat_id ) == 6 ? 'л' : 'шт'} </span>
                                         </div>
@@ -1346,29 +1346,27 @@ export class Home extends React.Component {
                     {itemsStore.getAllItemsCat().map((cat, key) => 
                         cat.items.length > 0 ?
                             mainLink == '' || mainLink == cat.main_link || mainLink == cat.link ?
-                                <LazyLoad once>
-                                    <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
-                                        <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%', paddingBottom: 40 }} className="MainItems mainContainer">
-                                            <Typography variant="h5" component="h2">{ cat.name }</Typography>
-                                        </Grid>
-                                        <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
-                                            {cat.items.map((it, k) => (
-                                                <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '20px 16px', display: 'flex' }}>
-                                                    <Hidden xsDown>
-                                                        
-                                                        <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
-                                                        
-                                                    </Hidden>
-                                                    <Hidden smUp>
-                                                        
-                                                        <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
-                                                        
-                                                    </Hidden>
-                                                </Grid>
-                                            ))}
-                                        </Grid>
-                                    </div>
-                                </LazyLoad>
+                                <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
+                                    <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%', paddingBottom: 40 }} className="MainItems mainContainer">
+                                        <Typography variant="h5" component="h2">{ cat.name }</Typography>
+                                    </Grid>
+                                    <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
+                                        {cat.items.map((it, k) => (
+                                            <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '30px 16px', display: 'flex' }}>
+                                                <Hidden xsDown>
+                                                    
+                                                    <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
+                                                    
+                                                </Hidden>
+                                                <Hidden smUp>
+                                                    
+                                                    <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
+                                                    
+                                                </Hidden>
+                                            </Grid>
+                                        ))}
+                                    </Grid>
+                                </div>
                                     :
                                 null
                                 :
