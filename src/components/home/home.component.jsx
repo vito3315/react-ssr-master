@@ -361,13 +361,13 @@ class CardItem extends React.Component {
                         <CardContent style={{ padding: '1.2vw', paddingBottom: 0, paddingTop: 0 }}>
                             <Typography className="CardNameItem" gutterBottom variant="h5" component="h3">{this.state.item.name}</Typography>
 
-                            <div style={{ width: '100%' }}>
-                                <div style={{ width: 120, height: 30, border: '1px solid red', borderRadius: 12, display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
-                                    <div style={{ height: 30, borderRight: '1px solid red' }}>
-                                        <span>{ this.state.item.count_part } шт.</span>
+                            <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                                <div style={{ width: 135, height: 34, border: '1px solid #dadada', borderRadius: 12, display: 'flex', flexDirection: 'row' }}>
+                                    <div style={{ height: 34, borderRight: '1px solid #dadada', flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                        <span style={{ fontFamily: 'Roboto', fontSize: '1.1rem', fontWeight: 400, color: '#525252' }}>{ this.state.item.count_part } шт.</span>
                                     </div>
-                                    <div>
-                                        <span>{ this.state.item.weight } г</span>
+                                    <div style={{ height: 34, flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                        <span style={{ fontFamily: 'Roboto', fontSize: '1.1rem', fontWeight: 400, color: '#525252' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight) } г</span>
                                     </div>
                                 </div>
                             </div>
