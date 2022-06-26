@@ -464,7 +464,7 @@ class CardItem extends React.Component {
                             />
                         }
                         
-                        <CardContent style={{ padding: 0, position: 'absolute', width: '100%', bottom: 0 }}>
+                        <CardContent style={{ padding: 0 }}>
                             <Typography className="CardNameItem" variant="h5" component="h3">{this.state.item.name}</Typography>
 
                             <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: 10, marginBottom: 10 }}>
@@ -475,7 +475,7 @@ class CardItem extends React.Component {
                                         </div>
                                     }
                                     <div style={{ height: 34, flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                        <span style={{ fontFamily: 'Roboto', fontSize: '0.9rem', fontWeight: 400, color: '#525252' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight) } г</span>
+                                        <span style={{ fontFamily: 'Roboto', fontSize: '0.9rem', fontWeight: 400, color: '#525252' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight) } { parseInt( this.state.item.cat_id ) == 6 ? 'л' : 'г' }</span>
                                     </div>
                                 </div>
                             </div>
