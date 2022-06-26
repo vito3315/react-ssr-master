@@ -964,8 +964,8 @@ export class Item2 extends React.Component {
                                 </div>
 
                                 <HtmlTooltip
-                                    onClose={this.handleTooltip.bind(this)}
-                                    open={this.state.openTooltip}
+                                    //onClose={this.handleTooltip.bind(this)}
+                                    //open={this.state.openTooltip}
                                     //disableFocusListener
                                     disableHoverListener
                                     //disableTouchListener
