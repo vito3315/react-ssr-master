@@ -318,7 +318,7 @@ class CardItem extends React.Component {
                 <Card elevation={0} className="CardItem">
                     
                     <CardContent style={{ cursor: 'pointer', position: 'relative' }} onClick={ () => this.props.openItem(this.state.item.id)}>
-                        <LazyLoad once height={150}>
+                        <LazyLoad once height={480}>
                             {img_type == 'old' ?
                                 <picture>
                                     <source 
@@ -345,7 +345,7 @@ class CardItem extends React.Component {
                                         https://storage.yandexcloud.net/site-img/${img_name}_760x760.jpg 760w,
                                         https://storage.yandexcloud.net/site-img/${img_name}_1875x1875.jpg 1875w`} 
                                         sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
-                                    <img alt={this.state.item.name} title={this.state.item.name} style={{ maxHeight: 250 }} src={`https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg`} />
+                                    <img alt={this.state.item.name} title={this.state.item.name} src={`https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg`} />
                                 </picture>
                             }
                         </LazyLoad>
@@ -360,7 +360,14 @@ class CardItem extends React.Component {
                         
                         <CardContent style={{ padding: '1.2vw', paddingBottom: 0, paddingTop: 0 }}>
                             <Typography className="CardNameItem" gutterBottom variant="h5" component="h3">{this.state.item.name}</Typography>
+
+                            <div>
+                                <span>{ this.state.item.count_part } шт.</span>
+                                <span>{ this.state.item.weight } г</span>
+                            </div>
+
                             <Typography gutterBottom className="CardInfoWeiItem" component="p">{this.state.item.info_weight}</Typography>
+
                             <Typography className="CardInfoItem" component="p">{this.state.item.tmp_desc}</Typography>
                         </CardContent>
                     </CardContent>
