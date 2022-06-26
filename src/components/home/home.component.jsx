@@ -12,6 +12,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faMinus, faTimes } from '@fortawesome/free-solid-svg-icons'
 import * as Scroll from 'react-scroll';
 
+function IconRuble(props) {
+    return (
+        <svg
+            style={ props.style }
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="-1 0 24 24"
+            >
+            <path d="M17.778 7.449a3.628 3.628 0 00-1.107-2.761l-.001-.001a4.03 4.03 0 00-2.923-1.057h.009-5.454v7.636h5.454a4.032 4.032 0 002.917-1.06l-.003.003a3.633 3.633 0 001.108-2.768v.007zm4.04 0a7.11 7.11 0 01-2.158 5.368l-.002.002a7.65 7.65 0 01-5.581 2.08h.015-5.795v2.011H16.926c.29 0 .525.235.525.525v.022-.001 2.203c0 .29-.235.525-.525.525h-.022.001-8.608v3.291a.537.537 0 01-.537.528H4.886a.525.525 0 01-.525-.525v-.022.001-3.273H.522a.525.525 0 01-.525-.525v-.022.001-2.182-.021c0-.29.235-.525.525-.525h.022-.001 3.818v-2.011H.522a.525.525 0 01-.525-.525v-.022.001-2.54-.006a.537.537 0 01.528-.537h.019-.001 3.818V.55.529c0-.29.235-.525.525-.525h.022-.001 9.187a7.653 7.653 0 015.57 2.084l-.004-.004a7.11 7.11 0 012.157 5.378v-.013z"></path>
+        </svg>
+    );
+}
+
 var Element  = Scroll.Element;
 var Events  = Scroll.Events;
 var scroller = Scroll.scroller;
@@ -313,6 +325,98 @@ class CardItem extends React.Component {
         const img_name = this.state.item.img_app.length > 0 ? this.state.item.img_app : this.state.item.img_new;
         const img_type = this.state.item.img_app.length > 0 ? 'new' : 'old';
 
+        let item_name = '';
+
+        let count = ""+this.state.count;
+
+        count = count.split("");
+
+        count = count[ count.length - 1 ];
+
+        if( parseInt( this.state.item.cat_id ) == 4 ){
+            if( parseInt( count ) == 1 ){
+                item_name = 'сет';
+            }
+
+            if( parseInt( count ) > 1 && parseInt( count ) < 5 ){
+                item_name = 'сета';
+            }
+
+            if( parseInt( count ) > 4 || parseInt( count ) == 0 ){
+                item_name = 'сетов';
+            }
+        }
+
+        if( parseInt( this.state.item.cat_id ) == 14 ){
+            if( parseInt( count ) == 1 ){
+                item_name = 'пицца';
+            }
+
+            if( parseInt( count ) > 1 && parseInt( count ) < 5 ){
+                item_name = 'пиццы';
+            }
+
+            if( parseInt( count ) > 4 || parseInt( count ) == 0 ){
+                item_name = 'пицц';
+            }
+        }
+
+        if( parseInt( this.state.item.cat_id ) == 9 || parseInt( this.state.item.cat_id ) == 10 || parseInt( this.state.item.cat_id ) == 12 || parseInt( this.state.item.cat_id ) == 13 ){
+            if( parseInt( count ) == 1 ){
+                item_name = 'ролл';
+            }
+
+            if( parseInt( count ) > 1 && parseInt( count ) < 5 ){
+                item_name = 'ролла';
+            }
+
+            if( parseInt( count ) > 4 || parseInt( count ) == 0 ){
+                item_name = 'роллов';
+            }
+        }
+
+        if( parseInt( this.state.item.cat_id ) == 6 ){
+            if( parseInt( count ) == 1 ){
+                item_name = 'напиток';
+            }
+
+            if( parseInt( count ) > 1 && parseInt( count ) < 5 ){
+                item_name = 'напитка';
+            }
+
+            if( parseInt( count ) > 4 || parseInt( count ) == 0 ){
+                item_name = 'напитков';
+            }
+        }
+
+        if( parseInt( this.state.item.cat_id ) == 7 ){
+            if( parseInt( count ) == 1 ){
+                item_name = 'соус';
+            }
+
+            if( parseInt( count ) > 1 && parseInt( count ) < 5 ){
+                item_name = 'соуса';
+            }
+
+            if( parseInt( count ) > 4 || parseInt( count ) == 0 ){
+                item_name = 'соусов';
+            }
+        }
+
+        if( parseInt( this.state.item.cat_id ) == 5 ){
+            if( parseInt( count ) == 1 ){
+                item_name = 'закуска';
+            }
+
+            if( parseInt( count ) > 1 && parseInt( count ) < 5 ){
+                item_name = 'закуски';
+            }
+
+            if( parseInt( count ) > 4 || parseInt( count ) == 0 ){
+                item_name = 'закусок';
+            }
+        }
+
         if( this.props.type == 'pc' ){
             return (
                 <Card elevation={0} className="CardItem">
@@ -359,54 +463,43 @@ class CardItem extends React.Component {
                         }
                         
                         <CardContent style={{ padding: '1.2vw', paddingBottom: 0, paddingTop: 0 }}>
-                            <Typography className="CardNameItem" gutterBottom variant="h5" component="h3">{this.state.item.name}</Typography>
+                            <Typography className="CardNameItem" variant="h5" component="h3">{this.state.item.name}</Typography>
 
-                            <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                            <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: 10, marginBottom: 10 }}>
                                 <div style={{ width: 135, height: 34, border: '1px solid #dadada', borderRadius: 12, display: 'flex', flexDirection: 'row' }}>
                                     <div style={{ height: 34, borderRight: '1px solid #dadada', flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                        <span style={{ fontFamily: 'Roboto', fontSize: '1.1rem', fontWeight: 400, color: '#525252' }}>{ this.state.item.count_part } шт.</span>
+                                        <span style={{ fontFamily: 'Roboto', fontSize: '0.9rem', fontWeight: 400, color: '#525252' }}>{ this.state.item.count_part } шт.</span>
                                     </div>
                                     <div style={{ height: 34, flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                        <span style={{ fontFamily: 'Roboto', fontSize: '1.1rem', fontWeight: 400, color: '#525252' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight) } г</span>
+                                        <span style={{ fontFamily: 'Roboto', fontSize: '0.9rem', fontWeight: 400, color: '#525252' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight) } г</span>
                                     </div>
                                 </div>
                             </div>
 
-                            <Typography gutterBottom className="CardInfoWeiItem" component="p">{this.state.item.info_weight}</Typography>
-
-                            <Typography className="CardInfoItem" component="p">{this.state.item.tmp_desc}</Typography>
+                            <Typography className="CardInfoItem" component="span" style={{ height: 70, textAlign: 'center', fontFamily: 'Roboto', fontSize: '1rem', color: '#525252' }}>{this.state.item.tmp_desc}</Typography>
                         </CardContent>
                     </CardContent>
                     
                     <CardActions className="CardAction">
-                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginLeft: 0, width: '100%' }}>
-                            <div>
-                                <Typography className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <Ruble /></Typography>
-                            </div>
-                            { this.state.is_old_price === false ? null :
-                                <Typography className="CardPriceItem_old" variant="h5" component="span">{this.state.old_price} <Ruble /></Typography>
-                            }
-                            {this.state.count == 0 ?
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder fohover">
-                                    <Button variant="contained" className="BtnCardMain CardInCardItem NONHOVERED" onClick={this.add.bind(this)}>
-                                        <ShoppingCartOutlinedIcon color='inherit'  />
-                                    </Button>
-                                    <Button variant="contained" className="BtnCardMain CardInCardItem HOVERED" onClick={this.add.bind(this)}>В корзину</Button>
-                                </ButtonGroup>
-                                    :
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder count">
-                                    <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this)}>
-                                        <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
-                                    </Button>
-                                    <Button variant="contained" className="BtnCardMain" >
-                                        <Typography className="CardCountItem" component="span">{this.state.count}</Typography>
-                                    </Button>
-                                    <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this)}> 
-                                        <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
-                                    </Button>
-                                </ButtonGroup>
-                            }
-                        </div>
+                        { this.state.count == 0 ?
+                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
+                                <Button variant="contained" className='ModalItemButtonCart' style={{ width: 300, height: 60, borderRadius: 40, border: '2px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.add.bind(this)}>
+                                    <span>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)}</span>
+                                    <IconRuble style={{ width: 15, height: 15, fill: '#525252', marginLeft: 5 }} />
+                                </Button>
+                            </ButtonGroup>
+                                :
+                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
+                                <div variant="contained" className='ModalItemButtonCart' style={{ width: 300, height: 56, borderRadius: 40, border: '2px solid #F9BC23', backgroundColor: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                    <button style={{ width: 30, height: 30, borderRadius: 40, marginLeft: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23', fontSize: '2rem', fontFamily: 'Roboto', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={this.minus.bind(this)}>-</button>
+                                    <div>
+                                        <span>{this.state.count} {item_name} на { new Intl.NumberFormat('ru-RU').format( parseInt(this.state.item.price) * parseInt(this.state.count) )}</span>
+                                        <IconRuble style={{ width: 15, height: 15, fill: '#525252', marginLeft: 5 }} />
+                                    </div>
+                                    <button style={{ width: 40, height: 40, borderRadius: 40, marginRight: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23', fontSize: '2rem', fontFamily: 'Roboto', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={this.add.bind(this)}>+</button>
+                                </div>
+                            </ButtonGroup>
+                        }
                     </CardActions>
                 </Card>
             )
