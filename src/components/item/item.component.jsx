@@ -1065,11 +1065,22 @@ export class Item2 extends React.Component {
 
                             <Typography variant="h5" component="span" style={{ marginBottom: '4%', minHeight: 200 }} className='ModalItemDesc'>{desc}</Typography>
                             
-                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{  }}>
+                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ display: 'none' }}>
                                 <Button variant="contained" className='ModalItemButtonCart' style={{ width: 300, height: 60, borderRadius: 30, border: '2px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.add.bind(this)}>
                                     <span>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)}</span>
-                                    <IconRuble style={{ width: 15, height: 15, fill: '#525252' }} />
+                                    <IconRuble style={{ width: 15, height: 15, fill: '#525252', marginLeft: 5 }} />
                                 </Button>
+                            </ButtonGroup>
+
+                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
+                                <div variant="contained" className='ModalItemButtonCart' style={{ width: 300, height: 60, borderRadius: 30, border: '2px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.add.bind(this)}>
+                                    <button>-</button>
+                                    <div>
+                                        <span>1 сет на { new Intl.NumberFormat('ru-RU').format(this.state.item.price)}</span>
+                                        <IconRuble style={{ width: 15, height: 15, fill: '#525252', marginLeft: 5 }} />
+                                    </div>
+                                    <button>+</button>
+                                </div>
                             </ButtonGroup>
 
                         </Grid>
