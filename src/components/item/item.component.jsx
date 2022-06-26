@@ -1019,9 +1019,7 @@ export class Item2 extends React.Component {
                                         </React.Fragment>
                                         }
                                     >
-                                        <div style={{ width: 40, height: 40 }} onClick={this.handleTooltipOpen.bind(this)}>
-                                            <IconInfoWhite />
-                                        </div>
+                                        <Button style={{ width: 40, height: 40 }} onClick={this.handleTooltipOpen.bind(this)}><IconInfoWhite /></Button>
                                     </HtmlTooltip>
                                 
                                 
