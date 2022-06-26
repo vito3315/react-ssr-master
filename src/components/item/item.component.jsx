@@ -939,7 +939,7 @@ export class Item2 extends React.Component {
                 item_name = 'сета';
             }
 
-            if( parseInt( count ) > 4 ){
+            if( parseInt( count ) > 4 || parseInt( count ) == 0 ){
                 item_name = 'сетов';
             }
         }
@@ -953,7 +953,7 @@ export class Item2 extends React.Component {
                 item_name = 'пиццы';
             }
 
-            if( parseInt( count ) > 4 ){
+            if( parseInt( count ) > 4 || parseInt( count ) == 0 ){
                 item_name = 'пицц';
             }
         }
@@ -967,7 +967,7 @@ export class Item2 extends React.Component {
                 item_name = 'ролла';
             }
 
-            if( parseInt( count ) > 4 ){
+            if( parseInt( count ) > 4 || parseInt( count ) == 0 ){
                 item_name = 'роллов';
             }
         }
@@ -1124,13 +1124,13 @@ export class Item2 extends React.Component {
                                 </ButtonGroup>
                                     :
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
-                                    <div variant="contained" className='ModalItemButtonCart' style={{ width: 300, height: 60, borderRadius: 30, border: '2px solid #F9BC23', backgroundColor: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} onClick={this.add.bind(this)}>
-                                        <button style={{ width: 30, height: 30, borderRadius: 30, marginLeft: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23', fontSize: '2rem', fontFamily: 'Roboto' }} onClick={this.minus.bind(this)}>-</button>
+                                    <div variant="contained" className='ModalItemButtonCart' style={{ width: 300, height: 60, borderRadius: 30, border: '2px solid #F9BC23', backgroundColor: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                        <button style={{ width: 30, height: 30, borderRadius: 30, marginLeft: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23', fontSize: '2rem', fontFamily: 'Roboto', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={this.minus.bind(this)}>-</button>
                                         <div>
-                                            <span>{this.state.count} {item_name} на { new Intl.NumberFormat('ru-RU').format(this.state.item.price)}</span>
+                                            <span>{this.state.count} {item_name} на { new Intl.NumberFormat('ru-RU').format( parseInt(this.state.item.price) * parseInt(this.state.item.count) )}</span>
                                             <IconRuble style={{ width: 15, height: 15, fill: '#525252', marginLeft: 5 }} />
                                         </div>
-                                        <button style={{ width: 40, height: 40, borderRadius: 40, marginRight: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23', fontSize: '2rem', fontFamily: 'Roboto' }} onClick={this.add.bind(this)}>+</button>
+                                        <button style={{ width: 40, height: 40, borderRadius: 40, marginRight: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23', fontSize: '2rem', fontFamily: 'Roboto', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={this.add.bind(this)}>+</button>
                                     </div>
                                 </ButtonGroup>
                             }
