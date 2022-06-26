@@ -82,6 +82,22 @@ function IconInfoBlack() {
     );
 }
 
+function IconRuble() {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        x="0"
+        y="0"
+        enableBackground="new 0 0 595.28 841.89"
+        version="1.1"
+        viewBox="0 0 595.28 841.89"
+        xmlSpace="preserve"
+      >
+        <path d="M171.03 33.32c-28.53-.92-106.87-.04-110.19 0-3.83.04-6.92 3.17-6.92 7v178.49c-11.26-.13-18.6-.25-18.87-.25h-.11c-3.82 0-6.94 3.06-7 6.89a6.996 6.996 0 006.89 7.11c1.06.02 8.31.13 19.08.26v26.07H34.94c-3.87 0-7 3.13-7 7s3.13 7 7 7h18.97v76.39c0 3.87 3.13 7 7 7s7-3.13 7-7v-76.39H180.8c3.87 0 7-3.13 7-7s-3.13-7-7-7H67.92v-25.92c32.77.33 81.14.59 103.72-.42 24.4-1.09 44.62-7.2 60.12-18.17 23.73-16.79 35.76-44.2 35.76-81.47-.01-89.52-73.86-98.86-96.49-99.59zm-.02 185.24c-22.01.98-70.39.72-103.09.4V47.24c20.24-.2 79.33-.68 102.66.07 24.94.8 82.93 10.76 82.93 85.6 0 54.39-27.75 83.21-82.5 85.65z"></path>
+      </svg>
+    );
+  }
+
 const HtmlTooltip = withStyles((theme) => ({
     tooltip: {
       backgroundColor: '#f5f5f9',
@@ -1044,16 +1060,22 @@ export class Item2 extends React.Component {
                             
 
                             { parseInt( this.state.item.cat_id ) == 4 ?
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ marginBottom: '4%' }} onClick={this.props.openSetPc.bind(this, this.state.item.items)}>
-                                    <Button variant="contained" className='ModalItemButtonCartOther' style={{ width: 300, height: 40, borderRadius: 30, border: '1px solid #F9BC23', backgroundColor: '#fff' }}>Состав сета</Button>
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ marginBottom: '4%' }}>
+                                    <Button variant="contained" className='ModalItemButtonCartOther' style={{ width: 300, height: 40, borderRadius: 30, border: '1px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.props.openSetPc.bind(this, this.state.item.items)}>Состав сета</Button>
                                 </ButtonGroup>
                                     :
                                 null
                             }
 
-                            <Typography variant="h5" component="span" style={{ marginBottom: '4%' }} className='ModalItemDesc'>{desc}</Typography>
+                            <Typography variant="h5" component="span" style={{ marginBottom: '4%', minHeight: 200 }} className='ModalItemDesc'>{desc}</Typography>
                             
-                            <Button variant="contained" className='ModalItemButtonCart' style={{ width: 300, height: 60, borderRadius: 30, border: '2px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.add.bind(this)}>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)} Р</Button>
+                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{  }}>
+                                <Button variant="contained" className='ModalItemButtonCart' style={{ width: 300, height: 60, borderRadius: 30, border: '2px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.add.bind(this)}>
+                                    <span>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)}</span>
+                                    <IconRuble />
+                                </Button>
+                            </ButtonGroup>
+
                         </Grid>
                     </Grid>
                 </Box>
