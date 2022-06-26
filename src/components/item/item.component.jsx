@@ -889,12 +889,16 @@ export class Item2 extends React.Component {
     }
     
     handleTooltipOpen(){
+        console.log( 'open' )
+
         this.setState({
             openTooltip: true
         })
     }
 
     handleTooltipClose(){
+        console.log( 'close' )
+
         this.setState({
             openTooltip: false
         })
