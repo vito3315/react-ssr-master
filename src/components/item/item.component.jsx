@@ -977,6 +977,7 @@ export class Item2 extends React.Component {
                                 </div>
 
                                 <ClickAwayListener mouseEvent="onMouseDown" touchEvent="onTouchStart" onClickAway={this.handleTooltipClose.bind(this)}>
+                                    <div>
                                     <HtmlTooltip
                                         onClose={this.handleTooltipClose.bind(this)}
                                         open={this.state.openTooltip}
@@ -1026,6 +1027,7 @@ export class Item2 extends React.Component {
                                     >
                                         <Button style={{ width: 40, height: 40 }} onClick={this.handleTooltipOpen.bind(this)}><IconInfoWhite /></Button>
                                     </HtmlTooltip>
+                                    </div>
                                 </ClickAwayListener>
                                 
                             </div>
