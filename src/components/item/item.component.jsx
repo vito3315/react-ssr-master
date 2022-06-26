@@ -1073,13 +1073,13 @@ export class Item2 extends React.Component {
                             </ButtonGroup>
 
                             <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
-                                <div variant="contained" className='ModalItemButtonCart' style={{ width: 300, height: 60, borderRadius: 30, border: '2px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.add.bind(this)}>
-                                    <button>-</button>
+                                <div variant="contained" className='ModalItemButtonCart' style={{ width: 300, height: 60, borderRadius: 30, border: '2px solid #F9BC23', backgroundColor: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} onClick={this.add.bind(this)}>
+                                    <button style={{ width: 30, height: 30, borderRadius: 30, marginLeft: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23' }}>-</button>
                                     <div>
                                         <span>1 сет на { new Intl.NumberFormat('ru-RU').format(this.state.item.price)}</span>
                                         <IconRuble style={{ width: 15, height: 15, fill: '#525252', marginLeft: 5 }} />
                                     </div>
-                                    <button>+</button>
+                                    <button style={{ width: 30, height: 40, borderRadius: 40, marginRight: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23' }}>+</button>
                                 </div>
                             </ButtonGroup>
 
