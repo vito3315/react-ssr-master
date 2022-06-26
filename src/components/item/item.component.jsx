@@ -888,9 +888,15 @@ export class Item2 extends React.Component {
         })
     }
     
-    handleTooltip(){
+    handleTooltipOpen(){
         this.setState({
-            openTooltip: !this.state.openTooltip
+            openTooltip: true
+        })
+    }
+
+    handleTooltipClose(){
+        this.setState({
+            openTooltip: false
         })
     }
 
@@ -906,7 +912,8 @@ export class Item2 extends React.Component {
                     <title>{this.state.title}</title>
                     <meta name="description" content={this.state.description} />
                 </Helmet>
-                <ClickAwayListener onClickAway={this.handleTooltip.bind(this)}>
+
+                <ClickAwayListener onClickAway={this.handleTooltipClose.bind(this)}>
                 <Box component="div" className="pcItem NewModal" >
                     <Grid container className="MainItem mainContainer" style={{  }}>
                         <Grid item style={{ width: '59%', marginLeft: '4%', marginRight: '4%', marginTop: '2%', marginBottom: '2%' }}>
@@ -966,7 +973,7 @@ export class Item2 extends React.Component {
 
                                 
                                     <HtmlTooltip
-                                        onClose={this.handleTooltip.bind(this)}
+                                        onClose={this.handleTooltipClose.bind(this)}
                                         open={this.state.openTooltip}
                                         //disableFocusListener
                                         //disableHoverListener
@@ -1012,7 +1019,7 @@ export class Item2 extends React.Component {
                                         </React.Fragment>
                                         }
                                     >
-                                        <div style={{ width: 40, height: 40 }} onClick={this.handleTooltip.bind(this)}>
+                                        <div style={{ width: 40, height: 40 }} onClick={this.handleTooltipOpen.bind(this)}>
                                             <IconInfoWhite />
                                         </div>
                                     </HtmlTooltip>
