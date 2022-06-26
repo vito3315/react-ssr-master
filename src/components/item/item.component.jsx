@@ -922,6 +922,56 @@ export class Item2 extends React.Component {
 
         const desc = this.state.item.marc_desc_full.length > 0 ? this.state.item.marc_desc_full : this.state.item.tmp_desc;
 
+        let item_name = '';
+
+        let count = ""+this.state.count;
+
+        count = count.split("");
+
+        count = count[ count.length - 1 ];
+
+        if( parseInt( this.state.item.cat_id ) == 4 ){
+            if( parseInt( count ) == 1 ){
+                item_name = 'сет';
+            }
+
+            if( parseInt( count ) > 1 && parseInt( count ) < 5 ){
+                item_name = 'сета';
+            }
+
+            if( parseInt( count ) > 4 ){
+                item_name = 'сетов';
+            }
+        }
+
+        if( parseInt( this.state.item.cat_id ) == 14 ){
+            if( parseInt( count ) == 1 ){
+                item_name = 'пицца';
+            }
+
+            if( parseInt( count ) > 1 && parseInt( count ) < 5 ){
+                item_name = 'пиццы';
+            }
+
+            if( parseInt( count ) > 4 ){
+                item_name = 'пицц';
+            }
+        }
+
+        if( parseInt( this.state.item.cat_id ) == 9 || parseInt( this.state.item.cat_id ) == 10 || parseInt( this.state.item.cat_id ) == 12 || parseInt( this.state.item.cat_id ) == 13 ){
+            if( parseInt( count ) == 1 ){
+                item_name = 'ролл';
+            }
+
+            if( parseInt( count ) > 1 && parseInt( count ) < 5 ){
+                item_name = 'ролла';
+            }
+
+            if( parseInt( count ) > 4 ){
+                item_name = 'роллов';
+            }
+        }
+
         return (
             <>
                 <Helmet>
@@ -1065,23 +1115,25 @@ export class Item2 extends React.Component {
 
                             <Typography variant="h5" component="span" style={{ marginBottom: '4%', minHeight: 200 }} className='ModalItemDesc'>{desc}</Typography>
                             
-                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ display: 'none' }}>
-                                <Button variant="contained" className='ModalItemButtonCart' style={{ width: 300, height: 60, borderRadius: 30, border: '2px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.add.bind(this)}>
-                                    <span>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)}</span>
-                                    <IconRuble style={{ width: 15, height: 15, fill: '#525252', marginLeft: 5 }} />
-                                </Button>
-                            </ButtonGroup>
-
-                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
-                                <div variant="contained" className='ModalItemButtonCart' style={{ width: 300, height: 60, borderRadius: 30, border: '2px solid #F9BC23', backgroundColor: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} onClick={this.add.bind(this)}>
-                                    <button style={{ width: 30, height: 30, borderRadius: 30, marginLeft: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23' }}>-</button>
-                                    <div>
-                                        <span>1 сет на { new Intl.NumberFormat('ru-RU').format(this.state.item.price)}</span>
+                            { this.state.count == 0 ?
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
+                                    <Button variant="contained" className='ModalItemButtonCart' style={{ width: 300, height: 60, borderRadius: 30, border: '2px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.add.bind(this)}>
+                                        <span>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)}</span>
                                         <IconRuble style={{ width: 15, height: 15, fill: '#525252', marginLeft: 5 }} />
+                                    </Button>
+                                </ButtonGroup>
+                                    :
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
+                                    <div variant="contained" className='ModalItemButtonCart' style={{ width: 300, height: 60, borderRadius: 30, border: '2px solid #F9BC23', backgroundColor: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} onClick={this.add.bind(this)}>
+                                        <button style={{ width: 30, height: 30, borderRadius: 30, marginLeft: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23', fontSize: '2rem', fontFamily: 'Roboto' }} onClick={this.minus.bind(this)}>-</button>
+                                        <div>
+                                            <span>{this.state.count} {item_name} на { new Intl.NumberFormat('ru-RU').format(this.state.item.price)}</span>
+                                            <IconRuble style={{ width: 15, height: 15, fill: '#525252', marginLeft: 5 }} />
+                                        </div>
+                                        <button style={{ width: 40, height: 40, borderRadius: 40, marginRight: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23', fontSize: '2rem', fontFamily: 'Roboto' }} onClick={this.add.bind(this)}>+</button>
                                     </div>
-                                    <button style={{ width: 30, height: 40, borderRadius: 40, marginRight: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23' }}>+</button>
-                                </div>
-                            </ButtonGroup>
+                                </ButtonGroup>
+                            }
 
                         </Grid>
                     </Grid>
