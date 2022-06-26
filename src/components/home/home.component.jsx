@@ -464,9 +464,9 @@ class CardItem extends React.Component {
                             />
                         }
                         
-                        <CardContent style={{ padding: 0 }}>
-                            <Typography className="CardNameItem" variant="h5" component="h3">{this.state.item.name}</Typography>
+                        <Typography className="CardNameItem" variant="h5" component="h3">{this.state.item.name}</Typography>
 
+                        <CardContent style={{ padding: 0 }}>
                             <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: 10, marginBottom: 10 }}>
                                 <div style={{ width: parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? 75 : 135, height: 34, border: '1px solid #dadada', borderRadius: 12, display: 'flex', flexDirection: 'row' }}>
                                     { parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? null :
