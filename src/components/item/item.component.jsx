@@ -913,7 +913,7 @@ export class Item2 extends React.Component {
                     <meta name="description" content={this.state.description} />
                 </Helmet>
 
-                <ClickAwayListener onClickAway={this.handleTooltipClose.bind(this)}>
+                
                 <Box component="div" className="pcItem NewModal" >
                     <Grid container className="MainItem mainContainer" style={{  }}>
                         <Grid item style={{ width: '59%', marginLeft: '4%', marginRight: '4%', marginTop: '2%', marginBottom: '2%' }}>
@@ -950,6 +950,7 @@ export class Item2 extends React.Component {
                         <Grid item style={{ width: '29%', marginTop: '2%', marginBottom: '2%', justifyContent: 'center' }}>
                             <Typography variant="h5" component="h1" className='ModalItemTitle'>{this.state.item.name}</Typography>
                             
+                            <ClickAwayListener onClickAway={this.handleTooltipClose.bind(this)}>
                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', maxWidth: 300 }}>
                                 <div style={{ width: parseInt( this.state.item.cat_id ) == 4 ? 230 : parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? 80 : 150, height: 40, border: '1px solid #e5e5e5', borderRadius: 15, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginTop: '4%', marginBottom: '4%', marginRight: 25 }}>
                                     { parseInt( this.state.item.cat_id ) == 4 ?
@@ -1024,6 +1025,7 @@ export class Item2 extends React.Component {
                                 
                                 
                             </div>
+                            </ClickAwayListener>
 
                             { parseInt( this.state.item.cat_id ) == 4 ?
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ marginBottom: '4%' }} onClick={this.props.openSetPc.bind(this, this.state.item.items)}>
@@ -1042,7 +1044,7 @@ export class Item2 extends React.Component {
                         </Grid>
                     </Grid>
                 </Box>
-                </ClickAwayListener>
+                
 
                 <Hidden smUp>
                     <Grid container className="MainItem mainContainer" style={{ paddingLeft: '4%', paddingRight: '4%', height: '100%' }}>
