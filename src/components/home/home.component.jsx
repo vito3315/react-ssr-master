@@ -325,6 +325,8 @@ class CardItem extends React.Component {
         const img_name = this.state.item.img_app.length > 0 ? this.state.item.img_app : this.state.item.img_new;
         const img_type = this.state.item.img_app.length > 0 ? 'new' : 'old';
 
+        const desc = this.state.item.marc_desc.length > 0 ? this.state.item.marc_desc : this.state.item.tmp_desc;
+
         let item_name = '';
 
         let count = ""+this.state.count;
@@ -421,7 +423,7 @@ class CardItem extends React.Component {
             return (
                 <Card elevation={0} className="CardItem">
                     
-                    <CardContent style={{ cursor: 'pointer', position: 'relative' }} onClick={ () => this.props.openItem(this.state.item.id)}>
+                    <CardContent style={{ cursor: 'pointer', position: 'relative', height: '100%' }} onClick={ () => this.props.openItem(this.state.item.id)}>
                         <LazyLoad once height={480}>
                             {img_type == 'old' ?
                                 <picture>
@@ -462,22 +464,24 @@ class CardItem extends React.Component {
                             />
                         }
                         
-                        <CardContent style={{ padding: 0 }}>
+                        <CardContent style={{ padding: 0, position: 'absolute', width: '100%', bottom: 0 }}>
                             <Typography className="CardNameItem" variant="h5" component="h3">{this.state.item.name}</Typography>
 
                             <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: 10, marginBottom: 10 }}>
-                                <div style={{ width: 135, height: 34, border: '1px solid #dadada', borderRadius: 12, display: 'flex', flexDirection: 'row' }}>
-                                    <div style={{ height: 34, borderRight: '1px solid #dadada', flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                        <span style={{ fontFamily: 'Roboto', fontSize: '0.9rem', fontWeight: 400, color: '#525252' }}>{ this.state.item.count_part } шт.</span>
-                                    </div>
+                                <div style={{ width: parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 ? 75 : 135, height: 34, border: '1px solid #dadada', borderRadius: 12, display: 'flex', flexDirection: 'row' }}>
+                                    { parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 ? null :
+                                        <div style={{ height: 34, borderRight: '1px solid #dadada', flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                            <span style={{ fontFamily: 'Roboto', fontSize: '0.9rem', fontWeight: 400, color: '#525252' }}>{ parseInt( this.state.item.cat_id ) == 14 ? this.state.item.size_pizza : this.state.item.count_part } { parseInt( this.state.item.cat_id ) == 14 ? 'см' : parseInt( this.state.item.cat_id ) == 6 ? 'л' : 'шт'} </span>
+                                        </div>
+                                    }
                                     <div style={{ height: 34, flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                         <span style={{ fontFamily: 'Roboto', fontSize: '0.9rem', fontWeight: 400, color: '#525252' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight) } г</span>
                                     </div>
                                 </div>
                             </div>
 
-                            <div style={{ height: 100, width: '100%', marginBottom: 10, textOverflow: 'ellipsis', textAlign: 'center', }}>
-                                <Typography component="span" style={{ fontFamily: 'Roboto', fontSize: '1rem', color: '#525252' }}>{this.state.item.tmp_desc}</Typography>
+                            <div style={{ height: 100, width: '100%', marginBottom: 10, textOverflow: 'ellipsis', textAlign: 'center', overflow: 'hidden' }}>
+                                <Typography component="span" style={{ fontFamily: 'Roboto', fontSize: '1rem', color: '#525252' }}>{desc}</Typography>
                             </div>
                         </CardContent>
                     </CardContent>
