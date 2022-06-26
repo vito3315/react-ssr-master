@@ -906,7 +906,7 @@ export class Item2 extends React.Component {
                     <title>{this.state.title}</title>
                     <meta name="description" content={this.state.description} />
                 </Helmet>
-                
+                <ClickAwayListener onClickAway={this.handleTooltip.bind(this)}>
                 <Box component="div" className="pcItem NewModal" >
                     <Grid container className="MainItem mainContainer" style={{  }}>
                         <Grid item style={{ width: '59%', marginLeft: '4%', marginRight: '4%', marginTop: '2%', marginBottom: '2%' }}>
@@ -964,7 +964,7 @@ export class Item2 extends React.Component {
                                     <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight)} г</Typography>
                                 </div>
 
-                                <ClickAwayListener onClickAway={this.handleTooltip.bind(this)}>
+                                
                                     <HtmlTooltip
                                         onClose={this.handleTooltip.bind(this)}
                                         open={this.state.openTooltip}
@@ -1016,7 +1016,7 @@ export class Item2 extends React.Component {
                                             <IconInfoWhite />
                                         </div>
                                     </HtmlTooltip>
-                                </ClickAwayListener>
+                                
                                 
                             </div>
 
@@ -1037,7 +1037,8 @@ export class Item2 extends React.Component {
                         </Grid>
                     </Grid>
                 </Box>
-                
+                </ClickAwayListener>
+
                 <Hidden smUp>
                     <Grid container className="MainItem mainContainer" style={{ paddingLeft: '4%', paddingRight: '4%', height: '100%' }}>
                         <Grid item xs={12} style={{ paddingRight: 12 }}>
