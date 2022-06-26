@@ -424,7 +424,7 @@ class CardItem extends React.Component {
                 <Card elevation={0} className="CardItem">
                     
                     <CardContent style={{ cursor: 'pointer', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }} onClick={ () => this.props.openItem(this.state.item.id)}>
-                        <LazyLoad once height={480}>
+                        
                             {img_type == 'old' ?
                                 <picture>
                                     <source 
@@ -454,7 +454,7 @@ class CardItem extends React.Component {
                                     <img alt={this.state.item.name} title={this.state.item.name} src={`https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg`} />
                                 </picture>
                             }
-                        </LazyLoad>
+                        
 
                         { parseInt(this.state.item.is_new) == 0 ? null :
                             <img 
@@ -464,7 +464,7 @@ class CardItem extends React.Component {
                             />
                         }
                         
-                        <Typography className="CardNameItem" variant="h5" component="h3">{this.state.item.name}</Typography>
+                        <Typography className="CardNameItem" variant="h5" component="h3" style={{ flex: 1 }}>{this.state.item.name}</Typography>
 
                         <CardContent style={{ padding: 0 }}>
                             <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: 10, marginBottom: 10 }}>
