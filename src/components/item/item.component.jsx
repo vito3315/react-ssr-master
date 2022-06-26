@@ -966,9 +966,9 @@ export class Item2 extends React.Component {
                                 <HtmlTooltip
                                     onClose={this.handleTooltip.bind(this)}
                                     open={this.state.openTooltip}
-                                    disableFocusListener
+                                    //disableFocusListener
                                     disableHoverListener
-                                    disableTouchListener
+                                    //disableTouchListener
                                     title={
                                     <React.Fragment>
                                         <Typography style={{ textAlign: 'center', fontFamily: 'Roboto', fontSize: '1.5rem', fontWeight: 400, lineHeight: 1, paddingTop: 10, paddingBottom: 20 }}>Пищевая ценность на 100 г</Typography>
