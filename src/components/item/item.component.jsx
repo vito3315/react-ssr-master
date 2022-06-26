@@ -1053,10 +1053,7 @@ export class Item2 extends React.Component {
 
                             <Typography variant="h5" component="span" style={{ marginBottom: '4%' }} className='ModalItemDesc'>{desc}</Typography>
                             
-                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{  }}>
-                                <Button variant="contained" className='ModalItemButtonCart' style={{ width: 300, height: 60, borderRadius: 30, border: '2px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.add.bind(this)}>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)} Р</Button>
-                            </ButtonGroup>
-
+                            <Button variant="contained" className='ModalItemButtonCart' style={{ width: 300, height: 60, borderRadius: 30, border: '2px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.add.bind(this)}>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)} Р</Button>
                         </Grid>
                     </Grid>
                 </Box>
