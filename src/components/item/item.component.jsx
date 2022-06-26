@@ -967,7 +967,7 @@ export class Item2 extends React.Component {
                                     //onClose={this.handleTooltip.bind(this)}
                                     //open={this.state.openTooltip}
                                     //disableFocusListener
-                                    disableHoverListener
+                                    //disableHoverListener
                                     //disableTouchListener
                                     title={
                                     <React.Fragment>
