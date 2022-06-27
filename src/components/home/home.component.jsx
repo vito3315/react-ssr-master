@@ -545,7 +545,7 @@ class CardItem extends React.Component {
                         }
                     </Grid>
                     <Grid item className="SecondBox_" style={{ width: ((GRID*3) + (2*20)), display: 'flex', flexDirection: 'column', position: 'relative', justifyContent: 'flex-end' }}>
-                        <Typography className="CardNameItem" variant="h5" component="h3" onClick={this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>
+                        <Typography className="CardNameItem" variant="h5" component="h3" onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>
 
                         <div style={{ width: 150, height: 30 }}>
                             <div style={{ flex: 3 }}>
@@ -556,7 +556,7 @@ class CardItem extends React.Component {
                             </div>
                         </div>
 
-                        <Typography className="CardInfoItem_" style={{ marginBottom: 10, fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400 }} component="p" onClick={this.props.openItem(this.state.item.id)}>{this.state.item.tmp_desc}</Typography>
+                        <Typography className="CardInfoItem_" style={{ marginBottom: 10, fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400 }} component="p" onClick={() => this.props.openItem(this.state.item.id)}>{this.state.item.tmp_desc}</Typography>
                         <div style={{ marginBottom: 20 }}>
                             {this.state.count == 0 ?
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
