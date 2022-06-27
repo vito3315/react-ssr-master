@@ -566,14 +566,18 @@ class CardItem extends React.Component {
                     <Grid item className="SecondBox_" style={{ width: ((GRID*3) + (2*20)), display: 'flex', flexDirection: 'column', position: 'relative', justifyContent: 'flex-end' }}>
                         <Typography className="CardNameItem_" variant="h5" component="h3" style={{ fontFamily: 'Roboto', fontSize: '1.1rem', fontWeight: 500, color: '#525252', marginBottom: 10 }} onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>
 
-                        <div style={{ width: 148, height: 28, display: 'flex', flexDirection: 'row', alignItems: 'center', border: '1px solid #dadada', borderRadius: 10, marginBottom: 10, }}>
-                            <div style={{ flex: 3, textAlign: 'center', borderRight: '1px solid #dadada', height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <Typography style={{ fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252' }} component="span">3 ролла</Typography>
+                        {  parseInt( this.state.item.cat_id ) == 4 ?
+                            <div style={{ width: 148, height: 28, display: 'flex', flexDirection: 'row', alignItems: 'center', border: '1px solid #dadada', borderRadius: 10, marginBottom: 10, }}>
+                                <div style={{ flex: 3, textAlign: 'center', borderRight: '1px solid #dadada', height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Typography style={{ fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252' }} component="span">{this.state.item.count_part_new}</Typography>
+                                </div>
+                                <div style={{ flex: 2, textAlign: 'center', height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Typography style={{ fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252' }} component="span">{this.state.item.count_part} шт</Typography>
+                                </div>
                             </div>
-                            <div style={{ flex: 2, textAlign: 'center', height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <Typography style={{ fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252' }} component="span">80 шт</Typography>
-                            </div>
-                        </div>
+                                :
+                            null
+                        }
 
                         <Typography className="CardInfoItem_" style={{ marginBottom: 10, fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252', maxHeight: 60, overflow: 'hidden' }} component="p" onClick={() => this.props.openItem(this.state.item.id)}>{desc}</Typography>
                         <div style={{ marginBottom: 20 }}>
