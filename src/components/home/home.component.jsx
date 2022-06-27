@@ -544,7 +544,7 @@ class CardItem extends React.Component {
                             />
                         }
                     </Grid>
-                    <Grid item className="SecondBox" style={{ width: ((GRID*3) + (2*20)) }}>
+                    <Grid item className="SecondBox_" style={{ width: ((GRID*3) + (2*20)), marginLeft: 20, display: 'flex', flexDirection: 'column', position: 'relative', justifyContent: 'flex-end' }}>
                         <Typography className="CardNameItem" gutterBottom variant="h5" component="h3" onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>
                         <Typography className="CardInfoItem" component="p" onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.tmp_desc}</Typography>
                         <div>
