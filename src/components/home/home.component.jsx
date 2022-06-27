@@ -472,7 +472,7 @@ class CardItem extends React.Component {
 
                         <CardContent style={{ padding: 0 }}>
                             <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: 10, marginBottom: 10 }}>
-                                <div style={{ width: parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? 75 : 135, height: 34, border: '1px solid #dadada', borderRadius: 12, display: 'flex', flexDirection: 'row' }}>
+                                <div style={{ width: parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? 75 : 135, height: 34, border: '1px solid #dadada', borderRadius: 10, display: 'flex', flexDirection: 'row' }}>
                                     { parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? null :
                                         <div style={{ height: 34, borderRight: '1px solid #dadada', flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                             <span style={{ fontFamily: 'Roboto', fontSize: '0.9rem', fontWeight: 400, color: '#525252' }}>{ parseInt( this.state.item.cat_id ) == 14 ? this.state.item.size_pizza : this.state.item.count_part } { parseInt( this.state.item.cat_id ) == 14 ? 'см' : parseInt( this.state.item.cat_id ) == 6 ? 'л' : 'шт'} </span>
@@ -547,7 +547,7 @@ class CardItem extends React.Component {
                     <Grid item className="SecondBox_" style={{ width: ((GRID*3) + (2*20)), display: 'flex', flexDirection: 'column', position: 'relative', justifyContent: 'flex-end' }}>
                         <Typography className="CardNameItem_" variant="h5" component="h3" style={{ fontFamily: 'Roboto', fontSize: '1.1rem', fontWeight: 500, color: '#525252', marginBottom: 10 }} onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>
 
-                        <div style={{ width: 148, height: 28, display: 'flex', flexDirection: 'row', alignItems: 'center', border: '1px solid #dadada', borderRadius: 12, marginBottom: 10, }}>
+                        <div style={{ width: 148, height: 28, display: 'flex', flexDirection: 'row', alignItems: 'center', border: '1px solid #dadada', borderRadius: 10, marginBottom: 10, }}>
                             <div style={{ flex: 3, textAlign: 'center', borderRight: '1px solid #dadada', height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                 <Typography style={{ fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252' }} component="span">3 ролла</Typography>
                             </div>
@@ -558,26 +558,14 @@ class CardItem extends React.Component {
 
                         <Typography className="CardInfoItem_" style={{ marginBottom: 10, fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252' }} component="p" onClick={() => this.props.openItem(this.state.item.id)}>{this.state.item.tmp_desc}</Typography>
                         <div style={{ marginBottom: 20 }}>
-                            {this.state.count == 0 ?
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
-                                    <Button variant="contained" style={{ fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252', width: 80, height: 30, backgroundColor: '#fff', border: '1px solid #F9BC23', borderRadius: 30 }} onClick={this.add.bind(this)}>
-                                        {this.state.item.price}
-                                        <IconRuble style={{ width: 15, height: 15, fill: '#525252', marginLeft: 5 }} />
-                                    </Button>
-                                </ButtonGroup>
-                                    :
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder count">
-                                    <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this)}>
-                                        <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
-                                    </Button>
-                                    <Button variant="contained" className="BtnCardMain" >
-                                        <Typography className="CardCountItem" component="span">{this.state.count}</Typography>
-                                    </Button>
-                                    <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this)}> 
-                                        <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
-                                    </Button>
-                                </ButtonGroup>
-                            }
+                            
+                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
+                                <Button variant="contained" style={{ fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252', width: 80, height: 30, backgroundColor: '#fff', border: '1px solid #F9BC23', borderRadius: 30, backgroundColor: 'rgb(255, 255, 255)', border: '1px solid rgb(249, 188, 35)', borderRadius: 30 }} onClick={this.add.bind(this)}>
+                                    {this.state.item.price}
+                                    <IconRuble style={{ width: 10, height: 10, fill: '#525252', marginLeft: 3 }} />
+                                </Button>
+                            </ButtonGroup>
+                                    
                         </div>
                     </Grid>
                     
