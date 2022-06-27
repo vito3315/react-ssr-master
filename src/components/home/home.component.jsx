@@ -419,6 +419,10 @@ class CardItem extends React.Component {
             }
         }
 
+        const width = window.screen.width;
+
+        const GRID = (width- 7*20) / 6;
+
         if( this.props.type == 'pc' ){
             return (
                 <Card elevation={0} className="CardItem">
@@ -514,22 +518,23 @@ class CardItem extends React.Component {
         if( this.props.type == 'mobile' ){
             return (
                 <Grid item container xs={12} className="CardItem_mobile">
-                    <Grid style={{ position: 'relative' }} item xs={6} sm={6} md={6} xl={6} onClick={ () => this.props.openItem(this.state.item.id)}>
-                        <LazyLoad once height={150}>
-                            <picture>
-                                <source 
-                                    srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.webp?"+this.state.item.img_new_update} 
-                                    type="image/webp" 
-                                    //ref={el => this.elementSource = el}
-                                />
-                                <img 
-                                    //ref={el => this.elementImg = el}
-                                    src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.jpg?"+this.state.item.img_new_update} 
-                                    alt={this.state.item.name}
-                                    title={this.state.item.name}
-                                />
-                            </picture>
-                        </LazyLoad>
+                    <Grid style={{ position: 'relative' }} item onClick={ () => this.props.openItem(this.state.item.id)}>
+                        
+                        <picture>
+                            <source 
+                                srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.webp?"+this.state.item.img_new_update} 
+                                type="image/webp" 
+                                //ref={el => this.elementSource = el}
+                            />
+                            <img 
+                                //ref={el => this.elementImg = el}
+                                src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.jpg?"+this.state.item.img_new_update} 
+                                alt={this.state.item.name}
+                                title={this.state.item.name}
+                                style={{ width: ((GRID*3) + (2*20)), height: ((GRID*3) + (2*20))  }}
+                            />
+                        </picture>
+                        
                         
                         { parseInt(this.state.item.is_new) == 0 ? null :
                             <img 
@@ -539,7 +544,7 @@ class CardItem extends React.Component {
                             />
                         }
                     </Grid>
-                    <Grid item xs={6} sm={6} md={6} xl={6} className="SecondBox">
+                    <Grid item className="SecondBox">
                         <Typography className="CardNameItem" gutterBottom variant="h5" component="h3" onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>
                         <Typography className="CardInfoItem" component="p" onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.tmp_desc}</Typography>
                         <div>
@@ -1347,23 +1352,20 @@ export class Home extends React.Component {
                         cat.items.length > 0 ?
                             mainLink == '' || mainLink == cat.main_link || mainLink == cat.link ?
                                 <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
-                                    <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%', paddingBottom: 40 }} className="MainItems mainContainer">
-                                        <Typography variant="h5" component="h2">{ cat.name }</Typography>
-                                    </Grid>
                                     <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
                                         {cat.items.map((it, k) => (
-                                            <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '30px 16px', display: 'flex' }}>
+                                            <React.Fragment key={k}>
                                                 <Hidden xsDown>
-                                                    
-                                                    <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
-                                                    
+                                                    <Grid item xs={12} sm={4} md={3} xl={3} style={{ padding: '30px 16px', display: 'flex' }}>
+                                                        <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
+                                                    </Grid>
                                                 </Hidden>
                                                 <Hidden smUp>
-                                                    
-                                                    <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
-                                                    
+                                                    <Grid item xs={12} sm={4} md={3} xl={3} style={{ display: 'flex' }}>
+                                                        <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
+                                                    </Grid>
                                                 </Hidden>
-                                            </Grid>
+                                            </React.Fragment>
                                         ))}
                                     </Grid>
                                 </div>
