@@ -544,16 +544,10 @@ class CardItem extends React.Component {
                             />
                         }
                     </Grid>
-                    <Grid item className="SecondBox_" style={{ width: ((GRID*3) + (2*20)), marginLeft: 20, display: 'flex', flexDirection: 'column', position: 'relative', justifyContent: 'flex-end' }}>
+                    <Grid item className="SecondBox_" style={{ width: ((GRID*3) + (2*20)), display: 'flex', flexDirection: 'column', position: 'relative', justifyContent: 'flex-end' }}>
                         <Typography className="CardNameItem" gutterBottom variant="h5" component="h3" onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>
                         <Typography className="CardInfoItem" component="p" onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.tmp_desc}</Typography>
-                        <div>
-                            <div>
-                                { this.state.is_old_price === false ? null :
-                                    <Typography gutterBottom className="CardPriceItem_old" variant="h5" component="span">{this.state.old_price} <Ruble width="20" viewBox="100 -100 800 300" /></Typography>
-                                }
-                                <Typography gutterBottom className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <Ruble width="20" viewBox="200 -200 400 600" /></Typography>
-                            </div>
+                        <div style={{ marginBottom: 20 }}>
                             {this.state.count == 0 ?
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
                                     <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={this.add.bind(this)}>
