@@ -518,7 +518,7 @@ class CardItem extends React.Component {
         if( this.props.type == 'mobile' ){
             return (
                 <Grid item container xs={12} className="CardItem_mobile" style={{ display: 'flex', flexDirection: 'row' }}>
-                    <Grid style={{ position: 'relative' }} item onClick={ () => this.props.openItem(this.state.item.id)}>
+                    <Grid style={{ position: 'relative', marginRight: 20 }} item onClick={ () => this.props.openItem(this.state.item.id)}>
                         
                         <picture>
                             <source 
@@ -544,7 +544,7 @@ class CardItem extends React.Component {
                             />
                         }
                     </Grid>
-                    <Grid item className="SecondBox">
+                    <Grid item className="SecondBox" style={{ width: ((GRID*3) + (2*20)), marginLeft: 20, }}>
                         <Typography className="CardNameItem" gutterBottom variant="h5" component="h3" onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>
                         <Typography className="CardInfoItem" component="p" onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.tmp_desc}</Typography>
                         <div>
