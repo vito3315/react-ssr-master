@@ -517,7 +517,7 @@ class CardItem extends React.Component {
         
         if( this.props.type == 'mobile' ){
             return (
-                <Grid item container xs={12} className="CardItem_mobile">
+                <Grid item container xs={12} className="CardItem_mobile" style={{ display: 'flex', flexDirection: 'row' }}>
                     <Grid style={{ position: 'relative' }} item onClick={ () => this.props.openItem(this.state.item.id)}>
                         
                         <picture>

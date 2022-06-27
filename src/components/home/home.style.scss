@@ -265,11 +265,6 @@ $colorMain: #CC0033;
     }
 }
 .CardItem_mobile{
-    & img{
-        margin-right: 10px;
-        width: calc(100% - 10px);
-    }
-    
     & .SecondBox{
         display: flex;
         flex-direction: column;
