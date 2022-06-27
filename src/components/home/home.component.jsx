@@ -429,35 +429,35 @@ class CardItem extends React.Component {
                     
                     <CardContent style={{ cursor: 'pointer', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }} onClick={ () => this.props.openItem(this.state.item.id)}>
                         
-                            {img_type == 'old' ?
-                                <picture>
-                                    <source 
-                                        srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
-                                        type="image/webp" 
-                                    />
-                                    <img 
-                                        src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
-                                        alt={this.state.item.name}
-                                        title={this.state.item.name}
-                                        style={{ minHeight: 150 }}
-                                    />
-                                </picture>
-                                    :
-                                <picture>
-                                    <source srcset={`
-                                        https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg 138w, 
-                                        https://storage.yandexcloud.net/site-img/${img_name}_146x146.jpg 146w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_183x183.jpg 183w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_233x233.jpg 233w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_292x292.jpg 292w
-                                        https://storage.yandexcloud.net/site-img/${img_name}_366x366.jpg 366w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_584x584.jpg 584w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_760x760.jpg 760w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_1875x1875.jpg 1875w`} 
-                                        sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
-                                    <img alt={this.state.item.name} title={this.state.item.name} src={`https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg`} />
-                                </picture>
-                            }
+                        {img_type == 'old' ?
+                            <picture>
+                                <source 
+                                    srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
+                                    type="image/webp" 
+                                />
+                                <img 
+                                    src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
+                                    alt={this.state.item.name}
+                                    title={this.state.item.name}
+                                    style={{ minHeight: 150 }}
+                                />
+                            </picture>
+                                :
+                            <picture>
+                                <source srcset={`
+                                    https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg 138w, 
+                                    https://storage.yandexcloud.net/site-img/${img_name}_146x146.jpg 146w,
+                                    https://storage.yandexcloud.net/site-img/${img_name}_183x183.jpg 183w,
+                                    https://storage.yandexcloud.net/site-img/${img_name}_233x233.jpg 233w,
+                                    https://storage.yandexcloud.net/site-img/${img_name}_292x292.jpg 292w
+                                    https://storage.yandexcloud.net/site-img/${img_name}_366x366.jpg 366w,
+                                    https://storage.yandexcloud.net/site-img/${img_name}_584x584.jpg 584w,
+                                    https://storage.yandexcloud.net/site-img/${img_name}_760x760.jpg 760w,
+                                    https://storage.yandexcloud.net/site-img/${img_name}_1875x1875.jpg 1875w`} 
+                                    sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
+                                <img alt={this.state.item.name} title={this.state.item.name} src={`https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg`} />
+                            </picture>
+                        }
                         
 
                         { parseInt(this.state.item.is_new) == 0 ? null :
@@ -520,22 +520,41 @@ class CardItem extends React.Component {
                 <Grid item container xs={12} className="CardItem_mobile" style={{ display: 'flex', flexDirection: 'row' }}>
                     <Grid style={{ position: 'relative', marginRight: 20 }} item onClick={ () => this.props.openItem(this.state.item.id)}>
                         
-                        <picture>
-                            <source 
-                                srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.webp?"+this.state.item.img_new_update} 
-                                type="image/webp" 
-                                //ref={el => this.elementSource = el}
-                            />
-                            <img 
-                                //ref={el => this.elementImg = el}
-                                src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.jpg?"+this.state.item.img_new_update} 
-                                alt={this.state.item.name}
-                                title={this.state.item.name}
-                                style={{ width: ((GRID*3) + (2*20)), height: ((GRID*3) + (2*20))  }}
-                            />
-                        </picture>
-                        
-                        
+                        {img_type == 'old' ?
+                            <picture>
+                                <source 
+                                    srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
+                                    type="image/webp" 
+                                />
+                                <img 
+                                    src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
+                                    alt={this.state.item.name}
+                                    title={this.state.item.name}
+                                    style={{ width: ((GRID*3) + (2*20)), height: ((GRID*3) + (2*20))  }}
+                                />
+                            </picture>
+                                :
+                            <picture>
+                                <source srcset={`
+                                    https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg 138w, 
+                                    https://storage.yandexcloud.net/site-img/${img_name}_146x146.jpg 146w,
+                                    https://storage.yandexcloud.net/site-img/${img_name}_183x183.jpg 183w,
+                                    https://storage.yandexcloud.net/site-img/${img_name}_233x233.jpg 233w,
+                                    https://storage.yandexcloud.net/site-img/${img_name}_292x292.jpg 292w
+                                    https://storage.yandexcloud.net/site-img/${img_name}_366x366.jpg 366w,
+                                    https://storage.yandexcloud.net/site-img/${img_name}_584x584.jpg 584w,
+                                    https://storage.yandexcloud.net/site-img/${img_name}_760x760.jpg 760w,
+                                    https://storage.yandexcloud.net/site-img/${img_name}_1875x1875.jpg 1875w`} 
+                                    sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
+                                <img 
+                                    alt={this.state.item.name} 
+                                    title={this.state.item.name} 
+                                    src={`https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg`} 
+                                    style={{ width: ((GRID*3) + (2*20)), height: ((GRID*3) + (2*20))  }}
+                                />
+                            </picture>
+                        }
+
                         { parseInt(this.state.item.is_new) == 0 ? null :
                             <img 
                                 src='/assets/is_new.png'
@@ -556,7 +575,7 @@ class CardItem extends React.Component {
                             </div>
                         </div>
 
-                        <Typography className="CardInfoItem_" style={{ marginBottom: 10, fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252' }} component="p" onClick={() => this.props.openItem(this.state.item.id)}>{this.state.item.tmp_desc}</Typography>
+                        <Typography className="CardInfoItem_" style={{ marginBottom: 10, fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252' }} component="p" onClick={() => this.props.openItem(this.state.item.id)}>{desc}</Typography>
                         <div style={{ marginBottom: 20 }}>
                             
                             <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
