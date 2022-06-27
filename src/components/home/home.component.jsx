@@ -560,8 +560,8 @@ class CardItem extends React.Component {
                         <div style={{ marginBottom: 20 }}>
                             {this.state.count == 0 ?
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
-                                    <Button variant="contained" className="" onClick={this.add.bind(this)}>
-                                        <Typography style={{ fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252' }} component="span"></Typography>
+                                    <Button variant="contained" style={{ fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252', width: 80, height: 30 }} onClick={this.add.bind(this)}>
+                                        {this.state.item.price}
                                     </Button>
                                 </ButtonGroup>
                                     :
