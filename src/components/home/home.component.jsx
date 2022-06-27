@@ -575,7 +575,7 @@ class CardItem extends React.Component {
                             </div>
                         </div>
 
-                        <Typography className="CardInfoItem_" style={{ marginBottom: 10, fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252' }} component="p" onClick={() => this.props.openItem(this.state.item.id)}>{desc}</Typography>
+                        <Typography className="CardInfoItem_" style={{ marginBottom: 10, fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252', maxHeight: 60, overflow: 'hidden' }} component="p" onClick={() => this.props.openItem(this.state.item.id)}>{desc}</Typography>
                         <div style={{ marginBottom: 20 }}>
                             
                             <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">

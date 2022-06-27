@@ -340,6 +340,16 @@ $colorMain: #CC0033;
         line-clamp: 3;
         box-orient: vertical;
     }
+    & .CardInfoItem_{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -moz-box;
+        -moz-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        line-clamp: 3;
+        box-orient: vertical;
+    }
     & > div:first-child{
         display: flex;
         justify-content: center;
