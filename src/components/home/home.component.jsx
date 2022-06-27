@@ -544,7 +544,7 @@ class CardItem extends React.Component {
                             />
                         }
                     </Grid>
-                    <Grid item className="SecondBox" style={{ width: ((GRID*3) + (2*20)), marginLeft: 20, }}>
+                    <Grid item className="SecondBox" style={{ width: ((GRID*3) + (2*20)) }}>
                         <Typography className="CardNameItem" gutterBottom variant="h5" component="h3" onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>
                         <Typography className="CardInfoItem" component="p" onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.tmp_desc}</Typography>
                         <div>
@@ -1352,7 +1352,7 @@ export class Home extends React.Component {
                         cat.items.length > 0 ?
                             mainLink == '' || mainLink == cat.main_link || mainLink == cat.link ?
                                 <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
-                                    <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
+                                    <Grid container spacing={2} style={{ margin: 0, padding: '0px 20px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
                                         {cat.items.map((it, k) => (
                                             <React.Fragment key={k}>
                                                 <Hidden xsDown>
@@ -1361,7 +1361,7 @@ export class Home extends React.Component {
                                                     </Grid>
                                                 </Hidden>
                                                 <Hidden smUp>
-                                                    <Grid item xs={12} sm={4} md={3} xl={3} style={{ display: 'flex' }}>
+                                                    <Grid item xs={12} sm={4} md={3} xl={3} style={{ display: 'flex', padding: 0 }}>
                                                         <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
                                                     </Grid>
                                                 </Hidden>
