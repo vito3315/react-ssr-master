@@ -545,18 +545,18 @@ class CardItem extends React.Component {
                         }
                     </Grid>
                     <Grid item className="SecondBox_" style={{ width: ((GRID*3) + (2*20)), display: 'flex', flexDirection: 'column', position: 'relative', justifyContent: 'flex-end' }}>
-                        <Typography className="CardNameItem" variant="h5" component="h3" onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>
+                        <Typography className="CardNameItem_" variant="h5" component="h3" style={{ fontFamily: 'Roboto', fontSize: '1.1rem', fontWeight: 500, color: '#525252', marginBottom: 10 }} onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>
 
-                        <div style={{ width: 150, height: 30 }}>
-                            <div style={{ flex: 3 }}>
-                                <Typography style={{ marginBottom: 10, fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252' }} component="span">3 ролла</Typography>
+                        <div style={{ width: 148, height: 28, display: 'flex', flexDirection: 'row', alignItems: 'center', border: '1px solid #dadada', borderRadius: 12, marginBottom: 10, }}>
+                            <div style={{ flex: 3, textAlign: 'center', borderRight: '1px solid #dadada', height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <Typography style={{ fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252' }} component="span">3 ролла</Typography>
                             </div>
-                            <div style={{ flex: 2 }}>
-                                <Typography style={{ marginBottom: 10, fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252' }} component="span">80 шт</Typography>
+                            <div style={{ flex: 2, textAlign: 'center', height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <Typography style={{ fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252' }} component="span">80 шт</Typography>
                             </div>
                         </div>
 
-                        <Typography className="CardInfoItem_" style={{ marginBottom: 10, fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400 }} component="p" onClick={() => this.props.openItem(this.state.item.id)}>{this.state.item.tmp_desc}</Typography>
+                        <Typography className="CardInfoItem_" style={{ marginBottom: 10, fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252' }} component="p" onClick={() => this.props.openItem(this.state.item.id)}>{this.state.item.tmp_desc}</Typography>
                         <div style={{ marginBottom: 20 }}>
                             {this.state.count == 0 ?
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
