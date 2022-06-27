@@ -559,9 +559,9 @@ class CardItem extends React.Component {
                         <Typography className="CardInfoItem_" style={{ marginBottom: 10, fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252' }} component="p" onClick={() => this.props.openItem(this.state.item.id)}>{this.state.item.tmp_desc}</Typography>
                         <div style={{ marginBottom: 20 }}>
                             {this.state.count == 0 ?
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
-                                    <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={this.add.bind(this)}>
-                                        <ShoppingCartOutlinedIcon color='inherit'  />
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
+                                    <Button variant="contained" className="" onClick={this.add.bind(this)}>
+                                        <Typography style={{ fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252' }} component="span"></Typography>
                                     </Button>
                                 </ButtonGroup>
                                     :
