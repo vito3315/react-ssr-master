@@ -1223,20 +1223,20 @@ export class Item2 extends React.Component {
 
                             <Typography variant="h5" component="h1" style={{ textAlign: 'center' }}>{this.state.item.name}</Typography>
                         </Grid>
-                        <Grid item xs={12}>
-                            <Typography component="span" style={{ textAlign: 'center', fontFamily: 'Roboto', fontSize: '1rem', fontWeight: 400, color: '#525252' }}>{desc}</Typography>
+                        <Grid item xs={12} style={{ height: 80 }}>
+                            <Typography component="span" style={{ textAlign: 'center', fontFamily: 'Roboto', fontSize: '0.875rem', fontWeight: 400, color: '#525252' }}>{desc}</Typography>
                         </Grid>
 
                         <Grid item xs={12}>
                             { this.state.count == 0 ?
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%' }}>
                                     <Button variant="contained" className='ModalItemButtonCart' style={{ width: '100%', height: 60, borderRadius: 40, border: '2px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.add.bind(this)}>
                                         <span style={{ fontSize: '1.5rem', textTransform: 'initial', fontFamily: 'Roboto', color: '#525252', fontWeight: 700 }}>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)}</span>
                                         <IconRuble style={{ width: 15, height: 15, fill: '#525252', marginLeft: 5 }} />
                                     </Button>
                                 </ButtonGroup>
                                     :
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%' }}>
                                     <div variant="contained" className='ModalItemButtonCart' style={{ width: '100%', height: 56, borderRadius: 40, border: '2px solid #F9BC23', backgroundColor: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <button style={{ width: 30, height: 30, borderRadius: 40, marginLeft: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23', fontSize: '2rem', fontFamily: 'Roboto', fontWeight: 400, display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={this.minus.bind(this)}>-</button>
                                         <div>

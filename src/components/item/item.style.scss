@@ -62,6 +62,7 @@ $colorMain: #CC0033;
     }
     & > div:last-child{
         display: flex; 
+        flex-direction: column;
     }
     & > div:not(:last-child):not(:first-child){
         display: flex;
