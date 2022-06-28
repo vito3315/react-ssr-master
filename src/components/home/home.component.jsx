@@ -1195,9 +1195,9 @@ export class Home extends React.Component {
         })
         
         setTimeout(()=>{
-            let el = document.getElementById("forSwiper");
+            /*let el = document.getElementById("forSwiper");
             el.addEventListener("touchstart", this.touchStart.bind(this), false);
-            el.addEventListener("touchend", this.touchEnd.bind(this), false);
+            el.addEventListener("touchend", this.touchEnd.bind(this), false);*/
         }, 300)
     }
     
@@ -1232,9 +1232,9 @@ export class Home extends React.Component {
     }
     
     handleClose(){
-        let el = document.getElementById("forSwiper");
+        /*let el = document.getElementById("forSwiper");
         el.removeEventListener("touchstart", this.touchStart.bind(this), false);
-        el.removeEventListener("touchend", this.touchEnd.bind(this), false);
+        el.removeEventListener("touchend", this.touchEnd.bind(this), false);*/
         
         let state = { },
             title = '',
