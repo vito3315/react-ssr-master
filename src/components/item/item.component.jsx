@@ -1200,7 +1200,7 @@ export class Item2 extends React.Component {
                 
 
                 <Hidden smUp>
-                    <Grid container className="MainItem mainContainer" style={{ height: '100%', paddingRight: 20, paddingLeft: 20 }}>
+                    <Grid container className="MainItem mainContainer" style={{ height: 'calc(100vh - 65px)', paddingRight: 20, paddingLeft: 20, alignContent: 'flex-start', position: 'relative' }}>
                         <Grid item xs={12}>
 
                             {img_type == 'old' ?
@@ -1280,7 +1280,7 @@ export class Item2 extends React.Component {
                             <Typography component="span" style={{ textAlign: 'center', fontFamily: 'Roboto', fontSize: '0.875rem', fontWeight: 400, color: '#525252' }}>{desc}</Typography>
                         </Grid>
 
-                        <Grid item xs={12}>
+                        <Grid item xs={12} style={{ position: 'absolute', width: 'calc(100% - 40px)', bottom: 50 }}>
                             { this.state.count == 0 ?
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%' }}>
                                     <Button variant="contained" className='ModalItemButtonCart' style={{ width: '100%', height: 60, borderRadius: 40, border: '2px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.add.bind(this)}>
