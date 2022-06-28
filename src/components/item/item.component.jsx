@@ -1183,7 +1183,7 @@ export class Item2 extends React.Component {
                 
 
                 <Hidden smUp>
-                    <Grid container className="MainItem mainContainer" style={{ height: '100%' }}>
+                    <Grid container className="MainItem mainContainer" style={{ height: '100%', paddingRight: 20, paddingLeft: 20 }}>
                         <Grid item xs={12}>
 
                             {img_type == 'old' ?
@@ -1196,7 +1196,7 @@ export class Item2 extends React.Component {
                                         src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
                                         alt={this.state.item.name}
                                         title={this.state.item.name}
-                                        style={{ minHeight: 150 }}
+                                        style={{ width: '100%' }}
                                     />
                                 </picture>
                                     :
@@ -1212,17 +1212,25 @@ export class Item2 extends React.Component {
                                         https://storage.yandexcloud.net/site-img/${img_name}_1420x1420.jpg 760w,
                                         https://storage.yandexcloud.net/site-img/${img_name}_2000x2000.jpg 1875w`} 
                                         sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
-                                    <img alt={this.state.item.name} title={this.state.item.name} class="img" src={`https://storage.yandexcloud.net/site-img/${img_name}_276x276.jpg`} />
+                                    <img 
+                                        alt={this.state.item.name} 
+                                        title={this.state.item.name} 
+                                        class="img" 
+                                        style={{ width: '100%' }}
+                                        src={`https://storage.yandexcloud.net/site-img/${img_name}_276x276.jpg`} />
                                 </picture>
                             }
 
                             <Typography variant="h5" component="h1" style={{ textAlign: 'center' }}>{this.state.item.name}</Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            
-                            
-                            
-                            
+                            <Typography component="span" style={{ textAlign: 'center', fontFamily: 'Roboto', fontSize: '1rem', fontWeight: 400, }}>{desc}</Typography>
+                        </Grid>
+
+                        <Grid item xs={12}>
+                            <div style={{ width: '100%', height: 60, borderRadius: 30, border: '2px solid rgba(249, 188, 35, 1)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                <Typography component="span" style={{ fontFamily: 'Roboto', fontSize: '1.5rem', fontWeight: 700, lineHeight: 1 }}>В корзину за 909 р</Typography>
+                            </div>
                         </Grid>
                     </Grid>
                 </Hidden>
