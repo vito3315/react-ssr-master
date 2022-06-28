@@ -574,15 +574,14 @@ class CardItem extends React.Component {
                         }
 
                         <Typography className="CardInfoItem_" style={{ marginBottom: 10, fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252', maxHeight: 60, overflow: 'hidden' }} component="p" onClick={() => this.props.openItem(this.state.item.id)}>{desc}</Typography>
-                        <div style={{ marginBottom: 20 }}>
-                            
+                        
+                        <div style={{ marginBottom: 10 }}>
                             <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
                                 <Button variant="contained" style={{ fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252', width: 80, height: 30, backgroundColor: '#fff', border: '1px solid #F9BC23', borderRadius: 30, backgroundColor: 'rgb(255, 255, 255)', border: '1px solid rgb(249, 188, 35)', borderRadius: 30 }} onClick={this.add.bind(this)}>
                                     {new Intl.NumberFormat('ru-RU').format( parseInt(this.state.item.price))}
                                     <IconRuble style={{ width: 10, height: 10, fill: '#525252', marginLeft: 3 }} />
                                 </Button>
                             </ButtonGroup>
-                                    
                         </div>
                     </Grid>
                     
@@ -1413,7 +1412,7 @@ export class Home extends React.Component {
                     )}
                     
                     {this.state.openItem ?
-                        <Dialog fullScreen open={this.state.openModal} className="ItemDialog" onClose={this.handleClose.bind(this)} TransitionComponent={Transition}>
+                        <Dialog fullWidth open={this.state.openModal} className="ItemDialog" onClose={this.handleClose.bind(this)} TransitionComponent={Transition}>
                             <MuiDialogTitle disableTypography style={{ margin: 0, padding: 8 }}>
                                 <IconButton aria-label="close" style={{ position: 'absolute', top: 0, right: 0 }} onClick={this.handleClose.bind(this)}>
                                     <FontAwesomeIcon icon={faTimes} style={{ fontSize: '1.8rem', color: '#e5e5e5' }} />
