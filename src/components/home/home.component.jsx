@@ -1414,8 +1414,8 @@ export class Home extends React.Component {
                     {this.state.openItem ?
                         <Dialog fullScreen open={this.state.openModal} className="ItemDialog" onClose={this.handleClose.bind(this)} TransitionComponent={Transition}>
                             <MuiDialogTitle disableTypography style={{ margin: 0, padding: 8 }}>
-                                <IconButton aria-label="close" style={{ position: 'absolute', top: 0, right: 0 }} onClick={this.handleClose.bind(this)}>
-                                    <FontAwesomeIcon icon={faTimes} style={{ fontSize: '1.8rem', color: '#e5e5e5' }} />
+                                <IconButton aria-label="close" style={{ position: 'absolute', top: -45, left: 8 }} onClick={this.handleClose.bind(this)}>
+                                    <IconClose />
                                 </IconButton>
                             </MuiDialogTitle>
                             <div>

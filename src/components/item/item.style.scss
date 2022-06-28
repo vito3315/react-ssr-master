@@ -56,6 +56,8 @@ $colorMain: #CC0033;
         @include fons(1.625rem, $Roboto);
         font-weight: 900;
         color: #525252;
+        line-height: 1;
+        margin-top: 20px;
     }
     & > div:first-child{
         text-align: center;

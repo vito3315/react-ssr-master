@@ -94,6 +94,23 @@ function IconRuble(props) {
     );
 }
 
+function IconClose(props) {
+    return (
+        <svg
+            style={ props.style }
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 64 64"
+        >
+            <path
+                stroke="#fff"
+                strokeLinecap="round"
+                strokeWidth="3"
+                d="M2 2l60 60M62 2L2 62"></path>
+        </svg>
+    );
+}
+
 const HtmlTooltip = withStyles((theme) => ({
     tooltip: {
       backgroundColor: '#f5f5f9',
@@ -102,7 +119,7 @@ const HtmlTooltip = withStyles((theme) => ({
       fontSize: theme.typography.pxToRem(12),
       border: '1px solid #dadde9',
     },
-  }))(Tooltip);
+}))(Tooltip);
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;

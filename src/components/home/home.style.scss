@@ -57,6 +57,7 @@ $colorMain: #CC0033;
 .ItemDialog{
     & .MuiDialog-paperFullScreen{
         margin-top: 100px;
+        overflow: initial!important;
     }
     & .MainItem_mobile{
         margin-top: 30px!important;
