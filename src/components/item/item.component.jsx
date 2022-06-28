@@ -1224,10 +1224,37 @@ export class Item2 extends React.Component {
                             <Typography variant="h5" component="h1" style={{ textAlign: 'center' }}>{this.state.item.name}</Typography>
                         </Grid>
 
-                        <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
-                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%' }}>
-                                <Button variant="contained" className='ModalItemButtonCart' style={{ width: 240, height: 30, borderRadius: 15, border: '1px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.add.bind(this)}>
-                                    <span style={{ fontSize: '1.25rem', textTransform: 'initial', fontFamily: 'Roboto', color: '#525252', fontWeight: 400 }}>Состав сета</span>
+                        <Grid item xs={12}>
+                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', maxWidth: 300 }}>
+                                <div style={{ width: parseInt( this.state.item.cat_id ) == 4 ? 230 : parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? 80 : 150, height: 40, border: '1px solid #e5e5e5', borderRadius: 15, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginTop: '4%', marginBottom: '4%', marginRight: 25 }}>
+                                    { parseInt( this.state.item.cat_id ) == 4 ?
+                                        <>
+                                            <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center' }}>{this.state.item.count_part_new}</Typography>
+                                            <div style={{ height: '100%', borderLeft: '1px solid #e5e5e5' }} />
+                                        </>
+                                            :
+                                        null
+                                    }
+                                    { parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ?
+                                        null
+                                            :
+                                        <>
+                                            <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: parseInt( this.state.item.cat_id ) == 4 ? 2 : 3, textAlign: 'center' }}>{ parseInt( this.state.item.cat_id ) == 14 ? this.state.item.size_pizza + ' см.' : this.state.item.count_part + ' шт.' }</Typography>
+                                            <div style={{ height: '100%', borderLeft: '1px solid #e5e5e5' }} />
+                                        </>
+                                    }
+                                    <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight)} { parseInt( this.state.item.cat_id ) == 6 ? 'л' : 'г' }</Typography>
+                                </div>
+
+                                
+                                
+                            </div>
+                        </Grid>
+
+                        <Grid item xs={12} style={{ marginBottom: 20 }}>
+                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                                <Button variant="contained" className='ModalItemButtonCart' style={{ width: 240, height: 30, borderRadius: 15, border: '1px solid #F9BC23', backgroundColor: '#fff', fontSize: '0.875rem', textTransform: 'initial', fontFamily: 'Roboto', color: '#525252', fontWeight: 400 }}>
+                                    Состав сета
                                 </Button>
                             </ButtonGroup>
                         </Grid>
