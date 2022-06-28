@@ -729,7 +729,7 @@ class Badge extends React.Component{
 
     render(){
         return (
-            <div style={{ position: 'absolute', top: -10, left: -10, }}>
+            <div style={{ position: 'absolute', top: 0, left: -10, }}>
                 <div style={{ width: this.state.size == 'small' ? 84 : 114, height: this.state.size == 'small' ? 34 : 44, backgroundColor: 'rgba(255, 255, 255, 0.6)', borderRadius: 15 }} />
                 <div style={{ width: this.state.size == 'small' ? 80 : 110, height: this.state.size == 'small' ? 30 : 40, backgroundColor: this.state.color, borderRadius: 15, display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'absolute', top: 2, left: 2 }}>
                     <Typography component="span" style={{ fontFamily: 'Roboto', fontSize: '0.75rem', fontWeight: 400, color: '#fff', textTransform: 'uppercase', lineHeight: 1 }}>{this.state.text}</Typography>
@@ -1389,7 +1389,7 @@ export class Home extends React.Component {
                         cat.items.length > 0 ?
                             mainLink == '' || mainLink == cat.main_link || mainLink == cat.link ?
                                 <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
-                                    <Grid container spacing={2} style={{ margin: 0, padding: '0px 20px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
+                                    <Grid container spacing={2} style={{ margin: 0, padding: '0px 20px', flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
                                         {cat.items.map((it, k) => (
                                             <React.Fragment key={k}>
                                                 <Hidden xsDown>
@@ -1398,7 +1398,7 @@ export class Home extends React.Component {
                                                     </Grid>
                                                 </Hidden>
                                                 <Hidden smUp>
-                                                    <Grid item xs={12} sm={4} md={3} xl={3} style={{ display: 'flex', paddingTop: 10, paddingBottom: 10, borderBottom: cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
+                                                    <Grid item xs={12} sm={4} md={3} xl={3} style={{ display: 'flex', padding: '10px 0px', borderBottom: cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
                                                         <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
                                                     </Grid>
                                                 </Hidden>
