@@ -62,7 +62,7 @@ $colorMain: #CC0033;
         margin-top: 30px!important;
     }
     & span, p, b{
-        @include fons(1rem, $Ubuntu);
+        //@include fons(1rem, $Ubuntu);
     }
 }
 .fohover{
