@@ -1215,7 +1215,6 @@ export class Item2 extends React.Component {
                                     <img 
                                         alt={this.state.item.name} 
                                         title={this.state.item.name} 
-                                        class="img" 
                                         style={{ width: '100%' }}
                                         src={`https://storage.yandexcloud.net/site-img/${img_name}_276x276.jpg`} />
                                 </picture>
