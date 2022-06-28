@@ -94,23 +94,6 @@ function IconRuble(props) {
     );
 }
 
-function IconClose(props) {
-    return (
-        <svg
-            style={ props.style }
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 64 64"
-        >
-            <path
-                stroke="#fff"
-                strokeLinecap="round"
-                strokeWidth="3"
-                d="M2 2l60 60M62 2L2 62"></path>
-        </svg>
-    );
-}
-
 const HtmlTooltip = withStyles((theme) => ({
     tooltip: {
       backgroundColor: '#f5f5f9',
@@ -1263,7 +1246,9 @@ export class Item2 extends React.Component {
                                     <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center', fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.87rem', color: '#525252' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight)} { parseInt( this.state.item.cat_id ) == 6 ? 'л' : 'г' }</Typography>
                                 </div>
 
-                                
+                                <div style={{ width: 40, height: 40, cursor: 'pointer' }}>
+                                    <IconInfoWhite />
+                                </div>
                                 
                             </div>
                         </Grid>
@@ -1277,7 +1262,7 @@ export class Item2 extends React.Component {
                         </Grid>
 
                         <Grid item xs={12} style={{ height: 80, justifyContent: 'center' }}>
-                            <Typography component="span" style={{ textAlign: 'center', fontFamily: 'Roboto', fontSize: '0.875rem', fontWeight: 400, color: '#525252' }}>{desc}</Typography>
+                            <Typography component="span" style={{ textAlign: 'center', fontFamily: 'Roboto', fontSize: '0.875rem', fontWeight: 400, color: '#525252', width: '100%' }}>{desc}</Typography>
                         </Grid>
 
                         <Grid item xs={12} style={{ position: 'absolute', width: 'calc(100% - 40px)', bottom: 50 }}>
