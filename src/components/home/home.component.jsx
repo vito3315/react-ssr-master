@@ -729,8 +729,11 @@ class Badge extends React.Component{
 
     render(){
         return (
-            <div style={{ width: this.state.size == 'small' ? 80 : 110, height: this.state.size == 'small' ? 30 : 40, backgroundColor: this.state.color, border: '2px solid rgba(255, 255, 255, 0.6)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Typography style={{ fontFamily: 'Roboto', fontSize: '1rem', fontWeight: 400 }}>{this.state.text}</Typography>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'absolute', top: -10, left: -10, }}>
+                <div style={{ width: this.state.size == 'small' ? 84 : 114, height: this.state.size == 'small' ? 34 : 44, backgroundColor: 'rgba(255, 255, 255, 0.6)', borderRadius: 15 }} />
+                <div style={{ width: this.state.size == 'small' ? 80 : 110, height: this.state.size == 'small' ? 30 : 40, backgroundColor: this.state.color, borderRadius: 15, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Typography component="span" style={{ fontFamily: 'Roboto', fontSize: '0.75rem', fontWeight: 400, color: '#fff', textTransform: 'uppercase', lineHeight: 1 }}>{this.state.text}</Typography>
+                </div>
             </div>
         );
     }
