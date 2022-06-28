@@ -720,10 +720,13 @@ class Badge extends React.Component{
     constructor(props) {
         super(props);
         
+        console.log( this.props )
+        console.log( this.arrColor )
+
         this.state = {      
             size: this.props.size,
-            color: this.arrColor[ this.props.type ].color,
-            text: this.arrColor[ this.props.type ].text
+            color: '#fff',//this.arrColor[ this.props.type ].color,
+            text: 'text'//this.arrColor[ this.props.type ].text
         };
     }
 
