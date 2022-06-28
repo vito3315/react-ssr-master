@@ -53,8 +53,8 @@ $colorMain: #CC0033;
     padding-left: 10%;
     padding-right: 10%;*/
     & h1{
-        @include fons(2rem, $Ubuntu);
-        font-weight: bold;
+        @include fons(2rem, $Roboto);
+        font-weight: 900;
     }
     & > div:first-child{
         text-align: center;
