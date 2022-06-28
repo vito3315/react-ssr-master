@@ -555,13 +555,7 @@ class CardItem extends React.Component {
                             </picture>
                         }
 
-                        { parseInt(this.state.item.is_new) == 0 ? null :
-                            <img 
-                                src='/assets/is_new.png'
-                                alt="Новинка"
-                                style={{ position: 'absolute', width: 70, top: 0, right: 0 }}
-                            />
-                        }
+                        <Badge size={'small'} type={'new'} />
                     </Grid>
                     <Grid item className="SecondBox_" style={{ width: ((GRID*3) + (2*20)), display: 'flex', flexDirection: 'column', position: 'relative', justifyContent: 'flex-end' }}>
                         <Typography className="CardNameItem_" variant="h5" component="h3" style={{ fontFamily: 'Roboto', fontSize: '1.1rem', fontWeight: 500, color: '#525252', marginBottom: 10 }} onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>
@@ -713,6 +707,32 @@ class CardItemBot extends React.Component {
                 </CardActions>
             </Card>
         )
+    }
+}
+
+class Badge extends React.Component{
+    arrColor = {
+        new: { color: '#EE7900', text: 'новинка' },
+        hit: { color: '#AF00DB', text: 'хит' },
+        sale: { color: '#DB0021', text: 'скидка' }, 
+    }
+
+    constructor(props) {
+        super(props);
+        
+        this.state = {      
+            size: this.props.size,
+            color: this.color[ this.props.type ].color,
+            text: this.color[ this.props.type ].text
+        };
+    }
+
+    render(){
+        return (
+            <div style={[ this.state.size == 'small' ? { width: 80, height: 30 } : { width: 110, height: 40 }, { backgroundColor: this.state.color, border: '2px solid rgba(255, 255, 255, 0.6)', display: 'flex', justifyContent: 'center', alignItems: 'center' } ]}>
+                <Typography style={{ fontFamily: 'Roboto', fontSize: '1rem', fontWeight: 400 }}>{this.state.text}</Typography>
+            </div>
+        );
     }
 }
 
@@ -1361,8 +1381,6 @@ export class Home extends React.Component {
                             />
                         }
                     </Hidden>
-                    
-                    <Typography variant="h5" component="h1" style={{ paddingBottom: 20 }}>{ this.state.page ? this.state.page.page_h : '' }</Typography>
                     
                     {itemsStore.getAllItemsCat().map((cat, key) => 
                         cat.items.length > 0 ?
