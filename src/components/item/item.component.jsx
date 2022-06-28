@@ -1183,7 +1183,7 @@ export class Item2 extends React.Component {
                 
 
                 <Hidden smUp>
-                    <Grid container className="MainItem mainContainer" style={{ height: 'calc(100vh - 65px)', paddingRight: 20, paddingLeft: 20, alignContent: 'flex-start', position: 'relative' }}>
+                    <Grid container className="MainItem mainContainer" style={{ height: 'calc(100vh - 50px)', paddingRight: 20, paddingLeft: 20, paddingTop: 20, alignContent: 'flex-start', position: 'relative' }}>
                         <Grid item xs={12}>
 
                             {img_type == 'old' ?
