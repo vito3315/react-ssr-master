@@ -1419,7 +1419,7 @@ export class Home extends React.Component {
                                 </IconButton>
                             </MuiDialogTitle>
                             <div>
-                                <Item2 itemId={this.state.openItem.id} item={this.state.openItem} />
+                                <Item2 itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} />
                             </div>
                         </Dialog>
                             :
