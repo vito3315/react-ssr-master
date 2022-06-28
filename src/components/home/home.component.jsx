@@ -563,10 +563,10 @@ class CardItem extends React.Component {
                         {  parseInt( this.state.item.cat_id ) == 4 ?
                             <div style={{ width: 148, height: 28, display: 'flex', flexDirection: 'row', alignItems: 'center', border: '1px solid #dadada', borderRadius: 10, marginBottom: 10, }}>
                                 <div style={{ flex: 3, textAlign: 'center', borderRight: '1px solid #dadada', height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                    <Typography style={{ fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252' }} component="span">{this.state.item.count_part_new}</Typography>
+                                    <Typography style={{ fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252', lineHeight: 0 }} component="span">{this.state.item.count_part_new}</Typography>
                                 </div>
                                 <div style={{ flex: 2, textAlign: 'center', height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                    <Typography style={{ fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252' }} component="span">{this.state.item.count_part} шт</Typography>
+                                    <Typography style={{ fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252', lineHeight: 0 }} component="span">{this.state.item.count_part} шт</Typography>
                                 </div>
                             </div>
                                 :
@@ -729,9 +729,9 @@ class Badge extends React.Component{
 
     render(){
         return (
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'absolute', top: -10, left: -10, }}>
+            <div style={{ position: 'absolute', top: -10, left: -10, }}>
                 <div style={{ width: this.state.size == 'small' ? 84 : 114, height: this.state.size == 'small' ? 34 : 44, backgroundColor: 'rgba(255, 255, 255, 0.6)', borderRadius: 15 }} />
-                <div style={{ width: this.state.size == 'small' ? 80 : 110, height: this.state.size == 'small' ? 30 : 40, backgroundColor: this.state.color, borderRadius: 15, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <div style={{ width: this.state.size == 'small' ? 80 : 110, height: this.state.size == 'small' ? 30 : 40, backgroundColor: this.state.color, borderRadius: 15, display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'absolute', top: 2, left: 2 }}>
                     <Typography component="span" style={{ fontFamily: 'Roboto', fontSize: '0.75rem', fontWeight: 400, color: '#fff', textTransform: 'uppercase', lineHeight: 1 }}>{this.state.text}</Typography>
                 </div>
             </div>
@@ -1398,7 +1398,7 @@ export class Home extends React.Component {
                                                     </Grid>
                                                 </Hidden>
                                                 <Hidden smUp>
-                                                    <Grid item xs={12} sm={4} md={3} xl={3} style={{ display: 'flex', padding: 0 }}>
+                                                    <Grid item xs={12} sm={4} md={3} xl={3} style={{ display: 'flex', paddingTop: 10, paddingBottom: 10, borderBottom: cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
                                                         <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
                                                     </Grid>
                                                 </Hidden>
