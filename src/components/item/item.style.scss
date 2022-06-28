@@ -55,17 +55,16 @@ $colorMain: #CC0033;
     & h1{
         @include fons(2rem, $Roboto);
         font-weight: 900;
+        color: #525252;
     }
     & > div:first-child{
         text-align: center;
     }
     & > div:last-child{
         display: flex; 
-        flex-direction: column;
     }
     & > div:not(:last-child):not(:first-child){
-        display: flex; 
-        justify-content: flex-end;
+        display: flex;
     }
     & img{
         object-fit: none;
