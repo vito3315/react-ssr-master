@@ -720,19 +720,16 @@ class Badge extends React.Component{
     constructor(props) {
         super(props);
         
-        console.log( this.props )
-        console.log( this.arrColor )
-
         this.state = {      
             size: this.props.size,
-            color: '#fff',//this.arrColor[ this.props.type ].color,
-            text: 'text'//this.arrColor[ this.props.type ].text
+            color: this.arrColor[ this.props.type ].color,
+            text: this.arrColor[ this.props.type ].text
         };
     }
 
     render(){
         return (
-            <div style={[ this.state.size == 'small' ? { width: 80, height: 30 } : { width: 110, height: 40 }, { backgroundColor: this.state.color, border: '2px solid rgba(255, 255, 255, 0.6)', display: 'flex', justifyContent: 'center', alignItems: 'center' } ]}>
+            <div style={{ width: this.state.size == 'small' ? 80 : 110, height: this.state.size == 'small' ? 30 : 40, backgroundColor: this.state.color, border: '2px solid rgba(255, 255, 255, 0.6)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Typography style={{ fontFamily: 'Roboto', fontSize: '1rem', fontWeight: 400 }}>{this.state.text}</Typography>
             </div>
         );
