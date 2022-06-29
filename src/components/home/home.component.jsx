@@ -1430,7 +1430,7 @@ export class Home extends React.Component {
                     {this.state.openItem ?
                         <>
                             <Hidden lgUp>
-                                <Dialog maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC" open={this.state.openModalPC}>
+                                <Dialog maxWidth={'md'}  style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC testModalMD" open={this.state.openModalPC}>
                                     <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -52, left: 16, zIndex: 1500, width: 52, height: 52 }} onClick={this.handleClosePC.bind(this)}>
                                         <IconClose />
                                     </IconButton>
@@ -1442,7 +1442,7 @@ export class Home extends React.Component {
                             </Hidden>
                             
                             <Hidden only={['xs', 'sm', 'md']}>
-                                <Dialog maxWidth={'lg'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC" open={this.state.openModalPC}>
+                                <Dialog maxWidth={'lg'} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC testModalLG" open={this.state.openModalPC}>
                                     <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -52, left: 16, zIndex: 1500, width: 52, height: 52 }} onClick={this.handleClosePC.bind(this)}>
                                         <IconClose />
                                     </IconButton>
