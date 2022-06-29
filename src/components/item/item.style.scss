@@ -69,7 +69,7 @@ $colorMain: #CC0033;
     & > div:not(:last-child):not(:first-child){
         display: flex;
     }
-    & img{
+    &:not(.MainItemMobile) img{
         object-fit: none;
         image-rendering: auto;
         width: 80%;

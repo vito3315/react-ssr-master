@@ -574,7 +574,7 @@ export class Item extends React.Component {
                 </Box>
                 
                 <Hidden smUp>
-                    <Grid container className="MainItem mainContainer" style={{ paddingLeft: '4%', paddingRight: '4%', height: '100%' }}>
+                    <Grid container className="MainItem MainItemMobile mainContainer" style={{ paddingLeft: '4%', paddingRight: '4%', height: '100%' }}>
                         <Grid item xs={12} style={{ paddingRight: 12 }}>
                             <picture id="forSwiper">
                                 <source 
@@ -1183,7 +1183,7 @@ export class Item2 extends React.Component {
                 
 
                 <Hidden smUp>
-                    <Grid container className="MainItem mainContainer" style={{ height: 'calc(100vh - 50px)', paddingRight: 20, paddingLeft: 20, paddingTop: 20, alignContent: 'flex-start', position: 'relative' }}>
+                    <Grid container className="MainItem MainItemMobile mainContainer" style={{ height: 'calc(100vh - 50px)', paddingRight: 20, paddingLeft: 20, paddingTop: 20, alignContent: 'flex-start', position: 'relative' }}>
                         <Grid item xs={12}>
 
                             {img_type == 'old' ?
