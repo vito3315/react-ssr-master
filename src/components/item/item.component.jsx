@@ -1024,8 +1024,9 @@ export class Item2 extends React.Component {
                 
                 <Box component="div" className="pcItem NewModal" >
                     <Grid container className="MainItem mainContainer" style={{  }}>
-                        <Grid item style={[{ width: '59%', marginLeft: '4%', marginRight: '4%', marginTop: '2%', marginBottom: '2%' }, img_type == 'old' ? { display: 'flex', alignItems: 'center', justifyContent: 'center' } : {} ]}>
-                            {img_type == 'old' ?
+                        
+                        {img_type == 'old' ?
+                            <Grid item style={{ width: '59%', marginLeft: '4%', marginRight: '4%', marginTop: '2%', marginBottom: '2%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                 <picture style={{ width: '100%' }}>
                                     <source 
                                         srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
@@ -1038,7 +1039,9 @@ export class Item2 extends React.Component {
                                         style={{ minHeight: 150 }}
                                     />
                                 </picture>
-                                    :
+                            </Grid>
+                                :
+                            <Grid item style={{ width: '59%', marginLeft: '4%', marginRight: '4%', marginTop: '2%', marginBottom: '2%' }}>
                                 <picture style={{ width: '100%' }}>
                                     <source srcset={`
                                         https://storage.yandexcloud.net/site-img/${img_name}_276x276.jpg 138w, 
@@ -1053,8 +1056,9 @@ export class Item2 extends React.Component {
                                         sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
                                     <img alt={this.state.item.name} title={this.state.item.name} class="img" src={`https://storage.yandexcloud.net/site-img/${img_name}_276x276.jpg`} />
                                 </picture>
-                            }
-                        </Grid>
+                            </Grid>
+                        }
+                        
                         <Grid item style={{ width: '29%', marginTop: '10%', marginBottom: '10%', justifyContent: 'end' }}>
                             <Typography variant="h5" component="h1" className='ModalItemTitle'>{this.state.item.name}</Typography>
                             
