@@ -1026,7 +1026,7 @@ export class Item2 extends React.Component {
                     <Grid container className="MainItem mainContainer" style={{  }}>
                         <Grid item style={{ width: '59%', marginLeft: '4%', marginRight: '4%', marginTop: '2%', marginBottom: '2%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                             {img_type == 'old' ?
-                                <picture>
+                                <picture style={{ width: '100%' }}>
                                     <source 
                                         srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
                                         type="image/webp" 
@@ -1039,7 +1039,7 @@ export class Item2 extends React.Component {
                                     />
                                 </picture>
                                     :
-                                <picture>
+                                <picture style={{ width: '100%' }}>
                                     <source srcset={`
                                         https://storage.yandexcloud.net/site-img/${img_name}_276x276.jpg 138w, 
                                         https://storage.yandexcloud.net/site-img/${img_name}_292x292.jpg 146w,
