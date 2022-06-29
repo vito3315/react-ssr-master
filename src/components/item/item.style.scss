@@ -48,6 +48,13 @@ $colorMain: #CC0033;
     font-weight: bold!important;
 }
 
+.hidddenText4{
+    -webkit-line-clamp: 4;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
 .MainItem{
     /*margin-bottom: 50px!important;
     padding-left: 10%;
