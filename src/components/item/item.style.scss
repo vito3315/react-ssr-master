@@ -55,6 +55,11 @@ $colorMain: #CC0033;
     overflow: hidden;
 }
 
+.OpenItemPC .MuiDialog-paper{
+    width: 70%!important;
+    max-height: 90%!important;
+}
+
 .MainItem{
     /*margin-bottom: 50px!important;
     padding-left: 10%;
@@ -77,7 +82,7 @@ $colorMain: #CC0033;
         display: flex;
     }
     &:not(.MainItemMobile) img{
-        object-fit: none;
+        object-fit: contain;
         image-rendering: auto;
         width: 100%;
         height: auto;
