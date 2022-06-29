@@ -79,7 +79,7 @@ $colorMain: #CC0033;
     &:not(.MainItemMobile) img{
         object-fit: none;
         image-rendering: auto;
-        width: 80%;
+        width: 100%;
         height: auto;
     }
     & .ItemDesc{
