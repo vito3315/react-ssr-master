@@ -1059,7 +1059,7 @@ export class Item2 extends React.Component {
                             </Grid>
                         }
                         
-                        <Grid item style={{ width: '29%', marginTop: '10%', marginBottom: '10%', justifyContent: 'start' }}>
+                        <Grid item style={{ width: '29%', marginTop: '10%', marginBottom: '10%', justifyContent: 'start', position: 'relative' }}>
                             <Typography variant="h5" component="h1" className='ModalItemTitle' style={{ marginTop: 0 }}>{this.state.item.name}</Typography>
                             
                             
@@ -1162,14 +1162,14 @@ export class Item2 extends React.Component {
                             <Typography variant="h5" component="span" style={{ marginBottom: '4%', minHeight: 200 }} className='ModalItemDesc'>{desc}</Typography>
                             
                             { this.state.count == 0 ?
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ position: 'absolute', bottom: 0 }}>
                                     <Button variant="contained" className='ModalItemButtonCart' style={{ width: 300, height: 60, borderRadius: 40, border: '2px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.add.bind(this)}>
                                         <span style={{ fontSize: '1.25rem', textTransform: 'initial', fontFamily: 'Roboto', color: '#525252', fontWeight: 700 }}>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)}</span>
                                         <IconRuble style={{ width: 15, height: 15, fill: '#525252', marginLeft: 5 }} />
                                     </Button>
                                 </ButtonGroup>
                                     :
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ position: 'absolute', bottom: 0 }}>
                                     <div variant="contained" className='ModalItemButtonCart' style={{ width: 300, height: 56, borderRadius: 40, border: '2px solid #F9BC23', backgroundColor: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <button style={{ width: 30, height: 30, borderRadius: 40, marginLeft: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23', fontSize: '2rem', fontFamily: 'Roboto', fontWeight: 400, display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={this.minus.bind(this)}>-</button>
                                         <div>
