@@ -1095,13 +1095,14 @@ export class Item2 extends React.Component {
                                             PopperProps={{
                                                 disablePortal: true,
                                             }}
+                                            style={{ left: '-3%', right: '3%' }}
                                             title={
                                             <React.Fragment>
                                                 <Typography style={{ textAlign: 'center', fontFamily: 'Roboto', fontSize: '1.5rem', fontWeight: 400, lineHeight: 1, paddingTop: 10, paddingBottom: 20 }}>Пищевая ценность на 100 г</Typography>
                                                 
                                                 <div style={ this.state.item.items.length > 1 ? { overflowY: 'scroll', maxHeight: 350 } : {}}>
                                                     { this.state.item.items.map( (item, key) =>
-                                                        <div style={{ border: '2px solid #fff', borderRadius: 15, marginBottom: this.state.item.items.length == 1 ? 0 : this.state.item.items.length-1 == key ? 0 : 20 }} key={key}>
+                                                        <div style={{ border: '2px solid #fff', borderRadius: 10, marginBottom: this.state.item.items.length == 1 ? 0 : this.state.item.items.length-1 == key ? 0 : 20 }} key={key}>
                                                             <div style={{ width: '100%', display: 'flex', flexDirection: 'row', borderBottom: '2px solid #fff' }}>
                                                                 <div style={{ width: '75%', display: 'flex', alignItems: 'center', borderRight: '2px solid #fff', padding: 20 }}>
                                                                     <Typography style={{ fontFamily: 'Roboto', fontWeight: 300, fontSize: '1.3rem', lineHeight: 1.25 }}>{item.name}</Typography>
@@ -1165,7 +1166,7 @@ export class Item2 extends React.Component {
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ position: 'absolute', bottom: 0 }}>
                                     <Button variant="contained" className='ModalItemButtonCart' style={{ width: 300, height: 60, borderRadius: 40, border: '2px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.add.bind(this)}>
                                         <span style={{ fontSize: '1.25rem', textTransform: 'initial', fontFamily: 'Roboto', color: '#525252', fontWeight: 700 }}>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)}</span>
-                                        <IconRuble style={{ width: 15, height: 15, fill: '#525252', marginLeft: 5 }} />
+                                        <IconRuble style={{ width: 16, height: 16, fill: '#525252', marginLeft: 5 }} />
                                     </Button>
                                 </ButtonGroup>
                                     :
@@ -1174,7 +1175,7 @@ export class Item2 extends React.Component {
                                         <button style={{ width: 30, height: 30, borderRadius: 40, marginLeft: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23', fontSize: '2rem', fontFamily: 'Roboto', fontWeight: 400, display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={this.minus.bind(this)}>-</button>
                                         <div>
                                             <span style={{ fontSize: '1.25rem', textTransform: 'initial', fontFamily: 'Roboto', color: '#525252', fontWeight: 700 }}>{this.state.count} {item_name} на { new Intl.NumberFormat('ru-RU').format( parseInt(this.state.item.price) * parseInt(this.state.count) )}</span>
-                                            <IconRuble style={{ width: 15, height: 15, fill: '#525252', marginLeft: 5 }} />
+                                            <IconRuble style={{ width: 16, height: 16, fill: '#525252', marginLeft: 5 }} />
                                         </div>
                                         <button style={{ width: 40, height: 40, borderRadius: 40, marginRight: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23', fontSize: '2rem', fontFamily: 'Roboto', fontWeight: 400, display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={this.add.bind(this)}>+</button>
                                     </div>

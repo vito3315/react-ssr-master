@@ -277,10 +277,10 @@ $colorMain: #CC0033;
     pointer-events: auto!important;
     & > div{
         max-width: 400px!important;
-        background-color: rgba(0,0,0, 0.7) !important;
-        backdrop-filter: blur(10px);
+        background-color: rgba(0,0,0, 0.65) !important;
+        backdrop-filter: blur(15px);
         color: #fff!important;
-        border-radius: 20px;
+        border-radius: 30px;
         padding: 20px;
         border: none!important;
         z-index: 4000;
