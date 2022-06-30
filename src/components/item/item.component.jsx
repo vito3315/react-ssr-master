@@ -1059,11 +1059,11 @@ export class Item2 extends React.Component {
                             </Grid>
                         }
                         
-                        <Grid item style={{ width: '24.4%', paddingLeft: '1.7vw', marginTop: '6%', marginBottom: '6%', justifyContent: 'start', position: 'relative' }}>
+                        <Grid item style={{ width: '24.4vw', paddingLeft: '1.7vw', marginTop: '6%', marginBottom: '6%', justifyContent: 'start', position: 'relative' }}>
                             <Typography variant="h5" component="h1" className='ModalItemTitle' style={{ marginTop: 0 }}>{this.state.item.name}</Typography>
                             
                             
-                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', maxWidth: 300 }}>
+                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: 300 }}>
                                 <div style={{ width: parseInt( this.state.item.cat_id ) == 4 ? 230 : parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? 80 : 150, height: 40, border: '1px solid #DADADA', borderRadius: 15, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginTop: 20, marginBottom: 20, marginRight: 25 }}>
                                     { parseInt( this.state.item.cat_id ) == 4 ?
                                         <>
