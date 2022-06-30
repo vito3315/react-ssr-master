@@ -1041,7 +1041,7 @@ export class Item2 extends React.Component {
                                 </picture>
                             </Grid>
                                 :
-                            <Grid item style={{ width: '24.2vw', paddingLeft: '1.7vw', marginTop: '2%', marginBottom: '2%', justifyContent: 'start', position: 'relative', marginRight: '3.4vw', paddingTop: '6%', paddingBottom: '6%' }}>
+                            <Grid item style={{ width: '42.3vw', marginLeft: '3.4vw', marginRight: '1.7%', marginTop: '2%', marginBottom: '2%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                 <picture style={{ width: '100%' }}>
                                     <source srcset={`
                                         https://storage.yandexcloud.net/site-img/${img_name}_276x276.jpg 138w, 
