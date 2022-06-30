@@ -276,26 +276,10 @@ $colorMain: #CC0033;
     }
 }
 
-.pos{
-    & .MuiTooltip-popper{
-        left: -17%!important;
-        right: 17%!important;
-    }
-    & .MuiTooltip-popper33{
-        left: -17%!important;
-        right: 17%!important;
-    }
-}
-.set{
-    & .MuiTooltip-popper{
-        left: -39%!important;
-        right: 39%!important;
-    }
-}
-
 .MuiTooltip-popper{
     //left: -100px!important;
     pointer-events: auto!important;
+    transform: initial!important;
     & > div{
         max-width: 400px!important;
         background-color: rgba(0,0,0, 0.65) !important;
