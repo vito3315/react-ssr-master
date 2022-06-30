@@ -275,6 +275,8 @@ $colorMain: #CC0033;
 .MuiTooltip-popper{
     //left: -100px!important;
     pointer-events: auto!important;
+    left: -3%!important;
+    right: 3%!important;
     & > div{
         max-width: 400px!important;
         background-color: rgba(0,0,0, 0.65) !important;
