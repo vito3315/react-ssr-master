@@ -55,9 +55,12 @@ $colorMain: #CC0033;
     overflow: hidden;
 }
 
-.OpenItemPC .MuiDialog-paper, .OpenItemPCSet .MuiDialog-paper{
+.OpenItemPC .MuiDialog-paper{
     width: 80%!important;
     height: auto!important;
+}
+.OpenItemPCSet .MuiDialog-paper{
+    width: 80%!important;
 }
 
 .MainItem{

@@ -27,8 +27,11 @@ $colorMain: #CC0033;
 }
 .OpenItemPCSet .MuiDialog-paper{
     overflow-y: visible;
-    height: 44%;
-    margin-top: 17%;
+    //height: 44%;
+    //margin-top: 17%;
+}
+.OpenItemPCSet .MuiDialog-scrollPaper{
+    align-items: flex-end!important;
 }
 
 .imgSVG{
