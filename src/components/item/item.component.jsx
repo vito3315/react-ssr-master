@@ -1085,7 +1085,7 @@ export class Item2 extends React.Component {
                                 </div>
 
                                 <ClickAwayListener mouseEvent="onMouseDown" touchEvent="onTouchStart" onClickAway={this.handleTooltipClose.bind(this)}>
-                                    <div>
+                                    <div className={ this.state.item.items.length > 1 ? "set" : "pos" }>
                                         <HtmlTooltip
                                             onClose={this.handleTooltipClose.bind(this)}
                                             open={this.state.openTooltip}
@@ -1104,10 +1104,10 @@ export class Item2 extends React.Component {
                                                         <div style={{ border: '2px solid #fff', borderRadius: 10, marginBottom: this.state.item.items.length == 1 ? 0 : this.state.item.items.length-1 == key ? 0 : 20 }} key={key}>
                                                             <div style={{ width: '100%', display: 'flex', flexDirection: 'row', borderBottom: '2px solid #fff' }}>
                                                                 <div style={{ width: '75%', display: 'flex', alignItems: 'center', borderRight: '2px solid #fff', padding: 10 }}>
-                                                                    <Typography style={{ fontFamily: 'Roboto', fontWeight: 400, fontSize: '1.7rem', lineHeight: 1.25 }}>{item.name}</Typography>
+                                                                    <Typography style={{ fontFamily: 'Roboto', fontWeight: 400, fontSize: '1.1rem', lineHeight: 1.25 }}>{item.name}</Typography>
                                                                 </div>
                                                                 <div style={{ width: '25%', display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'center', padding: 10 }}>
-                                                                    <Typography style={{ fontSize: '2.5rem', lineHeight: 0.8, fontFamily: 'Roboto', fontWeight: 500 }}>{item.kkal}</Typography>
+                                                                    <Typography style={{ fontSize: '2rem', lineHeight: 1, fontFamily: 'Roboto', fontWeight: 500 }}>{item.kkal}</Typography>
                                                                     <Typography style={{ fontSize: '1rem', lineHeight: 0.8, fontFamily: 'Roboto', fontWeight: 400 }}>ккал</Typography>
                                                                 </div>
                                                             </div>
