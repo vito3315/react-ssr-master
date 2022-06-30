@@ -1023,7 +1023,7 @@ export class Item2 extends React.Component {
 
                 
                 <Box component="div" className="pcItem NewModal" >
-                    <Grid container className="MainItem mainContainer" style={{ height: '80vh' }}>
+                    <Grid container className="MainItem mainContainer" style={{ height: '82vh' }}>
                         
                         {img_type == 'old' ?
                             <Grid item style={{ width: '42vw', marginLeft: '3.4vw', marginRight: '1.7vw', marginTop: '2%', marginBottom: '2%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -1152,7 +1152,7 @@ export class Item2 extends React.Component {
                             
 
                             { parseInt( this.state.item.cat_id ) == 4 ?
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ marginBottom: 20 }}>
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ marginBottom: 20, width: 300 }}>
                                     <Button variant="contained" className='ModalItemButtonCartOther' style={{ width: 300, height: 40, borderRadius: 30, border: '1px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.props.openSetPc.bind(this, this.state.item.items)}>Состав сета</Button>
                                 </ButtonGroup>
                                     :
