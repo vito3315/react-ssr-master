@@ -901,10 +901,8 @@ export class Item2 extends React.Component {
     }
     
     handleTooltipOpen(){
-        console.log( 'open' )
-
         this.setState({
-            openTooltip: true
+            openTooltip: !this.state.openTooltip
         })
     }
 
@@ -1085,7 +1083,7 @@ export class Item2 extends React.Component {
                                 </div>
 
                                 <ClickAwayListener mouseEvent="onMouseDown" touchEvent="onTouchStart" onClickAway={this.handleTooltipClose.bind(this)}>
-                                    <div className={ this.state.item.items.length > 1 ? "set" : "pos" }>
+                                    <div>
                                         <HtmlTooltip
                                             onClose={this.handleTooltipClose.bind(this)}
                                             open={this.state.openTooltip}
