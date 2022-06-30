@@ -1290,7 +1290,7 @@ export class Item2 extends React.Component {
                             }
                         </Grid>
 
-                        <Grid item xs={12} style={{ visibility: 'hidden' }}>
+                        <Grid item xs={12}>
                             { this.state.count == 0 ?
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%' }}>
                                     <Button variant="contained" className='ModalItemButtonCart' style={{ width: '100%', height: 60, borderRadius: 40, border: '2px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.add.bind(this)}>
