@@ -1152,14 +1152,14 @@ export class Item2 extends React.Component {
                             
 
                             { parseInt( this.state.item.cat_id ) == 4 ?
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ marginBottom: '4%' }}>
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ marginBottom: 20 }}>
                                     <Button variant="contained" className='ModalItemButtonCartOther' style={{ width: 300, height: 40, borderRadius: 30, border: '1px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.props.openSetPc.bind(this, this.state.item.items)}>Состав сета</Button>
                                 </ButtonGroup>
                                     :
                                 null
                             }
 
-                            <Typography variant="h5" component="span" style={{ marginBottom: '4%', minHeight: 200 }} className='ModalItemDesc'>{desc}</Typography>
+                            <Typography variant="h5" component="span" style={{ marginBottom: 20, minHeight: 200 }} className='ModalItemDesc'>{desc}</Typography>
                             
                             { this.state.count == 0 ?
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ position: 'absolute', bottom: 0 }}>
@@ -1180,6 +1180,28 @@ export class Item2 extends React.Component {
                                     </div>
                                 </ButtonGroup>
                             }
+
+                            <Grid item xs={12} style={{ visibility: 'hidden' }}>
+                                { this.state.count == 0 ?
+                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%' }}>
+                                        <Button variant="contained" className='ModalItemButtonCart' style={{ width: '100%', height: 60, borderRadius: 40, border: '2px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.add.bind(this)}>
+                                            <span style={{ fontSize: '1.25rem', textTransform: 'initial', fontFamily: 'Roboto', color: '#525252', fontWeight: 700 }}>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)}</span>
+                                            <IconRuble style={{ width: 15, height: 15, fill: '#525252', marginLeft: 5 }} />
+                                        </Button>
+                                    </ButtonGroup>
+                                        :
+                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%' }}>
+                                        <div variant="contained" className='ModalItemButtonCart' style={{ width: '100%', height: 56, borderRadius: 40, border: '2px solid #F9BC23', backgroundColor: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                            <button style={{ width: 30, height: 30, borderRadius: 40, marginLeft: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23', fontSize: '2rem', fontFamily: 'Roboto', fontWeight: 400, display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={this.minus.bind(this)}>-</button>
+                                            <div>
+                                                <span style={{ fontSize: '1.25rem', textTransform: 'initial', fontFamily: 'Roboto', color: '#525252', fontWeight: 700 }}>{this.state.count} {item_name} на { new Intl.NumberFormat('ru-RU').format( parseInt(this.state.item.price) * parseInt(this.state.count) )}</span>
+                                                <IconRuble style={{ width: 15, height: 15, fill: '#525252', marginLeft: 5 }} />
+                                            </div>
+                                            <button style={{ width: 40, height: 40, borderRadius: 40, marginRight: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23', fontSize: '2rem', fontFamily: 'Roboto', fontWeight: 400, display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={this.add.bind(this)}>+</button>
+                                        </div>
+                                    </ButtonGroup>
+                                }
+                            </Grid>
 
                         </Grid>
                     </Grid>
@@ -1269,28 +1291,6 @@ export class Item2 extends React.Component {
                         </Grid>
 
                         <Grid item xs={12} style={{ position: 'absolute', width: 'calc(100% - 40px)', bottom: 100 }}>
-                            { this.state.count == 0 ?
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%' }}>
-                                    <Button variant="contained" className='ModalItemButtonCart' style={{ width: '100%', height: 60, borderRadius: 40, border: '2px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.add.bind(this)}>
-                                        <span style={{ fontSize: '1.25rem', textTransform: 'initial', fontFamily: 'Roboto', color: '#525252', fontWeight: 700 }}>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)}</span>
-                                        <IconRuble style={{ width: 15, height: 15, fill: '#525252', marginLeft: 5 }} />
-                                    </Button>
-                                </ButtonGroup>
-                                    :
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%' }}>
-                                    <div variant="contained" className='ModalItemButtonCart' style={{ width: '100%', height: 56, borderRadius: 40, border: '2px solid #F9BC23', backgroundColor: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                        <button style={{ width: 30, height: 30, borderRadius: 40, marginLeft: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23', fontSize: '2rem', fontFamily: 'Roboto', fontWeight: 400, display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={this.minus.bind(this)}>-</button>
-                                        <div>
-                                            <span style={{ fontSize: '1.25rem', textTransform: 'initial', fontFamily: 'Roboto', color: '#525252', fontWeight: 700 }}>{this.state.count} {item_name} на { new Intl.NumberFormat('ru-RU').format( parseInt(this.state.item.price) * parseInt(this.state.count) )}</span>
-                                            <IconRuble style={{ width: 15, height: 15, fill: '#525252', marginLeft: 5 }} />
-                                        </div>
-                                        <button style={{ width: 40, height: 40, borderRadius: 40, marginRight: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23', fontSize: '2rem', fontFamily: 'Roboto', fontWeight: 400, display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={this.add.bind(this)}>+</button>
-                                    </div>
-                                </ButtonGroup>
-                            }
-                        </Grid>
-
-                        <Grid item xs={12}>
                             { this.state.count == 0 ?
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%' }}>
                                     <Button variant="contained" className='ModalItemButtonCart' style={{ width: '100%', height: 60, borderRadius: 40, border: '2px solid #F9BC23', backgroundColor: '#fff' }} onClick={this.add.bind(this)}>
