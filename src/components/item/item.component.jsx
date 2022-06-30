@@ -1021,7 +1021,7 @@ export class Item2 extends React.Component {
 
                 
                 <Box component="div" className="pcItem NewModal" >
-                    <Grid container className="MainItem mainContainer" style={{ height: '82vh' }}>
+                    <Grid container className="MainItem mainContainer">
                         
                         {img_type == 'old' ?
                             <Grid item style={{ width: '45vw', marginLeft: '3.4vw', marginRight: '1.7vw', marginTop: '2%', marginBottom: '2%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
