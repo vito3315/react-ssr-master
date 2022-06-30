@@ -57,7 +57,7 @@ $colorMain: #CC0033;
 
 .OpenItemPC .MuiDialog-paper{
     width: 80%!important;
-    height: 87%!important;
+    height: auto!important;
 }
 
 .MainItem{
@@ -285,6 +285,7 @@ $colorMain: #CC0033;
         max-width: 400px!important;
         background-color: rgba(0,0,0, 0.65) !important;
         backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
         color: #fff!important;
         border-radius: 30px;
         padding: 1.7vw;
