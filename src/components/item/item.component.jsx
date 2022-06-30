@@ -1026,7 +1026,7 @@ export class Item2 extends React.Component {
                     <Grid container className="MainItem mainContainer" style={{ height: '86vh' }}>
                         
                         {img_type == 'old' ?
-                            <Grid item style={{ width: '59%', marginLeft: '4%', marginRight: '4%', marginTop: '2%', marginBottom: '2%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <Grid item style={{ width: '56.4%', marginLeft: '4.5%', marginRight: '2.25%', marginTop: '2%', marginBottom: '2%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                 <picture style={{ width: '100%' }}>
                                     <source 
                                         srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
@@ -1041,7 +1041,7 @@ export class Item2 extends React.Component {
                                 </picture>
                             </Grid>
                                 :
-                            <Grid item style={{ width: '59%', marginLeft: '4%', marginRight: '4%', marginTop: '2%', marginBottom: '2%' }}>
+                            <Grid item style={{ width: '56.4%', marginLeft: '4.5%', marginRight: '2.25%', marginTop: '2%', marginBottom: '2%' }}>
                                 <picture style={{ width: '100%' }}>
                                     <source srcset={`
                                         https://storage.yandexcloud.net/site-img/${img_name}_276x276.jpg 138w, 
@@ -1059,7 +1059,7 @@ export class Item2 extends React.Component {
                             </Grid>
                         }
                         
-                        <Grid item style={{ width: '29%', marginTop: '6%', marginBottom: '6%', justifyContent: 'start', position: 'relative' }}>
+                        <Grid item style={{ width: '29.1%', paddingLeft: '2.5%', marginTop: '6%', marginBottom: '6%', justifyContent: 'start', position: 'relative' }}>
                             <Typography variant="h5" component="h1" className='ModalItemTitle' style={{ marginTop: 0 }}>{this.state.item.name}</Typography>
                             
                             
