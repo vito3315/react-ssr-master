@@ -1468,7 +1468,7 @@ export class Home extends React.Component {
                                     <MuiDialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 2.25% 2% 4.5%', alignContent: 'start' }}>
                                         {this.state.openModalPCSetItems.map( (item, key) =>
                                             <div key={key} style={{ width: '49%', display: 'flex', flexDirection: 'row', marginRight: key == 0 || key % 2 == 0 ? '2%' : 0, marginBottom: '2%' }}>
-                                                <div style={{ width: '60%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                                <div style={{ width: '30%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                                     { item.img_app.length == 0 || !item.img_app ?
                                                         <picture>
                                                             <source 
@@ -1499,7 +1499,7 @@ export class Home extends React.Component {
                                                         </picture>
                                                     }
                                                 </div>
-                                                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                                                <div style={{ width: '70%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                                                     <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 500, fontSize: '1.25rem'  }}>{ item.name }</Typography>
                                                     <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 300, fontSize: '0.94rem'  }}>{ item.tmp_desc }</Typography>
                                                 </div>
@@ -1518,7 +1518,7 @@ export class Home extends React.Component {
                                     <MuiDialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 2.25% 2% 4.5%', alignContent: 'start' }}>
                                         {this.state.openModalPCSetItems.map( (item, key) =>
                                             <div key={key} style={{ width: '49%', display: 'flex', flexDirection: 'row', marginRight: key == 0 || key % 2 == 0 ? '2%' : 0, marginBottom: '2%' }}>
-                                                <div style={{ width: '60%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                                <div style={{ width: '30%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                                     { item.img_app.length == 0 || !item.img_app ?
                                                         <picture>
                                                             <source 
@@ -1549,7 +1549,7 @@ export class Home extends React.Component {
                                                         </picture>
                                                     }
                                                 </div>
-                                                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                                                <div style={{ width: '70%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                                                     <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 500, fontSize: '1.25rem'  }}>{ item.name }</Typography>
                                                     <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 300, fontSize: '0.94rem'  }}>{ item.tmp_desc }</Typography>
                                                 </div>
