@@ -1468,7 +1468,7 @@ export class Home extends React.Component {
                                     <MuiDialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 2.25% 2% 4.5%', alignContent: 'start' }}>
                                         {this.state.openModalPCSetItems.map( (item, key) =>
                                             <div key={key} style={{ width: '49%', display: 'flex', flexDirection: 'row', marginRight: key == 0 || key % 2 == 0 ? '2%' : 0, marginBottom: '2%' }}>
-                                                <div style={{ width: '80%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                                <div style={{ width: '60%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                                     { item.img_app.length == 0 || !item.img_app ?
                                                         <picture>
                                                             <source 
@@ -1518,7 +1518,7 @@ export class Home extends React.Component {
                                     <MuiDialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 2.25% 2% 4.5%', alignContent: 'start' }}>
                                         {this.state.openModalPCSetItems.map( (item, key) =>
                                             <div key={key} style={{ width: '49%', display: 'flex', flexDirection: 'row', marginRight: key == 0 || key % 2 == 0 ? '2%' : 0, marginBottom: '2%' }}>
-                                                <div style={{ width: '80%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                                <div style={{ width: '60%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                                     { item.img_app.length == 0 || !item.img_app ?
                                                         <picture>
                                                             <source 
