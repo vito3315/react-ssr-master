@@ -1057,7 +1057,7 @@ export class Item2 extends React.Component {
                             </Grid>
                         }
                         
-                        <Grid item style={{ width: '31.3%', paddingLeft: '2.25%', marginRight: '5.5%', marginTop: '6%', marginBottom: '6%', justifyContent: 'start', position: 'relative' }}>
+                        <Grid item style={{ width: '31.3%', minHeight: 465, paddingLeft: '2.25%', marginRight: '5.5%', marginTop: '6%', marginBottom: '6%', justifyContent: 'start', position: 'relative' }}>
                             <Typography variant="h5" component="h1" className='ModalItemTitle' style={{ marginTop: 0 }}>{this.state.item.name}</Typography>
                             
                             
