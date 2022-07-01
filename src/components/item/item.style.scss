@@ -58,9 +58,11 @@ $colorMain: #CC0033;
 .OpenItemPC .MuiDialog-paper{
     width: 80%!important;
     height: auto!important;
+    max-width: fit-content!important;
 }
 .OpenItemPCSet .MuiDialog-paper{
     width: 80%!important;
+    height: 60%;
 }
 
 .MainItem{
