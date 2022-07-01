@@ -40,6 +40,16 @@ $colorMain: #CC0033;
     margin-bottom: 20px;
     margin-right: 20px;
 }
+.modalActiiContentNew::-webkit-scrollbar-track-piece:end {
+    background: transparent;
+    margin-bottom: 20px; 
+}
+
+.modalActiiContentNew::-webkit-scrollbar-track-piece:start {
+    background: transparent;
+    margin-top: 20px;
+}
+
 
 .imgSVG{
     height: 30px;
