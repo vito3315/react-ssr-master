@@ -34,7 +34,7 @@ $colorMain: #CC0033;
     align-items: flex-end!important;
 }
 
-.modalActiiContentNew::-webkit-scrollbar-track {
+.modalActiiContentNew::-webkit-scrollbar-track, .modalActiiContentNew::-webkit-scrollbar-thumb {
     //display: block;
     margin-top: 20px;
     margin-bottom: 20px;
