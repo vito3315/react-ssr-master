@@ -1097,6 +1097,10 @@ export class Item2 extends React.Component {
                                             <React.Fragment>
                                                 <Typography style={{ textAlign: 'center', fontFamily: 'Roboto', fontSize: '1.5rem', fontWeight: 500, lineHeight: 1, paddingTop: 10, paddingBottom: 20 }}>Пищевая ценность на 100 г</Typography>
                                                 
+                                                { this.state.item.items.length == 1 ? null :
+                                                    <div style={{ width: '100%', height: 2, backgroundColor: '#fff' }} />
+                                                }
+
                                                 <div style={ this.state.item.items.length > 1 ? { overflowY: 'scroll', maxHeight: 280, paddingRight: 5 } : {}}>
                                                     { this.state.item.items.map( (item, key) =>
                                                         <div style={{ border: '2px solid #fff', borderRadius: 10, marginBottom: this.state.item.items.length == 1 ? 0 : this.state.item.items.length-1 == key ? 0 : 20 }} key={key}>
