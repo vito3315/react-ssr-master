@@ -473,13 +473,19 @@ class CardItem extends React.Component {
 
                         <CardContent style={{ padding: 0 }}>
                             <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: 10, marginBottom: 10 }}>
-                                <div style={{ width: parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? 75 : 135, height: 34, border: '1px solid #dadada', borderRadius: 10, display: 'flex', flexDirection: 'row' }}>
+                                <div style={{ width: parseInt( this.state.item.cat_id ) == 4 ? 230 : parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? 75 : 135, height: 34, border: '1px solid #dadada', borderRadius: 10, display: 'flex', flexDirection: 'row' }}>
+                                    { parseInt( this.state.item.cat_id ) == 4 ?
+                                        
+                                        <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center', height: 34, borderRight: '1px solid #dadada', }}>{this.state.item.count_part_new}</Typography>
+                                            :
+                                        null
+                                    }
                                     { parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? null :
-                                        <div style={{ height: 34, borderRight: '1px solid #dadada', flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                            <span style={{ fontFamily: 'Roboto', fontSize: '0.9rem', fontWeight: 400, color: '#525252' }}>{ parseInt( this.state.item.cat_id ) == 14 ? this.state.item.size_pizza : this.state.item.count_part } { parseInt( this.state.item.cat_id ) == 14 ? 'см' : parseInt( this.state.item.cat_id ) == 6 ? 'л' : 'шт'} </span>
+                                        <div style={{ height: 34, borderRight: '1px solid #dadada', flex: parseInt( this.state.item.cat_id ) == 4 ? 2 : 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                            <span style={{ fontFamily: 'Roboto', fontSize: '0.9rem', fontWeight: 400, color: '#525252' }}>{ parseInt( this.state.item.cat_id ) == 14 ? this.state.item.size_pizza : this.state.item.count_part } { parseInt( this.state.item.cat_id ) == 14 ? 'см' : parseInt( this.state.item.cat_id ) == 6 ? 'л' : 'шт.'} </span>
                                         </div>
                                     }
-                                    <div style={{ height: 34, flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <div style={{ height: 34, flex: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                         <span style={{ fontFamily: 'Roboto', fontSize: '0.9rem', fontWeight: 400, color: '#525252' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight) } { parseInt( this.state.item.cat_id ) == 6 ? 'л' : 'г' }</span>
                                     </div>
                                 </div>
@@ -567,7 +573,7 @@ class CardItem extends React.Component {
                                     <Typography style={{ fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252', lineHeight: 0 }} component="span">{this.state.item.count_part_new}</Typography>
                                 </div>
                                 <div style={{ flex: 2, textAlign: 'center', height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                    <Typography style={{ fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252', lineHeight: 0 }} component="span">{this.state.item.count_part} шт</Typography>
+                                    <Typography style={{ fontFamily: 'Roboto', fontSize: '0.8rem', fontWeight: 400, color: '#525252', lineHeight: 0 }} component="span">{this.state.item.count_part} шт.</Typography>
                                 </div>
                             </div>
                                 :
