@@ -1095,10 +1095,10 @@ export class Item2 extends React.Component {
                                             }}
                                             title={
                                             <React.Fragment>
-                                                <Typography style={{ textAlign: 'center', fontFamily: 'Roboto', fontSize: '1.5rem', fontWeight: 500, lineHeight: 1, paddingTop: 10, paddingBottom: 20 }}>Пищевая ценность на 100 г</Typography>
+                                                <Typography style={{ textAlign: 'center', fontFamily: 'Roboto', fontSize: '1.5rem', fontWeight: 500, lineHeight: 1, paddingTop: 10, paddingBottom: this.state.item.items.length == 1 ? 20 : 10 }}>Пищевая ценность на 100 г</Typography>
                                                 
                                                 { this.state.item.items.length == 1 ? null :
-                                                    <div style={{ width: '100%', height: 2, backgroundColor: '#fff' }} />
+                                                    <div style={{ width: '100%', height: 2, backgroundColor: '#fff', marginBottom: 20 }} />
                                                 }
 
                                                 <div style={ this.state.item.items.length > 1 ? { overflowY: 'scroll', maxHeight: 280, paddingRight: 5 } : {}}>
