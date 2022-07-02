@@ -473,10 +473,10 @@ class CardItem extends React.Component {
 
                         <CardContent style={{ padding: 0 }}>
                             <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: 10, marginBottom: 10 }}>
-                                <div style={{ width: parseInt( this.state.item.cat_id ) == 4 ? 230 : parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? 75 : 135, height: 34, border: '1px solid #dadada', borderRadius: 10, display: 'flex', flexDirection: 'row' }}>
+                                <div style={{ width: parseInt( this.state.item.cat_id ) == 4 ? 230 : parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? 75 : 135, height: 34, border: '1px solid #dadada', borderRadius: 15, display: 'flex', flexDirection: 'row' }}>
                                     { parseInt( this.state.item.cat_id ) == 4 ?
                                         
-                                        <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center', height: 34, borderRight: '1px solid #dadada', }}>{this.state.item.count_part_new}</Typography>
+                                        <span style={{ flex: 3, textAlign: 'center', height: 34, borderRight: '1px solid #dadada', fontFamily: 'Roboto', fontSize: '0.9rem', fontWeight: 400, color: '#525252' }}>{this.state.item.count_part_new}</span>
                                             :
                                         null
                                     }
@@ -491,7 +491,7 @@ class CardItem extends React.Component {
                                 </div>
                             </div>
 
-                            <div style={{ height: 100, width: '100%', marginBottom: 10, textOverflow: 'ellipsis', textAlign: 'center', overflow: 'hidden' }}>
+                            <div style={{ height: 120, width: '100%', marginBottom: 10, textOverflow: 'ellipsis', textAlign: 'center', overflow: 'hidden' }}>
                                 <Typography component="span" style={{ fontFamily: 'Roboto', fontSize: '1rem', color: '#525252' }}>{desc}</Typography>
                             </div>
                         </CardContent>

@@ -1075,7 +1075,7 @@ export class Item2 extends React.Component {
                                         null
                                             :
                                         <>
-                                            <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: parseInt( this.state.item.cat_id ) == 4 ? 2 : 3, textAlign: 'center' }}>{ parseInt( this.state.item.cat_id ) == 14 ? this.state.item.size_pizza + ' см.' : this.state.item.count_part + ' шт.' }</Typography>
+                                            <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: parseInt( this.state.item.cat_id ) == 4 ? 2 : 3, textAlign: 'center' }}>{ parseInt( this.state.item.cat_id ) == 14 ? this.state.item.size_pizza + ' см' : this.state.item.count_part + ' шт.' }</Typography>
                                             <div style={{ height: '100%', borderLeft: '1px solid #DADADA' }} />
                                         </>
                                     }
@@ -1243,7 +1243,7 @@ export class Item2 extends React.Component {
                                         null
                                             :
                                         <>
-                                            <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: parseInt( this.state.item.cat_id ) == 4 ? 2 : 3, textAlign: 'center', fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.87rem', color: '#525252' }}>{ parseInt( this.state.item.cat_id ) == 14 ? this.state.item.size_pizza + ' см.' : this.state.item.count_part + ' шт.' }</Typography>
+                                            <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: parseInt( this.state.item.cat_id ) == 4 ? 2 : 3, textAlign: 'center', fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.87rem', color: '#525252' }}>{ parseInt( this.state.item.cat_id ) == 14 ? this.state.item.size_pizza + ' см' : this.state.item.count_part + ' шт.' }</Typography>
                                             <div style={{ height: '100%', borderLeft: '1px solid #DADADA' }} />
                                         </>
                                     }

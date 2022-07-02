@@ -281,10 +281,10 @@ $colorMain: #CC0033;
     }
 }
 
-.ModalItemButtonCart:hover{
+.ModalItemButtonCart:hover, .ModalItemButtonCartOther:hover{
     background-color: rgba(249, 188, 35, 0.1)!important;;
 }
-.ModalItemButtonCart:not(:hover){
+.ModalItemButtonCart:not(:hover), .ModalItemButtonCartOther:not(:hover){
     background-color: #fff!important;
 }
 
