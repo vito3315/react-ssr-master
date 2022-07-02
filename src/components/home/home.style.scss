@@ -39,12 +39,17 @@ $colorMain: #CC0033;
     margin-top: 20px;
     margin-bottom: 20px;
     //margin-right: 20px;
+
 }
+.modalActiiContentNew::-webkit-scrollbar-thumb{
+    background-color: #525252;
+}
+
 .ModalItemButtonCart:hover{
-    background-color: rgba(249, 188, 35, 0.1);
+    background-color: rgba(249, 188, 35, 0.1)!important;;
 }
-.ModalItemButtonCart{
-    background-color: #fff;
+.ModalItemButtonCart:not(:hover){
+    background-color: #fff!important;
 }
 
 .imgSVG{

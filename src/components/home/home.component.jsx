@@ -1550,8 +1550,8 @@ export class Home extends React.Component {
                                                     }
                                                 </div>
                                                 <div style={{ width: '55%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                                                    <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 500, fontSize: '1.25rem'  }}>{ item.name }</Typography>
-                                                    <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 300, fontSize: '0.94rem'  }}>{ item.tmp_desc }</Typography>
+                                                    <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 700, fontSize: '1.25rem', color: '#525252' }}>{ item.name }</Typography>
+                                                    <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.9rem', color: '#525252'  }}>{ item.tmp_desc }</Typography>
                                                 </div>
                                             </div>
                                         )}

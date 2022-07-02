@@ -261,7 +261,7 @@ $colorMain: #CC0033;
     }
     & .ModalItemDesc{
         font-family: $Roboto!important;
-        font-weight: 400!important;
+        font-weight: 300!important;
         color: #525252!important;
         font-size: 1.25rem!important;
     }
@@ -274,18 +274,18 @@ $colorMain: #CC0033;
     }
     & .ModalItemButtonCartOther{
         font-family: $Roboto!important;
-        font-weight: 300!important;
+        font-weight: 400!important;
         color: #525252!important;
-        font-size: 1.2rem!important;
+        font-size: 0.9rem!important;
         text-transform: initial!important;
     }
 }
 
 .ModalItemButtonCart:hover{
-    background-color: rgba(249, 188, 35, 0.1);
+    background-color: rgba(249, 188, 35, 0.1)!important;;
 }
-.ModalItemButtonCart{
-    background-color: #fff;
+.ModalItemButtonCart:not(:hover){
+    background-color: #fff!important;
 }
 
 .MuiTooltip-popper{
