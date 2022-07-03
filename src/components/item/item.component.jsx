@@ -1251,7 +1251,11 @@ export class Item2 extends React.Component {
                                 </div>
 
                                 <div style={{ width: 30, height: 30, cursor: 'pointer', position: 'absolute', top: 10, right: 0 }} onClick={this.props.openInfo.bind(this)}>
-                                    <IconInfoWhite />
+                                    { this.props.openModalPCInfo === true ?
+                                        <IconInfoBlack />
+                                            :
+                                        <IconInfoWhite />
+                                    }
                                 </div>
                                 
                             </div>
