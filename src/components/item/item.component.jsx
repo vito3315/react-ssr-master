@@ -1205,7 +1205,7 @@ export class Item2 extends React.Component {
                                     />
                                 </picture>
                                     :
-                                <picture style={{ display: 'none' }}>
+                                <picture>
                                     <source srcset={`
                                         https://storage.yandexcloud.net/site-img/${img_name}_276x276.jpg 138w, 
                                         https://storage.yandexcloud.net/site-img/${img_name}_292x292.jpg 146w,
