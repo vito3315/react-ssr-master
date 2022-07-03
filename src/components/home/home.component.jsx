@@ -1477,9 +1477,8 @@ export class Home extends React.Component {
 
                                         <Typography variant="h5" component="h1" style={{ textAlign: 'center', fontFamily: 'Roboto', fontWeight: 700, fontSize: '1.625rem', color: '#525252', width: '100%' }}>{this.state.openItem.name}</Typography>
 
-                                        
                                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
-                                            <div style={{ width: parseInt( this.state.openItem.cat_id ) == 4 ? 238 : parseInt( this.state.openItem.cat_id ) == 5 || parseInt( this.state.openItem.cat_id ) == 6 || parseInt( this.state.openItem.cat_id ) == 7 ? 78 : 148, height: 28, border: '1px solid #DADADA', borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginTop: 10, marginBottom: 30 }}>
+                                            <div style={{ width: parseInt( this.state.openItem.cat_id ) == 4 ? 238 : parseInt( this.state.openItem.cat_id ) == 5 || parseInt( this.state.openItem.cat_id ) == 6 || parseInt( this.state.openItem.cat_id ) == 7 ? 78 : 148, height: 28, border: '1px solid #DADADA', borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginTop: 10, marginBottom: 20 }}>
                                                 { parseInt( this.state.openItem.cat_id ) == 4 ?
                                                     <>
                                                         <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center', fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.87rem', color: '#525252' }}>{this.state.openItem.count_part_new}</Typography>
@@ -1500,46 +1499,47 @@ export class Home extends React.Component {
                                             </div>
                                         </div>
                                         
-
-                                        {this.state.openModalPCSetItems.map( (item, key) =>
-                                            <div key={key} style={{ width: '100', display: 'flex', flexDirection: 'row', marginBottom: '2%', borderTop: key == 0 ? '1px solid rgba(27, 27, 31, 0.1)' : null, borderBottom: '1px solid rgba(27, 27, 31, 0.1)' }}>
-                                                <div style={{ width: '40%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                                    { item.img_app.length == 0 || !item.img_app ?
-                                                        <picture>
-                                                            <source 
-                                                                srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.webp?"+item.img_new_update} 
-                                                                type="image/webp" 
-                                                            />
-                                                            <img 
-                                                                src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
-                                                                alt={item.name}
-                                                                title={item.name}
-                                                                style={{ width: '100%', height: 'auto' }}
-                                                            />
-                                                        </picture>
-                                                            :
-                                                        <picture>
-                                                            <source srcset={`
-                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg 138w, 
-                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_292x292.jpg 146w,
-                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_366x366.jpg 183w,
-                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_466x466.jpg 233w,
-                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_585x585.jpg 292w
-                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_732x732.jpg 366w,
-                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_1168x1168.jpg 584w,
-                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_1420x1420.jpg 760w,
-                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_2000x2000.jpg 1875w`} 
-                                                                sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
-                                                            <img alt={item.name} title={item.name} style={{ width: '100%', height: 'auto' }} src={`https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg`} />
-                                                        </picture>
-                                                    }
+                                        <div style={{ width: '100%', height: '100%', maxWidth: 'calc(100vh - 200px)', overflow: 'auto' }}>
+                                            {this.state.openModalPCSetItems.map( (item, key) =>
+                                                <div key={key} style={{ width: '100', display: 'flex', flexDirection: 'row', padding: '10px 0', borderTop: key == 0 ? '1px solid rgba(27, 27, 31, 0.1)' : null, borderBottom: '1px solid rgba(27, 27, 31, 0.1)' }}>
+                                                    <div style={{ width: '40%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                                        { item.img_app.length == 0 || !item.img_app ?
+                                                            <picture>
+                                                                <source 
+                                                                    srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.webp?"+item.img_new_update} 
+                                                                    type="image/webp" 
+                                                                />
+                                                                <img 
+                                                                    src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
+                                                                    alt={item.name}
+                                                                    title={item.name}
+                                                                    style={{ width: '100%', height: 'auto' }}
+                                                                />
+                                                            </picture>
+                                                                :
+                                                            <picture>
+                                                                <source srcset={`
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg 138w, 
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_292x292.jpg 146w,
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_366x366.jpg 183w,
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_466x466.jpg 233w,
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_585x585.jpg 292w
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_732x732.jpg 366w,
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_1168x1168.jpg 584w,
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_1420x1420.jpg 760w,
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_2000x2000.jpg 1875w`} 
+                                                                    sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
+                                                                <img alt={item.name} title={item.name} style={{ width: '100%', height: 'auto' }} src={`https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg`} />
+                                                            </picture>
+                                                        }
+                                                    </div>
+                                                    <div style={{ width: '60%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                                                        <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 700, fontSize: '1.06rem', color: '#525252'  }}>{ item.name }</Typography>
+                                                        <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.875rem', color: '#525252'  }}>{ item.tmp_desc }</Typography>
+                                                    </div>
                                                 </div>
-                                                <div style={{ width: '60%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                                                    <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 700, fontSize: '1.06rem', color: '#525252'  }}>{ item.name }</Typography>
-                                                    <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.875rem', color: '#525252'  }}>{ item.tmp_desc }</Typography>
-                                                </div>
-                                            </div>
-                                        )}
+                                            )}
+                                        </div>
                                     </MuiDialogContent>
                                 </Dialog>
                             </Hidden>
