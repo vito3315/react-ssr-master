@@ -1489,7 +1489,7 @@ export class Home extends React.Component {
                                         </IconButton>
                                     </MuiDialogTitle>
                                     
-                                    <MuiDialogContent className="modalActiiContentNew" style={{ height: 'calc(100vh - 500px)', padding: 20, display: 'flex', flexWrap: 'wrap', alignContent: 'start' }}>
+                                    <MuiDialogContent className="modalActiiContentNew" style={{ height: 'calc(100vh - 400px)', padding: 20, display: 'flex', flexWrap: 'wrap', alignContent: 'start' }}>
 
                                         <Typography variant="h5" component="h1" style={{ textAlign: 'center', fontFamily: 'Roboto', fontWeight: 700, fontSize: '1.625rem', color: '#fff', width: '100%' }}>Пищевая ценность на 100 г</Typography>
 
@@ -1497,7 +1497,7 @@ export class Home extends React.Component {
                                             <div style={{ width: '100%', height: 2, backgroundColor: '#fff', marginBottom: 20 }} />
                                         }
 
-                                        <div style={ this.state.openItem.items.length > 1 ? { overflowY: 'scroll', maxHeight: 280, paddingRight: 5 } : {}}>
+                                        <div style={ this.state.openItem.items.length > 1 ? { overflowY: 'scroll', maxHeight: 230, paddingRight: 5 } : {}}>
                                             { this.state.openItem.items.map( (item, key) =>
                                                 <div style={{ border: '2px solid #fff', borderRadius: 10, marginBottom: this.state.openItem.items.length == 1 ? 0 : this.state.openItem.items.length-1 == key ? 0 : 20 }} key={key}>
                                                     <div style={{ width: '100%', display: 'flex', flexDirection: 'row', borderBottom: '2px solid #fff' }}>
