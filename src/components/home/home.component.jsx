@@ -1482,14 +1482,14 @@ export class Home extends React.Component {
                     {this.state.openItem ?
                         <>
                             <Hidden smUp>
-                                <Dialog disableElevation fullScreen style={{ width: '100%', marginTop: this.state.openItem.items.length == 1 ? 400 : 550, backgroundColor: 'rgba(0, 0, 0, 0.6)', borderRadius: 30 }} onClose={this.handleClosePCInfo.bind(this)} className="ItemDialog OpenItemMobInfo blurBacground" open={this.state.openModalPCInfo} TransitionComponent={Transition}>
+                                <Dialog disableElevation fullScreen style={{ width: '100%', marginTop: this.state.openItem.items.length > 1 ? 400 : 470, backgroundColor: 'rgba(0, 0, 0, 0.6)', borderTopRightRadius: 30, borderTopLeftRadius: 30 }} onClose={this.handleClosePCInfo.bind(this)} className="ItemDialog OpenItemMobInfo blurBacground" open={this.state.openModalPCInfo} TransitionComponent={Transition}>
                                     <MuiDialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
                                         <IconButton aria-label="close" style={{ position: 'absolute', top: -47, left: 8, backgroundColor: 'transparent' }} onClick={this.handleClosePCInfo.bind(this)}>
                                             <IconClose style={{ width: 25, height: 25 }} />
                                         </IconButton>
                                     </MuiDialogTitle>
                                     
-                                    <MuiDialogContent className="modalActiiContentNew" style={{ height: this.state.openItem.items.length == 1 ? 'calc(100vh - 400px)' : 'calc(100vh - 550px)', padding: 20, display: 'flex', flexWrap: 'wrap', alignContent: 'start' }}>
+                                    <MuiDialogContent className="modalActiiContentNew" style={{ height: this.state.openItem.items.length > 1 ? 'calc(100vh - 400px)' : 'calc(100vh - 470px)', padding: 20, display: 'flex', flexWrap: 'wrap', alignContent: 'start' }}>
 
                                         <Typography variant="h5" component="h1" style={{ textAlign: 'center', fontFamily: 'Roboto', fontWeight: 700, fontSize: '1.625rem', color: '#fff', width: '100%', marginBottom: 20 }}>Пищевая ценность на 100 г</Typography>
 
