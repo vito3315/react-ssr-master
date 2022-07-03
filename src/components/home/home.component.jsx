@@ -1482,7 +1482,7 @@ export class Home extends React.Component {
                     {this.state.openItem ?
                         <>
                             <Hidden smUp>
-                                <Dialog fullScreen style={{ height: 'calc(100vh - 400px)', width: '100%' }} onClose={this.handleClosePCInfo.bind(this)} className="ItemDialog OpenItemMobSet" open={this.state.openModalPCInfo} TransitionComponent={Transition}>
+                                <Dialog fullScreen style={{ width: '100%', marginTop: 400 }} onClose={this.handleClosePCInfo.bind(this)} className="ItemDialog OpenItemMobInfo" open={this.state.openModalPCInfo} TransitionComponent={Transition}>
                                     <MuiDialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
                                         <IconButton aria-label="close" style={{ position: 'absolute', top: -47, left: 8, backgroundColor: 'transparent' }} onClick={this.handleClosePCInfo.bind(this)}>
                                             <IconClose style={{ width: 25, height: 25 }} />
@@ -1493,7 +1493,44 @@ export class Home extends React.Component {
 
                                         <Typography variant="h5" component="h1" style={{ textAlign: 'center', fontFamily: 'Roboto', fontWeight: 700, fontSize: '1.625rem', color: '#525252', width: '100%' }}>Пищевая ценность на 100 г</Typography>
 
-                                        
+                                        { this.state.openItem.items.length == 1 ? null :
+                                            <div style={{ width: '100%', height: 2, backgroundColor: '#fff', marginBottom: 20 }} />
+                                        }
+
+                                        <div style={ this.state.openItem.items.length > 1 ? { overflowY: 'scroll', maxHeight: 280, paddingRight: 5 } : {}}>
+                                            { this.state.openItem.items.map( (item, key) =>
+                                                <div style={{ border: '2px solid #fff', borderRadius: 10, marginBottom: this.state.openItem.items.length == 1 ? 0 : this.state.openItem.items.length-1 == key ? 0 : 20 }} key={key}>
+                                                    <div style={{ width: '100%', display: 'flex', flexDirection: 'row', borderBottom: '2px solid #fff' }}>
+                                                        <div style={{ width: '75%', display: 'flex', alignItems: 'center', borderRight: '2px solid #fff', padding: 10 }}>
+                                                            <Typography style={{ fontFamily: 'Roboto', fontWeight: 400, fontSize: '1.1rem', lineHeight: 1.25 }}>{item.name}</Typography>
+                                                        </div>
+                                                        <div style={{ width: '25%', display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'center', padding: 10 }}>
+                                                            <Typography style={{ fontSize: '2rem', lineHeight: 1, fontFamily: 'Roboto', fontWeight: 500 }}>{item.kkal}</Typography>
+                                                            <Typography style={{ fontSize: '1rem', lineHeight: 0.8, fontFamily: 'Roboto', fontWeight: 400 }}>ккал</Typography>
+                                                        </div>
+                                                    </div>
+                                                    <div style={{ width: '100%', display: 'flex', flexDirection: 'row' }}>
+                                                        <div style={{ width: '50%', padding: 10, borderRight: '2px solid #fff' }}>
+                                                            <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400 }}>Состав: {item.tmp_desc}</Typography>
+                                                        </div>
+                                                        <div style={{ width: '50%', padding: 10 }} className='styleTooltip'>
+                                                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                                <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 1 }}>белки</Typography>
+                                                                <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 3 }}>{item.protein} г</Typography>
+                                                            </div>
+                                                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                                <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 1 }}>жиры</Typography>
+                                                                <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 3 }}>{item.fat} г</Typography>
+                                                            </div>
+                                                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                                <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 1 }}>углеводы</Typography>
+                                                                <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 3 }}>{item.carbohydrates} г</Typography>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ) }
+                                        </div>
                                         
                                         
                                     </MuiDialogContent>

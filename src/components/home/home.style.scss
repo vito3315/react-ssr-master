@@ -75,7 +75,7 @@ $colorMain: #CC0033;
         font-weight: bold;
     }
 }
-.ItemDialog{
+.ItemDialog:not(.OpenItemMobInfo){
     & .MuiDialog-paperFullScreen{
         margin-top: 100px;
         overflow: initial!important;
