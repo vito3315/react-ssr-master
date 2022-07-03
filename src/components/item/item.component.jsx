@@ -1250,20 +1250,24 @@ export class Item2 extends React.Component {
                                     <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center', fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.87rem', color: '#525252' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight)} { parseInt( this.state.item.cat_id ) == 6 ? 'л' : 'г' }</Typography>
                                 </div>
 
-                                <div style={{ width: 30, height: 30, cursor: 'pointer', position: 'absolute', top: 10, right: 0 }}>
+                                <div style={{ width: 30, height: 30, cursor: 'pointer', position: 'absolute', top: 10, right: 0 }} onClick={this.props.openInfo.bind(this)}>
                                     <IconInfoWhite />
                                 </div>
                                 
                             </div>
                         </Grid>
 
-                        <Grid item xs={12} style={{ marginBottom: 20 }}>
-                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-                                <Button variant="contained" className='ModalItemButtonCart' style={{ width: 240, height: 30, borderRadius: 15, border: '1px solid #F9BC23', fontSize: '0.875rem', textTransform: 'initial', fontFamily: 'Roboto', color: '#525252', fontWeight: 400 }} onClick={this.props.openSetPc.bind(this, this.state.item.items)}>
-                                    Состав сета
-                                </Button>
-                            </ButtonGroup>
-                        </Grid>
+                        { parseInt( this.state.item.cat_id ) == 4 ?
+                            <Grid item xs={12} style={{ marginBottom: 20 }}>
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                                    <Button variant="contained" className='ModalItemButtonCart' style={{ width: 240, height: 30, borderRadius: 15, border: '1px solid #F9BC23', fontSize: '0.875rem', textTransform: 'initial', fontFamily: 'Roboto', color: '#525252', fontWeight: 400 }} onClick={this.props.openSetPc.bind(this, this.state.item.items)}>
+                                        Состав сета
+                                    </Button>
+                                </ButtonGroup>
+                            </Grid>
+                                :
+                            null
+                        }
 
                         <Grid item xs={12} style={{ height: 80, justifyContent: 'center' }}>
                             <Typography component="span" className='hidddenText4' style={{ textAlign: 'center', fontFamily: 'Roboto', fontSize: '0.875rem', fontWeight: 400, color: '#525252', width: '100%' }}>{desc}</Typography>

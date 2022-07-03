@@ -584,9 +584,9 @@ class CardItem extends React.Component {
                         
                         <div style={{ marginBottom: 10 }}>
                             <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
-                                <Button variant="contained" style={{ fontFamily: 'Roboto', fontSize: '0.875rem', fontWeight: 400, color: '#525252', width: 80, height: 30, backgroundColor: '#fff', border: '1px solid #F9BC23', borderRadius: 30, backgroundColor: 'rgb(255, 255, 255)', border: '1px solid rgb(249, 188, 35)', borderRadius: 30 }} onClick={this.add.bind(this)}>
+                                <Button variant="contained" style={{ fontFamily: 'Roboto', fontSize: '0.875rem', fontWeight: 400, color: '#525252', width: 80, height: 30, padding: 0, backgroundColor: '#fff', border: '1px solid #F9BC23', borderRadius: 30, backgroundColor: 'rgb(255, 255, 255)', border: '1px solid rgb(249, 188, 35)', borderRadius: 30 }} onClick={this.add.bind(this)}>
                                     {new Intl.NumberFormat('ru-RU').format( parseInt(this.state.item.price))}
-                                    <IconRuble style={{ width: 10, height: 10, fill: '#525252', marginLeft: 3 }} />
+                                    <IconRuble style={{ width: 11, height: 11, fill: '#525252', marginLeft: 3 }} />
                                 </Button>
                             </ButtonGroup>
                         </div>
@@ -808,6 +808,8 @@ export class Home extends React.Component {
             openModalPC: false,
             openModalPCSet: false,
             openModalPCSetItems: [],
+            openModalPCInfo: false,
+            openModalPCInfoItems: [],
             banners_pc: [],
             banners_mobile: [],
             city_name: this.props.city,
@@ -1279,6 +1281,13 @@ export class Home extends React.Component {
         })
     }
 
+    handleClosePCInfo(){
+        this.setState({
+            openModalPCInfo: false,
+            openModalPCInfoItems: []
+        })
+    }
+
     touchStart(el){
         this.startMove = el['changedTouches'][0].pageY;
     }
@@ -1293,6 +1302,13 @@ export class Home extends React.Component {
         this.setState({
             openModalPCSet: true,
             openModalPCSetItems: items
+        })
+    }
+
+    openInfo(items){
+        this.setState({
+            openModalPCInfo: true,
+            openModalPCInfoItems: items
         })
     }
 
@@ -1426,7 +1442,7 @@ export class Home extends React.Component {
                                 </IconButton>
                             </MuiDialogTitle>
                             <div>
-                                <Item2 itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} />
+                                <Item2 itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} openInfo={this.openInfo.bind(this)} />
                             </div>
                         </Dialog>
                             :
@@ -1442,7 +1458,7 @@ export class Home extends React.Component {
                                     </IconButton>
                                     
                                     <MuiDialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
-                                        <Item2 itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} />
+                                        <Item2 itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} openInfo={this.openInfo.bind(this)} />
                                     </MuiDialogContent>
                                 </Dialog>
                             </Hidden>
@@ -1454,7 +1470,7 @@ export class Home extends React.Component {
                                     </IconButton>
                                     
                                     <MuiDialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
-                                        <Item2 itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} />
+                                        <Item2 itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} openInfo={this.openInfo.bind(this)} />
                                     </MuiDialogContent>
                                 </Dialog>
                             </Hidden>
@@ -1465,6 +1481,25 @@ export class Home extends React.Component {
 
                     {this.state.openItem ?
                         <>
+                            <Hidden smUp>
+                                <Dialog fullScreen style={{ height: 'calc(100vh - 400px)', width: '100%' }} onClose={this.handleClosePCInfo.bind(this)} className="ItemDialog OpenItemMobSet" open={this.state.openModalPCInfo} TransitionComponent={Transition}>
+                                    <MuiDialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
+                                        <IconButton aria-label="close" style={{ position: 'absolute', top: -47, left: 8, backgroundColor: 'transparent' }} onClick={this.handleClosePCInfo.bind(this)}>
+                                            <IconClose style={{ width: 25, height: 25 }} />
+                                        </IconButton>
+                                    </MuiDialogTitle>
+                                    
+                                    <MuiDialogContent className="modalActiiContentNew" style={{ height: 'calc(100vh - 400px)', padding: 20, display: 'flex', flexWrap: 'wrap', alignContent: 'start' }}>
+
+                                        <Typography variant="h5" component="h1" style={{ textAlign: 'center', fontFamily: 'Roboto', fontWeight: 700, fontSize: '1.625rem', color: '#525252', width: '100%' }}>Пищевая ценность на 100 г</Typography>
+
+                                        
+                                        
+                                        
+                                    </MuiDialogContent>
+                                </Dialog>
+                            </Hidden>
+
                             <Hidden smUp>
                                 <Dialog fullScreen style={{ height: 'calc(100vh - 50px)', width: '100%' }} onClose={this.handleClosePCSet.bind(this)} className="ItemDialog OpenItemMobSet" open={this.state.openModalPCSet} TransitionComponent={Transition}>
                                     <MuiDialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
