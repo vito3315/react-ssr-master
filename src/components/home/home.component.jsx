@@ -1466,16 +1466,19 @@ export class Home extends React.Component {
                     {this.state.openItem ?
                         <>
                             <Hidden smUp>
-                                <Dialog fullScreen style={{ borderRadius: 50, height: 'calc(100vh - 50px)', width: '100%' }} onClose={this.handleClosePCSet.bind(this)} className="ItemDialog OpenItemMobSet" open={this.state.openModalPCSet} TransitionComponent={Transition}>
+                                <Dialog fullScreen style={{ height: 'calc(100vh - 50px)', width: '100%' }} onClose={this.handleClosePCSet.bind(this)} className="ItemDialog OpenItemMobSet" open={this.state.openModalPCSet} TransitionComponent={Transition}>
                                     <MuiDialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
                                         <IconButton aria-label="close" style={{ position: 'absolute', top: -47, left: 8, backgroundColor: 'transparent' }} onClick={this.handleClosePCSet.bind(this)}>
                                             <IconClose style={{ width: 25, height: 25 }} />
                                         </IconButton>
                                     </MuiDialogTitle>
                                     
-                                    <MuiDialogContent className="modalActiiContentNew" style={{ height: 'calc(100vh - 50px)', display: 'flex', flexWrap: 'wrap', alignContent: 'start' }}>
+                                    <MuiDialogContent className="modalActiiContentNew" style={{ height: 'calc(100vh - 50px)', padding: 20, display: 'flex', flexWrap: 'wrap', alignContent: 'start' }}>
+
+                                        <Typography variant="h5" component="h1" style={{ textAlign: 'center', fontFamily: 'Roboto', fontWeight: 700, fontSize: '1.625rem', color: '#525252' }}>{this.state.item.name}</Typography>
+
                                         {this.state.openModalPCSetItems.map( (item, key) =>
-                                            <div key={key} style={{ width: '100', display: 'flex', flexDirection: 'row', marginBottom: '2%', borderTop: key == 0 ? '1px solid rgba(27, 27, 31, 0.1)' : null, borderBottom: this.state.openModalPCSetItems.length - 1 == key ? null : '1px solid rgba(27, 27, 31, 0.1)' }}>
+                                            <div key={key} style={{ width: '100', display: 'flex', flexDirection: 'row', marginBottom: '2%', borderTop: key == 0 ? '1px solid rgba(27, 27, 31, 0.1)' : null, borderBottom: '1px solid rgba(27, 27, 31, 0.1)' }}>
                                                 <div style={{ width: '40%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                                     { item.img_app.length == 0 || !item.img_app ?
                                                         <picture>
@@ -1508,8 +1511,8 @@ export class Home extends React.Component {
                                                     }
                                                 </div>
                                                 <div style={{ width: '60%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                                                    <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 700, fontSize: '1.06rem'  }}>{ item.name }</Typography>
-                                                    <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.875rem'  }}>{ item.tmp_desc }</Typography>
+                                                    <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 700, fontSize: '1.06rem', color: '#525252'  }}>{ item.name }</Typography>
+                                                    <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.875rem', color: '#525252'  }}>{ item.tmp_desc }</Typography>
                                                 </div>
                                             </div>
                                         )}
