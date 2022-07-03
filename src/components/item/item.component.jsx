@@ -1269,7 +1269,7 @@ export class Item2 extends React.Component {
                             <Typography component="span" className='hidddenText4' style={{ textAlign: 'center', fontFamily: 'Roboto', fontSize: '0.875rem', fontWeight: 400, color: '#525252', width: '100%' }}>{desc}</Typography>
                         </Grid>
 
-                        <Grid item xs={12} style={{ position: 'absolute', width: 'calc(100% - 40px)', bottom: 100 }}>
+                        <Grid item xs={12} style={{ position: 'absolute', width: 'calc(100% - 40px)', bottom: 150 }}>
                             { this.state.count == 0 ?
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%' }}>
                                     <Button variant="contained" className='ModalItemButtonCart' style={{ width: '100%', height: 60, borderRadius: 40, border: '2px solid #F9BC23' }} onClick={this.add.bind(this)}>
