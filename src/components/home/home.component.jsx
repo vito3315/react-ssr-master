@@ -1466,7 +1466,7 @@ export class Home extends React.Component {
                     {this.state.openItem ?
                         <>
                             <Hidden smUp>
-                                <Dialog fullScreen style={{ borderRadius: 50 }} onClose={this.handleClosePCSet.bind(this)} className="ItemDialog OpenItemPCSet" open={this.state.openModalPCSet} TransitionComponent={Transition}>
+                                <Dialog fullScreen style={{ borderRadius: 50, height: 'calc(100vh - 50px)', width: '100%' }} onClose={this.handleClosePCSet.bind(this)} className="ItemDialog OpenItemMobSet" open={this.state.openModalPCSet} TransitionComponent={Transition}>
                                     <MuiDialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
                                         <IconButton aria-label="close" style={{ position: 'absolute', top: -47, left: 8, backgroundColor: 'transparent' }} onClick={this.handleClosePCSet.bind(this)}>
                                             <IconClose style={{ width: 25, height: 25 }} />
