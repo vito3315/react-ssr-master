@@ -508,12 +508,12 @@ class CardItem extends React.Component {
                                 :
                             <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%' }}>
                                 <div variant="contained" className='ModalItemButtonCart' style={{ width: '100%', height: 56, borderRadius: 40, border: '2px solid #F9BC23', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                    <button style={{ width: 30, height: 30, padding: 0, borderRadius: 40, marginLeft: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23', fontSize: '1.5rem', fontFamily: 'Roboto', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={this.minus.bind(this)}>–</button>
+                                    <button style={{ width: 30, height: 30, padding: 0, borderRadius: 40, marginLeft: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23', color: '#525252', fontSize: '1.5rem', fontFamily: 'Roboto', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={this.minus.bind(this)}>–</button>
                                     <div>
                                         <span style={{ fontSize: '1.25rem', fontFamily: 'Roboto', fontWeight: 700, color: '#525252' }}>{this.state.count} шт. на { new Intl.NumberFormat('ru-RU').format( parseInt(this.state.item.price) * parseInt(this.state.count) )}</span>
                                         <IconRuble style={{ width: 16, height: 16, fill: '#525252', marginLeft: 5 }} />
                                     </div>
-                                    <button style={{ width: 40, height: 40, padding: 0, borderRadius: 40, marginRight: 10, border: '1px solid #F9BC23', backgroundColor: '#F9BC23', fontSize: '2rem', fontFamily: 'Roboto', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={this.add.bind(this)}>+</button>
+                                    <button style={{ width: 40, height: 40, padding: 0, borderRadius: 40, marginRight: 10, border: '1px solid #F9BC23', backgroundColor: '#F9BC23', color: '#525252', fontSize: '2rem', fontFamily: 'Roboto', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={this.add.bind(this)}>+</button>
                                 </div>
                             </ButtonGroup>
                         }
@@ -1465,6 +1465,56 @@ export class Home extends React.Component {
 
                     {this.state.openItem ?
                         <>
+                            <Hidden smUp>
+                                <Dialog fullScreen style={{ borderRadius: 50 }} onClose={this.handleClosePCSet.bind(this)} className="modalActii Item OpenItemMobSet" open={this.state.openModalPCSet}>
+                                    <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -52, left: 16, zIndex: 2000, width: 52, height: 52, backgroundColor: 'transparent' }} onClick={this.handleClosePCSet.bind(this)}>
+                                        <IconClose />
+                                    </IconButton>
+                                    
+                                    <MuiDialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 2.25% 2% 4.5%', alignContent: 'start' }}>
+                                        {this.state.openModalPCSetItems.map( (item, key) =>
+                                            <div key={key} style={{ width: '49%', display: 'flex', flexDirection: 'row', marginRight: key == 0 || key % 2 == 0 ? '2%' : 0, marginBottom: '2%' }}>
+                                                <div style={{ width: '30%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                                    { item.img_app.length == 0 || !item.img_app ?
+                                                        <picture>
+                                                            <source 
+                                                                srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.webp?"+item.img_new_update} 
+                                                                type="image/webp" 
+                                                            />
+                                                            <img 
+                                                                src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
+                                                                alt={item.name}
+                                                                title={item.name}
+                                                                style={{ width: '100%', height: 'auto' }}
+                                                            />
+                                                        </picture>
+                                                            :
+                                                        <picture>
+                                                            <source srcset={`
+                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg 138w, 
+                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_292x292.jpg 146w,
+                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_366x366.jpg 183w,
+                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_466x466.jpg 233w,
+                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_585x585.jpg 292w
+                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_732x732.jpg 366w,
+                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_1168x1168.jpg 584w,
+                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_1420x1420.jpg 760w,
+                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_2000x2000.jpg 1875w`} 
+                                                                sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
+                                                            <img alt={item.name} title={item.name} style={{ width: '100%', height: 'auto' }} src={`https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg`} />
+                                                        </picture>
+                                                    }
+                                                </div>
+                                                <div style={{ width: '70%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                                                    <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 500, fontSize: '1.25rem'  }}>{ item.name }</Typography>
+                                                    <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 300, fontSize: '0.94rem'  }}>{ item.tmp_desc }</Typography>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </MuiDialogContent>
+                                </Dialog>
+                            </Hidden>
+
                             <Hidden lgUp>
                                 <Dialog maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePCSet.bind(this)} className="modalActii Item OpenItemPCSet" open={this.state.openModalPCSet}>
                                     <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -52, left: 16, zIndex: 2000, width: 52, height: 52, backgroundColor: 'transparent' }} onClick={this.handleClosePCSet.bind(this)}>
