@@ -537,7 +537,7 @@ class CardItem extends React.Component {
                                     src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
                                     alt={this.state.item.name}
                                     title={this.state.item.name}
-                                    style={{ width: ((GRID*3) + (2*20)), height: ((GRID*3) + (2*20))  }}
+                                    style={{ width: ((GRID*3) + (2*20)), height: 'auto'  }}
                                 />
                             </picture>
                                 :

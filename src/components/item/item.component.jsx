@@ -1285,7 +1285,7 @@ export class Item2 extends React.Component {
                                             <span style={{ fontSize: '1.25rem', textTransform: 'initial', fontFamily: 'Roboto', color: '#525252', fontWeight: 700 }}>{this.state.count} шт. на { new Intl.NumberFormat('ru-RU').format( parseInt(this.state.item.price) * parseInt(this.state.count) )}</span>
                                             <IconRuble style={{ width: 15, height: 15, fill: '#525252', marginLeft: 5 }} />
                                         </div>
-                                        <button style={{ width: 40, height: 40, borderRadius: 40, marginRight: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23', fontSize: '2rem', fontFamily: 'Roboto', fontWeight: 300, display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={this.add.bind(this)}>+</button>
+                                        <button style={{ width: 40, height: 40, borderRadius: 40, marginRight: 10, border: '1px solid #F9BC23', backgroundColor: '#F9BC23', fontSize: '2rem', fontFamily: 'Roboto', fontWeight: 300, display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={this.add.bind(this)}>+</button>
                                     </div>
                                 </ButtonGroup>
                             }
