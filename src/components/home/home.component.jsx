@@ -1466,7 +1466,7 @@ export class Home extends React.Component {
                     {this.state.openItem ?
                         <>
                             <Hidden smUp>
-                                <Dialog fullScreen fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePCSet.bind(this)} className="modalActii Item OpenItemMobSet" open={this.state.openModalPCSet}>
+                                <Dialog fullScreen fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePCSet.bind(this)} className="modalActii Item OpenItemPCSet" open={this.state.openModalPCSet}>
                                     <MuiDialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
                                         <IconButton aria-label="close" style={{ position: 'absolute', top: -47, left: 8, backgroundColor: 'transparent' }} onClick={this.handleClosePCSet.bind(this)}>
                                             <IconClose style={{ width: 25, height: 25 }} />
@@ -1475,7 +1475,7 @@ export class Home extends React.Component {
                                     
                                     <MuiDialogContent className="modalActiiContentNew" style={{ height: 'calc(100vh - 50px)', display: 'flex', flexWrap: 'wrap', alignContent: 'start' }}>
                                         {this.state.openModalPCSetItems.map( (item, key) =>
-                                            <div key={key} style={{ width: '100', display: 'flex', flexDirection: 'row', marginRight: key == 0 || key % 2 == 0 ? '2%' : 0, marginBottom: '2%' }}>
+                                            <div key={key} style={{ width: '100', display: 'flex', flexDirection: 'row', marginBottom: '2%', borderTop: key == 0 ? '1px solid rgba(27, 27, 31, 0.1)' : null, borderBottom: this.state.openModalPCSetItems.length - 1 == key ? null : '1px solid rgba(27, 27, 31, 0.1)' }}>
                                                 <div style={{ width: '40%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                                     { item.img_app.length == 0 || !item.img_app ?
                                                         <picture>
