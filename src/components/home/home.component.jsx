@@ -1515,7 +1515,7 @@ export class Home extends React.Component {
                                 </Dialog>
                             </Hidden>
 
-                            <Hidden lgUp>
+                            <Hidden only={['xs', 'sm', 'lg', 'xl']}>
                                 <Dialog maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePCSet.bind(this)} className="modalActii Item OpenItemPCSet" open={this.state.openModalPCSet}>
                                     <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -52, left: 16, zIndex: 2000, width: 52, height: 52, backgroundColor: 'transparent' }} onClick={this.handleClosePCSet.bind(this)}>
                                         <IconClose />
