@@ -87,6 +87,13 @@ $colorMain: #CC0033;
         //@include fons(1rem, $Ubuntu);
     }
 }
+.blurBacground div{
+    background-color: transparent!important;
+    box-shadow: none!important;
+}
+.ItemDialog div{
+    box-shadow: none!important;
+}
 .fohover{
     & .NONHOVERED{
         display: grid;
