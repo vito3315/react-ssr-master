@@ -1499,7 +1499,7 @@ export class Home extends React.Component {
                                             </div>
                                         </div>
                                         
-                                        <div style={{ width: '100%', height: '100%', maxWidth: 'calc(100vh - 200px)', overflow: 'auto' }}>
+                                        <div style={{ width: '100%', height: '100%', maxHeight: 'calc(100vh - 250px)', overflow: 'auto' }}>
                                             {this.state.openModalPCSetItems.map( (item, key) =>
                                                 <div key={key} style={{ width: '100', display: 'flex', flexDirection: 'row', padding: '10px 0', borderTop: key == 0 ? '1px solid rgba(27, 27, 31, 0.1)' : null, borderBottom: '1px solid rgba(27, 27, 31, 0.1)' }}>
                                                     <div style={{ width: '40%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
