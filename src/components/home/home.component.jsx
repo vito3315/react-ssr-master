@@ -1475,7 +1475,31 @@ export class Home extends React.Component {
                                     
                                     <MuiDialogContent className="modalActiiContentNew" style={{ height: 'calc(100vh - 50px)', padding: 20, display: 'flex', flexWrap: 'wrap', alignContent: 'start' }}>
 
-                                        <Typography variant="h5" component="h1" style={{ textAlign: 'center', fontFamily: 'Roboto', fontWeight: 700, fontSize: '1.625rem', color: '#525252' }}>{this.state.openItem.name}</Typography>
+                                        <Typography variant="h5" component="h1" style={{ textAlign: 'center', fontFamily: 'Roboto', fontWeight: 700, fontSize: '1.625rem', color: '#525252', width: '100%' }}>{this.state.openItem.name}</Typography>
+
+                                        
+                                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+                                            <div style={{ width: parseInt( this.state.openItem.cat_id ) == 4 ? 238 : parseInt( this.state.openItem.cat_id ) == 5 || parseInt( this.state.openItem.cat_id ) == 6 || parseInt( this.state.openItem.cat_id ) == 7 ? 78 : 148, height: 28, border: '1px solid #DADADA', borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginTop: 10, marginBottom: 20 }}>
+                                                { parseInt( this.state.openItem.cat_id ) == 4 ?
+                                                    <>
+                                                        <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center', fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.87rem', color: '#525252' }}>{this.state.openItem.count_part_new}</Typography>
+                                                        <div style={{ height: '100%', borderLeft: '1px solid #DADADA' }} />
+                                                    </>
+                                                        :
+                                                    null
+                                                }
+                                                { parseInt( this.state.openItem.cat_id ) == 5 || parseInt( this.state.openItem.cat_id ) == 6 || parseInt( this.state.openItem.cat_id ) == 7 ?
+                                                    null
+                                                        :
+                                                    <>
+                                                        <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: parseInt( this.state.openItem.cat_id ) == 4 ? 2 : 3, textAlign: 'center', fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.87rem', color: '#525252' }}>{ parseInt( this.state.openItem.cat_id ) == 14 ? this.state.openItem.size_pizza + ' см' : this.state.openItem.count_part + ' шт.' }</Typography>
+                                                        <div style={{ height: '100%', borderLeft: '1px solid #DADADA' }} />
+                                                    </>
+                                                }
+                                                <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center', fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.87rem', color: '#525252' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.openItem.weight)} { parseInt( this.state.openItem.cat_id ) == 6 ? 'л' : 'г' }</Typography>
+                                            </div>
+                                        </div>
+                                        
 
                                         {this.state.openModalPCSetItems.map( (item, key) =>
                                             <div key={key} style={{ width: '100', display: 'flex', flexDirection: 'row', marginBottom: '2%', borderTop: key == 0 ? '1px solid rgba(27, 27, 31, 0.1)' : null, borderBottom: '1px solid rgba(27, 27, 31, 0.1)' }}>
