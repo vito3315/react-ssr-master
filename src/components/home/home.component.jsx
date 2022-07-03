@@ -1489,9 +1489,9 @@ export class Home extends React.Component {
                                         </IconButton>
                                     </MuiDialogTitle>
                                     
-                                    <MuiDialogContent className="modalActiiContentNew" style={{ height: 'calc(100vh - 400px)', padding: 20, display: 'flex', flexWrap: 'wrap', alignContent: 'start' }}>
+                                    <MuiDialogContent className="modalActiiContentNew blurBacground" style={{ height: 'calc(100vh - 400px)', padding: 20, display: 'flex', flexWrap: 'wrap', alignContent: 'start', backgroundColor: 'rgba(0, 0, 0, 0.6)' }}>
 
-                                        <Typography variant="h5" component="h1" style={{ textAlign: 'center', fontFamily: 'Roboto', fontWeight: 700, fontSize: '1.625rem', color: '#525252', width: '100%' }}>Пищевая ценность на 100 г</Typography>
+                                        <Typography variant="h5" component="h1" style={{ textAlign: 'center', fontFamily: 'Roboto', fontWeight: 700, fontSize: '1.625rem', color: '#fff', width: '100%' }}>Пищевая ценность на 100 г</Typography>
 
                                         { this.state.openItem.items.length == 1 ? null :
                                             <div style={{ width: '100%', height: 2, backgroundColor: '#fff', marginBottom: 20 }} />
@@ -1502,29 +1502,29 @@ export class Home extends React.Component {
                                                 <div style={{ border: '2px solid #fff', borderRadius: 10, marginBottom: this.state.openItem.items.length == 1 ? 0 : this.state.openItem.items.length-1 == key ? 0 : 20 }} key={key}>
                                                     <div style={{ width: '100%', display: 'flex', flexDirection: 'row', borderBottom: '2px solid #fff' }}>
                                                         <div style={{ width: '75%', display: 'flex', alignItems: 'center', borderRight: '2px solid #fff', padding: 10 }}>
-                                                            <Typography style={{ fontFamily: 'Roboto', fontWeight: 400, fontSize: '1.1rem', lineHeight: 1.25 }}>{item.name}</Typography>
+                                                            <Typography style={{ fontFamily: 'Roboto', fontWeight: 400, fontSize: '1.1rem', lineHeight: 1.25, color: '#fff' }}>{item.name}</Typography>
                                                         </div>
                                                         <div style={{ width: '25%', display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'center', padding: 10 }}>
-                                                            <Typography style={{ fontSize: '2rem', lineHeight: 1, fontFamily: 'Roboto', fontWeight: 500 }}>{item.kkal}</Typography>
-                                                            <Typography style={{ fontSize: '1rem', lineHeight: 0.8, fontFamily: 'Roboto', fontWeight: 400 }}>ккал</Typography>
+                                                            <Typography style={{ fontSize: '2rem', lineHeight: 1, fontFamily: 'Roboto', fontWeight: 500, color: '#fff' }}>{item.kkal}</Typography>
+                                                            <Typography style={{ fontSize: '1rem', lineHeight: 0.8, fontFamily: 'Roboto', fontWeight: 400, color: '#fff' }}>ккал</Typography>
                                                         </div>
                                                     </div>
                                                     <div style={{ width: '100%', display: 'flex', flexDirection: 'row' }}>
                                                         <div style={{ width: '50%', padding: 10, borderRight: '2px solid #fff' }}>
-                                                            <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400 }}>Состав: {item.tmp_desc}</Typography>
+                                                            <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, color: '#fff' }}>Состав: {item.tmp_desc}</Typography>
                                                         </div>
                                                         <div style={{ width: '50%', padding: 10 }} className='styleTooltip'>
                                                             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                                                                <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 1 }}>белки</Typography>
-                                                                <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 3 }}>{item.protein} г</Typography>
+                                                                <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 1, color: '#fff' }}>белки</Typography>
+                                                                <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 3, color: '#fff' }}>{item.protein} г</Typography>
                                                             </div>
                                                             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                                                                <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 1 }}>жиры</Typography>
-                                                                <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 3 }}>{item.fat} г</Typography>
+                                                                <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 1, color: '#fff' }}>жиры</Typography>
+                                                                <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 3, color: '#fff' }}>{item.fat} г</Typography>
                                                             </div>
                                                             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                                                                <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 1 }}>углеводы</Typography>
-                                                                <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 3 }}>{item.carbohydrates} г</Typography>
+                                                                <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 1, color: '#fff' }}>углеводы</Typography>
+                                                                <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 3, color: '#fff' }}>{item.carbohydrates} г</Typography>
                                                             </div>
                                                         </div>
                                                     </div>

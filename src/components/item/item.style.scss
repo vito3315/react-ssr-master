@@ -288,6 +288,11 @@ $colorMain: #CC0033;
     background-color: #fff!important;
 }
 
+.blurBacground{
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
 .MuiTooltip-popper{
     //left: -100px!important;
     pointer-events: auto!important;
