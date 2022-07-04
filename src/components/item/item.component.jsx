@@ -907,8 +907,6 @@ export class Item2 extends React.Component {
     }
 
     handleTooltipClose(){
-        console.log( 'close' )
-
         this.setState({
             openTooltip: false
         })
