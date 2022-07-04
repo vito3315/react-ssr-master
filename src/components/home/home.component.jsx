@@ -525,7 +525,7 @@ class CardItem extends React.Component {
         
         if( this.props.type == 'mobile' ){
             return (
-                <Grid item container xs={12} className="CardItem_mobile" style={{ display: 'flex', flexDirection: 'row' }}>
+                <Grid item container xs={12} className="CardItem_mobile" style={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap' }}>
                     <Grid style={{ position: 'relative', marginRight: 20 }} item onClick={ () => this.props.openItem(this.state.item.id)}>
                         
                         {img_type == 'old' ?
@@ -565,7 +565,7 @@ class CardItem extends React.Component {
 
                         <Badge size={'small'} type={'new'} />
                     </Grid>
-                    <Grid item className="SecondBox_" style={{ width: ((GRID*3) + (2*20)), display: 'flex', flexDirection: 'column', position: 'relative', justifyContent: 'flex-end' }}>
+                    <Grid item className="SecondBox_" style={{ width: 'max-content', display: 'flex', flexDirection: 'column', position: 'relative', justifyContent: 'flex-end' }}>
                         <Typography className="CardNameItem_" variant="h5" component="h3" style={{ fontFamily: 'Roboto', fontSize: '1.0625rem', fontWeight: 700, color: '#525252', marginBottom: 10 }} onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>
 
                         {  parseInt( this.state.item.cat_id ) == 4 ?
