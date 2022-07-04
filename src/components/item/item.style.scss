@@ -287,7 +287,7 @@ $colorMain: #CC0033;
 .ModalItemButtonCart:hover, .ModalItemButtonCartOther:hover{
     background-color: rgba(249, 188, 35, 0.1)!important;
 }
-.ModalItemButtonCart:not(:hover), .ModalItemButtonCartOther:not(:hover){
+.ModalItemButtonCart:not(.OPEN):not(:hover), .ModalItemButtonCartOther:not(.OPEN):not(:hover){
     background-color: #fff!important;
 }
 
