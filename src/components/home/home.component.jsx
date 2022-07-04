@@ -475,8 +475,9 @@ class CardItem extends React.Component {
                             <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: 10, marginBottom: 10 }}>
                                 <div style={{ width: parseInt( this.state.item.cat_id ) == 4 ? 230 : parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? 75 : 135, height: 34, border: '1px solid #dadada', borderRadius: 15, display: 'flex', flexDirection: 'row' }}>
                                     { parseInt( this.state.item.cat_id ) == 4 ?
-                                        
-                                        <span style={{ flex: 3, textAlign: 'center', height: 34, borderRight: '1px solid #dadada', fontFamily: 'Roboto', fontSize: '0.9rem', fontWeight: 400, color: '#525252' }}>{this.state.item.count_part_new}</span>
+                                        <div style={{ height: 34, borderRight: '1px solid #dadada', flex: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                            <span style={{ fontFamily: 'Roboto', fontSize: '0.9rem', fontWeight: 400, color: '#525252' }}>{this.state.item.count_part_new}</span>
+                                        </div>
                                             :
                                         null
                                     }
@@ -1415,12 +1416,12 @@ export class Home extends React.Component {
                                         {cat.items.map((it, k) => (
                                             <React.Fragment key={k}>
                                                 <Hidden xsDown>
-                                                    <Grid item xs={12} sm={4} md={3} xl={3} style={{ padding: '30px 16px', display: 'flex', width: '100%' }}>
+                                                    <Grid item xs={12} sm={6} md={4} lg={3} xl={3} style={{ padding: '30px 16px', display: 'flex', width: '100%' }}>
                                                         <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
                                                     </Grid>
                                                 </Hidden>
                                                 <Hidden smUp>
-                                                    <Grid item xs={12} sm={4} md={3} xl={3} style={{ display: 'flex', padding: '10px 0px', borderBottom: cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
+                                                    <Grid item xs={12} sm={6} md={4} lg={3} xl={3} style={{ display: 'flex', padding: '10px 0px', borderBottom: cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
                                                         <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
                                                     </Grid>
                                                 </Hidden>
