@@ -1172,7 +1172,7 @@ export class Item2 extends React.Component {
                                 </ButtonGroup>
                                     :
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ position: 'absolute', bottom: 0 }}>
-                                    <div variant="contained" className='ModalItemButtonCart' style={{ width: 296, height: 56, borderRadius: 40, border: '2px solid #F9BC23', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                    <div variant="contained" className='ModalItemButtonCart OPEN' style={{ width: 296, height: 56, borderRadius: 40, border: '2px solid #F9BC23', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <button style={{ width: 30, height: 30, borderRadius: 40, padding: 0, marginLeft: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23', color: '#525252', fontSize: '1.5rem', fontFamily: 'Roboto', fontWeight: 300, display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={this.minus.bind(this)}>–</button>
                                         <div>
                                             <span style={{ fontSize: '1.25rem', textTransform: 'initial', fontFamily: 'Roboto', color: '#525252', fontWeight: 700 }}>{this.state.count} шт. на { new Intl.NumberFormat('ru-RU').format( parseInt(this.state.item.price) * parseInt(this.state.count) )}</span>
@@ -1287,7 +1287,7 @@ export class Item2 extends React.Component {
                                 </ButtonGroup>
                                     :
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%' }}>
-                                    <div variant="contained" className='ModalItemButtonCart' style={{ width: '100%', height: 56, borderRadius: 40, border: '2px solid #F9BC23', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                    <div variant="contained" className='ModalItemButtonCart OPEN' style={{ width: '100%', height: 56, borderRadius: 40, border: '2px solid #F9BC23', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <button style={{ width: 30, height: 30, minWidth: 30, maxWidth: 30, minHeight: 30, maxHeight: 30, borderRadius: 40, padding: 0, marginLeft: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23', color: '#525252', fontSize: '1.5rem', fontFamily: 'Roboto', fontWeight: 300, display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={this.minus.bind(this)}>–</button>
                                         <div>
                                             <span style={{ fontSize: '1.25rem', textTransform: 'initial', fontFamily: 'Roboto', color: '#525252', fontWeight: 700 }}>{this.state.count} шт. на { new Intl.NumberFormat('ru-RU').format( parseInt(this.state.item.price) * parseInt(this.state.count) )}</span>

@@ -508,7 +508,7 @@ class CardItem extends React.Component {
                             </ButtonGroup>
                                 :
                             <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%' }}>
-                                <div variant="contained" className='ModalItemButtonCart' style={{ width: '100%', height: 56, borderRadius: 40, border: '2px solid #F9BC23', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <div variant="contained" className='ModalItemButtonCart OPEN' style={{ width: '100%', height: 56, borderRadius: 40, border: '2px solid #F9BC23', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                     <button style={{ width: 30, height: 30, padding: 0, borderRadius: 40, marginLeft: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23', color: '#525252', fontSize: '1.5rem', fontFamily: 'Roboto', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={this.minus.bind(this)}>–</button>
                                     <div>
                                         <span style={{ fontSize: '1.25rem', fontFamily: 'Roboto', fontWeight: 700, color: '#525252' }}>{this.state.count} шт. на { new Intl.NumberFormat('ru-RU').format( parseInt(this.state.item.price) * parseInt(this.state.count) )}</span>
