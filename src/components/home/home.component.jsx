@@ -420,7 +420,7 @@ class CardItem extends React.Component {
             }
         }
 
-        const width = window.screen.width;
+        const width = window.innerWidth;
 
         const GRID = (width- 7*20) / 6;
 
