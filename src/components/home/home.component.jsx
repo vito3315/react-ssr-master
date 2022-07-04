@@ -426,7 +426,7 @@ class CardItem extends React.Component {
 
         if( this.props.type == 'pc' ){
             return (
-                <Card elevation={0} className="CardItem">
+                <Card elevation={0} className="CardItem" style={{ width: '100%' }}>
                     
                     <CardContent style={{ cursor: 'pointer', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }} onClick={ () => this.props.openItem(this.state.item.id)}>
                         
