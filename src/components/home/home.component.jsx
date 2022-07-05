@@ -460,13 +460,8 @@ class CardItem extends React.Component {
                             </picture>
                         }
                         
-
                         { parseInt(this.state.item.is_new) == 0 ? null :
-                            <img 
-                                src='/assets/is_new.png'
-                                alt="Новинка"
-                                style={{ position: 'absolute', width: 70, top: 0, right: 0 }}
-                            />
+                            <Badge size={'small'} type={'new'} />
                         }
                         
                         <Typography className="CardNameItem" variant="h5" component="h3" style={{ flex: 1 }}>{this.state.item.name}</Typography>
