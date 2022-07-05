@@ -294,6 +294,10 @@ $colorMain: #CC0033;
 .blurBacground{
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
+
+    -moz-backdrop-filter: blur(15px);
+    -o-backdrop-filter: blur(15px);
+    -ms-backdrop-filter: blur(15px);
 }
 
 .MuiTooltip-popper{
@@ -306,6 +310,9 @@ $colorMain: #CC0033;
         background-color: rgba(0,0,0, 0.65) !important;
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
+        -moz-backdrop-filter: blur(15px);
+        -o-backdrop-filter: blur(15px);
+        -ms-backdrop-filter: blur(15px);
         color: #fff!important;
         border-radius: 30px;
         padding: 20px;
