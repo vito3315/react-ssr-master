@@ -428,7 +428,7 @@ class CardItem extends React.Component {
             return (
                 <Card elevation={0} className="CardItem" style={{ width: '100%' }}>
                     
-                    <CardContent style={{ cursor: 'pointer', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }} onClick={ () => this.props.openItem(this.state.item.id)}>
+                    <CardContent style={{ cursor: 'pointer', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative' }} onClick={ () => this.props.openItem(this.state.item.id)}>
                         
                         {img_type == 'old' ?
                             <picture>
@@ -461,9 +461,9 @@ class CardItem extends React.Component {
                         }
                         
                         { parseInt(this.state.item.is_new) == 0 ? null :
-                            <Badge size={'small'} type={'new'} />
+                            <Badge size={'small'} type={'new'} view={'pc'} />
                         }
-                        
+
                         <Typography className="CardNameItem" variant="h5" component="h3" style={{ flex: 1 }}>{this.state.item.name}</Typography>
 
                         <CardContent style={{ padding: 0 }}>
@@ -559,7 +559,7 @@ class CardItem extends React.Component {
                         }
 
                         { parseInt(this.state.item.is_new) == 0 ? null :
-                            <Badge size={'small'} type={'new'} />
+                            <Badge size={'small'} type={'new'} view={'mobile'} />
                         }
                     </Grid>
                     <Grid item className="SecondBox_" style={{ width: 'max-content', display: 'flex', flexDirection: 'column', position: 'relative', justifyContent: 'flex-end' }}>
@@ -726,6 +726,7 @@ class Badge extends React.Component{
         
         this.state = {      
             size: this.props.size,
+            view: this.props.view,
             color: this.arrColor[ this.props.type ].color,
             text: this.arrColor[ this.props.type ].text
         };
@@ -733,7 +734,7 @@ class Badge extends React.Component{
 
     render(){
         return (
-            <div style={{ position: 'absolute', top: 0, left: -10, }}>
+            <div style={{ position: 'absolute', top: this.state.view == 'mobile' ? 0 : 20, left: this.state.view == 'mobile' ? -10 : 20, }}>
                 <div style={{ width: this.state.size == 'small' ? 84 : 114, height: this.state.size == 'small' ? 34 : 44, backgroundColor: 'rgba(255, 255, 255, 0.6)', borderRadius: 15 }} />
                 <div style={{ width: this.state.size == 'small' ? 80 : 110, height: this.state.size == 'small' ? 30 : 40, backgroundColor: this.state.color, borderRadius: 15, display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'absolute', top: 2, left: 2 }}>
                     <Typography component="span" style={{ fontFamily: 'Roboto', fontSize: '0.75rem', fontWeight: 400, color: '#fff', textTransform: 'uppercase', lineHeight: 1 }}>{this.state.text}</Typography>
