@@ -563,7 +563,9 @@ class CardItem extends React.Component {
                             </picture>
                         }
 
-                        <Badge size={'small'} type={'new'} />
+                        { parseInt(this.state.item.is_new) == 0 ? null :
+                            <Badge size={'small'} type={'new'} />
+                        }
                     </Grid>
                     <Grid item className="SecondBox_" style={{ width: 'max-content', display: 'flex', flexDirection: 'column', position: 'relative', justifyContent: 'flex-end' }}>
                         <Typography className="CardNameItem_" variant="h5" component="h3" style={{ fontFamily: 'Roboto', fontSize: '1.0625rem', fontWeight: 700, color: '#525252', marginBottom: 10 }} onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>
