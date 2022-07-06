@@ -1023,7 +1023,7 @@ export class Item2 extends React.Component {
                         
                         {img_type == 'old' ?
                             <Grid item style={{ width: '56.4%', margin: '2% 2.25% 2% 4.5%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <picture style={{ width: '100%' }}>
+                                <picture style={{ width: '100%', height: '100%' }}>
                                     <source 
                                         srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
                                         type="image/webp" 
@@ -1038,7 +1038,7 @@ export class Item2 extends React.Component {
                             </Grid>
                                 :
                             <Grid item style={{ width: '56.4%', margin: '2% 2.25% 2% 4.5%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <picture style={{ width: '100%' }}>
+                                <picture style={{ width: '100%', height: '100%' }}>
                                     <source srcset={`
                                         https://storage.yandexcloud.net/site-img/${img_name}_276x276.jpg 138w, 
                                         https://storage.yandexcloud.net/site-img/${img_name}_292x292.jpg 146w,
@@ -1164,7 +1164,7 @@ export class Item2 extends React.Component {
                             { this.state.count == 0 ?
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ position: 'absolute', bottom: 0 }}>
                                     <Button variant="contained" className='ModalItemButtonCart' style={{ width: 300, height: 60, borderRadius: 40, border: '2px solid #F9BC23' }} onClick={this.add.bind(this)}>
-                                        <span style={{ fontSize: '1.25rem', textTransform: 'initial', fontFamily: 'Roboto', color: '#525252', fontWeight: 700 }}>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)}</span>
+                                        <span style={{ fontSize: '1.25rem', textTransform: 'initial', fontFamily: 'Roboto', color: '#525252', fontWeight: 700 }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.price)}</span>
                                         <IconRuble style={{ width: 16, height: 16, fill: '#525252', marginLeft: 5 }} />
                                     </Button>
                                 </ButtonGroup>
@@ -1279,7 +1279,7 @@ export class Item2 extends React.Component {
                             { this.state.count == 0 ?
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%' }}>
                                     <Button variant="contained" className='ModalItemButtonCart' style={{ width: '100%', height: 60, borderRadius: 40, border: '2px solid #F9BC23' }} onClick={this.add.bind(this)}>
-                                        <span style={{ fontSize: '1.25rem', textTransform: 'initial', fontFamily: 'Roboto', color: '#525252', fontWeight: 700 }}>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)}</span>
+                                        <span style={{ fontSize: '1.25rem', textTransform: 'initial', fontFamily: 'Roboto', color: '#525252', fontWeight: 700 }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.price)}</span>
                                         <IconRuble style={{ width: 15, height: 15, fill: '#525252', marginLeft: 5 }} />
                                     </Button>
                                 </ButtonGroup>

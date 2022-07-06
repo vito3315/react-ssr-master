@@ -487,8 +487,8 @@ class CardItem extends React.Component {
                                 </div>
                             </div>
 
-                            <div style={{ height: 120, width: '100%', marginBottom: 10, textOverflow: 'ellipsis', textAlign: 'center', overflow: 'hidden' }}>
-                                <Typography component="span" className='hidddenText5' style={{ fontFamily: 'Roboto', fontSize: '1rem', color: '#525252' }}>{desc}</Typography>
+                            <div style={{ height: 120, width: '100%', marginBottom: 10, textAlign: 'center', overflow: 'hidden' }}>
+                                <Typography component="span" className='hidddenText5' style={{ fontFamily: 'Roboto', fontSize: '0.925rem', color: '#525252' }}>{desc}</Typography>
                             </div>
                         </CardContent>
                     </CardContent>
@@ -497,7 +497,7 @@ class CardItem extends React.Component {
                         { this.state.count == 0 ?
                             <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%' }}>
                                 <Button variant="contained" className='ModalItemButtonCart' style={{ width: '100%', height: 60, borderRadius: 40, border: '2px solid #F9BC23' }} onClick={this.add.bind(this)}>
-                                    <span style={{ fontSize: '1.25rem', fontFamily: 'Roboto', fontWeight: 700, color: '#525252', textTransform: 'initial' }}>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)}</span>
+                                    <span style={{ fontSize: '1.25rem', fontFamily: 'Roboto', fontWeight: 700, color: '#525252', textTransform: 'initial' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.price)}</span>
                                     <IconRuble style={{ width: 16, height: 16, fill: '#525252', marginLeft: 5 }} />
                                 </Button>
                             </ButtonGroup>
@@ -591,11 +591,11 @@ class CardItem extends React.Component {
                                     :
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%' }}>
                                     <div variant="contained" className='ModalItemButtonCart OPEN' style={{ width: '100%', height: 28, borderRadius: 40, border: '1px solid #F9BC23', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                        <button style={{ width: 28, height: 28, padding: 0, marginLeft: 13, color: '#525252', fontSize: '0.875rem', fontFamily: 'Roboto', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={this.minus.bind(this)}>–</button>
+                                        <button style={{ width: 28, height: 28, padding: 0, marginLeft: 13, color: '#525252', fontSize: '0.875rem', fontFamily: 'Roboto', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'transparent', border: 'transparent' }} onClick={this.minus.bind(this)}>–</button>
                                         <div>
                                             <span style={{ fontSize: '0.875rem', fontFamily: 'Roboto', fontWeight: 500, color: '#525252' }}>{this.state.count}</span>
                                         </div>
-                                        <button style={{ width: 28, height: 28, padding: 0, marginRight: 10, color: '#525252', fontSize: '0.875rem', fontFamily: 'Roboto', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={this.add.bind(this)}>+</button>
+                                        <button style={{ width: 28, height: 28, padding: 0, marginRight: 10, color: '#525252', fontSize: '0.875rem', fontFamily: 'Roboto', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'transparent', border: 'transparent' }} onClick={this.add.bind(this)}>+</button>
                                     </div>
                                 </ButtonGroup>
                             }
