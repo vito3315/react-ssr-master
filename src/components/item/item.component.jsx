@@ -1023,7 +1023,7 @@ export class Item2 extends React.Component {
                         
                         {img_type == 'old' ?
                             <Grid item style={{ width: '56.4%', margin: '2% 2.25% 2% 4.5%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <picture style={{ width: '100%', height: '100%' }}>
+                                <picture style={{ width: '100%' }}>
                                     <source 
                                         srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
                                         type="image/webp" 
@@ -1038,7 +1038,7 @@ export class Item2 extends React.Component {
                             </Grid>
                                 :
                             <Grid item style={{ width: '56.4%', margin: '2% 2.25% 2% 4.5%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <picture style={{ width: '100%', height: '100%' }}>
+                                <picture style={{ width: '100%' }}>
                                     <source srcset={`
                                         https://storage.yandexcloud.net/site-img/${img_name}_276x276.jpg 138w, 
                                         https://storage.yandexcloud.net/site-img/${img_name}_292x292.jpg 146w,
@@ -1077,7 +1077,7 @@ export class Item2 extends React.Component {
                                             <div style={{ height: '100%', borderLeft: '1px solid #DADADA' }} />
                                         </>
                                     }
-                                    <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight)} { parseInt( this.state.item.cat_id ) == 6 ? 'л' : 'г' }</Typography>
+                                    <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight)} { parseInt( this.state.item.id ) == 17 || parseInt( this.state.item.id ) == 237 ? 'шт.' : parseInt( this.state.item.cat_id ) == 6 ? 'л' : 'г' }</Typography>
                                 </div>
 
                                 <ClickAwayListener mouseEvent="onMouseDown" touchEvent="onTouchStart" onClickAway={this.handleTooltipClose.bind(this)}>
@@ -1245,7 +1245,7 @@ export class Item2 extends React.Component {
                                             <div style={{ height: '100%', borderLeft: '1px solid #DADADA' }} />
                                         </>
                                     }
-                                    <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center', fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.87rem', color: '#525252' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight)} { parseInt( this.state.item.cat_id ) == 6 ? 'л' : 'г' }</Typography>
+                                    <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center', fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.87rem', color: '#525252' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight)} { parseInt( this.state.item.id ) == 17 || parseInt( this.state.item.id ) == 237 ? 'шт.' : parseInt( this.state.item.cat_id ) == 6 ? 'л' : 'г' }</Typography>
                                 </div>
 
                                 <div style={{ width: 30, height: 30, cursor: 'pointer', position: 'absolute', top: 10, right: 0 }} onClick={this.props.openInfo.bind(this)}>

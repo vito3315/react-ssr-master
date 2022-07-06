@@ -482,7 +482,7 @@ class CardItem extends React.Component {
                                         </div>
                                     }
                                     <div style={{ height: 34, flex: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                        <span style={{ fontFamily: 'Roboto', fontSize: '0.9rem', fontWeight: 400, color: '#525252' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight) } { parseInt( this.state.item.cat_id ) == 6 ? 'л' : 'г' }</span>
+                                        <span style={{ fontFamily: 'Roboto', fontSize: '0.9rem', fontWeight: 400, color: '#525252' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight) } { parseInt( this.state.item.id ) == 17 || parseInt( this.state.item.id ) == 237 ? 'шт.' : parseInt( this.state.item.cat_id ) == 6 ? 'л' : 'г' }</span>
                                     </div>
                                 </div>
                             </div>
