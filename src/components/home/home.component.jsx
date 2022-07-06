@@ -488,7 +488,7 @@ class CardItem extends React.Component {
                             </div>
 
                             <div style={{ height: 120, width: '100%', marginBottom: 10, textOverflow: 'ellipsis', textAlign: 'center', overflow: 'hidden' }}>
-                                <Typography component="span" style={{ fontFamily: 'Roboto', fontSize: '1rem', color: '#525252' }}>{desc}</Typography>
+                                <Typography component="span" className='hidddenText5' style={{ fontFamily: 'Roboto', fontSize: '1rem', color: '#525252' }}>{desc}</Typography>
                             </div>
                         </CardContent>
                     </CardContent>
@@ -581,12 +581,24 @@ class CardItem extends React.Component {
                         <Typography className="CardInfoItem_" style={{ marginBottom: 10, fontFamily: 'Roboto', fontSize: '0.875rem', fontWeight: 400, color: '#525252', maxHeight: 60, overflow: 'hidden' }} component="p" onClick={() => this.props.openItem(this.state.item.id)}>{desc}</Typography>
                         
                         <div style={{ marginBottom: 10 }}>
-                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
-                                <Button variant="contained" style={{ fontFamily: 'Roboto', fontSize: '0.875rem', fontWeight: 500, color: '#525252', width: 80, height: 30, padding: 0, backgroundColor: '#fff', border: '1px solid #F9BC23', borderRadius: 30, backgroundColor: 'rgb(255, 255, 255)', border: '1px solid rgb(249, 188, 35)', borderRadius: 30 }} onClick={this.add.bind(this)}>
-                                    {new Intl.NumberFormat('ru-RU').format( parseInt(this.state.item.price))}
-                                    <IconRuble style={{ width: 11, height: 11, fill: '#525252', marginLeft: 3 }} />
-                                </Button>
-                            </ButtonGroup>
+                            { this.state.count == 0 ?
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
+                                    <Button variant="contained" style={{ fontFamily: 'Roboto', fontSize: '0.875rem', fontWeight: 500, color: '#525252', width: 80, height: 30, padding: 0, backgroundColor: '#fff', border: '1px solid #F9BC23', borderRadius: 30, backgroundColor: 'rgb(255, 255, 255)', border: '1px solid rgb(249, 188, 35)', borderRadius: 30 }} onClick={this.add.bind(this)}>
+                                        {new Intl.NumberFormat('ru-RU').format( parseInt(this.state.item.price))}
+                                        <IconRuble style={{ width: 11, height: 11, fill: '#525252', marginLeft: 3 }} />
+                                    </Button>
+                                </ButtonGroup>
+                                    :
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%' }}>
+                                    <div variant="contained" className='ModalItemButtonCart OPEN' style={{ width: '100%', height: 28, borderRadius: 40, border: '1px solid #F9BC23', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                        <button style={{ width: 28, height: 28, padding: 0, marginLeft: 13, color: '#525252', fontSize: '0.875rem', fontFamily: 'Roboto', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={this.minus.bind(this)}>–</button>
+                                        <div>
+                                            <span style={{ fontSize: '0.875rem', fontFamily: 'Roboto', fontWeight: 500, color: '#525252' }}>{this.state.count}</span>
+                                        </div>
+                                        <button style={{ width: 28, height: 28, padding: 0, marginRight: 10, color: '#525252', fontSize: '0.875rem', fontFamily: 'Roboto', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={this.add.bind(this)}>+</button>
+                                    </div>
+                                </ButtonGroup>
+                            }
                         </div>
                     </Grid>
                     

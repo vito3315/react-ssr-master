@@ -54,6 +54,12 @@ $colorMain: #CC0033;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+.hidddenText5{
+    -webkit-line-clamp: 4;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
 
 .OpenItemPC .MuiDialog-paper{
     width: 80%!important;
