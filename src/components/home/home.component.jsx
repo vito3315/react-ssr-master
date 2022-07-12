@@ -460,7 +460,9 @@ class CardItem extends React.Component {
                             </picture>
                         }
                         
-                        { parseInt(this.state.item.is_new) == 0 ? null :
+                        { parseInt(this.state.item.is_new) == 0 ? 
+                            <Badge size={'small'} type={'hit'} view={'pc'} />
+                                :
                             <Badge size={'small'} type={'new'} view={'pc'} />
                         }
 
@@ -497,7 +499,7 @@ class CardItem extends React.Component {
                         { this.state.count == 0 ?
                             <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%' }}>
                                 <Button variant="contained" className='ModalItemButtonCart' style={{ width: '100%', height: 60, borderRadius: 40, border: '2px solid #F9BC23' }} onClick={this.add.bind(this)}>
-                                    <span style={{ fontSize: '1.25rem', fontFamily: 'Roboto', fontWeight: 700, color: '#525252', textTransform: 'initial' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.price)}</span>
+                                    <span style={{ fontSize: '1.25rem', fontFamily: 'Roboto', fontWeight: 700, color: '#525252', textTransform: 'initial' }}>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)}</span>
                                     <IconRuble style={{ width: 16, height: 16, fill: '#525252', marginLeft: 5 }} />
                                 </Button>
                             </ButtonGroup>
@@ -558,7 +560,9 @@ class CardItem extends React.Component {
                             </picture>
                         }
 
-                        { parseInt(this.state.item.is_new) == 0 ? null :
+                        { parseInt(this.state.item.is_new) == 0 ? 
+                            <Badge size={'small'} type={'hit'} view={'mobile'} />
+                                :
                             <Badge size={'small'} type={'new'} view={'mobile'} />
                         }
                     </Grid>
@@ -584,7 +588,7 @@ class CardItem extends React.Component {
                             { this.state.count == 0 ?
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
                                     <Button variant="contained" style={{ fontFamily: 'Roboto', fontSize: '0.875rem', fontWeight: 500, color: '#525252', width: 80, height: 30, padding: 0, backgroundColor: '#fff', border: '1px solid #F9BC23', borderRadius: 30, backgroundColor: 'rgb(255, 255, 255)', border: '1px solid rgb(249, 188, 35)', borderRadius: 30 }} onClick={this.add.bind(this)}>
-                                        {new Intl.NumberFormat('ru-RU').format( parseInt(this.state.item.price))}
+                                        В корзину за {new Intl.NumberFormat('ru-RU').format( parseInt(this.state.item.price))}
                                         <IconRuble style={{ width: 11, height: 11, fill: '#525252', marginLeft: 3 }} />
                                     </Button>
                                 </ButtonGroup>
