@@ -340,7 +340,7 @@ class SimplePopover extends React.Component{
                             <tbody>
                                 {this.state.cartItems.map((item, key) => 
                                     item.type == 'us' ?
-                                        <tr key={key}>
+                                        <tr key={key} style={{ borderBottom: '1px solid #e5e5e5', paddingBottom: 5, paddingTop: 5 }}>
                                             <td className="">
 
                                                 <picture style={{  }}>
@@ -380,7 +380,7 @@ class SimplePopover extends React.Component{
                                             </td>
                                         </tr>
                                             :
-                                        <tr key={key}>
+                                        <tr key={key} style={{ borderBottom: '1px solid #e5e5e5', paddingBottom: 5, paddingTop: 5 }}>
                                             <td className="">
 
                                             <picture>
