@@ -343,7 +343,7 @@ class SimplePopover extends React.Component{
                                         <tr key={key}>
                                             <td className="">
 
-                                                <picture style={{ width: '100%' }}>
+                                                <picture style={{ width: 100 }}>
                                                     <source 
                                                         srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.webp?"+item.img_new_update} 
                                                         type="image/webp" 
@@ -352,7 +352,7 @@ class SimplePopover extends React.Component{
                                                         src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
                                                         alt={item.name}
                                                         title={item.name}
-                                                        style={{ minHeight: 150 }}
+                                                        style={{ minHeight: 50 }}
                                                     />
                                                 </picture>  
 
@@ -381,7 +381,7 @@ class SimplePopover extends React.Component{
                                         <tr key={key}>
                                             <td className="">
 
-                                            <picture style={{ width: '100%' }}>
+                                            <picture style={{ width: 100 }}>
                                                 <source 
                                                     srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.webp?"+item.img_new_update} 
                                                     type="image/webp" 
@@ -390,9 +390,9 @@ class SimplePopover extends React.Component{
                                                     src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
                                                     alt={item.name}
                                                     title={item.name}
-                                                    style={{ minHeight: 150 }}
+                                                    style={{ minHeight: 50 }}
                                                 />
-                                            </picture>  
+                                            </picture>   
 
                                             </td>
                                             <td className="TableMiniName">{item.name}</td>
