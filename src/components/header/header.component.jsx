@@ -324,16 +324,16 @@ class SimplePopover extends React.Component{
                                     item.type == 'us' ?
                                         <tr key={key}>
                                             <td className="">
-                                                
+
                                                 <picture style={{ width: '100%' }}>
                                                     <source 
-                                                        srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
+                                                        srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.webp?"+item.img_new_update} 
                                                         type="image/webp" 
                                                     />
                                                     <img 
-                                                        src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
-                                                        alt={this.state.item.name}
-                                                        title={this.state.item.name}
+                                                        src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
+                                                        alt={item.name}
+                                                        title={item.name}
                                                         style={{ minHeight: 150 }}
                                                     />
                                                 </picture>  
@@ -361,6 +361,22 @@ class SimplePopover extends React.Component{
                                         </tr>
                                             :
                                         <tr key={key}>
+                                            <td className="">
+
+                                            <picture style={{ width: '100%' }}>
+                                                <source 
+                                                    srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.webp?"+item.img_new_update} 
+                                                    type="image/webp" 
+                                                />
+                                                <img 
+                                                    src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
+                                                    alt={item.name}
+                                                    title={item.name}
+                                                    style={{ minHeight: 150 }}
+                                                />
+                                            </picture>  
+
+                                            </td>
                                             <td className="TableMiniName">{item.name}</td>
                                             <td>
                                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderWOBorder">
