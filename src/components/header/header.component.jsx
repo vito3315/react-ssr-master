@@ -352,13 +352,13 @@ class SimplePopover extends React.Component{
                                                         src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
                                                         alt={item.name}
                                                         title={item.name}
-                                                        style={{ height: 120, width: 'auto' }}
+                                                        style={{ height: 80, width: 'auto' }}
                                                     />
                                                 </picture>  
 
                                             </td>
                                             <td className="TableMiniName">
-                                                <span style={{ height: 100, width: '100%', display: 'flex', alignItems: 'center', padding: 20 }}>{item.name}</span>
+                                                <span style={{ height: 60, width: '100%', display: 'flex', alignItems: 'center', padding: 10 }}>{item.name}</span>
                                             </td>
                                             <td>
                                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderWOBorder">
@@ -392,13 +392,13 @@ class SimplePopover extends React.Component{
                                                     src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
                                                     alt={item.name}
                                                     title={item.name}
-                                                    style={{ height: 120, width: 'auto' }}
+                                                    style={{ height: 80, width: 'auto' }}
                                                 />
                                             </picture>   
 
                                             </td>
                                             <td className="TableMiniName">
-                                                <span style={{ height: 100, width: '100%', display: 'flex', alignItems: 'center', padding: 20 }}>{item.name}</span>
+                                                <span style={{ height: 60, width: '100%', display: 'flex', alignItems: 'center', padding: 10 }}>{item.name}</span>
                                             </td>
                                             <td>
                                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderWOBorder">
