@@ -352,7 +352,7 @@ class SimplePopover extends React.Component{
                                                         src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
                                                         alt={item.name}
                                                         title={item.name}
-                                                        style={{ height: 'auto', width: 200 }}
+                                                        style={{ height: 'auto', width: 100 }}
                                                     />
                                                 </picture>  
 
@@ -392,7 +392,7 @@ class SimplePopover extends React.Component{
                                                     src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
                                                     alt={item.name}
                                                     title={item.name}
-                                                    style={{ height: 'auto', width: 200 }}
+                                                    style={{ height: 'auto', width: 100 }}
                                                 />
                                             </picture>   
 
