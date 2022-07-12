@@ -352,12 +352,14 @@ class SimplePopover extends React.Component{
                                                         src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
                                                         alt={item.name}
                                                         title={item.name}
-                                                        style={{ maxHeight: 100 }}
+                                                        style={{ height: 'auto', width: 200 }}
                                                     />
                                                 </picture>  
 
                                             </td>
-                                            <td className="TableMiniName">{item.name}</td>
+                                            <td className="TableMiniName">
+                                                <span style={{ height: 60 }}>{item.name}</span>
+                                            </td>
                                             <td>
                                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderWOBorder">
                                                     <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this, item.item_id)}>
@@ -390,12 +392,14 @@ class SimplePopover extends React.Component{
                                                     src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
                                                     alt={item.name}
                                                     title={item.name}
-                                                    style={{ maxHeight: 100 }}
+                                                    style={{ height: 'auto', width: 200 }}
                                                 />
                                             </picture>   
 
                                             </td>
-                                            <td className="TableMiniName">{item.name}</td>
+                                            <td className="TableMiniName">
+                                                <span style={{ height: 60 }}>{item.name}</span>
+                                            </td>
                                             <td>
                                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderWOBorder">
                                                     <Button variant="contained" className="BtnCardMain PROMO">
