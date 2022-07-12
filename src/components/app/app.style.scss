@@ -296,7 +296,7 @@ body{
         & tbody{
             overflow-y: scroll;
             overflow-x: hidden;
-            height: 200px;
+            height: 450px;
             display: table-caption;
             width: 100%;
             border-bottom: 1px solid #e5e5e5;
@@ -345,6 +345,10 @@ body{
         & input{
             @include fons(1rem, $Ubuntu);
         }
+    }
+    & div.MuiPaper-root.MuiPopover-paper{
+        border-bottom-right-radius: 40px!important;
+        border-bottom-left-radius: 40px!important;
     }
 }
 
