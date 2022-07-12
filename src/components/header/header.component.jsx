@@ -340,7 +340,7 @@ class SimplePopover extends React.Component{
                             <tbody>
                                 {this.state.cartItems.map((item, key) => 
                                     item.type == 'us' ?
-                                        <tr key={key} style={{ borderBottom: '1px solid #e5e5e5', paddingBottom: 5, paddingTop: 5 }}>
+                                        <tr key={key} style={{ borderBottom: '1px solid #e5e5e5', paddingBottom: 5, paddingTop: 5, display: 'block' }}>
                                             <td className="">
 
                                                 <picture style={{  }}>
@@ -361,16 +361,14 @@ class SimplePopover extends React.Component{
                                                 <span style={{ height: 60, width: '100%', display: 'flex', alignItems: 'center', padding: 10 }}>{item.name}</span>
                                             </td>
                                             <td>
-                                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderWOBorder">
-                                                    <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this, item.item_id)}>
-                                                        <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
-                                                    </Button>
-                                                    <Button variant="contained" className="BtnCardMain" >
-                                                        <Typography component="span" className="CardCountItem">{item.count}</Typography>
-                                                    </Button>
-                                                    <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this, item.item_id)}> 
-                                                        <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
-                                                    </Button>
+                                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%' }}>
+                                                    <div variant="contained" className='ModalItemButtonCart OPEN' style={{ width: '100%', height: 28, borderRadius: 40, border: '1px solid #F9BC23', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                        <button style={{ width: 28, height: 28, padding: 0, marginLeft: 13, color: '#525252', fontSize: '0.875rem', fontFamily: 'Roboto', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'transparent', border: 'transparent' }} onClick={this.minus.bind(this)}>–</button>
+                                                        <div>
+                                                            <span style={{ fontSize: '0.875rem', fontFamily: 'Roboto', fontWeight: 500, color: '#525252' }}>{item.count}</span>
+                                                        </div>
+                                                        <button style={{ width: 28, height: 28, padding: 0, marginRight: 10, color: '#525252', fontSize: '0.875rem', fontFamily: 'Roboto', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'transparent', border: 'transparent' }} onClick={this.add.bind(this)}>+</button>
+                                                    </div>
                                                 </ButtonGroup>
                                             </td>
                                             <td style={{ width: '30%' }}> 
@@ -380,7 +378,7 @@ class SimplePopover extends React.Component{
                                             </td>
                                         </tr>
                                             :
-                                        <tr key={key} style={{ borderBottom: '1px solid #e5e5e5', paddingBottom: 5, paddingTop: 5 }}>
+                                        <tr key={key} style={{ borderBottom: '1px solid #e5e5e5', paddingBottom: 5, paddingTop: 5, display: 'block' }}>
                                             <td className="">
 
                                             <picture>
@@ -401,16 +399,14 @@ class SimplePopover extends React.Component{
                                                 <span style={{ height: 60, width: '100%', display: 'flex', alignItems: 'center', padding: 10 }}>{item.name}</span>
                                             </td>
                                             <td>
-                                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderWOBorder">
-                                                    <Button variant="contained" className="BtnCardMain PROMO">
-                                                        <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
-                                                    </Button>
-                                                    <Button variant="contained" className="BtnCardMain" >
-                                                        <Typography component="span" className="CardCountItem">{item.count}</Typography>
-                                                    </Button>
-                                                    <Button variant="contained" className="BtnCardMain PROMO"> 
-                                                        <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
-                                                    </Button>
+                                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%' }}>
+                                                    <div variant="contained" className='ModalItemButtonCart OPEN' style={{ width: '100%', height: 28, borderRadius: 40, border: '1px solid #F9BC23', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                        <button style={{ width: 28, height: 28, padding: 0, marginLeft: 13, color: '#525252', fontSize: '0.875rem', fontFamily: 'Roboto', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'transparent', border: 'transparent' }} onClick={this.minus.bind(this)}>–</button>
+                                                        <div>
+                                                            <span style={{ fontSize: '0.875rem', fontFamily: 'Roboto', fontWeight: 500, color: '#525252' }}>{item.count}</span>
+                                                        </div>
+                                                        <button style={{ width: 28, height: 28, padding: 0, marginRight: 10, color: '#525252', fontSize: '0.875rem', fontFamily: 'Roboto', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'transparent', border: 'transparent' }} onClick={this.add.bind(this)}>+</button>
+                                                    </div>
                                                 </ButtonGroup>
                                             </td>
                                             <td style={{ width: '30%' }}> 
