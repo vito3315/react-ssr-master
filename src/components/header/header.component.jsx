@@ -198,6 +198,8 @@ class SimplePopover extends React.Component{
             }
         })
         
+        console.log( cartItems )
+
         this.setState({
             cartItems: cartItems
         })
@@ -222,6 +224,8 @@ class SimplePopover extends React.Component{
                         newCart.push(item)
                     }
                 })
+                
+                console.log( newCart )
                 
                 this.setState({
                     cartItems: newCart,
@@ -313,12 +317,28 @@ class SimplePopover extends React.Component{
                         horizontal: 'right',
                     }}
                 >
-                    <div style={{ width: 400, padding: 16 }}>
+                    <div style={{ width: 600, padding: 16 }}>
                         <table className="TableMini">
                             <tbody>
                                 {this.state.cartItems.map((item, key) => 
                                     item.type == 'us' ?
                                         <tr key={key}>
+                                            <td className="">
+                                                
+                                                <picture style={{ width: '100%' }}>
+                                                    <source 
+                                                        srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
+                                                        type="image/webp" 
+                                                    />
+                                                    <img 
+                                                        src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
+                                                        alt={this.state.item.name}
+                                                        title={this.state.item.name}
+                                                        style={{ minHeight: 150 }}
+                                                    />
+                                                </picture>  
+
+                                            </td>
                                             <td className="TableMiniName">{item.name}</td>
                                             <td>
                                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderWOBorder">
