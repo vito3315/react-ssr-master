@@ -180,6 +180,7 @@ class SimplePopover extends React.Component{
     componentDidMount = () => {
         this._isMounted = true;
         
+        let allItems = itemsStore.getAllItems();
         let cartItems = itemsStore.getItems();
         let promoItems = itemsStore.getItemsPromo();
         let newCart = [];
@@ -200,6 +201,14 @@ class SimplePopover extends React.Component{
         
         console.log( cartItems )
 
+        cartItems.map( (item, key) => {
+            let this_item = allItems.find( (it) => parseInt(it.id) == parseInt(item.item_id) );
+
+            cartItems[ key ]['img_new'] = this_item['img_new'];
+            cartItems[ key ]['img_new_update'] = this_item['img_new_update'];
+            cartItems[ key ]['img_app'] = this_item['img_app'];
+        } )
+
         this.setState({
             cartItems: cartItems
         })
@@ -207,6 +216,7 @@ class SimplePopover extends React.Component{
         
         autorun(() => {
             if( this._isMounted ){
+                let allItems = itemsStore.getAllItems();
                 let cartItems = itemsStore.getItems();
                 let promoItems = itemsStore.getItemsPromo();
                 let newCart = [];
@@ -227,6 +237,14 @@ class SimplePopover extends React.Component{
                 
                 console.log( newCart )
                 
+                newCart.map( (item, key) => {
+                    let this_item = allItems.find( (it) => parseInt(it.id) == parseInt(item.item_id) );
+        
+                    newCart[ key ]['img_new'] = this_item['img_new'];
+                    newCart[ key ]['img_new_update'] = this_item['img_new_update'];
+                    newCart[ key ]['img_app'] = this_item['img_app'];
+                } )
+
                 this.setState({
                     cartItems: newCart,
                     sumDiv: itemsStore.getSumDiv(),
