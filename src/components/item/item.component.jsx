@@ -1068,9 +1068,9 @@ export class Item2 extends React.Component {
 
                                 { parseInt(this.state.item.is_new) == 0 ? 
                                     parseInt(this.state.item.is_hit) == 0 ? null :
-                                    <Badge size={'small'} type={'hit'} view={'pc'} />
+                                    <Badge size={'big'} type={'hit'} view={'pc'} />
                                         :
-                                    <Badge size={'small'} type={'new'} view={'pc'} />
+                                    <Badge size={'big'} type={'new'} view={'pc'} />
                                 }
                             </Grid>
                                 :
@@ -1092,9 +1092,9 @@ export class Item2 extends React.Component {
 
                                 { parseInt(this.state.item.is_new) == 0 ? 
                                     parseInt(this.state.item.is_hit) == 0 ? null :
-                                    <Badge size={'small'} type={'hit'} view={'pc'} />
+                                    <Badge size={'big'} type={'hit'} view={'pc'} />
                                         :
-                                    <Badge size={'small'} type={'new'} view={'pc'} />
+                                    <Badge size={'big'} type={'new'} view={'pc'} />
                                 }
                             </Grid>
                         }
