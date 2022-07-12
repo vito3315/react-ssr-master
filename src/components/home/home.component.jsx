@@ -461,6 +461,7 @@ class CardItem extends React.Component {
                         }
                         
                         { parseInt(this.state.item.is_new) == 0 ? 
+                            parseInt(this.state.item.is_hit) == 0 ? null :
                             <Badge size={'small'} type={'hit'} view={'pc'} />
                                 :
                             <Badge size={'small'} type={'new'} view={'pc'} />
@@ -561,6 +562,7 @@ class CardItem extends React.Component {
                         }
 
                         { parseInt(this.state.item.is_new) == 0 ? 
+                            parseInt(this.state.item.is_hit) == 0 ? null :
                             <Badge size={'small'} type={'hit'} view={'mobile'} />
                                 :
                             <Badge size={'small'} type={'new'} view={'mobile'} />

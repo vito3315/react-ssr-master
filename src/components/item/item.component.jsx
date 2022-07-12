@@ -34,6 +34,36 @@ import { getAnalytics, logEvent } from "firebase/analytics";
 
 var firebaseAPP = null;
 
+class Badge extends React.Component{
+    arrColor = {
+        new: { color: '#EE7900', text: 'новинка' },
+        hit: { color: '#AF00DB', text: 'хит' },
+        sale: { color: '#DB0021', text: 'скидка' }, 
+    }
+
+    constructor(props) {
+        super(props);
+        
+        this.state = {      
+            size: this.props.size,
+            view: this.props.view,
+            color: this.arrColor[ this.props.type ].color,
+            text: this.arrColor[ this.props.type ].text
+        };
+    }
+
+    render(){
+        return (
+            <div style={{ position: 'absolute', top: this.state.view == 'mobile' ? 0 : 20, left: this.state.view == 'mobile' ? -10 : 20, }}>
+                <div style={{ width: this.state.size == 'small' ? 84 : 114, height: this.state.size == 'small' ? 34 : 44, backgroundColor: 'rgba(255, 255, 255, 0.6)', borderRadius: 15 }} />
+                <div style={{ width: this.state.size == 'small' ? 80 : 110, height: this.state.size == 'small' ? 30 : 40, backgroundColor: this.state.color, borderRadius: 15, display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'absolute', top: 2, left: 2 }}>
+                    <Typography component="span" style={{ fontFamily: 'Roboto', fontSize: '0.75rem', fontWeight: 400, color: '#fff', textTransform: 'uppercase', lineHeight: 1 }}>{this.state.text}</Typography>
+                </div>
+            </div>
+        );
+    }
+}
+
 function Ruble(props){
     return (
         <svg width={ props.width ? props.width : "50"} height="20" viewBox={ props.viewBox ? props.viewBox : "0 0 1500 300"} xmlns="http://www.w3.org/2000/svg">
@@ -1037,6 +1067,7 @@ export class Item2 extends React.Component {
                                 </picture>
 
                                 { parseInt(this.state.item.is_new) == 0 ? 
+                                    parseInt(this.state.item.is_hit) == 0 ? null :
                                     <Badge size={'small'} type={'hit'} view={'pc'} />
                                         :
                                     <Badge size={'small'} type={'new'} view={'pc'} />
@@ -1060,6 +1091,7 @@ export class Item2 extends React.Component {
                                 </picture>
 
                                 { parseInt(this.state.item.is_new) == 0 ? 
+                                    parseInt(this.state.item.is_hit) == 0 ? null :
                                     <Badge size={'small'} type={'hit'} view={'pc'} />
                                         :
                                     <Badge size={'small'} type={'new'} view={'pc'} />
