@@ -43,7 +43,7 @@ import Badge from '@material-ui/core/Badge';
 import itemsStore from '../../stores/items-store';
 import config from '../../stores/config';
 
-import {MiniActionsCartButton} from '../../stores/elements';
+import { MiniActionsCartButton, IconRuble } from '../../stores/elements';
 
 import { autorun } from "mobx"
 
@@ -367,7 +367,7 @@ class SimplePopover extends React.Component{
                                             </td>
                                             <td style={{ width: '30%' }}> 
                                                 <div className="TableMiniPrice">
-                                                    {item.all_price} <Ruble viewBox="0 220 700 300" width="20" />
+                                                    {item.all_price} <IconRuble style={{ width: 16, height: 16, fill: '#525252', marginLeft: 5 }} />
                                                 </div>
                                             </td>
                                         </tr>
@@ -397,7 +397,7 @@ class SimplePopover extends React.Component{
                                             </td>
                                             <td style={{ width: '30%' }}> 
                                                 <div className="TableMiniPrice">
-                                                    {item.all_price} <Ruble viewBox="0 220 700 300" width="20" />
+                                                    {item.all_price} <IconRuble style={{ width: 16, height: 16, fill: '#525252', marginLeft: 5 }}/>
                                                 </div>
                                             </td>
                                         </tr>
