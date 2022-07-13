@@ -371,14 +371,23 @@ body{
             width: 100%;
             //border-bottom: 1px solid #e5e5e5;
         }
-        & tfoot td:first-child{
-            @include fonsNew(1.25rem, $Roboto);
-            font-weight: 500;
+        & tfoot{
+            height: 40px;
+            & td:first-child{
+                @include fonsNew(1.25rem, $Roboto);
+                font-weight: 500;
+            }
+            & td:last-child{
+                @include fonsNew(1.25rem, $Roboto);
+                font-weight: 500;
+                & > div{
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: center;
+                }
+            }
         }
-        & tfoot td:last-child{
-            @include fonsNew(1.25rem, $Roboto);
-            font-weight: 500;
-        }
+        
         & .TableMiniName{
             width: 40%;
             @include fonsNew(1.25rem, $Roboto);
