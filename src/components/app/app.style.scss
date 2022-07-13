@@ -428,12 +428,12 @@ body{
         }
     }
     & .SpacePromo{
-        padding: 2px 4px;
+        padding: 0px 15px;
         display: flex;
         align-items: center;
         height: 40px;
         border-radius: 60px;
-        //width: 390px;
+        border: 1px solid rgba(27, 27, 31, 0.1);
         width: 50%;
         & > div{
             margin-left: 8px;

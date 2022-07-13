@@ -415,7 +415,7 @@ class SimplePopover extends React.Component{
                                 </tr>
                             </tfoot>      
                         </table>
-                        <Paper component="div" className="SpacePromo">
+                        <Paper component="div" className="SpacePromo" disableElevation={true}>
                             <InputBase
                                 onBlur={this.checkPromo.bind(this)}
                                 value={this.state.promoName}
