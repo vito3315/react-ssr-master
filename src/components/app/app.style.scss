@@ -32,9 +32,12 @@ $Roboto: 'Roboto';
 $Ubuntu: 'Ubuntu';
 $Futuris: 'FuturaFuturisC Bold';
 $colorMain: #CC0033;
+$colorText: #525252;
+
 @mixin fons($size: 1rem, $family: $Ubuntu) {
     font-size: $size;
     font-family: $family, sans-serif !important;
+    color: $colorText;
 }
 
 ::-webkit-scrollbar-track{
@@ -310,12 +313,11 @@ body{
         & .TableMiniPrice{
             text-align: center;
             @include fons(1.25rem, $Roboto);
-            font-weight: 400;
+            font-weight: 500;
             display: flex;
             justify-content: flex-end;
         }
         & .TableMiniFullName{
-            width: 70%;
             & > span{
                 @include fons(1.25rem, $Roboto);
                 font-weight: 400;
@@ -325,6 +327,21 @@ body{
             @include fons(1.25rem, $Roboto);
             width: 40%;
             text-align: center;
+        }
+
+        & .CellPic{
+            width: 17.2%;
+        }
+        & .CellName{
+            width: 32.8%;
+            margin-right: 3.4%;
+            margin-left: 3.4%;
+        }
+        & .CellButton{
+            width: 25.9%;
+        }
+        & .CellPrice{
+            width: 17.2%;
         }
     }
     & .SpacePromo{

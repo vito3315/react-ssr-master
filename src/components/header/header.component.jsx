@@ -343,7 +343,7 @@ class SimplePopover extends React.Component{
                                 {this.state.cartItems.map((item, key) => 
                                     item.type == 'us' ?
                                         <tr key={key} style={{ borderBottom: '1px solid #e5e5e5', paddingBottom: 5, paddingTop: 5, display: 'block' }}>
-                                            <td className="">
+                                            <td className="CellPic">
 
                                                 <picture style={{  }}>
                                                     <source 
@@ -359,45 +359,45 @@ class SimplePopover extends React.Component{
                                                 </picture>  
 
                                             </td>
-                                            <td className="TableMiniName">
-                                                <span style={{ height: 60, width: '100%', display: 'flex', alignItems: 'center', padding: 10 }}>{item.name}</span>
+                                            <td className="TableMiniName CellName">
+                                                <span style={{ height: 60, width: '100%', display: 'flex', alignItems: 'center' }}>{item.name}</span>
                                             </td>
-                                            <td>
+                                            <td className="CellButton">
                                                 <MiniActionsCartButton count={item.count} item_id={item.item_id} minus={this.minus.bind(this)} add={this.add.bind(this)} />
                                             </td>
-                                            <td style={{ width: '30%' }}> 
+                                            <td className="CellPrice"> 
                                                 <div className="TableMiniPrice">
-                                                    {item.all_price} <IconRuble style={{ width: 16, height: 16, fill: '#525252', marginLeft: 5 }} />
+                                                    { new Intl.NumberFormat('ru-RU').format(item.all_price) } 
+                                                    <IconRuble style={{ width: 16, height: 16, fill: '#525252', marginLeft: 5 }} />
                                                 </div>
                                             </td>
                                         </tr>
                                             :
                                         <tr key={key} style={{ borderBottom: '1px solid #e5e5e5', paddingBottom: 5, paddingTop: 5, display: 'block' }}>
-                                            <td className="">
-
-                                            <picture>
-                                                <source 
-                                                    srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.webp?"+item.img_new_update} 
-                                                    type="image/webp" 
-                                                />
-                                                <img 
-                                                    src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
-                                                    alt={item.name}
-                                                    title={item.name}
-                                                    style={{ height: 80, width: 'auto' }}
-                                                />
-                                            </picture>   
-
+                                            <td className="CellPic">
+                                                <picture>
+                                                    <source 
+                                                        srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.webp?"+item.img_new_update} 
+                                                        type="image/webp" 
+                                                    />
+                                                    <img 
+                                                        src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
+                                                        alt={item.name}
+                                                        title={item.name}
+                                                        style={{ height: 80, width: 'auto' }}
+                                                    />
+                                                </picture>   
                                             </td>
-                                            <td className="TableMiniName">
-                                                <span style={{ height: 60, width: '100%', display: 'flex', alignItems: 'center', padding: 10 }}>{item.name}</span>
+                                            <td className="TableMiniName CellName">
+                                                <span style={{ height: 60, width: '100%', display: 'flex', alignItems: 'center' }}>{item.name}</span>
                                             </td>
-                                            <td>
+                                            <td className="CellButton">
                                                 <MiniActionsCartButton count={item.count} item_id={item.item_id} minus={this.minus.bind(this)} add={this.add.bind(this)} />
                                             </td>
-                                            <td style={{ width: '30%' }}> 
+                                            <td className="CellPrice"> 
                                                 <div className="TableMiniPrice">
-                                                    {item.all_price} <IconRuble style={{ width: 16, height: 16, fill: '#525252', marginLeft: 5 }}/>
+                                                    { new Intl.NumberFormat('ru-RU').format(item.all_price) } 
+                                                    <IconRuble style={{ width: 16, height: 16, fill: '#525252', marginLeft: 5 }}/>
                                                 </div>
                                             </td>
                                         </tr>
