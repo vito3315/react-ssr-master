@@ -306,6 +306,7 @@ body{
             background-color: #F9BC23;
             border: 1px solid #F9BC23;
             border-radius: 60px;
+            cursor: pointer;
         }
         & > span{
             @include fonsNew(0.875rem, $Roboto);
@@ -324,6 +325,11 @@ body{
             background-color: #F9BC23;
             border: 1px solid #F9BC23;
             border-radius: 60px;
+            cursor: pointer;
+        }
+        & > button:hover{
+            background-color: #cf9f37;
+            border: 1px solid #cf9f37;
         }
     }
 }
@@ -386,8 +392,8 @@ body{
         }
         & .CellName{
             width: 32.8%;
-            margin-right: 3.4%;
-            margin-left: 3.4%;
+            margin-right: 10px;
+            margin-left: 10px;
         }
         & .CellButton{
             width: 25.9%;
