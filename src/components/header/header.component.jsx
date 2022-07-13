@@ -404,21 +404,12 @@ class SimplePopover extends React.Component{
                                 )}
                             </tbody>
                             <tfoot>
-                                { this.state.sumDiv == 0 ? null :
-                                    <tr style={{height: 35}}>
-                                        <td className="TableMiniFullName">Доставка:</td>
-                                        <td className="" style={{width: '30%', textAlign: 'center'}}>
-                                            <div className="TableMiniPrice" style={{ marginRight: 21 }}>
-                                                { this.state.sumDiv } <Ruble viewBox="0 220 700 300" width="20" />
-                                            </div>
-                                        </td>
-                                    </tr>
-                                }
-                                <tr style={{height: 35}}>
-                                    <td className="TableMiniFullName">Сумма:</td>
-                                    <td className="" style={{width: '30%', textAlign: 'center'}}>
-                                        <div className="TableMiniPrice" style={{ marginRight: 21 }}>
-                                            { itemsStore.getAllPrice() + itemsStore.getSumDiv() } <Ruble viewBox="0 220 700 300" width="20" />
+                                <tr>
+                                    <td>Итого:</td>
+                                    <td>
+                                        <div>
+                                            { itemsStore.getAllPrice() + itemsStore.getSumDiv() } 
+                                            <IconRuble style={{ width: 16, height: 16, fill: '#525252', marginLeft: 5 }} />
                                         </div>
                                     </td>
                                 </tr>
