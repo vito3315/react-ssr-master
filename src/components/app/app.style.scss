@@ -276,6 +276,50 @@ body{
         padding-bottom: 1px;
     }
 }
+.MiniActionsCartButton{
+    width: 100%;
+    & > div{
+        width: 118px;
+        height: 38px; 
+        border-radius: 40px; 
+        border: 1px solid #F9BC23;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    & > button:first-child{
+        width: 23px;
+        height: 23px;
+        padding: 0; 
+        margin-left: 8px;
+        @include fons(1.5rem, $Roboto);
+        font-weight: 300;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #F9BC23;
+        border: 1px solid #F9BC23;
+        border-radius: 60px;
+    }
+    & > div > span{
+        @include fons(0.875rem, $Roboto);
+        font-weight: 500;
+    }
+    & > button:last-child{
+        width: 28px;
+        height: 28px;
+        padding: 0; 
+        margin-right: 6px;
+        @include fons(1.5rem, $Roboto);
+        font-weight: 300;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #F9BC23;
+        border: 1px solid #F9BC23;
+        border-radius: 60px;
+    }
+}
 #simple-popover{
     & .DescPromo{
         width: 393px;
@@ -316,6 +360,7 @@ body{
             font-weight: 500;
             display: flex;
             justify-content: flex-end;
+            align-items: center;
         }
         & .TableMiniFullName{
             & > span{
