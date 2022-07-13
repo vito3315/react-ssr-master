@@ -34,6 +34,12 @@ $Futuris: 'FuturaFuturisC Bold';
 $colorMain: #CC0033;
 $colorText: #525252;
 
+@mixin fonsNew($size: 1rem, $family: $Ubuntu) {
+    font-size: $size;
+    font-family: $family!important;
+    color: $colorText;
+}
+
 @mixin fons($size: 1rem, $family: $Ubuntu) {
     font-size: $size;
     font-family: $family, sans-serif !important;
@@ -291,8 +297,9 @@ body{
             height: 23px;
             padding: 0; 
             margin-left: 8px;
-            @include fons(1.5rem, $Roboto);
-            font-weight: 300;
+            padding-top: 0.9px;
+            @include fonsNew(1.25rem, $Roboto);
+            font-weight: 400;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -301,7 +308,7 @@ body{
             border-radius: 60px;
         }
         & > span{
-            @include fons(0.875rem, $Roboto);
+            @include fonsNew(0.875rem, $Roboto);
             font-weight: 500;
         }
         & > .plus{
@@ -309,7 +316,7 @@ body{
             height: 28px;
             padding: 0; 
             margin-right: 6px;
-            @include fons(1.5rem, $Roboto);
+            @include fonsNew(1.5rem, $Roboto);
             font-weight: 300;
             display: flex;
             justify-content: center;
@@ -352,11 +359,11 @@ body{
         }
         & .TableMiniName{
             width: 40%;
-            @include fons(1.25rem, $Roboto);
+            @include fonsNew(1.25rem, $Roboto);
         }
         & .TableMiniPrice{
             text-align: center;
-            @include fons(1.25rem, $Roboto);
+            @include fonsNew(1.25rem, $Roboto);
             font-weight: 500;
             display: flex;
             justify-content: flex-end;
@@ -364,12 +371,12 @@ body{
         }
         & .TableMiniFullName{
             & > span{
-                @include fons(1.25rem, $Roboto);
+                @include fonsNew(1.25rem, $Roboto);
                 font-weight: 400;
             }
         } 
         & .TableMiniFullPrice{
-            @include fons(1.25rem, $Roboto);
+            @include fonsNew(1.25rem, $Roboto);
             width: 40%;
             text-align: center;
         }
