@@ -7,11 +7,9 @@ export class MiniActionsCartButton extends React.PureComponent{
         return (
             <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className='MiniActionsCartButton'>
                 <div variant="contained" className='ModalItemButtonCart OPEN'>
-                    <button onClick={this.props.minus.bind(this, this.props.item_id)}>–</button>
-                    <div>
-                        <span>{this.props.count}</span>
-                    </div>
-                    <button onClick={this.props.add.bind(this, this.props.item_id)}>+</button>
+                    <button className='minus' onClick={this.props.minus.bind(this, this.props.item_id)}>–</button>
+                    <span>{this.props.count}</span>
+                    <button className='plus' onClick={this.props.add.bind(this, this.props.item_id)}>+</button>
                 </div>
             </ButtonGroup>
         )

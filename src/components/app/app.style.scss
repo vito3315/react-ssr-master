@@ -300,7 +300,7 @@ body{
             border: 1px solid #F9BC23;
             border-radius: 60px;
         }
-        & > div > span{
+        & > span{
             @include fons(0.875rem, $Roboto);
             font-weight: 500;
         }
