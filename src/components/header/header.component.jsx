@@ -437,7 +437,7 @@ class SimplePopover extends React.Component{
                                 </tr>
                             </tfoot>      
                         </table>
-                        <div>
+                        <div className="SpacePromoRoot">
                             <Paper component="div" className="SpacePromo" elevation={0}>
                                 <InputBase
                                     onBlur={this.checkPromo.bind(this)}
@@ -454,7 +454,7 @@ class SimplePopover extends React.Component{
                             </Paper>
                             {this.state.promoText.length > 0 && this.state.promoST === false ?
                                 <div className="DescPromo">
-                                    <Typography className="cat" variant="h5" component="span">{ this.state.promoST === true ? 'Промокод дает:' : 'Промокодом нельзя воспользоваться. '} {this.state.promoText}</Typography>
+                                    <Typography className="cat" variant="h5" component="span">{this.state.promoText}</Typography>
                                 </div>
                                     :
                                 null
@@ -468,13 +468,13 @@ class SimplePopover extends React.Component{
                                     style={{ textDecoration: 'none' }}
                                     onClick={this.handleClose.bind(this)}
                                 >
-                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
-                                        <Button variant="contained" className="BtnCardMain CardInCardItem">В корзину</Button>
+                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
+                                        <Button variant="contained" className="BtnCardMain CardInCardItem">Оформить заказ</Button>
                                     </ButtonGroup>
                                 </Link>
                                     :
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder">
-                                    <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={this.props.openLogin}>Войти</Button>
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
+                                    <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={this.props.openLogin}>Оформить заказ</Button>
                                 </ButtonGroup>
                             }
                         </div>
