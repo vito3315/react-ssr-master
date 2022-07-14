@@ -309,8 +309,8 @@ body{
             cursor: pointer;
         }
         & > span{
-            @include fonsNew(1.25rem, $Roboto);
-            font-weight: 500;
+            @include fonsNew(1.08rem, $Roboto);
+            font-weight: 400;
         }
         & > .plus{
             width: 38px;
@@ -373,7 +373,7 @@ body{
                 border-radius: 60px;
                 & > span{
                     @include fonsNew(1rem, $Roboto);
-                    font-weight: 300;
+                    font-weight: 400;
                 }
             }
             & > button:hover{
@@ -424,30 +424,18 @@ body{
             }
         }
         
-        & .TableMiniName{
-            width: 40%;
-            @include fonsNew(1.25rem, $Roboto);
+        & .TableMiniName > span{
+            @include fonsNew(1.08rem, $Roboto);
+            font-weight: 400;
         }
         & .TableMiniPrice{
             text-align: center;
-            @include fonsNew(1.25rem, $Roboto);
-            font-weight: 500;
+            @include fonsNew(1.08rem, $Roboto);
+            font-weight: 400;
             display: flex;
             justify-content: flex-end;
             align-items: center;
         }
-        & .TableMiniFullName{
-            & > span{
-                @include fonsNew(1.25rem, $Roboto);
-                font-weight: 400;
-            }
-        } 
-        & .TableMiniFullPrice{
-            @include fonsNew(1.25rem, $Roboto);
-            width: 40%;
-            text-align: center;
-        }
-
         & .CellPic{
             width: 17.2%;
         }
