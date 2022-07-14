@@ -359,12 +359,12 @@ class SimplePopover extends React.Component{
                         horizontal: 'right',
                     }}
                 >
-                    <div style={{ width: 600, padding: 16 }}>
+                    <div>
                         <table className="TableMini">
                             <tbody>
                                 {this.state.cartItems.map((item, key) => 
                                     item.type == 'us' ?
-                                        <tr key={key} style={{ borderBottom: '1px solid rgba(27, 27, 31, 0.1)', paddingBottom: 5, paddingTop: 5, display: 'block' }}>
+                                        <tr key={key}>
                                             <td className="CellPic">
 
                                                 <picture style={{  }}>
@@ -376,13 +376,12 @@ class SimplePopover extends React.Component{
                                                         src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
                                                         alt={item.name}
                                                         title={item.name}
-                                                        style={{ height: 80, width: 'auto' }}
                                                     />
                                                 </picture>  
 
                                             </td>
                                             <td className="TableMiniName CellName">
-                                                <span style={{ height: 60, width: '100%', display: 'flex', alignItems: 'center' }}>{item.name}</span>
+                                                <span style={{ height: 40, width: '100%', display: 'flex', alignItems: 'center' }}>{item.name}</span>
                                             </td>
                                             <td className="CellButton">
                                                 <MiniActionsCartButton count={item.count} item_id={item.item_id} minus={this.minus.bind(this)} add={this.add.bind(this)} />
@@ -395,7 +394,7 @@ class SimplePopover extends React.Component{
                                             </td>
                                         </tr>
                                             :
-                                        <tr key={key} style={{ borderBottom: '1px solid rgba(27, 27, 31, 0.1)', paddingBottom: 5, paddingTop: 5, display: 'block' }}>
+                                        <tr key={key}>
                                             <td className="CellPic">
                                                 <picture>
                                                     <source 
@@ -406,12 +405,11 @@ class SimplePopover extends React.Component{
                                                         src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
                                                         alt={item.name}
                                                         title={item.name}
-                                                        style={{ height: 80, width: 'auto' }}
                                                     />
                                                 </picture>   
                                             </td>
                                             <td className="TableMiniName CellName">
-                                                <span style={{ height: 60, width: '100%', display: 'flex', alignItems: 'center' }}>{item.name}</span>
+                                                <span style={{ height: 40, width: '100%', display: 'flex', alignItems: 'center' }}>{item.name}</span>
                                             </td>
                                             <td className="CellButton">
                                                 <MiniActionsCartButton count={item.count} item_id={item.item_id} minus={this.minus.bind(this)} add={this.add.bind(this)} />
