@@ -318,8 +318,9 @@ class SimplePopover extends React.Component{
     }
 
     checkPromoKey(event){
-        console.log(event)
-        console.log(e)
+        if( parseInt(event.keyCode) == 13 ){
+            this.checkPromo();
+        }
     }
 
     render(){
@@ -338,7 +339,7 @@ class SimplePopover extends React.Component{
                     open={open}
                     anchorEl={this.state.anchorEl}
                     onClose={this.handleClose.bind(this)}
-                    
+                    anchorPosition={{ top: 50, right: 50 }}
                     anchorOrigin={{
                         vertical: 'bottom',
                         horizontal: 'right',
