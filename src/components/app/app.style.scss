@@ -289,24 +289,25 @@ body{
         height: 60px; 
         border-radius: 40px;
         border: 2px solid #F9BC23;
+        & span{
+            @include fonsNew(1.25rem, $Roboto);
+            font-weight: 700;
+            text-transform: initial;
+        }
+        &:hover{
+            background-color: #cf9f37;
+            border: 2px solid #cf9f37;
+        }
+        &:target{
+            background-color: #cf9f37;
+            border: 2px solid #cf9f37;
+        }
+        &:active{
+            background-color: #cf9f37;
+            border: 2px solid #cf9f37;
+        }
     }
-    & span{
-        @include fonsNew(1.25rem, $Roboto);
-        font-weight: 700;
-        text-transform: initial;
-    }
-    &:hover{
-        background-color: #cf9f37;
-        border: 2px solid #cf9f37;
-    }
-    &:target{
-        background-color: #cf9f37;
-        border: 2px solid #cf9f37;
-    }
-    &:active{
-        background-color: #cf9f37;
-        border: 2px solid #cf9f37;
-    }
+    
 }
 .ActionsCartButton{
     width: 100%;
