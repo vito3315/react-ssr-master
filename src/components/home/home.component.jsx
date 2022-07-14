@@ -39,7 +39,7 @@ import Hidden from '@material-ui/core/Hidden';
 
 import LazyLoad from 'react-lazyload';
 
-import { MiniActionsCartButton, IconRuble } from '../../stores/elements';
+import { ActionsCartButton, IconRuble } from '../../stores/elements';
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics, logEvent } from "firebase/analytics";
@@ -495,7 +495,7 @@ class CardItem extends React.Component {
                                 </Button>
                             </ButtonGroup>
                                 :
-                            <MiniActionsCartButton count={this.state.count} item_id={this.state.item.id} minus={this.minus.bind(this)} add={this.add.bind(this)} />
+                            <ActionsCartButton count={this.state.count} price={this.state.item.price} item_id={this.state.item.id} minus={this.minus.bind(this)} add={this.add.bind(this)} />
                         }
                     </CardActions>
                 </Card>
