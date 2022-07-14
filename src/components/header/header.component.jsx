@@ -413,7 +413,7 @@ class SimplePopover extends React.Component{
                                             <td className="CellPrice"> 
                                                 <div className="TableMiniPrice">
                                                     { new Intl.NumberFormat('ru-RU').format(item.all_price) } 
-                                                    <IconRuble style={{ width: 16, height: 16, fill: '#525252', marginLeft: 5 }} />
+                                                    <IconRuble style={{ width: 13, height: 13, fill: '#525252', marginLeft: 5 }} />
                                                 </div>
                                             </td>
                                         </tr>
@@ -461,7 +461,7 @@ class SimplePopover extends React.Component{
                                             <td className="CellPrice"> 
                                                 <div className="TableMiniPrice">
                                                     { new Intl.NumberFormat('ru-RU').format(item.all_price) } 
-                                                    <IconRuble style={{ width: 16, height: 16, fill: '#525252', marginLeft: 5 }}/>
+                                                    <IconRuble style={{ width: 13, height: 13, fill: '#525252', marginLeft: 5 }}/>
                                                 </div>
                                             </td>
                                         </tr>
