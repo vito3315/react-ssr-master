@@ -182,6 +182,16 @@ class SimplePopover extends React.Component{
     componentDidMount = () => {
         this._isMounted = true;
         
+        if( localStorage.getItem('promo_name') && localStorage.getItem('promo_name').length > 0 ){
+            this.setState({
+                promoName: localStorage.getItem('promo_name')
+            })
+
+            setTimeout(() => {
+                this.checkPromo();
+            }, 300)
+        }
+
         let allItems = itemsStore.getAllItems();
         let cartItems = itemsStore.getItems();
         let promoItems = itemsStore.getItemsPromo();
@@ -427,27 +437,29 @@ class SimplePopover extends React.Component{
                                 </tr>
                             </tfoot>      
                         </table>
-                        <Paper component="div" className="SpacePromo" elevation={0}>
-                            <InputBase
-                                onBlur={this.checkPromo.bind(this)}
-                                value={this.state.promoName}
-                                onKeyDown={this.checkPromoKey.bind(this)}
-                                onChange={this.changePromo.bind(this)}
-                                placeholder="Есть промокод"
-                            />
-                            {this.state.promoText.length > 0 ?
-                                <div className={ this.state.promoST === true ? 'promoIndicator true' : 'promoIndicator false'} />
+                        <div>
+                            <Paper component="div" className="SpacePromo" elevation={0}>
+                                <InputBase
+                                    onBlur={this.checkPromo.bind(this)}
+                                    value={this.state.promoName}
+                                    onKeyDown={this.checkPromoKey.bind(this)}
+                                    onChange={this.changePromo.bind(this)}
+                                    placeholder="Есть промокод"
+                                />
+                                {this.state.promoText.length > 0 ?
+                                    <div className={ this.state.promoST === true ? 'promoIndicator true' : 'promoIndicator false'} />
+                                        :
+                                    null
+                                }
+                            </Paper>
+                            {this.state.promoText.length > 0 && this.state.promoST === false ?
+                                <div className="DescPromo">
+                                    <Typography className="cat" variant="h5" component="span">{ this.state.promoST === true ? 'Промокод дает:' : 'Промокодом нельзя воспользоваться. '} {this.state.promoText}</Typography>
+                                </div>
                                     :
                                 null
                             }
-                        </Paper>
-                        {this.state.promoText.length > 0 ?
-                            <div className="DescPromo">
-                                <Typography className="cat" variant="h5" component="span">{ this.state.promoST === true ? 'Промокод дает:' : 'Промокодом нельзя воспользоваться. '} {this.state.promoText}</Typography>
-                            </div>
-                                :
-                            null
-                        }
+                        </div>
                         <div className="InCart">
                             {itemsStore.getToken() !== null ?
                                 <Link
