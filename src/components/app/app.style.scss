@@ -435,16 +435,25 @@ body{
         border-radius: 60px;
         border: 1px solid rgba(27, 27, 31, 0.1);
         width: 50%;
-        & > div{
-            margin-left: 8px;
-            flex: 1;
+        & > div:first-child{
+            width: 100%;
         }
         & input{
             @include fonsNew(1rem, $Roboto);
         }
         & .promoIndicator{
-            width: 20px;
+            width: 22px;
             height: 20px;
+            border-radius: 60px;
+            margin: 0;
+            padding: 0;
+            background-color: transparent;
+            &.true{
+                background-color: rgb(118, 236, 63);
+            }
+            &.false{
+                background-color: rgb(221, 25, 50);
+            }
         }
     }
     & div.MuiPaper-root.MuiPopover-paper{

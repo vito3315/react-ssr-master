@@ -311,6 +311,17 @@ class SimplePopover extends React.Component{
         })
     }
     
+    changePromo(event){
+        this.setState({ 
+            promoName: event.target.value 
+        })
+    }
+
+    checkPromoKey(event){
+        console.log(event)
+        console.log(e)
+    }
+
     render(){
         const open = Boolean(this.state.anchorEl);
         const id = open ? 'simple-popover' : undefined;
@@ -419,10 +430,15 @@ class SimplePopover extends React.Component{
                             <InputBase
                                 onBlur={this.checkPromo.bind(this)}
                                 value={this.state.promoName}
-                                onChange={ event => this.setState({ promoName: event.target.value }) }
+                                onKeyDown={this.checkPromoKey.bind(this)}
+                                onChange={this.changePromo.bind(this)}
                                 placeholder="Есть промокод"
                             />
-                            <div className='promoIndicator' />
+                            {this.state.promoText.length > 0 ?
+                                <div className={ this.state.promoST === true ? 'promoIndicator true' : 'promoIndicator false'} />
+                                    :
+                                null
+                            }
                         </Paper>
                         {this.state.promoText.length > 0 ?
                             <div className="DescPromo">
