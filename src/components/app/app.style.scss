@@ -357,14 +357,26 @@ body{
     
     & .InCart{
         width: 100%; 
-        & > a > div.MuiButtonGroup-root.MuiButtonGroup-contained{
-            background-color: #cf9f37;
-            border-radius: 60px;
+        margin-top: 20px;
+        & div.MuiButtonGroup-root.MuiButtonGroup-contained{
+            width: 100%;
             & > button{
                 width: 100%;
+                background-color: #F9BC23;
+                border-radius: 60px;
                 & > span{
                     @include fonsNew(1rem, $Roboto);
+                    font-weight: 300;
                 }
+            }
+            & > button:hover{
+                background-color: #cf9f37;
+            }
+            & > button:target{
+                background-color: #cf9f37;
+            }
+            & > button:active{
+                background-color: #cf9f37;
             }
         }
     }
@@ -438,7 +450,7 @@ body{
         padding: 0px 15px;
         display: flex;
         align-items: center;
-        height: 40px;
+        height: 38px;
         border-radius: 60px;
         border: 1px solid rgba(27, 27, 31, 0.1);
         width: 50%;
@@ -446,7 +458,8 @@ body{
             width: 100%;
         }
         & input{
-            @include fonsNew(1rem, $Roboto);
+            @include fonsNew(0.825rem, $Roboto);
+            font-weight: 300;
         }
         & .promoIndicator{
             width: 22px;

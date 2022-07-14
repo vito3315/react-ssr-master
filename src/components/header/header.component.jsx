@@ -469,12 +469,12 @@ class SimplePopover extends React.Component{
                                     onClick={this.handleClose.bind(this)}
                                 >
                                     <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
-                                        <Button variant="contained" className="BtnCardMain CardInCardItem">Оформить заказ</Button>
+                                        <Button variant="contained">Оформить заказ</Button>
                                     </ButtonGroup>
                                 </Link>
                                     :
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
-                                    <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={this.props.openLogin}>Оформить заказ</Button>
+                                    <Button variant="contained" onClick={this.props.openLogin}>Оформить заказ</Button>
                                 </ButtonGroup>
                             }
                         </div>
