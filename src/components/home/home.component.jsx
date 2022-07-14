@@ -39,7 +39,7 @@ import Hidden from '@material-ui/core/Hidden';
 
 import LazyLoad from 'react-lazyload';
 
-import { ActionsCartButton, IconRuble } from '../../stores/elements';
+import { ActionsCartButton, ActionsCartButtonStart, IconRuble } from '../../stores/elements';
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics, logEvent } from "firebase/analytics";
@@ -488,12 +488,7 @@ class CardItem extends React.Component {
                     
                     <CardActions style={{ padding: 0, width: '100%' }}>
                         { this.state.count == 0 ?
-                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%' }}>
-                                <Button variant="contained" className='ModalItemButtonCart' style={{ width: '100%', height: 60, borderRadius: 40, border: '2px solid #F9BC23' }} onClick={this.add.bind(this)}>
-                                    <span style={{ fontSize: '1.25rem', fontFamily: 'Roboto', fontWeight: 700, color: '#525252', textTransform: 'initial' }}>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)}</span>
-                                    <IconRuble style={{ width: 16, height: 16, fill: '#525252', marginLeft: 5 }} />
-                                </Button>
-                            </ButtonGroup>
+                            <ActionsCartButtonStart price={this.state.item.price} add={this.add.bind(this)} />
                                 :
                             <ActionsCartButton count={this.state.count} price={this.state.item.price} item_id={this.state.item.id} minus={this.minus.bind(this)} add={this.add.bind(this)} />
                         }

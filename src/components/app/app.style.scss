@@ -282,6 +282,32 @@ body{
         padding-bottom: 1px;
     }
 }
+.ActionsCartButtonStart{
+    width: 100%;
+    & > .ModalItemButtonCart{
+        width: 100%;
+        height: 60px; 
+        border-radius: 40px;
+        border: 2px solid #F9BC23;
+    }
+    & span{
+        @include fonsNew(1.25rem, $Roboto);
+        font-weight: 700;
+        text-transform: initial;
+    }
+    &:hover{
+        background-color: #cf9f37;
+        border: 2px solid #cf9f37;
+    }
+    &:target{
+        background-color: #cf9f37;
+        border: 2px solid #cf9f37;
+    }
+    &:active{
+        background-color: #cf9f37;
+        border: 2px solid #cf9f37;
+    }
+}
 .ActionsCartButton{
     width: 100%;
     & > div{
@@ -305,6 +331,19 @@ body{
             display: flex;
             justify-content: center;
             align-items: center;
+            cursor: pointer;
+            &:hover{
+                background-color: #cf9f37;
+                border: 1px solid #cf9f37;
+            }
+            &:target{
+                background-color: #cf9f37;
+                border: 1px solid #cf9f37;
+            }
+            &:active{
+                background-color: #cf9f37;
+                border: 1px solid #cf9f37;
+            }
         }
         & > .plus{
             width: 40px;
@@ -319,6 +358,19 @@ body{
             display: flex; 
             justify-content: center;
             align-content: center;
+            cursor: pointer;
+            &:hover{
+                background-color: #cf9f37;
+                border: 1px solid #cf9f37;
+            }
+            &:target{
+                background-color: #cf9f37;
+                border: 1px solid #cf9f37;
+            }
+            &:active{
+                background-color: #cf9f37;
+                border: 1px solid #cf9f37;
+            }
         }
         & > div > span{
             @include fonsNew(1.25rem, $Roboto);
