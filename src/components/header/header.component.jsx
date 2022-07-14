@@ -415,17 +415,14 @@ class SimplePopover extends React.Component{
                                 </tr>
                             </tfoot>      
                         </table>
-                        <Paper component="div" className="SpacePromo" disableElevation={true}>
+                        <Paper component="div" className="SpacePromo" elevation={0}>
                             <InputBase
                                 onBlur={this.checkPromo.bind(this)}
                                 value={this.state.promoName}
                                 onChange={ event => this.setState({ promoName: event.target.value }) }
-                                placeholder="Промокод"
+                                placeholder="Есть промокод"
                             />
-                            <Divider orientation="vertical" />
-                            <IconButton color="primary" aria-label="directions" onClick={this.checkPromo.bind(this)}>
-                                <CheckOutlinedIcon />
-                            </IconButton>
+                            <div className='promoIndicator' />
                         </Paper>
                         {this.state.promoText.length > 0 ?
                             <div className="DescPromo">

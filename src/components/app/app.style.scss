@@ -439,15 +439,12 @@ body{
             margin-left: 8px;
             flex: 1;
         }
-        & hr{
-            height: 28px;
-            margin: 4px;
-        }
-        & svg{
-            fill: $colorMain;
-        }
         & input{
-            @include fons(1rem, $Ubuntu);
+            @include fonsNew(1rem, $Roboto);
+        }
+        & .promoIndicator{
+            width: 20px;
+            height: 20px;
         }
     }
     & div.MuiPaper-root.MuiPopover-paper{
