@@ -35,7 +35,7 @@ export class ActionsCartButtonStart extends React.PureComponent{
             <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className='ActionsCartButtonStart'>
                 <Button variant="contained" className='ModalItemButtonCart' onClick={this.props.add.bind(this)}>
                     <span>В корзину за { new Intl.NumberFormat('ru-RU').format(this.props.price)}</span>
-                    <IconRuble style={{ width: 16, height: 16, fill: '#525252', marginLeft: 5 }} />
+                    <IconRuble style={{ width: 14, height: 14, fill: '#525252', marginLeft: 5, paddingBottom: 1 }} />
                 </Button>
             </ButtonGroup>
         )
@@ -50,7 +50,7 @@ export class ActionsCartButton extends React.PureComponent{
                     <button className='minus' onClick={this.props.minus.bind(this)}>–</button>
                     <div>
                         <span>{this.props.count} шт. на { new Intl.NumberFormat('ru-RU').format( parseInt(this.props.price) * parseInt(this.props.count) )}</span>
-                        <IconRuble style={{ width: 16, height: 16, fill: '#525252', marginLeft: 5 }} />
+                        <IconRuble style={{ width: 14, height: 14, fill: '#525252', marginLeft: 5, paddingBottom: 1 }} />
                     </div>
                     <button className='plus' onClick={this.props.add.bind(this)}>+</button>
                 </div>
