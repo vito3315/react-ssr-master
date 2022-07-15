@@ -333,8 +333,8 @@ body{
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: transparent;
-            border: transparent;
+            background-color: rgba(249,188,35,0.1);
+            border: rgba(249,188,35,0.1);
         }
         & > span:not(.minus):not(.plus){
             @include fonsNew(0.875rem, $Roboto);
@@ -348,16 +348,16 @@ body{
             -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none;
             &:hover{
-                background-color: transparent;
-                border: transparent;
+                background-color: rgba(249,188,35,0.1);
+                border: rgba(249,188,35,0.1);
             }
             &:target{
-                background-color: transparent;
-                border: transparent;
+                background-color: rgba(249,188,35,0.1);
+                border: rgba(249,188,35,0.1);
             }
             &:active{
-                background-color: transparent;
-                border: transparent;
+                background-color: rgba(249,188,35,0.1);
+                border: rgba(249,188,35,0.1);
             }
         }
         & > .plus{
@@ -370,8 +370,8 @@ body{
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: transparent;
-            border: transparent;
+            background-color: rgba(249,188,35,0.1);
+            border: rgba(249,188,35,0.1);
         }
     }
 }
