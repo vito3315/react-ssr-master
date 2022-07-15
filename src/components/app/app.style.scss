@@ -340,7 +340,13 @@ body{
             @include fonsNew(0.875rem, $Roboto);
             font-weight: 500;
         }
-        & > span.minus, span.plus{
+        & > span{
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+            -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Old versions of Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
             &:hover{
                 background-color: transparent;
                 border: transparent;
