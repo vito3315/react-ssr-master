@@ -333,8 +333,8 @@ body{
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: rgba(249,188,35,0.1);
-            border: rgba(249,188,35,0.1);
+            background-color: transparent;
+            border: transparent;
             -webkit-tap-highlight-color: transparent;
         }
         & > span:not(.minus):not(.plus){
