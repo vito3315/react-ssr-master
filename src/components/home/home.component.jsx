@@ -1661,7 +1661,7 @@ export class Home extends React.Component {
                                         <IconClose />
                                     </IconButton>
                                     
-                                    <MuiDialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 2.25% 2% 4.5%', marginRight: '2.25%', alignContent: 'start' }}>
+                                    <MuiDialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 2.25% 2% 4.5%', marginRight: '1.5%', alignContent: 'start' }}>
                                         {this.state.openModalPCSetItems.map( (item, key) =>
                                             <div key={key} style={{ width: '49%', display: 'flex', flexDirection: 'row', marginRight: key == 0 || key % 2 == 0 ? '2%' : 0, marginBottom: '2%' }}>
                                                 <div style={{ width: '45%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

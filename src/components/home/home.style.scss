@@ -34,24 +34,27 @@ $colorMain: #CC0033;
     align-items: flex-end!important;
 }
 
-.modalActiiContentNew::-webkit-scrollbar-track, .modalActiiContentNew::-webkit-scrollbar-thumb {
-    //display: block;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    //margin-right: 20px;
-
-}
-.modalActiiContentNew::-webkit-scrollbar-thumb{
-    background-color: #525252;
-}
-
-.ModalItemButtonCart:hover{
-    background-color: rgba(249, 188, 35, 0.1)!important;;
-}
-.ModalItemButtonCart:not(:hover){
-    background-color: #fff!important;
+.modalActiiContentNew{
+    &::-webkit-scrollbar-thumb{
+        background-color: #525252;
+    }
+    &::-webkit-scrollbar{
+        background-color: transparent;
+    }
+    &::-webkit-scrollbar-track, ::-webkit-scrollbar-thumb{
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
 }
 
+.ModalItemButtonCart{
+    &:hover{
+        background-color: rgba(249, 188, 35, 0.1)!important;;
+    }
+    &:not(:hover){
+        background-color: #fff!important;
+    }
+}
 .imgSVG{
     height: 30px;
     width: 20px;
