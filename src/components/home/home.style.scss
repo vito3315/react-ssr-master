@@ -33,7 +33,11 @@ $colorMain: #CC0033;
 .OpenItemPCSet .MuiDialog-scrollPaper{
     align-items: flex-end!important;
 }
-
+.InfoScroll{
+    &::-webkit-scrollbar-thumb{
+        background-color: #525252;
+    }
+}
 .modalActiiContentNew{
     &::-webkit-scrollbar-thumb{
         background-color: #525252;

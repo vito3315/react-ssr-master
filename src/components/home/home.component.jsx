@@ -1611,7 +1611,7 @@ export class Home extends React.Component {
                                         <IconClose />
                                     </IconButton>
                                     
-                                    <MuiDialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 2.25% 2% 4.5%', alignContent: 'start' }}>
+                                    <MuiDialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 2.25% 2% 4.5%', marginRight: '1.5%', alignContent: 'start' }}>
                                         {this.state.openModalPCSetItems.map( (item, key) =>
                                             <div key={key} style={{ width: '49%', display: 'flex', flexDirection: 'row', marginRight: key == 0 || key % 2 == 0 ? '2%' : 0, marginBottom: '2%' }}>
                                                 <div style={{ width: '30%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -1696,7 +1696,7 @@ export class Home extends React.Component {
                                                     }
                                                 </div>
                                                 <div style={{ width: '55%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                                                    <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 700, fontSize: '1.25rem', color: '#525252' }}>{ item.name }</Typography>
+                                                    <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 500, fontSize: '1.25rem', color: '#525252' }}>{ item.name }</Typography>
                                                     <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.9rem', color: '#525252'  }}>{ item.tmp_desc }</Typography>
                                                 </div>
                                             </div>

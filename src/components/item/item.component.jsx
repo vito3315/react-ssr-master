@@ -1133,7 +1133,7 @@ export class Item2 extends React.Component {
                                                     <div style={{ width: '100%', height: 2, backgroundColor: '#fff', marginBottom: 20 }} />
                                                 }
 
-                                                <div style={ this.state.item.items.length > 1 ? { overflowY: 'scroll', maxHeight: 280, paddingRight: 5 } : {}}>
+                                                <div className='InfoScroll' style={ this.state.item.items.length > 1 ? { overflowY: 'scroll', maxHeight: 280, paddingRight: 5 } : {}}>
                                                     { this.state.item.items.map( (item, key) =>
                                                         <div style={{ border: '2px solid #fff', borderRadius: 10, marginBottom: this.state.item.items.length == 1 ? 0 : this.state.item.items.length-1 == key ? 0 : 20 }} key={key}>
                                                             <div style={{ width: '100%', display: 'flex', flexDirection: 'row', borderBottom: '2px solid #fff' }}>
