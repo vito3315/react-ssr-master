@@ -313,6 +313,62 @@ body{
         }
     }
 }
+.MobileActionsCartButton{
+    width: 100%;
+    & > div{
+        width: 100%;
+        height: 28px;
+        border-radius: 40px;
+        border: 1px solid #F9BC23;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        & > .minus{
+            width: 28px;
+            height: 28px;
+            padding: 0;
+            margin-left: 13px;
+            @include fonsNew(0.875rem, $Roboto);
+            font-weight: 500;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: transparent;
+            border: transparent;
+        }
+        & > span{
+            @include fonsNew(0.875rem, $Roboto);
+            font-weight: 500;
+        }
+        & > button{
+            &:hover{
+                background-color: transparent;
+                border: transparent;
+            }
+            &:target{
+                background-color: transparent;
+                border: transparent;
+            }
+            &:active{
+                background-color: transparent;
+                border: transparent;
+            }
+        }
+        & > .plus{
+            width: 28px;
+            height: 28px;
+            padding: 0; 
+            margin-right: 10px; 
+            @include fonsNew(0.875rem, $Roboto);
+            font-weight: 500;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: transparent;
+            border: transparent;
+        }
+    }
+}
 .ActionsCartButtonStart{
     width: 100%;
     & > .ModalItemButtonCart{
