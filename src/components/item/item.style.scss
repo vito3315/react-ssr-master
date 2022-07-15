@@ -243,10 +243,28 @@ $colorMain: #CC0033;
     }
 }
 .pcItem{
-    & > div:last-child > div:last-child{
-        position: absolute;
-        bottom: 0;
-        width: 93%;
+    & .FirstMainItem{
+        width: 56.4%;
+        margin: 2% 2.25% 2% 4.5%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+    & .SecondMainItem{
+        width: 31.3%;
+        min-height: 465px;
+        padding-left: 2.25%;
+        margin-right: 5.5%;
+        margin-top: 6%;
+        margin-bottom: 6%;
+        justify-content: start;
+        position: relative;
+        & .ActionsCartButton, .ActionsCartButtonStart{
+            position: absolute;
+            bottom: 0;
+            width: 93%;
+        }
     }
     @media (max-width: 600px){
         display: none;

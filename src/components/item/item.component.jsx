@@ -1042,7 +1042,7 @@ export class Item2 extends React.Component {
                     <Grid container className="MainItem mainContainer">
                         
                         {img_type == 'old' ?
-                            <Grid item style={{ width: '56.4%', margin: '2% 2.25% 2% 4.5%', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+                            <Grid item className='FirstMainItem'>
                                 <picture style={{ width: '100%' }}>
                                     <source 
                                         srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
@@ -1064,7 +1064,7 @@ export class Item2 extends React.Component {
                                 }
                             </Grid>
                                 :
-                            <Grid item style={{ width: '56.4%', margin: '2% 2.25% 2% 4.5%', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+                            <Grid item className='FirstMainItem'>
                                 <picture style={{ width: '100%' }}>
                                     <source srcset={`
                                         https://storage.yandexcloud.net/site-img/${img_name}_276x276.jpg 138w, 
@@ -1089,7 +1089,7 @@ export class Item2 extends React.Component {
                             </Grid>
                         }
                         
-                        <Grid item style={{ width: '31.3%', minHeight: 465, paddingLeft: '2.25%', marginRight: '5.5%', marginTop: '6%', marginBottom: '6%', justifyContent: 'start', position: 'relative' }}>
+                        <Grid item className='SecondMainItem'>
                             <Typography variant="h5" component="h1" className='ModalItemTitle' style={{ marginTop: 0 }}>{this.state.item.name}</Typography>
                             
                             
