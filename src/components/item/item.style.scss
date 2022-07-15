@@ -243,6 +243,11 @@ $colorMain: #CC0033;
     }
 }
 .pcItem{
+    & > div:last-child > div:last-child{
+        position: absolute;
+        bottom: 0;
+        width: 93%;
+    }
     @media (max-width: 600px){
         display: none;
     }
@@ -313,6 +318,7 @@ $colorMain: #CC0033;
     top: 110px!important;
     & > div{
         max-width: 400px!important;
+        width: 93%;
         background-color: rgba(0,0,0, 0.65) !important;
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
