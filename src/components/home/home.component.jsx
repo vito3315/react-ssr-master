@@ -573,9 +573,9 @@ class CardItem extends React.Component {
                                     :
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className='MobileActionsCartButton'>
                                     <div variant="contained" className='ModalItemButtonCart OPEN' >
-                                        <button className='minus' onClick={this.minus.bind(this)}>–</button>
+                                        <span className='minus' onClick={this.minus.bind(this)}>–</span>
                                         <span>{this.state.count}</span>
-                                        <button className='plus' onClick={this.add.bind(this)}>+</button>
+                                        <span className='plus' onClick={this.add.bind(this)}>+</span>
                                     </div>
                                 </ButtonGroup>
                             }

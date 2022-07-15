@@ -336,23 +336,9 @@ body{
             background-color: transparent;
             border: transparent;
         }
-        & > span{
+        & > span:not(.minus):not(.plus){
             @include fonsNew(0.875rem, $Roboto);
             font-weight: 500;
-        }
-        & > button{
-            &:hover{
-                background-color: transparent;
-                border: transparent;
-            }
-            &:target{
-                background-color: transparent;
-                border: transparent;
-            }
-            &:active{
-                background-color: transparent;
-                border: transparent;
-            }
         }
         & > .plus{
             width: 28px;
