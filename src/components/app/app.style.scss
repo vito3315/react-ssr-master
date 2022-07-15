@@ -335,6 +335,7 @@ body{
             align-items: center;
             background-color: rgba(249,188,35,0.1);
             border: rgba(249,188,35,0.1);
+            -webkit-tap-highlight-color: transparent;
         }
         & > span:not(.minus):not(.plus){
             @include fonsNew(0.875rem, $Roboto);
@@ -347,17 +348,22 @@ body{
             -moz-user-select: none; /* Old versions of Firefox */
             -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
             &:hover{
-                background-color: rgba(249,188,35,0.1);
-                border: rgba(249,188,35,0.1);
+                background-color: transparent;
+                border: transparent;
             }
             &:target{
-                background-color: rgba(249,188,35,0.1);
-                border: rgba(249,188,35,0.1);
+                background-color: transparent;
+                border: transparent;
             }
             &:active{
-                background-color: rgba(249,188,35,0.1);
-                border: rgba(249,188,35,0.1);
+                background-color: transparent;
+                border: transparent;
+            }
+            &:focus { 
+                outline: none !important;
             }
         }
         & > .plus{
@@ -370,8 +376,9 @@ body{
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: rgba(249,188,35,0.1);
-            border: rgba(249,188,35,0.1);
+            background-color: transparent;
+            border: transparent;
+            -webkit-tap-highlight-color: transparent;
         }
     }
 }
