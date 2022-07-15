@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Typography from '@material-ui/core/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faMinus, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 import * as Scroll from 'react-scroll';
 
 var Element  = Scroll.Element;
@@ -564,8 +564,8 @@ class CardItem extends React.Component {
                         
                         <div style={{ marginBottom: 10 }}>
                             { this.state.count == 0 ?
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
-                                    <Button variant="contained" style={{ fontFamily: 'Roboto', fontSize: '0.875rem', fontWeight: 500, color: '#525252', width: 80, height: 30, padding: 0, backgroundColor: '#fff', border: '1px solid #F9BC23', borderRadius: 30, backgroundColor: 'rgb(255, 255, 255)', border: '1px solid rgb(249, 188, 35)', borderRadius: 30 }} onClick={this.add.bind(this)}>
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className='MobileActionsCartButtonStart'>
+                                    <Button variant="contained" onClick={this.add.bind(this)}>
                                         {new Intl.NumberFormat('ru-RU').format( parseInt(this.state.item.price))}
                                         <IconRuble style={{ width: 11, height: 11, fill: '#525252', marginLeft: 3 }} />
                                     </Button>
