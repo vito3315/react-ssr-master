@@ -43,7 +43,6 @@ $colorText: #525252;
 @mixin fons($size: 1rem, $family: $Ubuntu) {
     font-size: $size;
     font-family: $family, sans-serif !important;
-    color: $colorText;
 }
 
 ::-webkit-scrollbar-track{
@@ -578,11 +577,9 @@ body{
                 width: 100%;
                 background-color: #F9BC23;
                 border-radius: 60px;
-                & > span{
-                    @include fonsNew(1rem, $Roboto);
-                    font-weight: 400;
-                    text-transform: initial;
-                }
+                @include fonsNew(1rem, $Roboto);
+                font-weight: 400;
+                text-transform: initial;
             }
             & > button:hover{
                 background-color: #cf9f37;
