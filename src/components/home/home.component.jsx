@@ -1330,7 +1330,7 @@ export class Home extends React.Component {
                     {this.state.openItem ?
                         <Dialog disableElevation fullScreen open={this.state.openModal} className="ItemDialog" onClose={this.handleClose.bind(this)} TransitionComponent={Transition}>
                             <MuiDialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
-                                <IconButton aria-label="close" style={{ position: 'absolute', top: -47, left: 8, backgroundColor: 'transparent' }} onClick={this.handleClose.bind(this)}>
+                                <IconButton aria-label="close" style={{ position: 'absolute', top: -36, left: 15, backgroundColor: 'transparent' }} onClick={this.handleClose.bind(this)}>
                                     <IconClose style={{ width: 25, height: 25 }} />
                                 </IconButton>
                             </MuiDialogTitle>
@@ -1377,7 +1377,7 @@ export class Home extends React.Component {
                             <Hidden smUp>
                                 <Dialog disableElevation fullScreen style={{ width: '100%', marginTop: this.state.openItem.items.length > 1 ? 400 : 470, borderTopRightRadius: 30, borderTopLeftRadius: 30 }} onClose={this.handleClosePCInfo.bind(this)} className="ItemDialog OpenItemMobInfo blurBacground" open={this.state.openModalPCInfo} TransitionComponent={Transition}>
                                     <MuiDialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
-                                        <IconButton aria-label="close" style={{ position: 'absolute', top: -47, left: 8, backgroundColor: 'transparent' }} onClick={this.handleClosePCInfo.bind(this)}>
+                                        <IconButton aria-label="close" style={{ position: 'absolute', top: -36, left: 15, backgroundColor: 'transparent' }} onClick={this.handleClosePCInfo.bind(this)}>
                                             <IconClose style={{ width: 25, height: 25 }} />
                                         </IconButton>
                                     </MuiDialogTitle>
@@ -1433,7 +1433,7 @@ export class Home extends React.Component {
                             <Hidden smUp>
                                 <Dialog disableElevation fullScreen style={{ height: 'calc(100vh - 50px)', width: '100%' }} onClose={this.handleClosePCSet.bind(this)} className="ItemDialog OpenItemMobSet" open={this.state.openModalPCSet} TransitionComponent={Transition}>
                                     <MuiDialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
-                                        <IconButton aria-label="close" style={{ position: 'absolute', top: -47, left: 8, backgroundColor: 'transparent' }} onClick={this.handleClosePCSet.bind(this)}>
+                                        <IconButton aria-label="close" style={{ position: 'absolute', top: -36, left: 15, backgroundColor: 'transparent' }} onClick={this.handleClosePCSet.bind(this)}>
                                             <IconClose style={{ width: 25, height: 25 }} />
                                         </IconButton>
                                     </MuiDialogTitle>

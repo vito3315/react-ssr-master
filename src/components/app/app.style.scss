@@ -175,6 +175,9 @@ body{
             height: 33px;
         }
         & .ShopIconBTN{
+            & > span{
+                width: 40px;
+            }
             & svg{
                 fill: $colorMain;
                 right: -10px!important;
