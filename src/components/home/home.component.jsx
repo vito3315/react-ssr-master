@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink as Link } from 'react-router-dom';
 
-import Grid from '@material-ui/core/Grid';
+import Grid from '@mui/material/Grid';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -26,7 +26,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 
-import IconButton from '@material-ui/core/IconButton';
+import IconButton from '@mui/material/IconButton';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 
 import itemsStore from '../../stores/items-store';
