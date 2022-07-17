@@ -16,7 +16,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 
 import { styled } from '@mui/material/styles';
-import Tooltip from '@mui/material/Tooltip';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import ClickAwayListener from '@mui/base/ClickAwayListener';
 
 import { ActionsCartButton, ActionsCartButtonStart, IconRuble, IconInfoWhite, IconInfoBlack } from '../../stores/elements';
