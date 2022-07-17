@@ -1469,7 +1469,7 @@ export class Home extends React.Component {
                     {this.state.openItem ?
                         <>
                             <Hidden smUp>
-                                <Dialog disableElevation fullScreen style={{ width: '100%', marginTop: this.state.openItem.items.length > 1 ? 400 : 470, backgroundColor: 'rgba(0, 0, 0, 0.6)', borderTopRightRadius: 30, borderTopLeftRadius: 30 }} onClose={this.handleClosePCInfo.bind(this)} className="ItemDialog OpenItemMobInfo blurBacground" open={this.state.openModalPCInfo} TransitionComponent={Transition}>
+                                <Dialog disableElevation fullScreen style={{ width: '100%', marginTop: this.state.openItem.items.length > 1 ? 400 : 470, borderTopRightRadius: 30, borderTopLeftRadius: 30 }} onClose={this.handleClosePCInfo.bind(this)} className="ItemDialog OpenItemMobInfo blurBacground" open={this.state.openModalPCInfo} TransitionComponent={Transition}>
                                     <MuiDialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
                                         <IconButton aria-label="close" style={{ position: 'absolute', top: -47, left: 8, backgroundColor: 'transparent' }} onClick={this.handleClosePCInfo.bind(this)}>
                                             <IconClose style={{ width: 25, height: 25 }} />
