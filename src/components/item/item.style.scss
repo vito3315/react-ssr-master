@@ -351,7 +351,7 @@ $colorMain: #CC0033;
         -o-backdrop-filter: blur(15px);
         -ms-backdrop-filter: blur(15px);
         @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
-            background-color: rgba(0,0,0, 0.65);
+            background-color: rgba(0,0,0, 0.65)!important;
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             -moz-backdrop-filter: blur(15px);
