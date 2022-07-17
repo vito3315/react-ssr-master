@@ -24,8 +24,8 @@ import IconButton from '@mui/material/IconButton';
 
 import Typography from '@mui/material/Typography';
 
-import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 import Popover from '@mui/material/Popover';
 import { Link as ScrollLink } from "react-scroll";
