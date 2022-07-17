@@ -1361,7 +1361,7 @@ export class Header extends React.Component {
                                     <img alt="Жако доставка роллов и пиццы" src="https://jacochef.ru/src/img/Bely_fon_logo.png" />
                                 </Link> 
                             </Grid>
-                            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+                            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                                 
                                 <Grid item className="CityProfileNav">
                                     <Typography className="cat" variant="h5" component="span" onClick={this.openCity.bind(this)} style={{ display: 'flex', flexDirection: 'row' }}>{this.state.cityNameRu} <ArrowDropDownIcon /></Typography>

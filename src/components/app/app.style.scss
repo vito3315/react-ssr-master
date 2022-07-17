@@ -167,7 +167,7 @@ body{
                 @include fons(1rem, $Ubuntu);
             }
         }
-        & > div{
+        & > div:first-child{
             display: flex;
             align-items: center;
         }
