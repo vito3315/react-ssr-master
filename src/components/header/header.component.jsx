@@ -1361,7 +1361,7 @@ export class Header extends React.Component {
                                     <img alt="Жако доставка роллов и пиццы" src="https://jacochef.ru/src/img/Bely_fon_logo.png" />
                                 </Link> 
                             </Grid>
-                            <Box sx={{ display: { sm: 'none', xs: 'none' } }}>
+                            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
                                 
                                 <Grid item className="CityProfileNav">
                                     <Typography className="cat" variant="h5" component="span" onClick={this.openCity.bind(this)} style={{ display: 'flex', flexDirection: 'row' }}>{this.state.cityNameRu} <ArrowDropDownIcon /></Typography>
@@ -1490,7 +1490,7 @@ export class Header extends React.Component {
                             </Box>
                         </Grid>
                     
-                        <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
+                        <Box sx={{ display: { md: 'none' } }}>
                             <Typography variant="h5" component="span" className="thisCity" onClick={this.openCity.bind(this)}><FontAwesomeIcon icon={ faMapMarkerAlt } /> {itemsStore.getCityRU()}</Typography>
                         </Box>
                                 
@@ -1498,7 +1498,7 @@ export class Header extends React.Component {
                     
                     {this.state.activePage == 'home' ?
                         <Grid className="scrollCat mobile">
-                            <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
+                            <Box sx={{ display: { md: 'none' } }}>
                                 {this.state.categoryItems.map((item, key) => 
                                     check && check.length > 0 ?
                                         <ScrollLink 
