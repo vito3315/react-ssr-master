@@ -180,7 +180,7 @@ function get_city(path){
     return path[ 0 ];
 }
 
-import { Item, Item2 } from '../item';
+import { Item } from '../item';
 
 class CardItem extends React.Component {
     _isMounted = false;
@@ -315,98 +315,6 @@ class CardItem extends React.Component {
         const img_type = this.state.item.img_app.length > 0 ? 'new' : 'old';
 
         const desc = this.state.item.marc_desc.length > 0 ? this.state.item.marc_desc : this.state.item.tmp_desc;
-
-        let item_name = '';
-
-        let count = ""+this.state.count;
-
-        count = count.split("");
-
-        count = count[ count.length - 1 ];
-
-        if( parseInt( this.state.item.cat_id ) == 4 ){
-            if( parseInt( count ) == 1 ){
-                item_name = 'сет';
-            }
-
-            if( parseInt( count ) > 1 && parseInt( count ) < 5 ){
-                item_name = 'сета';
-            }
-
-            if( parseInt( count ) > 4 || parseInt( count ) == 0 ){
-                item_name = 'сетов';
-            }
-        }
-
-        if( parseInt( this.state.item.cat_id ) == 14 ){
-            if( parseInt( count ) == 1 ){
-                item_name = 'пицца';
-            }
-
-            if( parseInt( count ) > 1 && parseInt( count ) < 5 ){
-                item_name = 'пиццы';
-            }
-
-            if( parseInt( count ) > 4 || parseInt( count ) == 0 ){
-                item_name = 'пицц';
-            }
-        }
-
-        if( parseInt( this.state.item.cat_id ) == 9 || parseInt( this.state.item.cat_id ) == 10 || parseInt( this.state.item.cat_id ) == 12 || parseInt( this.state.item.cat_id ) == 13 ){
-            if( parseInt( count ) == 1 ){
-                item_name = 'ролл';
-            }
-
-            if( parseInt( count ) > 1 && parseInt( count ) < 5 ){
-                item_name = 'ролла';
-            }
-
-            if( parseInt( count ) > 4 || parseInt( count ) == 0 ){
-                item_name = 'роллов';
-            }
-        }
-
-        if( parseInt( this.state.item.cat_id ) == 6 ){
-            if( parseInt( count ) == 1 ){
-                item_name = 'напиток';
-            }
-
-            if( parseInt( count ) > 1 && parseInt( count ) < 5 ){
-                item_name = 'напитка';
-            }
-
-            if( parseInt( count ) > 4 || parseInt( count ) == 0 ){
-                item_name = 'напитков';
-            }
-        }
-
-        if( parseInt( this.state.item.cat_id ) == 7 ){
-            if( parseInt( count ) == 1 ){
-                item_name = 'соус';
-            }
-
-            if( parseInt( count ) > 1 && parseInt( count ) < 5 ){
-                item_name = 'соуса';
-            }
-
-            if( parseInt( count ) > 4 || parseInt( count ) == 0 ){
-                item_name = 'соусов';
-            }
-        }
-
-        if( parseInt( this.state.item.cat_id ) == 5 ){
-            if( parseInt( count ) == 1 ){
-                item_name = 'закуска';
-            }
-
-            if( parseInt( count ) > 1 && parseInt( count ) < 5 ){
-                item_name = 'закуски';
-            }
-
-            if( parseInt( count ) > 4 || parseInt( count ) == 0 ){
-                item_name = 'закусок';
-            }
-        }
 
         const width = window.innerWidth;
 
@@ -1427,7 +1335,7 @@ export class Home extends React.Component {
                                 </IconButton>
                             </MuiDialogTitle>
                             <div>
-                                <Item2 itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} openInfo={this.openInfo.bind(this)} openModalPCInfo={this.state.openModalPCInfo} />
+                                <Item itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} openInfo={this.openInfo.bind(this)} openModalPCInfo={this.state.openModalPCInfo} />
                             </div>
                         </Dialog>
                             :
@@ -1443,7 +1351,7 @@ export class Home extends React.Component {
                                     </IconButton>
                                     
                                     <MuiDialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
-                                        <Item2 itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} openInfo={this.openInfo.bind(this)} openModalPCInfo={this.state.openModalPCInfo} />
+                                        <Item itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} openInfo={this.openInfo.bind(this)} openModalPCInfo={this.state.openModalPCInfo} />
                                     </MuiDialogContent>
                                 </Dialog>
                             </Hidden>
@@ -1455,7 +1363,7 @@ export class Home extends React.Component {
                                     </IconButton>
                                     
                                     <MuiDialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
-                                        <Item2 itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} openInfo={this.openInfo.bind(this)} openModalPCInfo={this.state.openModalPCInfo} />
+                                        <Item itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} openInfo={this.openInfo.bind(this)} openModalPCInfo={this.state.openModalPCInfo} />
                                     </MuiDialogContent>
                                 </Dialog>
                             </Hidden>

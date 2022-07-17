@@ -147,7 +147,7 @@ function get_item(path){
     return path[ path.length - 1 ];
 }
 
-export class Item2 extends React.Component {
+export class Item extends React.Component {
     _isMounted = false;
     swiper = null;
     

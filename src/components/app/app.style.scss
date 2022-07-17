@@ -173,11 +173,9 @@ body{
             height: 33px;
         }
         & .ShopIconBTN{
-            & .MuiBadge-anchorOriginTopRightRectangle{
-                right: -10px!important;
-            }
             & svg{
                 fill: $colorMain;
+                right: -10px!important;
             }
         } 
     }

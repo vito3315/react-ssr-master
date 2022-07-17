@@ -21,7 +21,7 @@ import { Header } from '../header';
 import Grid from '@mui/material/Grid';
 
 import Typography from '@mui/material/Typography';
-import Hidden from '@material-ui/core/Hidden';
+import Box from '@mui/material/Box';
 
 const queryString = require('query-string');
 
@@ -32,8 +32,7 @@ const stores = { itemsStore };
 
 import { autorun } from "mobx"
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faInstagram, faFacebookF, faOdnoklassniki, faVk, faTelegramPlane } from '@fortawesome/free-brands-svg-icons'
+import { VKIcon, OdnIcon, TGIcon } from '../../stores/elements';
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -183,35 +182,13 @@ class StickyFooter extends React.Component{
                     </Grid>
                     { this.state.is_load ?
                         <Grid item lg={3} md={3} sm={3} xl={3} xs={12} className="socIcons">
-                            { this.state.soc_link && this.state.soc_link.link_fb ?
-                                <Link
-                                    to={{ pathname: this.state.soc_link.link_fb }}
-                                    target="_blank"
-                                    style={{ textDecoration: 'none' }}
-                                >
-                                    <FontAwesomeIcon icon={faFacebookF} style={{ fontSize: '2rem', padding: 10 }} />
-                                </Link>
-                                    :
-                                null
-                            }
-                            { this.state.soc_link && this.state.soc_link.link_inst ?
-                                <Link
-                                    to={{ pathname: this.state.soc_link.link_inst }}
-                                    target="_blank"
-                                    style={{ textDecoration: 'none' }}
-                                >
-                                    <FontAwesomeIcon icon={faInstagram} style={{ fontSize: '2rem', padding: 10 }} />
-                                </Link>
-                                    :
-                                null
-                            }
                             { this.state.soc_link && this.state.soc_link.link_ok ?
                                 <Link
                                     to={{ pathname: this.state.soc_link.link_ok }}
                                     target="_blank"
                                     style={{ textDecoration: 'none' }}
                                 >
-                                    <FontAwesomeIcon icon={faOdnoklassniki} style={{ fontSize: '2rem', padding: 10 }} />
+                                    <OdnIcon style={{ fontSize: '2rem', padding: 10 }} />
                                 </Link>
                                     :
                                 null
@@ -222,7 +199,7 @@ class StickyFooter extends React.Component{
                                     target="_blank"
                                     style={{ textDecoration: 'none' }}
                                 >
-                                    <FontAwesomeIcon icon={faVk} style={{ fontSize: '2rem', padding: 10 }} />
+                                    <VKIcon style={{ fontSize: '2rem', padding: 10 }} />
                                 </Link>
                                     :
                                 null
@@ -233,7 +210,7 @@ class StickyFooter extends React.Component{
                                     target="_blank"
                                     style={{ textDecoration: 'none' }}
                                 >
-                                    <FontAwesomeIcon icon={faTelegramPlane} style={{ fontSize: '2rem', padding: 10 }} />
+                                    <TGIcon style={{ fontSize: '2rem', padding: 10 }} />
                                 </Link>
                                     
                         </Grid>
@@ -509,8 +486,8 @@ export class App extends React.Component {
                     </Switch>
                     
                     {this.state.activePage == 'cart' ?
-                        <Hidden mdUp>
-                            <Hidden only="xs">
+                        <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
+                            <Box sx={{ display: { xs: 'none' } }}>
                                 <div className="456" style={{ width: '100%', height: 3, position: 'fixed', bottom: 72, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
                                 <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 69, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
                                 <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 66, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
@@ -521,10 +498,9 @@ export class App extends React.Component {
                                 <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 51, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
                                 <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 48, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
                                 <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 45, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
-                            </Hidden>
-
-
-                            <Hidden only="sm">
+                                
+                            </Box>
+                            <Box sx={{ display: { sm: 'none' } }}>
                                 <div className="123" style={{ width: '100%', height: 3, position: 'fixed', bottom: 72+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
                                 <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 69+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
                                 <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 66+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
@@ -535,16 +511,14 @@ export class App extends React.Component {
                                 <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 51+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
                                 <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 48+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
                                 <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 45+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
-                            </Hidden>
-                        </Hidden>
+                            </Box>
+                        </Box>
                             :
                         null
                     }
-                 
-                    
-                    {this.state.activePage == 'cart' ? null
-                            :
-                        <Hidden mdUp>
+
+                    {this.state.activePage == 'cart' ? null :
+                        <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
                             <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 72, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
                             <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 69, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
                             <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 66, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
@@ -555,9 +529,9 @@ export class App extends React.Component {
                             <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 51, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
                             <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 48, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
                             <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 45, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
-                        </Hidden>
+                        </Box> 
                     }
-                    
+
                     <StickyFooter cityName={ this.props.globalState.city } />
                 </div>
             </Provider>
