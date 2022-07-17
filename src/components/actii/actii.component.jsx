@@ -1,20 +1,20 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
+import Grid from '@mui/material/Grid';
 
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
-import Dialog from '@material-ui/core/Dialog';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogActions from '@material-ui/core/DialogActions';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 
-import Snackbar from '@material-ui/core/Snackbar';
+import Snackbar from '@mui/material/Snackbar';
 
 import axios from 'axios';
 import {Helmet} from "react-helmet";
@@ -261,23 +261,23 @@ export class Actii extends React.Component {
                 
                 { this.state.showItem ?
                     <Dialog onClose={this.closeDialog.bind(this)} aria-labelledby="customized-dialog-title" className="modalActii" open={this.state.openDialog}>
-                        <MuiDialogTitle disableTypography style={{ margin: 0, padding: 8 }}>
+                        <DialogTitle disableTypography style={{ margin: 0, padding: 8 }}>
                             <Typography variant="h6">{this.state.showItem.promo_title}</Typography>
                           
                             <IconButton aria-label="close" style={{ position: 'absolute', top: 0, right: 0 }} onClick={this.closeDialog.bind(this)}>
                                 <FontAwesomeIcon icon={faTimes} style={{ fontSize: '1.8rem', color: '#e5e5e5' }} />
                             </IconButton>
-                        </MuiDialogTitle>
+                        </DialogTitle>
                         
-                        <MuiDialogContent className="modalActiiContent">
+                        <DialogContent className="modalActiiContent">
                             <div dangerouslySetInnerHTML={{__html: this.state.showItem.text}} />
-                        </MuiDialogContent>
+                        </DialogContent>
                         {this.state.showItem.promo.length > 0 ?
-                            <MuiDialogActions style={{ justifyContent: 'center', padding: '15px 0px' }}>
+                            <DialogActions style={{ justifyContent: 'center', padding: '15px 0px' }}>
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderOther" onClick={this.activePromo.bind(this, this.state.showItem.info, this.state.showItem.promo)}>
                                     <Button variant="contained" className="BtnCardMain CardInCardItem">Применить промокод</Button>
                                 </ButtonGroup>
-                            </MuiDialogActions>
+                            </DialogActions>
                                 :
                             null
                         }

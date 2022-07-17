@@ -3,41 +3,43 @@ import { NavLink as Link } from 'react-router-dom';
 
 import Grid from '@mui/material/Grid';
 
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
 
-import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
-import InputBase from '@material-ui/core/InputBase';
+import Paper from '@mui/material/Paper';
+import TextField from '@mui/material/TextField';
+import InputBase from '@mui/material/InputBase';
 
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import PropTypes from 'prop-types';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Box from '@material-ui/core/Box';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
 
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import IconButton from '@mui/material/IconButton';
 
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+
 import Hidden from '@material-ui/core/Hidden';
-import Popover from '@material-ui/core/Popover';
+
+import Popover from '@mui/material/Popover';
 import { Link as ScrollLink } from "react-scroll";
 
 const queryString = require('query-string');
 
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 import InputMask from "react-input-mask";
-import Badge from '@material-ui/core/Badge';
+import Badge from '@mui/material/Badge';
 import itemsStore from '../../stores/items-store';
 import config from '../../stores/config';
 
@@ -49,8 +51,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 import { faUtensils, faUser, faGift } from '@fortawesome/free-solid-svg-icons'
 
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 class CustomBottomNavigation extends React.Component{
     constructor(props) {

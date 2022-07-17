@@ -18,9 +18,9 @@ import { PagePolitika } from '../pagePolitika';
 import { HeaderCat } from '../header';
 import { Header } from '../header';
 
-import Grid from '@material-ui/core/Grid';
+import Grid from '@mui/material/Grid';
 
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 import Hidden from '@material-ui/core/Hidden';
 
 const queryString = require('query-string');
