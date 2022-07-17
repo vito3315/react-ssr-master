@@ -188,7 +188,7 @@ class StickyFooter extends React.Component{
                                     target="_blank"
                                     style={{ textDecoration: 'none' }}
                                 >
-                                    <OdnIcon style={{ fontSize: '2rem', padding: 10 }} />
+                                    <OdnIcon />
                                 </Link>
                                     :
                                 null
@@ -199,7 +199,7 @@ class StickyFooter extends React.Component{
                                     target="_blank"
                                     style={{ textDecoration: 'none' }}
                                 >
-                                    <VKIcon style={{ fontSize: '2rem', padding: 10 }} />
+                                    <VKIcon />
                                 </Link>
                                     :
                                 null
@@ -210,7 +210,7 @@ class StickyFooter extends React.Component{
                                     target="_blank"
                                     style={{ textDecoration: 'none' }}
                                 >
-                                    <TGIcon style={{ fontSize: '2rem', padding: 10 }} />
+                                    <TGIcon />
                                 </Link>
                                     
                         </Grid>

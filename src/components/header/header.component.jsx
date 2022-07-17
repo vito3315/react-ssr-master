@@ -27,8 +27,6 @@ import Typography from '@mui/material/Typography';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
-import Hidden from '@material-ui/core/Hidden';
-
 import Popover from '@mui/material/Popover';
 import { Link as ScrollLink } from "react-scroll";
 
@@ -1330,21 +1328,20 @@ export class Header extends React.Component {
                             </>
                         </Grid>
                     
-                        <Hidden mdUp>
+                        <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
                             <Typography variant="h5" component="span" className="thisCity" onClick={this.openCity.bind(this)}><FontAwesomeIcon icon={ faMapMarkerAlt } /> {itemsStore.getCityRU()}</Typography>
-                        </Hidden>
-                                
+                        </Box>
                     </Toolbar>
                     
                     {this.state.activePage == 'home' ?
                         <Grid className="scrollCat">
-                            <Hidden mdUp>
+                            <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
                                 {this.state.testData.map((item, key) => 
                                     <Grid item key={key}>
                                         <div style={{ width: 120, height: 28, marginRight: 12, backgroundColor: '#e5e5e5' }} />    
                                     </Grid>)
                                 }
-                            </Hidden>
+                            </Box>
                         </Grid>
                             :
                         null
@@ -1364,7 +1361,7 @@ export class Header extends React.Component {
                                     <img alt="Жако доставка роллов и пиццы" src="https://jacochef.ru/src/img/Bely_fon_logo.png" />
                                 </Link> 
                             </Grid>
-                            <Hidden smDown>
+                            <Box sx={{ display: { sm: 'none', xs: 'none' } }}>
                                 
                                 <Grid item className="CityProfileNav">
                                     <Typography className="cat" variant="h5" component="span" onClick={this.openCity.bind(this)} style={{ display: 'flex', flexDirection: 'row' }}>{this.state.cityNameRu} <ArrowDropDownIcon /></Typography>
@@ -1490,18 +1487,18 @@ export class Header extends React.Component {
                                 <Grid item style={{ marginLeft: 'auto' }}>
                                     <SimplePopover openLogin={this.openLogin.bind(this)} />
                                 </Grid>
-                            </Hidden>
+                            </Box>
                         </Grid>
                     
-                        <Hidden mdUp>
+                        <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
                             <Typography variant="h5" component="span" className="thisCity" onClick={this.openCity.bind(this)}><FontAwesomeIcon icon={ faMapMarkerAlt } /> {itemsStore.getCityRU()}</Typography>
-                        </Hidden>
+                        </Box>
                                 
                     </Toolbar>
                     
                     {this.state.activePage == 'home' ?
                         <Grid className="scrollCat mobile">
-                            <Hidden mdUp>
+                            <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
                                 {this.state.categoryItems.map((item, key) => 
                                     check && check.length > 0 ?
                                         <ScrollLink 
@@ -1561,7 +1558,7 @@ export class Header extends React.Component {
                                         </ScrollLink>    
                                         
                                 )}
-                            </Hidden>
+                            </Box>
                         </Grid>
                             :
                         null
@@ -1818,7 +1815,7 @@ export class Header extends React.Component {
 
 
                 {this.state.activePage == 'home' ?
-                    <Hidden mdUp>
+                    <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
                         <div style={{ width: '100%', height: 3, position: 'fixed', top: 85, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
                         <div style={{ width: '100%', height: 3, position: 'fixed', top: 88, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
                         <div style={{ width: '100%', height: 3, position: 'fixed', top: 91, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
@@ -1829,14 +1826,14 @@ export class Header extends React.Component {
                         <div style={{ width: '100%', height: 3, position: 'fixed', top: 106, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
                         <div style={{ width: '100%', height: 3, position: 'fixed', top: 109, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
                         <div style={{ width: '100%', height: 3, position: 'fixed', top: 112, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
-                    </Hidden>
+                    </Box>
                         :
                     null
                 }    
                 
-                <Hidden mdUp>
+                <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
                     <CustomBottomNavigation login={ this.openLogin.bind(this) } />
-                </Hidden>
+                </Box>
             </div>
         )
     }

@@ -51,6 +51,44 @@ export function TGIcon(props){
     )
 }
 
+export function IconInfoWhite() {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 80 80"
+      >
+        <circle cx="40" cy="40" r="39" stroke="#DADADA" strokeWidth="2"></circle>
+        <path
+          stroke="#DADADA"
+          strokeLinecap="round"
+          strokeWidth="4"
+          d="M40 34L40 62"
+        ></path>
+        <circle cx="40" cy="22.667" r="4" fill="#DADADA"></circle>
+      </svg>
+    );
+}
+
+export function IconInfoBlack() {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 80 80"
+      >
+        <circle cx="40" cy="40" r="40" fill="#000" fillOpacity="0.6"></circle>
+        <path
+          stroke="#fff"
+          strokeLinecap="round"
+          strokeWidth="4"
+          d="M40 34L40 62"
+        ></path>
+        <circle cx="40" cy="22.666" r="4" fill="#fff"></circle>
+      </svg>
+    );
+}
+
 export class MiniActionsCartButton extends React.PureComponent{
     render(){
         return (

@@ -105,8 +105,10 @@ body{
         padding: 4px 0px;
     }
     & svg{
-        color: #fff;
-        @include fons(2rem, $Ubuntu);
+        fill: #fff;
+        width: 30px;
+        height: 30px;
+        padding: 10px;
     }
     @media (max-width: 1024px){
         padding-bottom: 56px!important;

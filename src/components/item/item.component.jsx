@@ -3,7 +3,6 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Typography from '@mui/material/Typography';
-import Hidden from '@material-ui/core/Hidden';
 import { autorun } from "mobx"
 import itemsStore from '../../stores/items-store';
 import config from '../../stores/config';
@@ -20,7 +19,7 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Tooltip from '@mui/material/Tooltip';
 import ClickAwayListener from '@mui/base/ClickAwayListener';
 
-import { ActionsCartButton, ActionsCartButtonStart, IconRuble } from '../../stores/elements';
+import { ActionsCartButton, ActionsCartButtonStart, IconRuble, IconInfoWhite, IconInfoBlack } from '../../stores/elements';
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics, logEvent } from "firebase/analytics";
@@ -55,44 +54,6 @@ class Badge extends React.Component{
             </div>
         );
     }
-}
-
-function IconInfoWhite() {
-    return (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 80 80"
-      >
-        <circle cx="40" cy="40" r="39" stroke="#DADADA" strokeWidth="2"></circle>
-        <path
-          stroke="#DADADA"
-          strokeLinecap="round"
-          strokeWidth="4"
-          d="M40 34L40 62"
-        ></path>
-        <circle cx="40" cy="22.667" r="4" fill="#DADADA"></circle>
-      </svg>
-    );
-}
-
-function IconInfoBlack() {
-    return (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 80 80"
-      >
-        <circle cx="40" cy="40" r="40" fill="#000" fillOpacity="0.6"></circle>
-        <path
-          stroke="#fff"
-          strokeLinecap="round"
-          strokeWidth="4"
-          d="M40 34L40 62"
-        ></path>
-        <circle cx="40" cy="22.666" r="4" fill="#fff"></circle>
-      </svg>
-    );
 }
 
 const HtmlTooltip = withStyles((theme) => ({
@@ -527,7 +488,7 @@ export class Item extends React.Component {
                 </Box>
                 
 
-                <Hidden smUp>
+                <Box sx={{ display: { sm: 'none', md: 'none', lg: 'none', xl: 'none' } }}>
                     <Grid container className="MainItem MainItemMobile mainContainer" style={{ height: 'calc(100vh - 50px)', paddingRight: 20, paddingLeft: 20, paddingTop: 20, alignContent: 'flex-start', position: 'relative' }}>
                         <Grid item xs={12}>
 
@@ -639,7 +600,7 @@ export class Item extends React.Component {
                             }
                         </Grid>
                     </Grid>
-                </Hidden>
+                </Box>
             </>
         )
     }
