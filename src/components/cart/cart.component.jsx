@@ -2194,8 +2194,7 @@ export class Cart extends React.Component {
                         </TabPanel>
                         
                         {this.state.orderType == 0 ?
-                            <div>
-                                
+                            <div className='_comment_'>
                                 <TextField
                                     style={{ width: '100%' }}
                                     id="outlined-multiline-flexible"
@@ -2208,7 +2207,7 @@ export class Cart extends React.Component {
                                     size={'small'} 
                                     type={ 'text' }
                                 />
-                                
+
                             </div>
                                 :
                             null
@@ -2435,7 +2434,9 @@ export class Cart extends React.Component {
                                         rowsMax={2}
                                         value={this.state.orderComment}
                                         onChange={this.changeComment}
-                                        variant="outlined"
+                                        variant="outlined" 
+                                        size={'small'} 
+                                        type={ 'text' }
                                     />
                                 </form>
                             </div>

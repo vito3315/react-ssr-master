@@ -527,7 +527,16 @@ div.boxItem .promoIcon{
                 color: rgba(0, 0, 0, 0.87);
             }
         }
-        & > div:not(.promoOrder){
+        & > div._comment_{
+            width: 50%;
+            @media (max-width: 960px) {
+                width: 100%;
+            }
+            display: flex;
+            justify-content: center;
+            padding-top: 20px;
+        }
+        & > div:not(.promoOrder):not(._comment_){
             width: 100%;
             display: flex;
             justify-content: center;
