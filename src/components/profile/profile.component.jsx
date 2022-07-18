@@ -933,18 +933,32 @@ export class Profile extends React.Component {
                                         className="input" 
                                         onChange={this.changeName.bind(this)}
                                         onBlur={this.saveName.bind(this)}
+                                        size="small"
                                     />
-                                    <TextField InputProps={{ readOnly: true }} label="Номер телефона" value={this.state.info.user.login} className="input" />
+                                    <TextField 
+                                        InputProps={{ readOnly: true }} 
+                                        label="Номер телефона" 
+                                        value={this.state.info.user.login} 
+                                        className="input" 
+                                        size="small"
+                                    />
                                 </form>
                                 <form noValidate autoComplete="off">
                                     {this.state.info.user.date_bir != '' ?
-                                        <TextField label="Дата рождения" className="input" InputProps={{ readOnly: true }} value={this.state.info.user.date_bir} />
+                                        <TextField 
+                                            label="Дата рождения" 
+                                            className="input" 
+                                            InputProps={{ readOnly: true }} 
+                                            value={this.state.info.user.date_bir} 
+                                            size="small"
+                                        />
                                             :
                                         <div className="input">
-                                            <InputLabel className="otherLabel">Дата рождения</InputLabel>
+                                            <InputLabel className="otherLabel" size="small">Дата рождения</InputLabel>
                                             
                                             <FormControl className="ChangeDay">
                                                 <Select
+                                                    size="small"
                                                   labelId="demo-simple-select-label"
                                                   id="demo-simple-select"
                                                   displayEmpty
@@ -966,6 +980,7 @@ export class Profile extends React.Component {
                                                   value={this.state.changeM}
                                                   onChange={this.changeM.bind(this)}
                                                   onBlur={this.saveDay.bind(this)}
+                                                  size="small"
                                                 >
                                                     <MenuItem className="menuItem" value="">Месяц</MenuItem>
                                                     {this.state.arr_m.map((item, key) =>
@@ -981,6 +996,7 @@ export class Profile extends React.Component {
                                         value={this.state.userMail} 
                                         onChange={this.changeMail.bind(this)} 
                                         onBlur={this.saveMail.bind(this)}
+                                        size="small"
                                     />
                                 </form>
                                 

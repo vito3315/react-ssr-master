@@ -203,12 +203,12 @@ body{
     border-right: 0px solid #bdbdbd!important;
 }
 .BtnCardMain{   
-    padding: 1px!important;
+    padding: 5px 20px!important;
     background-color: #fff!important;
     min-width: 35px!important;
     min-height: 30px!important;
     @include fonsNew(1rem, $Roboto);
-    color: $colorMain;
+    color: $colorMain!important;
     font-weight: 400;
     & .CardCountItem{
         @include fonsNew(1rem, $Roboto);
