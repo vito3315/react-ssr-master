@@ -387,11 +387,11 @@ div.boxItem .promoIcon{
     padding-right: 28px!important;
 }
 .boxMobile_.area .MuiInputLabel-outlined{
-    transform: translate(14px, 12px) scale(1);
+    //transform: translate(14px, 12px) scale(1);
     @include fons(1rem, $Ubuntu);
 }
 .boxMobile_.area .MuiInputLabel-outlined.MuiInputLabel-shrink{
-    transform: translate(14px, -5px) scale(0.75);
+    //transform: translate(14px, -5px) scale(0.75);
     @include fons(1rem, $Ubuntu);
 }
 .DialogOrderCheckDialog .MuiDialog-paperFullWidth{
@@ -423,7 +423,7 @@ div.boxItem .promoIcon{
             height: 90px;
             background-color: #fff;
             position: fixed;
-            bottom: 51px;
+            bottom: 50px;
             left: 0;
             z-index: 1;
             display: flex;
