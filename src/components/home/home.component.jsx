@@ -1347,30 +1347,25 @@ export class Home extends React.Component {
                     
                     {this.state.openItem ?
                         <>
-                            <Box sx={{ display: { xs: 'block', lg: 'none' } }}>
-                                <Dialog disableElevation maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC testModalMD" open={this.state.openModalPC}>
-                                    <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -52, left: 16, zIndex: 1500, width: 52, height: 52, backgroundColor: 'transparent' }} onClick={this.handleClosePC.bind(this)}>
-                                        <IconClose />
-                                    </IconButton>
-                                    
-                                    <DialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
-                                        <Item itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} openInfo={this.openInfo.bind(this)} openModalPCInfo={this.state.openModalPCInfo} />
-                                    </DialogContent>
-                                </Dialog>
-                            </Box>
-                            
-                            
-                            <Box sx={{ display: { xs: 'none', sm: 'none', md: 'none', lg: 'block' } }}>
-                                <Dialog disableElevation maxWidth={'lg'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC testModalLG" open={this.state.openModalPC}>
-                                    <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -44, left: 16, zIndex: 1500, width: 40, height: 40, backgroundColor: 'transparent' }} onClick={this.handleClosePC.bind(this)}>
-                                        <IconClose />
-                                    </IconButton>
-                                    
-                                    <DialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
-                                        <Item itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} openInfo={this.openInfo.bind(this)} openModalPCInfo={this.state.openModalPCInfo} />
-                                    </DialogContent>
-                                </Dialog>
-                            </Box>
+                            <Dialog disableElevation maxWidth={'md'} sx={{ display: { xs: 'none', md: 'block', lg: 'none' } }} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC testModalMD" open={this.state.openModalPC}>
+                                <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -52, left: 16, zIndex: 1500, width: 52, height: 52, backgroundColor: 'transparent' }} onClick={this.handleClosePC.bind(this)}>
+                                    <IconClose />
+                                </IconButton>
+                                
+                                <DialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
+                                    <Item itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} openInfo={this.openInfo.bind(this)} openModalPCInfo={this.state.openModalPCInfo} />
+                                </DialogContent>
+                            </Dialog>
+                        
+                            <Dialog disableElevation maxWidth={'lg'} sx={{ display: { xs: 'none', lg: 'block' } }} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC testModalLG" open={this.state.openModalPC}>
+                                <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -44, left: 16, zIndex: 1500, width: 40, height: 40, backgroundColor: 'transparent' }} onClick={this.handleClosePC.bind(this)}>
+                                    <IconClose />
+                                </IconButton>
+                                
+                                <DialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
+                                    <Item itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} openInfo={this.openInfo.bind(this)} openModalPCInfo={this.state.openModalPCInfo} />
+                                </DialogContent>
+                            </Dialog>
                         </>
                             :
                         null
