@@ -423,7 +423,7 @@ div.boxItem .promoIcon{
             height: 90px;
             background-color: #fff;
             position: fixed;
-            bottom: 45px;
+            bottom: 51px;
             left: 0;
             z-index: 1;
             display: flex;
@@ -528,13 +528,16 @@ div.boxItem .promoIcon{
             }
         }
         & > div._comment_{
-            width: 50%;
-            @media (max-width: 960px) {
-                width: 100%;
-            }
+            width: 100%;
             display: flex;
             justify-content: center;
             padding-top: 20px;
+            & > div{
+                width: 50%;
+                @media (max-width: 960px) {
+                    width: 100%;
+                }
+            }
         }
         & > div:not(.promoOrder):not(._comment_){
             width: 100%;

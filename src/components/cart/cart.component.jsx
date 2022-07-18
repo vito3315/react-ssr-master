@@ -2196,7 +2196,6 @@ export class Cart extends React.Component {
                         {this.state.orderType == 0 ?
                             <div className='_comment_'>
                                 <TextField
-                                    style={{ width: '100%' }}
                                     id="outlined-multiline-flexible"
                                     label="Комментарий курьеру"
                                     multiline
