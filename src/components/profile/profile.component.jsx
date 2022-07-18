@@ -1,30 +1,29 @@
 import React from 'react';
 
-import Grid from '@material-ui/core/Grid';
+import Grid from '@mui/material/Grid';
 
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import IconButton from '@material-ui/core/IconButton';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import IconButton from '@mui/material/IconButton';
 
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
-import CheckIcon from '@material-ui/icons/Check';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 
-import CloseIcon from '@material-ui/icons/Close';
-
-import Dialog from '@material-ui/core/Dialog';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogActions from '@material-ui/core/DialogActions';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContentText from '@mui/material/DialogContentText';
 
 import itemsStore from '../../stores/items-store';
 import config from '../../stores/config';
 
-import TextField from '@material-ui/core/TextField';
+import TextField from '@mui/material/TextField';
 
 import axios from 'axios';
 import {Helmet} from "react-helmet";
@@ -33,28 +32,25 @@ const queryString = require('query-string');
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
-
+import AppBar from '@mui/material/AppBar';
 import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Checkbox from '@material-ui/core/Checkbox';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogActions from '@material-ui/core/DialogActions';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
 
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
+import Checkbox from '@mui/material/Checkbox';
 
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
 
-import Snackbar from '@material-ui/core/Snackbar';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+
+import Snackbar from '@mui/material/Snackbar';
 import Hidden from '@material-ui/core/Hidden';
 
 function TabPanel(props) {
@@ -1014,15 +1010,15 @@ export class Profile extends React.Component {
                         open={this.state.openDialog}
                         fullWidth={true}
                     >
-                        <MuiDialogTitle disableTypography style={{ margin: 0, padding: 8 }}>
+                        <DialogTitle disableTypography style={{ margin: 0, padding: 8 }}>
                             <Typography variant="h6">Заказ {this.state.showOrder.order.order_id}</Typography>
                           
                             <IconButton aria-label="close" style={{ position: 'absolute', top: 0, right: 0, color: '#000' }} onClick={this.closeDialog.bind(this)}>
                                 <CloseIcon />
                             </IconButton>
-                        </MuiDialogTitle>
+                        </DialogTitle>
                         
-                        <MuiDialogContent className="showOrderDialogContent">
+                        <DialogContent className="showOrderDialogContent">
                             <Typography variant="h6" component="span">{this.state.showOrder.order.type_order}: {this.state.showOrder.order.type_order_addr_new}</Typography>
                             <Typography variant="h6" component="span">{this.state.showOrder.order.time_order_name}: {this.state.showOrder.order.time_order}</Typography>
                             <Typography variant="h6" component="span">Статус заказа: {this.state.showOrder.order.this_status_order}</Typography>
@@ -1055,23 +1051,23 @@ export class Profile extends React.Component {
                                 </tbody>
                             </table>
                             
-                        </MuiDialogContent>
+                        </DialogContent>
                         
                         { parseInt( this.state.showOrder.order.is_delete ) == 0 && parseInt( this.state.showOrder.order.status_order ) !== 6 ? 
-                            <MuiDialogActions style={{ justifyContent: 'flex-end', padding: '15px 0px' }}>
+                            <DialogActions style={{ justifyContent: 'flex-end', padding: '15px 0px' }}>
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderOther" style={{ marginRight: 24 }}>
                                     <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={ this.closeOrder.bind(this, this.state.showOrder.order.order_id, this.state.showOrder.order.point_id) }>Отменить заказ</Button>
                                 </ButtonGroup>
-                            </MuiDialogActions>
+                            </DialogActions>
                                 :
                             null
                         }
                         { parseInt( this.state.showOrder.order.is_delete ) == 1 || parseInt( this.state.showOrder.order.status_order ) == 6 ? 
-                            <MuiDialogActions style={{ justifyContent: 'flex-end', padding: '15px 0px' }}>
+                            <DialogActions style={{ justifyContent: 'flex-end', padding: '15px 0px' }}>
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderOther" style={{ marginRight: 24 }}>
                                     <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={ this.repeatOrder.bind(this, this.state.showOrder.order.order_id, this.state.showOrder.order.point_id) }>Повторить заказ</Button>
                                 </ButtonGroup>
-                            </MuiDialogActions>
+                            </DialogActions>
                                 :
                             null
                         }
