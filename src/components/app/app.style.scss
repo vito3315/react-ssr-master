@@ -298,6 +298,12 @@ body{
         background-color: #fff;
         border: 1px solid #F9BC23;
         border-radius: 30px;
+        @include fonsNew(0.875rem, $Roboto);
+        font-weight: 500;
+        text-transform: initial;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         & span{
             @include fonsNew(0.875rem, $Roboto);
             font-weight: 500;

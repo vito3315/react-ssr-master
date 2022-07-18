@@ -323,7 +323,7 @@ export class Item extends React.Component {
                 </Helmet>
 
                 
-                <Box component="div" className="pcItem NewModal" >
+                <Box component="div" className="pcItem NewModal" sx={{ display: { xs: 'none', sm: 'block' } }}>
                     <Grid container className="MainItem mainContainer">
                         
                         {img_type == 'old' ?
@@ -490,7 +490,7 @@ export class Item extends React.Component {
                 </Box>
                 
 
-                <Box sx={{ display: { sm: 'none', md: 'none', lg: 'none', xl: 'none' } }}>
+                <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
                     <Grid container className="MainItem MainItemMobile mainContainer" style={{ height: 'calc(100vh - 50px)', paddingRight: 20, paddingLeft: 20, paddingTop: 20, alignContent: 'flex-start', position: 'relative' }}>
                         <Grid item xs={12}>
 
