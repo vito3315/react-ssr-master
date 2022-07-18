@@ -1373,151 +1373,97 @@ export class Home extends React.Component {
 
                     {this.state.openItem ?
                         <>
-                            <Box sx={{ display: { xs: 'block', md: 'none' } }}>
-                                <Dialog disableElevation fullScreen style={{ width: '100%', marginTop: this.state.openItem.items.length > 1 ? 400 : 470, borderTopRightRadius: 30, borderTopLeftRadius: 30 }} onClose={this.handleClosePCInfo.bind(this)} className="ItemDialog OpenItemMobInfo blurBacground" open={this.state.openModalPCInfo} TransitionComponent={Transition}>
-                                    <DialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
-                                        <IconButton aria-label="close" style={{ position: 'absolute', top: -36, left: 15, backgroundColor: 'transparent' }} onClick={this.handleClosePCInfo.bind(this)}>
-                                            <IconClose style={{ width: 25, height: 25 }} />
-                                        </IconButton>
-                                    </DialogTitle>
-                                    
-                                    <DialogContent className="modalActiiContentNew" style={{ height: this.state.openItem.items.length > 1 ? 'calc(100vh - 400px)' : 'calc(100vh - 470px)', padding: 20, display: 'flex', flexWrap: 'wrap', alignContent: 'start' }}>
-
-                                        <Typography variant="h5" component="h1" style={{ textAlign: 'center', fontFamily: 'Roboto', fontWeight: 700, fontSize: '1.625rem', color: '#fff', width: '100%', marginBottom: 20 }}>Пищевая ценность на 100 г</Typography>
-
-                                        { this.state.openItem.items.length == 1 ? null :
-                                            <div style={{ width: '100%', height: 2, backgroundColor: '#fff', marginBottom: 20 }} />
-                                        }
-
-                                        <div style={ this.state.openItem.items.length > 1 ? { overflowY: 'scroll', maxHeight: 200 } : {}}>
-                                            { this.state.openItem.items.map( (item, key) =>
-                                                <div style={{ border: '2px solid #fff', borderRadius: 10, marginBottom: this.state.openItem.items.length == 1 ? 0 : this.state.openItem.items.length-1 == key ? 0 : 20 }} key={key}>
-                                                    <div style={{ width: '100%', display: 'flex', flexDirection: 'row', borderBottom: '2px solid #fff' }}>
-                                                        <div style={{ width: '75%', display: 'flex', alignItems: 'center', borderRight: '2px solid #fff', padding: 10 }}>
-                                                            <Typography style={{ fontFamily: 'Roboto', fontWeight: 400, fontSize: '1.1rem', lineHeight: 1.25, color: '#fff' }}>{item.name}</Typography>
-                                                        </div>
-                                                        <div style={{ width: '25%', display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'center', padding: 10 }}>
-                                                            <Typography style={{ fontSize: '2rem', lineHeight: 1, fontFamily: 'Roboto', fontWeight: 500, color: '#fff' }}>{item.kkal}</Typography>
-                                                            <Typography style={{ fontSize: '1rem', lineHeight: 0.8, fontFamily: 'Roboto', fontWeight: 400, color: '#fff' }}>ккал</Typography>
-                                                        </div>
-                                                    </div>
-                                                    <div style={{ width: '100%', display: 'flex', flexDirection: 'row' }}>
-                                                        <div style={{ width: '50%', padding: 10, borderRight: '2px solid #fff' }}>
-                                                            <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, color: '#fff' }}>Состав: {item.tmp_desc}</Typography>
-                                                        </div>
-                                                        <div style={{ width: '50%', padding: 10 }} className='styleTooltip'>
-                                                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                                                                <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 1, color: '#fff' }}>белки</Typography>
-                                                                <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 3, color: '#fff' }}>{item.protein} г</Typography>
-                                                            </div>
-                                                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                                                                <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 1, color: '#fff' }}>жиры</Typography>
-                                                                <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 3, color: '#fff' }}>{item.fat} г</Typography>
-                                                            </div>
-                                                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                                                                <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 1, color: '#fff' }}>углеводы</Typography>
-                                                                <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 3, color: '#fff' }}>{item.carbohydrates} г</Typography>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            ) }
-                                        </div>
-                                        
-                                        
-                                    </DialogContent>
-                                </Dialog>
-                            </Box>
-
-                            <Box sx={{ display: { xs: 'block', md: 'none' } }}>
-                                <Dialog disableElevation fullScreen style={{ height: 'calc(100vh - 50px)', width: '100%' }} onClose={this.handleClosePCSet.bind(this)} className="ItemDialog OpenItemMobSet" open={this.state.openModalPCSet} TransitionComponent={Transition}>
-                                    <DialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
-                                        <IconButton aria-label="close" style={{ position: 'absolute', top: -36, left: 15, backgroundColor: 'transparent' }} onClick={this.handleClosePCSet.bind(this)}>
-                                            <IconClose style={{ width: 25, height: 25 }} />
-                                        </IconButton>
-                                    </DialogTitle>
-                                    
-                                    <DialogContent className="modalActiiContentNew" style={{ height: 'calc(100vh - 50px)', padding: 20, display: 'flex', flexWrap: 'wrap', alignContent: 'start' }}>
-
-                                        <Typography variant="h5" component="h1" style={{ textAlign: 'center', fontFamily: 'Roboto', fontWeight: 700, fontSize: '1.625rem', color: '#525252', width: '100%' }}>{this.state.openItem.name}</Typography>
-
-                                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
-                                            <div style={{ width: parseInt( this.state.openItem.cat_id ) == 4 ? 238 : parseInt( this.state.openItem.cat_id ) == 5 || parseInt( this.state.openItem.cat_id ) == 6 || parseInt( this.state.openItem.cat_id ) == 7 ? 78 : 148, height: 28, border: '1px solid #DADADA', borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginTop: 10, marginBottom: 20 }}>
-                                                { parseInt( this.state.openItem.cat_id ) == 4 ?
-                                                    <>
-                                                        <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center', fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.87rem', color: '#525252' }}>{this.state.openItem.count_part_new}</Typography>
-                                                        <div style={{ height: '100%', borderLeft: '1px solid #DADADA' }} />
-                                                    </>
-                                                        :
-                                                    null
-                                                }
-                                                { parseInt( this.state.openItem.cat_id ) == 5 || parseInt( this.state.openItem.cat_id ) == 6 || parseInt( this.state.openItem.cat_id ) == 7 ?
-                                                    null
-                                                        :
-                                                    <>
-                                                        <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: parseInt( this.state.openItem.cat_id ) == 4 ? 2 : 3, textAlign: 'center', fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.87rem', color: '#525252' }}>{ parseInt( this.state.openItem.cat_id ) == 14 ? this.state.openItem.size_pizza + ' см' : this.state.openItem.count_part + ' шт.' }</Typography>
-                                                        <div style={{ height: '100%', borderLeft: '1px solid #DADADA' }} />
-                                                    </>
-                                                }
-                                                <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center', fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.87rem', color: '#525252' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.openItem.weight)} { parseInt( this.state.openItem.cat_id ) == 6 ? 'л' : 'г' }</Typography>
-                                            </div>
-                                        </div>
-                                        
-                                        <div style={{ width: '100%', height: '100%', maxHeight: 'calc(100vh - 250px)', overflow: 'auto' }}>
-                                            {this.state.openModalPCSetItems.map( (item, key) =>
-                                                <div key={key} style={{ width: '100', display: 'flex', flexDirection: 'row', padding: '10px 0', borderTop: key == 0 ? '1px solid rgba(27, 27, 31, 0.1)' : null, borderBottom: '1px solid rgba(27, 27, 31, 0.1)' }}>
-                                                    <div style={{ width: '40%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                                        { item.img_app.length == 0 || !item.img_app ?
-                                                            <picture>
-                                                                <source 
-                                                                    srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.webp?"+item.img_new_update} 
-                                                                    type="image/webp" 
-                                                                />
-                                                                <img 
-                                                                    src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
-                                                                    alt={item.name}
-                                                                    title={item.name}
-                                                                    style={{ width: '100%', height: 'auto' }}
-                                                                />
-                                                            </picture>
-                                                                :
-                                                            <picture>
-                                                                <source srcset={`
-                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg 138w, 
-                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_292x292.jpg 146w,
-                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_366x366.jpg 183w,
-                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_466x466.jpg 233w,
-                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_585x585.jpg 292w
-                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_732x732.jpg 366w,
-                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_1168x1168.jpg 584w,
-                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_1420x1420.jpg 760w,
-                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_2000x2000.jpg 1875w`} 
-                                                                    sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
-                                                                <img alt={item.name} title={item.name} style={{ width: '100%', height: 'auto' }} src={`https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg`} />
-                                                            </picture>
-                                                        }
-                                                    </div>
-                                                    <div style={{ width: '60%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                                                        <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 700, fontSize: '1.06rem', color: '#525252'  }}>{ item.name }</Typography>
-                                                        <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.875rem', color: '#525252'  }}>{ item.tmp_desc }</Typography>
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </div>
-                                    </DialogContent>
-                                </Dialog>
-                            </Box>
-
-                            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-                                <Dialog disableElevation maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePCSet.bind(this)} className="modalActii Item OpenItemPCSet" open={this.state.openModalPCSet}>
-                                    <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -44, left: 16, zIndex: 2000, width: 40, height: 40, backgroundColor: 'transparent' }} onClick={this.handleClosePCSet.bind(this)}>
-                                        <IconClose />
+                            <Dialog sx={{ display: { xs: 'block', md: 'none' } }} disableElevation fullScreen style={{ width: '100%', marginTop: this.state.openItem.items.length > 1 ? 400 : 470, borderTopRightRadius: 30, borderTopLeftRadius: 30 }} onClose={this.handleClosePCInfo.bind(this)} className="ItemDialog OpenItemMobInfo blurBacground" open={this.state.openModalPCInfo} TransitionComponent={Transition}>
+                                <DialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
+                                    <IconButton aria-label="close" style={{ position: 'absolute', top: -36, left: 15, backgroundColor: 'transparent' }} onClick={this.handleClosePCInfo.bind(this)}>
+                                        <IconClose style={{ width: 25, height: 25 }} />
                                     </IconButton>
+                                </DialogTitle>
+                                
+                                <DialogContent className="modalActiiContentNew" style={{ height: this.state.openItem.items.length > 1 ? 'calc(100vh - 400px)' : 'calc(100vh - 470px)', padding: 20, display: 'flex', flexWrap: 'wrap', alignContent: 'start' }}>
+
+                                    <Typography variant="h5" component="h1" style={{ textAlign: 'center', fontFamily: 'Roboto', fontWeight: 700, fontSize: '1.625rem', color: '#fff', width: '100%', marginBottom: 20 }}>Пищевая ценность на 100 г</Typography>
+
+                                    { this.state.openItem.items.length == 1 ? null :
+                                        <div style={{ width: '100%', height: 2, backgroundColor: '#fff', marginBottom: 20 }} />
+                                    }
+
+                                    <div style={ this.state.openItem.items.length > 1 ? { overflowY: 'scroll', maxHeight: 200 } : {}}>
+                                        { this.state.openItem.items.map( (item, key) =>
+                                            <div style={{ border: '2px solid #fff', borderRadius: 10, marginBottom: this.state.openItem.items.length == 1 ? 0 : this.state.openItem.items.length-1 == key ? 0 : 20 }} key={key}>
+                                                <div style={{ width: '100%', display: 'flex', flexDirection: 'row', borderBottom: '2px solid #fff' }}>
+                                                    <div style={{ width: '75%', display: 'flex', alignItems: 'center', borderRight: '2px solid #fff', padding: 10 }}>
+                                                        <Typography style={{ fontFamily: 'Roboto', fontWeight: 400, fontSize: '1.1rem', lineHeight: 1.25, color: '#fff' }}>{item.name}</Typography>
+                                                    </div>
+                                                    <div style={{ width: '25%', display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'center', padding: 10 }}>
+                                                        <Typography style={{ fontSize: '2rem', lineHeight: 1, fontFamily: 'Roboto', fontWeight: 500, color: '#fff' }}>{item.kkal}</Typography>
+                                                        <Typography style={{ fontSize: '1rem', lineHeight: 0.8, fontFamily: 'Roboto', fontWeight: 400, color: '#fff' }}>ккал</Typography>
+                                                    </div>
+                                                </div>
+                                                <div style={{ width: '100%', display: 'flex', flexDirection: 'row' }}>
+                                                    <div style={{ width: '50%', padding: 10, borderRight: '2px solid #fff' }}>
+                                                        <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, color: '#fff' }}>Состав: {item.tmp_desc}</Typography>
+                                                    </div>
+                                                    <div style={{ width: '50%', padding: 10 }} className='styleTooltip'>
+                                                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                            <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 1, color: '#fff' }}>белки</Typography>
+                                                            <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 3, color: '#fff' }}>{item.protein} г</Typography>
+                                                        </div>
+                                                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                            <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 1, color: '#fff' }}>жиры</Typography>
+                                                            <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 3, color: '#fff' }}>{item.fat} г</Typography>
+                                                        </div>
+                                                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                            <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 1, color: '#fff' }}>углеводы</Typography>
+                                                            <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 3, color: '#fff' }}>{item.carbohydrates} г</Typography>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ) }
+                                    </div>
                                     
-                                    <DialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 2.25% 2% 4.5%', marginRight: '1.5%', alignContent: 'start' }}>
+                                    
+                                </DialogContent>
+                            </Dialog>
+                            
+                            <Dialog sx={{ display: { xs: 'block', sm: 'none' } }} disableElevation fullScreen style={{ height: 'calc(100vh - 50px)', width: '100%' }} onClose={this.handleClosePCSet.bind(this)} className="ItemDialog OpenItemMobSet" open={this.state.openModalPCSet} TransitionComponent={Transition}>
+                                <DialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
+                                    <IconButton aria-label="close" style={{ position: 'absolute', top: -36, left: 15, backgroundColor: 'transparent' }} onClick={this.handleClosePCSet.bind(this)}>
+                                        <IconClose style={{ width: 25, height: 25 }} />
+                                    </IconButton>
+                                </DialogTitle>
+                                
+                                <DialogContent className="modalActiiContentNew" style={{ height: 'calc(100vh - 50px)', padding: 20, display: 'flex', flexWrap: 'wrap', alignContent: 'start' }}>
+
+                                    <Typography variant="h5" component="h1" style={{ textAlign: 'center', fontFamily: 'Roboto', fontWeight: 700, fontSize: '1.625rem', color: '#525252', width: '100%' }}>{this.state.openItem.name}</Typography>
+
+                                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+                                        <div style={{ width: parseInt( this.state.openItem.cat_id ) == 4 ? 238 : parseInt( this.state.openItem.cat_id ) == 5 || parseInt( this.state.openItem.cat_id ) == 6 || parseInt( this.state.openItem.cat_id ) == 7 ? 78 : 148, height: 28, border: '1px solid #DADADA', borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginTop: 10, marginBottom: 20 }}>
+                                            { parseInt( this.state.openItem.cat_id ) == 4 ?
+                                                <>
+                                                    <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center', fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.87rem', color: '#525252' }}>{this.state.openItem.count_part_new}</Typography>
+                                                    <div style={{ height: '100%', borderLeft: '1px solid #DADADA' }} />
+                                                </>
+                                                    :
+                                                null
+                                            }
+                                            { parseInt( this.state.openItem.cat_id ) == 5 || parseInt( this.state.openItem.cat_id ) == 6 || parseInt( this.state.openItem.cat_id ) == 7 ?
+                                                null
+                                                    :
+                                                <>
+                                                    <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: parseInt( this.state.openItem.cat_id ) == 4 ? 2 : 3, textAlign: 'center', fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.87rem', color: '#525252' }}>{ parseInt( this.state.openItem.cat_id ) == 14 ? this.state.openItem.size_pizza + ' см' : this.state.openItem.count_part + ' шт.' }</Typography>
+                                                    <div style={{ height: '100%', borderLeft: '1px solid #DADADA' }} />
+                                                </>
+                                            }
+                                            <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center', fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.87rem', color: '#525252' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.openItem.weight)} { parseInt( this.state.openItem.cat_id ) == 6 ? 'л' : 'г' }</Typography>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style={{ width: '100%', height: '100%', maxHeight: 'calc(100vh - 250px)', overflow: 'auto' }}>
                                         {this.state.openModalPCSetItems.map( (item, key) =>
-                                            <div key={key} style={{ width: '49%', display: 'flex', flexDirection: 'row', marginRight: key == 0 || key % 2 == 0 ? '2%' : 0, marginBottom: '2%' }}>
-                                                <div style={{ width: '30%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                            <div key={key} style={{ width: '100', display: 'flex', flexDirection: 'row', padding: '10px 0', borderTop: key == 0 ? '1px solid rgba(27, 27, 31, 0.1)' : null, borderBottom: '1px solid rgba(27, 27, 31, 0.1)' }}>
+                                                <div style={{ width: '40%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                                     { item.img_app.length == 0 || !item.img_app ?
                                                         <picture>
                                                             <source 
@@ -1548,66 +1494,111 @@ export class Home extends React.Component {
                                                         </picture>
                                                     }
                                                 </div>
-                                                <div style={{ width: '70%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                                                    <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 500, fontSize: '1.25rem'  }}>{ item.name }</Typography>
-                                                    <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 300, fontSize: '0.94rem'  }}>{ item.tmp_desc }</Typography>
+                                                <div style={{ width: '60%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                                                    <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 700, fontSize: '1.06rem', color: '#525252'  }}>{ item.name }</Typography>
+                                                    <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.875rem', color: '#525252'  }}>{ item.tmp_desc }</Typography>
                                                 </div>
                                             </div>
                                         )}
-                                    </DialogContent>
-                                </Dialog>
-                            </Box>
+                                    </div>
+                                </DialogContent>
+                            </Dialog>
                             
-                            <Box sx={{ display: { xs: 'none', xl: 'block' } }}>
-                            
-                                <Dialog disableElevation maxWidth={'lg'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePCSet.bind(this)} className="modalActii Item OpenItemPCSet" open={this.state.openModalPCSet}>
-                                    <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -44, left: 16, zIndex: 2000, width: 40, height: 40, backgroundColor: 'transparent' }} onClick={this.handleClosePCSet.bind(this)}>
-                                        <IconClose />
-                                    </IconButton>
-                                    
-                                    <DialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 2.25% 2% 4.5%', marginRight: '1.5%', alignContent: 'start' }}>
-                                        {this.state.openModalPCSetItems.map( (item, key) =>
-                                            <div key={key} style={{ width: '49%', display: 'flex', flexDirection: 'row', marginRight: key == 0 || key % 2 == 0 ? '2%' : 0, marginBottom: '2%' }}>
-                                                <div style={{ width: '45%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                                    { item.img_app.length == 0 || !item.img_app ?
-                                                        <picture>
-                                                            <source 
-                                                                srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.webp?"+item.img_new_update} 
-                                                                type="image/webp" 
-                                                            />
-                                                            <img 
-                                                                src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
-                                                                alt={item.name}
-                                                                title={item.name}
-                                                                style={{ width: '100%', height: 'auto' }}
-                                                            />
-                                                        </picture>
-                                                            :
-                                                        <picture>
-                                                            <source srcset={`
-                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg 138w, 
-                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_292x292.jpg 146w,
-                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_366x366.jpg 183w,
-                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_466x466.jpg 233w,
-                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_585x585.jpg 292w
-                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_732x732.jpg 366w,
-                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_1168x1168.jpg 584w,
-                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_1420x1420.jpg 760w,
-                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_2000x2000.jpg 1875w`} 
-                                                                sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
-                                                            <img alt={item.name} title={item.name} style={{ width: '100%', height: 'auto' }} src={`https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg`} />
-                                                        </picture>
-                                                    }
-                                                </div>
-                                                <div style={{ width: '55%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                                                    <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 500, fontSize: '1.25rem', color: '#525252' }}>{ item.name }</Typography>
-                                                    <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.9rem', color: '#525252'  }}>{ item.tmp_desc }</Typography>
-                                                </div>
+                            <Dialog sx={{ display: { xs: 'none', md: 'block', lg: 'none' } }} disableElevation maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePCSet.bind(this)} className="modalActii Item OpenItemPCSet" open={this.state.openModalPCSet}>
+                                <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -44, left: 16, zIndex: 2000, width: 40, height: 40, backgroundColor: 'transparent' }} onClick={this.handleClosePCSet.bind(this)}>
+                                    <IconClose />
+                                </IconButton>
+                                
+                                <DialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 2.25% 2% 4.5%', marginRight: '1.5%', alignContent: 'start' }}>
+                                    {this.state.openModalPCSetItems.map( (item, key) =>
+                                        <div key={key} style={{ width: '49%', display: 'flex', flexDirection: 'row', marginRight: key == 0 || key % 2 == 0 ? '2%' : 0, marginBottom: '2%' }}>
+                                            <div style={{ width: '30%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                                { item.img_app.length == 0 || !item.img_app ?
+                                                    <picture>
+                                                        <source 
+                                                            srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.webp?"+item.img_new_update} 
+                                                            type="image/webp" 
+                                                        />
+                                                        <img 
+                                                            src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
+                                                            alt={item.name}
+                                                            title={item.name}
+                                                            style={{ width: '100%', height: 'auto' }}
+                                                        />
+                                                    </picture>
+                                                        :
+                                                    <picture>
+                                                        <source srcset={`
+                                                            https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg 138w, 
+                                                            https://storage.yandexcloud.net/site-img/${item.img_app}_292x292.jpg 146w,
+                                                            https://storage.yandexcloud.net/site-img/${item.img_app}_366x366.jpg 183w,
+                                                            https://storage.yandexcloud.net/site-img/${item.img_app}_466x466.jpg 233w,
+                                                            https://storage.yandexcloud.net/site-img/${item.img_app}_585x585.jpg 292w
+                                                            https://storage.yandexcloud.net/site-img/${item.img_app}_732x732.jpg 366w,
+                                                            https://storage.yandexcloud.net/site-img/${item.img_app}_1168x1168.jpg 584w,
+                                                            https://storage.yandexcloud.net/site-img/${item.img_app}_1420x1420.jpg 760w,
+                                                            https://storage.yandexcloud.net/site-img/${item.img_app}_2000x2000.jpg 1875w`} 
+                                                            sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
+                                                        <img alt={item.name} title={item.name} style={{ width: '100%', height: 'auto' }} src={`https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg`} />
+                                                    </picture>
+                                                }
                                             </div>
-                                        )}
-                                    </DialogContent>
-                                </Dialog>
-                            </Box>
+                                            <div style={{ width: '70%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                                                <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 500, fontSize: '1.25rem'  }}>{ item.name }</Typography>
+                                                <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 300, fontSize: '0.94rem'  }}>{ item.tmp_desc }</Typography>
+                                            </div>
+                                        </div>
+                                    )}
+                                </DialogContent>
+                            </Dialog>
+                        
+                            <Dialog sx={{ display: { xs: 'none', lg: 'block' } }} disableElevation maxWidth={'lg'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePCSet.bind(this)} className="modalActii Item OpenItemPCSet" open={this.state.openModalPCSet}>
+                                <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -44, left: 16, zIndex: 2000, width: 40, height: 40, backgroundColor: 'transparent' }} onClick={this.handleClosePCSet.bind(this)}>
+                                    <IconClose />
+                                </IconButton>
+                                
+                                <DialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 2.25% 2% 4.5%', marginRight: '1.5%', alignContent: 'start' }}>
+                                    {this.state.openModalPCSetItems.map( (item, key) =>
+                                        <div key={key} style={{ width: '49%', display: 'flex', flexDirection: 'row', marginRight: key == 0 || key % 2 == 0 ? '2%' : 0, marginBottom: '2%' }}>
+                                            <div style={{ width: '45%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                                { item.img_app.length == 0 || !item.img_app ?
+                                                    <picture>
+                                                        <source 
+                                                            srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.webp?"+item.img_new_update} 
+                                                            type="image/webp" 
+                                                        />
+                                                        <img 
+                                                            src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
+                                                            alt={item.name}
+                                                            title={item.name}
+                                                            style={{ width: '100%', height: 'auto' }}
+                                                        />
+                                                    </picture>
+                                                        :
+                                                    <picture>
+                                                        <source srcset={`
+                                                            https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg 138w, 
+                                                            https://storage.yandexcloud.net/site-img/${item.img_app}_292x292.jpg 146w,
+                                                            https://storage.yandexcloud.net/site-img/${item.img_app}_366x366.jpg 183w,
+                                                            https://storage.yandexcloud.net/site-img/${item.img_app}_466x466.jpg 233w,
+                                                            https://storage.yandexcloud.net/site-img/${item.img_app}_585x585.jpg 292w
+                                                            https://storage.yandexcloud.net/site-img/${item.img_app}_732x732.jpg 366w,
+                                                            https://storage.yandexcloud.net/site-img/${item.img_app}_1168x1168.jpg 584w,
+                                                            https://storage.yandexcloud.net/site-img/${item.img_app}_1420x1420.jpg 760w,
+                                                            https://storage.yandexcloud.net/site-img/${item.img_app}_2000x2000.jpg 1875w`} 
+                                                            sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
+                                                        <img alt={item.name} title={item.name} style={{ width: '100%', height: 'auto' }} src={`https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg`} />
+                                                    </picture>
+                                                }
+                                            </div>
+                                            <div style={{ width: '55%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                                                <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 500, fontSize: '1.25rem', color: '#525252' }}>{ item.name }</Typography>
+                                                <Typography variant="h5" component="span" style={{ fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.9rem', color: '#525252'  }}>{ item.tmp_desc }</Typography>
+                                            </div>
+                                        </div>
+                                    )}
+                                </DialogContent>
+                            </Dialog>
                         </>
                             :
                         null
