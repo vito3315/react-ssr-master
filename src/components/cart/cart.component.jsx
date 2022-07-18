@@ -2195,18 +2195,20 @@ export class Cart extends React.Component {
                         
                         {this.state.orderType == 0 ?
                             <div>
-                                <form noValidate autoComplete="off">
-                                    <TextField
-                                        style={{ width: '100%' }}
-                                        id="outlined-multiline-flexible"
-                                        label="Комментарий курьеру"
-                                        multiline
-                                        rowsMax={2}
-                                        value={this.state.orderComment}
-                                        onChange={this.changeComment}
-                                        variant="outlined"
-                                    />
-                                </form>
+                                
+                                <TextField
+                                    style={{ width: '100%' }}
+                                    id="outlined-multiline-flexible"
+                                    label="Комментарий курьеру"
+                                    multiline
+                                    rowsMax={2}
+                                    value={this.state.orderComment}
+                                    onChange={this.changeComment}
+                                    variant="outlined" 
+                                    size={'small'} 
+                                    type={ 'text' }
+                                />
+                                
                             </div>
                                 :
                             null
@@ -2677,9 +2679,10 @@ export class Cart extends React.Component {
                     <FontAwesomeIcon className="closeDialog" onClick={this.closeTimeDialog.bind(this)} icon={faTimes}/>
                     <DialogContent>
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            <FormControl style={{ width: '100%', paddingBottom: 20 }}>
+                            <FormControl style={{ width: '100%', paddingBottom: 20 }} variant="standard">
                                 <InputLabel htmlFor="age-native-simple">День</InputLabel>
                                 <Select
+                                    size='small'
                                   displayEmpty
                                   value={this.state.orderPredDay}
                                   onChange={this.changePredDay}
@@ -2693,9 +2696,10 @@ export class Cart extends React.Component {
                                     )}
                                 </Select>
                             </FormControl>
-                            <FormControl style={{ width: '100%', paddingBottom: 20, display: this.state.orderPredDay == 0 ? 'none' : 'inline-flex' }}>
+                            <FormControl style={{ width: '100%', paddingBottom: 20, display: this.state.orderPredDay == 0 ? 'none' : 'inline-flex' }} variant="standard">
                                 <InputLabel htmlFor="age-native-simple1">Время</InputLabel>
                                 <Select
+                                    size='small'
                                   displayEmpty
                                   value={this.state.orderPredTime}
                                   onChange={this.changePredTime}

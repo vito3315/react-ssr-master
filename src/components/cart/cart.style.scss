@@ -23,6 +23,7 @@ $colorText: #525252;
 }
 .MuiTabs-root button{
     @include fonsNew(1rem, $Roboto);
+    color: $colorText!important;
     font-weight: 400;
     text-transform: initial!important;
 }
