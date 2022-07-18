@@ -39,7 +39,7 @@ import config from '../../stores/config';
 import { autorun } from "mobx"
 
 import Slide from '@mui/material/Slide';
-import Hidden from '@material-ui/core/Hidden';
+import Box from '@mui/material/Box';
 
 import LazyLoad from 'react-lazyload';
 
@@ -1273,11 +1273,12 @@ export class Home extends React.Component {
                             null
                     )}
                     
-                    <Hidden mdUp>
+                    
+                    <Box sx={{ display: { xs: 'block', md: 'none' } }}>
                         <Backdrop style={{ zIndex: 4, color: '#fff' }} open={true}>
                             <CircularProgress color="inherit" />
                         </Backdrop>
-                    </Hidden>
+                    </Box>
                 </Element>
                     :
                 <Element name="myScrollToElement" className="Category">
@@ -1287,22 +1288,23 @@ export class Home extends React.Component {
                         <meta name="description" content={this.state.description} />
                     </Helmet>
                     
-                    <Hidden smDown>
+                    
+                    <Box sx={{ display: { xs: 'none', md: 'block' } }}>
                         { this.state.banners_pc.length == 0 ? null :
                             <CoverFlowCarousel
                                 type="pc"
                                 data={this.state.banners_pc}
                             />
                         }
-                    </Hidden>
-                    <Hidden mdUp>
+                    </Box>
+                    <Box sx={{ display: { xs: 'block', md: 'none' } }}>
                         { this.state.banners_mobile.length == 0 ? null :
                             <CoverFlowCarousel
                                 type="mobile"
                                 data={this.state.banners_mobile}
                             />
                         }
-                    </Hidden>
+                    </Box>
                     
                     {itemsStore.getAllItemsCat().map((cat, key) => 
                         cat.items.length > 0 ?
@@ -1311,16 +1313,19 @@ export class Home extends React.Component {
                                     <Grid container spacing={2} style={{ margin: 0, padding: '0px 20px', flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
                                         {cat.items.map((it, k) => (
                                             <React.Fragment key={k}>
-                                                <Hidden xsDown>
-                                                    <Grid item xs={12} sm={6} md={4} lg={3} xl={3} style={{ padding: '30px 16px', display: 'flex', width: '100%' }}>
+                                                
+                                                <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
+                                                    <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} style={{ padding: '30px 16px', display: 'flex', width: '100%' }}>
                                                         <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
                                                     </Grid>
-                                                </Hidden>
-                                                <Hidden smUp>
-                                                    <Grid item xs={12} sm={6} md={4} lg={3} xl={3} style={{ display: 'flex', padding: '10px 0px', borderBottom: cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
+                                                </Box>
+                                                
+                                                <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+                                                    <Grid item className='_mobile_' xs={12} sm={6} md={4} lg={3} xl={3} style={{ display: 'flex', padding: '10px 0px', borderBottom: cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
                                                         <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
                                                     </Grid>
-                                                </Hidden>
+                                                </Box>
+
                                             </React.Fragment>
                                         ))}
                                     </Grid>
@@ -1348,7 +1353,7 @@ export class Home extends React.Component {
                     
                     {this.state.openItem ?
                         <>
-                            <Hidden lgUp>
+                            <Box sx={{ display: { xs: 'block', lg: 'none' } }}>
                                 <Dialog disableElevation maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC testModalMD" open={this.state.openModalPC}>
                                     <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -52, left: 16, zIndex: 1500, width: 52, height: 52, backgroundColor: 'transparent' }} onClick={this.handleClosePC.bind(this)}>
                                         <IconClose />
@@ -1358,9 +1363,10 @@ export class Home extends React.Component {
                                         <Item itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} openInfo={this.openInfo.bind(this)} openModalPCInfo={this.state.openModalPCInfo} />
                                     </DialogContent>
                                 </Dialog>
-                            </Hidden>
+                            </Box>
                             
-                            <Hidden only={['xs', 'sm', 'md']}>
+                            
+                            <Box sx={{ display: { xs: 'none', sm: 'none', md: 'none' } }}>
                                 <Dialog disableElevation maxWidth={'lg'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC testModalLG" open={this.state.openModalPC}>
                                     <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -44, left: 16, zIndex: 1500, width: 40, height: 40, backgroundColor: 'transparent' }} onClick={this.handleClosePC.bind(this)}>
                                         <IconClose />
@@ -1370,7 +1376,7 @@ export class Home extends React.Component {
                                         <Item itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} openInfo={this.openInfo.bind(this)} openModalPCInfo={this.state.openModalPCInfo} />
                                     </DialogContent>
                                 </Dialog>
-                            </Hidden>
+                            </Box>
                         </>
                             :
                         null
@@ -1378,7 +1384,7 @@ export class Home extends React.Component {
 
                     {this.state.openItem ?
                         <>
-                            <Hidden smUp>
+                            <Box sx={{ display: { xs: 'block', md: 'none' } }}>
                                 <Dialog disableElevation fullScreen style={{ width: '100%', marginTop: this.state.openItem.items.length > 1 ? 400 : 470, borderTopRightRadius: 30, borderTopLeftRadius: 30 }} onClose={this.handleClosePCInfo.bind(this)} className="ItemDialog OpenItemMobInfo blurBacground" open={this.state.openModalPCInfo} TransitionComponent={Transition}>
                                     <DialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
                                         <IconButton aria-label="close" style={{ position: 'absolute', top: -36, left: 15, backgroundColor: 'transparent' }} onClick={this.handleClosePCInfo.bind(this)}>
@@ -1432,9 +1438,9 @@ export class Home extends React.Component {
                                         
                                     </DialogContent>
                                 </Dialog>
-                            </Hidden>
+                            </Box>
 
-                            <Hidden smUp>
+                            <Box sx={{ display: { xs: 'block', md: 'none' } }}>
                                 <Dialog disableElevation fullScreen style={{ height: 'calc(100vh - 50px)', width: '100%' }} onClose={this.handleClosePCSet.bind(this)} className="ItemDialog OpenItemMobSet" open={this.state.openModalPCSet} TransitionComponent={Transition}>
                                     <DialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
                                         <IconButton aria-label="close" style={{ position: 'absolute', top: -36, left: 15, backgroundColor: 'transparent' }} onClick={this.handleClosePCSet.bind(this)}>
@@ -1511,9 +1517,9 @@ export class Home extends React.Component {
                                         </div>
                                     </DialogContent>
                                 </Dialog>
-                            </Hidden>
+                            </Box>
 
-                            <Hidden only={['xs', 'sm', 'lg', 'xl']}>
+                            <Box sx={{ display: { xs: 'none', sm: 'none', lg: 'none', xl: 'none' } }}>
                                 <Dialog disableElevation maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePCSet.bind(this)} className="modalActii Item OpenItemPCSet" open={this.state.openModalPCSet}>
                                     <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -44, left: 16, zIndex: 2000, width: 40, height: 40, backgroundColor: 'transparent' }} onClick={this.handleClosePCSet.bind(this)}>
                                         <IconClose />
@@ -1561,9 +1567,10 @@ export class Home extends React.Component {
                                         )}
                                     </DialogContent>
                                 </Dialog>
-                            </Hidden>
+                            </Box>
                             
-                            <Hidden only={['xs', 'sm', 'md']}>
+                            <Box sx={{ display: { xs: 'none', sm: 'none', md: 'none' } }}>
+                            
                                 <Dialog disableElevation maxWidth={'lg'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePCSet.bind(this)} className="modalActii Item OpenItemPCSet" open={this.state.openModalPCSet}>
                                     <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -44, left: 16, zIndex: 2000, width: 40, height: 40, backgroundColor: 'transparent' }} onClick={this.handleClosePCSet.bind(this)}>
                                         <IconClose />
@@ -1611,7 +1618,7 @@ export class Home extends React.Component {
                                         )}
                                     </DialogContent>
                                 </Dialog>
-                            </Hidden>
+                            </Box>
                         </>
                             :
                         null
