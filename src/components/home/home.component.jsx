@@ -1314,7 +1314,7 @@ export class Home extends React.Component {
                                         {cat.items.map((it, k) => (
                                             <React.Fragment key={k}>
                                                 
-                                                <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
+                                                <Box sx={{ display: { xs: 'block', md: 'none' } }}>
                                                     <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} style={{ padding: '30px 16px', display: 'flex', width: '100%' }}>
                                                         <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
                                                     </Grid>
