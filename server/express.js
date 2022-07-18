@@ -6,10 +6,10 @@ const ReactDOMServer = require( 'react-dom/server' );
 const { StaticRouter, matchPath } = require( 'react-router-dom' );
 const {Helmet} = require("react-helmet");
 
-const compression = require('compression');
+//const compression = require('compression');
 // create express application
 const app = express();
-app.use(compression());
+//app.use(compression());
 
 // import App component
 const { App } = require( '../src/components/app' );
@@ -32,12 +32,12 @@ app.get( /\.(eot|ttf|woff|woff2)$/, express.static( path.resolve( __dirname, '..
 
 //app.use(express.static(path.join(__dirname, 'public')));
 
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
     res.set('Cache-Control', 'public, max-age=604800')
     res.set('Set-Cookie', 'SameSite=None')
     res.set('Accept-Encoding', 'gzip, compress, br')
     next()
-})
+})*/
 
 app.get('/sitemap.xml', function(req, res) {
     res.sendFile('../dist/sitemap.xml');
@@ -229,9 +229,9 @@ app.use( '*', async ( req, res ) => {
         );
 
 
-        res.set('Cache-Control', 'public, max-age=604800')
+        /*res.set('Cache-Control', 'public, max-age=604800')
         res.set('Set-Cookie', 'SameSite=None')
-        res.set('Accept-Encoding', 'gzip, compress, br')
+        res.set('Accept-Encoding', 'gzip, compress, br')*/
 
         res.contentType( 'text/html' );
         res.status( matchRoute.code );
