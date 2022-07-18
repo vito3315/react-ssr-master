@@ -1,6 +1,8 @@
 $Ubuntu: 'Ubuntu';
+$Roboto: 'Roboto';
 $Futuris: 'FuturaFuturisC Bold';
 $mainColor: #CC0033;
+$colorText: #525252;
 @mixin fons($size: 1rem, $family: $Ubuntu) {
     font-size: $size !important;
     font-family: $family !important;
@@ -9,8 +11,20 @@ $mainColor: #CC0033;
     font-size: $size !important;
     font-family: $family, bold !important;
 }
+
+@mixin fonsNew($size: 1rem, $family: $Ubuntu) {
+    font-size: $size;
+    font-family: $family!important;
+    color: $colorText;
+}
+
 .MuiRadio-colorSecondary.Mui-checked{
     color: $mainColor!important;
+}
+.MuiTabs-root button{
+    @include fonsNew(1rem, $Roboto);
+    font-weight: 400;
+    text-transform: initial!important;
 }
 .Accordion{
     padding-left: 12px;

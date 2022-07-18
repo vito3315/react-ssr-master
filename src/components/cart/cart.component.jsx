@@ -2232,9 +2232,10 @@ export class Cart extends React.Component {
                         </div>
                         {this.state.orderTimes == 2 ?
                             <div>
-                                <FormControl style={{ width: '30%' }}>
+                                <FormControl style={{ width: '30%', marginRight: '5%' }}>
                                     <InputLabel htmlFor="age-native-simple">День</InputLabel>
                                     <Select
+                                      size='small'
                                       displayEmpty
                                       value={this.state.orderPredDay}
                                       onChange={this.changePredDay}
@@ -2247,10 +2248,11 @@ export class Cart extends React.Component {
                                         )}
                                     </Select>
                                 </FormControl>
-                                <FormControl style={{ width: '20%' }}>
+                                <FormControl style={{ width: '20%', marginLeft: '5%' }}>
                                     <InputLabel htmlFor="age-native-simple1">Время</InputLabel>
                                     <Select
                                       displayEmpty
+                                      size='small'
                                       value={this.state.orderPredTime}
                                       onChange={this.changePredTime}
                                       inputProps={{
