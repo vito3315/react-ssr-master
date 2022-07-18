@@ -1360,7 +1360,7 @@ export class Home extends React.Component {
                             </Box>
                             
                             
-                            <Box sx={{ display: { xs: 'none', sm: 'none', md: 'none' } }}>
+                            <Box sx={{ display: { xs: 'none', sm: 'none', md: 'none', lg: 'block' } }}>
                                 <Dialog disableElevation maxWidth={'lg'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC testModalLG" open={this.state.openModalPC}>
                                     <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -44, left: 16, zIndex: 1500, width: 40, height: 40, backgroundColor: 'transparent' }} onClick={this.handleClosePC.bind(this)}>
                                         <IconClose />
@@ -1513,7 +1513,7 @@ export class Home extends React.Component {
                                 </Dialog>
                             </Box>
 
-                            <Box sx={{ display: { xs: 'none', sm: 'none', lg: 'none', xl: 'none' } }}>
+                            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
                                 <Dialog disableElevation maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePCSet.bind(this)} className="modalActii Item OpenItemPCSet" open={this.state.openModalPCSet}>
                                     <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -44, left: 16, zIndex: 2000, width: 40, height: 40, backgroundColor: 'transparent' }} onClick={this.handleClosePCSet.bind(this)}>
                                         <IconClose />
@@ -1563,7 +1563,7 @@ export class Home extends React.Component {
                                 </Dialog>
                             </Box>
                             
-                            <Box sx={{ display: { xs: 'none', sm: 'none', md: 'none' } }}>
+                            <Box sx={{ display: { xs: 'none', xl: 'block' } }}>
                             
                                 <Dialog disableElevation maxWidth={'lg'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePCSet.bind(this)} className="modalActii Item OpenItemPCSet" open={this.state.openModalPCSet}>
                                     <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -44, left: 16, zIndex: 2000, width: 40, height: 40, backgroundColor: 'transparent' }} onClick={this.handleClosePCSet.bind(this)}>
