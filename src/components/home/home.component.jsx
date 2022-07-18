@@ -477,7 +477,7 @@ class CardItem extends React.Component {
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className='MobileActionsCartButtonStart'>
                                     <Button variant="contained" onClick={this.add.bind(this)}>
                                         {new Intl.NumberFormat('ru-RU').format( parseInt(this.state.item.price))}
-                                        <IconRuble style={{ width: 11, height: 11, fill: '#525252', marginLeft: 3 }} />
+                                        <IconRuble style={{ width: 11, height: 11, fill: '#525252', marginLeft: 3, paddingBottom: 1 }} />
                                     </Button>
                                 </ButtonGroup>
                                     :
