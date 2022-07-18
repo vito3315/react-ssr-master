@@ -1313,11 +1313,11 @@ export class Home extends React.Component {
                                     <Grid container spacing={2} style={{ margin: 0, padding: '0px 20px', flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
                                         {cat.items.map((it, k) => (
                                             <React.Fragment key={k}>
-                                                <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'flex', md: 'none' } }} style={{ padding: '30px 16px', width: '100%' }}>
+                                                <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'none', md: 'flex' } }} style={{ padding: '30px 16px', width: '100%' }}>
                                                     <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
                                                 </Grid>
                                             
-                                                <Grid item className='_mobile_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'none', md: 'flex' } }} style={{ padding: '10px 0px', borderBottom: cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
+                                                <Grid item className='_mobile_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'flex', md: 'none' } }} style={{ padding: '10px 0px', borderBottom: cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
                                                     <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
                                                 </Grid>
                                             </React.Fragment>
