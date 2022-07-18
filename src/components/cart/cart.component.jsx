@@ -2089,7 +2089,7 @@ export class Cart extends React.Component {
                 
                 
                 
-                <Grid item container sx={{ display: { xs: 'none', sm: 'block' } }} spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer" style={{ paddingTop: 0 }}>
+                <Grid item container sx={{ display: { xs: 'none', sm: 'flex' } }} spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer" style={{ paddingTop: 0 }}>
                     <AppBar position="static" style={{ backgroundColor: '#fff', color: '#000', zIndex: 0 }} elevation={0}>
                         <Tabs value={this.state.orderType || this.state.orderType == 0 ? this.state.orderType : 0} onChange={this.changeTab.bind(this)} aria-label="simple tabs example"  style={{ justifyContent: 'center' }}>
                             <Tab label="Доставка" {...a11yProps(0)} disableRipple={true} />
@@ -2364,7 +2364,7 @@ export class Cart extends React.Component {
                 </Grid>
             
             
-                <Grid item container sx={{ display: { xs: 'block', sm: 'none' } }} spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer mobile">
+                <Grid item container sx={{ display: { xs: 'flex', sm: 'none' } }} spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer mobile">
                     <AppBar position="static" style={{ backgroundColor: '#fff', color: '#000', zIndex: 0 }} elevation={0}>
                         <Tabs value={this.state.orderType || this.state.orderType == 0 ? this.state.orderType : 0} onChange={this.changeTab.bind(this)} aria-label="simple tabs example"  style={{ justifyContent: 'center' }}>
                             <Tab label="Доставка" {...a11yProps(0)} style={{ width: '50%' }} disableRipple={true} />
