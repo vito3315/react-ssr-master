@@ -2,12 +2,15 @@ import React from 'react';
 import { NavLink as Link } from 'react-router-dom';
 
 import Grid from '@mui/material/Grid';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Typography from '@material-ui/core/Typography';
+
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import ButtonGroup from '@mui/material/ButtonGroup';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 import * as Scroll from 'react-scroll';
@@ -20,21 +23,22 @@ import axios from 'axios';
 
 import {Helmet} from "react-helmet";
 
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
 
 import IconButton from '@mui/material/IconButton';
-import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 import itemsStore from '../../stores/items-store';
 import config from '../../stores/config';
 
 import { autorun } from "mobx"
-import Dialog from '@material-ui/core/Dialog';
-import Slide from '@material-ui/core/Slide';
+
+import Slide from '@mui/material/Slide';
 import Hidden from '@material-ui/core/Hidden';
 
 import LazyLoad from 'react-lazyload';
@@ -1329,11 +1333,11 @@ export class Home extends React.Component {
                     
                     {this.state.openItem ?
                         <Dialog disableElevation fullScreen open={this.state.openModal} className="ItemDialog" onClose={this.handleClose.bind(this)} TransitionComponent={Transition}>
-                            <MuiDialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
+                            <DialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
                                 <IconButton aria-label="close" style={{ position: 'absolute', top: -36, left: 15, backgroundColor: 'transparent' }} onClick={this.handleClose.bind(this)}>
                                     <IconClose style={{ width: 25, height: 25 }} />
                                 </IconButton>
-                            </MuiDialogTitle>
+                            </DialogTitle>
                             <div>
                                 <Item itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} openInfo={this.openInfo.bind(this)} openModalPCInfo={this.state.openModalPCInfo} />
                             </div>
@@ -1350,9 +1354,9 @@ export class Home extends React.Component {
                                         <IconClose />
                                     </IconButton>
                                     
-                                    <MuiDialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
+                                    <DialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
                                         <Item itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} openInfo={this.openInfo.bind(this)} openModalPCInfo={this.state.openModalPCInfo} />
-                                    </MuiDialogContent>
+                                    </DialogContent>
                                 </Dialog>
                             </Hidden>
                             
@@ -1362,9 +1366,9 @@ export class Home extends React.Component {
                                         <IconClose />
                                     </IconButton>
                                     
-                                    <MuiDialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
+                                    <DialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
                                         <Item itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} openInfo={this.openInfo.bind(this)} openModalPCInfo={this.state.openModalPCInfo} />
-                                    </MuiDialogContent>
+                                    </DialogContent>
                                 </Dialog>
                             </Hidden>
                         </>
@@ -1376,13 +1380,13 @@ export class Home extends React.Component {
                         <>
                             <Hidden smUp>
                                 <Dialog disableElevation fullScreen style={{ width: '100%', marginTop: this.state.openItem.items.length > 1 ? 400 : 470, borderTopRightRadius: 30, borderTopLeftRadius: 30 }} onClose={this.handleClosePCInfo.bind(this)} className="ItemDialog OpenItemMobInfo blurBacground" open={this.state.openModalPCInfo} TransitionComponent={Transition}>
-                                    <MuiDialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
+                                    <DialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
                                         <IconButton aria-label="close" style={{ position: 'absolute', top: -36, left: 15, backgroundColor: 'transparent' }} onClick={this.handleClosePCInfo.bind(this)}>
                                             <IconClose style={{ width: 25, height: 25 }} />
                                         </IconButton>
-                                    </MuiDialogTitle>
+                                    </DialogTitle>
                                     
-                                    <MuiDialogContent className="modalActiiContentNew" style={{ height: this.state.openItem.items.length > 1 ? 'calc(100vh - 400px)' : 'calc(100vh - 470px)', padding: 20, display: 'flex', flexWrap: 'wrap', alignContent: 'start' }}>
+                                    <DialogContent className="modalActiiContentNew" style={{ height: this.state.openItem.items.length > 1 ? 'calc(100vh - 400px)' : 'calc(100vh - 470px)', padding: 20, display: 'flex', flexWrap: 'wrap', alignContent: 'start' }}>
 
                                         <Typography variant="h5" component="h1" style={{ textAlign: 'center', fontFamily: 'Roboto', fontWeight: 700, fontSize: '1.625rem', color: '#fff', width: '100%', marginBottom: 20 }}>Пищевая ценность на 100 г</Typography>
 
@@ -1426,19 +1430,19 @@ export class Home extends React.Component {
                                         </div>
                                         
                                         
-                                    </MuiDialogContent>
+                                    </DialogContent>
                                 </Dialog>
                             </Hidden>
 
                             <Hidden smUp>
                                 <Dialog disableElevation fullScreen style={{ height: 'calc(100vh - 50px)', width: '100%' }} onClose={this.handleClosePCSet.bind(this)} className="ItemDialog OpenItemMobSet" open={this.state.openModalPCSet} TransitionComponent={Transition}>
-                                    <MuiDialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
+                                    <DialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
                                         <IconButton aria-label="close" style={{ position: 'absolute', top: -36, left: 15, backgroundColor: 'transparent' }} onClick={this.handleClosePCSet.bind(this)}>
                                             <IconClose style={{ width: 25, height: 25 }} />
                                         </IconButton>
-                                    </MuiDialogTitle>
+                                    </DialogTitle>
                                     
-                                    <MuiDialogContent className="modalActiiContentNew" style={{ height: 'calc(100vh - 50px)', padding: 20, display: 'flex', flexWrap: 'wrap', alignContent: 'start' }}>
+                                    <DialogContent className="modalActiiContentNew" style={{ height: 'calc(100vh - 50px)', padding: 20, display: 'flex', flexWrap: 'wrap', alignContent: 'start' }}>
 
                                         <Typography variant="h5" component="h1" style={{ textAlign: 'center', fontFamily: 'Roboto', fontWeight: 700, fontSize: '1.625rem', color: '#525252', width: '100%' }}>{this.state.openItem.name}</Typography>
 
@@ -1505,7 +1509,7 @@ export class Home extends React.Component {
                                                 </div>
                                             )}
                                         </div>
-                                    </MuiDialogContent>
+                                    </DialogContent>
                                 </Dialog>
                             </Hidden>
 
@@ -1515,7 +1519,7 @@ export class Home extends React.Component {
                                         <IconClose />
                                     </IconButton>
                                     
-                                    <MuiDialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 2.25% 2% 4.5%', marginRight: '1.5%', alignContent: 'start' }}>
+                                    <DialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 2.25% 2% 4.5%', marginRight: '1.5%', alignContent: 'start' }}>
                                         {this.state.openModalPCSetItems.map( (item, key) =>
                                             <div key={key} style={{ width: '49%', display: 'flex', flexDirection: 'row', marginRight: key == 0 || key % 2 == 0 ? '2%' : 0, marginBottom: '2%' }}>
                                                 <div style={{ width: '30%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -1555,7 +1559,7 @@ export class Home extends React.Component {
                                                 </div>
                                             </div>
                                         )}
-                                    </MuiDialogContent>
+                                    </DialogContent>
                                 </Dialog>
                             </Hidden>
                             
@@ -1565,7 +1569,7 @@ export class Home extends React.Component {
                                         <IconClose />
                                     </IconButton>
                                     
-                                    <MuiDialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 2.25% 2% 4.5%', marginRight: '1.5%', alignContent: 'start' }}>
+                                    <DialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 2.25% 2% 4.5%', marginRight: '1.5%', alignContent: 'start' }}>
                                         {this.state.openModalPCSetItems.map( (item, key) =>
                                             <div key={key} style={{ width: '49%', display: 'flex', flexDirection: 'row', marginRight: key == 0 || key % 2 == 0 ? '2%' : 0, marginBottom: '2%' }}>
                                                 <div style={{ width: '45%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -1605,7 +1609,7 @@ export class Home extends React.Component {
                                                 </div>
                                             </div>
                                         )}
-                                    </MuiDialogContent>
+                                    </DialogContent>
                                 </Dialog>
                             </Hidden>
                         </>
