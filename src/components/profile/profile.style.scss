@@ -1,6 +1,9 @@
 $Ubuntu: 'Ubuntu';
 $Futuris: 'FuturaFuturisC Bold';
+$Roboto: 'Roboto';
 $mainColor: #CC0033;
+$colorText: #525252;
+
 @mixin fons($size: 1rem, $family: $Ubuntu) {
     font-size: $size;
     font-family: $family !important;
@@ -9,12 +12,19 @@ $mainColor: #CC0033;
     font-size: $size !important;
     font-family: $family, bold !important;
 }
+
+@mixin fonsNew($size: 1rem, $family: $Roboto) {
+    font-size: $size;
+    font-family: $family!important;
+    color: $colorText;
+}
+
 .MuiSnackbarContent-root.MuiPaper-elevation6{
     box-shadow: none;
 }
 .showOrderDialog{
     & h6{
-        @include fons_new(1.3rem, $Futuris);
+        @include fonsNew(1.3rem, $Roboto);
         text-align: center;
     }
     & .showOrderDialogContent{
@@ -102,7 +112,8 @@ $mainColor: #CC0033;
 .Profile{
     margin-top: 64px!important;
     & h1{
-        @include fons_new(2rem, $Futuris);
+        @include fonsNew(2rem, $Roboto);
+        font-weight: 700;
         text-align: center;
     }
     & .mainContainer{
@@ -122,13 +133,15 @@ $mainColor: #CC0033;
             padding-left: 34px!important;
         }
         & h1{
-            @include fons_new(1.7rem, $Futuris);
+            @include fonsNew(1.7rem, $Roboto);
+            font-weight: 700;
             text-align: center;
         }
     }
-    & header.MuiAppBar-root button span{
-        @include fons(1rem, $Ubuntu);
-        text-transform: capitalize!important;
+    & .MuiTabs-root button{
+        @include fonsNew(1rem, $Roboto);
+        font-weight: 400;
+        text-transform: initial!important;
     }
 }
 .modalProfile{
