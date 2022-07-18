@@ -2232,7 +2232,7 @@ export class Cart extends React.Component {
                         </div>
                         {this.state.orderTimes == 2 ?
                             <div>
-                                <FormControl style={{ width: '30%', marginRight: '5%' }}>
+                                <FormControl style={{ width: '30%' }} variant="standard">
                                     <InputLabel htmlFor="age-native-simple">День</InputLabel>
                                     <Select
                                       size='small'
@@ -2248,7 +2248,7 @@ export class Cart extends React.Component {
                                         )}
                                     </Select>
                                 </FormControl>
-                                <FormControl style={{ width: '20%', marginLeft: '5%' }}>
+                                <FormControl style={{ width: '20%' }} variant="standard">
                                     <InputLabel htmlFor="age-native-simple1">Время</InputLabel>
                                     <Select
                                       displayEmpty
