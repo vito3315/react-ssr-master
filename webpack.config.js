@@ -51,7 +51,7 @@ module.exports = {
                 use: [ MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader' ]
             },
             {
-                test: /\.(jpg|png|svg|otf|ttf|webp|woff|woff2)$/,
+                test: /\.(jpg|png|svg|otf|ttf|webp|woff|woff2|ico)$/,
                 use: {
                     loader: 'url-loader',
                     options: {

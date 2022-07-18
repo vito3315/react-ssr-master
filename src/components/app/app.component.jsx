@@ -250,7 +250,7 @@ export class App extends React.Component {
             errSMS: '',
             userName: '',
             
-            soc_link: null
+            soc_link: null,
         };
     }
 
