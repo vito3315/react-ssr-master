@@ -1003,7 +1003,17 @@ export class Profile extends React.Component {
                                 <FormGroup row className="input checkbox">
                                     <FormControlLabel 
                                         onChange={this.changeCheck.bind(this)} 
-                                        control={<Checkbox checked={ parseInt(this.state.spam) == 1 ? true : false } name="checkedC" />} 
+                                        control={
+                                            <Checkbox 
+                                                checked={ parseInt(this.state.spam) == 1 ? true : false } 
+                                                name="checkedC" 
+                                                sx={{
+                                                    color: '#c03',
+                                                    '&.Mui-checked': {
+                                                        color: '#c03',
+                                                    },
+                                                }}
+                                            />} 
                                         label="Получать сообщения с акциями" 
                                     />
                                 </FormGroup>
@@ -1106,7 +1116,18 @@ export class Profile extends React.Component {
                         <FormControl component="fieldset">
                             <RadioGroup name="typeDel" value={ this.state.typeDel } onChange={this.changeAddr} >
                                 {this.state.radiogroup_options.map((item, key) => 
-                                    <FormControlLabel key={key} value={item.id} control={<Radio />} label={item.label} />
+                                    <FormControlLabel 
+                                        key={key} 
+                                        value={item.id} 
+                                        control={
+                                            <Radio sx={{
+                                                color: '#c03',
+                                                '&.Mui-checked': {
+                                                    color: '#c03',
+                                                },
+                                                }} 
+                                            />} 
+                                        label={item.label} />
                                 )}
                             </RadioGroup>
                         </FormControl>
