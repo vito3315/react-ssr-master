@@ -1118,13 +1118,7 @@ export class Profile extends React.Component {
                                     <FormControlLabel 
                                         key={key} 
                                         value={item.id} 
-                                        control={
-                                            <Radio sx={{
-                                                '&.Mui-checked': {
-                                                    color: '#c03',
-                                                },
-                                                }} 
-                                            />} 
+                                        control={ <Radio sx={{ '&.Mui-checked': { color: '#c03', }, }} /> } 
                                         label={item.label} />
                                 )}
                             </RadioGroup>

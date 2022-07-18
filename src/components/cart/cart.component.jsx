@@ -266,7 +266,7 @@ class CartItem extends React.Component {
                                 <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this, this.state.item.id)}>
                                     <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
                                 </Button>
-                                <Button variant="contained" className="BtnCardMain" >
+                                <Button variant="contained" className="BtnCardMain _COUNT_">
                                     <Typography component="span" className="CardCountItem">{this.state.count}</Typography>
                                 </Button>
                                 <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this, this.state.item.id)}> 
@@ -278,9 +278,7 @@ class CartItem extends React.Component {
                                 <Button variant="contained" className="BtnCardMain">
                                     <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
                                 </Button>
-                                <Button variant="contained" className="BtnCardMain" >
-                                    <Typography component="span" className="CardCountItem">{this.state.count}</Typography>
-                                </Button>
+                                <Button variant="contained" className="BtnCardMain" >{this.state.count}</Button>
                                 <Button variant="contained" className="BtnCardMain"> 
                                     <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
                                 </Button>
@@ -439,7 +437,7 @@ class CartItemMobile extends React.Component {
                                     <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this, this.state.item.id)}>
                                         <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
                                     </Button>
-                                    <Button variant="contained" className="BtnCardMain" >
+                                    <Button variant="contained" className="BtnCardMain _COUNT_" >
                                         <Typography component="span" className="CardCountItem">{this.state.count}</Typography>
                                     </Button>
                                     <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this, this.state.item.id)}> 
@@ -451,7 +449,7 @@ class CartItemMobile extends React.Component {
                                     <Button variant="contained" className="BtnCardMain">
                                         <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
                                     </Button>
-                                    <Button variant="contained" className="BtnCardMain" >
+                                    <Button variant="contained" className="BtnCardMain _COUNT_" >
                                         <Typography component="span" className="CardCountItem">{this.state.count}</Typography>
                                     </Button>
                                     <Button variant="contained" className="BtnCardMain"> 
@@ -2104,7 +2102,7 @@ export class Cart extends React.Component {
                                 <RadioGroup name="addrs" value={ this.state.orderAddr ? this.state.orderAddr.id : 0 } onChange={this.changeAddr}>
                                     {this.state.my_addr.map((item, key) => 
                                         <div key={key} className="boxAddr">
-                                            <FormControlLabel value={item.id} control={<Radio />} label={ 
+                                            <FormControlLabel value={item.id} control={ <Radio sx={{ '&.Mui-checked': { color: '#c03', }, }} /> } label={ 
                                                 item.city_name+', '+
                                                 item.street+' '+
                                                 item.home+
@@ -2218,7 +2216,7 @@ export class Cart extends React.Component {
                                 <FormLabel component="legend">Оплата</FormLabel>
                                 <RadioGroup aria-label="pays" name="pays" value={this.state.orderPay} onChange={this.changePay}>
                                     {this.state.renderPay.map((item, key) => 
-                                        <FormControlLabel key={key} value={item.type} control={<Radio />} label={item.title} />
+                                        <FormControlLabel key={key} value={item.type} control={ <Radio sx={{ '&.Mui-checked': { color: '#c03', }, }} /> } label={item.title} />
                                     )}
                                 </RadioGroup>
                             </FormControl>
@@ -2227,8 +2225,8 @@ export class Cart extends React.Component {
                             <FormControl component="fieldset">
                                 <FormLabel component="legend">Когда приготовить?</FormLabel>
                                 <RadioGroup aria-label="times" name="times" value={this.state.orderTimes} onChange={this.changeTimes}>
-                                    <FormControlLabel value='1' control={<Radio />} label="Как можно быстрее" />
-                                    <FormControlLabel value='2' control={<Radio />} label="Предзаказ" />
+                                    <FormControlLabel value='1' control={<Radio sx={{ '&.Mui-checked': { color: '#c03', }, }} />} label="Как можно быстрее" />
+                                    <FormControlLabel value='2' control={<Radio sx={{ '&.Mui-checked': { color: '#c03', }, }} />} label="Предзаказ" />
                                 </RadioGroup>
                             </FormControl>
                         </div>
@@ -2561,7 +2559,7 @@ export class Cart extends React.Component {
                             <RadioGroup name="addrs" value={ this.state.orderAddr ? this.state.orderAddr.id : 0 } onChange={this.changeAddr}>
                                 {this.state.my_addr.map((item, key) => 
                                     <div key={key} className="boxAddr">
-                                        <FormControlLabel value={item.id} control={<Radio />} label={
+                                        <FormControlLabel value={item.id} control={<Radio sx={{ '&.Mui-checked': { color: '#c03', }, }} />} label={
                                             item.city_name+', '+
                                             item.street+' '+
                                             item.home+
