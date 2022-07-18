@@ -207,8 +207,13 @@ body{
     background-color: #fff!important;
     min-width: 35px!important;
     min-height: 30px!important;
+    @include fonsNew(1rem, $Roboto);
+    color: $colorMain;
+    font-weight: 400;
     & .CardCountItem{
-        @include fons(1rem, $Ubuntu);
+        @include fonsNew(1rem, $Roboto);
+        font-weight: 400;
+        color: $colorMain;
     }
     &:hover{
         background-color: #fff!important;

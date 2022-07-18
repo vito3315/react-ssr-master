@@ -171,7 +171,8 @@ $colorText: #525252;
     border-collapse: collapse;
     padding-bottom: 50px!important;
     & .TEXT{
-        @include fons(1.1rem, $Ubuntu);
+        @include fonsNew(1.1rem, $Roboto);
+        font-weight: 400;
     }
     & td{
         text-align: center;
@@ -180,7 +181,7 @@ $colorText: #525252;
     & thead{
         border-bottom: 2px solid #e5e5e5;
         & span{
-            @include fons(1.1rem, $Ubuntu);
+            @include fonsNew(1.1rem, $Roboto);
             font-weight: bold;
         }
     }
@@ -193,7 +194,7 @@ $colorText: #525252;
             cursor: pointer;
         }
         & td > span{
-            @include fons(1.1rem, $Ubuntu);
+            @include fonsNew(1.1rem, $Roboto);
         }
     }
 }
@@ -205,10 +206,10 @@ $colorText: #525252;
         & tr{
             border-bottom: 1px solid #e5e5e5;
             & div > span:first-child{
-                @include fons_new(1.1rem, $Futuris);
+                @include fonsNew(1.1rem, $Roboto);
             }
             & div > span:last-child{
-                @include fons(1.1rem, $Ubuntu);
+                @include fonsNew(1.1rem, $Roboto);
             }
         }
     }
@@ -237,7 +238,7 @@ $colorText: #525252;
             }
         }
         & span{
-            @include fons(1rem, $Ubuntu);
+            @include fonsNew(1rem, $Roboto);
         }
     }
     & .thead{
@@ -246,7 +247,7 @@ $colorText: #525252;
         justify-content: space-around;
         border-bottom: 2px solid #e5e5e5;
         & span{
-            @include fons(1rem, $Ubuntu);
+            @include fonsNew(1rem, $Roboto);
             font-weight: bold;
             text-align: center;
             padding: 10px 0;
