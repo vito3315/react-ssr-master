@@ -51,7 +51,7 @@ import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 
 import Snackbar from '@mui/material/Snackbar';
-import Hidden from '@material-ui/core/Hidden';
+import Box from '@mui/material/Box';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -815,7 +815,7 @@ export class Profile extends React.Component {
                     <TabPanel value={this.state.valueTab} index={0} style={{ width: '100%' }}>
                         <div style={{ padding: 12 }}>
                             {this.state.info.promo ?
-                                <Hidden mdDown>
+                                <Box sx={{ display: { xs: 'none', lg: 'block' } }}>
                                     <table style={{ width: '100%' }} className="TablePromo">
                                         <thead>
                                             <tr>
@@ -834,12 +834,12 @@ export class Profile extends React.Component {
                                             )}
                                         </tbody>
                                     </table>
-                                </Hidden>
+                                </Box>
                                     :
                                 null
                             }
                             {this.state.info.promo ?
-                                <Hidden lgUp>
+                                <Box sx={{ display: { xs: 'block', lg: 'none' } }}>
                                     <table style={{ width: '100%' }} className="TablePromoMobile">
                                         <tbody>
                                             {this.state.info.promo.promo.map((item, key) => 
@@ -867,7 +867,7 @@ export class Profile extends React.Component {
                                             )}
                                         </tbody>
                                     </table>
-                                </Hidden>
+                                </Box>
                                     :
                                 null
                             }
@@ -1008,7 +1008,6 @@ export class Profile extends React.Component {
                                                 checked={ parseInt(this.state.spam) == 1 ? true : false } 
                                                 name="checkedC" 
                                                 sx={{
-                                                    color: '#c03',
                                                     '&.Mui-checked': {
                                                         color: '#c03',
                                                     },
@@ -1121,7 +1120,6 @@ export class Profile extends React.Component {
                                         value={item.id} 
                                         control={
                                             <Radio sx={{
-                                                color: '#c03',
                                                 '&.Mui-checked': {
                                                     color: '#c03',
                                                 },
@@ -1145,12 +1143,8 @@ export class Profile extends React.Component {
                         />
                     </DialogContent>
                     <DialogActions style={{ paddingBottom: 24 }}>
-                        <Hidden xsDown>
-                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderOther" style={{ marginRight: 24 }}>
-                                <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={() => { this.setState({delOrder: false}) }}>К заказу</Button>
-                            </ButtonGroup>
-                        </Hidden>
                         <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderOther" style={{ marginRight: 24 }}>
+                            <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={() => { this.setState({delOrder: false}) }}>К заказу</Button>
                             <Button variant="contained" className="BtnCardMain CardInCardItem" onClick={this.closeOrderTrue.bind(this)}>Отменить заказ</Button>
                         </ButtonGroup>
                     </DialogActions>
