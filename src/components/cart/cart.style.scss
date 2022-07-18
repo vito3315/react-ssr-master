@@ -419,10 +419,10 @@ div.boxItem .promoIcon{
         & .bottomOrder{
             width: calc(100% - 48px);
             padding: 12px 24px;
-            height: 90px;
+            height: 100px;
             background-color: #fff;
             position: fixed;
-            bottom: 50px;
+            bottom: 45px;
             left: 0;
             z-index: 1;
             display: flex;
@@ -538,7 +538,7 @@ div.boxItem .promoIcon{
                 }
             }
         }
-        & > div:not(.promoOrder):not(._comment_){
+        & > div:not(.promoOrder):not(._comment_):not(.orderSdacha){
             width: 100%;
             display: flex;
             justify-content: center;
