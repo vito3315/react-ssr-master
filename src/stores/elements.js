@@ -124,8 +124,8 @@ export class MiniActionsCartButton extends React.PureComponent{
 export class ActionsCartButtonStart extends React.PureComponent{
     render(){
         return(
-            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className='ActionsCartButtonStart'>
-                <Button variant="contained" className='ModalItemButtonCart' onClick={this.props.add.bind(this)}>
+            <ButtonGroup disableElevation={true} disableRipple={true} variant="outlined" className='ActionsCartButtonStart'>
+                <Button variant="outlined" className='ModalItemButtonCart' onClick={this.props.add.bind(this)}>
                     <span>В корзину за { new Intl.NumberFormat('ru-RU').format(this.props.price)}</span>
                     <IconRuble style={{ width: 14, height: 14, fill: '#525252', marginLeft: 5, paddingBottom: 1  }} />
                 </Button>
