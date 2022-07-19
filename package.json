@@ -6,7 +6,7 @@
     "start": "NODE_ENV=development webpack serve",
     "build": "NODE_ENV=production webpack",
     "start:ssr": "node server",
-    "bundle-report": "webpack-bundle-analyzer --port 5000 dist/stats.json"
+    "bundle-report": "webpack-bundle-analyzer --port 5001 dist/stats.json"
   },
   "dependencies": {
     "@emotion/react": "^11.9.3",

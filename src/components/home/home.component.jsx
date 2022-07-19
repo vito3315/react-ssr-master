@@ -94,7 +94,16 @@ class CoverFlowCarousel extends React.Component {
                 delay: 5000,
             },
             
-            pagination: this_count == 1 ? false : this.state.type == 'pc' ? true : true,
+            pagination: {
+                el: '.swiper-pagination',
+                type: 'bullets',
+                clickable: true,
+                renderBullet: function (index, className) {
+                    return '<span class="' + className + '">' + (index + 1) + '</span>';
+                },
+            },
+
+            /*pagination: this_count == 1 ? false : this.state.type == 'pc' ? true : true,
             pagination: this_count == 1 ? {} : this.state.type == 'pc' ? {
                 el: ".swiper-pagination",
                 clickable: true,
@@ -102,7 +111,7 @@ class CoverFlowCarousel extends React.Component {
                 renderBullet: function (index, className) {
                     return '<span class="' + className + '">' + (index + 1) + '</span>';
                 },
-            } : {},
+            } : {},*/
             navigation: this_count == 1 ? {} : this.state.type == 'pc' ? {
                 nextEl: ".swiper-button-next", // arrows on the side of the slides
                 prevEl: ".swiper-button-prev", // arrows on the side of the slides
