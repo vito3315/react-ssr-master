@@ -342,7 +342,7 @@ class SimplePopover extends React.Component{
                     open={open}
                     anchorEl={this.state.anchorEl}
                     onClose={this.handleClose.bind(this)}
-                    anchorPosition={{ top: 50, right: 50 }}
+                    //anchorPosition={{ top: 50, right: 50 }}
                     anchorOrigin={{
                         vertical: 'bottom',
                         horizontal: 'right',
