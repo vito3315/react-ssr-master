@@ -1268,11 +1268,17 @@ export class Home extends React.Component {
                                 <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%', paddingBottom: 40 }} className="MainItems mainContainer">
                                     <Typography variant="h5" component="h2">{ cat.name }</Typography>
                                 </Grid>
-                                <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
+                                <Grid container spacing={2} style={{ margin: 0, padding: '0px 20px', flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
                                     {cat.items.map((it, k) => (
-                                        <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '10px 8px', display: 'flex'}}>
-                                            <CardItem city={this.state.city_name} data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
-                                        </Grid>
+                                        <React.Fragment key={k}>
+                                            <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'none', sm: 'flex' } }} style={{ padding: '30px 16px', width: '100%' }}>
+                                                <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
+                                            </Grid>
+                                        
+                                            <Grid item className='_mobile_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'flex', sm: 'none' } }} style={{ padding: '10px 0px', borderBottom: cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
+                                                <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
+                                            </Grid>
+                                        </React.Fragment>
                                     ))}
                                 </Grid>
                             </div>
