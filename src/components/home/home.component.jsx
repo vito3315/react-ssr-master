@@ -52,8 +52,8 @@ var firebaseAPP = null;
 
 import Swiper from "swiper";
 import SwiperCore, { Pagination, Navigation, A11y, Autoplay } from 'swiper';
-SwiperCore.use([Navigation, Pagination, A11y, Autoplay]);
-//import "swiper/swiper.min.css";
+//SwiperCore.use([Navigation, Pagination, A11y, Autoplay]);
+import 'swiper/css'
 
 class CoverFlowCarousel extends React.Component {
     swiper = null;
@@ -80,6 +80,8 @@ class CoverFlowCarousel extends React.Component {
         
         
         this.swiper = new Swiper(".swiper-container", {
+            modules: [Navigation, Pagination, A11y, Autoplay],
+
             grabCursor: this_count == 1 ? false : true,
             loop: this_count == 1 ? false : true,
             centeredSlidesBounds: false,
