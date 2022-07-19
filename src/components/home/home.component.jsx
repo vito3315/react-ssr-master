@@ -302,11 +302,23 @@ class CardItem extends React.Component {
 
         const desc = this.state.item.marc_desc.length > 0 ? this.state.item.marc_desc : this.state.item.tmp_desc;
 
-        const width = window.innerWidth;
+        //const width = window.innerWidth;
 
-        const GRID = (width- 7*20) / 6;
+        let width = 0;
+        let GRID = 0;
+
+        //const GRID = (width- 7*20) / 6;
 
         if( this.props.type == 'pc' ){
+
+            if (typeof window !== 'undefined') {
+                width = window.innerWidth;
+            }else{
+                width = 1280;
+            }
+
+            GRID = (width- 7*20) / 6;
+
             return (
                 <Card elevation={0} className="CardItem" style={{ width: '100%' }}>
                     
@@ -390,6 +402,15 @@ class CardItem extends React.Component {
         }
         
         if( this.props.type == 'mobile' ){
+
+            if (typeof window !== 'undefined') {
+                width = window.innerWidth;
+            }else{
+                width = 320;
+            }
+
+            GRID = (width- 7*20) / 6;
+
             return (
                 <Grid item container xs={12} className="CardItem_mobile" style={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap' }}>
                     <Grid style={{ position: 'relative', marginRight: 20 }} item onClick={ () => this.props.openItem(this.state.item.id)}>
