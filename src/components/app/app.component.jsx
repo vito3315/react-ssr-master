@@ -126,28 +126,36 @@ class StickyFooter extends React.Component{
             <footer className={"footer "+(this.state.page == 'cart' ? this.state.page : '')}>
                 <Grid container className="mainContainer">
                     <Grid item lg={3} md={3} sm={3} xl={3} xs={12} className="copy">
-                        <Typography variant="body1" component="span">© Жако 2017 - {new Date().getFullYear()}</Typography>
+                        <Typography variant="body1" component="h1">© Жако 2017 - {new Date().getFullYear()}</Typography>
                     </Grid>
                     <Grid item lg={3} md={3} sm={3} xl={3} xs={12}>
                         <Link
                             to={ '/'+this.state.cityName+'/about' }
                             style={{ textDecoration: 'none' }}
-                        >О Компании</Link>
+                        >
+                            <Typography variant="body1">О Компании</Typography>
+                        </Link>
                         <Link
                             to={ '/'+this.state.cityName+'/jobs' }
                             style={{ textDecoration: 'none' }}
-                        >Вакансии</Link>
+                        >
+                            <Typography variant="body1">Вакансии</Typography>
+                        </Link>
                         <Link
                             to={ '/'+this.state.cityName+'/publichnaya-oferta' }
                             style={{ textDecoration: 'none' }}
-                        >Публичная оферта</Link>
+                        >
+                            <Typography variant="body1">Публичная оферта</Typography>
+                        </Link>
 
                         { this.state.is_load && this.state.soc_link && this.state.soc_link.link_allergens.length ?
                             <Link
                                 to={{ pathname: this.state.soc_link.link_allergens }}
                                 target="_blank"
                                 style={{ textDecoration: 'none' }}
-                            >Калорийность, состав и аллергены</Link>
+                            >
+                                <Typography variant="body1">Калорийность, состав и аллергены</Typography>
+                            </Link>
                                 :
                             null
                         }
@@ -156,15 +164,21 @@ class StickyFooter extends React.Component{
                         <Link
                             to={ '/'+this.state.cityName+'/politika-konfidencialnosti' }
                             style={{ textDecoration: 'none' }}
-                        >Политика конфиденциальности</Link>
+                        >
+                            <Typography variant="body1">Политика конфиденциальности</Typography>
+                        </Link>
                         <Link
                             to={ '/'+this.state.cityName+'/contacts' }
                             style={{ textDecoration: 'none' }}
-                        >Доставка и контакты</Link>
+                        >
+                            <Typography variant="body1">Доставка и контакты</Typography>
+                        </Link>
                         <Link
                             to={ '/'+this.state.cityName+'/instpayorders' }
                             style={{ textDecoration: 'none' }}
-                        >Правила оплаты товаров</Link>
+                        >
+                            <Typography variant="body1">Правила оплаты товаров</Typography>
+                        </Link>
                     </Grid>
                     { this.state.is_load ?
                         <Grid item lg={3} md={3} sm={3} xl={3} xs={12} className="socIcons">
