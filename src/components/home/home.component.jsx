@@ -335,6 +335,7 @@ class CardItem extends React.Component {
                                     alt={this.state.item.name}
                                     title={this.state.item.name}
                                     style={{ minHeight: 150 }}
+                                    loading="lazy"
                                 />
                             </picture>
                                 :
@@ -350,7 +351,12 @@ class CardItem extends React.Component {
                                     https://storage.yandexcloud.net/site-img/${img_name}_760x760.jpg 760w,
                                     https://storage.yandexcloud.net/site-img/${img_name}_1875x1875.jpg 1875w`} 
                                     sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
-                                <img alt={this.state.item.name} title={this.state.item.name} src={`https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg`} />
+                                <img 
+                                    alt={this.state.item.name} 
+                                    title={this.state.item.name} 
+                                    src={`https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg`} 
+                                    loading="lazy"
+                                />
                             </picture>
                         }
                         
@@ -426,6 +432,7 @@ class CardItem extends React.Component {
                                     alt={this.state.item.name}
                                     title={this.state.item.name}
                                     style={{ width: ((GRID*3) + (2*20)), height: 'auto'  }}
+                                    loading="lazy"
                                 />
                             </picture>
                                 :
@@ -446,6 +453,7 @@ class CardItem extends React.Component {
                                     title={this.state.item.name} 
                                     src={`https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg`} 
                                     style={{ width: ((GRID*3) + (2*20)), height: ((GRID*3) + (2*20))  }}
+                                    loading="lazy"
                                 />
                             </picture>
                         }
