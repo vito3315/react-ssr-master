@@ -147,16 +147,6 @@ class CoverFlowCarousel extends React.Component {
                         </div>
                     )}
                 </div>
-                    
-                { this.state.data.length == 1 ? null : this.state.type == 'pc' ?
-                    <>
-                        <div className="swiper-pagination" />
-                        <div className="swiper-button-prev" onClick={this.prev.bind(this)} />
-                        <div className="swiper-button-next" onClick={this.next.bind(this)} />
-                    </>
-                        :
-                    null
-                }
             </div>
         );
     }
