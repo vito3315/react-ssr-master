@@ -94,14 +94,7 @@ class CoverFlowCarousel extends React.Component {
                 delay: 5000,
             },
             
-            pagination: {
-                el: '.swiper-pagination',
-                type: 'bullets',
-                clickable: true,
-                renderBullet: function (index, className) {
-                    return '<span class="' + className + '">' + (index + 1) + '</span>';
-                },
-            },
+            pagination: true,
 
             /*pagination: this_count == 1 ? false : this.state.type == 'pc' ? true : true,
             pagination: this_count == 1 ? {} : this.state.type == 'pc' ? {
