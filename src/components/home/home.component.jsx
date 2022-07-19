@@ -50,10 +50,19 @@ import { getAnalytics, logEvent } from "firebase/analytics";
 
 var firebaseAPP = null;
 
-import Swiper from "swiper";
-import { Pagination, Navigation, A11y, Autoplay } from 'swiper';
+//import Swiper from "swiper";
+//import { Pagination, Navigation, A11y, Autoplay } from 'swiper';
 //SwiperCore.use([Navigation, Pagination, A11y, Autoplay]);
-import 'swiper/css'
+//import 'swiper/css'
+
+
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+
+
 
 class CoverFlowCarousel extends React.Component {
     swiper = null;
@@ -79,7 +88,7 @@ class CoverFlowCarousel extends React.Component {
         
         
         
-        this.swiper = new Swiper(".swiper-container", {
+        /*this.swiper = new Swiper(".swiper-container", {
             modules: [Navigation, Pagination, A11y, Autoplay],
 
             grabCursor: this_count == 1 ? false : true,
@@ -112,18 +121,35 @@ class CoverFlowCarousel extends React.Component {
             
             //renderPrevButton: () => <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />,
             //renderNextButton: () => <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
-        });
+        });*/
     }
      
     prev(){
-        this.swiper.slidePrev();
+        //this.swiper.slidePrev();
     }
     
     next(){
-        this.swiper.slideNext();
+        //this.swiper.slideNext();
     }
      
     render() {
+
+        return (
+            <Swiper
+                //spaceBetween={50}
+                slidesPerView={1}
+                onSlideChange={() => console.log('slide change')}
+                onSwiper={(swiper) => console.log(swiper)}
+            >
+                {this.state.data.map((item, key) => 
+                    <div className={"swiper-slide _h3_ "+key} key={key}>
+                        {item}
+                    </div>
+                )}
+                
+            </Swiper>
+        )
+
         return (
             <div className={"swiper-container swiper_"+this.state.type+" _h1_"}>
                 <div className={"swiper-wrapper _h2_ _count_"+this.state.data.length}>
