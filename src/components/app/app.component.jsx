@@ -132,30 +132,22 @@ class StickyFooter extends React.Component{
                         <Link
                             to={ '/'+this.state.cityName+'/about' }
                             style={{ textDecoration: 'none' }}
-                        >
-                            <Typography variant="body1" component="span">О Компании</Typography>
-                        </Link>
+                        >О Компании</Link>
                         <Link
                             to={ '/'+this.state.cityName+'/jobs' }
                             style={{ textDecoration: 'none' }}
-                        >
-                            <Typography variant="body1" component="span">Вакансии</Typography>
-                        </Link>
+                        >Вакансии</Link>
                         <Link
                             to={ '/'+this.state.cityName+'/publichnaya-oferta' }
                             style={{ textDecoration: 'none' }}
-                        >
-                            <Typography variant="body1" component="span">Публичная оферта</Typography>
-                        </Link>
+                        >Публичная оферта</Link>
 
                         { this.state.is_load && this.state.soc_link && this.state.soc_link.link_allergens.length ?
                             <Link
                                 to={{ pathname: this.state.soc_link.link_allergens }}
                                 target="_blank"
                                 style={{ textDecoration: 'none' }}
-                            >
-                                <Typography variant="body1" component="span">Калорийность, состав и аллергены</Typography>
-                            </Link>
+                            >Калорийность, состав и аллергены</Link>
                                 :
                             null
                         }
@@ -164,21 +156,15 @@ class StickyFooter extends React.Component{
                         <Link
                             to={ '/'+this.state.cityName+'/politika-konfidencialnosti' }
                             style={{ textDecoration: 'none' }}
-                        >
-                            <Typography variant="body1" component="span">Политика конфиденциальности</Typography>
-                        </Link>
+                        >Политика конфиденциальности</Link>
                         <Link
                             to={ '/'+this.state.cityName+'/contacts' }
                             style={{ textDecoration: 'none' }}
-                        >
-                            <Typography variant="body1" component="span">Доставка и контакты</Typography>
-                        </Link>
+                        >Доставка и контакты</Link>
                         <Link
                             to={ '/'+this.state.cityName+'/instpayorders' }
                             style={{ textDecoration: 'none' }}
-                        >
-                            <Typography variant="body1" component="span">Правила оплаты товаров</Typography>
-                        </Link>
+                        >Правила оплаты товаров</Link>
                     </Grid>
                     { this.state.is_load ?
                         <Grid item lg={3} md={3} sm={3} xl={3} xs={12} className="socIcons">
