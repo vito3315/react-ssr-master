@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
+import "swiper/css/bundle";
 // import App components
 import { App } from './components/app';
 
