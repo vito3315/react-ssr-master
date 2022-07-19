@@ -139,7 +139,7 @@ class CoverFlowCarousel extends React.Component {
     render() {
 
         return (
-            <div className={"swiper-container swiper_"+this.state.type+" _h1_"} style={{ overflow: 'hidden' }}>
+            <div className={"swiper-container swiper_"+this.state.type+" _h1_"} style={{ overflow: 'hidden', position: 'relative' }}>
                 <div className={"swiper-wrapper _h2_ _count_"+this.state.data.length}>
                     {this.state.data.map((item, key) => 
                         <div className={"swiper-slide _h3_ "+key} key={key}>
@@ -147,6 +147,16 @@ class CoverFlowCarousel extends React.Component {
                         </div>
                     )}
                 </div>
+                    
+                { this.state.data.length == 1 ? null : this.state.type == 'pc' ?
+                    <>
+                        <div className="swiper-pagination" />
+                        <div className="swiper-button-prev" onClick={this.prev.bind(this)} />
+                        <div className="swiper-button-next" onClick={this.next.bind(this)} />
+                    </>
+                        :
+                    null
+                }
             </div>
         );
     }

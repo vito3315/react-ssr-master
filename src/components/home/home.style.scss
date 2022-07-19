@@ -157,19 +157,22 @@ $colorMain: #CC0033;
 }
 
 .swiper-button-prev{
-    width: 100px;
-    height: 100%;
-    top: 0;
-    z-index: 1;
-    position: absolute;
+    width: 100px!important;
+    height: 100%!important;
+    top: 0!important;
+    z-index: 1!important;
+    position: absolute!important;
 }
 .swiper-button-next{
-    width: 100px;
-    height: 100%;
-    top: 0;
-    right: 0;
-    z-index: 1;
-    position: absolute;
+    width: 100px!important;
+    height: 100%!important;
+    top: 0!important;
+    right: 0!important;
+    z-index: 1!important;
+    position: absolute!important;
+}
+.swiper-button-next:after, .swiper-button-prev:after{
+    color: transparent;
 }
 
 .swiper-pagination-bullet{
