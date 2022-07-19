@@ -43,7 +43,7 @@ import Box from '@mui/material/Box';
 
 //import LazyLoad from 'react-lazyload';
 
-import { ActionsCartButton, ActionsCartButtonStart, IconRuble } from '../../stores/elements';
+import { ActionsCartButton, ActionsCartButtonStart, IconRuble, IconClose } from '../../stores/elements';
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics, logEvent } from "firebase/analytics";
@@ -154,24 +154,6 @@ function Ruble(props){
             </g>
         </svg>
     )
-}
-
-function IconClose(props) {
-    return (
-      <svg
-        style={ props.style ? props.style : null }
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 64 64"
-      >
-        <path
-          stroke="#fff"
-          strokeLinecap="round"
-          strokeWidth="3"
-          d="M2 2l60 60M62 2L2 62"
-        ></path>
-      </svg>
-    );
 }
 
 const handleDragStart = (e) => e.preventDefault();
@@ -1268,7 +1250,7 @@ export class Home extends React.Component {
                                 <Grid container spacing={2} style={{ margin: 0, padding: '0px 10px', paddingBottom: 20, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
                                     {cat.items.map((it, k) => (
                                         <Grid item xs={12} sm={4} md={3} xl={3} key={k} style={{ padding: '10px 8px', display: 'flex'}}>
-                                            <CardItemBot city={this.state.city_name} data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
+                                            <CardItem city={this.state.city_name} data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
                                         </Grid>
                                     ))}
                                 </Grid>

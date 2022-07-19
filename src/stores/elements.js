@@ -89,6 +89,24 @@ export function IconInfoBlack() {
     );
 }
 
+export function IconClose(props) {
+    return (
+      <svg
+        style={ props.style ? props.style : null }
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 64 64"
+      >
+        <path
+          stroke="#fff"
+          strokeLinecap="round"
+          strokeWidth="3"
+          d="M2 2l60 60M62 2L2 62"
+        ></path>
+      </svg>
+    );
+}
+
 export class MiniActionsCartButton extends React.PureComponent{
     render(){
         return (
