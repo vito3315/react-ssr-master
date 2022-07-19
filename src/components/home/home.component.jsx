@@ -41,7 +41,7 @@ import { autorun } from "mobx"
 import Slide from '@mui/material/Slide';
 import Box from '@mui/material/Box';
 
-import LazyLoad from 'react-lazyload';
+//import LazyLoad from 'react-lazyload';
 
 import { ActionsCartButton, ActionsCartButtonStart, IconRuble } from '../../stores/elements';
 

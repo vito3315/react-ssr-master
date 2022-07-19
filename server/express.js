@@ -141,7 +141,7 @@ app.use( '*', async ( req, res ) => {
             Item: Item
         }
         
-        let appHTML = ReactDOMServer.renderToString(
+        let appHTML = ReactDOMServer.renderToPipeableStream(
             <StaticRouter location={ req.originalUrl }>
                 <App globalState={GLOBAL_STATE} />
             </StaticRouter>
