@@ -95,10 +95,10 @@ class CoverFlowCarousel extends React.Component {
         this.swiper = new Swiper(".swiper-container", {
             //modules: [Navigation, Pagination, A11y, Autoplay],
 
-            //grabCursor: this_count == 1 ? false : true,
+            grabCursor: this_count == 1 ? false : true,
             loop: this_count == 1 ? false : true,
-            //centeredSlidesBounds: false,
-            //setWrapperSize: this_count == 1 ? false : true,
+            centeredSlidesBounds: false,
+            setWrapperSize: this_count == 1 ? false : true,
             autoHeight: true,
             //spaceBetween: 100,
             centeredSlides: true,
@@ -109,7 +109,7 @@ class CoverFlowCarousel extends React.Component {
                 delay: 5000,
             },
             
-            /*pagination: this_count == 1 ? false : this.state.type == 'pc' ? true : true,
+            pagination: this_count == 1 ? false : this.state.type == 'pc' ? true : true,
             pagination: this_count == 1 ? {} : this.state.type == 'pc' ? {
                 el: ".swiper-pagination",
                 clickable: true,
@@ -121,7 +121,7 @@ class CoverFlowCarousel extends React.Component {
             navigation: this_count == 1 ? {} : this.state.type == 'pc' ? {
                 nextEl: ".swiper-button-next", // arrows on the side of the slides
                 prevEl: ".swiper-button-prev", // arrows on the side of the slides
-            } : {},*/
+            } : {},
             
             //renderPrevButton: () => <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />,
             //renderNextButton: () => <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
@@ -139,7 +139,7 @@ class CoverFlowCarousel extends React.Component {
     render() {
 
         return (
-            <div className={"swiper-container swiper_"+this.state.type+" _h1_"}>
+            <div className={"swiper-container swiper_"+this.state.type+" _h1_"} style={{ overflow: 'hidden' }}>
                 <div className={"swiper-wrapper _h2_ _count_"+this.state.data.length}>
                     {this.state.data.map((item, key) => 
                         <div className={"swiper-slide _h3_ "+key} key={key}>
