@@ -93,7 +93,7 @@ class CoverFlowCarousel extends React.Component {
 
         
         this.swiper = new Swiper(".swiper-container", {
-            //modules: [Navigation, Pagination, A11y, Autoplay],
+            modules: [Navigation, Pagination, A11y, Autoplay],
 
             grabCursor: this_count == 1 ? false : true,
             loop: this_count == 1 ? false : true,
