@@ -1047,22 +1047,26 @@ export class Home extends React.Component {
         
         //if( !this.props.data ){
             Home.fetchData('/'+this.state.city_name).then( data => {
-                this.setState( {
-                    page: data.page,
-                    title: data.title,
-                    description: data.description,
+                if( this._isMounted === true ){
+                    this.setState( {
+                        page: data.page,
+                        title: data.title,
+                        description: data.description,
 
 
-                } );
+                    } );
+                }
             } );
         //}
         
         itemsStore.setPage('home');
         
         if( itemsStore.getAllItemsCat().length == 0 ){
-            this.setState({
-                allItems: itemsStore.getAllItemsCat()
-            })
+            if( this._isMounted === true ){
+                this.setState({
+                    allItems: itemsStore.getAllItemsCat()
+                })
+            }
         }
         
         //if( itemsStore.getAllItemsCat().length == 0 ){
@@ -1070,7 +1074,7 @@ export class Home extends React.Component {
         //}
         
         autorun(() => {
-            if( this._isMounted ){
+            if( this._isMounted === true ){
                 this.setState({
                     allItems: itemsStore.getAllItemsCat(),
                     mainLink: itemsStore.getMainLink()
