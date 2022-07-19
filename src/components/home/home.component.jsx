@@ -50,21 +50,6 @@ import { getAnalytics, logEvent } from "firebase/analytics";
 
 var firebaseAPP = null;
 
-//import Swiper from "swiper";
-//import { Pagination, Navigation, A11y, Autoplay } from 'swiper';
-//SwiperCore.use([Navigation, Pagination, A11y, Autoplay]);
-//import 'swiper/css'
-
-
-//import { Swiper, SwiperSlide } from "swiper/react";
-
-//import { Swiper } from 'https://unpkg.com/swiper@8/swiper-bundle.esm.browser.min.js'
-
-// Import Swiper styles
-//import "swiper/css";
-
-
-
 class CoverFlowCarousel extends React.Component {
     swiper = null;
     
@@ -128,14 +113,6 @@ class CoverFlowCarousel extends React.Component {
         });
     }
      
-    prev(){
-        this.swiper.slidePrev();
-    }
-    
-    next(){
-        this.swiper.slideNext();
-    }
-     
     render() {
 
         return (
@@ -151,8 +128,8 @@ class CoverFlowCarousel extends React.Component {
                 { this.state.data.length == 1 ? null : this.state.type == 'pc' ?
                     <>
                         <div className="swiper-pagination" />
-                        <div className="swiper-button-prev" onClick={this.prev.bind(this)} />
-                        <div className="swiper-button-next" onClick={this.next.bind(this)} />
+                        <div className="swiper-button-prev" />
+                        <div className="swiper-button-next" />
                     </>
                         :
                     null
