@@ -56,10 +56,12 @@ var firebaseAPP = null;
 //import 'swiper/css'
 
 
-import { Swiper, SwiperSlide } from "swiper/react";
+//import { Swiper, SwiperSlide } from "swiper/react";
+
+//import { Swiper } from 'https://unpkg.com/swiper@8/swiper-bundle.esm.browser.min.js'
 
 // Import Swiper styles
-import "swiper/css";
+//import "swiper/css";
 
 
 
@@ -86,9 +88,12 @@ class CoverFlowCarousel extends React.Component {
         }*/
         
         
+
+
+
         
         this.swiper = new Swiper(".swiper-container", {
-            modules: [Navigation, Pagination, A11y, Autoplay],
+            //modules: [Navigation, Pagination, A11y, Autoplay],
 
             grabCursor: this_count == 1 ? false : true,
             loop: this_count == 1 ? false : true,
@@ -132,21 +137,6 @@ class CoverFlowCarousel extends React.Component {
     }
      
     render() {
-
-        return (
-            <Swiper
-                //spaceBetween={50}
-                slidesPerView={1}
-                onSlideChange={() => console.log('slide change')}
-                onSwiper={(swiper) => console.log(swiper)}
-            >
-                {this.state.data.map((item, key) => 
-                    <SwiperSlide key={key}>
-                        {item}
-                    </SwiperSlide>
-                )}
-            </Swiper>
-        )
 
         return (
             <div className={"swiper-container swiper_"+this.state.type+" _h1_"}>
