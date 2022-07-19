@@ -6,6 +6,8 @@ const ReactDOMServer = require( 'react-dom/server' );
 const { StaticRouter, matchPath } = require( 'react-router-dom' );
 const {Helmet} = require("react-helmet");
 
+import { renderToPipeableStream } from "react-dom/server";
+
 //const compression = require('compression');
 // create express application
 const app = express();
@@ -141,7 +143,7 @@ app.use( '*', async ( req, res ) => {
             Item: Item
         }
         
-        let appHTML = ReactDOMServer.renderToPipeableStream(
+        let appHTML = renderToPipeableStream(
             <StaticRouter location={ req.originalUrl }>
                 <App globalState={GLOBAL_STATE} />
             </StaticRouter>
