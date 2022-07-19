@@ -51,7 +51,7 @@ import { getAnalytics, logEvent } from "firebase/analytics";
 var firebaseAPP = null;
 
 import Swiper from "swiper";
-import SwiperCore, { Pagination, Navigation, A11y, Autoplay } from 'swiper';
+import { Pagination, Navigation, A11y, Autoplay } from 'swiper';
 //SwiperCore.use([Navigation, Pagination, A11y, Autoplay]);
 import 'swiper/css'
 
