@@ -262,7 +262,7 @@ export class Actii extends React.Component {
                 { this.state.showItem ?
                     <Dialog onClose={this.closeDialog.bind(this)} aria-labelledby="customized-dialog-title" className="modalActii" open={this.state.openDialog}>
                         <DialogTitle disableTypography style={{ margin: 0, padding: 8 }}>
-                            <Typography variant="h6">{this.state.showItem.promo_title}</Typography>
+                            <Typography variant="h6" component="span">{this.state.showItem.promo_title}</Typography>
                           
                             <IconButton aria-label="close" style={{ position: 'absolute', top: 0, right: 0 }} onClick={this.closeDialog.bind(this)}>
                                 <FontAwesomeIcon icon={faTimes} style={{ fontSize: '1.8rem', color: '#e5e5e5' }} />

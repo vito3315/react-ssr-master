@@ -112,6 +112,7 @@ class CustomBottomNavigation extends React.Component{
                     </Link>
                         :
                     <Typography 
+                        component="span"
                         className="MuiButtonBase-root MuiBottomNavigationAction-root" 
                         onClick={this.props.login}>
                         <Badge badgeContent={ this.state.allPrice } max={500000} color="primary">
@@ -136,6 +137,7 @@ class CustomBottomNavigation extends React.Component{
                     </Link>
                         :
                     <Typography 
+                        component="span"
                         className="MuiButtonBase-root MuiBottomNavigationAction-root" 
                         onClick={this.props.login}>
                             <FontAwesomeIcon icon={ faUser } style={{ color: this.state.thisPage == 'profile' ? 'black' : 'gray' }} />
