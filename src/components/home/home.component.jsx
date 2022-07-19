@@ -88,7 +88,7 @@ class CoverFlowCarousel extends React.Component {
         
         
         
-        /*this.swiper = new Swiper(".swiper-container", {
+        this.swiper = new Swiper(".swiper-container", {
             modules: [Navigation, Pagination, A11y, Autoplay],
 
             grabCursor: this_count == 1 ? false : true,
@@ -121,15 +121,15 @@ class CoverFlowCarousel extends React.Component {
             
             //renderPrevButton: () => <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />,
             //renderNextButton: () => <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
-        });*/
+        });
     }
      
     prev(){
-        //this.swiper.slidePrev();
+        this.swiper.slidePrev();
     }
     
     next(){
-        //this.swiper.slideNext();
+        this.swiper.slideNext();
     }
      
     render() {
@@ -142,11 +142,10 @@ class CoverFlowCarousel extends React.Component {
                 onSwiper={(swiper) => console.log(swiper)}
             >
                 {this.state.data.map((item, key) => 
-                    <div className={"swiper-slide _h3_ "+key} key={key}>
+                    <SwiperSlide key={key}>
                         {item}
-                    </div>
+                    </SwiperSlide>
                 )}
-                
             </Swiper>
         )
 
