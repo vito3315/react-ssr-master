@@ -1,8 +1,9 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
+// import App components
 import { App } from './components/app';
 
-import { hydrateRoot } from 'react-dom/client';
-const container = document.getElementById('app');
-const root = hydrateRoot(container, <BrowserRouter><App globalState={GLOBAL_STATE} /></BrowserRouter>);
+// compile App component in `#app` HTML element
+ReactDOM.hydrate( <BrowserRouter><App globalState={GLOBAL_STATE} /></BrowserRouter>, document.getElementById( 'app' ) );
