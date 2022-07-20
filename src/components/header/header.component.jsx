@@ -157,6 +157,7 @@ class SimplePopover extends React.Component{
         this.state = {      
             anchorEl: null,
             cartItems: [],
+            originPrice: 0,
             allPrice: 0,
             sumDiv: 0,
             promoName: '',
@@ -252,7 +253,17 @@ class SimplePopover extends React.Component{
                     newCart[ key ]['img_app'] = this_item['img_app'];
                 } )
 
+                let allPrice = 0;
+
+                newCart.map( (item) => {
+                    allPrice += parseInt(item.one_price) * parseInt(item.count);
+                } )
+
+                console.log( 'originPrice', allPrice )
+                console.log( 'allPrice', itemsStore.getSumDiv() + itemsStore.getAllPrice() )
+
                 this.setState({
+                    originPrice: allPrice,
                     cartItems: newCart,
                     sumDiv: itemsStore.getSumDiv(),
                     promoName: localStorage.getItem('promo_name') ? localStorage.getItem('promo_name') : ''
