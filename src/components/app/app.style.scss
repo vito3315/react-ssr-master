@@ -560,15 +560,15 @@ body{
         }
         & > button:hover{
             background-color: #cf9f37;
-            border: 1px solid #F9BC23;
+            border: 1px solid #cf9f37;
         }
         & > button:target{
             background-color: #cf9f37;
-            border: 1px solid #F9BC23;
+            border: 1px solid #cf9f37;
         }
         & > button:active{
             background-color: #cf9f37;
-            border: 1px solid #F9BC23;
+            border: 1px solid #cf9f37;
         }
     }
 }
@@ -584,7 +584,7 @@ body{
         display: flex;
         flex-direction: row;
         & .DescPromo{
-            width: 50%;
+            width: calc(100% - 360px);
             padding-left: 20px;
             & span{
                 @include fonsNew(0.95rem, $Roboto);
@@ -604,6 +604,7 @@ body{
                 width: 100%;
                 background-color: #F9BC23;
                 border-radius: 60px;
+                height: 60px;
                 @include fonsNew(1rem, $Roboto);
                 font-weight: 400;
                 text-transform: initial;
@@ -640,14 +641,14 @@ body{
             }
         }
         & tfoot{
-            height: 40px;
+            height: 80px;
             & td:first-child{
                 @include fonsNew(1.25rem, $Roboto);
                 font-weight: 500;
             }
             & td:last-child{
                 @include fonsNew(1.25rem, $Roboto);
-                font-weight: 500;
+                font-weight: 400;
                 & > div{
                     display: flex;
                     justify-content: flex-end;
@@ -687,12 +688,12 @@ body{
         padding: 0px 10px 0px 20px;
         display: flex;
         align-items: center;
-        height: 38px;
+        height: 58px;
         border-radius: 60px;
         border: 1px solid rgba(27, 27, 31, 0.1);
-        width: 50%;
+        width: 300px;
         & > div:first-child{
-            width: calc(100% - 20px);
+            width: calc(100% - 27px);
         }
         & input{
             @include fonsNew(0.95rem, $Roboto);

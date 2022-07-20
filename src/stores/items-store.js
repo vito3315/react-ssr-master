@@ -215,7 +215,7 @@ class ItemsStore {
       if( !promo_info.status_promo ){
         return {
           st: false,
-          text: 'Данный промокод уже активирован или не найден'
+          text: 'Данный промокод не найден или уже активирован.'
         }
       }
       
