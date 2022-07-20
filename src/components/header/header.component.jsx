@@ -445,8 +445,8 @@ class SimplePopover extends React.Component{
                                             <td className="TableMiniName CellName">
                                                 <span style={{ height: 40, width: '100%', display: 'flex', alignItems: 'center' }}>{item.name}</span>
                                             </td>
-                                            <td className="CellButton" colSpan="2">
-                                                <MiniActionsCartButtonPrize count={item.count} price={this.state.allPrice} />
+                                            <td className="CellButtonPrize" colSpan="2">
+                                                <MiniActionsCartButtonPrize count={item.count} price={item.all_price} />
                                             </td>
                                         </tr>
                                 )}

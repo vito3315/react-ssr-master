@@ -161,7 +161,7 @@ export class MiniActionsCartButtonPrize extends React.PureComponent{
                             : 
                         <span>{this.props.count} шт. в подарок за { new Intl.NumberFormat('ru-RU').format( parseInt(this.props.price) )}</span>
                     }
-                    <IconRuble style={{ width: 14, height: 14, fill: '#525252', marginLeft: 5, paddingBottom: 1 }} />
+                    <IconRuble style={{ width: 12, height: 12, fill: '#525252', marginLeft: 5, paddingBottom: 1 }} />
                 </div>
             </ButtonGroup>
         )

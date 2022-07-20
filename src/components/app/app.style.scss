@@ -304,14 +304,14 @@ body{
     }
 }
 .MiniActionsCartButtonPrize{
-    & > button{
-        width: 160px;
+    & > div{
+        width: 240px;
         height: 30px;
         padding: 0; 
         background-color: rgba(143, 222, 15, 0.1);
         border: 1px solid rgb(143, 222, 15);
         border-radius: 30px;
-        @include fonsNew(0.875rem, $Roboto);
+        @include fonsNew(1.08rem, $Roboto);
         font-weight: 500;
         text-transform: initial;
         display: flex;
@@ -715,6 +715,9 @@ body{
         }
         & .CellButton{
             width: 25.9%;
+        }
+        & .CellButtonPrize{
+            width: 43.1%;
         }
         & .CellPrice{
             width: 17.2%;
