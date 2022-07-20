@@ -151,3 +151,19 @@ export class ActionsCartButton extends React.PureComponent{
     }
 }
 
+export class MiniActionsCartButtonPrize extends React.PureComponent{
+    render(){
+        return (
+            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className='MiniActionsCartButtonPrize'>
+                <div variant="contained" className='ModalItemButtonCart OPEN'>
+                    { parseInt(this.props.count) == 1 ? 
+                        <span>В подарок за { new Intl.NumberFormat('ru-RU').format( parseInt(this.props.price) )}</span> 
+                            : 
+                        <span>{this.props.count} шт. в подарок за { new Intl.NumberFormat('ru-RU').format( parseInt(this.props.price) )}</span>
+                    }
+                    <IconRuble style={{ width: 14, height: 14, fill: '#525252', marginLeft: 5, paddingBottom: 1 }} />
+                </div>
+            </ButtonGroup>
+        )
+    }
+}

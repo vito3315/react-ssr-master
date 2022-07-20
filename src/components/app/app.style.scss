@@ -303,6 +303,42 @@ body{
         padding-bottom: 1px;
     }
 }
+.MiniActionsCartButtonPrize{
+    & > button{
+        width: 160px;
+        height: 30px;
+        padding: 0; 
+        background-color: rgba(143, 222, 15, 0.1);
+        border: 1px solid rgb(143, 222, 15);
+        border-radius: 30px;
+        @include fonsNew(0.875rem, $Roboto);
+        font-weight: 500;
+        text-transform: initial;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        & span{
+            @include fonsNew(0.875rem, $Roboto);
+            font-weight: 500;
+            text-transform: initial;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        &:hover{
+            background-color: rgba(143, 222, 15, 0.1);
+            border: 1px solid rgb(143, 222, 15);
+        }
+        &:target{
+            background-color: rgba(143, 222, 15, 0.1);
+            border: 1px solid rgb(143, 222, 15);
+        }
+        &:active{
+            background-color: rgba(143, 222, 15, 0.1);
+            border: 1px solid rgb(143, 222, 15);
+        }
+    }
+}
 .MobileActionsCartButtonStart{
     & > button{
         width: 80px;

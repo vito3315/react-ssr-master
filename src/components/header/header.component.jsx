@@ -41,7 +41,7 @@ import Badge from '@mui/material/Badge';
 import itemsStore from '../../stores/items-store';
 import config from '../../stores/config';
 
-import { MiniActionsCartButton, IconRuble } from '../../stores/elements';
+import { MiniActionsCartButton, MiniActionsCartButtonPrize, IconRuble } from '../../stores/elements';
 
 import { autorun } from "mobx"
 
@@ -445,14 +445,8 @@ class SimplePopover extends React.Component{
                                             <td className="TableMiniName CellName">
                                                 <span style={{ height: 40, width: '100%', display: 'flex', alignItems: 'center' }}>{item.name}</span>
                                             </td>
-                                            <td className="CellButton">
-                                                <MiniActionsCartButton count={item.count} item_id={item.item_id} minus={this.minus.bind(this)} add={this.add.bind(this)} />
-                                            </td>
-                                            <td className="CellPrice"> 
-                                                <div className="TableMiniPrice">
-                                                    { new Intl.NumberFormat('ru-RU').format(item.all_price) } 
-                                                    <IconRuble style={{ width: 13, height: 13, fill: '#525252', marginLeft: 5 }}/>
-                                                </div>
+                                            <td className="CellButton" colSpan="2">
+                                                <MiniActionsCartButtonPrize count={item.count} price={this.state.allPrice} />
                                             </td>
                                         </tr>
                                 )}
@@ -529,34 +523,34 @@ function TabPanel(props) {
     const { children, value, index, ...other } = props;
   
     return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`full-width-tabpanel-${index}`}
-        aria-labelledby={`full-width-tab-${index}`}
-        {...other}
-      >
-        {value === index && (
-          <Box p={3}>
-            {children}
-          </Box>
-        )}
-      </div>
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`full-width-tabpanel-${index}`}
+            aria-labelledby={`full-width-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <Box p={3}>
+                    {children}
+                </Box>
+            )}
+        </div>
     );
-  }
+}
   
-  TabPanel.propTypes = {
+TabPanel.propTypes = {
     children: PropTypes.node,
     index: PropTypes.any.isRequired,
     value: PropTypes.any.isRequired,
-  };
+};
   
-  function a11yProps(index) {
+function a11yProps(index) {
     return {
-      id: `full-width-tab-${index}`,
-      'aria-controls': `full-width-tabpanel-${index}`,
+        id: `full-width-tab-${index}`,
+        'aria-controls': `full-width-tabpanel-${index}`,
     };
-  }
+}
 
 export class Header extends React.Component {
     is_load = false;
