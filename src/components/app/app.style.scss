@@ -689,22 +689,23 @@ body{
                     justify-content: flex-end;
                     align-items: center;
                     @include fonsNew(1.25rem, $Roboto);
-                    font-weight: 400;
+                    font-weight: 500;
                 }
                 & > .originPrice{
                     display: flex;
                     justify-content: flex-end;
                     align-items: center;
                     @include fonsNew(1.25rem, $Roboto);
-                    font-weight: 400;
-                    color: #1b1b1f!important;
+                    font-weight: 500;
+                    color: rgba(27,27,31,0.1)!important;
                     position: relative;
                     &:before {
-                        border-bottom: 1px solid red;
+                        border-bottom: 2px solid red;
                         position: absolute;
                         content: "";
-                        width: 100%;
-                        height: 50%;
+                        width: 26%;
+                        height: 6%;
+                        right: -5px;
                     }
                 }
             }
