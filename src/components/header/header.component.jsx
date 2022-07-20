@@ -469,7 +469,7 @@ class SimplePopover extends React.Component{
                                         { this.state.originPrice != this.state.allPrice ?
                                             <div className='originPrice'>
                                                 { new Intl.NumberFormat('ru-RU').format(this.state.originPrice) } 
-                                                <IconRuble style={{ width: 14, height: 14, fill: '#525252', marginLeft: 5 }} />
+                                                <IconRuble style={{ width: 14, height: 14, fill: 'rgba(27,27,31,0.1)', marginLeft: 5 }} />
                                             </div>
                                                 :
                                             <div>

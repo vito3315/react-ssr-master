@@ -630,6 +630,16 @@ body{
                 color: #dd1932;
             }
         }
+        & .DescPromoPrice{
+            width: calc(100% - 360px);
+            padding-left: 20px;
+            @include fonsNew(0.95rem, $Roboto);
+            font-weight: 300;
+            line-height: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
     }
     
     & .InCart{
@@ -700,7 +710,7 @@ body{
                     color: rgba(27,27,31,0.1)!important;
                     position: relative;
                     &:before {
-                        border-bottom: 2px solid red;
+                        border-bottom: 2px solid $colorMain;
                         position: absolute;
                         content: "";
                         width: 26%;
