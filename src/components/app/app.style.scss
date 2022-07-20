@@ -684,12 +684,28 @@ body{
                 font-weight: 500;
             }
             & td:last-child{
-                @include fonsNew(1.25rem, $Roboto);
-                font-weight: 400;
-                & > div{
+                & > div:not(.originPrice){
                     display: flex;
                     justify-content: flex-end;
                     align-items: center;
+                    @include fonsNew(1.25rem, $Roboto);
+                    font-weight: 400;
+                }
+                & > .originPrice{
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: center;
+                    @include fonsNew(1.25rem, $Roboto);
+                    font-weight: 400;
+                    color: #1b1b1f!important;
+                    position: relative;
+                    &:before {
+                        border-bottom: 1px solid red;
+                        position: absolute;
+                        content: "";
+                        width: 100%;
+                        height: 50%;
+                    }
                 }
             }
         }

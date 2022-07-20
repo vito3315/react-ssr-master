@@ -466,10 +466,17 @@ class SimplePopover extends React.Component{
                                 <tr>
                                     <td>Итого:</td>
                                     <td>
-                                        <div>
-                                            { new Intl.NumberFormat('ru-RU').format(this.state.allPrice) } 
-                                            <IconRuble style={{ width: 14, height: 14, fill: '#525252', marginLeft: 5 }} />
-                                        </div>
+                                        { this.state.originPrice != this.state.allPrice ?
+                                            <div className='originPrice'>
+                                                { new Intl.NumberFormat('ru-RU').format(this.state.originPrice) } 
+                                                <IconRuble style={{ width: 14, height: 14, fill: '#525252', marginLeft: 5 }} />
+                                            </div>
+                                                :
+                                            <div>
+                                                { new Intl.NumberFormat('ru-RU').format(this.state.allPrice) } 
+                                                <IconRuble style={{ width: 14, height: 14, fill: '#525252', marginLeft: 5 }} />
+                                            </div>
+                                        }
                                     </td>
                                 </tr>
                             </tfoot>      
@@ -489,6 +496,16 @@ class SimplePopover extends React.Component{
                                     null
                                 }
                             </Paper>
+
+                            { this.state.originPrice != this.state.allPrice ?
+                                <div className="DescPromoPrice">
+                                    { new Intl.NumberFormat('ru-RU').format(this.state.allPrice) } 
+                                    <IconRuble style={{ width: 14, height: 14, fill: '#525252', marginLeft: 5 }} />
+                                </div>
+                                    :
+                                null
+                            }
+
                             {this.state.promoText.length > 0 && this.state.promoST === false ?
                                 <div className="DescPromo">
                                     <Typography className="cat" variant="h5" component="span">{this.state.promoText}</Typography>
