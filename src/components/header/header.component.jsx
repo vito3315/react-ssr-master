@@ -174,6 +174,8 @@ class SimplePopover extends React.Component{
         this._isMounted = true;
         
         if( localStorage.getItem('promo_name') && localStorage.getItem('promo_name').length > 0 ){
+            console.log( 'getPromo', itemsStore.getPromo() )
+
             this.setState({
                 promoName: localStorage.getItem('promo_name')
             })
@@ -226,6 +228,8 @@ class SimplePopover extends React.Component{
         autorun(() => {
             if( this._isMounted ){
 
+                console.log( 'getPromo autorun', itemsStore.getPromo() )
+
                 this.setState({
                     allPrice: itemsStore.getSumDiv() + itemsStore.getAllPrice()
                 })
@@ -262,6 +266,9 @@ class SimplePopover extends React.Component{
                 newCart.map( (item) => {
                     allPrice += parseInt(item.one_price) * parseInt(item.count);
                 } )
+
+                console.log( newCart )
+                console.log( allPrice )
 
                 this.setState({
                     originPrice: allPrice,
