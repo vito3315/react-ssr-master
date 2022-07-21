@@ -687,7 +687,10 @@ body{
             }
         }
         & tfoot{
-            height: 80px;
+            height: 60px;
+            & > tr{
+                height: 60px;
+            }
             & td:first-child{
                 @include fonsNew(1.25rem, $Roboto);
                 font-weight: 500;

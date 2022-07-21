@@ -202,16 +202,23 @@ class SimplePopover extends React.Component{
             }
         })
         
-        cartItems.map( (item, key) => {
+        let allPrice = itemsStore.getSumDiv();
+
+        newCart.map( (item) => {
+            allPrice += parseInt(item.one_price) * parseInt(item.count);
+        } )
+
+        newCart.map( (item, key) => {
             let this_item = allItems.find( (it) => parseInt(it.id) == parseInt(item.item_id) );
 
-            cartItems[ key ]['img_new'] = this_item['img_new'];
-            cartItems[ key ]['img_new_update'] = this_item['img_new_update'];
-            cartItems[ key ]['img_app'] = this_item['img_app'];
+            newCart[ key ]['img_new'] = this_item['img_new'];
+            newCart[ key ]['img_new_update'] = this_item['img_new_update'];
+            newCart[ key ]['img_app'] = this_item['img_app'];
         } )
 
         this.setState({
-            cartItems: cartItems
+            cartItems: newCart,
+            originPrice: allPrice,
         })
         
         
@@ -461,8 +468,10 @@ class SimplePopover extends React.Component{
                                     <td>
                                         { this.state.originPrice != this.state.allPrice ?
                                             <div className='originPrice'>
-                                                { new Intl.NumberFormat('ru-RU').format(this.state.originPrice) } 
-                                                <IconRuble style={{ width: 14, height: 14, fill: 'rgba(27,27,31,0.2)', marginLeft: 5 }} />
+                                                <span>
+                                                    { new Intl.NumberFormat('ru-RU').format(this.state.originPrice) } 
+                                                    <IconRuble style={{ width: 14, height: 14, fill: 'rgba(27,27,31,0.2)', marginLeft: 5 }} />
+                                                </span>
                                             </div>
                                                 :
                                             <div>
