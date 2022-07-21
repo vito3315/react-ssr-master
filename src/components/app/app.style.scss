@@ -621,7 +621,7 @@ body{
         display: flex;
         flex-direction: row;
         & .DescPromo{
-            width: calc(100% - 360px);
+            width: calc(100% - 352px);
             padding-left: 20px;
             & span{
                 @include fonsNew(0.95rem, $Roboto);
@@ -631,7 +631,7 @@ body{
             }
         }
         & .DescPromoPrice{
-            width: calc(100% - 360px);
+            width: calc(100% - 352px);
             padding-left: 20px;
             @include fonsNew(1.25rem, $Roboto);
             font-weight: 500;

@@ -253,7 +253,7 @@ class SimplePopover extends React.Component{
                     newCart[ key ]['img_app'] = this_item['img_app'];
                 } )
 
-                let allPrice = 0;
+                let allPrice = itemsStore.getSumDiv();
 
                 newCart.map( (item) => {
                     allPrice += parseInt(item.one_price) * parseInt(item.count);
