@@ -973,6 +973,10 @@ class ItemsStore {
   
   constructor() {
     if (typeof window !== 'undefined') {
+      if( localStorage.getItem('cartData') ){
+        this.cartData = localStorage.getItem('cartData');
+      }
+
       if( localStorage.getItem('my_cart') ){
         let cart = JSON.parse(localStorage.getItem('my_cart'));
         let new_cart = [];
@@ -1008,9 +1012,7 @@ class ItemsStore {
         }, 300 )
       }
 
-      if( localStorage.getItem('cartData') ){
-        this.cartData = localStorage.getItem('cartData');
-      }
+      
 
       
 
