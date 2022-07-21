@@ -180,7 +180,8 @@ class SimplePopover extends React.Component{
 
             setTimeout(() => {
                 this.checkPromo();
-            }, 300)
+                console.log( 'checkPromo HEADER' )
+            }, 1000)
         }
 
         let allItems = itemsStore.getAllItems();
