@@ -633,9 +633,8 @@ body{
         & .DescPromoPrice{
             width: calc(100% - 360px);
             padding-left: 20px;
-            @include fonsNew(0.95rem, $Roboto);
-            font-weight: 300;
-            line-height: 1;
+            @include fonsNew(1.25rem, $Roboto);
+            font-weight: 500;
             display: flex;
             justify-content: flex-end;
             align-items: center;
@@ -707,7 +706,7 @@ body{
                     align-items: center;
                     @include fonsNew(1.25rem, $Roboto);
                     font-weight: 500;
-                    color: rgba(27,27,31,0.1)!important;
+                    color: rgba(27,27,31,0.2)!important;
                     position: relative;
                     &:before {
                         border-bottom: 2px solid $colorMain;
