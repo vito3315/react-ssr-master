@@ -191,7 +191,7 @@ class ItemsStore {
     
     my_cart = new_my_cart;  
       
-    this.setItems(my_cart);  
+    //this.setItems(my_cart);  
       
     let cart_new_promo = [];    
     allPrice = my_cart.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
