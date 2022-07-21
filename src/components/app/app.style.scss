@@ -623,6 +623,8 @@ body{
         & .DescPromo{
             width: calc(100% - 352px);
             padding-left: 20px;
+            display: flex;
+            align-items: center;
             & span{
                 @include fonsNew(0.95rem, $Roboto);
                 font-weight: 300;
