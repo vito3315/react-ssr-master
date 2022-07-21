@@ -712,15 +712,15 @@ body{
                     color: rgba(27,27,31,0.2)!important;
                     
                     & > span{
-                        padding: 10px 0px;
                         position: relative;
+                        width: fit-content;
                         &:before {
                             border-bottom: 2px solid $colorMain;
                             position: absolute;
                             content: "";
-                            width: 100%;
-                            height: 6%;
-                            right: -5px;
+                            width: 140%;
+                            height: 50%;
+                            left: -20%;
                         }
                     }
                 }
