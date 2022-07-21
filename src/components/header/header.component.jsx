@@ -173,7 +173,7 @@ class SimplePopover extends React.Component{
     componentDidMount = () => {
         this._isMounted = true;
         
-        if( localStorage.getItem('promo_name') && localStorage.getItem('promo_name').length > 0 ){
+        /*if( localStorage.getItem('promo_name') && localStorage.getItem('promo_name').length > 0 ){
             this.setState({
                 promoName: localStorage.getItem('promo_name')
             })
@@ -181,7 +181,7 @@ class SimplePopover extends React.Component{
             setTimeout(() => {
                 this.checkPromo();
             }, 1000)
-        }
+        }*/
 
         let allItems = itemsStore.getAllItems();
         let cartItems = itemsStore.getItems();
