@@ -202,8 +202,6 @@ class SimplePopover extends React.Component{
             }
         })
         
-        console.log( cartItems )
-
         cartItems.map( (item, key) => {
             let this_item = allItems.find( (it) => parseInt(it.id) == parseInt(item.item_id) );
 
@@ -243,8 +241,6 @@ class SimplePopover extends React.Component{
                     }
                 })
                 
-                console.log( newCart )
-                
                 newCart.map( (item, key) => {
                     let this_item = allItems.find( (it) => parseInt(it.id) == parseInt(item.item_id) );
         
@@ -258,9 +254,6 @@ class SimplePopover extends React.Component{
                 newCart.map( (item) => {
                     allPrice += parseInt(item.one_price) * parseInt(item.count);
                 } )
-
-                console.log( 'originPrice', allPrice )
-                console.log( 'allPrice', itemsStore.getSumDiv() + itemsStore.getAllPrice() )
 
                 this.setState({
                     originPrice: allPrice,
