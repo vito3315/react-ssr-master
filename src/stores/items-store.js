@@ -988,6 +988,18 @@ class ItemsStore {
         });
         
         this.setItems( new_cart );
+
+        if( localStorage.getItem('promo_name') && localStorage.getItem('promo_name').length > 0 ){
+          setTimeout(()=>{
+            this.getInfoPromo( localStorage.getItem('promo_name') )
+          }, 500)
+        }
+      }else{
+        if( localStorage.getItem('promo_name') && localStorage.getItem('promo_name').length > 0 ){
+          setTimeout(()=>{
+            this.getInfoPromo( localStorage.getItem('promo_name') )
+          }, 500)
+        }
       }
 
       if( localStorage.getItem('token') ){
@@ -999,11 +1011,8 @@ class ItemsStore {
       if( localStorage.getItem('cartData') ){
         this.cartData = localStorage.getItem('cartData');
       }
-      if( localStorage.getItem('promo_name') && localStorage.getItem('promo_name').length > 0 ){
-        setTimeout(()=>{
-          this.getInfoPromo( localStorage.getItem('promo_name') )
-        }, 300)
-      }
+
+      
 
       
     }
