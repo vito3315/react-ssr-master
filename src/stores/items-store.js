@@ -31,6 +31,9 @@ class ItemsStore {
   mainLink = '';
   
   free_drive = 0;
+
+  promoText = '';
+  promoST = null;
   
   setMainLink = (items) => {
     this.mainLink = items;
@@ -136,7 +139,13 @@ class ItemsStore {
         //localStorage.removeItem('promo_name')
       }
       
-      //return check_promo;
+      if( promoName.length == 0 ){
+        itemsStore.promoText = '';
+        itemsStore.promoST = null;
+      }else{
+        itemsStore.promoText = check_promo.text;
+        itemsStore.promoST = check_promo.st;
+      }
     })
   }
   
@@ -990,11 +999,13 @@ class ItemsStore {
       if( localStorage.getItem('cartData') ){
         this.cartData = localStorage.getItem('cartData');
       }
-      if( localStorage.getItem('promo_name') ){
+      if( localStorage.getItem('promo_name') && localStorage.getItem('promo_name').length > 0 ){
         setTimeout(()=>{
           this.getInfoPromo( localStorage.getItem('promo_name') )
         }, 300)
       }
+
+      
     }
     
     

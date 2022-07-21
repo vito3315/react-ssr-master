@@ -225,7 +225,10 @@ class SimplePopover extends React.Component{
             if( this._isMounted ){
 
                 this.setState({
-                    allPrice: itemsStore.getSumDiv() + itemsStore.getAllPrice()
+                    allPrice: itemsStore.getSumDiv() + itemsStore.getAllPrice(),
+
+                    promoText: itemsStore.promoText,
+                    promoST: itemsStore.promoST,
                 })
 
                 let allItems = itemsStore.getAllItems();
@@ -296,7 +299,9 @@ class SimplePopover extends React.Component{
     }
     
     checkPromo(){
-        fetch(config.urlApi, {
+        itemsStore.getInfoPromo(this.state.promoName);
+
+        /*fetch(config.urlApi, {
             method: 'POST',
             headers: {
                 'Content-Type':'application/x-www-form-urlencoded'},
@@ -323,7 +328,7 @@ class SimplePopover extends React.Component{
                     promoST: check_promo.st
                 })
             }
-        })
+        })*/
     }
     
     changePromo(event){
