@@ -179,7 +179,7 @@ class SimplePopover extends React.Component{
             })
 
             setTimeout(() => {
-                //this.checkPromo();
+                this.checkPromo();
             }, 1000)
         }
 
