@@ -111,8 +111,8 @@ function SpringModal() {
                         </div>
                         
                         
-                        <MyTextInput label="Телефон" value={ '' } func={ () => {} } className='inputLogin' />
-                        <MyTextInput label="Пароль" value={ '' } func={ () => {} } className='inputLogin' />
+                        <MyTextInput label="Телефон" value={ '' } func={ () => {} } />
+                        <MyTextInput label="Пароль" value={ '' } func={ () => {} } />
 
                         <Typography component="span">Забыли пароль ?</Typography>
 

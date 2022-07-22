@@ -30,6 +30,9 @@ $colorText: #525252;
     background-color: #fff;
     padding: 30px 80px;
     border-radius: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     & .inputLogin:first-child{
         margin-bottom: 30px;
     }
@@ -56,10 +59,16 @@ $colorText: #525252;
 
         
     }
-
+    
     & .loginHeader{
         height: 60px;
         margin-bottom: 30px;
+        display: flex;
+        align-items: flex-end;
+        & .h2{
+            @include fonsNew(2rem, $Roboto);
+            font-weight: 900;
+        }
     }
     
     & .loginSMS{

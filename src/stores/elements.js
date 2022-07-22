@@ -4,6 +4,7 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
 
 import TextField from '@mui/material/TextField';
+import { height } from '@mui/system';
 
 export function IconRuble(props) {
     return (
@@ -182,6 +183,7 @@ export class MyTextInput extends React.PureComponent {
     render(){
       return (
         <TextField 
+            sx={{ height: 60 }}
           label={this.props.label}
           value={this.props.value}
           onChange={this.props.func}
