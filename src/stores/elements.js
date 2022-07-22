@@ -183,7 +183,6 @@ export class MyTextInput extends React.PureComponent {
     render(){
       return (
         <TextField 
-            sx={{ height: 60 }}
           label={this.props.label}
           value={this.props.value}
           onChange={this.props.func}
