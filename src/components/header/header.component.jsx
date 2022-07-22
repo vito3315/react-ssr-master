@@ -378,7 +378,6 @@ class SimplePopover extends React.Component{
     }
     
     checkPromo(){
-        console.log( 'checkPromo HEADER' )
         itemsStore.getInfoPromo(this.state.promoName);
 
         /*fetch(config.urlApi, {

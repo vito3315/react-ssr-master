@@ -1821,8 +1821,6 @@ export class Cart extends React.Component {
 
         street = street1.length > 0 ? street1 : street2.length > 0 ? street2 : '';
         
-        console.log( street, this.state.newAddrHome )
-
         if( street.length > 0 && this.state.newAddrHome.length > 0 ){
             fetch(config.urlApi, {
                 method: 'POST',
