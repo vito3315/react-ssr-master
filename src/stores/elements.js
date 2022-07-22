@@ -194,7 +194,7 @@ export class MyTextInput extends React.PureComponent {
           multiline={this.props.multiline ? this.props.multiline : false}
           maxRows={this.props.maxRows ? this.props.maxRows : 1}
           type={ this.props.type ? this.props.type : this.state.type }
-          style={{ width: '100%' }} 
+          style={ this.props.style ? this.props.style : {} } 
           className={ this.props.className ? this.props.className : '' }
         />
       )
