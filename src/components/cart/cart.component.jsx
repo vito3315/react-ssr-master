@@ -1814,7 +1814,12 @@ export class Cart extends React.Component {
     }
     
     checkNewAddr(){
-        let street = document.querySelector('#newAddrStreet').value;
+        let street = '';
+
+        let street1 = document.querySelector('#newAddrStreet').value;
+        let street2 = document.querySelector('#newAddrStreetModal').value;
+
+        street = street1.length > 0 ? street1 : street2.length > 0 ? street2 : '';
         
         console.log( street, this.state.newAddrHome )
 
@@ -2593,7 +2598,7 @@ export class Cart extends React.Component {
                         <div className="newAddrMobile" style={{ paddingTop: 0 }}>
                             <Autocomplete
                                 freeSolo
-                                id="newAddrStreet"
+                                id="newAddrStreetModal"
                                 size="small"
                                 style={{ width: '100%' }}
                                 onBlur={this.checkNewAddr.bind(this)}
