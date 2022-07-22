@@ -41,7 +41,7 @@ import Badge from '@mui/material/Badge';
 import itemsStore from '../../stores/items-store';
 import config from '../../stores/config';
 
-import { MiniActionsCartButton, MiniActionsCartButtonPrize, IconRuble } from '../../stores/elements';
+import { MiniActionsCartButton, MiniActionsCartButtonPrize, IconRuble, MyTextInput } from '../../stores/elements';
 
 import { autorun } from "mobx"
 
@@ -93,10 +93,10 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
+    backgroundColor: '#fff',
     boxShadow: 24,
     p: 4,
+    borderRadius: 40
 };
 
 function SpringModal() {
@@ -124,6 +124,8 @@ function SpringModal() {
                         <Typography id="spring-modal-description" sx={{ mt: 2 }}>
                             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
                         </Typography>
+
+                        <MyTextInput label="Название" value={ '' } func={ () => {} } />
                     </Box>
                 </Fade>
             </Modal>
@@ -600,6 +602,9 @@ class SimplePopover extends React.Component{
                             }
                         </div>
                         <div className="InCart">
+
+                            <SpringModal />
+
                             {itemsStore.getToken() !== null ?
                                 <Link
                                     to={'/'+itemsStore.getCity()+'/cart'}

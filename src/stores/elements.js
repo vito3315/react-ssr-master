@@ -3,6 +3,8 @@ import React from 'react';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
 
+import TextField from '@mui/material/TextField';
+
 export function IconRuble(props) {
     return (
         <svg
@@ -167,3 +169,32 @@ export class MiniActionsCartButtonPrize extends React.PureComponent{
         )
     }
 }
+
+export class MyTextInput extends React.PureComponent {
+    constructor(props) {
+      super(props);
+          
+      this.state = {
+        type: 'text'
+      };
+    }
+    
+    render(){
+      return (
+        <TextField 
+          label={this.props.label}
+          value={this.props.value}
+          onChange={this.props.func}
+          onBlur={this.props.onBlur ? this.props.onBlur : null}
+          disabled={ this.props.disabled || this.props.disabled === true ? true : false }
+          variant="outlined" 
+          size={'small'} 
+          color='primary'
+          multiline={this.props.multiline ? this.props.multiline : false}
+          maxRows={this.props.maxRows ? this.props.maxRows : 1}
+          type={ this.props.type ? this.props.type : this.state.type }
+          style={{ width: '100%' }} 
+        />
+      )
+    }
+  }
