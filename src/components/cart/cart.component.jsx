@@ -1816,6 +1816,8 @@ export class Cart extends React.Component {
     checkNewAddr(){
         let street = document.querySelector('#newAddrStreet').value;
         
+        console.log( street, this.state.newAddrHome )
+
         if( street.length > 0 && this.state.newAddrHome.length > 0 ){
             fetch(config.urlApi, {
                 method: 'POST',
