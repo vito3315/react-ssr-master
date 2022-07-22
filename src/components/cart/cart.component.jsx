@@ -1816,8 +1816,8 @@ export class Cart extends React.Component {
     checkNewAddr(){
         let street = '';
 
-        let street1 = document.querySelector('#newAddrStreet').value;
-        let street2 = document.querySelector('#newAddrStreetModal').value;
+        let street1 = document.querySelector('#newAddrStreet') ? document.querySelector('#newAddrStreet').value : '';
+        let street2 = document.querySelector('#newAddrStreetModal') ? document.querySelector('#newAddrStreetModal').value : '';
 
         street = street1.length > 0 ? street1 : street2.length > 0 ? street2 : '';
         
