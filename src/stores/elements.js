@@ -194,6 +194,7 @@ export class MyTextInput extends React.PureComponent {
           maxRows={this.props.maxRows ? this.props.maxRows : 1}
           type={ this.props.type ? this.props.type : this.state.type }
           style={{ width: '100%' }} 
+          className={ this.props.className ? this.props.className : '' }
         />
       )
     }

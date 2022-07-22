@@ -86,18 +86,6 @@ Fade.propTypes = {
     onEnter: PropTypes.func,
     onExited: PropTypes.func,
 };
-  
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    backgroundColor: '#fff',
-    boxShadow: 24,
-    p: 4,
-    borderRadius: 40
-};
 
 function SpringModal() {
     const [open, setOpen] = React.useState(false);
@@ -117,7 +105,7 @@ function SpringModal() {
                 }}
             >
                 <Fade in={open}>
-                    <Box sx={style}>
+                    <Box className='modalLoginStart'>
                         <Typography id="spring-modal-title" variant="h6" component="h2">
                             Мой аккаунт
                         </Typography>
@@ -125,7 +113,7 @@ function SpringModal() {
                             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
                         </Typography>
 
-                        <MyTextInput label="Название" value={ '' } func={ () => {} } />
+                        <MyTextInput label="Название" value={ '' } func={ () => {} } className='inputLogin' />
                     </Box>
                 </Fade>
             </Modal>
