@@ -599,6 +599,8 @@ class SimplePopover extends React.Component{
                         </div>
                         <div className="InCart">
 
+                            <SpringModal />
+
                             {itemsStore.getToken() !== null ?
                                 <Link
                                     to={'/'+itemsStore.getCity()+'/cart'}
