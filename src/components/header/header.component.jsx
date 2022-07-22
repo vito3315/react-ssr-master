@@ -106,7 +106,10 @@ function SpringModal() {
             >
                 <Fade in={open}>
                     <Box className='modalLoginStart'>
-                        <Typography component="h2">Мой аккаунт</Typography>
+                        <div className='loginHeader'>
+                            <Typography component="h2">Мой аккаунт</Typography>
+                        </div>
+                        
                         
                         <MyTextInput label="Телефон" value={ '' } func={ () => {} } className='inputLogin' />
                         <MyTextInput label="Пароль" value={ '' } func={ () => {} } className='inputLogin' />
@@ -115,7 +118,10 @@ function SpringModal() {
 
                         <Typography component="span">Войти</Typography>
                         <Typography component="span">Создать новый аккаутн</Typography>
-                        <Typography component="span">Войти по смс</Typography>
+                        <div className='loginSMS'>
+                            <Typography component="span">Войти по смс</Typography>
+                        </div>
+                        
                     </Box>
                 </Fade>
             </Modal>
