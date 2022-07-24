@@ -126,7 +126,7 @@ class ModalLogin extends React.Component{
             })
         }
         
-        data.method = method;
+        data.type = method;
 
         console.log( config.urlApi )
         console.log( data )
@@ -216,7 +216,7 @@ class ModalLogin extends React.Component{
                         timeout: 500,
                     }}
                 >
-                    <Fade in={open}>
+                    <Fade in={this.state.open}>
                         <Box className='modalLoginStart'>
                             <div className='loginHeader'>
                                 <Typography component="h2">Мой аккаунт</Typography>
