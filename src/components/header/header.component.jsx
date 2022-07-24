@@ -263,28 +263,19 @@ class ModalLogin extends React.Component{
                                 </div>
 
                                 <div className='loginHeader'>
-                                    <Typography component="h2">Мой аккаунт</Typography>
+                                    <Typography component="h2">Новый аккаунт</Typography>
                                 </div>
                                 
                                 <MyTextInput type={"phone"} label="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this)} className="inputLogin" style={{ marginBottom: 30 }} />
                                 <MyTextInput type={"newPassword"} label="Придумай пароль" value={ this.state.newPassword } func={ this.changeData.bind(this, 'newPassword') } onKeyDown={this.checkLoginKey.bind(this)} className="inputLogin" />
 
-                                <div className='loginLosePWD'>
-                                    <Typography component="span">Забыли пароль ?</Typography>
-                                </div>
-
                                 <div className='loginLogin' onClick={this.logIn.bind(this)}>
-                                    <Typography component="span">Войти</Typography>
-                                </div>
-
-                                <div className='loginCreate'>
-                                    <Typography component="span">Создать новый аккаунт</Typography>
-                                </div>
-
-                                <div className='loginSMS'>
-                                    <Typography component="span">Войти по смс</Typography>
+                                    <Typography component="span">Создать аккаунт</Typography>
                                 </div>
                                 
+                                <div className='loginCreate' onClick={ () => { this.setState({ typeLogin: 'start' }) } }>
+                                    <Typography component="span">У меня есть аккаунт</Typography>
+                                </div>
                             </Box>
                         }
                     </Fade>
