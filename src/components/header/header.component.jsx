@@ -130,7 +130,9 @@ class ModalLogin extends React.Component{
         })
     }
 
-    changeData(event, type){
+    changeData(type, event){
+        console.log(type, event)
+        
         this.setState({
             [type]: event.target.value
         })
