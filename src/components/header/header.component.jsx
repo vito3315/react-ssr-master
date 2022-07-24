@@ -269,6 +269,10 @@ class ModalLogin extends React.Component{
                                 <MyTextInput type={"phone"} label="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this)} className="inputLogin" style={{ marginBottom: 30 }} />
                                 <MyTextInput type={"newPassword"} label="Придумай пароль" value={ this.state.newPassword } func={ this.changeData.bind(this, 'newPassword') } onKeyDown={this.checkLoginKey.bind(this)} className="inputLogin" />
 
+                                <div className='loginErrText'>
+                                    <Typography component="span">Забыли пароль ?</Typography>
+                                </div>
+
                                 <div className='loginLogin' onClick={this.logIn.bind(this)}>
                                     <Typography component="span">Создать аккаунт</Typography>
                                 </div>
