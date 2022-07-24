@@ -123,7 +123,7 @@ function SpringModal() {
                         </div>
 
                         <div className='loginCreate'>
-                            <Typography component="span">Создать новый аккаутн</Typography>
+                            <Typography component="span">Создать новый аккаунт</Typography>
                         </div>
 
                         <div className='loginSMS'>

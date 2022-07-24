@@ -89,7 +89,7 @@ $colorText: #525252;
         }
     }
     .loginLogin{
-        width: 50%;
+        width: 75%;
         height: 60px;
         border-radius: 120px;
         background-color: #CC0033;
@@ -99,20 +99,21 @@ $colorText: #525252;
         justify-content: center;
         & span{
             @include fonsNew(1.25rem, $Roboto);
-            font-weight: 700;
+            font-weight: 500;
         }
     }
     .loginCreate{
-        width: 50%;
+        width: 75%;
         height: 60px;
         border-radius: 120px;
-        background-color: #CC0033;
+        background-color: #fff;
+        border: 1px solid #F9BC23;
         display: flex;
         align-items: center;
         justify-content: center;
         & span{
             @include fonsNew(1.25rem, $Roboto);
-            font-weight: 700;
+            font-weight: 500;
         }
     }
     
