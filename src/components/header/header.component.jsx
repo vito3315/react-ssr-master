@@ -118,6 +118,34 @@ class ModalLogin extends React.Component{
         };
     }
 
+    getData = (method, data = {}, is_load = true) => {
+    
+        if( is_load == true ){
+          this.setState({
+            is_load: true
+          })
+        }
+        
+        data.method = method;
+
+        return fetch(config.urlApi, {
+          method: 'POST',
+          headers: {
+            'Content-Type':'application/x-www-form-urlencoded'},
+          body: queryString.stringify( data )
+        }).then(res => res.json()).then(json => {
+          return json;
+        })
+        .catch(err => { 
+          setTimeout( () => {
+            this.setState({
+              is_load: false
+            })
+          }, 300 )
+          console.log( err )
+        });
+      }  
+
     open(){
         this.setState({
             open: true
@@ -131,11 +159,45 @@ class ModalLogin extends React.Component{
     }
 
     changeData(type, event){
-        console.log(type, event)
-        
         this.setState({
             [type]: event.target.value
         })
+    }
+
+    checkLoginKey(event){
+        if( parseInt(event.keyCode) == 13 ){
+            this.logIn();
+        }
+    }
+
+    async logIn(){
+        let number = this.state.loginLogin;
+            
+        number = number.split(' ').join('');
+        number = number.split('(').join('');
+        number = number.split(')').join('');
+        number = number.split('-').join('');
+        number = number.split('_').join('');
+        
+        number = number.slice(1);
+
+        let data = {
+            number: number,
+            pwd: this.state.pwdLogin 
+        };
+
+        let res = await this.getData('site_login', data);
+
+        if( res.st === false ){
+            this.setState({
+                errPhone: res.text
+            });
+        }else{
+            itemsStore.setToken( res.token, res.name ); 
+            itemsStore.setUserName(res.name);
+
+            this.close();
+        }
     }
 
     render(){
@@ -158,8 +220,8 @@ class ModalLogin extends React.Component{
                             </div>
                             
                             
-                            <MyTextInput label="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } className="inputLogin" style={{ marginBottom: 30 }} />
-                            <MyTextInput label="Пароль" value={ this.state.pwdLogin } func={ this.changeData.bind(this, 'pwdLogin') } className="inputLogin" />
+                            <MyTextInput label="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this)} className="inputLogin" style={{ marginBottom: 30 }} />
+                            <MyTextInput label="Пароль" value={ this.state.pwdLogin } func={ this.changeData.bind(this, 'pwdLogin') } onKeyDown={this.checkLoginKey.bind(this)} className="inputLogin" />
 
                             <div className='loginLosePWD'>
                                 <Typography component="span">Забыли пароль ?</Typography>

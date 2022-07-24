@@ -187,6 +187,7 @@ export class MyTextInput extends React.PureComponent {
           value={this.props.value}
           onChange={this.props.func}
           onBlur={this.props.onBlur ? this.props.onBlur : null}
+          onKeyDown={this.props.onKeyDown ? this.props.onKeyDown : null}
           disabled={ this.props.disabled || this.props.disabled === true ? true : false }
           variant="outlined" 
           size={'small'} 
