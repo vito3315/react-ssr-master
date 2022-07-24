@@ -121,12 +121,15 @@ class ModalLogin extends React.Component{
     getData = (method, data = {}, is_load = true) => {
     
         if( is_load == true ){
-          this.setState({
-            is_load: true
-          })
+            this.setState({
+                is_load: true
+            })
         }
         
         data.method = method;
+
+        console.log( config.urlApi )
+        console.log( data )
 
         return fetch(config.urlApi, {
           method: 'POST',
@@ -144,7 +147,7 @@ class ModalLogin extends React.Component{
           }, 300 )
           console.log( err )
         });
-      }  
+    }  
 
     open(){
         this.setState({
