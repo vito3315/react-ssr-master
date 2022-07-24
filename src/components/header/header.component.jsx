@@ -87,54 +87,100 @@ Fade.propTypes = {
     onExited: PropTypes.func,
 };
 
-function SpringModal() {
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-  
-    return (
-        <div>
-            <Button onClick={handleOpen}>Open modal</Button>
-            <Modal
-                open={open}
-                onClose={handleClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}
-            >
-                <Fade in={open}>
-                    <Box className='modalLoginStart'>
-                        <div className='loginHeader'>
-                            <Typography component="h2">Мой аккаунт</Typography>
-                        </div>
-                        
-                        
-                        <MyTextInput label="Телефон" value={ '' } func={ () => {} } className="inputLogin" style={{ marginBottom: 30 }} />
-                        <MyTextInput label="Пароль" value={ '' } func={ () => {} } className="inputLogin" />
+class ModalLogin extends React.Component{
+    constructor(props) {
+        super(props);
+        
+        this.state = {      
+            open: false,
 
-                        <div className='loginLosePWD'>
-                            <Typography component="span">Забыли пароль ?</Typography>
-                        </div>
+            loginLogin: '',
+            pwdLogin: '',
 
-                        <div className='loginLogin'>
-                            <Typography component="span">Войти</Typography>
-                        </div>
+            pwd: '',
+            ResPWD: false,
+            NeedCode: false,
+            typeLogin: 0,
 
-                        <div className='loginCreate'>
-                            <Typography component="span">Создать новый аккаунт</Typography>
-                        </div>
+            openLogin: false,
+            userLogin: '',
+            userLoginFormat: '',
+            userCode: '',
+            
+            stage_1: true,
+            stage_2: false,
+            
+            timerSMS: 89,
+            errPhone: '',
+            errSMS: '',
+            userName: '',
+            token: '',
+        };
+    }
 
-                        <div className='loginSMS'>
-                            <Typography component="span">Войти по смс</Typography>
-                        </div>
-                        
-                    </Box>
-                </Fade>
-            </Modal>
-        </div>
-    );
+    open(){
+        this.setState({
+            open: true
+        })
+    }
+
+    close(){
+        this.setState({
+            open: false
+        })
+    }
+
+    changeData(event, type){
+        this.setState({
+            [type]: event.target.value
+        })
+    }
+
+    render(){
+        return (
+            <>
+                <Button onClick={this.open.bind(this)}>Open modal</Button>
+                <Modal
+                    open={this.state.open}
+                    onClose={this.close.bind(this)}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={open}>
+                        <Box className='modalLoginStart'>
+                            <div className='loginHeader'>
+                                <Typography component="h2">Мой аккаунт</Typography>
+                            </div>
+                            
+                            
+                            <MyTextInput label="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } className="inputLogin" style={{ marginBottom: 30 }} />
+                            <MyTextInput label="Пароль" value={ this.state.pwdLogin } func={ this.changeData.bind(this, 'pwdLogin') } className="inputLogin" />
+
+                            <div className='loginLosePWD'>
+                                <Typography component="span">Забыли пароль ?</Typography>
+                            </div>
+
+                            <div className='loginLogin'>
+                                <Typography component="span">Войти</Typography>
+                            </div>
+
+                            <div className='loginCreate'>
+                                <Typography component="span">Создать новый аккаунт</Typography>
+                            </div>
+
+                            <div className='loginSMS'>
+                                <Typography component="span">Войти по смс</Typography>
+                            </div>
+                            
+                        </Box>
+                    </Fade>
+                </Modal>
+            </>
+        )
+    }
 }
 
 class CustomBottomNavigation extends React.Component{
@@ -607,7 +653,7 @@ class SimplePopover extends React.Component{
                         </div>
                         <div className="InCart">
 
-                            <SpringModal />
+                            <ModalLogin />
 
                             {itemsStore.getToken() !== null ?
                                 <Link

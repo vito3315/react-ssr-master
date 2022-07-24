@@ -86,17 +86,19 @@ $colorText: #525252;
         & span{
             @include fonsNew(0.825rem, $Roboto);
             font-weight: 300;
+            cursor: pointer;
         }
     }
     .loginLogin{
         width: 75%;
         height: 60px;
         border-radius: 120px;
-        background-color: #CC0033;
+        background-color: #F9BC23;
         margin-bottom: 30px;
         display: flex;
         align-items: center;
         justify-content: center;
+        cursor: pointer;
         & span{
             @include fonsNew(1.25rem, $Roboto);
             font-weight: 500;
@@ -111,6 +113,7 @@ $colorText: #525252;
         display: flex;
         align-items: center;
         justify-content: center;
+        cursor: pointer;
         & span{
             @include fonsNew(1.25rem, $Roboto);
             font-weight: 500;
@@ -125,6 +128,7 @@ $colorText: #525252;
         & span{
             @include fonsNew(0.825rem, $Roboto);
             font-weight: 300;
+            cursor: pointer;
         }
     }
 }
