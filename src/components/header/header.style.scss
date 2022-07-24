@@ -47,7 +47,6 @@ $colorText: #525252;
         }
         & > div{
             border-radius: 40px;
-            padding-left: 10px;
             height: 100%;
         }
         & > label{
@@ -71,7 +70,16 @@ $colorText: #525252;
 
         
     }
-    
+    & .loginIMG{
+        height: 90px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        & > img{
+            width: 100%;
+            height: 100%;
+        }
+    }
     & .loginHeader{
         height: 60px;
         margin-bottom: 30px;

@@ -119,7 +119,6 @@ class ModalLogin extends React.Component{
     }
 
     getData = (method, data = {}, is_load = true) => {
-    
         if( is_load == true ){
             this.setState({
                 is_load: true
@@ -127,9 +126,6 @@ class ModalLogin extends React.Component{
         }
         
         data.type = method;
-
-        console.log( config.urlApi )
-        console.log( data )
 
         return fetch(config.urlApi, {
           method: 'POST',
@@ -157,7 +153,9 @@ class ModalLogin extends React.Component{
 
     close(){
         this.setState({
-            open: false
+            open: false,
+            loginLogin: '',
+            pwdLogin: '',
         })
     }
 
@@ -218,10 +216,16 @@ class ModalLogin extends React.Component{
                 >
                     <Fade in={this.state.open}>
                         <Box className='modalLoginStart'>
+                            <div className='loginIMG'>
+                                <img 
+                                    alt={'Login'} 
+                                    title={'Login'} 
+                                    src={`/assets/img_other/account-icon-240x240.png`} />
+                            </div>
+
                             <div className='loginHeader'>
                                 <Typography component="h2">Мой аккаунт</Typography>
                             </div>
-                            
                             
                             <MyTextInput type={"phone"} label="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this)} className="inputLogin" style={{ marginBottom: 30 }} />
                             <MyTextInput type={"password"} label="Пароль" value={ this.state.pwdLogin } func={ this.changeData.bind(this, 'pwdLogin') } onKeyDown={this.checkLoginKey.bind(this)} className="inputLogin" />
@@ -230,7 +234,7 @@ class ModalLogin extends React.Component{
                                 <Typography component="span">Забыли пароль ?</Typography>
                             </div>
 
-                            <div className='loginLogin'>
+                            <div className='loginLogin' onClick={this.logIn.bind(this)}>
                                 <Typography component="span">Войти</Typography>
                             </div>
 
