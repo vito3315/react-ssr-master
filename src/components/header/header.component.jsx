@@ -236,7 +236,7 @@ class ModalLogin extends React.Component{
                                 <MyTextInput type={"password"} label="Пароль" value={ this.state.pwdLogin } func={ this.changeData.bind(this, 'pwdLogin') } onKeyDown={this.checkLoginKey.bind(this)} className="inputLogin" />
 
                                 <div className='loginLosePWD'>
-                                    <Typography component="span" onClick={ () => { this.setState({ typeLogin: 'create' }) } }>Забыли пароль ?</Typography>
+                                    <Typography component="span" onClick={ () => { this.setState({ typeLogin: 'resetPWD' }) } }>Забыли пароль ?</Typography>
                                 </div>
 
                                 <div className='loginLogin' onClick={this.logIn.bind(this)}>
@@ -248,9 +248,66 @@ class ModalLogin extends React.Component{
                                 </div>
 
                                 <div className='loginSMS'>
-                                    <Typography component="span">Войти по смс</Typography>
+                                    <Typography component="span" onClick={ () => { this.setState({ typeLogin: 'loginSMS' }) } }>Войти по смс</Typography>
                                 </div>
                                 
+                            </Box>
+                        }
+                        { this.state.typeLogin != 'loginSMS' ? null :
+                            <Box className='modalLoginCreate'>
+                                <div className='loginIMG'>
+                                    <img 
+                                        alt={'Login'} 
+                                        title={'Login'} 
+                                        src={`/assets/img_other/account-icon-240x240.png`} />
+                                </div>
+
+                                <div className='loginHeader'>
+                                    <Typography component="h2">Авторизация</Typography>
+                                </div>
+                                
+                                <MyTextInput type={"phone"} label="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this)} className="inputLogin" />
+                                
+                                <div className='loginErrText'>
+                                    <Typography component="span"></Typography>
+                                </div>
+
+                                <div className='loginLogin' onClick={this.logIn.bind(this)}>
+                                    <Typography component="span">Получить код</Typography>
+                                </div>
+                                
+                                <div className='loginCreate' onClick={ () => { this.setState({ typeLogin: 'start' }) } }>
+                                    <Typography component="span">У меня есть аккаунт</Typography>
+                                </div>
+                            </Box>
+                        }
+                        { this.state.typeLogin != 'resetPWD' ? null :
+                            <Box className='modalLoginCreate'>
+                                <div className='loginIMG'>
+                                    <img 
+                                        alt={'Login'} 
+                                        title={'Login'} 
+                                        src={`/assets/img_other/account-icon-240x240.png`} />
+                                </div>
+
+                                <div className='loginHeader'>
+                                    <Typography component="h2">Восстановление пароля</Typography>
+                                </div>
+                                
+                                <MyTextInput type={"phone"} label="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this)} className="inputLogin" style={{ marginBottom: 30 }} />
+                                <MyTextInput type={"password"} label="Придумай пароль" value={ this.state.newPassword } func={ this.changeData.bind(this, 'newPassword') } onKeyDown={this.checkLoginKey.bind(this)} className="inputLogin" />
+
+                                <div className='loginErrText'>
+                                    <Typography component="span"></Typography>
+                                </div>
+
+                                <div className='loginLogin' onClick={this.logIn.bind(this)}>
+                                    <Typography component="span">Создать аккаунт</Typography>
+                                </div>
+                                
+                                <div className='loginCreate' onClick={ () => { this.setState({ typeLogin: 'start' }) } }>
+                                    <Typography component="span">У меня есть аккаунт</Typography>
+                                </div>
                             </Box>
                         }
                         { this.state.typeLogin != 'create' ? null :
@@ -267,10 +324,10 @@ class ModalLogin extends React.Component{
                                 </div>
                                 
                                 <MyTextInput type={"phone"} label="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this)} className="inputLogin" style={{ marginBottom: 30 }} />
-                                <MyTextInput type={"newPassword"} label="Придумай пароль" value={ this.state.newPassword } func={ this.changeData.bind(this, 'newPassword') } onKeyDown={this.checkLoginKey.bind(this)} className="inputLogin" />
+                                <MyTextInput type={"password"} label="Придумай пароль" value={ this.state.newPassword } func={ this.changeData.bind(this, 'newPassword') } onKeyDown={this.checkLoginKey.bind(this)} className="inputLogin" />
 
                                 <div className='loginErrText'>
-                                    <Typography component="span">Забыли пароль ?</Typography>
+                                    <Typography component="span"></Typography>
                                 </div>
 
                                 <div className='loginLogin' onClick={this.logIn.bind(this)}>
