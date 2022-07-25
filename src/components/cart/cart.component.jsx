@@ -960,6 +960,7 @@ export class Cart extends React.Component {
                                 count: item.count,
                                 allPrice: item.all_price,
                                 img: thisitem.img_new,
+                                img_app: thisitem.img_app,
                                 imgUpdate: thisitem.img_new_update,
                             })
                         }
@@ -985,6 +986,7 @@ export class Cart extends React.Component {
                                 count: 0,
                                 allPrice: 0,
                                 img: thisitem.img_new,
+                                img_app: thisitem.img_app,
                                 imgUpdate: thisitem.img_new_update,
                             })
                         }else{
@@ -996,6 +998,7 @@ export class Cart extends React.Component {
                                 count: cart_item.count,
                                 allPrice: cart_item.allPrice,
                                 img: thisitem.img_new,
+                                img_app: thisitem.img_app,
                                 imgUpdate: thisitem.img_new_update,
                             })
                         }
@@ -1013,6 +1016,7 @@ export class Cart extends React.Component {
                                 count: item.count,
                                 allPrice: item.all_price,
                                 img: thisitem.img_new,
+                                img_app: thisitem.img_app,
                                 imgUpdate: thisitem.img_new_update,
                             })
                         }

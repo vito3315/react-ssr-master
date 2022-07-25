@@ -895,10 +895,6 @@ export class Header extends React.Component {
         if( this.props && this.props.data ){
             this.is_load = true;
 
-
-            console.log( this.props.data.all.other.cats.all_items )
-
-
             itemsStore.setDops(this.props.data.all.other.cats.need_dop);
             itemsStore.setAllItems(this.props.data.all.other.cats.all_items);
             itemsStore.setAllItemsCat(this.props.data.all.other.cats.arr);
