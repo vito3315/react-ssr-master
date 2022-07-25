@@ -559,8 +559,8 @@ export class Item extends React.Component {
                                     <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center', fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.87rem', color: '#525252' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight)} { parseInt( this.state.item.id ) == 17 || parseInt( this.state.item.id ) == 237 ? 'шт.' : parseInt( this.state.item.cat_id ) == 6 ? 'л' : 'г' }</Typography>
                                 </div>
 
-                                <div style={{ width: 30, height: 30, cursor: 'pointer', position: 'absolute', top: 10, right: 0 }} onClick={this.props.openInfo.bind(this)}>
-                                    { this.props.openModalPCInfo === true ?
+                                <div style={{ width: 30, height: 30, cursor: 'pointer', position: 'absolute', top: 10, right: 0 }} onClick={this.props.openInfo ? this.props.openInfo.bind(this) : null}>
+                                    { this.props.openModalPCInfo && this.props.openModalPCInfo === true ?
                                         <IconInfoBlack />
                                             :
                                         <IconInfoWhite />
