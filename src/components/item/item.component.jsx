@@ -197,6 +197,8 @@ export class Item extends React.Component {
             if( this._isMounted ){
                 let item = itemsStore.getAllItems().find( (item) => item.link == this.state.itemLink );
                 
+
+
                 if( item ){
                     this.setState({
                         item: item,
@@ -416,7 +418,7 @@ export class Item extends React.Component {
                                             }}
                                             title={
                                             <React.Fragment>
-                                                <Typography style={{ textAlign: 'center', fontFamily: 'Roboto', fontSize: '1.5rem', fontWeight: 500, lineHeight: 1, paddingTop: 10, paddingBottom: this.state.item.items.length == 1 ? 20 : 20, whiteSpace: 'nowrap' }}>Пищевая ценность на 100 г</Typography>
+                                                <Typography style={{ textAlign: 'center', fontFamily: 'Roboto', fontSize: '1.5rem', fontWeight: 500, lineHeight: 1, paddingTop: 10, paddingBottom: 20, whiteSpace: 'nowrap' }}>Пищевая ценность на 100 г</Typography>
                                                 
                                                 { this.state.item.items.length == 1 ? null :
                                                     <div style={{ width: '100%', height: 2, backgroundColor: '#fff', marginBottom: 20 }} />
@@ -476,7 +478,7 @@ export class Item extends React.Component {
 
                             { parseInt( this.state.item.cat_id ) == 4 ?
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ marginBottom: 20, width: 300 }}>
-                                    <Button variant="contained" className='ModalItemButtonCartOther' style={{ width: 300, height: 40, borderRadius: 30, border: '1px solid #F9BC23' }} onClick={this.props.openSetPc.bind(this, this.state.item.items)}>Состав сета</Button>
+                                    <Button variant="contained" className='ModalItemButtonCartOther' style={{ width: 300, height: 40, borderRadius: 30, border: '1px solid #F9BC23' }} onClick={this.props.openSetPc ? this.props.openSetPc.bind(this, this.state.item.items) : null }>Состав сета</Button>
                                 </ButtonGroup>
                                     :
                                 null
@@ -571,7 +573,7 @@ export class Item extends React.Component {
                         { parseInt( this.state.item.cat_id ) == 4 ?
                             <Grid item xs={12} style={{ marginBottom: 20 }}>
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-                                    <Button variant="contained" className='ModalItemButtonCart' style={{ width: 240, height: 30, borderRadius: 15, border: '1px solid #F9BC23', fontSize: '0.875rem', textTransform: 'initial', fontFamily: 'Roboto', color: '#525252', fontWeight: 400 }} onClick={this.props.openSetPc.bind(this, this.state.item.items)}>
+                                    <Button variant="contained" className='ModalItemButtonCart' style={{ width: 240, height: 30, borderRadius: 15, border: '1px solid #F9BC23', fontSize: '0.875rem', textTransform: 'initial', fontFamily: 'Roboto', color: '#525252', fontWeight: 400 }} onClick={this.props.openSetPc ? this.props.openSetPc.bind(this, this.state.item.items) : null}>
                                         Состав сета
                                     </Button>
                                 </ButtonGroup>
