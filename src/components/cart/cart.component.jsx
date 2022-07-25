@@ -133,10 +133,6 @@ class CartItem extends React.Component {
         
         this.firebaseAnalitic = this.props.firebaseAnalitic;
 
-
-        console.log( this.props.item )
-
-
         this.state = {  
             item: this.props.item,
             type: this.props.type,
@@ -240,17 +236,35 @@ class CartItem extends React.Component {
             return (
                 <tr>
                     <td style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', position: 'relative' }}>
-                        <picture>
-                            <source 
-                                srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img+"300х200.webp?"+this.state.item.imgUpdate} 
-                                type="image/webp" 
-                            />
-                            <img 
-                                src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img+"300х200.jpg?"+this.state.item.imgUpdate} 
-                                alt={this.state.item.name}
-                                title={this.state.item.name}
-                            />
-                        </picture>
+                        {this.state.item.img_app.length > 0 ?
+                            <picture>
+                                <source srcset={`
+                                    https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_276x276.jpg 138w, 
+                                    https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_292x292.jpg 146w,
+                                    https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_366x366.jpg 183w,
+                                    https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_466x466.jpg 233w,
+                                    https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_585x585.jpg 292w
+                                    https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_732x732.jpg 366w,
+                                    https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_1168x1168.jpg 584w,
+                                    https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_1420x1420.jpg 760w,
+                                    https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_2000x2000.jpg 1875w`} 
+                                    sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
+                                <img alt={this.state.item.name} title={this.state.item.name} src={`https://storage.yandexcloud.net/site-img/${this.state.item.img_name}_276x276.jpg`} loading="lazy" />
+                            </picture>
+                                :
+                            <picture>
+                                <source 
+                                    srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img+"300х200.webp?"+this.state.item.imgUpdate} 
+                                    type="image/webp" 
+                                />
+                                <img 
+                                    src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img+"300х200.jpg?"+this.state.item.imgUpdate} 
+                                    alt={this.state.item.name}
+                                    title={this.state.item.name}
+                                    loading="lazy"
+                                />
+                            </picture>
+                        }
                         
                         {this.state.type == 'promo' ? 
                             <FontAwesomeIcon icon={faGift} className="promoIcon" />
@@ -415,17 +429,38 @@ class CartItemMobile extends React.Component {
         if( this.state.count > 0 || (parseInt(this.state.item.cat_id) == 7 || parseInt(this.state.item.cat_id) == 6) ){
             return (
                 <div className="boxItem">
-                    <picture style={{ width: '40%' }}>
-                        <source 
-                            srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img+"300х200.webp?"+this.state.item.imgUpdate} 
-                            type="image/webp" 
-                        />
-                        <img 
-                            src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img+"300х200.jpg?"+this.state.item.imgUpdate} 
-                            alt={this.state.item.name}
-                            title={this.state.item.name}
-                        />
-                    </picture>
+                    {this.state.item.img_app.length > 0 ?
+                        <picture style={{ width: '40%' }}>
+                            <source srcset={`
+                                https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_276x276.jpg 138w, 
+                                https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_292x292.jpg 146w,
+                                https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_366x366.jpg 183w,
+                                https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_466x466.jpg 233w,
+                                https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_585x585.jpg 292w
+                                https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_732x732.jpg 366w,
+                                https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_1168x1168.jpg 584w,
+                                https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_1420x1420.jpg 760w,
+                                https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_2000x2000.jpg 1875w`} 
+                                sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
+                            <img alt={this.state.item.name} title={this.state.item.name} src={`https://storage.yandexcloud.net/site-img/${this.state.item.img_name}_276x276.jpg`} loading="lazy" />
+                        </picture>
+                            :
+                        <picture style={{ width: '40%' }}>
+                            <source 
+                                srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img+"300х200.webp?"+this.state.item.imgUpdate} 
+                                type="image/webp" 
+                            />
+                            <img 
+                                src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img+"300х200.jpg?"+this.state.item.imgUpdate} 
+                                alt={this.state.item.name}
+                                title={this.state.item.name}
+                                loading="lazy"
+                            />
+                        </picture>
+                    }
+
+
+                    
                     {this.state.type == 'promo' ? 
                         <FontAwesomeIcon icon={faGift} className="promoIcon" />
                             :
@@ -857,6 +892,7 @@ export class Cart extends React.Component {
                             count: item.count,
                             allPrice: item.all_price,
                             img: thisitem.img_new,
+                            img_app: thisitem.img_app,
                             imgUpdate: thisitem.img_new_update,
                         })
                     }
