@@ -310,10 +310,17 @@ export class Item extends React.Component {
     }
 
     render() {
-        const img_name = this.state.item.img_app.length > 0 ? this.state.item.img_app : this.state.item.img_new;
-        const img_type = this.state.item.img_app.length > 0 ? 'new' : 'old';
+        let img_name = '';
+        let img_type = '';
+        let desc = '';
 
-        const desc = this.state.item.marc_desc_full.length > 0 ? this.state.item.marc_desc_full : this.state.item.tmp_desc;
+        if( this.state.item ){
+            img_name = this.state.item.img_app.length > 0 ? this.state.item.img_app : this.state.item.img_new;
+            img_type = this.state.item.img_app.length > 0 ? 'new' : 'old';
+    
+            desc = this.state.item.marc_desc_full.length > 0 ? this.state.item.marc_desc_full : this.state.item.tmp_desc;
+        }
+        
 
         return (
             <>

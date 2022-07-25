@@ -266,7 +266,7 @@ class ModalLogin extends React.Component{
                                     <Typography component="h2">Авторизация</Typography>
                                 </div>
                                 
-                                <MyTextInput type={"phone"} label="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this)} className="inputLogin" />
+                                <MyTextInput type={"phone"} label="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this)} className="inputLogin" style={{ marginBottom: 0 }} />
                                 
                                 <div className='loginErrText'>
                                     <Typography component="span"></Typography>
@@ -816,7 +816,7 @@ class SimplePopover extends React.Component{
                         </div>
                         <div className="InCart">
 
-                            <ModalLogin />
+                            
 
                             {itemsStore.getToken() !== null ?
                                 <Link
