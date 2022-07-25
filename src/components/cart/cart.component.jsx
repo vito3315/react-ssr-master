@@ -133,6 +133,8 @@ class CartItem extends React.Component {
         
         this.firebaseAnalitic = this.props.firebaseAnalitic;
 
+        console.log( this.props.item )
+
         this.state = {  
             item: this.props.item,
             type: this.props.type,
