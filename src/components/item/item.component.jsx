@@ -130,7 +130,11 @@ export class Item extends React.Component {
             description: this.props.data ? this.props.data.description : '',
             itemTab: 0,
 
-            openTooltip: false
+            openTooltip: false,
+
+            img_name: '',
+            img_type: '',
+            desc: ''
         };
         
         if( !this.props.item ){
@@ -195,7 +199,12 @@ export class Item extends React.Component {
                 
                 if( item ){
                     this.setState({
-                        item: item
+                        item: item,
+
+                        img_name: item.img_app.length > 0 ? item.img_app : item.img_new,
+                        img_type: item.img_app.length > 0 ? 'new' : 'old',
+                
+                        desc: item.marc_desc_full.length > 0 ? item.marc_desc_full : item.tmp_desc
                     })
                     
                     if( item.items.length == 0 && (parseInt(item.type) !== 3 && parseInt(item.type) !== 4) ){
@@ -310,18 +319,6 @@ export class Item extends React.Component {
     }
 
     render() {
-        let img_name = '';
-        let img_type = '';
-        let desc = '';
-
-        if( this.state.item ){
-            img_name = this.state.item.img_app.length > 0 ? this.state.item.img_app : this.state.item.img_new;
-            img_type = this.state.item.img_app.length > 0 ? 'new' : 'old';
-    
-            desc = this.state.item.marc_desc_full.length > 0 ? this.state.item.marc_desc_full : this.state.item.tmp_desc;
-        }
-        
-
         return (
             <>
                 <Helmet>
@@ -333,7 +330,7 @@ export class Item extends React.Component {
                 <Box component="div" className="pcItem NewModal" sx={{ display: { xs: 'none', sm: 'block' } }}>
                     <Grid container className="MainItem mainContainer">
                         
-                        {img_type == 'old' ?
+                        {this.state.img_type == 'old' ?
                             <Grid item className='FirstMainItem'>
                                 <picture style={{ width: '100%' }}>
                                     <source 
@@ -359,17 +356,17 @@ export class Item extends React.Component {
                             <Grid item className='FirstMainItem'>
                                 <picture style={{ width: '100%' }}>
                                     <source srcset={`
-                                        https://storage.yandexcloud.net/site-img/${img_name}_276x276.jpg 138w, 
-                                        https://storage.yandexcloud.net/site-img/${img_name}_292x292.jpg 146w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_366x366.jpg 183w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_466x466.jpg 233w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_585x585.jpg 292w
-                                        https://storage.yandexcloud.net/site-img/${img_name}_732x732.jpg 366w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_1168x1168.jpg 584w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_1420x1420.jpg 760w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_2000x2000.jpg 1875w`} 
+                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_276x276.jpg 138w, 
+                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_292x292.jpg 146w,
+                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_366x366.jpg 183w,
+                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_466x466.jpg 233w,
+                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_585x585.jpg 292w
+                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_732x732.jpg 366w,
+                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_1168x1168.jpg 584w,
+                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_1420x1420.jpg 760w,
+                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_2000x2000.jpg 1875w`} 
                                         sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
-                                    <img alt={this.state.item.name} title={this.state.item.name} class="img" src={`https://storage.yandexcloud.net/site-img/${img_name}_276x276.jpg`} />
+                                    <img alt={this.state.item.name} title={this.state.item.name} class="img" src={`https://storage.yandexcloud.net/site-img/${this.state.img_name}_276x276.jpg`} />
                                 </picture>
 
                                 { parseInt(this.state.item.is_new) == 0 ? 
@@ -485,7 +482,7 @@ export class Item extends React.Component {
                                 null
                             }
 
-                            <Typography variant="h5" component="span" style={{ marginBottom: 20, minHeight: 200 }} className='ModalItemDesc'>{desc}</Typography>
+                            <Typography variant="h5" component="span" style={{ marginBottom: 20, minHeight: 200 }} className='ModalItemDesc'>{this.state.desc}</Typography>
                             
                             { this.state.count == 0 ?
                                 <ActionsCartButtonStart price={this.state.item.price} add={this.add.bind(this)} />
@@ -501,7 +498,7 @@ export class Item extends React.Component {
                     <Grid container className="MainItem MainItemMobile mainContainer" style={{ height: 'calc(100vh - 50px)', paddingRight: 20, paddingLeft: 20, paddingTop: 20, alignContent: 'flex-start', position: 'relative' }}>
                         <Grid item xs={12}>
 
-                            {img_type == 'old' ?
+                            {this.state.img_type == 'old' ?
                                 <picture>
                                     <source 
                                         srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
@@ -517,21 +514,21 @@ export class Item extends React.Component {
                                     :
                                 <picture>
                                     <source srcset={`
-                                        https://storage.yandexcloud.net/site-img/${img_name}_276x276.jpg 138w, 
-                                        https://storage.yandexcloud.net/site-img/${img_name}_292x292.jpg 146w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_366x366.jpg 183w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_466x466.jpg 233w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_585x585.jpg 292w
-                                        https://storage.yandexcloud.net/site-img/${img_name}_732x732.jpg 366w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_1168x1168.jpg 584w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_1420x1420.jpg 760w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_2000x2000.jpg 1875w`} 
+                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_276x276.jpg 138w, 
+                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_292x292.jpg 146w,
+                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_366x366.jpg 183w,
+                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_466x466.jpg 233w,
+                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_585x585.jpg 292w
+                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_732x732.jpg 366w,
+                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_1168x1168.jpg 584w,
+                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_1420x1420.jpg 760w,
+                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_2000x2000.jpg 1875w`} 
                                         sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
                                     <img 
                                         alt={this.state.item.name} 
                                         title={this.state.item.name} 
                                         style={{ width: '80%' }}
-                                        src={`https://storage.yandexcloud.net/site-img/${img_name}_276x276.jpg`} />
+                                        src={`https://storage.yandexcloud.net/site-img/${this.state.img_name}_276x276.jpg`} />
                                 </picture>
                             }
 
@@ -584,7 +581,7 @@ export class Item extends React.Component {
                         }
 
                         <Grid item xs={12} style={{ height: 80, justifyContent: 'center' }}>
-                            <Typography component="span" className='hidddenText4' style={{ textAlign: 'center', fontFamily: 'Roboto', fontSize: '0.875rem', fontWeight: 400, color: '#525252', width: '100%' }}>{desc}</Typography>
+                            <Typography component="span" className='hidddenText4' style={{ textAlign: 'center', fontFamily: 'Roboto', fontSize: '0.875rem', fontWeight: 400, color: '#525252', width: '100%' }}>{this.state.desc}</Typography>
                         </Grid>
 
                         <Grid item xs={12} style={{ position: 'absolute', width: 'calc(100% - 40px)', bottom: 120 }}>
