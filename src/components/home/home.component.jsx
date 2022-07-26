@@ -1355,7 +1355,7 @@ export class Home extends React.Component {
                         <Dialog disableElevation fullScreen open={this.state.openModal} className="ItemDialog" onClose={this.handleClose.bind(this)} TransitionComponent={Transition}>
                             <DialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
                                 <IconButton aria-label="close" style={{ position: 'absolute', top: -36, left: 15, backgroundColor: 'transparent' }} onClick={this.handleClose.bind(this)}>
-                                    <IconClose style={{ width: 25, height: 25 }} />
+                                    <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
                                 </IconButton>
                             </DialogTitle>
                             <div>
@@ -1370,7 +1370,7 @@ export class Home extends React.Component {
                         <>
                             <Dialog disableElevation maxWidth={'md'} sx={{ display: { xs: 'none', md: 'block', lg: 'none' } }} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC testModalMD" open={this.state.openModalPC}>
                                 <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -52, left: 16, zIndex: 1500, width: 52, height: 52, backgroundColor: 'transparent' }} onClick={this.handleClosePC.bind(this)}>
-                                    <IconClose />
+                                    <IconClose style={{ width: 'inherit', height: 'inherit', fill: '#fff', color: '#fff', overflow: 'visible' }} />
                                 </IconButton>
                                 
                                 <DialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
@@ -1380,7 +1380,7 @@ export class Home extends React.Component {
                         
                             <Dialog disableElevation maxWidth={'lg'} sx={{ display: { xs: 'none', lg: 'block' } }} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC testModalLG" open={this.state.openModalPC}>
                                 <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -44, left: 16, zIndex: 1500, width: 40, height: 40, backgroundColor: 'transparent' }} onClick={this.handleClosePC.bind(this)}>
-                                    <IconClose />
+                                    <IconClose style={{ width: 'inherit', height: 'inherit', fill: '#fff', color: '#fff', overflow: 'visible' }} />
                                 </IconButton>
                                 
                                 <DialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
@@ -1397,7 +1397,7 @@ export class Home extends React.Component {
                             <Dialog sx={{ display: { xs: 'block', md: 'none' } }} disableElevation fullScreen style={{ width: '100%', marginTop: this.state.openItem.items.length > 1 ? 400 : 470, borderTopRightRadius: 30, borderTopLeftRadius: 30 }} onClose={this.handleClosePCInfo.bind(this)} className="ItemDialog OpenItemMobInfo blurBacground" open={this.state.openModalPCInfo} TransitionComponent={Transition}>
                                 <DialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
                                     <IconButton aria-label="close" style={{ position: 'absolute', top: -36, left: 15, backgroundColor: 'transparent' }} onClick={this.handleClosePCInfo.bind(this)}>
-                                        <IconClose style={{ width: 25, height: 25 }} />
+                                        <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
                                     </IconButton>
                                 </DialogTitle>
                                 
@@ -1451,7 +1451,7 @@ export class Home extends React.Component {
                             <Dialog sx={{ display: { xs: 'block', sm: 'none' } }} disableElevation fullScreen style={{ height: 'calc(100vh - 50px)', width: '100%' }} onClose={this.handleClosePCSet.bind(this)} className="ItemDialog OpenItemMobSet" open={this.state.openModalPCSet} TransitionComponent={Transition}>
                                 <DialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
                                     <IconButton aria-label="close" style={{ position: 'absolute', top: -36, left: 15, backgroundColor: 'transparent' }} onClick={this.handleClosePCSet.bind(this)}>
-                                        <IconClose style={{ width: 25, height: 25 }} />
+                                        <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
                                     </IconButton>
                                 </DialogTitle>
                                 
@@ -1527,7 +1527,7 @@ export class Home extends React.Component {
                             
                             <Dialog sx={{ display: { xs: 'none', md: 'block', lg: 'none' } }} disableElevation maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePCSet.bind(this)} className="modalActii Item OpenItemPCSet" open={this.state.openModalPCSet}>
                                 <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -44, left: 16, zIndex: 2000, width: 40, height: 40, backgroundColor: 'transparent' }} onClick={this.handleClosePCSet.bind(this)}>
-                                    <IconClose />
+                                    <IconClose style={{ width: 'inherit', height: 'inherit', fill: '#fff', color: '#fff', overflow: 'visible' }} />
                                 </IconButton>
                                 
                                 <DialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 2.25% 2% 4.5%', marginRight: '1.5%', alignContent: 'start' }}>
@@ -1575,7 +1575,7 @@ export class Home extends React.Component {
                         
                             <Dialog sx={{ display: { xs: 'none', lg: 'block' } }} disableElevation maxWidth={'lg'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePCSet.bind(this)} className="modalActii Item OpenItemPCSet" open={this.state.openModalPCSet}>
                                 <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -44, left: 16, zIndex: 2000, width: 40, height: 40, backgroundColor: 'transparent' }} onClick={this.handleClosePCSet.bind(this)}>
-                                    <IconClose />
+                                    <IconClose style={{ width: 'inherit', height: 'inherit', fill: '#fff', color: '#fff', overflow: 'visible' }} />
                                 </IconButton>
                                 
                                 <DialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 2.25% 2% 4.5%', marginRight: '1.5%', alignContent: 'start' }}>

@@ -97,7 +97,6 @@ export function IconClose(props) {
       <svg
         style={ props.style ? props.style : null }
         xmlns="http://www.w3.org/2000/svg"
-        fill="none"
         viewBox="0 0 64 64"
       >
         <path
