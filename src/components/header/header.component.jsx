@@ -816,7 +816,7 @@ class SimplePopover extends React.Component{
                         </div>
                         <div className="InCart">
 
-                            
+                            <ModalLogin />
 
                             {itemsStore.getToken() !== null ?
                                 <Link
