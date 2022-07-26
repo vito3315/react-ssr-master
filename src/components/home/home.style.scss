@@ -155,7 +155,10 @@ $colorMain: #CC0033;
         //width: calc(80vw - 0px )!important;
     }
 }
-
+.MuiDialog-container button > svg{
+    width: inherit;
+    height: inherit;
+}
 .swiper-button-prev{
     width: 100px!important;
     height: 100%!important;
