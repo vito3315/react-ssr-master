@@ -155,9 +155,12 @@ $colorMain: #CC0033;
         //width: calc(80vw - 0px )!important;
     }
 }
-.MuiDialog-container button > svg{
+.IconButtonClose svg{
     width: inherit;
     height: inherit;
+    fill: #fff;
+    color: #fff;
+    overflow: visible;
 }
 .swiper-button-prev{
     width: 100px!important;
