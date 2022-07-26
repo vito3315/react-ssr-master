@@ -132,9 +132,9 @@ export class Item extends React.Component {
 
             openTooltip: false,
 
-            img_name: '',
-            img_type: '',
-            desc: ''
+            img_name: this.props.item ? this.props.item.img_app.length > 0 ? this.props.item.img_app : this.props.item.img_new : '',
+            img_type: this.props.item ? this.props.item.img_app.length > 0 ? 'new' : 'old' : 'old',
+            desc: this.props.item ? this.props.item.marc_desc_full.length > 0 ? this.props.item.marc_desc_full : this.props.item.tmp_desc : ''
         };
         
         if( !this.props.item ){
@@ -201,10 +201,10 @@ export class Item extends React.Component {
                     this.setState({
                         item: item,
 
-                        img_name: item.img_app.length > 0 ? item.img_app : item.img_new,
-                        img_type: item.img_app.length > 0 ? 'new' : 'old',
+                        //img_name: item.img_app.length > 0 ? item.img_app : item.img_new,
+                        //img_type: item.img_app.length > 0 ? 'new' : 'old',
                 
-                        desc: item.marc_desc_full.length > 0 ? item.marc_desc_full : item.tmp_desc
+                        //desc: item.marc_desc_full.length > 0 ? item.marc_desc_full : item.tmp_desc
                     })
                     
                     if( item.items.length == 0 && (parseInt(item.type) !== 3 && parseInt(item.type) !== 4) ){
