@@ -186,16 +186,20 @@ app.use( '*', async ( req, res ) => {
         }
         
         if( matchRoute.type == 'item' ){  
-            
+            let tmp_desc = '';
+
             componentData.allItems.forEach(element => {
                 element.items.forEach(item => {
                     if( item.link == linkItem ){
+
+                        tmp_desc = item.marc_desc_full.length > 0 ? item.marc_desc_full : item.tmp_desc;
+
                         meta = `
                             <meta property="og:image" content="https://storage.yandexcloud.net/site-img/${item.img_new}300х200.jpg">
                             <meta property="og:image:width" content="300" />
                             
                             <meta property="og:title" content="${item.name}">
-                            <meta property="og:description" content="${item.tmp_desc}">
+                            <meta property="og:description" content="${tmp_desc}">
                             <meta property="og:site_name" content="Жако роллы и пицца">
                             <meta property="og:type" content="website">
                             <meta property="og:url" content="https://jacofood.ru${req.originalUrl}">
@@ -203,7 +207,7 @@ app.use( '*', async ( req, res ) => {
                         
                             <meta name="twitter:card" content="summary_large_image" /> 
                             <meta name="twitter:title" content="${item.name}" /> 
-                            <meta name="twitter:desсription" content="${item.tmp_desc}" /> 
+                            <meta name="twitter:desсription" content="${tmp_desc}" /> 
                             <meta name="twitter:image" content="https://storage.yandexcloud.net/site-img/${item.img_new}300х200.jpg" /> 
                         `;
                         
@@ -228,6 +232,19 @@ app.use( '*', async ( req, res ) => {
             `GLOBAL_STATE = ${JSON.stringify(GLOBAL_STATE)};`
         );
 
+        if( city == 'togliatti' ){
+            indexHTML = indexHTML.replace(
+                '<!-- city_script -->',
+                `<script type="text/javascript">!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src='https://vk.com/js/api/openapi.js?169',t.onload=function(){VK.Retargeting.Init("VK-RTRG-1473124-g35FP"),VK.Retargeting.Hit()},document.head.appendChild(t)}();</script><noscript><img src="https://vk.com/rtrg?p=VK-RTRG-1473124-g35FP" style="position:fixed; left:-999px;" alt=""/></noscript>`
+            );
+        }
+
+        if( city == 'samara' ){
+            indexHTML = indexHTML.replace(
+                '<!-- city_script -->',
+                `<script type="text/javascript">!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src='https://vk.com/js/api/openapi.js?169',t.onload=function(){VK.Retargeting.Init("VK-RTRG-1473143-e3HQT"),VK.Retargeting.Hit()},document.head.appendChild(t)}();</script><noscript><img src="https://vk.com/rtrg?p=VK-RTRG-1473143-e3HQT" style="position:fixed; left:-999px;" alt=""/></noscript>`
+            );
+        }
 
         /*res.set('Cache-Control', 'public, max-age=604800')
         res.set('Set-Cookie', 'SameSite=None')
