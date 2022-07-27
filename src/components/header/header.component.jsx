@@ -286,8 +286,9 @@ class ModalLogin extends React.Component{
         return date.toISOString().substr(14, 5);
     }
 
-    changeCode(event){
-        console.log(event.target.value)
+    changeCode(data, event){
+        console.log(data)
+        console.log(event)
         this.setState({
             checkCode: event.target.value
         })
