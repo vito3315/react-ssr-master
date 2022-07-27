@@ -348,6 +348,10 @@ class ModalLogin extends React.Component{
                                     <Typography component="span"></Typography>
                                 </div>
 
+                                <div className='loginLogin' onClick={() => { this.setState({ typeLogin: 'loginSMSCode' }) }}>
+                                    <Typography component="span">Получить код</Typography>
+                                </div>
+
                                 <div className='loginLogin' onClick={this.sendSMS.bind(this)}>
                                     <Typography component="span">Получить код</Typography>
                                 </div>
