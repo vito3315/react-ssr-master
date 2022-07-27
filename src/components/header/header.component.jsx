@@ -178,8 +178,16 @@ class ModalLogin extends React.Component{
     }
 
     changeData(type, event){
+        let data = event.target.value;
+
+        if( type == 'loginLogin' ){
+            if( parseInt(data[0]) == 9 ){
+                data = '8' + data;
+            }
+        }
+
         this.setState({
-            [type]: event.target.value
+            [type]: data
         })
     }
 
@@ -295,10 +303,16 @@ class ModalLogin extends React.Component{
         return date.toISOString().substr(14, 5);
     }
 
-    changeCode(data, event){
+    changeCode(data){
         this.setState({
             checkCode: data
         })
+
+        if( data.length == 4 ){
+            setTimeout( () => {
+                this.checkCode();
+            }, 300 )
+        }
     }
 
     async checkCode(){
@@ -416,7 +430,7 @@ class ModalLogin extends React.Component{
                                 </div>
                                 
                                 <div className='loginAutCode'>
-                                    <AuthCode autoFocus={true} allowedCharacters='numeric' length="4" onChange={ this.changeCode.bind(this) } onKeyDown={this.checkLoginKey.bind(this, 3)} />
+                                    <AuthCode autoFocus={true} allowedCharacters='numeric' length="4" onChange={ this.changeCode.bind(this) } />
                                 </div>
 
                                 <div className='loginTimer'>
