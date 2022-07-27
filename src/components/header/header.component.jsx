@@ -262,7 +262,7 @@ class ModalLogin extends React.Component{
         if( this.sms1 == false ){
             this.sms1 = true;
             
-            let number = this.state.userLogin;
+            let number = this.state.loginLogin;
             
             number = number.split(' ').join('');
             number = number.split('(').join('');
@@ -295,7 +295,7 @@ class ModalLogin extends React.Component{
 
     async checkCode(){
         let data = {
-            number: this.state.number,
+            number: this.state.loginLogin,
             pwd: this.state.checkCode 
         };
 
