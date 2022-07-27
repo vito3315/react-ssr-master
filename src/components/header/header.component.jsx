@@ -287,10 +287,8 @@ class ModalLogin extends React.Component{
     }
 
     changeCode(data, event){
-        console.log(data)
-        console.log(event)
         this.setState({
-            checkCode: event.target.value
+            checkCode: data
         })
     }
 
@@ -409,7 +407,7 @@ class ModalLogin extends React.Component{
                                 </div>
                                 
                                 <div className='loginAutCode'>
-                                    <AuthCode autoFocus={false} allowedCharacters='numeric' length="4" onChange={ this.changeCode.bind(this) } />
+                                    <AuthCode autoFocus={true} allowedCharacters='numeric' length="4" onChange={ this.changeCode.bind(this) } />
                                 </div>
 
                                 <div className='loginTimer'>
