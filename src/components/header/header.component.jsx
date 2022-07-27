@@ -295,7 +295,7 @@ class ModalLogin extends React.Component{
     async checkCode(){
         let data = {
             number: this.state.loginLogin,
-            pwd: this.state.checkCode 
+            cod: this.state.checkCode 
         };
 
         let res = await this.getData('check_profile', data);
