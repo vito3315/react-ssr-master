@@ -98,8 +98,8 @@ $colorText: #525252;
         justify-content: center;
         align-items: center;
         & span{
-            @include fonsNew(1.5rem, $Roboto);
-            font-weight: 200;
+            @include fonsNew(1.25rem, $Roboto);
+            font-weight: 300;
             text-align: center;
         }
     }

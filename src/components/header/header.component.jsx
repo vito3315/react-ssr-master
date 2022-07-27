@@ -89,15 +89,6 @@ Fade.propTypes = {
     onExited: PropTypes.func,
 };
 
-const AutCode = () => {
-    const [result, setResult] = useState();
-    const handleOnChange = (res) => {
-      setResult(res);
-    };
-  
-    return <AuthCode autoFocus={false} allowedCharacters='numeric' length="4" onChange={handleOnChange} />
-  };
-
 class ModalLogin extends React.Component{
     sms1 = false;
 
@@ -980,8 +971,6 @@ class SimplePopover extends React.Component{
                             }
                         </div>
                         <div className="InCart">
-
-                            <ModalLogin />
 
                             {itemsStore.getToken() !== null ?
                                 <Link
