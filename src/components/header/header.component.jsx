@@ -126,6 +126,7 @@ class ModalLogin extends React.Component{
             stage_2: false,
             
             timerSMS: 89,
+            timerSMSTime: this.toTime(89),
             errPhone: '',
             errSMS: '',
             userName: '',
@@ -238,7 +239,8 @@ class ModalLogin extends React.Component{
         
             let timerId = setInterval(() => {
                 this.setState({
-                    timerSMS: this.state.timerSMS-1
+                    timerSMS: this.state.timerSMS-1,
+                    timerSMSTime: this.toTime(this.state.timerSMS-1)
                 })
                 if( this.state.timerSMS == 0 ){
                     clearInterval(timerId);
@@ -276,6 +278,12 @@ class ModalLogin extends React.Component{
             });
         }
     }
+
+    toTime(seconds) {
+        let date = new Date(null);
+        date.setSeconds(seconds);
+        return date.toISOString().substr(11, 8);
+     }
 
     render(){
         return (
@@ -380,7 +388,7 @@ class ModalLogin extends React.Component{
                                 </div>
 
                                 <div className='loginTimer'>
-                                    <Typography component="span">{this.state.timerSMS}</Typography>
+                                    <Typography component="span">{this.state.timerSMSTime}</Typography>
                                 </div>
                                 
                                 <div className='loginSend' onClick={this.sendSMS.bind(this)}>
