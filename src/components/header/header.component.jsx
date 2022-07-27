@@ -238,6 +238,16 @@ class ModalLogin extends React.Component{
             typeLogin: 'loginSMSCode'
         })
 
+        let timerId = setInterval(() => {
+            this.setState({
+                timerSMS: this.state.timerSMS-1,
+                timerSMSTime: this.toTime(this.state.timerSMS-1)
+            })
+            if( this.state.timerSMS == 0 ){
+                clearInterval(timerId);
+            }
+        }, 1000);
+
         let res = await this.getData('create_profile', data);
 
         if( res['st'] === true ){
@@ -245,15 +255,7 @@ class ModalLogin extends React.Component{
                 errPhone: ''
             })
         
-            let timerId = setInterval(() => {
-                this.setState({
-                    timerSMS: this.state.timerSMS-1,
-                    timerSMSTime: this.toTime(this.state.timerSMS-1)
-                })
-                if( this.state.timerSMS == 0 ){
-                    clearInterval(timerId);
-                }
-            }, 1000);
+            
         }else{
             this.setState({
               errPhone: res.text
@@ -418,7 +420,7 @@ class ModalLogin extends React.Component{
                                 </div>
 
                                 <div className='loginTimer'>
-                                    <Typography component="span">{this.state.timerSMSTime}</Typography>
+                                    <Typography component="span">Перезвонить можно через {this.state.timerSMSTime}</Typography>
                                 </div>
                                 
                                 <div className='loginSend' onClick={this.checkCode.bind(this)}>
