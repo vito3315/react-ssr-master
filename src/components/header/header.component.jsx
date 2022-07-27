@@ -191,6 +191,10 @@ class ModalLogin extends React.Component{
             if( parseInt(type) == 2 ){
                 this.sendSMS();
             }
+
+            if( parseInt(type) == 3 ){
+                this.checkCode();
+            }
         }
     }
 
@@ -230,12 +234,15 @@ class ModalLogin extends React.Component{
             token: token 
         };
 
+        this.setState({ 
+            typeLogin: 'loginSMSCode'
+        })
+
         let res = await this.getData('create_profile', data);
 
         if( res['st'] === true ){
             this.setState({ 
-                errPhone: '',
-                typeLogin: 'loginSMSCode'
+                errPhone: ''
             })
         
             let timerId = setInterval(() => {
@@ -403,11 +410,11 @@ class ModalLogin extends React.Component{
 
                                 <div className='loginSubHeader'>
                                     <Typography component="span">Сейчас мы вам позвоним.</Typography>
-                                    <Typography component="span">Введите последние 4 цифры.</Typography>
+                                    <Typography component="span">Введите последние 4 цифры номера.</Typography>
                                 </div>
                                 
                                 <div className='loginAutCode'>
-                                    <AuthCode autoFocus={true} allowedCharacters='numeric' length="4" onChange={ this.changeCode.bind(this) } />
+                                    <AuthCode autoFocus={true} allowedCharacters='numeric' length="4" onChange={ this.changeCode.bind(this) } onKeyDown={this.checkLoginKey.bind(this, 3)} />
                                 </div>
 
                                 <div className='loginTimer'>
@@ -418,8 +425,8 @@ class ModalLogin extends React.Component{
                                     <Typography component="span">Отправить</Typography>
                                 </div>
                                 
-                                <div className='loginPrev' onClick={ () => { this.setState({ typeLogin: 'loginSMS' }) } }>
-                                    <Typography component="span">Изменить номер</Typography>
+                                <div className='loginPrev'>
+                                    <Typography component="span" onClick={ () => { this.setState({ typeLogin: 'loginSMS' }) } }>Изменить номер телефона</Typography>
                                 </div>
                             </Box>
                         }
