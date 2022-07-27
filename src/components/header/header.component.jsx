@@ -234,7 +234,8 @@ class ModalLogin extends React.Component{
 
         if( res['st'] === true ){
             this.setState({ 
-                errPhone: ''
+                errPhone: '',
+                typeLogin: 'loginSMSCode'
             })
         
             let timerId = setInterval(() => {
@@ -282,8 +283,35 @@ class ModalLogin extends React.Component{
     toTime(seconds) {
         let date = new Date(null);
         date.setSeconds(seconds);
-        return date.toISOString().substr(11, 8);
-     }
+        return date.toISOString().substr(14, 5);
+    }
+
+    changeCode(event){
+        console.log(event.target.value)
+        this.setState({
+            checkCode: event.target.value
+        })
+    }
+
+    async checkCode(){
+        let data = {
+            number: this.state.number,
+            pwd: this.state.checkCode 
+        };
+
+        let res = await this.getData('check_profile', data);
+
+        if( res.st === false ){
+            this.setState({
+                errPhone: res.text
+            });
+        }else{
+            itemsStore.setToken( res.token, res.name ); 
+            itemsStore.setUserName(res.name);
+
+            this.close();
+        }
+    }
 
     render(){
         return (
@@ -352,10 +380,6 @@ class ModalLogin extends React.Component{
                                     <Typography component="span"></Typography>
                                 </div>
 
-                                <div className='loginLogin' onClick={() => { this.setState({ typeLogin: 'loginSMSCode' }) }}>
-                                    <Typography component="span">Получить код</Typography>
-                                </div>
-
                                 <div className='loginLogin' onClick={this.sendSMS.bind(this)}>
                                     <Typography component="span">Получить код</Typography>
                                 </div>
@@ -384,14 +408,14 @@ class ModalLogin extends React.Component{
                                 </div>
                                 
                                 <div className='loginAutCode'>
-                                    <AutCode />
+                                    <AuthCode autoFocus={false} allowedCharacters='numeric' length="4" onChange={ this.changeCode.bind(this) } />
                                 </div>
 
                                 <div className='loginTimer'>
                                     <Typography component="span">{this.state.timerSMSTime}</Typography>
                                 </div>
                                 
-                                <div className='loginSend' onClick={this.sendSMS.bind(this)}>
+                                <div className='loginSend' onClick={this.checkCode.bind(this)}>
                                     <Typography component="span">Отправить</Typography>
                                 </div>
                                 
