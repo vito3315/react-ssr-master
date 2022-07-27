@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink as Link } from 'react-router-dom';
 
 import Grid from '@mui/material/Grid';
@@ -56,6 +56,8 @@ import Modal from '@mui/material/Modal';
 // web.cjs is required for IE11 support
 import { useSpring, animated } from '@react-spring/web';
 
+import AuthCode from 'react-auth-code-input';
+
 const Fade = React.forwardRef(function Fade(props, ref) {
     const { in: open, children, onEnter, onExited, ...other } = props;
     const style = useSpring({
@@ -86,6 +88,15 @@ Fade.propTypes = {
     onEnter: PropTypes.func,
     onExited: PropTypes.func,
 };
+
+const AutCode = () => {
+    const [result, setResult] = useState();
+    const handleOnChange = (res) => {
+      setResult(res);
+    };
+  
+    return <AuthCode autoFocus={false} allowedCharacters='numeric' length="4" onChange={handleOnChange} />
+  };
 
 class ModalLogin extends React.Component{
     sms1 = false;
@@ -329,6 +340,8 @@ class ModalLogin extends React.Component{
                                 
                                 <MyTextInput type={"phone"} label="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this, 2)} className="inputLogin" style={{ marginBottom: 0 }} />
                                 
+                                <AutCode />
+
                                 <div className='loginErrText'>
                                     <Typography component="span"></Typography>
                                 </div>
