@@ -357,6 +357,31 @@ class ModalLogin extends React.Component{
                                 </div>
                             </Box>
                         }
+                        { this.state.typeLogin != 'loginSMSCode' ? null :
+                            <Box className='modalLoginSMSCode'>
+                                <div className='loginIMG'>
+                                    <img 
+                                        alt={'Login'} 
+                                        title={'Login'} 
+                                        src={`/assets/img_other/tripple_dop.png`} />
+                                </div>
+
+                                <div className='loginHeader'>
+                                    <Typography component="h2">Проверим телефон ?</Typography>
+                                </div>
+
+                                <div className='loginSubHeader'>
+                                    <Typography component="span">Сейчас мы вам позвоним.</Typography>
+                                    <Typography component="span">Введите последние 4 цифры.</Typography>
+                                </div>
+                                
+                                <div className='loginAutCode'>
+                                    <AutCode />
+                                </div>
+
+                                
+                            </Box>
+                        }
                         { this.state.typeLogin != 'resetPWD' ? null :
                             <Box className='modalLoginCreate'>
                                 <div className='loginIMG'>
