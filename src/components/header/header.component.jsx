@@ -379,7 +379,17 @@ class ModalLogin extends React.Component{
                                     <AutCode />
                                 </div>
 
+                                <div className='loginTimer'>
+                                    <Typography component="span">{this.state.timerSMS}</Typography>
+                                </div>
                                 
+                                <div className='loginSend' onClick={this.sendSMS.bind(this)}>
+                                    <Typography component="span">Отправить</Typography>
+                                </div>
+                                
+                                <div className='loginPrev' onClick={ () => { this.setState({ typeLogin: 'loginSMS' }) } }>
+                                    <Typography component="span">Изменить номер</Typography>
+                                </div>
                             </Box>
                         }
                         { this.state.typeLogin != 'resetPWD' ? null :
