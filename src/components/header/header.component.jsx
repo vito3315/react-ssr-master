@@ -340,10 +340,6 @@ class ModalLogin extends React.Component{
                                 
                                 <MyTextInput type={"phone"} label="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this, 2)} className="inputLogin" style={{ marginBottom: 0 }} />
                                 
-                                <div className='loginAutCode'>
-                                    <AutCode />
-                                </div>
-
                                 <div className='loginErrText'>
                                     <Typography component="span"></Typography>
                                 </div>
