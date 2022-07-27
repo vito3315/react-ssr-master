@@ -32,12 +32,12 @@ app.get( /\.(eot|ttf|woff|woff2)$/, express.static( path.resolve( __dirname, '..
 
 //app.use(express.static(path.join(__dirname, 'public')));
 
-/*app.use((req, res, next) => {
-    res.set('Cache-Control', 'public, max-age=604800')
+app.use((req, res, next) => {
+    res.set('Cache-Control', 'public, max-age=86400')
     res.set('Set-Cookie', 'SameSite=None')
     res.set('Accept-Encoding', 'gzip, compress, br')
     next()
-})*/
+})
 
 app.get('/sitemap.xml', function(req, res) {
     res.sendFile('../dist/sitemap.xml');
@@ -246,9 +246,9 @@ app.use( '*', async ( req, res ) => {
             );
         }
 
-        /*res.set('Cache-Control', 'public, max-age=604800')
+        res.set('Cache-Control', 'public, max-age=86400')
         res.set('Set-Cookie', 'SameSite=None')
-        res.set('Accept-Encoding', 'gzip, compress, br')*/
+        res.set('Accept-Encoding', 'gzip, compress, br')
 
         res.contentType( 'text/html' );
         res.status( matchRoute.code );

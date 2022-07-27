@@ -88,6 +88,8 @@ Fade.propTypes = {
 };
 
 class ModalLogin extends React.Component{
+    sms1 = false;
+
     constructor(props) {
         super(props);
         
@@ -169,9 +171,14 @@ class ModalLogin extends React.Component{
         })
     }
 
-    checkLoginKey(event){
+    checkLoginKey(type, event){
         if( parseInt(event.keyCode) == 13 ){
-            this.logIn();
+            if( parseInt(type) == 1 ){
+                this.logIn();
+            }
+            if( parseInt(type) == 2 ){
+                this.sendSMS();
+            }
         }
     }
 
@@ -205,6 +212,60 @@ class ModalLogin extends React.Component{
         }
     }
 
+    async createProfileFetch(number, token){
+        let data = {
+            number: number,
+            token: token 
+        };
+
+        let res = await this.getData('create_profile', data);
+
+        if( res['st'] === true ){
+            this.setState({ 
+                errPhone: ''
+            })
+        
+            let timerId = setInterval(() => {
+                this.setState({
+                    timerSMS: this.state.timerSMS-1
+                })
+                if( this.state.timerSMS == 0 ){
+                    clearInterval(timerId);
+                }
+            }, 1000);
+        }else{
+            this.setState({
+              errPhone: res.text
+            });
+        }
+        
+        setTimeout( () => {
+            this.sms1 = false;
+        }, 300 )
+    }
+
+    sendSMS(){
+        if( this.sms1 == false ){
+            this.sms1 = true;
+            
+            let number = this.state.userLogin;
+            
+            number = number.split(' ').join('');
+            number = number.split('(').join('');
+            number = number.split(')').join('');
+            number = number.split('-').join('');
+            number = number.split('_').join('');
+            
+            number = number.slice(1);
+            
+            grecaptcha.ready(() => {
+                grecaptcha.execute('6LdhWpIdAAAAAA4eceqTfNH242EGuIleuWAGQ2su', {action: 'submit'}).then( (token) => {
+                    this.createProfileFetch(number, token);
+                });
+            });
+        }
+    }
+
     render(){
         return (
             <>
@@ -232,8 +293,8 @@ class ModalLogin extends React.Component{
                                     <Typography component="h2">Мой аккаунт</Typography>
                                 </div>
                                 
-                                <MyTextInput type={"phone"} label="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this)} className="inputLogin" style={{ marginBottom: 30 }} />
-                                <MyTextInput type={"password"} label="Пароль" value={ this.state.pwdLogin } func={ this.changeData.bind(this, 'pwdLogin') } onKeyDown={this.checkLoginKey.bind(this)} className="inputLogin" />
+                                <MyTextInput type={"phone"} label="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this, 1)} className="inputLogin" style={{ marginBottom: 30 }} />
+                                <MyTextInput type={"password"} label="Пароль" value={ this.state.pwdLogin } func={ this.changeData.bind(this, 'pwdLogin') } onKeyDown={this.checkLoginKey.bind(this, 1)} className="inputLogin" />
 
                                 <div className='loginLosePWD'>
                                     <Typography component="span" onClick={ () => { this.setState({ typeLogin: 'resetPWD' }) } }>Забыли пароль ?</Typography>
@@ -266,13 +327,13 @@ class ModalLogin extends React.Component{
                                     <Typography component="h2">Авторизация</Typography>
                                 </div>
                                 
-                                <MyTextInput type={"phone"} label="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this)} className="inputLogin" style={{ marginBottom: 0 }} />
+                                <MyTextInput type={"phone"} label="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this, 2)} className="inputLogin" style={{ marginBottom: 0 }} />
                                 
                                 <div className='loginErrText'>
                                     <Typography component="span"></Typography>
                                 </div>
 
-                                <div className='loginLogin' onClick={this.logIn.bind(this)}>
+                                <div className='loginLogin' onClick={this.sendSMS.bind(this)}>
                                     <Typography component="span">Получить код</Typography>
                                 </div>
                                 
@@ -815,8 +876,6 @@ class SimplePopover extends React.Component{
                             }
                         </div>
                         <div className="InCart">
-
-                            <ModalLogin />
 
                             {itemsStore.getToken() !== null ?
                                 <Link
