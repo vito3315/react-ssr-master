@@ -21,6 +21,26 @@ $colorText: #525252;
     color: #000!important;
 }
 
+.loginAutCode input {
+    width: 90px;
+    height: 90px;
+    padding: 0;
+    text-align: center;
+    margin-right: 12px;
+    text-transform: uppercase;
+    @include fonsNew(2rem, $Roboto);
+    font-weight: 400;
+    border: 1px solid #d6d6d6;
+    border-radius: 4px;
+    background: #fff;
+    background-clip: padding-box;
+    &:focus {
+        appearance: none;
+        outline: 0;
+        box-shadow: 0 0 0 3px rgb(131, 192, 253 / 50%);
+    }
+}
+
 .modalLoginCreate{
     position: absolute;
     top: 50%;
