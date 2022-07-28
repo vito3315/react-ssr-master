@@ -200,11 +200,6 @@ export class Item extends React.Component {
                 if( item ){
                     this.setState({
                         item: item,
-
-                        //img_name: item.img_app.length > 0 ? item.img_app : item.img_new,
-                        //img_type: item.img_app.length > 0 ? 'new' : 'old',
-                
-                        //desc: item.marc_desc_full.length > 0 ? item.marc_desc_full : item.tmp_desc
                     })
                     
                     if( item.items.length == 0 && (parseInt(item.type) !== 3 && parseInt(item.type) !== 4) ){

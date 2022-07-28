@@ -175,6 +175,10 @@ class ModalLogin extends React.Component{
             if( parseInt(data[0]) == 9 ){
                 data = '8' + data;
             }
+            if( data[0] == '+' && parseInt(data[1]) == '7' ){
+                data = data.slice(2);
+                data = '8' + data;
+            }
         }
 
         this.setState({
@@ -971,6 +975,8 @@ class SimplePopover extends React.Component{
                             }
                         </div>
                         <div className="InCart">
+
+                            <ModalLogin />
 
                             {itemsStore.getToken() !== null ?
                                 <Link
