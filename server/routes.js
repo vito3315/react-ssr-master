@@ -4,7 +4,6 @@ const { Item } = require( '../src/components/item' );
 const { Contact } = require( '../src/components/contact' );
 const { Actii } = require( '../src/components/actii' );
 const { Profile } = require( '../src/components/profile' );
-const { NotFound } = require( '../src/components/app' );
 const { Cart } = require( '../src/components/cart' );
 
 const { PageAbout } = require( '../src/components/pageAbout' );
@@ -81,7 +80,7 @@ module.exports = [
     {
         path: '/',
         exact: true,
-        component: Contact,
+        component: Home,
         type: '',
         code: 200
     },
@@ -145,8 +144,8 @@ module.exports = [
     
     {
         path: '*',
-        component: NotFound,
-        type: '',
+        component: Home,
+        type: 'home',
         code: 404
     },
 ];

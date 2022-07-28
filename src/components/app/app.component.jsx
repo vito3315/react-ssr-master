@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink as Link, Switch, Route, Redirect } from 'react-router-dom';
+import { NavLink as Link, Switch, Route, Redirect, matchPath } from 'react-router-dom';
 
 import { Home } from '../home';
 import { HomeCat } from '../home';
@@ -24,6 +24,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
 const queryString = require('query-string');
+import axios from 'axios';
 
 import { Provider } from 'mobx-react';
 import itemsStore from '../../stores/items-store';
@@ -33,6 +34,8 @@ const stores = { itemsStore };
 import { autorun } from "mobx"
 
 import { VKIcon, OdnIcon, TGIcon } from '../../stores/elements';
+
+const routes = require( '../../../server/routes' );
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -223,6 +226,14 @@ class StickyFooter extends React.Component{
     }
 }
 
+function get_city(path){
+    
+    path = path.split('/');
+    path = path.filter( (item) => item != '' );
+    
+    return path[ 0 ];
+}
+
 export class App extends React.Component {
     constructor(props) {
         super(props);
@@ -251,8 +262,104 @@ export class App extends React.Component {
             userName: '',
             
             soc_link: null,
+
+            globalState: null
         };
     }
+
+    async getData1(uri){
+
+        let data = {
+            city_id: get_city(uri),
+            page: '',
+            link: uri,
+        };
+
+        let res = await this.getData('get_page_info', data);
+
+        console.log( res );
+
+        let res_data = {
+            title: res.page.title,
+            description: res.page.description,
+            page: res.page,
+            cats: res.cats,
+            allItems: res.allItems,
+            all: res
+        };
+
+        let GLOBAL_STATE = {
+            data: res_data,
+            city: get_city(uri),
+            this_link: uri,
+            linkItem: '',
+            Item: null
+        }
+
+        this.setState({
+            globalState: GLOBAL_STATE
+        })
+
+        //return res
+    }
+
+    fetchData(propsData) {
+        let data = {
+            type: 'get_page_info', 
+            city_id: get_city(propsData),
+            page: '',
+            link: propsData,
+        };
+        
+        return axios({
+            method: 'POST',
+            url: config.urlApi,
+            headers: { 'content-type': 'application/x-www-form-urlencoded' },
+            data: queryString.stringify(data)
+        }).then(response => {
+            if(response['status'] === 200){
+                var json = response['data'];
+                
+                return {
+                    title: json.page.title,
+                    description: json.page.description,
+                    page: json.page,
+                    cats: json.cats,
+                    allItems: json.allItems,
+                    all: json
+                }
+            } 
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+
+    getData = (method, data = {}, is_load = true) => {
+        if( is_load == true ){
+            this.setState({
+                is_load: true
+            })
+        }
+        
+        data.type = method;
+
+        return fetch(config.urlApi, {
+          method: 'POST',
+          headers: {
+            'Content-Type':'application/x-www-form-urlencoded'},
+          body: queryString.stringify( data )
+        }).then(res => res.json()).then(json => {
+          return json;
+        })
+        .catch(err => { 
+          setTimeout( () => {
+            this.setState({
+              is_load: false
+            })
+          }, 300 )
+          console.log( err )
+        });
+    }  
 
     componentDidMount = () => {
         const firebaseConfig = {
@@ -269,6 +376,65 @@ export class App extends React.Component {
         const analytics = getAnalytics(firebaseAPP);
         const perf = getPerformance(firebaseAPP);
 
+
+        if( !this.props.globalState ){
+
+            let uri = window.location.pathname;
+
+            let city = uri.split('/');
+            city = city.filter( (item) => item != '' ); 
+            city = city[0];
+
+            const matchRoute = routes.find( route => matchPath( uri, route ) );
+
+            console.log( uri )
+            console.log( matchRoute )
+
+
+            if( matchRoute ){
+                //let componentData = null;
+                this.getData1(uri);
+                //if( typeof matchRoute.component.fetchData === 'function' ) {
+                    //componentData = this.getData1(uri);
+                //}
+        
+                
+        
+                /*let linkItem = '';
+                let Item = null;
+                
+                let findItem = null;
+                
+                if( matchRoute.type == 'item' ){  
+                    let linkItem1 = uri.split("/");
+                    
+                    findItem = linkItem1.find( (item) => item == 'item' );
+                    
+                    linkItem1 = linkItem1.filter( (item) => item != '' ); 
+                    linkItem = linkItem1[ linkItem1.length-1 ];
+                    
+                    componentData.allItems.forEach(element => {
+                        element.items.forEach(item => {
+                            if( item.link == linkItem ){
+                                Item = item;
+                            }
+                        })
+                    })
+                }
+                
+                const GLOBAL_STATE = {
+                    data: componentData,
+                    city: city,
+                    this_link: uri,
+                    linkItem: linkItem,
+                    Item: Item
+                }
+     
+                console.log( GLOBAL_STATE )*/
+            }
+        }
+
+
         autorun(() => {
             this.setState({
                 activePage: itemsStore.getPage()
@@ -283,212 +449,508 @@ export class App extends React.Component {
     shouldComponentUpdate(nextProps, nextState) {
         return (
             this.state.activePage !== nextState.activePage ||
-            this.state.cityName !== nextState.cityName
+            this.state.cityName !== nextState.cityName ||
+            this.state.globalState !== nextState.globalState
         );
     }
     
     render() {
-        return (
-            <Provider { ...stores }>
-                <div className="home">
-                    <Switch>
-                        <Route
-                            path='/:cityName/contacts'
-                            exact={ true }
-                        >
-                            <Header 
-                                data={this.props.globalState.data} 
-                                city={this.props.globalState.city} 
-                                this_link={this.props.globalState.this_link} />   
-                            <Contact data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
-                        </Route>
-                        <Route
-                            path='/:cityName/akcii/:act_id'
-                            exact={ true }
-                        >
-                            <Header 
-                                data={this.props.globalState.data} 
-                                city={this.props.globalState.city} 
-                                this_link={this.props.globalState.this_link} />  
-                            <Actii data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
-                        </Route>
-                        <Route
-                            path='/:cityName/akcii'
-                            exact={ true }
-                        >
-                            <Header 
-                                data={this.props.globalState.data} 
-                                city={this.props.globalState.city} 
-                                this_link={this.props.globalState.this_link} />  
-                            <Actii data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
-                        </Route>
-                        <Route
-                            path='/:cityName/menu'
-                            exact={ true }
-                        >
-                            <Header 
-                                data={this.props.globalState.data} 
-                                city={this.props.globalState.city} 
-                                this_link={this.props.globalState.this_link} />  
-                            <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
-                        </Route>
-                        <Route
-                            path='/:cityName'
-                            exact={ true }
-                        >
-                            <Header 
-                                data={this.props.globalState.data} 
-                                city={this.props.globalState.city} 
-                                this_link={this.props.globalState.this_link} />  
-                            <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
-                        </Route>
-                        <Route
-                            path='/:cityName/item/:id'
-                            exact={ true }
-                        >
-                            <HeaderCat 
-                                data={this.props.globalState.data} 
-                                city={this.props.globalState.city} 
-                                this_link={this.props.globalState.this_link} />  
-                            <div style={{ paddingTop: 80 }}>
-                                <Item 
+
+        if( !this.props.globalState ){
+            console.log( '!this.props.globalState' )
+
+            if( this.state.globalState ){
+                console.log( 'this.state.globalState' )
+
+                return (
+                    <Provider { ...stores }>
+                        <div className="home">
+                            <Switch>
+                                <Route
+                                    path='/:cityName/contacts'
+                                    exact={ true }
+                                >
+                                    <Header 
+                                        data={this.state.globalState.data} 
+                                        city={this.state.globalState.city} 
+                                        this_link={this.state.globalState.this_link} />   
+                                    <Contact data={this.state.globalState.data} city={this.state.globalState.city} this_link={this.state.globalState.this_link}  />
+                                </Route>
+                                <Route
+                                    path='/:cityName/akcii/:act_id'
+                                    exact={ true }
+                                >
+                                    <Header 
+                                        data={this.state.globalState.data} 
+                                        city={this.state.globalState.city} 
+                                        this_link={this.state.globalState.this_link} />  
+                                    <Actii data={this.state.globalState.data} city={this.state.globalState.city} this_link={this.state.globalState.this_link}  />
+                                </Route>
+                                <Route
+                                    path='/:cityName/akcii'
+                                    exact={ true }
+                                >
+                                    <Header 
+                                        data={this.state.globalState.data} 
+                                        city={this.state.globalState.city} 
+                                        this_link={this.state.globalState.this_link} />  
+                                    <Actii data={this.state.globalState.data} city={this.state.globalState.city} this_link={this.state.globalState.this_link}  />
+                                </Route>
+                                <Route
+                                    path='/:cityName/menu'
+                                    exact={ true }
+                                >
+                                    <Header 
+                                        data={this.state.globalState.data} 
+                                        city={this.state.globalState.city} 
+                                        this_link={this.state.globalState.this_link} />  
+                                    <Home data={this.state.globalState.data} city={this.state.globalState.city} this_link={this.state.globalState.this_link}  />
+                                </Route>
+                                <Route
+                                    path='/:cityName'
+                                    exact={ true }
+                                >
+                                    <Header 
+                                        data={this.state.globalState.data} 
+                                        city={this.state.globalState.city} 
+                                        this_link={this.state.globalState.this_link} />  
+                                    <Home data={this.state.globalState.data} city={this.state.globalState.city} this_link={this.state.globalState.this_link}  />
+                                </Route>
+                                <Route
+                                    path='/:cityName/item/:id'
+                                    exact={ true }
+                                >
+                                    <HeaderCat 
+                                        data={this.state.globalState.data} 
+                                        city={this.state.globalState.city} 
+                                        this_link={this.state.globalState.this_link} />  
+                                    <div style={{ paddingTop: 80 }}>
+                                        <Item 
+                                            data={this.state.globalState.data} 
+                                            city={this.state.globalState.city} 
+                                            this_link={this.state.globalState.this_link} 
+                                            linkItem={this.state.globalState.linkItem} 
+                                            item={this.state.globalState.Item}  
+                                        />
+                                    </div>
+                                </Route>
+                                <Route
+                                    path='/:cityName/menu/:catLink/:itemId'
+                                    exact={ true }
+                                >
+                                    <HeaderCat 
+                                        data={this.state.globalState.data} 
+                                        city={this.state.globalState.city} 
+                                        this_link={this.state.globalState.this_link} />  
+                                    <div style={{ paddingTop: 80 }}>
+                                        <Item 
+                                            data={this.state.globalState.data} 
+                                            city={this.state.globalState.city} 
+                                            this_link={this.state.globalState.this_link} 
+                                            linkItem={this.state.globalState.linkItem} 
+                                            item={this.state.globalState.Item}  
+                                        />
+                                    </div>
+                                </Route>
+                                <Route 
+                                    exact 
+                                    path='/:cityName/profile/'
+                                >
+                                    <Header 
+                                        data={this.state.globalState.data} 
+                                        city={this.state.globalState.city} 
+                                        this_link={this.state.globalState.this_link} />  
+                                    <Profile data={this.state.globalState.data} city={this.state.globalState.city} this_link={this.state.globalState.this_link}  />
+                                </Route>
+                                <Route
+                                    path='/:cityName/menu/:itemLink'
+                                    exact={ true }
+                                >
+                                    <HeaderCat 
+                                        data={this.state.globalState.data} 
+                                        city={this.state.globalState.city} 
+                                        this_link={this.state.globalState.this_link} />  
+                                    <HomeCat data={this.state.globalState.data} city={this.state.globalState.city} this_link={this.state.globalState.this_link}  />
+                                </Route>
+                                <Route
+                                    path='/:cityName/cart'
+                                    exact={ true }
+                                >
+                                    <Header 
+                                        data={this.state.globalState.data} 
+                                        city={this.state.globalState.city} 
+                                        this_link={this.state.globalState.this_link} />  
+                                    <Cart data={this.state.globalState.data} city={this.state.globalState.city} this_link={this.state.globalState.this_link}  />
+                                </Route>
+                                <Route
+                                    path='/:cityName/about'
+                                    exact={ true }
+                                >
+                                    <Header 
+                                        data={this.state.globalState.data} 
+                                        city={this.state.globalState.city} 
+                                        this_link={this.state.globalState.this_link} />  
+                                    <PageAbout data={this.state.globalState.data} city={this.state.globalState.city} this_link={this.state.globalState.this_link}  />
+                                </Route>
+                                <Route
+                                    path='/:cityName/jobs'
+                                    exact={ true }
+                                >
+                                    <Header 
+                                        data={this.state.globalState.data} 
+                                        city={this.state.globalState.city} 
+                                        this_link={this.state.globalState.this_link} />  
+                                    <PageJob data={this.state.globalState.data} city={this.state.globalState.city} this_link={this.state.globalState.this_link}  />
+                                </Route>
+                                <Route
+                                    path='/:cityName/instpayorders'
+                                    exact={ true }
+                                >
+                                    <Header 
+                                        data={this.state.globalState.data} 
+                                        city={this.state.globalState.city} 
+                                        this_link={this.state.globalState.this_link} />  
+                                    <PageInstPay data={this.state.globalState.data} city={this.state.globalState.city} this_link={this.state.globalState.this_link}  />
+                                </Route>
+                                <Route
+                                    path='/:cityName/publichnaya-oferta'
+                                    exact={ true }
+                                >
+                                    <Header 
+                                        data={this.state.globalState.data} 
+                                        city={this.state.globalState.city} 
+                                        this_link={this.state.globalState.this_link} />  
+                                    <PageOferta data={this.state.globalState.data} city={this.state.globalState.city} this_link={this.state.globalState.this_link}  />
+                                </Route>
+                                <Route
+                                    path='/:cityName/politika-konfidencialnosti'
+                                    exact={ true }
+                                >
+                                    <Header 
+                                        data={this.state.globalState.data} 
+                                        city={this.state.globalState.city} 
+                                        this_link={this.state.globalState.this_link} />  
+                                    <PagePolitika data={this.state.globalState.data} city={this.state.globalState.city} this_link={this.state.globalState.this_link}  />
+                                </Route>
+                                <Route
+                                    path='/'
+                                    exact={ true }
+                                >
+                                    <Redirect push
+                                        to={"/togliatti"}
+                                    />
+                                </Route>
+                                <Route
+                                    path='/profile'
+                                    exact={ true }
+                                >
+                                    <Redirect push
+                                        to={"/togliatti"}
+                                    />
+                                </Route>
+                                
+                                <Route>
+                                    <Header 
+                                        data={this.state.globalState.data} 
+                                        city={this.state.globalState.city} 
+                                        this_link={this.state.globalState.this_link} />  
+                                    <NotFound data={this.state.globalState.data} city={this.state.globalState.city} this_link={this.state.globalState.this_link}  />
+                                </Route>
+                                
+                            </Switch>
+                            
+                            {this.state.activePage == 'cart' ?
+                                <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
+                                    <Box sx={{ display: { xs: 'none' } }}>
+                                        <div className="456" style={{ width: '100%', height: 3, position: 'fixed', bottom: 72, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
+                                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 69, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
+                                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 66, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
+                                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 63, zIndex: 0, backgroundColor: '#bababa', opacity: 0.04 }} />
+                                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 60, zIndex: 0, backgroundColor: '#bababa', opacity: 0.05 }} />
+                                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 57, zIndex: 0, backgroundColor: '#bababa', opacity: 0.06 }} />
+                                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 54, zIndex: 0, backgroundColor: '#bababa', opacity: 0.07 }} />
+                                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 51, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
+                                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 48, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
+                                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 45, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
+                                        
+                                    </Box>
+                                    <Box sx={{ display: { sm: 'none' } }}>
+                                        <div className="123" style={{ width: '100%', height: 3, position: 'fixed', bottom: 72+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
+                                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 69+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
+                                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 66+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
+                                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 63+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.04 }} />
+                                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 60+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.05 }} />
+                                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 57+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.06 }} />
+                                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 54+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.07 }} />
+                                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 51+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
+                                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 48+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
+                                        <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 45+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
+                                    </Box>
+                                </Box>
+                                    :
+                                null
+                            }
+
+                            {this.state.activePage == 'cart' ? null :
+                                <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 72, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 69, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 66, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 63, zIndex: 0, backgroundColor: '#bababa', opacity: 0.04 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 60, zIndex: 0, backgroundColor: '#bababa', opacity: 0.05 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 57, zIndex: 0, backgroundColor: '#bababa', opacity: 0.06 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 54, zIndex: 0, backgroundColor: '#bababa', opacity: 0.07 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 51, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 48, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 45, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
+                                </Box> 
+                            }
+
+                            <StickyFooter cityName={ this.state.globalState.city } />
+                        </div>
+                    </Provider>
+                )
+            }
+
+            console.log( '!this.state.globalState' )
+            return <h1>LOAD ....</h1>;
+        }
+
+        if( this.props.globalState ){
+            console.log( 'this.props.globalState' )
+
+            return (
+                <Provider { ...stores }>
+                    <div className="home">
+                        <Switch>
+                            <Route
+                                path='/:cityName/contacts'
+                                exact={ true }
+                            >
+                                <Header 
                                     data={this.props.globalState.data} 
                                     city={this.props.globalState.city} 
-                                    this_link={this.props.globalState.this_link} 
-                                    linkItem={this.props.globalState.linkItem} 
-                                    item={this.props.globalState.Item}  
-                                />
-                            </div>
-                        </Route>
-                        <Route
-                            path='/:cityName/menu/:catLink/:itemId'
-                            exact={ true }
-                        >
-                            <HeaderCat 
-                                data={this.props.globalState.data} 
-                                city={this.props.globalState.city} 
-                                this_link={this.props.globalState.this_link} />  
-                            <div style={{ paddingTop: 80 }}>
-                                <Item 
+                                    this_link={this.props.globalState.this_link} />   
+                                <Contact data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                            </Route>
+                            <Route
+                                path='/:cityName/akcii/:act_id'
+                                exact={ true }
+                            >
+                                <Header 
                                     data={this.props.globalState.data} 
                                     city={this.props.globalState.city} 
-                                    this_link={this.props.globalState.this_link} 
-                                    linkItem={this.props.globalState.linkItem} 
-                                    item={this.props.globalState.Item}  
+                                    this_link={this.props.globalState.this_link} />  
+                                <Actii data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                            </Route>
+                            <Route
+                                path='/:cityName/akcii'
+                                exact={ true }
+                            >
+                                <Header 
+                                    data={this.props.globalState.data} 
+                                    city={this.props.globalState.city} 
+                                    this_link={this.props.globalState.this_link} />  
+                                <Actii data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                            </Route>
+                            <Route
+                                path='/:cityName/menu'
+                                exact={ true }
+                            >
+                                <Header 
+                                    data={this.props.globalState.data} 
+                                    city={this.props.globalState.city} 
+                                    this_link={this.props.globalState.this_link} />  
+                                <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                            </Route>
+                            <Route
+                                path='/:cityName'
+                                exact={ true }
+                            >
+                                <Header 
+                                    data={this.props.globalState.data} 
+                                    city={this.props.globalState.city} 
+                                    this_link={this.props.globalState.this_link} />  
+                                <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                            </Route>
+                            <Route
+                                path='/:cityName/item/:id'
+                                exact={ true }
+                            >
+                                <HeaderCat 
+                                    data={this.props.globalState.data} 
+                                    city={this.props.globalState.city} 
+                                    this_link={this.props.globalState.this_link} />  
+                                <div style={{ paddingTop: 80 }}>
+                                    <Item 
+                                        data={this.props.globalState.data} 
+                                        city={this.props.globalState.city} 
+                                        this_link={this.props.globalState.this_link} 
+                                        linkItem={this.props.globalState.linkItem} 
+                                        item={this.props.globalState.Item}  
+                                    />
+                                </div>
+                            </Route>
+                            <Route
+                                path='/:cityName/menu/:catLink/:itemId'
+                                exact={ true }
+                            >
+                                <HeaderCat 
+                                    data={this.props.globalState.data} 
+                                    city={this.props.globalState.city} 
+                                    this_link={this.props.globalState.this_link} />  
+                                <div style={{ paddingTop: 80 }}>
+                                    <Item 
+                                        data={this.props.globalState.data} 
+                                        city={this.props.globalState.city} 
+                                        this_link={this.props.globalState.this_link} 
+                                        linkItem={this.props.globalState.linkItem} 
+                                        item={this.props.globalState.Item}  
+                                    />
+                                </div>
+                            </Route>
+                            <Route 
+                                exact 
+                                path='/:cityName/profile/'
+                            >
+                                <Header 
+                                    data={this.props.globalState.data} 
+                                    city={this.props.globalState.city} 
+                                    this_link={this.props.globalState.this_link} />  
+                                <Profile data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                            </Route>
+                            <Route
+                                path='/:cityName/menu/:itemLink'
+                                exact={ true }
+                            >
+                                <HeaderCat 
+                                    data={this.props.globalState.data} 
+                                    city={this.props.globalState.city} 
+                                    this_link={this.props.globalState.this_link} />  
+                                <HomeCat data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                            </Route>
+                            <Route
+                                path='/:cityName/cart'
+                                exact={ true }
+                            >
+                                <Header 
+                                    data={this.props.globalState.data} 
+                                    city={this.props.globalState.city} 
+                                    this_link={this.props.globalState.this_link} />  
+                                <Cart data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                            </Route>
+                            <Route
+                                path='/:cityName/about'
+                                exact={ true }
+                            >
+                                <Header 
+                                    data={this.props.globalState.data} 
+                                    city={this.props.globalState.city} 
+                                    this_link={this.props.globalState.this_link} />  
+                                <PageAbout data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                            </Route>
+                            <Route
+                                path='/:cityName/jobs'
+                                exact={ true }
+                            >
+                                <Header 
+                                    data={this.props.globalState.data} 
+                                    city={this.props.globalState.city} 
+                                    this_link={this.props.globalState.this_link} />  
+                                <PageJob data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                            </Route>
+                            <Route
+                                path='/:cityName/instpayorders'
+                                exact={ true }
+                            >
+                                <Header 
+                                    data={this.props.globalState.data} 
+                                    city={this.props.globalState.city} 
+                                    this_link={this.props.globalState.this_link} />  
+                                <PageInstPay data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                            </Route>
+                            <Route
+                                path='/:cityName/publichnaya-oferta'
+                                exact={ true }
+                            >
+                                <Header 
+                                    data={this.props.globalState.data} 
+                                    city={this.props.globalState.city} 
+                                    this_link={this.props.globalState.this_link} />  
+                                <PageOferta data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                            </Route>
+                            <Route
+                                path='/:cityName/politika-konfidencialnosti'
+                                exact={ true }
+                            >
+                                <Header 
+                                    data={this.props.globalState.data} 
+                                    city={this.props.globalState.city} 
+                                    this_link={this.props.globalState.this_link} />  
+                                <PagePolitika data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                            </Route>
+                            <Route
+                                path='/'
+                                exact={ true }
+                            >
+                                <Redirect push
+                                    to={"/togliatti"}
                                 />
-                            </div>
-                        </Route>
-                        <Route 
-                            exact 
-                            path='/:cityName/profile/'
-                        >
-                            <Header 
-                                data={this.props.globalState.data} 
-                                city={this.props.globalState.city} 
-                                this_link={this.props.globalState.this_link} />  
-                            <Profile data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
-                        </Route>
-                        <Route
-                            path='/:cityName/menu/:itemLink'
-                            exact={ true }
-                        >
-                            <HeaderCat 
-                                data={this.props.globalState.data} 
-                                city={this.props.globalState.city} 
-                                this_link={this.props.globalState.this_link} />  
-                            <HomeCat data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
-                        </Route>
-                        <Route
-                            path='/:cityName/cart'
-                            exact={ true }
-                        >
-                            <Header 
-                                data={this.props.globalState.data} 
-                                city={this.props.globalState.city} 
-                                this_link={this.props.globalState.this_link} />  
-                            <Cart data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
-                        </Route>
-                        <Route
-                            path='/:cityName/about'
-                            exact={ true }
-                        >
-                            <Header 
-                                data={this.props.globalState.data} 
-                                city={this.props.globalState.city} 
-                                this_link={this.props.globalState.this_link} />  
-                            <PageAbout data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
-                        </Route>
-                        <Route
-                            path='/:cityName/jobs'
-                            exact={ true }
-                        >
-                            <Header 
-                                data={this.props.globalState.data} 
-                                city={this.props.globalState.city} 
-                                this_link={this.props.globalState.this_link} />  
-                            <PageJob data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
-                        </Route>
-                        <Route
-                            path='/:cityName/instpayorders'
-                            exact={ true }
-                        >
-                            <Header 
-                                data={this.props.globalState.data} 
-                                city={this.props.globalState.city} 
-                                this_link={this.props.globalState.this_link} />  
-                            <PageInstPay data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
-                        </Route>
-                        <Route
-                            path='/:cityName/publichnaya-oferta'
-                            exact={ true }
-                        >
-                            <Header 
-                                data={this.props.globalState.data} 
-                                city={this.props.globalState.city} 
-                                this_link={this.props.globalState.this_link} />  
-                            <PageOferta data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
-                        </Route>
-                        <Route
-                            path='/:cityName/politika-konfidencialnosti'
-                            exact={ true }
-                        >
-                            <Header 
-                                data={this.props.globalState.data} 
-                                city={this.props.globalState.city} 
-                                this_link={this.props.globalState.this_link} />  
-                            <PagePolitika data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
-                        </Route>
-                        <Route
-                            path='/'
-                            exact={ true }
-                        >
-                            <Redirect push
-                                to={"/togliatti"}
-                            />
-                        </Route>
-                        <Route
-                            path='/profile'
-                            exact={ true }
-                        >
-                            <Redirect push
-                                to={"/togliatti"}
-                            />
-                        </Route>
+                            </Route>
+                            <Route
+                                path='/profile'
+                                exact={ true }
+                            >
+                                <Redirect push
+                                    to={"/togliatti"}
+                                />
+                            </Route>
+                            
+                            <Route>
+                                <Header 
+                                    data={this.props.globalState.data} 
+                                    city={this.props.globalState.city} 
+                                    this_link={this.props.globalState.this_link} />  
+                                <NotFound data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                            </Route>
+                            
+                        </Switch>
                         
-                        <Route>
-                            <Header 
-                                data={this.props.globalState.data} 
-                                city={this.props.globalState.city} 
-                                this_link={this.props.globalState.this_link} />  
-                            <NotFound data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
-                        </Route>
-                        
-                    </Switch>
-                    
-                    {this.state.activePage == 'cart' ?
-                        <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
-                            <Box sx={{ display: { xs: 'none' } }}>
-                                <div className="456" style={{ width: '100%', height: 3, position: 'fixed', bottom: 72, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
+                        {this.state.activePage == 'cart' ?
+                            <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
+                                <Box sx={{ display: { xs: 'none' } }}>
+                                    <div className="456" style={{ width: '100%', height: 3, position: 'fixed', bottom: 72, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 69, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 66, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 63, zIndex: 0, backgroundColor: '#bababa', opacity: 0.04 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 60, zIndex: 0, backgroundColor: '#bababa', opacity: 0.05 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 57, zIndex: 0, backgroundColor: '#bababa', opacity: 0.06 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 54, zIndex: 0, backgroundColor: '#bababa', opacity: 0.07 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 51, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 48, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 45, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
+                                    
+                                </Box>
+                                <Box sx={{ display: { sm: 'none' } }}>
+                                    <div className="123" style={{ width: '100%', height: 3, position: 'fixed', bottom: 72+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 69+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 66+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 63+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.04 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 60+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.05 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 57+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.06 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 54+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.07 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 51+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 48+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
+                                    <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 45+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
+                                </Box>
+                            </Box>
+                                :
+                            null
+                        }
+
+                        {this.state.activePage == 'cart' ? null :
+                            <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
+                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 72, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
                                 <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 69, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
                                 <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 66, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
                                 <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 63, zIndex: 0, backgroundColor: '#bababa', opacity: 0.04 }} />
@@ -498,43 +960,13 @@ export class App extends React.Component {
                                 <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 51, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
                                 <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 48, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
                                 <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 45, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
-                                
-                            </Box>
-                            <Box sx={{ display: { sm: 'none' } }}>
-                                <div className="123" style={{ width: '100%', height: 3, position: 'fixed', bottom: 72+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 69+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 66+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 63+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.04 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 60+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.05 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 57+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.06 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 54+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.07 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 51+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 48+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
-                                <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 45+99, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
-                            </Box>
-                        </Box>
-                            :
-                        null
-                    }
+                            </Box> 
+                        }
 
-                    {this.state.activePage == 'cart' ? null :
-                        <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 72, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 69, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 66, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 63, zIndex: 0, backgroundColor: '#bababa', opacity: 0.04 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 60, zIndex: 0, backgroundColor: '#bababa', opacity: 0.05 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 57, zIndex: 0, backgroundColor: '#bababa', opacity: 0.06 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 54, zIndex: 0, backgroundColor: '#bababa', opacity: 0.07 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 51, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 48, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
-                            <div style={{ width: '100%', height: 3, position: 'fixed', bottom: 45, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
-                        </Box> 
-                    }
-
-                    <StickyFooter cityName={ this.props.globalState.city } />
-                </div>
-            </Provider>
-        );
+                        <StickyFooter cityName={ this.props.globalState.city } />
+                    </div>
+                </Provider>
+            );
+        }
     }
 }

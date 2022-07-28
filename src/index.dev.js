@@ -6,4 +6,4 @@ import { BrowserRouter } from 'react-router-dom';
 import { App } from './components/app';
 
 // compile App component in `#app` HTML element
-ReactDOM.render( <BrowserRouter><App/></BrowserRouter>, document.getElementById( 'app' ) );
+ReactDOM.render( <BrowserRouter><App /></BrowserRouter>, document.getElementById( 'app' ) );
