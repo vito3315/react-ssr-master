@@ -183,6 +183,7 @@ export class MyTextInput extends React.PureComponent {
       return (
         <TextField 
           label={this.props.label}
+          placeholder={this.props.placeholder}
           value={this.props.value}
           onChange={this.props.func}
           onBlur={this.props.onBlur ? this.props.onBlur : null}

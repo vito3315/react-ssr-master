@@ -50,7 +50,12 @@ $colorMain: #CC0033;
         margin-bottom: 20px;
     }
 }
-
+.hidddenText3{
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
 .ModalItemButtonCart{
     &:hover{
         background-color: rgba(249, 188, 35, 0.1)!important;;

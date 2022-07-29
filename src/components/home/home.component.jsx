@@ -340,7 +340,7 @@ class CardItem extends React.Component {
                             </picture>
                                 :
                             <picture>
-                                <source srcset={`
+                                <source srcSet={`
                                     https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg 138w, 
                                     https://storage.yandexcloud.net/site-img/${img_name}_146x146.jpg 146w,
                                     https://storage.yandexcloud.net/site-img/${img_name}_183x183.jpg 183w,
@@ -437,7 +437,7 @@ class CardItem extends React.Component {
                             </picture>
                                 :
                             <picture>
-                                <source srcset={`
+                                <source srcSet={`
                                     https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg 138w, 
                                     https://storage.yandexcloud.net/site-img/${img_name}_146x146.jpg 146w,
                                     https://storage.yandexcloud.net/site-img/${img_name}_183x183.jpg 183w,
@@ -481,13 +481,13 @@ class CardItem extends React.Component {
                             null
                         }
 
-                        <Typography className="CardInfoItem_" style={{ marginBottom: 10, fontFamily: 'Roboto', fontSize: '0.875rem', fontWeight: 400, color: '#525252', maxHeight: 60, overflow: 'hidden' }} component="p" onClick={() => this.props.openItem(this.state.item.id)}>{desc}</Typography>
+                        <Typography className="CardInfoItem_ hidddenText3" style={{ marginBottom: 10, fontFamily: 'Roboto', fontSize: '0.875rem', fontWeight: 400, color: '#525252', maxHeight: 60, overflow: 'hidden' }} component="p" onClick={() => this.props.openItem(this.state.item.id)}>{desc}</Typography>
                         
                         <div style={{ marginBottom: 10 }}>
                             { this.state.count == 0 ?
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="outlined" className='MobileActionsCartButtonStart'>
                                     <Button variant="outlined" onClick={this.add.bind(this)}>
-                                        {new Intl.NumberFormat('ru-RU').format( parseInt(this.state.item.price))}
+                                        В корзину за {new Intl.NumberFormat('ru-RU').format( parseInt(this.state.item.price))}
                                         <IconRuble style={{ width: 11, height: 11, fill: '#525252', marginLeft: 3, paddingBottom: 1 }} />
                                     </Button>
                                 </ButtonGroup>
@@ -662,7 +662,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export class HomeCat extends React.Component{
-    
+    constructor(props) {
+        super(props);
+        
+        this.state = {      
+            
+        };
+    }
+
     static fetchData(propsData) {
         let data = {
             type: 'get_page_info', 
@@ -670,7 +677,6 @@ export class HomeCat extends React.Component{
             page: '',
             link: propsData,
         };
-        
         return axios({
             method: 'POST',
             url: config.urlApi,
@@ -1354,9 +1360,9 @@ export class Home extends React.Component {
                     {this.state.openItem ?
                         <Dialog disableElevation fullScreen open={this.state.openModal} className="ItemDialog" onClose={this.handleClose.bind(this)} TransitionComponent={Transition}>
                             <DialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
-                                <IconButton aria-label="close" style={{ position: 'absolute', top: -36, left: 15, backgroundColor: 'transparent' }} onClick={this.handleClose.bind(this)}>
+                                <div style={{ position: 'absolute', top: -36, left: 15, backgroundColor: 'transparent', cursor: 'pointer' }} onClick={this.handleClose.bind(this)}>
                                     <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
-                                </IconButton>
+                                </div>
                             </DialogTitle>
                             <div>
                                 <Item itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} openInfo={this.openInfo.bind(this)} openModalPCInfo={this.state.openModalPCInfo} />
@@ -1369,9 +1375,9 @@ export class Home extends React.Component {
                     {this.state.openItem ?
                         <>
                             <Dialog disableElevation maxWidth={'md'} sx={{ display: { xs: 'none', md: 'block', lg: 'none' } }} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC testModalMD" open={this.state.openModalPC}>
-                                <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -52, left: 16, zIndex: 1500, width: 52, height: 52, backgroundColor: 'transparent' }} onClick={this.handleClosePC.bind(this)}>
+                                <div className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -52, left: 16, zIndex: 1500, width: 52, height: 52, backgroundColor: 'transparent', cursor: 'pointer' }} onClick={this.handleClosePC.bind(this)}>
                                     <IconClose style={{ width: 'inherit', height: 'inherit', fill: '#fff', color: '#fff', overflow: 'visible' }} />
-                                </IconButton>
+                                </div>
                                 
                                 <DialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
                                     <Item itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} openInfo={this.openInfo.bind(this)} openModalPCInfo={this.state.openModalPCInfo} />
@@ -1379,9 +1385,9 @@ export class Home extends React.Component {
                             </Dialog>
                         
                             <Dialog disableElevation maxWidth={'lg'} sx={{ display: { xs: 'none', lg: 'block' } }} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePC.bind(this)} className="modalActii Item OpenItemPC testModalLG" open={this.state.openModalPC}>
-                                <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -44, left: 16, zIndex: 1500, width: 40, height: 40, backgroundColor: 'transparent' }} onClick={this.handleClosePC.bind(this)}>
+                                <div className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -32, left: 16, zIndex: 1500, width: 25, height: 25, backgroundColor: 'transparent', cursor: 'pointer' }} onClick={this.handleClosePC.bind(this)}>
                                     <IconClose style={{ width: 'inherit', height: 'inherit', fill: '#fff', color: '#fff', overflow: 'visible' }} />
-                                </IconButton>
+                                </div>
                                 
                                 <DialogContent className="modalActiiContentNew" style={{ overflow: 'hidden' }}>
                                     <Item itemId={this.state.openItem.id} item={this.state.openItem} openSetPc={this.openSetPc.bind(this)} openInfo={this.openInfo.bind(this)} openModalPCInfo={this.state.openModalPCInfo} />
@@ -1396,9 +1402,9 @@ export class Home extends React.Component {
                         <>
                             <Dialog sx={{ display: { xs: 'block', md: 'none' } }} disableElevation fullScreen style={{ width: '100%', marginTop: this.state.openItem.items.length > 1 ? 400 : 470, borderTopRightRadius: 30, borderTopLeftRadius: 30 }} onClose={this.handleClosePCInfo.bind(this)} className="ItemDialog OpenItemMobInfo blurBacground" open={this.state.openModalPCInfo} TransitionComponent={Transition}>
                                 <DialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
-                                    <IconButton aria-label="close" style={{ position: 'absolute', top: -36, left: 15, backgroundColor: 'transparent' }} onClick={this.handleClosePCInfo.bind(this)}>
+                                    <div style={{ position: 'absolute', top: -36, left: 15, backgroundColor: 'transparent', cursor: 'pointer' }} onClick={this.handleClosePCInfo.bind(this)}>
                                         <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
-                                    </IconButton>
+                                    </div>
                                 </DialogTitle>
                                 
                                 <DialogContent className="modalActiiContentNew" style={{ height: this.state.openItem.items.length > 1 ? 'calc(100vh - 400px)' : 'calc(100vh - 470px)', padding: 20, display: 'flex', flexWrap: 'wrap', alignContent: 'start' }}>
@@ -1450,9 +1456,9 @@ export class Home extends React.Component {
                             
                             <Dialog sx={{ display: { xs: 'block', sm: 'none' } }} disableElevation fullScreen style={{ height: 'calc(100vh - 50px)', width: '100%' }} onClose={this.handleClosePCSet.bind(this)} className="ItemDialog OpenItemMobSet" open={this.state.openModalPCSet} TransitionComponent={Transition}>
                                 <DialogTitle disableTypography style={{ margin: 0, padding: 0 }}>
-                                    <IconButton aria-label="close" style={{ position: 'absolute', top: -36, left: 15, backgroundColor: 'transparent' }} onClick={this.handleClosePCSet.bind(this)}>
+                                    <div style={{ position: 'absolute', top: -36, left: 15, backgroundColor: 'transparent', cursor: 'pointer' }} onClick={this.handleClosePCSet.bind(this)}>
                                         <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
-                                    </IconButton>
+                                    </div>
                                 </DialogTitle>
                                 
                                 <DialogContent className="modalActiiContentNew" style={{ height: 'calc(100vh - 50px)', padding: 20, display: 'flex', flexWrap: 'wrap', alignContent: 'start' }}>
@@ -1500,7 +1506,7 @@ export class Home extends React.Component {
                                                         </picture>
                                                             :
                                                         <picture>
-                                                            <source srcset={`
+                                                            <source srcSet={`
                                                                 https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg 138w, 
                                                                 https://storage.yandexcloud.net/site-img/${item.img_app}_292x292.jpg 146w,
                                                                 https://storage.yandexcloud.net/site-img/${item.img_app}_366x366.jpg 183w,
@@ -1526,9 +1532,9 @@ export class Home extends React.Component {
                             </Dialog>
                             
                             <Dialog sx={{ display: { xs: 'none', md: 'block', lg: 'none' } }} disableElevation maxWidth={'md'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePCSet.bind(this)} className="modalActii Item OpenItemPCSet" open={this.state.openModalPCSet}>
-                                <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -44, left: 16, zIndex: 2000, width: 40, height: 40, backgroundColor: 'transparent' }} onClick={this.handleClosePCSet.bind(this)}>
+                                <div className='IconButtonClose' style={{ position: 'absolute', top: -32, left: 16, zIndex: 2000, width: 25, height: 25, backgroundColor: 'transparent', cursor: 'pointer' }} onClick={this.handleClosePCSet.bind(this)}>
                                     <IconClose style={{ width: 'inherit', height: 'inherit', fill: '#fff', color: '#fff', overflow: 'visible' }} />
-                                </IconButton>
+                                </div>
                                 
                                 <DialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 2.25% 2% 4.5%', marginRight: '1.5%', alignContent: 'start' }}>
                                     {this.state.openModalPCSetItems.map( (item, key) =>
@@ -1549,7 +1555,7 @@ export class Home extends React.Component {
                                                     </picture>
                                                         :
                                                     <picture>
-                                                        <source srcset={`
+                                                        <source srcSet={`
                                                             https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg 138w, 
                                                             https://storage.yandexcloud.net/site-img/${item.img_app}_292x292.jpg 146w,
                                                             https://storage.yandexcloud.net/site-img/${item.img_app}_366x366.jpg 183w,
@@ -1574,9 +1580,9 @@ export class Home extends React.Component {
                             </Dialog>
                         
                             <Dialog sx={{ display: { xs: 'none', lg: 'block' } }} disableElevation maxWidth={'lg'} fullWidth={true} style={{ borderRadius: 50 }} onClose={this.handleClosePCSet.bind(this)} className="modalActii Item OpenItemPCSet" open={this.state.openModalPCSet}>
-                                <IconButton className='IconButtonClose' aria-label="close" style={{ position: 'absolute', top: -44, left: 16, zIndex: 2000, width: 40, height: 40, backgroundColor: 'transparent' }} onClick={this.handleClosePCSet.bind(this)}>
+                                <div className='IconButtonClose' style={{ position: 'absolute', top: -32, left: 16, zIndex: 2000, width: 25, height: 25, backgroundColor: 'transparent', cursor: 'pointer' }} onClick={this.handleClosePCSet.bind(this)}>
                                     <IconClose style={{ width: 'inherit', height: 'inherit', fill: '#fff', color: '#fff', overflow: 'visible' }} />
-                                </IconButton>
+                                </div>
                                 
                                 <DialogContent className="modalActiiContentNew" style={{ display: 'flex', flexWrap: 'wrap', padding: '2% 2.25% 2% 4.5%', marginRight: '1.5%', alignContent: 'start' }}>
                                     {this.state.openModalPCSetItems.map( (item, key) =>
@@ -1597,7 +1603,7 @@ export class Home extends React.Component {
                                                     </picture>
                                                         :
                                                     <picture>
-                                                        <source srcset={`
+                                                        <source srcSet={`
                                                             https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg 138w, 
                                                             https://storage.yandexcloud.net/site-img/${item.img_app}_292x292.jpg 146w,
                                                             https://storage.yandexcloud.net/site-img/${item.img_app}_366x366.jpg 183w,

@@ -41,7 +41,7 @@ import Badge from '@mui/material/Badge';
 import itemsStore from '../../stores/items-store';
 import config from '../../stores/config';
 
-import { MiniActionsCartButton, MiniActionsCartButtonPrize, IconRuble, MyTextInput } from '../../stores/elements';
+import { MiniActionsCartButton, MiniActionsCartButtonPrize, IconRuble, MyTextInput, IconClose } from '../../stores/elements';
 
 import { autorun } from "mobx"
 
@@ -99,9 +99,12 @@ class ModalLogin extends React.Component{
             open: false,
 
             typeLogin: 'start',
+            fromType: 'start',
             loginLogin: '',
             pwdLogin: '',
             newPassword: '',
+            genPwd: '',
+            checkCode: '',
 
             pwd: '',
             ResPWD: false,
@@ -123,6 +126,10 @@ class ModalLogin extends React.Component{
             userName: '',
             token: '',
         };
+    }
+
+    componentDidMount(){
+        this.gen_password();
     }
 
     getData = (method, data = {}, is_load = true) => {
@@ -161,6 +168,7 @@ class ModalLogin extends React.Component{
     close(){
         this.setState({
             open: false,
+            fromType: 'start',
             typeLogin: 'start',
             loginLogin: '',
             pwdLogin: '',
@@ -172,6 +180,10 @@ class ModalLogin extends React.Component{
         let data = event.target.value;
 
         if( type == 'loginLogin' ){
+            if( isNaN(data) && data != '+' ){
+                return ;
+            }
+
             if( parseInt(data[0]) == 9 ){
                 data = '8' + data;
             }
@@ -179,6 +191,12 @@ class ModalLogin extends React.Component{
                 data = data.slice(2);
                 data = '8' + data;
             }
+
+            data = data.split(' ').join('');
+            data = data.split('(').join('');
+            data = data.split(')').join('');
+            data = data.split('-').join('');
+            data = data.split('_').join('');
         }
 
         this.setState({
@@ -198,22 +216,16 @@ class ModalLogin extends React.Component{
             if( parseInt(type) == 3 ){
                 this.checkCode();
             }
+
+            if( parseInt(type) == 4 ){
+                this.sendsmsNewLogin();
+            }
         }
     }
 
     async logIn(){
-        let number = this.state.loginLogin;
-            
-        number = number.split(' ').join('');
-        number = number.split('(').join('');
-        number = number.split(')').join('');
-        number = number.split('-').join('');
-        number = number.split('_').join('');
-        
-        number = number.slice(1);
-
         let data = {
-            number: number,
+            number: this.state.loginLogin,
             pwd: this.state.pwdLogin 
         };
 
@@ -238,6 +250,7 @@ class ModalLogin extends React.Component{
         };
 
         this.setState({ 
+            fromType: this.state.typeLogin,
             typeLogin: 'loginSMSCode'
         })
 
@@ -257,8 +270,6 @@ class ModalLogin extends React.Component{
             this.setState({ 
                 errPhone: ''
             })
-        
-            
         }else{
             this.setState({
               errPhone: res.text
@@ -275,14 +286,6 @@ class ModalLogin extends React.Component{
             this.sms1 = true;
             
             let number = this.state.loginLogin;
-            
-            number = number.split(' ').join('');
-            number = number.split('(').join('');
-            number = number.split(')').join('');
-            number = number.split('-').join('');
-            number = number.split('_').join('');
-            
-            number = number.slice(1);
             
             grecaptcha.ready(() => {
                 grecaptcha.execute('6LdhWpIdAAAAAA4eceqTfNH242EGuIleuWAGQ2su', {action: 'submit'}).then( (token) => {
@@ -326,7 +329,81 @@ class ModalLogin extends React.Component{
             itemsStore.setToken( res.token, res.name ); 
             itemsStore.setUserName(res.name);
 
-            this.close();
+            if( this.state.fromType == 'create' ){
+                this.setState({ 
+                    fromType: this.state.typeLogin,
+                    typeLogin: 'finish'
+                })
+            }else{
+                this.close();
+            }
+        }
+    }
+
+    gen_password(){
+        var password = "";
+        var symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+?";
+        for (var i = 0; i < 10; i++){
+            password += symbols.charAt(Math.floor(Math.random() * symbols.length));     
+        }
+        
+        this.setState({
+            genPwd: password
+        })
+    }
+
+    async sendsmsNewLoginFetch(token){
+        let data = {
+            number: this.state.loginLogin,
+            pwd: this.state.newPassword,
+            token: token 
+        };
+
+        this.setState({ 
+            fromType: this.state.typeLogin,
+            typeLogin: 'loginSMSCode'
+        })
+
+        let timerId = setInterval(() => {
+            this.setState({
+                timerSMS: this.state.timerSMS-1,
+                timerSMSTime: this.toTime(this.state.timerSMS-1)
+            })
+            if( this.state.timerSMS == 0 ){
+                clearInterval(timerId);
+            }
+        }, 1000);
+
+        let json = await this.getData('sendsmsrp', data);
+
+        if( json['st'] ){
+            this.setState({ 
+                errPhone: '', 
+                errSMS: ''
+            })
+        }else{
+            this.setState({
+              errPhone: json.text
+            });
+        }
+        
+        setTimeout( () => {
+            this.sms1 = false;
+            this.setState({
+                is_load_new: false
+            })
+        }, 300 )
+    }
+
+    sendsmsNewLogin(){
+        if( this.sms1 == false ){
+            this.sms1 = true;
+            
+            grecaptcha.ready(() => {
+                grecaptcha.execute('6LdhWpIdAAAAAA4eceqTfNH242EGuIleuWAGQ2su', {action: 'submit'}).then( (token) => {
+                    this.sendsmsNewLoginFetch(token);
+                });
+            });
         }
     }
 
@@ -342,10 +419,18 @@ class ModalLogin extends React.Component{
                     BackdropProps={{
                         timeout: 500,
                     }}
+                    className="123"
                 >
                     <Fade in={this.state.open}>
+                        
+
                         { this.state.typeLogin != 'start' ? null :
                             <Box className='modalLoginStart'>
+
+                                <IconButton style={{ position: 'absolute', top: -40, left: 15, backgroundColor: 'transparent' }} onClick={this.close.bind(this)}>
+                                    <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
+                                </IconButton>
+
                                 <div className='loginIMG'>
                                     <img 
                                         alt={'Login'} 
@@ -357,29 +442,33 @@ class ModalLogin extends React.Component{
                                     <Typography component="h2">Мой аккаунт</Typography>
                                 </div>
                                 
-                                <MyTextInput type={"phone"} label="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this, 1)} className="inputLogin" style={{ marginBottom: 30 }} />
-                                <MyTextInput type={"password"} label="Пароль" value={ this.state.pwdLogin } func={ this.changeData.bind(this, 'pwdLogin') } onKeyDown={this.checkLoginKey.bind(this, 1)} className="inputLogin" />
+                                <MyTextInput type={"phone"} placeholder="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this, 1)} className="inputLogin" style={{ marginBottom: 30 }} />
+                                <MyTextInput type={"password"} placeholder="Пароль" value={ this.state.pwdLogin } func={ this.changeData.bind(this, 'pwdLogin') } onKeyDown={this.checkLoginKey.bind(this, 1)} className="inputLogin" />
 
                                 <div className='loginLosePWD'>
-                                    <Typography component="span" onClick={ () => { this.setState({ typeLogin: 'resetPWD' }) } }>Забыли пароль ?</Typography>
+                                    <Typography component="span" onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'resetPWD' }) } }>Забыли пароль ?</Typography>
                                 </div>
 
                                 <div className='loginLogin' onClick={this.logIn.bind(this)}>
                                     <Typography component="span">Войти</Typography>
                                 </div>
 
-                                <div className='loginCreate' onClick={ () => { this.setState({ typeLogin: 'create' }) } }>
+                                <div className='loginCreate' onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'create' }); this.gen_password(); } }>
                                     <Typography component="span">Создать новый аккаунт</Typography>
                                 </div>
 
                                 <div className='loginSMS'>
-                                    <Typography component="span" onClick={ () => { this.setState({ typeLogin: 'loginSMS' }) } }>Войти по смс</Typography>
+                                    <Typography component="span" onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'loginSMS' }) } }>Войти по смс</Typography>
                                 </div>
                                 
                             </Box>
                         }
                         { this.state.typeLogin != 'loginSMS' ? null :
                             <Box className='modalLoginCreate'>
+                                <IconButton style={{ position: 'absolute', top: -40, left: 15, backgroundColor: 'transparent' }} onClick={this.close.bind(this)}>
+                                    <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
+                                </IconButton>
+
                                 <div className='loginIMG'>
                                     <img 
                                         alt={'Login'} 
@@ -391,7 +480,7 @@ class ModalLogin extends React.Component{
                                     <Typography component="h2">Авторизация</Typography>
                                 </div>
                                 
-                                <MyTextInput type={"phone"} label="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this, 2)} className="inputLogin" style={{ marginBottom: 0 }} />
+                                <MyTextInput type={"phone"} placeholder="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this, 2)} className="inputLogin" style={{ marginBottom: 0 }} />
                                 
                                 <div className='loginErrText'>
                                     <Typography component="span"></Typography>
@@ -401,13 +490,17 @@ class ModalLogin extends React.Component{
                                     <Typography component="span">Получить код</Typography>
                                 </div>
                                 
-                                <div className='loginCreate' onClick={ () => { this.setState({ typeLogin: 'start' }) } }>
+                                <div className='loginCreate' onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'start' }) } }>
                                     <Typography component="span">У меня есть аккаунт</Typography>
                                 </div>
                             </Box>
                         }
                         { this.state.typeLogin != 'loginSMSCode' ? null :
                             <Box className='modalLoginSMSCode'>
+                                <IconButton style={{ position: 'absolute', top: -40, left: 15, backgroundColor: 'transparent' }} onClick={this.close.bind(this)}>
+                                    <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
+                                </IconButton>
+
                                 <div className='loginIMG'>
                                     <img 
                                         alt={'Login'} 
@@ -424,25 +517,35 @@ class ModalLogin extends React.Component{
                                     <Typography component="span">Введите последние 4 цифры номера.</Typography>
                                 </div>
                                 
-                                <div className='loginAutCode'>
+                                <div className={this.state.timerSMS > 0 ? 'loginAutCode' : 'loginAutCodeOther'}>
                                     <AuthCode autoFocus={true} allowedCharacters='numeric' length="4" onChange={ this.changeCode.bind(this) } />
                                 </div>
 
-                                <div className='loginTimer'>
-                                    <Typography component="span">Перезвонить можно через {this.state.timerSMSTime}</Typography>
-                                </div>
+                                { this.state.timerSMS > 0 ?
+                                    <div className='loginTimer'>
+                                        <Typography component="span">Перезвонить можно через {this.state.timerSMSTime}</Typography>
+                                    </div>
+                                        :
+                                    <div className='loginTimerSend' onClick={this.sendSMS.bind(this)}>
+                                        <Typography component="span">Отправить код еще раз</Typography>
+                                    </div>
+                                }
                                 
-                                <div className='loginSend' onClick={this.checkCode.bind(this)}>
+                                <div className={'loginSend ' + (this.state.checkCode.length == 4 ? '' : 'disabled') } onClick={this.checkCode.bind(this)}>
                                     <Typography component="span">Отправить</Typography>
                                 </div>
                                 
                                 <div className='loginPrev'>
-                                    <Typography component="span" onClick={ () => { this.setState({ typeLogin: 'loginSMS' }) } }>Изменить номер телефона</Typography>
+                                    <Typography component="span" onClick={ () => { this.setState({ typeLogin: this.state.fromType }) } }>Изменить номер телефона</Typography>
                                 </div>
                             </Box>
                         }
                         { this.state.typeLogin != 'resetPWD' ? null :
                             <Box className='modalLoginCreate'>
+                                <IconButton style={{ position: 'absolute', top: -40, left: 15, backgroundColor: 'transparent' }} onClick={this.close.bind(this)}>
+                                    <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
+                                </IconButton>
+
                                 <div className='loginIMG'>
                                     <img 
                                         alt={'Login'} 
@@ -454,8 +557,8 @@ class ModalLogin extends React.Component{
                                     <Typography component="h2">Восстановление пароля</Typography>
                                 </div>
                                 
-                                <MyTextInput type={"phone"} label="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this)} className="inputLogin" style={{ marginBottom: 30 }} />
-                                <MyTextInput type={"password"} label="Придумай пароль" value={ this.state.newPassword } func={ this.changeData.bind(this, 'newPassword') } onKeyDown={this.checkLoginKey.bind(this)} className="inputLogin" />
+                                <MyTextInput type={"phone"} placeholder="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this, 4)} className="inputLogin" style={{ marginBottom: 30 }} />
+                                <MyTextInput type={"password"} placeholder="Придумай пароль" value={ this.state.newPassword } func={ this.changeData.bind(this, 'newPassword') } onKeyDown={this.checkLoginKey.bind(this, 4)} className="inputLogin" />
 
                                 <div className='loginErrText'>
                                     <Typography component="span"></Typography>
@@ -465,38 +568,81 @@ class ModalLogin extends React.Component{
                                     <Typography component="span">Создать аккаунт</Typography>
                                 </div>
                                 
-                                <div className='loginCreate' onClick={ () => { this.setState({ typeLogin: 'start' }) } }>
+                                <div className='loginCreate' onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'start' }) } }>
                                     <Typography component="span">У меня есть аккаунт</Typography>
                                 </div>
                             </Box>
                         }
                         { this.state.typeLogin != 'create' ? null :
-                            <Box className='modalLoginCreate'>
+                            <Box className='modalLoginCreateNew'>
+                                <IconButton style={{ position: 'absolute', top: -40, left: 15, backgroundColor: 'transparent' }} onClick={this.close.bind(this)}>
+                                    <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
+                                </IconButton>
+
                                 <div className='loginIMG'>
                                     <img 
                                         alt={'Login'} 
                                         title={'Login'} 
-                                        src={`/assets/img_other/account-icon-240x240.png`} />
+                                        src={`/assets/img_other/account-icon-240x240_white.png`} />
                                 </div>
 
                                 <div className='loginHeader'>
                                     <Typography component="h2">Новый аккаунт</Typography>
                                 </div>
                                 
-                                <MyTextInput type={"phone"} label="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this)} className="inputLogin" style={{ marginBottom: 30 }} />
-                                <MyTextInput type={"password"} label="Придумай пароль" value={ this.state.newPassword } func={ this.changeData.bind(this, 'newPassword') } onKeyDown={this.checkLoginKey.bind(this)} className="inputLogin" />
+                                <MyTextInput type={"phone"} placeholder="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this, 4)} className="inputLogin" style={{ marginBottom: 30 }} />
+                                <MyTextInput type={"password"} placeholder="Придумайте пароль" value={ this.state.newPassword } func={ this.changeData.bind(this, 'newPassword') } onKeyDown={this.checkLoginKey.bind(this, 4)} className="inputLogin" />
+
+                                <div className='loginSubHeader'>
+                                    <Typography component="span">Надежный пароль - строчные и заглавные буквы, цифры и символы.</Typography>
+                                    <Typography component="span">Например: {this.state.genPwd}</Typography>
+                                </div>
 
                                 <div className='loginErrText'>
                                     <Typography component="span"></Typography>
                                 </div>
 
-                                <div className='loginLogin' onClick={this.logIn.bind(this)}>
+                                <div className='loginLogin' onClick={this.sendsmsNewLogin.bind(this)}>
                                     <Typography component="span">Создать аккаунт</Typography>
                                 </div>
                                 
-                                <div className='loginCreate' onClick={ () => { this.setState({ typeLogin: 'start' }) } }>
+                                <div className='loginCreate' onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'start' }) } }>
                                     <Typography component="span">У меня есть аккаунт</Typography>
                                 </div>
+                            </Box>
+                        }
+                        { this.state.typeLogin != 'finish' ? null :
+                            <Box className='modalLoginFinish'>
+                                <IconButton style={{ position: 'absolute', top: -40, left: 15, backgroundColor: 'transparent' }} onClick={this.close.bind(this)}>
+                                    <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
+                                </IconButton>
+
+                                <div className='loginIMG'>
+                                    <img 
+                                        alt={'Login'} 
+                                        title={'Login'} 
+                                        src={`/assets/img_other/like.png`} />
+                                </div>
+
+                                <div className='loginHeader'>
+                                    <Typography component="h2">Добро пожаловать</Typography>
+                                </div>
+                                
+                                <div className='loginSubHeader1'>
+                                    <Typography component="span">Теперь вы можете легко оформить онлайн-заказ с доставкой или забрать его самостоятельно из любого нашего кафе.</Typography>
+                                </div>
+
+                                <div className='loginSubHeader2'>
+                                    <Typography component="span"><Link to={'/samara/profile'} exact={ true } onClick={ this.close.bind(this) }>Укажите в профиле</Link> день рождения и мы заренее пришлём вам промокод на приятный подарок.</Typography>
+                                </div>
+
+                                <Link to={'/samara/'} exact={ true } className='loginLogin' onClick={ this.close.bind(this) }>
+                                    <Typography component="span">Перейти в меню</Typography>
+                                </Link>
+                                
+                                <Link to={'/samara/cart'} exact={ true } className='loginCreate' onClick={ this.close.bind(this) }>
+                                    <Typography component="span">Открыть корзину</Typography>
+                                </Link>
                             </Box>
                         }
                     </Fade>
@@ -665,6 +811,8 @@ class SimplePopover extends React.Component{
         newCart.map( (item, key) => {
             let this_item = allItems.find( (it) => parseInt(it.id) == parseInt(item.item_id) );
 
+            newCart[ key ]['is_sale'] = parseInt(item.all_price) != parseInt(item.count) * parseInt(item.one_price);
+
             newCart[ key ]['img_new'] = this_item['img_new'];
             newCart[ key ]['img_new_update'] = this_item['img_new_update'];
             newCart[ key ]['img_app'] = this_item['img_app'];
@@ -678,11 +826,13 @@ class SimplePopover extends React.Component{
         autorun(() => {
             if( this._isMounted ){
 
+                let promo_st = itemsStore.getPromoStatus();
+
                 this.setState({
                     allPrice: itemsStore.getSumDiv() + itemsStore.getAllPrice(),
 
-                    promoText: itemsStore.promoText,
-                    promoST: itemsStore.promoST,
+                    promoText: promo_st.text,
+                    promoST: promo_st.st,
                 })
 
                 let allItems = itemsStore.getAllItems();
@@ -707,6 +857,8 @@ class SimplePopover extends React.Component{
                 newCart.map( (item, key) => {
                     let this_item = allItems.find( (it) => parseInt(it.id) == parseInt(item.item_id) );
         
+                    newCart[ key ]['is_sale'] = parseInt(item.all_price) != parseInt(item.count) * parseInt(item.one_price);
+
                     newCart[ key ]['img_new'] = this_item['img_new'];
                     newCart[ key ]['img_new_update'] = this_item['img_new_update'];
                     newCart[ key ]['img_app'] = this_item['img_app'];
@@ -833,7 +985,7 @@ class SimplePopover extends React.Component{
 
                                                 { item.img_app.length > 0 ? 
                                                     <picture>
-                                                        <source srcset={`
+                                                        <source srcSet={`
                                                             https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg 138w, 
                                                             https://storage.yandexcloud.net/site-img/${item.img_app}_292x292.jpg 146w,
                                                             https://storage.yandexcloud.net/site-img/${item.img_app}_366x366.jpg 183w,
@@ -869,19 +1021,36 @@ class SimplePopover extends React.Component{
                                             <td className="CellButton">
                                                 <MiniActionsCartButton count={item.count} item_id={item.item_id} minus={this.minus.bind(this)} add={this.add.bind(this)} />
                                             </td>
-                                            <td className="CellPrice"> 
-                                                <div className="TableMiniPrice">
-                                                    { new Intl.NumberFormat('ru-RU').format(item.all_price) } 
-                                                    <IconRuble style={{ width: 13, height: 13, fill: '#525252', marginLeft: 5 }} />
-                                                </div>
-                                            </td>
+                                            
+                                            { item.is_sale === true && this.state.promoST === true ?
+                                                <td className="CellPrice2"> 
+                                                    <div className="TableMiniPrice">
+                                                        <div>
+                                                            { new Intl.NumberFormat('ru-RU').format(item.all_price) } 
+                                                            <IconRuble style={{ width: 13, height: 13, fill: 'rgba(27, 27, 31, 0.2)', marginLeft: 5 }} />
+                                                        </div>
+                                                    </div>
+                                                    <div className="TableMiniPrice">
+                                                        { new Intl.NumberFormat('ru-RU').format(item.all_price) } 
+                                                        <IconRuble style={{ width: 13, height: 13, fill: '#525252', marginLeft: 5 }} />
+                                                    </div>
+                                                </td>
+                                                    :
+                                                <td className="CellPrice"> 
+                                                    <div className="TableMiniPrice">
+                                                        { new Intl.NumberFormat('ru-RU').format(item.all_price) } 
+                                                        <IconRuble style={{ width: 13, height: 13, fill: '#525252', marginLeft: 5 }} />
+                                                    </div>
+                                                </td>
+                                            }
+                                            
                                         </tr>
                                             :
                                         <tr key={key}>
                                             <td className="CellPic">
                                                 { item.img_app.length > 0 ? 
                                                     <picture>
-                                                        <source srcset={`
+                                                        <source srcSet={`
                                                             https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg 138w, 
                                                             https://storage.yandexcloud.net/site-img/${item.img_app}_292x292.jpg 146w,
                                                             https://storage.yandexcloud.net/site-img/${item.img_app}_366x366.jpg 183w,
@@ -924,7 +1093,7 @@ class SimplePopover extends React.Component{
                                 <tr>
                                     <td>Итого:</td>
                                     <td>
-                                        { this.state.originPrice != this.state.allPrice ?
+                                        { this.state.originPrice != this.state.allPrice && this.state.promoST === true ?
                                             <div className='originPrice'>
                                                 <span>
                                                     { new Intl.NumberFormat('ru-RU').format(this.state.originPrice) } 
@@ -957,7 +1126,7 @@ class SimplePopover extends React.Component{
                                 }
                             </Paper>
 
-                            { this.state.originPrice != this.state.allPrice ?
+                            { this.state.originPrice != this.state.allPrice && this.state.promoST === true ?
                                 <div className="DescPromoPrice">
                                     { new Intl.NumberFormat('ru-RU').format(this.state.allPrice) } 
                                     <IconRuble style={{ width: 14, height: 14, fill: '#525252', marginLeft: 5 }} />
@@ -975,8 +1144,6 @@ class SimplePopover extends React.Component{
                             }
                         </div>
                         <div className="InCart">
-
-                            <ModalLogin />
 
                             {itemsStore.getToken() !== null ?
                                 <Link

@@ -24,7 +24,6 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
 const queryString = require('query-string');
-import axios from 'axios';
 
 import { Provider } from 'mobx-react';
 import itemsStore from '../../stores/items-store';
@@ -277,8 +276,6 @@ export class App extends React.Component {
 
         let res = await this.getData('get_page_info', data);
 
-        console.log( res );
-
         let res_data = {
             title: res.page.title,
             description: res.page.description,
@@ -299,39 +296,6 @@ export class App extends React.Component {
         this.setState({
             globalState: GLOBAL_STATE
         })
-
-        //return res
-    }
-
-    fetchData(propsData) {
-        let data = {
-            type: 'get_page_info', 
-            city_id: get_city(propsData),
-            page: '',
-            link: propsData,
-        };
-        
-        return axios({
-            method: 'POST',
-            url: config.urlApi,
-            headers: { 'content-type': 'application/x-www-form-urlencoded' },
-            data: queryString.stringify(data)
-        }).then(response => {
-            if(response['status'] === 200){
-                var json = response['data'];
-                
-                return {
-                    title: json.page.title,
-                    description: json.page.description,
-                    page: json.page,
-                    cats: json.cats,
-                    allItems: json.allItems,
-                    all: json
-                }
-            } 
-        }).catch(function (error) {
-            console.log(error);
-        });
     }
 
     getData = (method, data = {}, is_load = true) => {
@@ -387,50 +351,8 @@ export class App extends React.Component {
 
             const matchRoute = routes.find( route => matchPath( uri, route ) );
 
-            console.log( uri )
-            console.log( matchRoute )
-
-
             if( matchRoute ){
-                //let componentData = null;
                 this.getData1(uri);
-                //if( typeof matchRoute.component.fetchData === 'function' ) {
-                    //componentData = this.getData1(uri);
-                //}
-        
-                
-        
-                /*let linkItem = '';
-                let Item = null;
-                
-                let findItem = null;
-                
-                if( matchRoute.type == 'item' ){  
-                    let linkItem1 = uri.split("/");
-                    
-                    findItem = linkItem1.find( (item) => item == 'item' );
-                    
-                    linkItem1 = linkItem1.filter( (item) => item != '' ); 
-                    linkItem = linkItem1[ linkItem1.length-1 ];
-                    
-                    componentData.allItems.forEach(element => {
-                        element.items.forEach(item => {
-                            if( item.link == linkItem ){
-                                Item = item;
-                            }
-                        })
-                    })
-                }
-                
-                const GLOBAL_STATE = {
-                    data: componentData,
-                    city: city,
-                    this_link: uri,
-                    linkItem: linkItem,
-                    Item: Item
-                }
-     
-                console.log( GLOBAL_STATE )*/
             }
         }
 
@@ -457,11 +379,7 @@ export class App extends React.Component {
     render() {
 
         if( !this.props.globalState ){
-            console.log( '!this.props.globalState' )
-
             if( this.state.globalState ){
-                console.log( 'this.state.globalState' )
-
                 return (
                     <Provider { ...stores }>
                         <div className="home">
@@ -712,13 +630,10 @@ export class App extends React.Component {
                 )
             }
 
-            console.log( '!this.state.globalState' )
             return <h1>LOAD ....</h1>;
         }
 
         if( this.props.globalState ){
-            console.log( 'this.props.globalState' )
-
             return (
                 <Provider { ...stores }>
                     <div className="home">

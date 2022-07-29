@@ -350,7 +350,7 @@ export class Item extends React.Component {
                                 :
                             <Grid item className='FirstMainItem'>
                                 <picture style={{ width: '100%' }}>
-                                    <source srcset={`
+                                    <source srcSet={`
                                         https://storage.yandexcloud.net/site-img/${this.state.img_name}_276x276.jpg 138w, 
                                         https://storage.yandexcloud.net/site-img/${this.state.img_name}_292x292.jpg 146w,
                                         https://storage.yandexcloud.net/site-img/${this.state.img_name}_366x366.jpg 183w,
@@ -398,73 +398,75 @@ export class Item extends React.Component {
                                     <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight)} { parseInt( this.state.item.id ) == 17 || parseInt( this.state.item.id ) == 237 ? 'шт.' : parseInt( this.state.item.cat_id ) == 6 ? 'л' : 'г' }</Typography>
                                 </div>
 
-                                <ClickAwayListener mouseEvent="onMouseDown" touchEvent="onTouchStart" onClickAway={this.handleTooltipClose.bind(this)}>
-                                    <div>
-                                        <HtmlTooltip
-                                            onClose={this.handleTooltipClose.bind(this)}
-                                            open={this.state.openTooltip}
-                                            disableFocusListener
-                                            disableHoverListener
-                                            disableTouchListener
-                                            PopperProps={{
-                                                disablePortal: true,
-                                            }}
-                                            title={
-                                            <React.Fragment>
-                                                <Typography style={{ textAlign: 'center', fontFamily: 'Roboto', fontSize: '1.5rem', fontWeight: 500, lineHeight: 1, paddingTop: 10, paddingBottom: 20, whiteSpace: 'nowrap' }}>Пищевая ценность на 100 г</Typography>
-                                                
-                                                { this.state.item.items.length == 1 ? null :
-                                                    <div style={{ width: '100%', height: 2, backgroundColor: '#fff', marginBottom: 20 }} />
-                                                }
+                                { parseInt( this.state.item.id ) == 17 || parseInt( this.state.item.id ) == 237 ? null :
+                                    <ClickAwayListener mouseEvent="onMouseDown" touchEvent="onTouchStart" onClickAway={this.handleTooltipClose.bind(this)}>
+                                        <div>
+                                            <HtmlTooltip
+                                                onClose={this.handleTooltipClose.bind(this)}
+                                                open={this.state.openTooltip}
+                                                disableFocusListener
+                                                disableHoverListener
+                                                disableTouchListener
+                                                PopperProps={{
+                                                    disablePortal: true,
+                                                }}
+                                                title={
+                                                <React.Fragment>
+                                                    <Typography style={{ textAlign: 'center', fontFamily: 'Roboto', fontSize: '1.5rem', fontWeight: 500, lineHeight: 1, paddingTop: 10, paddingBottom: 20, whiteSpace: 'nowrap' }}>Пищевая ценность на 100 г</Typography>
+                                                    
+                                                    { this.state.item.items.length == 1 ? null :
+                                                        <div style={{ width: '100%', height: 2, backgroundColor: '#fff', marginBottom: 20 }} />
+                                                    }
 
-                                                <div className='InfoScroll' style={ this.state.item.items.length > 1 ? { overflowY: 'scroll', maxHeight: 280, paddingRight: 5 } : {}}>
-                                                    { this.state.item.items.map( (item, key) =>
-                                                        <div style={{ border: '2px solid #fff', borderRadius: 10, marginBottom: this.state.item.items.length == 1 ? 0 : this.state.item.items.length-1 == key ? 0 : 20 }} key={key}>
-                                                            <div style={{ width: '100%', display: 'flex', flexDirection: 'row', borderBottom: '2px solid #fff' }}>
-                                                                <div style={{ width: '75%', display: 'flex', alignItems: 'center', borderRight: '2px solid #fff', padding: 10 }}>
-                                                                    <Typography style={{ fontFamily: 'Roboto', fontWeight: 400, fontSize: '1.1rem', lineHeight: 1.25 }}>{item.name}</Typography>
+                                                    <div className='InfoScroll' style={ this.state.item.items.length > 1 ? { overflowY: 'scroll', maxHeight: 280, paddingRight: 5 } : {}}>
+                                                        { this.state.item.items.map( (item, key) =>
+                                                            <div style={{ border: '2px solid #fff', borderRadius: 10, marginBottom: this.state.item.items.length == 1 ? 0 : this.state.item.items.length-1 == key ? 0 : 20 }} key={key}>
+                                                                <div style={{ width: '100%', display: 'flex', flexDirection: 'row', borderBottom: '2px solid #fff' }}>
+                                                                    <div style={{ width: '75%', display: 'flex', alignItems: 'center', borderRight: '2px solid #fff', padding: 10 }}>
+                                                                        <Typography style={{ fontFamily: 'Roboto', fontWeight: 400, fontSize: '1.1rem', lineHeight: 1.25 }}>{item.name}</Typography>
+                                                                    </div>
+                                                                    <div style={{ width: '25%', display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'center', padding: 10 }}>
+                                                                        <Typography style={{ fontSize: '2rem', lineHeight: 1, fontFamily: 'Roboto', fontWeight: 500 }}>{item.kkal}</Typography>
+                                                                        <Typography style={{ fontSize: '1rem', lineHeight: 0.8, fontFamily: 'Roboto', fontWeight: 400 }}>ккал</Typography>
+                                                                    </div>
                                                                 </div>
-                                                                <div style={{ width: '25%', display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'center', padding: 10 }}>
-                                                                    <Typography style={{ fontSize: '2rem', lineHeight: 1, fontFamily: 'Roboto', fontWeight: 500 }}>{item.kkal}</Typography>
-                                                                    <Typography style={{ fontSize: '1rem', lineHeight: 0.8, fontFamily: 'Roboto', fontWeight: 400 }}>ккал</Typography>
+                                                                <div style={{ width: '100%', display: 'flex', flexDirection: 'row' }}>
+                                                                    <div style={{ width: '50%', padding: 10, borderRight: '2px solid #fff' }}>
+                                                                        <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400 }}>Состав: {item.tmp_desc}</Typography>
+                                                                    </div>
+                                                                    <div style={{ width: '50%', padding: 10 }} className='styleTooltip'>
+                                                                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                                            <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 1 }}>белки</Typography>
+                                                                            <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 3 }}>{item.protein} г</Typography>
+                                                                        </div>
+                                                                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                                            <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 1 }}>жиры</Typography>
+                                                                            <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 3 }}>{item.fat} г</Typography>
+                                                                        </div>
+                                                                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                                            <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 1 }}>углеводы</Typography>
+                                                                            <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 3 }}>{item.carbohydrates} г</Typography>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <div style={{ width: '100%', display: 'flex', flexDirection: 'row' }}>
-                                                                <div style={{ width: '50%', padding: 10, borderRight: '2px solid #fff' }}>
-                                                                    <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400 }}>Состав: {item.tmp_desc}</Typography>
-                                                                </div>
-                                                                <div style={{ width: '50%', padding: 10 }} className='styleTooltip'>
-                                                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                                                                        <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 1 }}>белки</Typography>
-                                                                        <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 3 }}>{item.protein} г</Typography>
-                                                                    </div>
-                                                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                                                                        <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 1 }}>жиры</Typography>
-                                                                        <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 3 }}>{item.fat} г</Typography>
-                                                                    </div>
-                                                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                                                                        <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 1 }}>углеводы</Typography>
-                                                                        <Typography style={{ fontSize: '0.8rem', fontFamily: 'Roboto', fontWeight: 400, order: 3 }}>{item.carbohydrates} г</Typography>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    ) }
-                                                </div>
-                                            </React.Fragment>
-                                            }
-                                        >
-                                            <div style={{ width: 40, height: 40, cursor: 'pointer' }} onClick={this.handleTooltipOpen.bind(this)}>
-                                                { this.state.openTooltip === true ?
-                                                    <IconInfoBlack />
-                                                        :
-                                                    <IconInfoWhite />
+                                                        ) }
+                                                    </div>
+                                                </React.Fragment>
                                                 }
-                                                
-                                            </div>
-                                        </HtmlTooltip>
-                                    </div>
-                                </ClickAwayListener>
+                                            >
+                                                <div style={{ width: 40, height: 40, cursor: 'pointer' }} onClick={this.handleTooltipOpen.bind(this)}>
+                                                    { this.state.openTooltip === true ?
+                                                        <IconInfoBlack />
+                                                            :
+                                                        <IconInfoWhite />
+                                                    }
+                                                    
+                                                </div>
+                                            </HtmlTooltip>
+                                        </div>
+                                    </ClickAwayListener>
+                                }
                                 
                             </div>
                             
@@ -508,7 +510,7 @@ export class Item extends React.Component {
                                 </picture>
                                     :
                                 <picture>
-                                    <source srcset={`
+                                    <source srcSet={`
                                         https://storage.yandexcloud.net/site-img/${this.state.img_name}_276x276.jpg 138w, 
                                         https://storage.yandexcloud.net/site-img/${this.state.img_name}_292x292.jpg 146w,
                                         https://storage.yandexcloud.net/site-img/${this.state.img_name}_366x366.jpg 183w,
@@ -552,13 +554,15 @@ export class Item extends React.Component {
                                     <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center', fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.87rem', color: '#525252' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight)} { parseInt( this.state.item.id ) == 17 || parseInt( this.state.item.id ) == 237 ? 'шт.' : parseInt( this.state.item.cat_id ) == 6 ? 'л' : 'г' }</Typography>
                                 </div>
 
-                                <div style={{ width: 30, height: 30, cursor: 'pointer', position: 'absolute', top: 10, right: 0 }} onClick={this.props.openInfo ? this.props.openInfo.bind(this) : null}>
-                                    { this.props.openModalPCInfo && this.props.openModalPCInfo === true ?
-                                        <IconInfoBlack />
-                                            :
-                                        <IconInfoWhite />
-                                    }
-                                </div>
+                                { parseInt( this.state.item.id ) == 17 || parseInt( this.state.item.id ) == 237 ? null :
+                                    <div style={{ width: 30, height: 30, cursor: 'pointer', position: 'absolute', top: 10, right: 0 }} onClick={this.props.openInfo ? this.props.openInfo.bind(this) : null}>
+                                        { this.props.openModalPCInfo && this.props.openModalPCInfo === true ?
+                                            <IconInfoBlack />
+                                                :
+                                            <IconInfoWhite />
+                                        }
+                                    </div>
+                                }
                                 
                             </div>
                         </Grid>

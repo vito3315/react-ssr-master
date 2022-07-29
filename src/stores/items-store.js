@@ -121,6 +121,18 @@ class ItemsStore {
     return this.userToken;
   };
 
+  getPromoStatus(){
+    return {
+      text: this.promoText,
+      st: this.promoST,
+    };
+  }
+
+  setPromoStatus(promoText, promoST){
+    this.promoText = promoText;
+    this.promoST = promoST;
+  }
+
   getInfoPromo(promoName){
     fetch(config.urlApi, {
       method: 'POST',
@@ -135,16 +147,18 @@ class ItemsStore {
       itemsStore.setPromo( JSON.stringify(json), promoName );
       let check_promo = itemsStore.checkPromo();
               
-      if( check_promo.st === false ){
+      //if( check_promo.st === false ){
         //localStorage.removeItem('promo_name')
-      }
+      //}
       
       if( promoName.length == 0 ){
-        itemsStore.promoText = '';
-        itemsStore.promoST = null;
+        this.setPromoStatus('', null);
       }else{
-        itemsStore.promoText = check_promo.text;
-        itemsStore.promoST = check_promo.st;
+        if( check_promo ){
+          this.setPromoStatus(check_promo.text, check_promo.st);
+        }else{
+          this.setPromoStatus('', null);
+        }
       }
     })
   }
@@ -224,7 +238,7 @@ class ItemsStore {
       if( !promo_info.status_promo ){
         return {
           st: false,
-          text: 'Данный промокод не найден или уже активирован.'
+          text: 'Данный промокод не найден или уже активирован'
         }
       }
       
@@ -256,7 +270,7 @@ class ItemsStore {
         }else{
           return {
             st: false,
-            text: 'Адрес для доставки или самовывоза указан некорректно. Проверьте правильность введённых данных.'
+            text: 'Адрес указан некорректно'
           }
         }
       }
@@ -265,9 +279,18 @@ class ItemsStore {
         if( allPrice >= promo_info.limits.summ.min && (promo_info.limits.summ.max >= allPrice || promo_info.limits.summ.max == 0) ){
           
         }else{
-          return {
-            st: false,
-            text: 'Общая сумма вашего заказа превышает допустимую стоимость для применения промокода.'
+          if( allPrice < promo_info.limits.summ.min ){
+            return {
+              st: false,
+              text: 'Суммы заказа не достаточно для активации промокода'
+            }
+          }
+
+          if( allPrice > promo_info.limits.summ.max ){
+            return {
+              st: false,
+              text: 'Сумма заказа больше, чем лимит промокода'
+            }
           }
         }
       }
@@ -276,7 +299,7 @@ class ItemsStore {
         if( parseInt(promo_info.limits.dows[ this_dow ]) == 0 ){
           return {
             st: false,
-            text: 'Указанный вами день недели недоступен для применения промокода. Пожалуйста, выберите другую дату.'
+            text: 'Промокод не действует в эти даты'
           }
         }
       }
@@ -290,9 +313,25 @@ class ItemsStore {
           (parseInt( promo_info.limits.type_order ) == 2 && type_order == 1) ){
           
         }else{
-          return {
-            st: false,
-            text: 'Тип заказа не применим для данного промокода. Пожалуйста, отредактируйте заказ.'
+          if( parseInt( promo_info.limits.type_order ) == 1 ){
+            return {
+              st: false,
+              text: 'Промокод действует только на доставку'
+            }
+          }
+
+          if( parseInt( promo_info.limits.type_order ) == 2 ){
+            return {
+              st: false,
+              text: 'Промокод действует только на самовывоз'
+            }
+          }
+
+          if( parseInt( promo_info.limits.type_order ) == 3 ){
+            return {
+              st: false,
+              text: 'Промокод действует только в кафе'
+            }
           }
         }
       }
@@ -301,7 +340,7 @@ class ItemsStore {
         if( parseInt( promo_info.limits.only_kassa ) == 1 ){
           return {
             st: false,
-            text: 'Указанный вами промокод действителен только при оплате на кассе. Пожалуйста, посетите для оформления заказа ближайшее к вам кафе.'
+            text: 'Промокод действует только в кафе'
           }
         }
       }

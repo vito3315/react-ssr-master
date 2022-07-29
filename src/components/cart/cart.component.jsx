@@ -238,7 +238,7 @@ class CartItem extends React.Component {
                     <td style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', position: 'relative' }}>
                         {this.state.item.img_app.length > 0 ?
                             <picture>
-                                <source srcset={`
+                                <source srcSet={`
                                     https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_276x276.jpg 138w, 
                                     https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_292x292.jpg 146w,
                                     https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_366x366.jpg 183w,
@@ -273,7 +273,7 @@ class CartItem extends React.Component {
                         }
                         <div>
                             <Typography variant="h5" component="span" className="nameItem">{this.state.item.name}</Typography>
-                            <Typography variant="h5" component="span" className="descItem">{this.state.item.desc}</Typography>
+                            <Typography variant="h5" component="span" className="descItem">{ this.state.type == 'dop' ? '' : this.state.item.desc}</Typography>
                         </div>
                     </td>
                     <td>
@@ -431,7 +431,7 @@ class CartItemMobile extends React.Component {
                 <div className="boxItem">
                     {this.state.item.img_app.length > 0 ?
                         <picture style={{ width: '40%' }}>
-                            <source srcset={`
+                            <source srcSet={`
                                 https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_276x276.jpg 138w, 
                                 https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_292x292.jpg 146w,
                                 https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_366x366.jpg 183w,
