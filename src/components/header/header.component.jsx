@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink as Link } from 'react-router-dom';
 
 import Grid from '@mui/material/Grid';
@@ -7,15 +7,11 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 
 import Paper from '@mui/material/Paper';
-import TextField from '@mui/material/TextField';
 import InputBase from '@mui/material/InputBase';
 
 import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
 
 import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 
 import Button from '@mui/material/Button';
@@ -33,10 +29,8 @@ import { Link as ScrollLink } from "react-scroll";
 const queryString = require('query-string');
 
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import InputMask from "react-input-mask";
 import Badge from '@mui/material/Badge';
 import itemsStore from '../../stores/items-store';
 import config from '../../stores/config';
@@ -116,16 +110,41 @@ class ModalLogin extends React.Component{
             userLoginFormat: '',
             userCode: '',
             
-            stage_1: true,
-            stage_2: false,
-            
             timerSMS: 89,
             timerSMSTime: this.toTime(89),
             errPhone: '',
             errSMS: '',
-            userName: '',
-            token: '',
         };
+    }
+
+    componentDidUpdate(){
+        if( this.props.isOpen != this.state.open ){
+            this.setState({
+                open: this.props.isOpen,
+                typeLogin: 'start',
+                fromType: 'start',
+                loginLogin: '',
+                pwdLogin: '',
+                newPassword: '',
+                genPwd: '',
+                checkCode: '',
+    
+                pwd: '',
+                ResPWD: false,
+                NeedCode: false,
+                
+    
+                openLogin: false,
+                userLogin: '',
+                userLoginFormat: '',
+                userCode: '',
+                
+                timerSMS: 89,
+                timerSMSTime: this.toTime(89),
+                errPhone: '',
+                errSMS: '',
+            })
+        }
     }
 
     componentDidMount(){
@@ -166,14 +185,15 @@ class ModalLogin extends React.Component{
     }
 
     close(){
-        this.setState({
+        this.props.close();
+        /*this.setState({
             open: false,
             fromType: 'start',
             typeLogin: 'start',
             loginLogin: '',
             pwdLogin: '',
             newPassword: '',
-        })
+        })*/
     }
 
     changeData(type, event){
@@ -409,245 +429,246 @@ class ModalLogin extends React.Component{
 
     render(){
         return (
-            <>
-                <Button onClick={this.open.bind(this)}>Open modal</Button>
-                <Modal
-                    open={this.state.open}
-                    onClose={this.close.bind(this)}
-                    closeAfterTransition
-                    BackdropComponent={Backdrop}
-                    BackdropProps={{
-                        timeout: 500,
-                    }}
-                    className="123"
-                >
-                    <Fade in={this.state.open}>
-                        
+            <Modal
+                open={this.props.isOpen}
+                onClose={this.props.close}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}
+                className="123"
+            >
+                <Fade in={this.props.isOpen}>
+                    
 
-                        { this.state.typeLogin != 'start' ? null :
-                            <Box className='modalLoginStart'>
+                    { this.state.typeLogin != 'start' ? null :
+                        <Box className='modalLoginStart'>
 
-                                <IconButton style={{ position: 'absolute', top: -40, left: 15, backgroundColor: 'transparent' }} onClick={this.close.bind(this)}>
-                                    <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
-                                </IconButton>
+                            <IconButton style={{ position: 'absolute', top: -40, left: 15, backgroundColor: 'transparent' }} onClick={this.close.bind(this)}>
+                                <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
+                            </IconButton>
 
-                                <div className='loginIMG'>
-                                    <img 
-                                        alt={'Login'} 
-                                        title={'Login'} 
-                                        src={`/assets/img_other/account-icon-240x240.png`} />
-                                </div>
+                            <div className='loginIMG'>
+                                <img 
+                                    alt={'Login'} 
+                                    title={'Login'} 
+                                    src={`/assets/img_other/account-icon-240x240.png`} />
+                            </div>
 
-                                <div className='loginHeader'>
-                                    <Typography component="h2">Мой аккаунт</Typography>
-                                </div>
-                                
-                                <MyTextInput type={"phone"} placeholder="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this, 1)} className="inputLogin" style={{ marginBottom: 30 }} />
-                                <MyTextInput type={"password"} placeholder="Пароль" value={ this.state.pwdLogin } func={ this.changeData.bind(this, 'pwdLogin') } onKeyDown={this.checkLoginKey.bind(this, 1)} className="inputLogin" />
+                            <div className='loginHeader'>
+                                <Typography component="h2">Мой аккаунт</Typography>
+                            </div>
+                            
+                            <MyTextInput type={"phone"} placeholder="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this, 1)} className="inputLogin" style={{ marginBottom: 30 }} />
+                            <MyTextInput type={"password"} placeholder="Пароль" value={ this.state.pwdLogin } func={ this.changeData.bind(this, 'pwdLogin') } onKeyDown={this.checkLoginKey.bind(this, 1)} className="inputLogin" />
 
-                                <div className='loginLosePWD'>
-                                    <Typography component="span" onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'resetPWD' }) } }>Забыли пароль ?</Typography>
-                                </div>
+                            <div className='loginLosePWD'>
+                                <Typography component="span" onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'resetPWD' }) } }>Забыли пароль ?</Typography>
+                            </div>
 
-                                <div className='loginLogin' onClick={this.logIn.bind(this)}>
-                                    <Typography component="span">Войти</Typography>
-                                </div>
+                            <div className='loginLogin' onClick={this.logIn.bind(this)}>
+                                <Typography component="span">Войти</Typography>
+                            </div>
 
-                                <div className='loginCreate' onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'create' }); this.gen_password(); } }>
-                                    <Typography component="span">Создать новый аккаунт</Typography>
-                                </div>
+                            <div className='loginCreate' onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'create' }); this.gen_password(); } }>
+                                <Typography component="span">Создать новый аккаунт</Typography>
+                            </div>
 
-                                <div className='loginSMS'>
-                                    <Typography component="span" onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'loginSMS' }) } }>Войти по смс</Typography>
-                                </div>
-                                
-                            </Box>
-                        }
-                        { this.state.typeLogin != 'loginSMS' ? null :
-                            <Box className='modalLoginCreate'>
-                                <IconButton style={{ position: 'absolute', top: -40, left: 15, backgroundColor: 'transparent' }} onClick={this.close.bind(this)}>
-                                    <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
-                                </IconButton>
+                            <div className='loginSMS'>
+                                <Typography component="span" onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'loginSMS' }) } }>Войти по смс</Typography>
+                            </div>
+                            
+                        </Box>
+                    }
+                    { this.state.typeLogin != 'loginSMS' ? null :
+                        <Box className='modalLoginCreate'>
+                            <IconButton style={{ position: 'absolute', top: -40, left: 15, backgroundColor: 'transparent' }} onClick={this.close.bind(this)}>
+                                <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
+                            </IconButton>
 
-                                <div className='loginIMG'>
-                                    <img 
-                                        alt={'Login'} 
-                                        title={'Login'} 
-                                        src={`/assets/img_other/account-icon-240x240.png`} />
-                                </div>
+                            <div className='loginIMG'>
+                                <img 
+                                    alt={'Login'} 
+                                    title={'Login'} 
+                                    src={`/assets/img_other/account-icon-240x240.png`} />
+                            </div>
 
-                                <div className='loginHeader'>
-                                    <Typography component="h2">Авторизация</Typography>
-                                </div>
-                                
-                                <MyTextInput type={"phone"} placeholder="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this, 2)} className="inputLogin" style={{ marginBottom: 0 }} />
-                                
-                                <div className='loginErrText'>
-                                    <Typography component="span"></Typography>
-                                </div>
+                            <div className='loginHeader'>
+                                <Typography component="h2">Авторизация</Typography>
+                            </div>
+                            
+                            <MyTextInput type={"phone"} placeholder="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this, 2)} className="inputLogin" style={{ marginBottom: 0 }} />
+                            
+                            <div className='loginErrText'>
+                                <Typography component="span"></Typography>
+                            </div>
 
-                                <div className='loginLogin' onClick={this.sendSMS.bind(this)}>
-                                    <Typography component="span">Получить код</Typography>
-                                </div>
-                                
-                                <div className='loginCreate' onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'start' }) } }>
-                                    <Typography component="span">У меня есть аккаунт</Typography>
-                                </div>
-                            </Box>
-                        }
-                        { this.state.typeLogin != 'loginSMSCode' ? null :
-                            <Box className='modalLoginSMSCode'>
-                                <IconButton style={{ position: 'absolute', top: -40, left: 15, backgroundColor: 'transparent' }} onClick={this.close.bind(this)}>
-                                    <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
-                                </IconButton>
+                            <div className='loginLogin' onClick={this.sendSMS.bind(this)}>
+                                <Typography component="span">Получить код</Typography>
+                            </div>
+                            
+                            <div className='loginCreate' onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'start' }) } }>
+                                <Typography component="span">У меня есть аккаунт</Typography>
+                            </div>
+                        </Box>
+                    }
+                    { this.state.typeLogin != 'loginSMSCode' ? null :
+                        <Box className='modalLoginSMSCode'>
+                            <IconButton style={{ position: 'absolute', top: -40, left: 15, backgroundColor: 'transparent' }} onClick={this.close.bind(this)}>
+                                <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
+                            </IconButton>
 
-                                <div className='loginIMG'>
-                                    <img 
-                                        alt={'Login'} 
-                                        title={'Login'} 
-                                        src={`/assets/img_other/tripple_dop.png`} />
-                                </div>
+                            <div className='loginIMG'>
+                                <img 
+                                    alt={'Login'} 
+                                    title={'Login'} 
+                                    src={`/assets/img_other/tripple_dop.png`} />
+                            </div>
 
-                                <div className='loginHeader'>
-                                    <Typography component="h2">Проверим телефон ?</Typography>
-                                </div>
+                            <div className='loginHeader'>
+                                <Typography component="h2">Проверим телефон ?</Typography>
+                            </div>
 
-                                <div className='loginSubHeader'>
-                                    <Typography component="span">Сейчас мы вам позвоним.</Typography>
-                                    <Typography component="span">Введите последние 4 цифры номера.</Typography>
-                                </div>
-                                
-                                <div className={this.state.timerSMS > 0 ? 'loginAutCode' : 'loginAutCodeOther'}>
-                                    <AuthCode autoFocus={true} allowedCharacters='numeric' length="4" onChange={ this.changeCode.bind(this) } />
-                                </div>
+                            <div className='loginSubHeader' style={{ display: 'none' }}>
+                                <Typography component="span">Сейчас мы вам позвоним.</Typography>
+                                <Typography component="span">Введите последние 4 цифры номера.</Typography>
+                            </div>
 
-                                { this.state.timerSMS > 0 ?
-                                    <div className='loginTimer'>
-                                        <Typography component="span">Перезвонить можно через {this.state.timerSMSTime}</Typography>
-                                    </div>
-                                        :
-                                    <div className='loginTimerSend' onClick={this.sendSMS.bind(this)}>
-                                        <Typography component="span">Отправить код еще раз</Typography>
-                                    </div>
-                                }
-                                
-                                <div className={'loginSend ' + (this.state.checkCode.length == 4 ? '' : 'disabled') } onClick={this.checkCode.bind(this)}>
-                                    <Typography component="span">Отправить</Typography>
-                                </div>
-                                
-                                <div className='loginPrev'>
-                                    <Typography component="span" onClick={ () => { this.setState({ typeLogin: this.state.fromType }) } }>Изменить номер телефона</Typography>
-                                </div>
-                            </Box>
-                        }
-                        { this.state.typeLogin != 'resetPWD' ? null :
-                            <Box className='modalLoginCreate'>
-                                <IconButton style={{ position: 'absolute', top: -40, left: 15, backgroundColor: 'transparent' }} onClick={this.close.bind(this)}>
-                                    <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
-                                </IconButton>
+                            <div className='loginSubHeader' style={{ display: 'none' }}>
+                                <Typography component="span">Введите 4 цифры из смс.</Typography>
+                            </div>
+                            
+                            <div className={this.state.timerSMS > 0 ? 'loginAutCode' : 'loginAutCodeOther'}>
+                                <AuthCode autoFocus={true} allowedCharacters='numeric' length="4" onChange={ this.changeCode.bind(this) } />
+                            </div>
 
-                                <div className='loginIMG'>
-                                    <img 
-                                        alt={'Login'} 
-                                        title={'Login'} 
-                                        src={`/assets/img_other/account-icon-240x240.png`} />
+                            { this.state.timerSMS > 0 ?
+                                <div className='loginTimer'>
+                                    <Typography component="span">Повторно отправить можно через {this.state.timerSMSTime}</Typography>
                                 </div>
+                                    :
+                                <div className='loginTimerSend' onClick={this.sendSMS.bind(this)}>
+                                    <Typography component="span">Отправить код еще раз</Typography>
+                                </div>
+                            }
+                            
+                            <div className={'loginSend ' + (this.state.checkCode.length == 4 ? '' : 'disabled') } onClick={this.checkCode.bind(this)}>
+                                <Typography component="span">Отправить</Typography>
+                            </div>
+                            
+                            <div className='loginPrev'>
+                                <Typography component="span" onClick={ () => { this.setState({ typeLogin: this.state.fromType }) } }>Изменить номер телефона</Typography>
+                            </div>
+                        </Box>
+                    }
+                    { this.state.typeLogin != 'resetPWD' ? null :
+                        <Box className='modalLoginCreate'>
+                            <IconButton style={{ position: 'absolute', top: -40, left: 15, backgroundColor: 'transparent' }} onClick={this.close.bind(this)}>
+                                <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
+                            </IconButton>
 
-                                <div className='loginHeader'>
-                                    <Typography component="h2">Восстановление пароля</Typography>
-                                </div>
-                                
-                                <MyTextInput type={"phone"} placeholder="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this, 4)} className="inputLogin" style={{ marginBottom: 30 }} />
-                                <MyTextInput type={"password"} placeholder="Придумай пароль" value={ this.state.newPassword } func={ this.changeData.bind(this, 'newPassword') } onKeyDown={this.checkLoginKey.bind(this, 4)} className="inputLogin" />
+                            <div className='loginIMG'>
+                                <img 
+                                    alt={'Login'} 
+                                    title={'Login'} 
+                                    src={`/assets/img_other/account-icon-240x240.png`} />
+                            </div>
 
-                                <div className='loginErrText'>
-                                    <Typography component="span"></Typography>
-                                </div>
+                            <div className='loginHeader'>
+                                <Typography component="h2">Восстановление пароля</Typography>
+                            </div>
+                            
+                            <MyTextInput type={"phone"} placeholder="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this, 4)} className="inputLogin" style={{ marginBottom: 30 }} />
+                            <MyTextInput type={"password"} placeholder="Придумай пароль" value={ this.state.newPassword } func={ this.changeData.bind(this, 'newPassword') } onKeyDown={this.checkLoginKey.bind(this, 4)} className="inputLogin" />
 
-                                <div className='loginLogin' onClick={this.logIn.bind(this)}>
-                                    <Typography component="span">Создать аккаунт</Typography>
-                                </div>
-                                
-                                <div className='loginCreate' onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'start' }) } }>
-                                    <Typography component="span">У меня есть аккаунт</Typography>
-                                </div>
-                            </Box>
-                        }
-                        { this.state.typeLogin != 'create' ? null :
-                            <Box className='modalLoginCreateNew'>
-                                <IconButton style={{ position: 'absolute', top: -40, left: 15, backgroundColor: 'transparent' }} onClick={this.close.bind(this)}>
-                                    <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
-                                </IconButton>
+                            <div className='loginErrText'>
+                                <Typography component="span"></Typography>
+                            </div>
 
-                                <div className='loginIMG'>
-                                    <img 
-                                        alt={'Login'} 
-                                        title={'Login'} 
-                                        src={`/assets/img_other/account-icon-240x240_white.png`} />
-                                </div>
+                            <div className='loginLogin' onClick={this.logIn.bind(this)}>
+                                <Typography component="span">Создать аккаунт</Typography>
+                            </div>
+                            
+                            <div className='loginCreate' onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'start' }) } }>
+                                <Typography component="span">У меня есть аккаунт</Typography>
+                            </div>
+                        </Box>
+                    }
+                    { this.state.typeLogin != 'create' ? null :
+                        <Box className='modalLoginCreateNew'>
+                            <IconButton style={{ position: 'absolute', top: -40, left: 15, backgroundColor: 'transparent' }} onClick={this.close.bind(this)}>
+                                <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
+                            </IconButton>
 
-                                <div className='loginHeader'>
-                                    <Typography component="h2">Новый аккаунт</Typography>
-                                </div>
-                                
-                                <MyTextInput type={"phone"} placeholder="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this, 4)} className="inputLogin" style={{ marginBottom: 30 }} />
-                                <MyTextInput type={"password"} placeholder="Придумайте пароль" value={ this.state.newPassword } func={ this.changeData.bind(this, 'newPassword') } onKeyDown={this.checkLoginKey.bind(this, 4)} className="inputLogin" />
+                            <div className='loginIMG'>
+                                <img 
+                                    alt={'Login'} 
+                                    title={'Login'} 
+                                    src={`/assets/img_other/account-icon-240x240_white.png`} />
+                            </div>
 
-                                <div className='loginSubHeader'>
-                                    <Typography component="span">Надежный пароль - строчные и заглавные буквы, цифры и символы.</Typography>
-                                    <Typography component="span">Например: {this.state.genPwd}</Typography>
-                                </div>
+                            <div className='loginHeader'>
+                                <Typography component="h2">Новый аккаунт</Typography>
+                            </div>
+                            
+                            <MyTextInput type={"phone"} placeholder="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this, 4)} className="inputLogin" style={{ marginBottom: 30 }} />
+                            <MyTextInput type={"password"} placeholder="Придумайте пароль" value={ this.state.newPassword } func={ this.changeData.bind(this, 'newPassword') } onKeyDown={this.checkLoginKey.bind(this, 4)} className="inputLogin" />
 
-                                <div className='loginErrText'>
-                                    <Typography component="span"></Typography>
-                                </div>
+                            <div className='loginSubHeader'>
+                                <Typography component="span">Надежный пароль - строчные и заглавные буквы, цифры и символы.</Typography>
+                                <Typography component="span">Например: {this.state.genPwd}</Typography>
+                            </div>
 
-                                <div className='loginLogin' onClick={this.sendsmsNewLogin.bind(this)}>
-                                    <Typography component="span">Создать аккаунт</Typography>
-                                </div>
-                                
-                                <div className='loginCreate' onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'start' }) } }>
-                                    <Typography component="span">У меня есть аккаунт</Typography>
-                                </div>
-                            </Box>
-                        }
-                        { this.state.typeLogin != 'finish' ? null :
-                            <Box className='modalLoginFinish'>
-                                <IconButton style={{ position: 'absolute', top: -40, left: 15, backgroundColor: 'transparent' }} onClick={this.close.bind(this)}>
-                                    <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
-                                </IconButton>
+                            <div className='loginErrText'>
+                                <Typography component="span"></Typography>
+                            </div>
 
-                                <div className='loginIMG'>
-                                    <img 
-                                        alt={'Login'} 
-                                        title={'Login'} 
-                                        src={`/assets/img_other/like.png`} />
-                                </div>
+                            <div className='loginLogin' onClick={this.sendsmsNewLogin.bind(this)}>
+                                <Typography component="span">Создать аккаунт</Typography>
+                            </div>
+                            
+                            <div className='loginCreate' onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'start' }) } }>
+                                <Typography component="span">У меня есть аккаунт</Typography>
+                            </div>
+                        </Box>
+                    }
+                    { this.state.typeLogin != 'finish' ? null :
+                        <Box className='modalLoginFinish'>
+                            <IconButton style={{ position: 'absolute', top: -40, left: 15, backgroundColor: 'transparent' }} onClick={this.close.bind(this)}>
+                                <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
+                            </IconButton>
 
-                                <div className='loginHeader'>
-                                    <Typography component="h2">Добро пожаловать</Typography>
-                                </div>
-                                
-                                <div className='loginSubHeader1'>
-                                    <Typography component="span">Теперь вы можете легко оформить онлайн-заказ с доставкой или забрать его самостоятельно из любого нашего кафе.</Typography>
-                                </div>
+                            <div className='loginIMG'>
+                                <img 
+                                    alt={'Login'} 
+                                    title={'Login'} 
+                                    src={`/assets/img_other/like.png`} />
+                            </div>
 
-                                <div className='loginSubHeader2'>
-                                    <Typography component="span"><Link to={'/samara/profile'} exact={ true } onClick={ this.close.bind(this) }>Укажите в профиле</Link> день рождения и мы заренее пришлём вам промокод на приятный подарок.</Typography>
-                                </div>
+                            <div className='loginHeader'>
+                                <Typography component="h2">Добро пожаловать</Typography>
+                            </div>
+                            
+                            <div className='loginSubHeader1'>
+                                <Typography component="span">Теперь вы можете легко оформить онлайн-заказ с доставкой или забрать его самостоятельно из любого нашего кафе.</Typography>
+                            </div>
 
-                                <Link to={'/samara/'} exact={ true } className='loginLogin' onClick={ this.close.bind(this) }>
-                                    <Typography component="span">Перейти в меню</Typography>
-                                </Link>
-                                
-                                <Link to={'/samara/cart'} exact={ true } className='loginCreate' onClick={ this.close.bind(this) }>
-                                    <Typography component="span">Открыть корзину</Typography>
-                                </Link>
-                            </Box>
-                        }
-                    </Fade>
-                </Modal>
-            </>
+                            <div className='loginSubHeader2'>
+                                <Typography component="span"><Link to={'/samara/profile'} exact={ true } onClick={ this.close.bind(this) }>Укажите в профиле</Link> день рождения и мы заренее пришлём вам промокод на приятный подарок.</Typography>
+                            </div>
+
+                            <Link to={'/samara/'} exact={ true } className='loginLogin' onClick={ this.close.bind(this) }>
+                                <Typography component="span">Перейти в меню</Typography>
+                            </Link>
+                            
+                            <Link to={'/samara/cart'} exact={ true } className='loginCreate' onClick={ this.close.bind(this) }>
+                                <Typography component="span">Открыть корзину</Typography>
+                            </Link>
+                        </Box>
+                    }
+                </Fade>
+            </Modal>
         )
     }
 }
@@ -1202,13 +1223,6 @@ TabPanel.propTypes = {
     index: PropTypes.any.isRequired,
     value: PropTypes.any.isRequired,
 };
-  
-function a11yProps(index) {
-    return {
-        id: `full-width-tab-${index}`,
-        'aria-controls': `full-width-tabpanel-${index}`,
-    };
-}
 
 export class Header extends React.Component {
     is_load = false;
@@ -1247,22 +1261,7 @@ export class Header extends React.Component {
             cityList: this.props.data ? this.props.data.all.other.cats.city_list : [],
             
             openLoginNew: false,
-            pwd: '',
-            ResPWD: false,
-            NeedCode: false,
-            typeLogin: 0,
-
-            openLogin: false,
-            userLogin: '',
-            userLoginFormat: '',
-            userCode: '',
             
-            stage_1: true,
-            stage_2: false,
-            
-            timerSMS: 89,
-            errPhone: '',
-            errSMS: '',
             userName: '',
             token: '',
             
@@ -1285,52 +1284,7 @@ export class Header extends React.Component {
 
             if( token && token.length == 0 && localStorage.getItem('token') && localStorage.getItem('token').length > 0 ){
                 this.setToken( localStorage.getItem('token'), '' ); 
-                
-                /*fetch(config.urlApi, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type':'application/x-www-form-urlencoded'},
-                    body: queryString.stringify({
-                        type: 'get_user_data', 
-                        user_id: localStorage.getItem('token')
-                    })
-                }).then(res => res.json()).then(json => {
-
-                    itemsStore.setToken( localStorage.getItem('token'), json ); 
-                    itemsStore.setUserName(json);
-
-                    this.is_load = false;
-
-                    this.setState({
-                        userName: json,
-                        token: localStorage.getItem('token')
-                    })
-                })
-                .catch(err => { });*/
             }
-
-            /*if( !userName || userName.length == 0 ){
-                fetch(config.urlApi, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type':'application/x-www-form-urlencoded'},
-                    body: queryString.stringify({
-                        type: 'get_user_data', 
-                        user_id: itemsStore.getToken()
-                    })
-                }).then(res => res.json()).then(json => {
-                    itemsStore.setUserName(json);
-                    this.is_load = false;
-
-                    this.setState({
-                        userName: json
-                    })
-                })
-                .catch(err => { });
-
-
-                
-            }*/
 
             if( userName.length > 0 ){
                 itemsStore.setUserName(userName);
@@ -1339,10 +1293,6 @@ export class Header extends React.Component {
                 })
             } 
             
-
-            
-
-
             let cartData = itemsStore.getCartData();
 
             if( cartData.orderType || cartData.orderType == 0 ){
@@ -1494,251 +1444,11 @@ export class Header extends React.Component {
     
     closeLogin(){
         this.setState({
-            openLogin: false,
             openLoginNew: false,
-            ResPWD: false,
-            NeedCode: false,
-            userLogin: '',
-            userLoginFormat: '',
-            userCode: '',
-            pwd: ''
         })
-    }
-    
-    logIn(){
-        let number = this.state.userLogin;
-            
-        number = number.split(' ').join('');
-        number = number.split('(').join('');
-        number = number.split(')').join('');
-        number = number.split('-').join('');
-        number = number.split('_').join('');
-        
-        number = number.slice(1);
-
-        fetch(config.urlApi, {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/x-www-form-urlencoded'},
-            body: queryString.stringify({
-                type: 'site_login',
-                number: number,
-                pwd: this.state.pwd 
-            })
-        }).then(res => res.json()).then(json => {
-            if( json.st === false ){
-                this.setState({
-                    errPhone: json.text
-                });
-            }else{
-                itemsStore.setToken( json.token, json.name ); 
-                itemsStore.setUserName(json.name);
-
-                this.is_load = false;
-
-                this.setState({
-                    userName: json.name,
-                    token: json.token
-                })
-
-                this.closeLogin();
-
-                //if (typeof window !== 'undefined') {
-                //    window.location.pathname = '/'+this.state.cityName+'/profile';
-                //}
-            }
-
-            
-        })
-        .catch(err => { });
-    }
-
-    sendSMS(){
-        if( this.sms1 == false ){
-            this.sms1 = true;
-            
-            this.setState({
-                stage_1: false,
-                stage_2: true, 
-                errPhone: '',
-                errSMS: ''
-            });
-            
-            let number = this.state.userLogin;
-            
-            number = number.split(' ').join('');
-            number = number.split('(').join('');
-            number = number.split(')').join('');
-            number = number.split('-').join('');
-            number = number.split('_').join('');
-            
-            number = number.slice(1);
-            
-            this.setState({
-                userLoginFormat: number
-            })
-            
-            grecaptcha.ready(() => {
-                grecaptcha.execute('6LdhWpIdAAAAAA4eceqTfNH242EGuIleuWAGQ2su', {action: 'submit'}).then( (token) => {
-                    fetch(config.urlApi, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type':'application/x-www-form-urlencoded'},
-                        body: queryString.stringify({
-                            type: 'create_profile', 
-                            number: number,
-                            token: token 
-                        })
-                    }).then(res => res.json()).then(json => {
-                        if( json['st'] ){
-                            this.setState({ 
-                                errPhone: ''
-                            })
-                        
-                            let timerId = setInterval(() => {
-                                this.setState({
-                                    timerSMS: this.state.timerSMS-1
-                                })
-                                if( this.state.timerSMS == 0 ){
-                                    clearInterval(timerId);
-                                }
-                            }, 1000);
-                        }else{
-                            this.setState({
-                              errPhone: json.text
-                            });
-                        }
-                        
-                        setTimeout( () => {
-                            this.sms1 = false;
-                        }, 300 )
-                    });
-                });
-            });
-            
-        }
-    }
-    
-    repeatSMS(){
-        if( this.sms2 === false ){
-            this.sms2 = true;
-            
-            this.setState({
-                errSMS: '',
-                is_load_new: true
-            });
-            
-            grecaptcha.ready(() => {
-                grecaptcha.execute('6LdhWpIdAAAAAA4eceqTfNH242EGuIleuWAGQ2su', {action: 'submit'}).then( (token) => {
-                    fetch(config.urlApi, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type':'application/x-www-form-urlencoded'},
-                        body: queryString.stringify({
-                            type: 'repeat_sms', 
-                            number: this.state.userLoginFormat,
-                            token: token
-                        })
-                    }).then(res => res.json()).then(json => {
-                        this.sms2 = false;
-                        
-                        if( json['st'] ){
-                            this.setState({
-                                timerSMS: 89
-                            })
-                        
-                            let timerId = setInterval(() => {
-                                this.setState({
-                                    timerSMS: this.state.timerSMS-1
-                                })
-                                if( this.state.timerSMS == 0 ){
-                                    clearInterval(timerId);
-                                }
-                            }, 1000);
-                        }else{
-                            this.setState({
-                                errSMS: json.text
-                            });
-                        }
-
-                        setTimeout( () => {
-                            this.setState({
-                                is_load_new: false
-                            });
-                        }, 300 )
-                        
-                    });
-                });
-            });
-        }
-    }
-    
-    checkCode(){
-        this.setState({
-            errSMS: ''
-        });
-        
-        fetch(config.urlApi, {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/x-www-form-urlencoded'},
-            body: queryString.stringify({
-                type: 'check_profile', 
-                cod: this.state.userCode,
-                number: this.state.userLoginFormat
-            })
-        }).then(res => res.json()).then(json => {
-            if( json['st'] ){
-                itemsStore.setToken(json.token, json.name);
-                this.closeLogin();
-            }else{
-                this.setState({
-                  errSMS: json.text
-                });
-            }
-        });
-    }
-    
-    changeNumber(){
-        this.setState({
-            stage_1: true,
-            stage_2: false,
-            
-            errPhone: '',
-            errSMS: ''
-        })
-    }
-
-    changeCode(code){
-        code = code.target.value
-        
-        this.setState({
-            userCode: code
-        })
-        
-        if( (parseInt(code)+'').length == 4 ){ 
-            setTimeout(()=>{
-                this.checkCode() 
-            }, 500)
-        }
-    }
-
-    changeCodeNew(code){
-        code = code.target.value
-        
-        this.setState({
-            userCode: code
-        })
-    }
-
-    handleKeyPress = (event) => {
-        if(event.key === 'Enter'){
-            this.sendSMS()
-        }
     }
     
     handleClick = (event) => {
-        
         this.setState({
             anchorEl: event.currentTarget
         })
@@ -1750,152 +1460,11 @@ export class Header extends React.Component {
         })
     };
     
-    LoginBySMS(){
-        this.setState({
-            openLoginNew: false,
-            openLogin: true,
-            errPhone: '', 
-            errSMS: ''
-        })
-
-        this.is_load = false;
-    
-        this.sms1 = false;
-        this.sms2 = false;
-    }
-
-    ResPWD(){
-        this.setState({
-            ResPWD: true,
-            NeedCode: false
-        })
-    }
-
-    sendsmsrp(){
-        if( this.sms1 == false ){
-            this.sms1 = true;
-            
-            this.setState({
-                //stage_1: false,
-                //stage_2: true, 
-                errPhone: '',
-                errSMS: '',
-                is_load_new: true
-            });
-            
-            let number = this.state.userLogin;
-            
-            number = number.split(' ').join('');
-            number = number.split('(').join('');
-            number = number.split(')').join('');
-            number = number.split('-').join('');
-            number = number.split('_').join('');
-            
-            number = number.slice(1);
-            
-            this.setState({
-                userLoginFormat: number
-            })
-            
-            grecaptcha.ready(() => {
-                grecaptcha.execute('6LdhWpIdAAAAAA4eceqTfNH242EGuIleuWAGQ2su', {action: 'submit'}).then( (token) => {
-                    fetch(config.urlApi, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type':'application/x-www-form-urlencoded'},
-                        body: queryString.stringify({
-                            type: 'sendsmsrp', 
-                            number: number,
-                            pwd: this.state.pwd,
-                            token: token 
-                        })
-                    }).then(res => res.json()).then(json => {
-                        if( json['st'] ){
-                            this.setState({ 
-                                errPhone: '',
-                                NeedCode: true,
-                                errPhone: '', 
-                                errSMS: ''
-                            })
-                        
-                            let timerId = setInterval(() => {
-                                this.setState({
-                                    timerSMS: this.state.timerSMS-1
-                                })
-                                if( this.state.timerSMS == 0 ){
-                                    clearInterval(timerId);
-                                }
-                            }, 1000);
-                        }else{
-                            this.setState({
-                              errPhone: json.text
-                            });
-                        }
-                        
-                        setTimeout( () => {
-                            this.sms1 = false;
-                            this.setState({
-                                is_load_new: false
-                            })
-                        }, 300 )
-                    });
-                });
-            });
-            
-        }
-    }
-
-    checkcoderp(){
-        fetch(config.urlApi, {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/x-www-form-urlencoded'},
-            body: queryString.stringify({
-                type: 'checkcoderp', 
-                number: this.state.userLoginFormat,
-                code: this.state.userCode
-            })
-        }).then(res => res.json()).then(json => {
-            if( json['st'] ){
-                this.setState({ 
-                    errPhone: '',
-                    NeedCode: true
-                })
-            
-                itemsStore.setToken( json.token, json.name ); 
-                itemsStore.setUserName(json.name);
-
-                this.is_load = false;
-
-                this.setState({
-                    userName: json.name,
-                    token: json.token,
-                    errPhone: '', 
-                    errSMS: ''
-                })
-
-                this.closeLogin();
-
-                //if (typeof window !== 'undefined') {
-                //    window.location.pathname = '/'+this.state.cityName+'/profile';
-                //}
-            }else{
-                this.setState({
-                  errPhone: json.text
-                });
-            }
-            
-            setTimeout( () => {
-                this.sms1 = false;
-            }, 300 )
-        });
-    }
-
     render() {
         let link = this.props.this_link;
         link = link.split('/');
         let mainLink = '';
-        
+
         let check = link.find( (item) => item == 'menu');
         
         if( check && check.length > 0 ){
@@ -1941,7 +1510,6 @@ export class Header extends React.Component {
                                 </Link> 
                             </Grid>
                             <>
-                                
                                 <Grid item className="CityProfileNav">
                                     <Typography className="cat" variant="h5" component="span" onClick={this.openCity.bind(this)} style={{ display: 'flex', flexDirection: 'row' }}>{itemsStore.getCityRU()} <ArrowDropDownIcon /></Typography>
                                     <Typography className="cat" variant="h5" component="span" onClick={this.openLogin.bind(this)}>Войти</Typography>
@@ -2244,231 +1812,7 @@ export class Header extends React.Component {
                     </DialogContent>
                 </Dialog>
                 
-                <Dialog
-                    open={this.state.openLogin}
-                    fullWidth={true}
-                    maxWidth={'xs'}
-                    onClose={this.closeLogin.bind(this)}
-                    className="ModalAuth"
-                >
-                    <DialogTitle id="alert-dialog-title">Вход на сайт</DialogTitle>
-                    <DialogContent className="ModalContent_1_1">
-                        <div className="ModalContent_1_2">
-                            <Typography variant="h5" component="span" className="ModalLabel">Номер телефона</Typography>
-                            <InputMask 
-                                className="InputMask"
-                                mask="8 (999) 999-99-99" 
-                                placeholder="8 (999) 999-99-99" 
-                                disabled={!this.state.stage_1}
-                                value={this.state.userLogin}
-                                //onKeyPress={this.handleKeyPress}
-                                onChange={ event => this.state.stage_1 ? this.setState({ userLogin: event.target.value }) : {} }
-                            />
-                            {this.state.stage_2 ?
-                                <Typography variant="h5" component="span" className="changeNumber" onClick={this.changeNumber.bind(this)}>Изменить номер</Typography>
-                                    :
-                                null
-                            }
-                            {this.state.errPhone.length > 0 ?
-                                <div style={{ marginTop: 10, padding: 16, backgroundColor: '#BB0025', borderRadius: 4 }}>
-                                    <Typography variant="h5" component="span" style={{ fontSize: '1.1rem', color: '#fff' }}>{this.state.errPhone}</Typography>
-                                </div>
-                                    :
-                                null
-                            }
-                        </div>
-                        {this.state.stage_2 ?
-                            <div className="ModalContent_1_3">
-                                <Typography variant="h5" component="span" className="ModalLabel">Код из смс</Typography>
-                                <div className="ModalContent_1_2">
-                                    <InputMask 
-                                        className="InputMask"
-                                        mask="9999" 
-                                        value={this.state.userCode}
-                                        //onChange={ (event) => { this.changeCode.bind(this, event.target.value) } }
-                                        onChange={ this.changeCode.bind(this) }
-                                    />
-                                    {this.state.timerSMS > 0 ?
-                                        <Typography variant="h5" component="span" style={{ fontSize: '0.8rem', paddingTop: 10 }}>{'Новое смс доступно через '+this.state.timerSMS+' сек.'}</Typography>
-                                            :
-                                        <Typography variant="h5" component="span" style={{ fontSize: '0.8rem', paddingTop: 10, cursor: 'pointer', width: 'fit-content' }} onClick={this.repeatSMS.bind(this)}>Получить новый код</Typography>
-                                    }
-                                </div>
-                                {this.state.errSMS.length > 0 ?
-                                    <div style={{ marginTop: 10, padding: 16, backgroundColor: '#BB0025', borderRadius: 4 }}>
-                                        <Typography variant="h5" component="span" style={{ fontSize: '1.1rem', color: '#fff' }}>{this.state.errSMS}</Typography>
-                                    </div>
-                                        :
-                                    null
-                                }
-                            </div>
-                                :
-                            null
-                        }
-                    </DialogContent>
-                    {this.state.stage_1 ?
-                        <DialogActions style={{ padding: '12px 24px' }}>
-                            <Button onClick={this.sendSMS.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Выслать код</Button>
-                        </DialogActions>
-                            :
-                        null
-                    }
-                    {this.state.stage_2 ?
-                        <DialogActions style={{ padding: '12px 24px' }}>
-                            <Button onClick={this.checkCode.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Подтвердить код</Button>
-                        </DialogActions>
-                            :
-                        null
-                    }
-                </Dialog>
-
-
-                
-
-
-                <Dialog
-                    open={this.state.openLoginNew}
-                    fullWidth={true}
-                    maxWidth={'xs'}
-                    onClose={this.closeLogin.bind(this)}
-                    className="ModalAuth"
-                >
-                    <DialogTitle style={{ display: 'none' }}>{this.state.ResPWD === false ? 'Авторизация' : 'Восстановление пароля'}</DialogTitle>
-                    <DialogContent className="ModalContent_1_1 newContent">
-
-                        <Backdrop open={this.state.is_load_new} style={{ zIndex: 999, color: '#fff' }}>
-                            <CircularProgress color="inherit" />
-                        </Backdrop>
-
-                        <Tabs
-                            value={this.state.typeLogin}
-                            onChange={ (event, value) => { this.setState({ typeLogin: value, ResPWD: value == 0 ? false : true, errPhone: '', errSMS: '' }) } }
-                            indicatorColor="primary"
-                            //textColor="primary"
-                            variant="fullWidth"
-                            style={{ backgroundColor: '#fff', color: '#000', marginBottom: 20 }}
-                        >
-                            <Tab style={{ color: '#000' }} label="Вход" {...a11yProps(0)} />
-                            <Tab style={{ color: '#000' }} label="Регистрация" {...a11yProps(1)} />
-                        </Tabs>
-
-                        <div className="ModalContent_1_2">
-                            { this.state.ResPWD === false ?
-                                <>
-                                    <Typography variant="h5" component="span" className="ModalLabel">Номер телефона</Typography>
-                                    <InputMask 
-                                        className="InputMask"
-                                        mask="8 (999) 999-99-99" 
-                                        placeholder="8 (999) 999-99-99" 
-                                        disabled={!this.state.stage_1}
-                                        value={this.state.userLogin}
-                                        //onKeyPress={this.handleKeyPress}
-                                        onChange={ event => this.state.stage_1 ? this.setState({ userLogin: event.target.value }) : {} }
-                                    />
-                                    <Typography variant="h5" component="span" className="ModalLabel" style={{ marginTop: 20 }}>Пароль</Typography>
-                                    <TextField 
-                                        size="small"
-                                        variant="outlined" 
-                                        type="password"
-                                        value={this.state.pwd} 
-                                        disabled={!this.state.stage_1}
-                                        onChange={ event => this.setState({ pwd: event.target.value }) }
-                                    />
-                                    <Typography variant="h5" component="span" className="changeNumberGray" onClick={this.LoginBySMS.bind(this)}>Войти по смс</Typography>
-                                    
-                                </>
-                                    :
-                                <>
-                                    { this.state.ResPWD === true && this.state.NeedCode === false ?
-                                        <>
-                                            <Typography variant="h5" component="span" className="ModalLabel">Номер телефона</Typography>
-                                            <InputMask 
-                                                className="InputMask"
-                                                mask="8 (999) 999-99-99" 
-                                                placeholder="8 (999) 999-99-99" 
-                                                disabled={!this.state.stage_1}
-                                                value={this.state.userLogin}
-                                                //onKeyPress={this.handleKeyPress}
-                                                onChange={ event => this.state.stage_1 ? this.setState({ userLogin: event.target.value }) : {} }
-                                            />
-
-                                            <Typography variant="h5" component="span" className="ModalLabel" style={{ marginTop: 20 }}>{ this.state.typeLogin == 0 ? 'Новый пароль' : 'Придумайте пароль' }</Typography>
-                                            <TextField 
-                                                size="small"
-                                                variant="outlined" 
-                                                type="password"
-                                                value={this.state.pwd} 
-                                                disabled={!this.state.stage_1}
-                                                onChange={ event => this.setState({ pwd: event.target.value }) }
-                                            />
-                                        </>
-                                            :
-                                        <div className="ModalContent_1_3">
-                                            <Typography variant="h5" component="span" className="ModalLabel">Номер телефона</Typography>
-                                            <InputMask 
-                                                className="InputMask"
-                                                mask="8 (999) 999-99-99" 
-                                                placeholder="8 (999) 999-99-99" 
-                                                disabled={true}
-                                                value={this.state.userLogin}
-                                            />
-
-                                            <div className="ModalContent_1_2">
-                                                <Typography variant="h5" component="span" className="ModalLabel" style={{ marginTop: 20 }}>Код из смс</Typography>
-                                                <InputMask 
-                                                    className="InputMask"
-                                                    mask="9999" 
-                                                    value={this.state.userCode}
-                                                    onChange={ this.changeCodeNew.bind(this) }
-                                                />
-                                                {this.state.timerSMS > 0 ?
-                                                    <Typography variant="h5" component="span" style={{ fontSize: '0.8rem', paddingTop: 10 }}>{'Новое смс доступно через '+this.state.timerSMS+' сек.'}</Typography>
-                                                        :
-                                                    <Typography variant="h5" component="span" style={{ fontSize: '0.8rem', paddingTop: 10, cursor: 'pointer', width: 'fit-content' }} onClick={this.repeatSMS.bind(this)}>Получить новый код</Typography>
-                                                }
-                                            </div>
-                                            {this.state.errSMS.length > 0 ?
-                                                <div style={{ marginTop: 10, padding: 16, backgroundColor: '#BB0025', borderRadius: 4 }}>
-                                                    <Typography variant="h5" component="span" style={{ fontSize: '1.1rem', color: '#fff' }}>{this.state.errSMS}</Typography>
-                                                </div>
-                                                    :
-                                                null
-                                            }
-                                        </div>
-                                        
-                                    }
-                                </>
-                            }
-                            {this.state.errPhone.length > 0 ?
-                                <div style={{ marginTop: 10, padding: 16, backgroundColor: '#BB0025', borderRadius: 4 }}>
-                                    <Typography variant="h5" component="span" style={{ fontSize: '1.1rem', color: '#fff' }}>{this.state.errPhone}</Typography>
-                                </div>
-                                    :
-                                null
-                            }
-                        </div>
-                        
-                    </DialogContent>
-                    <DialogActions style={{ padding: '12px 24px' }}>
-                        { this.state.ResPWD === false ?
-                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', width: '100%', justifyContent: 'space-between' }}>
-                                <Typography variant="h5" component="span" className="changeNumber" onClick={this.ResPWD.bind(this)}>Восстановить пароль</Typography>
-
-                                <Button onClick={this.logIn.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Войти</Button>
-                            </div>
-
-                            
-                                :
-                                this.state.NeedCode === false ?
-                                    <Button onClick={this.sendsmsrp.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Подтвердить номер</Button>
-                                        :
-                                    <Button onClick={this.checkcoderp.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Авторизоваться</Button>
-                        }
-                    </DialogActions>
-                </Dialog>
-                
-
-
+                <ModalLogin isOpen={this.state.openLoginNew} close={this.closeLogin.bind(this)} />
 
                 {this.state.activePage == 'home' ?
                     <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
