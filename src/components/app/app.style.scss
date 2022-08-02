@@ -363,6 +363,18 @@ body{
             align-items: center;
             justify-content: center;
         }
+        &:hover{
+            background-color: #fff;
+            border: 1px solid #F9BC23;
+        }
+        &:target{
+            background-color: #fff;
+            border: 1px solid #F9BC23;
+        }
+        &:active{
+            background-color: #fff;
+            border: 1px solid #F9BC23;
+        }
     }
 }
 .MobileActionsCartButton{
