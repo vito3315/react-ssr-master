@@ -524,7 +524,7 @@ export class Item extends React.Component {
                                     <img 
                                         alt={this.state.item.name} 
                                         title={this.state.item.name} 
-                                        style={{ width: '100%' }}
+                                        style={{ width: '80%' }}
                                         src={`https://storage.yandexcloud.net/site-img/${this.state.img_name}_276x276.jpg`} />
                                 </picture>
                             }
