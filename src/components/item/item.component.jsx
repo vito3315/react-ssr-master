@@ -586,7 +586,7 @@ export class Item extends React.Component {
                         <Grid item xs={12} style={{ position: 'absolute', width: 'calc(100% - 40px)', bottom: 120 }}>
                             { this.state.count == 0 ?
                                 <ButtonGroup disableelevation={true} disableRipple={true} variant="contained" style={{ width: '100%', backgroundColor: '#fff' }}>
-                                    <Button variant="contained" className='ModalItemButtonCart' style={{ width: '100%', height: 60, borderRadius: 40, border: '2px solid #F9BC23' }} onClick={this.add.bind(this)}>
+                                    <Button variant="contained" className='ModalItemButtonCart _NON_HOVER_' style={{ width: '100%', height: 60, borderRadius: 40, border: '2px solid #F9BC23' }} onClick={this.add.bind(this)}>
                                         <span style={{ fontSize: '1.25rem', textTransform: 'initial', fontFamily: 'Roboto', color: '#525252', fontWeight: 700 }}>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)}</span>
                                         <IconRuble style={{ width: 15, height: 15, fill: '#525252', marginLeft: 5 }} />
                                     </Button>

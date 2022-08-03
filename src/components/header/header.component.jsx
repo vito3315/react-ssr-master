@@ -123,7 +123,7 @@ class ModalLogin extends React.Component{
             
             timerSMS: 89,
             timerSMSTime: this.toTime(89),
-            errPhone: '',
+            errPhone: 'Тестовая ошибка',
             errSMS: '',
         };
     }
@@ -471,7 +471,12 @@ class ModalLogin extends React.Component{
                                 <Typography component="h2">Мой аккаунт</Typography>
                             </div>
                             
-                            <MyTextInput type={"phone"} placeholder="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this, 1)} className="inputLogin" style={{ marginBottom: 30 }} />
+                            <MyTextInput type={"phone"} placeholder="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this, 1)} className="inputLogin" />
+
+                            <div className='loginErr'>
+                                <Typography component="span">{this.state.errPhone}</Typography>
+                            </div>
+
                             <MyTextInput type={"password"} placeholder="Пароль" value={ this.state.pwdLogin } func={ this.changeData.bind(this, 'pwdLogin') } onKeyDown={this.checkLoginKey.bind(this, 1)} className="inputLogin" />
 
                             <div className='loginLosePWD'>
@@ -506,13 +511,13 @@ class ModalLogin extends React.Component{
                             </div>
 
                             <div className='loginHeader'>
-                                <Typography component="h2">Авторизация</Typography>
+                                <Typography component="h2">Вход по СМС</Typography>
                             </div>
                             
                             <MyTextInput type={"phone"} placeholder="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this, 2)} className="inputLogin" style={{ marginBottom: 0 }} />
                             
-                            <div className='loginErrText'>
-                                <Typography component="span"></Typography>
+                            <div className='loginErr'>
+                                <Typography component="span">{this.state.errPhone}</Typography>
                             </div>
 
                             <div className='loginLogin' onClick={this.sendSMS.bind(this)}>
@@ -546,12 +551,16 @@ class ModalLogin extends React.Component{
                                 <Typography component="span">Введите последние 4 цифры номера.</Typography>
                             </div>
 
-                            <div className='loginSubHeader' style={{ display: 'none' }}>
+                            <div className='loginSubHeader'>
                                 <Typography component="span">Введите 4 цифры из смс.</Typography>
                             </div>
                             
                             <div className={this.state.timerSMS > 0 ? 'loginAutCode' : 'loginAutCodeOther'}>
                                 <AuthCode autoFocus={true} allowedCharacters='numeric' length="4" onChange={ this.changeCode.bind(this) } />
+                            </div>
+
+                            <div className='loginErr'>
+                                <Typography component="span">{this.state.errPhone}</Typography>
                             </div>
 
                             { this.state.timerSMS > 0 ?
@@ -574,7 +583,7 @@ class ModalLogin extends React.Component{
                         </Box>
                     }
                     { this.state.typeLogin != 'resetPWD' ? null :
-                        <Box className='modalLoginCreate'>
+                        <Box className='modalLoginReset'>
                             <IconButton style={{ position: 'absolute', top: -40, left: 15, backgroundColor: 'transparent' }} onClick={this.close.bind(this)}>
                                 <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
                             </IconButton>
@@ -590,12 +599,13 @@ class ModalLogin extends React.Component{
                                 <Typography component="h2">Восстановление пароля</Typography>
                             </div>
                             
-                            <MyTextInput type={"phone"} placeholder="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this, 4)} className="inputLogin" style={{ marginBottom: 30 }} />
-                            <MyTextInput type={"password"} placeholder="Придумай пароль" value={ this.state.newPassword } func={ this.changeData.bind(this, 'newPassword') } onKeyDown={this.checkLoginKey.bind(this, 4)} className="inputLogin" />
-
-                            <div className='loginErrText'>
-                                <Typography component="span"></Typography>
+                            <MyTextInput type={"phone"} placeholder="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this, 4)} className="inputLogin" />
+                            
+                            <div className='loginErr'>
+                                <Typography component="span">{this.state.errPhone}</Typography>
                             </div>
+
+                            <MyTextInput type={"password"} placeholder="Придумай пароль" value={ this.state.newPassword } func={ this.changeData.bind(this, 'newPassword') } onKeyDown={this.checkLoginKey.bind(this, 4)} className="inputLogin" />
 
                             <div className='loginLogin' onClick={this.logIn.bind(this)}>
                                 <Typography component="span">Создать аккаунт</Typography>
@@ -623,7 +633,12 @@ class ModalLogin extends React.Component{
                                 <Typography component="h2">Новый аккаунт</Typography>
                             </div>
                             
-                            <MyTextInput type={"phone"} placeholder="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this, 4)} className="inputLogin" style={{ marginBottom: 30 }} />
+                            <MyTextInput type={"phone"} placeholder="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this, 4)} className="inputLogin" />
+
+                            <div className='loginErr'>
+                                <Typography component="span">{this.state.errPhone}</Typography>
+                            </div>
+
                             <MyTextInput type={"password"} placeholder="Придумайте пароль" value={ this.state.newPassword } func={ this.changeData.bind(this, 'newPassword') } onKeyDown={this.checkLoginKey.bind(this, 4)} className="inputLogin" />
 
                             <div className='loginSubHeader'>
@@ -1070,7 +1085,7 @@ class SimplePopover extends React.Component{
                                                     :
                                                 <td className="CellPrice"> 
                                                     <div className="TableMiniPrice">
-                                                        { new Intl.NumberFormat('ru-RU').format(item.all_price) } 
+                                                        { new Intl.NumberFormat('ru-RU').format( parseInt(item.one_price) * parseInt(item.count) ) } 
                                                         <IconRuble style={{ width: 13, height: 13, fill: '#525252', marginLeft: 5 }} />
                                                     </div>
                                                 </td>
@@ -1134,7 +1149,7 @@ class SimplePopover extends React.Component{
                                             </div>
                                                 :
                                             <div>
-                                                { new Intl.NumberFormat('ru-RU').format(this.state.allPrice) } 
+                                                { new Intl.NumberFormat('ru-RU').format(this.state.originPrice) } 
                                                 <IconRuble style={{ width: 14, height: 14, fill: '#525252', marginLeft: 5 }} />
                                             </div>
                                         }
