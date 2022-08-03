@@ -419,7 +419,7 @@ class CardItem extends React.Component {
 
             return (
                 <Grid item container xs={12} className="CardItem_mobile" style={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap' }}>
-                    <Grid style={{ position: 'relative', marginRight: 20 }} item onClick={ () => this.props.openItem(this.state.item.id)}>
+                    <Grid style={{ position: 'relative', marginRight: '3%' }} item onClick={ () => this.props.openItem(this.state.item.id)}>
                         
                         {img_type == 'old' ?
                             <picture>
@@ -466,7 +466,7 @@ class CardItem extends React.Component {
                         }
                     </Grid>
                     <Grid item className="SecondBox_" style={{ width: 'max-content', display: 'flex', flexDirection: 'column', position: 'relative', justifyContent: 'flex-end' }}>
-                        <Typography className="CardNameItem_" variant="h5" component="h3" style={{ fontFamily: 'Roboto', fontSize: '1.0625rem', fontWeight: 'bold', color: '#525252', marginBottom: 10 }} onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>
+                        <Typography className="CardNameItem_" variant="h5" component="h3" style={{ fontFamily: 'Roboto', fontSize: '1.0625rem', fontWeight: '500', color: '#525252', marginBottom: 10 }} onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>
 
                         {  parseInt( this.state.item.cat_id ) == 4 ?
                             <div style={{ width: 148, height: 28, display: 'flex', flexDirection: 'row', alignItems: 'center', border: '1px solid #dadada', borderRadius: 10, marginBottom: 10, }}>
@@ -624,6 +624,327 @@ class CardItemBot extends React.Component {
                 </CardActions>
             </Card>
         )
+    }
+}
+
+class CardItemBotNew extends React.Component {
+    _isMounted = false;
+    
+    constructor(props) {
+        super(props);
+        
+        this.state = {      
+            item: this.props.data, 
+            count: 0,
+            is_old_price: false,
+            old_price: 0
+        };
+    }
+    
+    componentDidMount(){
+        this._isMounted = true; 
+        let my_cart = itemsStore.getItems();
+            
+        let item = my_cart.find( (item) => item.item_id == this.state.item['id'] );
+  
+        if( item ){
+            this.setState({ 
+              count: item.count,
+            })
+            
+            let city = itemsStore.getCity();
+            
+            if( city == 'samara' && (parseInt(this.state.item['id']) == 70 || parseInt(this.state.item['id']) == 71 || parseInt(this.state.item['id']) == 7) ){
+                this.setState({
+                    //old_price: 205,
+                    //is_old_price: true
+                })
+            }
+
+            if( city == 'samara' && parseInt(this.state.item['id']) == 4 ){
+                this.setState({
+                    //old_price: 135,
+                    //is_old_price: true
+                })
+            }
+            
+            if( city == 'togliatti' && (parseInt(this.state.item['id']) == 70 || parseInt(this.state.item['id']) == 71 || parseInt(this.state.item['id']) == 7) ){
+                this.setState({
+                    //old_price: 195,
+                    //is_old_price: true
+                })
+            }
+
+            if( city == 'togliatti' && parseInt(this.state.item['id']) == 4 ){
+                this.setState({
+                    //old_price: 135,
+                    //is_old_price: true
+                })
+            }
+        }
+        
+        autorun(() => {
+            if( this._isMounted ){
+                
+                let city = itemsStore.getCity();
+            
+                if( city == 'samara' && (parseInt(this.state.item['id']) == 70 || parseInt(this.state.item['id']) == 71 || parseInt(this.state.item['id']) == 7) ){
+                    this.setState({
+                        //old_price: 205,
+                        //is_old_price: true
+                    })
+                }
+    
+                if( city == 'samara' && parseInt(this.state.item['id']) == 4 ){
+                    this.setState({
+                        //old_price: 135,
+                        //is_old_price: true
+                    })
+                }
+                
+                if( city == 'togliatti' && (parseInt(this.state.item['id']) == 70 || parseInt(this.state.item['id']) == 71 || parseInt(this.state.item['id']) == 7) ){
+                    this.setState({
+                        //old_price: 195,
+                        //is_old_price: true
+                    })
+                }
+    
+                if( city == 'togliatti' && parseInt(this.state.item['id']) == 4 ){
+                    this.setState({
+                        //old_price: 135,
+                        //is_old_price: true
+                    })
+                }
+                
+                let my_cart = itemsStore.getItems();
+                let item = my_cart.find( (item) => item.item_id == this.state.item['id'] );
+          
+                if( item ){
+                    this.setState({ 
+                      count: item.count,
+                    })
+                }else{
+                    this.setState({ 
+                      count: 0,
+                    })
+                }
+            }
+        })
+    }
+    
+    componentWillUnmount(){
+        this._isMounted = false;
+    }
+    
+    add(){
+        if(this._isMounted){
+            itemsStore.AddItem(this.state.item['id']);
+        }
+    }
+    
+    minus(){
+        if(this._isMounted){
+            itemsStore.MinusItem(this.state.item['id']);
+        }
+    }
+    
+    /*shouldComponentUpdate(nextProps, nextState) {
+        return (
+            this.state.count !== nextState.count ||
+            this.state.item.price !== nextState.item.price
+        );
+    }*/
+    
+    render() {
+        const img_name = this.state.item.img_app.length > 0 ? this.state.item.img_app : this.state.item.img_new;
+        const img_type = this.state.item.img_app.length > 0 ? 'new' : 'old';
+
+        const desc = this.state.item.marc_desc.length > 0 ? this.state.item.marc_desc : this.state.item.tmp_desc;
+
+        //const width = window.innerWidth;
+
+        let width = 0;
+        let GRID = 0;
+
+        //const GRID = (width- 7*20) / 6;
+
+        if( this.props.type == 'pc' ){
+
+            if (typeof window !== 'undefined') {
+                width = window.innerWidth;
+            }else{
+                width = 1280;
+            }
+
+            GRID = (width- 7*20) / 6;
+
+            return (
+                <Card elevation={0} className="CardItem" style={{ width: '100%' }}>
+                    
+                    <CardContent style={{ cursor: 'pointer', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative' }} onClick={ () => this.props.openItem(this.state.item.id)}>
+                        
+                        {img_type == 'old' ?
+                            <picture>
+                                <source 
+                                    srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.webp?"+this.state.item.img_new_update} 
+                                    type="image/webp" 
+                                />
+                                <img 
+                                    dataSrc={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.jpg?"+this.state.item.img_new_update} 
+                                    alt={this.state.item.name}
+                                    title={this.state.item.name}
+                                    style={{ minHeight: 150 }}
+                                    loading="lazy"
+                                />
+                            </picture>
+                                :
+                            <picture>
+                                
+                                <img 
+                                    alt={this.state.item.name} 
+                                    title={this.state.item.name} 
+                                    dataSrc={`https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg`} 
+                                    loading="lazy"
+                                />
+                            </picture>
+                        }
+                        
+                        { parseInt(this.state.item.is_new) == 0 ? 
+                            parseInt(this.state.item.is_hit) == 0 ? null :
+                            <Badge size={'small'} type={'hit'} view={'pc'} />
+                                :
+                            <Badge size={'small'} type={'new'} view={'pc'} />
+                        }
+
+                        <Typography className="CardNameItem" variant="h5" component="h3" style={{ flex: 1 }}>{this.state.item.name}</Typography>
+
+                        <CardContent style={{ padding: 0 }}>
+                            <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: 10, marginBottom: 10 }}>
+                                <div style={{ width: parseInt( this.state.item.cat_id ) == 4 ? 230 : parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? 75 : 135, height: 34, border: '1px solid #dadada', borderRadius: 15, display: 'flex', flexDirection: 'row' }}>
+                                    { parseInt( this.state.item.cat_id ) == 4 ?
+                                        <div style={{ height: 34, borderRight: '1px solid #dadada', flex: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                            <span style={{ fontFamily: 'Roboto', fontSize: '0.9rem', fontWeight: 400, color: '#525252' }}>{this.state.item.count_part_new}</span>
+                                        </div>
+                                            :
+                                        null
+                                    }
+                                    { parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? null :
+                                        <div style={{ height: 34, borderRight: '1px solid #dadada', flex: parseInt( this.state.item.cat_id ) == 4 ? 2 : 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                            <span style={{ fontFamily: 'Roboto', fontSize: '0.9rem', fontWeight: 400, color: '#525252' }}>{ parseInt( this.state.item.cat_id ) == 14 ? this.state.item.size_pizza : this.state.item.count_part } { parseInt( this.state.item.cat_id ) == 14 ? 'см' : parseInt( this.state.item.cat_id ) == 6 ? 'л' : 'шт.'} </span>
+                                        </div>
+                                    }
+                                    <div style={{ height: 34, flex: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                        <span style={{ fontFamily: 'Roboto', fontSize: '0.9rem', fontWeight: 400, color: '#525252' }}>{ new Intl.NumberFormat('ru-RU').format(this.state.item.weight) } { parseInt( this.state.item.id ) == 17 || parseInt( this.state.item.id ) == 237 ? 'шт.' : parseInt( this.state.item.cat_id ) == 6 ? 'л' : 'г' }</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style={{ height: 120, width: '100%', marginBottom: 10, textAlign: 'center', overflow: 'hidden' }}>
+                                <Typography component="span" className='hidddenText5' style={{ fontFamily: 'Roboto', fontSize: '0.925rem', color: '#525252' }}>{desc}</Typography>
+                            </div>
+                        </CardContent>
+                    </CardContent>
+                    
+                    <CardActions style={{ padding: 0, width: '100%' }}>
+                        { this.state.count == 0 ?
+                            <ActionsCartButtonStart price={this.state.item.price} add={this.add.bind(this)} />
+                                :
+                            <ActionsCartButton count={this.state.count} price={this.state.item.price} item_id={this.state.item.id} minus={this.minus.bind(this)} add={this.add.bind(this)} />
+                        }
+                    </CardActions>
+                </Card>
+            )
+        }
+        
+        if( this.props.type == 'mobile' ){
+
+            if (typeof window !== 'undefined') {
+                width = window.innerWidth;
+            }else{
+                width = 320;
+            }
+
+            GRID = (width- 7*20) / 6;
+
+            return (
+                <Grid item container xs={12} className="CardItem_mobile" style={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap' }}>
+                    <Grid style={{ position: 'relative', marginRight: 20 }} item onClick={ () => this.props.openItem(this.state.item.id)}>
+                        
+                        {img_type == 'old' ?
+                            <picture>
+                                <source 
+                                    srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.webp?"+this.state.item.img_new_update} 
+                                    type="image/webp" 
+                                />
+                                <img 
+                                    src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.jpg?"+this.state.item.img_new_update} 
+                                    alt={this.state.item.name}
+                                    title={this.state.item.name}
+                                    style={{ width: ((GRID*3) + (2*20)), height: 'auto'  }}
+                                    loading="lazy"
+                                />
+                            </picture>
+                                :
+                            <picture>
+                               
+                                <img 
+                                    alt={this.state.item.name} 
+                                    title={this.state.item.name} 
+                                    dataSrc={`https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg`} 
+                                    style={{ width: ((GRID*3) + (2*20)), height: ((GRID*3) + (2*20))  }}
+                                    loading="lazy"
+                                />
+                            </picture>
+                        }
+
+                        { parseInt(this.state.item.is_new) == 0 ? 
+                            parseInt(this.state.item.is_hit) == 0 ? null :
+                            <Badge size={'small'} type={'hit'} view={'mobile'} />
+                                :
+                            <Badge size={'small'} type={'new'} view={'mobile'} />
+                        }
+                    </Grid>
+                    <Grid item className="SecondBox_" style={{ width: 'max-content', display: 'flex', flexDirection: 'column', position: 'relative', justifyContent: 'flex-end' }}>
+                        <Typography className="CardNameItem_" variant="h5" component="h3" style={{ fontFamily: 'Roboto', fontSize: '1.0625rem', fontWeight: '500', color: '#525252', marginBottom: 10 }} onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>
+
+                        {  parseInt( this.state.item.cat_id ) == 4 ?
+                            <div style={{ width: 148, height: 28, display: 'flex', flexDirection: 'row', alignItems: 'center', border: '1px solid #dadada', borderRadius: 10, marginBottom: 10, }}>
+                                <div style={{ flex: 3, textAlign: 'center', borderRight: '1px solid #dadada', height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Typography style={{ fontFamily: 'Roboto', fontSize: '0.875rem', fontWeight: 400, color: '#525252', lineHeight: 0 }} component="span">{this.state.item.count_part_new}</Typography>
+                                </div>
+                                <div style={{ flex: 2, textAlign: 'center', height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Typography style={{ fontFamily: 'Roboto', fontSize: '0.875rem', fontWeight: 400, color: '#525252', lineHeight: 0 }} component="span">{this.state.item.count_part} шт.</Typography>
+                                </div>
+                            </div>
+                                :
+                            null
+                        }
+
+                        <Typography className="CardInfoItem_ hidddenText3" style={{ marginBottom: 10, fontFamily: 'Roboto', fontSize: '0.875rem', fontWeight: 400, color: '#525252', maxHeight: 60, overflow: 'hidden' }} component="p" onClick={() => this.props.openItem(this.state.item.id)}>{desc}</Typography>
+                        
+                        <div style={{ marginBottom: 10 }}>
+                            { this.state.count == 0 ?
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="outlined" className='MobileActionsCartButtonStart'>
+                                    <Button variant="outlined" onClick={this.add.bind(this)}>
+                                        В корзину за {new Intl.NumberFormat('ru-RU').format( parseInt(this.state.item.price))}
+                                        <IconRuble style={{ width: 11, height: 11, fill: '#525252', marginLeft: 3, paddingBottom: 1 }} />
+                                    </Button>
+                                </ButtonGroup>
+                                    :
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className='MobileActionsCartButton'>
+                                    <div variant="contained" className='ModalItemButtonCart OPEN' >
+                                        <span className='minus' onClick={this.minus.bind(this)}>–</span>
+                                        <span>{this.state.count}</span>
+                                        <span className='plus' onClick={this.add.bind(this)}>+</span>
+                                    </div>
+                                </ButtonGroup>
+                            }
+                        </div>
+                    </Grid>
+                    
+                </Grid>
+            )
+        }
     }
 }
 
@@ -1286,11 +1607,11 @@ export class Home extends React.Component {
                                     {cat.items.map((it, k) => (
                                         <React.Fragment key={k}>
                                             <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'none', sm: 'flex' } }} style={{ padding: '30px 16px', width: '100%' }}>
-                                                <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
+                                                <CardItemBotNew data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
                                             </Grid>
                                         
                                             <Grid item className='_mobile_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'flex', sm: 'none' } }} style={{ padding: '10px 0px', borderBottom: cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
-                                                <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
+                                                <CardItemBotNew data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
                                             </Grid>
                                         </React.Fragment>
                                     ))}
@@ -1337,7 +1658,7 @@ export class Home extends React.Component {
                         cat.items.length > 0 ?
                             mainLink == '' || mainLink == cat.main_link || mainLink == cat.link ?
                                 <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
-                                    <Grid container spacing={2} style={{ margin: 0, padding: '0px 20px', flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
+                                    <Grid container spacing={2} sx={{ padding: { xs: '0px 5%', sm: '0px 20px' } }} style={{ margin: 0, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
                                         {cat.items.map((it, k) => (
                                             <React.Fragment key={k}>
                                                 <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'none', sm: 'flex' } }} style={{ padding: '30px 16px', width: '100%' }}>

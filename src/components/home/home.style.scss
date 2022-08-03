@@ -83,8 +83,8 @@ $colorMain: #CC0033;
         width: 100%;
     }
     & h3{
-        @include fons(1.2rem, $Ubuntu);
-        font-weight: bold;
+        //@include fons(1.2rem, $Ubuntu);
+        //font-weight: bold;
     }
 }
 .ItemDialog:not(.OpenItemMobInfo){

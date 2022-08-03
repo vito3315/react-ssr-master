@@ -361,7 +361,7 @@ export class Item extends React.Component {
                                         https://storage.yandexcloud.net/site-img/${this.state.img_name}_1420x1420.jpg 760w,
                                         https://storage.yandexcloud.net/site-img/${this.state.img_name}_2000x2000.jpg 1875w`} 
                                         sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
-                                    <img alt={this.state.item.name} title={this.state.item.name} class="img" src={`https://storage.yandexcloud.net/site-img/${this.state.img_name}_276x276.jpg`} />
+                                    <img alt={this.state.item.name} title={this.state.item.name} className="img" src={`https://storage.yandexcloud.net/site-img/${this.state.img_name}_276x276.jpg`} />
                                 </picture>
 
                                 { parseInt(this.state.item.is_new) == 0 ? 
