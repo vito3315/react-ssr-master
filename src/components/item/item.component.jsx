@@ -472,7 +472,7 @@ export class Item extends React.Component {
                             
 
                             { parseInt( this.state.item.cat_id ) == 4 ?
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ marginBottom: 20, width: 300 }}>
+                                <ButtonGroup disableelevation={true} disableRipple={true} variant="contained" style={{ marginBottom: 20, width: 300 }}>
                                     <Button variant="contained" className='ModalItemButtonCartOther' style={{ width: 300, height: 40, borderRadius: 30, border: '1px solid #F9BC23' }} onClick={this.props.openSetPc ? this.props.openSetPc.bind(this, this.state.item.items) : null }>Состав сета</Button>
                                 </ButtonGroup>
                                     :
@@ -569,7 +569,7 @@ export class Item extends React.Component {
 
                         { parseInt( this.state.item.cat_id ) == 4 ?
                             <Grid item xs={12} style={{ marginBottom: 20 }}>
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                                <ButtonGroup disableelevation={true} disableRipple={true} variant="contained" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
                                     <Button variant="contained" className='ModalItemButtonCart' style={{ width: 240, height: 30, borderRadius: 15, border: '1px solid #F9BC23', fontSize: '0.875rem', textTransform: 'initial', fontFamily: 'Roboto', color: '#525252', fontWeight: 400 }} onClick={this.props.openSetPc ? this.props.openSetPc.bind(this, this.state.item.items) : null}>
                                         Состав сета
                                     </Button>
@@ -585,14 +585,14 @@ export class Item extends React.Component {
 
                         <Grid item xs={12} style={{ position: 'absolute', width: 'calc(100% - 40px)', bottom: 120 }}>
                             { this.state.count == 0 ?
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%' }}>
+                                <ButtonGroup disableelevation={true} disableRipple={true} variant="contained" style={{ width: '100%', backgroundColor: '#fff' }}>
                                     <Button variant="contained" className='ModalItemButtonCart' style={{ width: '100%', height: 60, borderRadius: 40, border: '2px solid #F9BC23' }} onClick={this.add.bind(this)}>
                                         <span style={{ fontSize: '1.25rem', textTransform: 'initial', fontFamily: 'Roboto', color: '#525252', fontWeight: 700 }}>В корзину за { new Intl.NumberFormat('ru-RU').format(this.state.item.price)}</span>
                                         <IconRuble style={{ width: 15, height: 15, fill: '#525252', marginLeft: 5 }} />
                                     </Button>
                                 </ButtonGroup>
                                     :
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" style={{ width: '100%' }}>
+                                <ButtonGroup disableelevation={true} disableRipple={true} variant="contained" style={{ width: '100%', backgroundColor: '#fff' }}>
                                     <div variant="contained" className='ModalItemButtonCart OPEN' style={{ width: '100%', height: 56, borderRadius: 40, border: '2px solid #F9BC23', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <button style={{ width: 30, height: 30, minWidth: 30, maxWidth: 30, minHeight: 30, maxHeight: 30, borderRadius: 40, padding: 0, marginLeft: 13, border: '1px solid #F9BC23', backgroundColor: '#F9BC23', color: '#525252', fontSize: '1.5rem', fontFamily: 'Roboto', fontWeight: 300, display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={this.minus.bind(this)}>–</button>
                                         <div>
