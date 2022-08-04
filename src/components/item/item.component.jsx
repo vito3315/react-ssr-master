@@ -472,7 +472,7 @@ export class Item extends React.Component {
                             
 
                             { parseInt( this.state.item.cat_id ) == 4 ?
-                                <ButtonGroup disableelevation={true} disableRipple={true} variant="contained" style={{ marginBottom: 20, width: 300 }}>
+                                <ButtonGroup elevation={0} disableRipple={true} variant="contained" style={{ marginBottom: 20, width: 300 }}>
                                     <Button variant="contained" className='ModalItemButtonCartOther' style={{ width: 300, height: 40, borderRadius: 30, border: '1px solid #F9BC23' }} onClick={this.props.openSetPc ? this.props.openSetPc.bind(this, this.state.item.items) : null }>Состав сета</Button>
                                 </ButtonGroup>
                                     :
@@ -569,7 +569,7 @@ export class Item extends React.Component {
 
                         { parseInt( this.state.item.cat_id ) == 4 ?
                             <Grid item xs={12} style={{ marginBottom: 20 }}>
-                                <ButtonGroup disableelevation={true} disableRipple={true} variant="contained" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                                <ButtonGroup elevation={0} disableRipple={true} variant="contained" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
                                     <Button variant="contained" className='ModalItemButtonCart' style={{ width: 240, height: 30, borderRadius: 15, border: '1px solid #F9BC23', fontSize: '0.875rem', textTransform: 'initial', fontFamily: 'Roboto', color: '#525252', fontWeight: 400 }} onClick={this.props.openSetPc ? this.props.openSetPc.bind(this, this.state.item.items) : null}>
                                         Состав сета
                                     </Button>

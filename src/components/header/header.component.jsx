@@ -123,8 +123,12 @@ class ModalLogin extends React.Component{
             
             timerSMS: 89,
             timerSMSTime: this.toTime(89),
-            errPhone: 'Тестовая ошибка',
+            errPhone: '',
             errSMS: '',
+
+            errTitle: '',
+            errText1: '',
+            errText2: '',
         };
     }
 
@@ -154,6 +158,10 @@ class ModalLogin extends React.Component{
                 timerSMSTime: this.toTime(89),
                 errPhone: '',
                 errSMS: '',
+
+                errTitle: '',
+                errText1: '',
+                errText2: '',
             })
         }
     }
@@ -263,10 +271,26 @@ class ModalLogin extends React.Component{
         let res = await this.getData('site_login', data);
 
         if( res.st === false ){
-            this.setState({
-                errPhone: res.text
-            });
+            if( res.type == 'modal' ){
+                this.setState({
+                    typeLogin: 'error',
+                    errTitle: res.title,
+                    errText1: res.text1,
+                    errText2: res.text2,
+                });
+            }else{
+                this.setState({
+                    errPhone: res.text
+                });
+            }
         }else{
+            this.setState({ 
+                errPhone: '',
+                errTitle: '',
+                errText1: '',
+                errText2: '',
+            })
+
             itemsStore.setToken( res.token, res.name ); 
             itemsStore.setUserName(res.name);
 
@@ -299,12 +323,24 @@ class ModalLogin extends React.Component{
 
         if( res['st'] === true ){
             this.setState({ 
-                errPhone: ''
+                errPhone: '',
+                errTitle: '',
+                errText1: '',
+                errText2: '',
             })
         }else{
-            this.setState({
-              errPhone: res.text
-            });
+            if( res.type == 'modal' ){
+                this.setState({
+                    typeLogin: 'error',
+                    errTitle: res.title,
+                    errText1: res.text1,
+                    errText2: res.text2,
+                });
+            }else{
+                this.setState({
+                    errPhone: res.text
+                });
+            }
         }
         
         setTimeout( () => {
@@ -353,10 +389,26 @@ class ModalLogin extends React.Component{
         let res = await this.getData('check_profile', data);
 
         if( res.st === false ){
-            this.setState({
-                errPhone: res.text
-            });
+            if( res.type == 'modal' ){
+                this.setState({
+                    typeLogin: 'error',
+                    errTitle: res.title,
+                    errText1: res.text1,
+                    errText2: res.text2,
+                });
+            }else{
+                this.setState({
+                    errPhone: res.text
+                });
+            }
         }else{
+            this.setState({ 
+                errPhone: '',
+                errTitle: '',
+                errText1: '',
+                errText2: '',
+            })
+
             itemsStore.setToken( res.token, res.name ); 
             itemsStore.setUserName(res.name);
 
@@ -409,13 +461,24 @@ class ModalLogin extends React.Component{
 
         if( json['st'] ){
             this.setState({ 
-                errPhone: '', 
-                errSMS: ''
+                errPhone: '',
+                errTitle: '',
+                errText1: '',
+                errText2: '',
             })
         }else{
-            this.setState({
-              errPhone: json.text
-            });
+            if( res.type == 'modal' ){
+                this.setState({
+                    typeLogin: 'error',
+                    errTitle: res.title,
+                    errText1: res.text1,
+                    errText2: res.text2,
+                });
+            }else{
+                this.setState({
+                    errPhone: res.text
+                });
+            }
         }
         
         setTimeout( () => {
@@ -691,6 +754,27 @@ class ModalLogin extends React.Component{
                             <Link to={'/samara/cart'} exact={ true } className='loginCreate' onClick={ this.close.bind(this) }>
                                 <Typography component="span">Открыть корзину</Typography>
                             </Link>
+                        </Box>
+                    }
+                    { this.state.typeLogin != 'error' ? null :
+                        <Box className='modalLoginError'>
+                            <IconButton style={{ position: 'absolute', top: -40, left: 15, backgroundColor: 'transparent' }} onClick={this.close.bind(this)}>
+                                <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
+                            </IconButton>
+
+                            <div className='InnerBorder'>
+                                <div className='loginHeader'>
+                                    <Typography component="h2">{this.state.errTitle}</Typography>
+                                </div>
+                                
+                                <div className='loginSubHeader1'>
+                                    <Typography component="span">{this.state.errText1}</Typography>
+                                </div>
+
+                                <div className='loginSubHeader2'>
+                                    <Typography component="span">{this.state.errText2}</Typography>
+                                </div>
+                            </div>
                         </Box>
                     }
                 </Fade>
@@ -1250,7 +1334,7 @@ TabPanel.propTypes = {
     value: PropTypes.any.isRequired,
 };
 
-export class HeaderNew extends React.Component {
+export class Header extends React.Component {
     is_load = false;
     
     sms1 = false;
@@ -1872,7 +1956,7 @@ function a11yProps(index) {
     };
 }
 
-export class Header extends React.Component {
+export class HeaderOld extends React.Component {
     is_load = false;
     
     sms1 = false;

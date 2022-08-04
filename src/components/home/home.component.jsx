@@ -465,7 +465,7 @@ class CardItem extends React.Component {
                             <Badge size={'small'} type={'new'} view={'mobile'} />
                         }
                     </Grid>
-                    <Grid item className="SecondBox_" style={{ width: 'max-content', display: 'flex', flexDirection: 'column', position: 'relative', justifyContent: 'flex-end' }}>
+                    <Grid item className="SecondBox_" style={{ width: '100%', display: 'flex', flexDirection: 'column', position: 'relative', justifyContent: 'flex-end' }}>
                         <Typography className="CardNameItem_" variant="h5" component="h3" style={{ fontFamily: 'Roboto', fontSize: '1.0625rem', fontWeight: '500', color: '#525252', marginBottom: 10 }} onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>
 
                         {  parseInt( this.state.item.cat_id ) == 4 ?

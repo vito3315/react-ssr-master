@@ -309,6 +309,9 @@ $colorMain: #CC0033;
         text-transform: initial!important;
     }
 }
+.Item .MuiButtonGroup-root.MuiButtonGroup-contained{
+    box-shadow: none;
+}
 .ModalItemButtonCart.OPEN{
     background-color: rgba(249, 188, 35, 0.1)!important;
 }
