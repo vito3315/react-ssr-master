@@ -340,21 +340,10 @@ class CardItem extends React.Component {
                             </picture>
                                 :
                             <picture>
-                                <source srcSet={`
-                                    https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg 138w, 
-                                    https://storage.yandexcloud.net/site-img/${img_name}_146x146.jpg 146w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_183x183.jpg 183w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_233x233.jpg 233w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_292x292.jpg 292w
-                                    https://storage.yandexcloud.net/site-img/${img_name}_366x366.jpg 366w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_584x584.jpg 584w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_760x760.jpg 760w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_1875x1875.jpg 1875w`} 
-                                    sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
                                 <img 
                                     alt={this.state.item.name} 
                                     title={this.state.item.name} 
-                                    src={`https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg`} 
+                                    src={`https://storage.yandexcloud.net/site-img/${img_name}_760x760.jpg`} 
                                     loading="lazy"
                                 />
                             </picture>
@@ -437,21 +426,10 @@ class CardItem extends React.Component {
                             </picture>
                                 :
                             <picture>
-                                <source srcSet={`
-                                    https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg 138w, 
-                                    https://storage.yandexcloud.net/site-img/${img_name}_146x146.jpg 146w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_183x183.jpg 183w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_233x233.jpg 233w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_292x292.jpg 292w
-                                    https://storage.yandexcloud.net/site-img/${img_name}_366x366.jpg 366w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_584x584.jpg 584w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_760x760.jpg 760w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_1875x1875.jpg 1875w`} 
-                                    sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
                                 <img 
                                     alt={this.state.item.name} 
                                     title={this.state.item.name} 
-                                    src={`https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg`} 
+                                    src={`https://storage.yandexcloud.net/site-img/${img_name}_366x366.jpg`} 
                                     style={{ width: ((GRID*3) + (2*20)), height: ((GRID*3) + (2*20))  }}
                                     loading="lazy"
                                 />
