@@ -511,7 +511,8 @@ class ModalLogin extends React.Component{
                 BackdropProps={{
                     timeout: 500,
                 }}
-                className="123"
+                className="class123"
+                
             >
                 <Fade in={this.props.isOpen}>
                     

@@ -758,6 +758,13 @@ $colorText: #525252;
         }
     }
 }
+.class123{
+    & > div{
+        box-shadow: none!important;
+        border: 0 !important;
+        outline: none !important;
+    }
+}
 .modalLoginStart{
     position: absolute;
     top: 50%;
