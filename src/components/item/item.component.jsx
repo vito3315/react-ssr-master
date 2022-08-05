@@ -350,17 +350,7 @@ export class Item extends React.Component {
                                 :
                             <Grid item className='FirstMainItem'>
                                 <picture style={{ width: '100%' }}>
-                                    <source srcSet={`
-                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_276x276.jpg 138w, 
-                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_292x292.jpg 146w,
-                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_366x366.jpg 183w,
-                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_466x466.jpg 233w,
-                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_585x585.jpg 292w
-                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_732x732.jpg 366w,
-                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_1168x1168.jpg 584w,
-                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_1420x1420.jpg 760w,
-                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_2000x2000.jpg 1875w`} 
-                                        sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
+                                    <source srcSet={`https://storage.yandexcloud.net/site-img/${this.state.img_name}_732x732.jpg`} />
                                     <img alt={this.state.item.name} title={this.state.item.name} className="img" src={`https://storage.yandexcloud.net/site-img/${this.state.img_name}_276x276.jpg`} />
                                 </picture>
 
@@ -511,16 +501,7 @@ export class Item extends React.Component {
                                     :
                                 <picture>
                                     <source srcSet={`
-                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_276x276.jpg 138w, 
-                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_292x292.jpg 146w,
-                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_366x366.jpg 183w,
-                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_466x466.jpg 233w,
-                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_585x585.jpg 292w
-                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_732x732.jpg 366w,
-                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_1168x1168.jpg 584w,
-                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_1420x1420.jpg 760w,
-                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_2000x2000.jpg 1875w`} 
-                                        sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
+                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_366x366.jpg`}/>
                                     <img 
                                         alt={this.state.item.name} 
                                         title={this.state.item.name} 

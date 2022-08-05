@@ -239,16 +239,7 @@ class CartItem extends React.Component {
                         {this.state.item.img_app.length > 0 ?
                             <picture>
                                 <source srcSet={`
-                                    https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_276x276.jpg 138w, 
-                                    https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_292x292.jpg 146w,
-                                    https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_366x366.jpg 183w,
-                                    https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_466x466.jpg 233w,
-                                    https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_585x585.jpg 292w
-                                    https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_732x732.jpg 366w,
-                                    https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_1168x1168.jpg 584w,
-                                    https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_1420x1420.jpg 760w,
-                                    https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_2000x2000.jpg 1875w`} 
-                                    sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
+                                    https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_466x466.jpg`} />
                                 <img alt={this.state.item.name} title={this.state.item.name} src={`https://storage.yandexcloud.net/site-img/${this.state.item.img_name}_276x276.jpg`} loading="lazy" />
                             </picture>
                                 :
@@ -432,15 +423,7 @@ class CartItemMobile extends React.Component {
                     {this.state.item.img_app.length > 0 ?
                         <picture style={{ width: '40%' }}>
                             <source srcSet={`
-                                https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_276x276.jpg 138w, 
-                                https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_292x292.jpg 146w,
-                                https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_366x366.jpg 183w,
-                                https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_466x466.jpg 233w,
-                                https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_585x585.jpg 292w
-                                https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_732x732.jpg 366w,
-                                https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_1168x1168.jpg 584w,
-                                https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_1420x1420.jpg 760w,
-                                https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_2000x2000.jpg 1875w`} 
+                                https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_466x466.jpg`} 
                                 sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
                             <img alt={this.state.item.name} title={this.state.item.name} src={`https://storage.yandexcloud.net/site-img/${this.state.item.img_name}_276x276.jpg`} loading="lazy" />
                         </picture>
