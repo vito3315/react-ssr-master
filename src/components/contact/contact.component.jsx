@@ -136,6 +136,8 @@ export class Contact extends React.Component {
         }).then(res => res.json()).then(json => {
             let points_zone = [];
             
+            console.log( json )
+
             json.map(function(point){
 				if(point['zone_origin'].length > 0){
 					points_zone.push( JSON.parse(point['zone_origin']) );
@@ -216,6 +218,7 @@ export class Contact extends React.Component {
 			let HintLayout = ymaps.templateLayoutFactory.createClass( 
                 "<div class='my-hint'>" +
                     "<b>{{ properties.address }}</b><br />" +
+                    "Зона {{ properties.zone }}<br />" +
                     "График работы: c 10:00 до 21:30<br />" +
                     "Стоимость доставки: {{ properties.sum_div }} руб." +
                 "</div>"
@@ -227,6 +230,7 @@ export class Contact extends React.Component {
     					//hintContent: "Зона доставки"
                         address: points[ key ]['addr'], 
                         sum_div: points[ key ]['sum_div'], 
+                        zone: points[ key ]['test'],
     				}, {
                         hintLayout: HintLayout,
     					fillColor: 'rgba(187, 0, 37, 0.25)',
