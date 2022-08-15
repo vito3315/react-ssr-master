@@ -340,10 +340,15 @@ class CardItem extends React.Component {
                             </picture>
                                 :
                             <picture>
+                                <source 
+                                    srcSet={"https://storage.yandexcloud.net/site-img/"+img_name+"_760x760.webp"} 
+                                    type="image/webp" 
+                                />
                                 <img 
                                     alt={this.state.item.name} 
                                     title={this.state.item.name} 
                                     src={`https://storage.yandexcloud.net/site-img/${img_name}_760x760.jpg`} 
+                                    style={{ minHeight: GRID * 1.3 }}
                                     loading="lazy"
                                 />
                             </picture>
@@ -426,6 +431,10 @@ class CardItem extends React.Component {
                             </picture>
                                 :
                             <picture>
+                                <source 
+                                    srcSet={"https://storage.yandexcloud.net/site-img/"+img_name+"_366x366.webp"} 
+                                    type="image/webp" 
+                                />
                                 <img 
                                     alt={this.state.item.name} 
                                     title={this.state.item.name} 
@@ -768,7 +777,7 @@ class CardItemBotNew extends React.Component {
                                     type="image/webp" 
                                 />
                                 <img 
-                                    dataSrc={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.jpg?"+this.state.item.img_new_update} 
+                                    datasrc={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.jpg?"+this.state.item.img_new_update} 
                                     alt={this.state.item.name}
                                     title={this.state.item.name}
                                     style={{ minHeight: 150 }}
@@ -777,11 +786,14 @@ class CardItemBotNew extends React.Component {
                             </picture>
                                 :
                             <picture>
-                                
+                                <source 
+                                    srcSet={"https://storage.yandexcloud.net/site-img/"+img_name+"_138x138.webp"} 
+                                    type="image/webp" 
+                                />
                                 <img 
                                     alt={this.state.item.name} 
                                     title={this.state.item.name} 
-                                    dataSrc={`https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg`} 
+                                    datasrc={`https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg`} 
                                     loading="lazy"
                                 />
                             </picture>
@@ -864,11 +876,14 @@ class CardItemBotNew extends React.Component {
                             </picture>
                                 :
                             <picture>
-                               
+                                <source 
+                                    srcSet={"https://storage.yandexcloud.net/site-img/"+img_name+"_138x138.webp"} 
+                                    type="image/webp" 
+                                />
                                 <img 
                                     alt={this.state.item.name} 
                                     title={this.state.item.name} 
-                                    dataSrc={`https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg`} 
+                                    datasrc={`https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg`} 
                                     style={{ width: ((GRID*3) + (2*20)), height: ((GRID*3) + (2*20))  }}
                                     loading="lazy"
                                 />
@@ -1805,9 +1820,15 @@ export class Home extends React.Component {
                                                         </picture>
                                                             :
                                                         <picture>
-                                                            <source srcSet={`
-                                                                https://storage.yandexcloud.net/site-img/${item.img_app}_732x732.jpg`} />
-                                                            <img alt={item.name} title={item.name} style={{ width: '100%', height: 'auto' }} src={`https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg`} />
+                                                            <source 
+                                                                srcSet={"https://storage.yandexcloud.net/site-img/"+img_app+"_732x732.webp"} 
+                                                                type="image/webp" 
+                                                            />
+                                                            <img 
+                                                                alt={item.name} 
+                                                                title={item.name} 
+                                                                style={{ width: '100%', height: 'auto' }}
+                                                                src={`https://storage.yandexcloud.net/site-img/${item.img_app}_732x732.jpg`} />
                                                         </picture>
                                                     }
                                                 </div>
@@ -1845,9 +1866,15 @@ export class Home extends React.Component {
                                                     </picture>
                                                         :
                                                     <picture>
-                                                        <source srcSet={`
-                                                            https://storage.yandexcloud.net/site-img/${item.img_app}_732x732.jpg`} />
-                                                        <img alt={item.name} title={item.name} style={{ width: '100%', height: 'auto' }} src={`https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg`} />
+                                                        <source 
+                                                            srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_app+"_732x732.webp"} 
+                                                            type="image/webp" 
+                                                        />
+                                                        <img 
+                                                            alt={item.name} 
+                                                            title={item.name} 
+                                                            style={{ width: '100%', height: 'auto' }} 
+                                                            src={`https://storage.yandexcloud.net/site-img/${item.img_app}_732x732.jpg`} />
                                                     </picture>
                                                 }
                                             </div>
@@ -1884,9 +1911,15 @@ export class Home extends React.Component {
                                                     </picture>
                                                         :
                                                     <picture>
-                                                        <source srcSet={`
-                                                            https://storage.yandexcloud.net/site-img/${item.img_app}_732x732.jpg`} />
-                                                        <img alt={item.name} title={item.name} style={{ width: '100%', height: 'auto' }} src={`https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg`} />
+                                                        <source 
+                                                            srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_app+"_732x732.webp"} 
+                                                            type="image/webp" 
+                                                        />
+                                                        <img 
+                                                            alt={item.name} 
+                                                            title={item.name} 
+                                                            style={{ width: '100%', height: 'auto' }} 
+                                                            src={`https://storage.yandexcloud.net/site-img/${item.img_app}_732x732.jpg`} />
                                                     </picture>
                                                 }
                                             </div>

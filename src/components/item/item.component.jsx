@@ -350,8 +350,15 @@ export class Item extends React.Component {
                                 :
                             <Grid item className='FirstMainItem'>
                                 <picture style={{ width: '100%' }}>
-                                    <source srcSet={`https://storage.yandexcloud.net/site-img/${this.state.img_name}_732x732.jpg`} />
-                                    <img alt={this.state.item.name} title={this.state.item.name} className="img" src={`https://storage.yandexcloud.net/site-img/${this.state.img_name}_276x276.jpg`} />
+                                    <source 
+                                        srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.img_name+"_1420x1420.webp"} 
+                                        type="image/webp" 
+                                    />
+                                    <img 
+                                        alt={this.state.item.name} 
+                                        title={this.state.item.name} 
+                                        className="img" 
+                                        src={`https://storage.yandexcloud.net/site-img/${this.state.img_name}_1420x1420.jpg`} />
                                 </picture>
 
                                 { parseInt(this.state.item.is_new) == 0 ? 
@@ -500,13 +507,15 @@ export class Item extends React.Component {
                                 </picture>
                                     :
                                 <picture>
-                                    <source srcSet={`
-                                        https://storage.yandexcloud.net/site-img/${this.state.img_name}_366x366.jpg`}/>
+                                    <source 
+                                        srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.img_name+"_366x366.webp"} 
+                                        type="image/webp" 
+                                    />
                                     <img 
                                         alt={this.state.item.name} 
                                         title={this.state.item.name} 
                                         style={{ width: '80%' }}
-                                        src={`https://storage.yandexcloud.net/site-img/${this.state.img_name}_276x276.jpg`} />
+                                        src={`https://storage.yandexcloud.net/site-img/${this.state.img_name}_366x366.jpg`} />
                                 </picture>
                             }
 

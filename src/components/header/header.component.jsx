@@ -1117,10 +1117,16 @@ class SimplePopover extends React.Component{
 
                                                 { item.img_app.length > 0 ? 
                                                     
-                                                    <img 
-                                                        alt={item.name} 
-                                                        title={item.name} 
-                                                        src={`https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg`} />
+                                                    <picture>
+                                                        <source 
+                                                            srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_app+"_276x276.webp"} 
+                                                            type="image/webp" 
+                                                        />
+                                                        <img 
+                                                            alt={item.name} 
+                                                            title={item.name} 
+                                                            src={`https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg`} />
+                                                    </picture>
                                                         : 
                                                     <picture>
                                                         <source 
@@ -1169,10 +1175,16 @@ class SimplePopover extends React.Component{
                                         <tr key={key}>
                                             <td className="CellPic">
                                                 { item.img_app.length > 0 ? 
-                                                    <img 
-                                                        alt={item.name} 
-                                                        title={item.name} 
-                                                        src={`https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg`} />
+                                                    <picture>
+                                                        <source 
+                                                            srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_app+"_276x276.webp"} 
+                                                            type="image/webp" 
+                                                        />
+                                                        <img 
+                                                            alt={item.name} 
+                                                            title={item.name} 
+                                                            src={`https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg`} />
+                                                    </picture>
                                                         : 
                                                     <picture>
                                                         <source 

@@ -238,9 +238,15 @@ class CartItem extends React.Component {
                     <td style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', position: 'relative' }}>
                         {this.state.item.img_app.length > 0 ?
                             <picture>
-                                <source srcSet={`
-                                    https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_466x466.jpg`} />
-                                <img alt={this.state.item.name} title={this.state.item.name} src={`https://storage.yandexcloud.net/site-img/${this.state.item.img_name}_276x276.jpg`} loading="lazy" />
+                                <source 
+                                    srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_app+"_466x466.webp"} 
+                                    type="image/webp" 
+                                />
+                                <img 
+                                    alt={this.state.item.name} 
+                                    title={this.state.item.name} 
+                                    src={`https://storage.yandexcloud.net/site-img/${this.state.item.img_name}_466x466.jpg`} 
+                                    loading="lazy" />
                             </picture>
                                 :
                             <picture>
@@ -422,10 +428,15 @@ class CartItemMobile extends React.Component {
                 <div className="boxItem">
                     {this.state.item.img_app.length > 0 ?
                         <picture style={{ width: '40%' }}>
-                            <source srcSet={`
-                                https://storage.yandexcloud.net/site-img/${this.state.item.img_app}_466x466.jpg`} 
-                                sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
-                            <img alt={this.state.item.name} title={this.state.item.name} src={`https://storage.yandexcloud.net/site-img/${this.state.item.img_name}_276x276.jpg`} loading="lazy" />
+                            <source 
+                                srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_app+"_466x466.jpg.webp"} 
+                                type="image/webp" 
+                            />
+                            <img 
+                                alt={this.state.item.name} 
+                                title={this.state.item.name} 
+                                src={`https://storage.yandexcloud.net/site-img/${this.state.item.img_name}_466x466.jpg`} 
+                                loading="lazy" />
                         </picture>
                             :
                         <picture style={{ width: '40%' }}>
