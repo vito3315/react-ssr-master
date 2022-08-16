@@ -672,7 +672,7 @@ class ModalLogin extends React.Component{
                             <MyTextInput type={"password"} placeholder="Придумай пароль" value={ this.state.newPassword } func={ this.changeData.bind(this, 'newPassword') } onKeyDown={this.checkLoginKey.bind(this, 4)} className="inputLogin" />
 
                             <div className='loginLogin' onClick={this.logIn.bind(this)}>
-                                <Typography component="span">Создать аккаунт</Typography>
+                                <Typography component="span">Сменить пароль</Typography>
                             </div>
                             
                             <div className='loginCreate' onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'start' }) } }>
