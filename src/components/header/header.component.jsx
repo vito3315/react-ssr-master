@@ -1376,6 +1376,7 @@ class OpenBasket extends React.Component{
             originPrice: 0,
             allPrice: 0,
             sumDiv: 0,
+            countCart: 0,
             promoName: '',
             promoText: '',
             promoST: false,
@@ -1419,9 +1420,11 @@ class OpenBasket extends React.Component{
         })
         
         let allPrice = itemsStore.getSumDiv();
+        let allCount = 0;
 
         newCart.map( (item) => {
             allPrice += parseInt(item.one_price) * parseInt(item.count);
+            allCount += parseInt(item.count);
         } )
 
         newCart.map( (item, key) => {
@@ -1437,6 +1440,7 @@ class OpenBasket extends React.Component{
         this.setState({
             cartItems: newCart,
             originPrice: allPrice,
+            countCart: allCount
         })
         
         autorun(() => {
@@ -1481,16 +1485,19 @@ class OpenBasket extends React.Component{
                 } )
 
                 let allPrice = itemsStore.getSumDiv();
+                let allCount = 0;
 
                 newCart.map( (item) => {
                     allPrice += parseInt(item.one_price) * parseInt(item.count);
+                    allCount += parseInt(item.count);
                 } )
 
                 this.setState({
                     originPrice: allPrice,
                     cartItems: newCart,
                     sumDiv: itemsStore.getSumDiv(),
-                    promoName: localStorage.getItem('promo_name') ? localStorage.getItem('promo_name') : ''
+                    promoName: localStorage.getItem('promo_name') ? localStorage.getItem('promo_name') : '',
+                    countCart: allCount
                 })
             }
         })
@@ -1505,14 +1512,17 @@ class OpenBasket extends React.Component{
     }
     
     handleClick = (event) => {
-        //console.log( 'anchorEl', event.currentTarget, document.getElementById('headerNew') )
-        if( itemsStore.getPage() !== 'cart' ){
-            this.setState({
-                //anchorEl: event.currentTarget
-                anchorEl: document.getElementById('headerNew')
-            })
-        }else{
+        if( Boolean(this.state.anchorEl) ){
             this.handleClose()
+        }else{
+            if( itemsStore.getPage() !== 'cart' ){
+                this.setState({
+                    //anchorEl: event.currentTarget
+                    anchorEl: document.getElementById('headerNew')
+                })
+            }else{
+                this.handleClose()
+            }
         }
     }
 
@@ -1572,7 +1582,7 @@ class OpenBasket extends React.Component{
         const id = open ? 'simple-popover' : undefined;
         return(
             <div style={{ width: '12.27%', minWidth: 'max-content' }}>
-                <div aria-describedby={id} style={{ width: '100%', minWidth: 'max-content' }} className='headerCart count' onClick={this.handleClick.bind(this)}><span>Корзина</span><div>99</div></div>
+                <div aria-describedby={id} style={{ width: '100%', minWidth: 'max-content' }} className={ parseInt(this.state.countCart) > 0 ? 'headerCart count' : 'headerCart'} onClick={this.handleClick.bind(this)}><span>Корзина</span>{ parseInt(this.state.countCart) > 0 ? <div>{this.state.countCart}</div> : null }</div>
 
                 <Popover
                     id={id}
@@ -1588,6 +1598,7 @@ class OpenBasket extends React.Component{
                         vertical: 'top',
                         horizontal: 'right',
                     }}
+                    style={{ zIndex: 1100 }}
                 >
                     <div>
                         <table className="TableMini">
@@ -2632,7 +2643,7 @@ export class Header extends React.Component{
 
         return (
             <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="fixed" className='headerNew' id='headerNew'>
+                <AppBar position="fixed" className='headerNew' id='headerNew' elevation={2}>
                     <Toolbar>
                         <div style={{ width: '4.51%' }} />
                         <Link to={"/"} style={{ width: '14.8%' }}>

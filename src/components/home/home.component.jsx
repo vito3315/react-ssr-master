@@ -1244,11 +1244,12 @@ export class Home extends React.Component {
 
         const AllItemsCatNew = itemsStore.getAllItemsCatNew();
         const AllItemsCat = itemsStore.getAllItemsCat();
-        
+        let _isMounted = this._isMounted;
+
         setTimeout( () => {
-            window.addEventListener('scroll', function() {
+            window.addEventListener('scroll', () => {
                 if( this._isMounted ){
-                    if ((time + 500 - Date.now()) < 0) {
+                    if ((time + 700 - Date.now()) < 0) {
                         AllItemsCat.map( (item, key) => {
                             var elem = document.getElementById('cat'+item.id);
                             if( elem ){
@@ -1364,13 +1365,13 @@ export class Home extends React.Component {
                         let index = link.findIndex( (item) => item == 'menu');
                         mainLink = link[ index+1 ];
                         
-                        if( document.querySelector('.activeCat') ){
-                            document.querySelector('.activeCat').classList.remove('activeCat');
-                        }
+                        //if( document.querySelector('.activeCat') ){
+                        //    document.querySelector('.activeCat').classList.remove('activeCat');
+                        //}
                         
-                        if( document.querySelector('[name="'+mainLink+'"]') ){
-                            document.querySelector('[name="'+mainLink+'"]').classList.add('activeCat')
-                        }
+                        //if( document.querySelector('[name="'+mainLink+'"]') ){
+                        //    document.querySelector('[name="'+mainLink+'"]').classList.add('activeCat')
+                        //}
                     }
                 }
             }, 750);
