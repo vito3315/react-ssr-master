@@ -293,7 +293,7 @@ body{
         white-space: nowrap;
     }
 }
-.activeCat{
+.header .activeCat{
     background-color: $colorMain;
     padding: 4px 8px;
     border-radius: 5px;
@@ -674,7 +674,7 @@ body{
         & tbody{
             overflow-y: scroll;
             overflow-x: hidden;
-            height: 450px;
+            height: 350px;
             display: table-caption;
             width: 100%;
             padding-right: 20px;

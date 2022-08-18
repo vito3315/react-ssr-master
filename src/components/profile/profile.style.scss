@@ -111,6 +111,9 @@ $colorText: #525252;
 }
 .Profile{
     margin-top: 64px!important;
+    @media (min-width: 800px) {
+        margin-top: 170px!important;
+    }
     & h1{
         @include fonsNew(2rem, $Roboto);
         font-weight: 700;

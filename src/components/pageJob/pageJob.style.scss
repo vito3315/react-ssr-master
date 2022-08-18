@@ -11,6 +11,9 @@ $colorMain: #BB0025;
 }
 .PAGEjob{
     margin-top: 64px!important;
+    @media (min-width: 800px) {
+        margin-top: 170px!important;
+    }
     & h1{
         @include fons_new(1.3rem, $Futuris);
         text-align: center;

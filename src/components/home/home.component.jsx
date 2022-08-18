@@ -1302,10 +1302,10 @@ export class Home extends React.Component {
                     
                     localStorage.removeItem('goTo');
                     
-                    let offset = 50;
+                    let offset = 120;
                     
                     if( document.querySelector('.scrollCat.mobile') ){
-                        offset += 50;
+                        offset += 120;
                     }
                     
                     setTimeout(()=>{

@@ -6,16 +6,10 @@ import Grid from '@mui/material/Grid';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 
-import TextField from '@mui/material/TextField';
-
 import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
 
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
@@ -34,14 +28,7 @@ import { Link as ScrollLink } from "react-scroll";
 
 const queryString = require('query-string');
 
-
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import InputMask from "react-input-mask";
 import Badge from '@mui/material/Badge';
-
 
 import itemsStore from '../../stores/items-store';
 import config from '../../stores/config';
@@ -62,6 +49,11 @@ import Modal from '@mui/material/Modal';
 import { useSpring, animated } from '@react-spring/web';
 
 import AuthCode from 'react-auth-code-input';
+
+import { styled } from '@mui/material/styles';
+import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import MoreIcon from '@mui/icons-material/MoreVert';
 
 const Fade = React.forwardRef(function Fade(props, ref) {
     const { in: open, children, onEnter, onExited, ...other } = props;
@@ -784,6 +776,90 @@ class ModalLogin extends React.Component{
     }
 }
 
+class ModalCity extends React.Component{
+    constructor(props) {
+        super(props);
+        
+        this.state = {      
+            open: false,
+            cityName: this.props.cityName ?? '',
+            cityList: this.props.cityList ?? []
+        };
+    }
+
+    componentDidUpdate(){
+        if( this.props.isOpen != this.state.open ){
+            this.setState({
+                open: this.props.isOpen,
+                cityName: this.props.cityName ?? '',
+                cityList: this.props.cityList ?? []
+            })
+        }
+    }
+
+    chooseCity(){
+        setTimeout(()=>{ 
+            itemsStore.saveCartData([]); 
+            window.location.reload(); 
+        }, 300)
+    }
+
+    getNewLink(city){
+        let this_addr = window.location.pathname;
+        return this_addr.replace(this.state.cityName, city);
+    }
+
+    render(){
+        return (
+            <Modal
+                open={this.props.isOpen}
+                onClose={this.props.close}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}
+                className="class123"
+                
+            >
+                <Fade in={this.props.isOpen}>
+                    
+                    <Box className='modalCity'>
+
+                        <IconButton style={{ position: 'absolute', top: -40, left: 15, backgroundColor: 'transparent' }} onClick={this.props.close}>
+                            <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
+                        </IconButton>
+
+                        <div className='loginIMG'>
+                            <img 
+                                alt={'Login'} 
+                                title={'Login'} 
+                                src={`/assets/img_other/account-icon-240x240.png`} />
+                        </div>
+
+                        <div className='loginHeader'>
+                            <Typography component="h2">Выберите город</Typography>
+                        </div>
+
+                        {this.state.cityList.map((item, key) => 
+                            <Link 
+                                key={key} 
+                                className={ this.state.cityName == item.link ? 'active' : '' } 
+                                to={{ pathname: this.getNewLink(item.link) }} 
+                                onClick={this.chooseCity.bind(this)}
+                            >
+                                <Typography variant="h5" component="span" className={"ModalLabel"}>{item.name}</Typography>
+                            </Link> 
+                        )}
+                        
+                    </Box>
+                    
+                </Fade>
+            </Modal>
+        )
+    }
+}
+
 class CustomBottomNavigation extends React.Component{
     constructor(props) {
         super(props);
@@ -1288,6 +1364,412 @@ class SimplePopover extends React.Component{
     }
 }
 
+class OpenBasket extends React.Component{
+    _isMounted = false;
+    
+    constructor(props) {
+        super(props);
+        
+        this.state = {      
+            anchorEl: null,
+            cartItems: [],
+            originPrice: 0,
+            allPrice: 0,
+            sumDiv: 0,
+            promoName: '',
+            promoText: '',
+            promoST: false,
+        };
+    }
+    
+    componentWillUnmount(){
+        this._isMounted = false;
+    }
+    
+    componentDidMount = () => {
+        this._isMounted = true;
+        
+        if( localStorage.getItem('promo_name') && localStorage.getItem('promo_name').length > 0 ){
+            this.setState({
+                promoName: localStorage.getItem('promo_name')
+            })
+
+            setTimeout(() => {
+                this.checkPromo();
+            }, 1000)
+        }
+
+        let allItems = itemsStore.getAllItems();
+        let cartItems = itemsStore.getItems();
+        let promoItems = itemsStore.getItemsPromo();
+        let newCart = [];
+        
+        cartItems.map((item) => {
+            if( item.count > 0 ){
+                item.type == 'us';
+                newCart.push(item)
+            }
+        })
+        
+        promoItems.map((item) => {
+            if( item.count > 0 ){
+                item.type == 'promo';
+                newCart.push(item)
+            }
+        })
+        
+        let allPrice = itemsStore.getSumDiv();
+
+        newCart.map( (item) => {
+            allPrice += parseInt(item.one_price) * parseInt(item.count);
+        } )
+
+        newCart.map( (item, key) => {
+            let this_item = allItems.find( (it) => parseInt(it.id) == parseInt(item.item_id) );
+
+            newCart[ key ]['is_sale'] = parseInt(item.all_price) != parseInt(item.count) * parseInt(item.one_price);
+
+            newCart[ key ]['img_new'] = this_item['img_new'];
+            newCart[ key ]['img_new_update'] = this_item['img_new_update'];
+            newCart[ key ]['img_app'] = this_item['img_app'];
+        } )
+
+        this.setState({
+            cartItems: newCart,
+            originPrice: allPrice,
+        })
+        
+        autorun(() => {
+            if( this._isMounted ){
+
+                let promo_st = itemsStore.getPromoStatus();
+
+                this.setState({
+                    allPrice: itemsStore.getSumDiv() + itemsStore.getAllPrice(),
+
+                    promoText: promo_st.text,
+                    promoST: promo_st.st,
+                })
+
+                let allItems = itemsStore.getAllItems();
+                let cartItems = itemsStore.getItems();
+                let promoItems = itemsStore.getItemsPromo();
+                let newCart = [];
+                
+                cartItems.map((item) => {
+                    if( item.count > 0 ){
+                        item.type = 'us';
+                        newCart.push(item)
+                    }
+                })
+                
+                promoItems.map((item) => {
+                    if( item.count > 0 ){
+                        item.type = 'promo';
+                        newCart.push(item)
+                    }
+                })
+                
+                newCart.map( (item, key) => {
+                    let this_item = allItems.find( (it) => parseInt(it.id) == parseInt(item.item_id) );
+        
+                    newCart[ key ]['is_sale'] = parseInt(item.all_price) != parseInt(item.count) * parseInt(item.one_price);
+
+                    newCart[ key ]['img_new'] = this_item['img_new'];
+                    newCart[ key ]['img_new_update'] = this_item['img_new_update'];
+                    newCart[ key ]['img_app'] = this_item['img_app'];
+                } )
+
+                let allPrice = itemsStore.getSumDiv();
+
+                newCart.map( (item) => {
+                    allPrice += parseInt(item.one_price) * parseInt(item.count);
+                } )
+
+                this.setState({
+                    originPrice: allPrice,
+                    cartItems: newCart,
+                    sumDiv: itemsStore.getSumDiv(),
+                    promoName: localStorage.getItem('promo_name') ? localStorage.getItem('promo_name') : ''
+                })
+            }
+        })
+    }
+    
+    add(id){
+        itemsStore.AddItem(id);
+    }
+    
+    minus(id){
+        itemsStore.MinusItem(id);
+    }
+    
+    handleClick = (event) => {
+        //console.log( 'anchorEl', event.currentTarget, document.getElementById('headerNew') )
+        if( itemsStore.getPage() !== 'cart' ){
+            this.setState({
+                //anchorEl: event.currentTarget
+                anchorEl: document.getElementById('headerNew')
+            })
+        }else{
+            this.handleClose()
+        }
+    }
+
+    handleClose = () => {
+        this.setState({
+            anchorEl: null
+        })
+    }
+    
+    checkPromo(){
+        itemsStore.getInfoPromo(this.state.promoName);
+
+        /*fetch(config.urlApi, {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'},
+            body: queryString.stringify({
+                type: 'get_promo_web', 
+                city_id: itemsStore.getCity(),
+                promo_name: this.state.promoName
+            })
+        }).then(res => res.json()).then(json => {
+            itemsStore.setPromo( JSON.stringify(json), this.state.promoName );
+            let check_promo = itemsStore.checkPromo();
+              
+            if( check_promo.st === false ){
+                //localStorage.removeItem('promo_name')
+            }
+            
+            if( this.state.promoName.length == 0 ){
+                this.setState({
+                    promoText: ''
+                })
+            }else{
+                this.setState({
+                    promoText: check_promo.text,
+                    promoST: check_promo.st
+                })
+            }
+        })*/
+    }
+    
+    changePromo(event){
+        this.setState({ 
+            promoName: event.target.value 
+        })
+    }
+
+    checkPromoKey(event){
+        if( parseInt(event.keyCode) == 13 ){
+            this.checkPromo();
+        }
+    }
+
+    render(){
+        const open = Boolean(this.state.anchorEl);
+        const id = open ? 'simple-popover' : undefined;
+        return(
+            <div style={{ width: '12.27%', minWidth: 'max-content' }}>
+                <div aria-describedby={id} style={{ width: '100%', minWidth: 'max-content' }} className='headerCart count' onClick={this.handleClick.bind(this)}><span>Корзина</span><div>99</div></div>
+
+                <Popover
+                    id={id}
+                    open={open}
+                    anchorEl={this.state.anchorEl}
+                    onClose={this.handleClose.bind(this)}
+                    //anchorPosition={{ top: 50, right: 50 }}
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'right',
+                    }}
+                    transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                    }}
+                >
+                    <div>
+                        <table className="TableMini">
+                            <tbody>
+                                {this.state.cartItems.map((item, key) => 
+                                    item.type == 'us' ?
+                                        <tr key={key}>
+                                            <td className="CellPic">
+
+                                                { item.img_app.length > 0 ? 
+                                                    
+                                                    <picture>
+                                                        <source 
+                                                            srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_app+"_276x276.webp"} 
+                                                            type="image/webp" 
+                                                        />
+                                                        <img 
+                                                            alt={item.name} 
+                                                            title={item.name} 
+                                                            src={`https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg`} />
+                                                    </picture>
+                                                        : 
+                                                    <picture>
+                                                        <source 
+                                                            srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.webp?"+item.img_new_update} 
+                                                            type="image/webp" 
+                                                        />
+                                                        <img 
+                                                            src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
+                                                            alt={item.name}
+                                                            title={item.name}
+                                                        />
+                                                    </picture> 
+                                                }
+                                            </td>
+                                            <td className="TableMiniName CellName">
+                                                <span style={{ height: 40, width: '100%', display: 'flex', alignItems: 'center' }}>{item.name}</span>
+                                            </td>
+                                            <td className="CellButton">
+                                                <MiniActionsCartButton count={item.count} item_id={item.item_id} minus={this.minus.bind(this)} add={this.add.bind(this)} />
+                                            </td>
+                                            
+                                            { item.is_sale === true && this.state.promoST === true ?
+                                                <td className="CellPrice2"> 
+                                                    <div className="TableMiniPrice">
+                                                        <div>
+                                                            { new Intl.NumberFormat('ru-RU').format( parseInt(item.one_price) * parseInt(item.count) ) } 
+                                                            <IconRuble style={{ width: 13, height: 13, fill: 'rgba(27, 27, 31, 0.2)', marginLeft: 5 }} />
+                                                        </div>
+                                                    </div>
+                                                    <div className="TableMiniPrice">
+                                                        { new Intl.NumberFormat('ru-RU').format(item.all_price) } 
+                                                        <IconRuble style={{ width: 13, height: 13, fill: '#525252', marginLeft: 5 }} />
+                                                    </div>
+                                                </td>
+                                                    :
+                                                <td className="CellPrice"> 
+                                                    <div className="TableMiniPrice">
+                                                        { new Intl.NumberFormat('ru-RU').format( parseInt(item.one_price) * parseInt(item.count) ) } 
+                                                        <IconRuble style={{ width: 13, height: 13, fill: '#525252', marginLeft: 5 }} />
+                                                    </div>
+                                                </td>
+                                            }
+                                            
+                                        </tr>
+                                            :
+                                        <tr key={key}>
+                                            <td className="CellPic">
+                                                { item.img_app.length > 0 ? 
+                                                    <picture>
+                                                        <source 
+                                                            srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_app+"_276x276.webp"} 
+                                                            type="image/webp" 
+                                                        />
+                                                        <img 
+                                                            alt={item.name} 
+                                                            title={item.name} 
+                                                            src={`https://storage.yandexcloud.net/site-img/${item.img_app}_276x276.jpg`} />
+                                                    </picture>
+                                                        : 
+                                                    <picture>
+                                                        <source 
+                                                            srcSet={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.webp?"+item.img_new_update} 
+                                                            type="image/webp" 
+                                                        />
+                                                        <img 
+                                                            src={"https://storage.yandexcloud.net/site-img/"+item.img_new+"600х400.jpg?"+item.img_new_update} 
+                                                            alt={item.name}
+                                                            title={item.name}
+                                                        />
+                                                    </picture> 
+                                                }   
+                                            </td>
+                                            <td className="TableMiniName CellName">
+                                                <span style={{ height: 40, width: '100%', display: 'flex', alignItems: 'center' }}>{item.name}</span>
+                                            </td>
+                                            <td className="CellButtonPrize" colSpan="2">
+                                                <MiniActionsCartButtonPrize count={item.count} price={item.all_price} />
+                                            </td>
+                                        </tr>
+                                )}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td>Итого:</td>
+                                    <td>
+                                        { this.state.originPrice != this.state.allPrice && this.state.promoST === true ?
+                                            <div className='originPrice'>
+                                                <span>
+                                                    { new Intl.NumberFormat('ru-RU').format(this.state.originPrice) } 
+                                                    <IconRuble style={{ width: 14, height: 14, fill: 'rgba(27,27,31,0.2)', marginLeft: 5 }} />
+                                                </span>
+                                            </div>
+                                                :
+                                            <div>
+                                                { new Intl.NumberFormat('ru-RU').format(this.state.originPrice) } 
+                                                <IconRuble style={{ width: 14, height: 14, fill: '#525252', marginLeft: 5 }} />
+                                            </div>
+                                        }
+                                    </td>
+                                </tr>
+                            </tfoot>      
+                        </table>
+                        <div className="SpacePromoRoot">
+                            <Paper component="div" className="SpacePromo" elevation={0}>
+                                <InputBase
+                                    onBlur={this.checkPromo.bind(this)}
+                                    value={this.state.promoName}
+                                    onKeyDown={this.checkPromoKey.bind(this)}
+                                    onChange={this.changePromo.bind(this)}
+                                    placeholder="Есть промокод"
+                                />
+                                {this.state.promoText.length > 0 ?
+                                    <div className={ this.state.promoST === true ? 'promoIndicator true' : 'promoIndicator false'} />
+                                        :
+                                    null
+                                }
+                            </Paper>
+
+                            { this.state.originPrice != this.state.allPrice && this.state.promoST === true ?
+                                <div className="DescPromoPrice">
+                                    { new Intl.NumberFormat('ru-RU').format(this.state.allPrice) } 
+                                    <IconRuble style={{ width: 14, height: 14, fill: '#525252', marginLeft: 5 }} />
+                                </div>
+                                    :
+                                null
+                            }
+
+                            {this.state.promoText.length > 0 && this.state.promoST === false ?
+                                <div className="DescPromo">
+                                    <Typography className="cat" variant="h5" component="span">{this.state.promoText}</Typography>
+                                </div>
+                                    :
+                                null
+                            }
+                        </div>
+                        <div className="InCart">
+
+                            {itemsStore.getToken() !== null ?
+                                <Link
+                                    to={'/'+itemsStore.getCity()+'/cart'}
+                                    exact={ true }
+                                    style={{ textDecoration: 'none' }}
+                                    onClick={this.handleClose.bind(this)}
+                                >
+                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
+                                        <Button variant="contained">Оформить заказ</Button>
+                                    </ButtonGroup>
+                                </Link>
+                                    :
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained">
+                                    <Button variant="contained" onClick={this.props.openLogin}>Оформить заказ</Button>
+                                </ButtonGroup>
+                            }
+                        </div>
+                    </div>
+                </Popover>
+            </div>
+        );
+    }
+}
+
 export class HeaderCat extends React.Component {
     render(){
         return (
@@ -1296,37 +1778,8 @@ export class HeaderCat extends React.Component {
     }
 }
 
-function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-  
-    return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`full-width-tabpanel-${index}`}
-            aria-labelledby={`full-width-tab-${index}`}
-            {...other}
-        >
-            {value === index && (
-                <Box p={3}>
-                    {children}
-                </Box>
-            )}
-        </div>
-    );
-}
-  
-TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.any.isRequired,
-    value: PropTypes.any.isRequired,
-};
-
-export class Header extends React.Component {
+export class HeaderOld extends React.Component {
     is_load = false;
-    
-    sms1 = false;
-    sms2 = false;
     
     constructor(props) {
         super(props);
@@ -1501,11 +1954,6 @@ export class Header extends React.Component {
         })
     }
 
-    getNewLink(city){
-        let this_addr = window.location.pathname;
-        return this_addr.replace(this.state.cityName, city);
-    }
-
     openLogin(){
         if( localStorage.getItem('token') && localStorage.getItem('token').length > 0 ){
             fetch(config.urlApi, {
@@ -1547,6 +1995,7 @@ export class Header extends React.Component {
     }
     
     handleClick = (event) => {
+        console.log( 'anchorEl', event.currentTarget )
         this.setState({
             anchorEl: event.currentTarget
         })
@@ -1886,30 +2335,8 @@ export class Header extends React.Component {
                     }
                 </AppBar>
                 
-                <Dialog
-                    open={this.state.openCity}
-                    fullWidth={true}
-                    maxWidth={'xs'}
-                    onClose={this.closeCity.bind(this)}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                    className="ModalCity"
-                >
-                    <DialogTitle id="alert-dialog-title">Выберите город</DialogTitle>
-                    <DialogContent className="ModalContent_1_1" style={{ paddingBottom: 24, paddingTop: 0 }}>
-                        {this.state.cityList.map((item, key) => 
-                            <Link 
-                                key={key} 
-                                className={ this.state.cityName == item.link ? 'active' : '' } 
-                                to={{ pathname: this.getNewLink(item.link) }} 
-                                onClick={() => { setTimeout(()=>{ itemsStore.saveCartData([]); window.location.reload(); }, 300) }}
-                            >
-                                <Typography variant="h5" component="span" className={"ModalLabel"}>{item.name}</Typography>
-                            </Link> 
-                        )}
-                    </DialogContent>
-                </Dialog>
-                
+                <ModalCity isOpen={this.state.openCity} close={this.closeCity.bind(this)} cityList={this.state.cityList} cityName={this.state.cityName} />
+
                 <ModalLogin isOpen={this.state.openLoginNew} close={this.closeLogin.bind(this)} />
 
                 {this.state.activePage == 'home' ?
@@ -1937,19 +2364,8 @@ export class Header extends React.Component {
     }
 }
 
-function a11yProps(index) {
-    return {
-        id: `full-width-tab-${index}`,
-        'aria-controls': `full-width-tabpanel-${index}`,
-    };
-}
+export class Header extends React.Component{
 
-export class HeaderOld extends React.Component {
-    is_load = false;
-    
-    sms1 = false;
-    sms2 = false;
-    
     constructor(props) {
         super(props);
         
@@ -1981,22 +2397,7 @@ export class HeaderOld extends React.Component {
             cityList: this.props.data ? this.props.data.all.other.cats.city_list : [],
             
             openLoginNew: false,
-            pwd: '',
-            ResPWD: false,
-            NeedCode: false,
-            typeLogin: 0,
-
-            openLogin: false,
-            userLogin: '',
-            userLoginFormat: '',
-            userCode: '',
             
-            stage_1: true,
-            stage_2: false,
-            
-            timerSMS: 89,
-            errPhone: '',
-            errSMS: '',
             userName: '',
             token: '',
             
@@ -2019,52 +2420,7 @@ export class HeaderOld extends React.Component {
 
             if( token && token.length == 0 && localStorage.getItem('token') && localStorage.getItem('token').length > 0 ){
                 this.setToken( localStorage.getItem('token'), '' ); 
-                
-                /*fetch(config.urlApi, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type':'application/x-www-form-urlencoded'},
-                    body: queryString.stringify({
-                        type: 'get_user_data', 
-                        user_id: localStorage.getItem('token')
-                    })
-                }).then(res => res.json()).then(json => {
-
-                    itemsStore.setToken( localStorage.getItem('token'), json ); 
-                    itemsStore.setUserName(json);
-
-                    this.is_load = false;
-
-                    this.setState({
-                        userName: json,
-                        token: localStorage.getItem('token')
-                    })
-                })
-                .catch(err => { });*/
             }
-
-            /*if( !userName || userName.length == 0 ){
-                fetch(config.urlApi, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type':'application/x-www-form-urlencoded'},
-                    body: queryString.stringify({
-                        type: 'get_user_data', 
-                        user_id: itemsStore.getToken()
-                    })
-                }).then(res => res.json()).then(json => {
-                    itemsStore.setUserName(json);
-                    this.is_load = false;
-
-                    this.setState({
-                        userName: json
-                    })
-                })
-                .catch(err => { });
-
-
-                
-            }*/
 
             if( userName.length > 0 ){
                 itemsStore.setUserName(userName);
@@ -2073,10 +2429,6 @@ export class HeaderOld extends React.Component {
                 })
             } 
             
-
-            
-
-
             let cartData = itemsStore.getCartData();
 
             if( cartData.orderType || cartData.orderType == 0 ){
@@ -2173,8 +2525,8 @@ export class HeaderOld extends React.Component {
         //        this.is_load = false;
             }
         //}
-    }  
-    
+    } 
+
     openCity(){
         this.setState({
             openCity: true
@@ -2185,11 +2537,6 @@ export class HeaderOld extends React.Component {
         this.setState({
             openCity: false
         })
-    }
-
-    getNewLink(city){
-        let this_addr = window.location.pathname;
-        return this_addr.replace(this.state.cityName, city);
     }
 
     openLogin(){
@@ -2228,251 +2575,12 @@ export class HeaderOld extends React.Component {
     
     closeLogin(){
         this.setState({
-            openLogin: false,
             openLoginNew: false,
-            ResPWD: false,
-            NeedCode: false,
-            userLogin: '',
-            userLoginFormat: '',
-            userCode: '',
-            pwd: ''
         })
-    }
-    
-    logIn(){
-        let number = this.state.userLogin;
-            
-        number = number.split(' ').join('');
-        number = number.split('(').join('');
-        number = number.split(')').join('');
-        number = number.split('-').join('');
-        number = number.split('_').join('');
-        
-        number = number.slice(1);
-
-        fetch(config.urlApi, {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/x-www-form-urlencoded'},
-            body: queryString.stringify({
-                type: 'site_login',
-                number: number,
-                pwd: this.state.pwd 
-            })
-        }).then(res => res.json()).then(json => {
-            if( json.st === false ){
-                this.setState({
-                    errPhone: json.text
-                });
-            }else{
-                itemsStore.setToken( json.token, json.name ); 
-                itemsStore.setUserName(json.name);
-
-                this.is_load = false;
-
-                this.setState({
-                    userName: json.name,
-                    token: json.token
-                })
-
-                this.closeLogin();
-
-                //if (typeof window !== 'undefined') {
-                //    window.location.pathname = '/'+this.state.cityName+'/profile';
-                //}
-            }
-
-            
-        })
-        .catch(err => { });
-    }
-
-    sendSMS(){
-        if( this.sms1 == false ){
-            this.sms1 = true;
-            
-            this.setState({
-                stage_1: false,
-                stage_2: true, 
-                errPhone: '',
-                errSMS: ''
-            });
-            
-            let number = this.state.userLogin;
-            
-            number = number.split(' ').join('');
-            number = number.split('(').join('');
-            number = number.split(')').join('');
-            number = number.split('-').join('');
-            number = number.split('_').join('');
-            
-            number = number.slice(1);
-            
-            this.setState({
-                userLoginFormat: number
-            })
-            
-            grecaptcha.ready(() => {
-                grecaptcha.execute('6LdhWpIdAAAAAA4eceqTfNH242EGuIleuWAGQ2su', {action: 'submit'}).then( (token) => {
-                    fetch(config.urlApi, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type':'application/x-www-form-urlencoded'},
-                        body: queryString.stringify({
-                            type: 'create_profile', 
-                            number: number,
-                            token: token 
-                        })
-                    }).then(res => res.json()).then(json => {
-                        if( json['st'] ){
-                            this.setState({ 
-                                errPhone: ''
-                            })
-                        
-                            let timerId = setInterval(() => {
-                                this.setState({
-                                    timerSMS: this.state.timerSMS-1
-                                })
-                                if( this.state.timerSMS == 0 ){
-                                    clearInterval(timerId);
-                                }
-                            }, 1000);
-                        }else{
-                            this.setState({
-                              errPhone: json.text
-                            });
-                        }
-                        
-                        setTimeout( () => {
-                            this.sms1 = false;
-                        }, 300 )
-                    });
-                });
-            });
-            
-        }
-    }
-    
-    repeatSMS(){
-        if( this.sms2 === false ){
-            this.sms2 = true;
-            
-            this.setState({
-                errSMS: '',
-                is_load_new: true
-            });
-            
-            grecaptcha.ready(() => {
-                grecaptcha.execute('6LdhWpIdAAAAAA4eceqTfNH242EGuIleuWAGQ2su', {action: 'submit'}).then( (token) => {
-                    fetch(config.urlApi, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type':'application/x-www-form-urlencoded'},
-                        body: queryString.stringify({
-                            type: 'repeat_sms', 
-                            number: this.state.userLoginFormat,
-                            token: token
-                        })
-                    }).then(res => res.json()).then(json => {
-                        this.sms2 = false;
-                        
-                        if( json['st'] ){
-                            this.setState({
-                                timerSMS: 89
-                            })
-                        
-                            let timerId = setInterval(() => {
-                                this.setState({
-                                    timerSMS: this.state.timerSMS-1
-                                })
-                                if( this.state.timerSMS == 0 ){
-                                    clearInterval(timerId);
-                                }
-                            }, 1000);
-                        }else{
-                            this.setState({
-                                errSMS: json.text
-                            });
-                        }
-
-                        setTimeout( () => {
-                            this.setState({
-                                is_load_new: false
-                            });
-                        }, 300 )
-                        
-                    });
-                });
-            });
-        }
-    }
-    
-    checkCode(){
-        this.setState({
-            errSMS: ''
-        });
-        
-        fetch(config.urlApi, {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/x-www-form-urlencoded'},
-            body: queryString.stringify({
-                type: 'check_profile', 
-                cod: this.state.userCode,
-                number: this.state.userLoginFormat
-            })
-        }).then(res => res.json()).then(json => {
-            if( json['st'] ){
-                itemsStore.setToken(json.token, json.name);
-                this.closeLogin();
-            }else{
-                this.setState({
-                  errSMS: json.text
-                });
-            }
-        });
-    }
-    
-    changeNumber(){
-        this.setState({
-            stage_1: true,
-            stage_2: false,
-            
-            errPhone: '',
-            errSMS: ''
-        })
-    }
-
-    changeCode(code){
-        code = code.target.value
-        
-        this.setState({
-            userCode: code
-        })
-        
-        if( (parseInt(code)+'').length == 4 ){ 
-            setTimeout(()=>{
-                this.checkCode() 
-            }, 500)
-        }
-    }
-
-    changeCodeNew(code){
-        code = code.target.value
-        
-        this.setState({
-            userCode: code
-        })
-    }
-
-    handleKeyPress = (event) => {
-        if(event.key === 'Enter'){
-            this.sendSMS()
-        }
     }
     
     handleClick = (event) => {
-        
+        console.log( 'anchorEl', event.currentTarget )
         this.setState({
             anchorEl: event.currentTarget
         })
@@ -2483,153 +2591,12 @@ export class HeaderOld extends React.Component {
             anchorEl: null
         })
     };
-    
-    LoginBySMS(){
-        this.setState({
-            openLoginNew: false,
-            openLogin: true,
-            errPhone: '', 
-            errSMS: ''
-        })
 
-        this.is_load = false;
-    
-        this.sms1 = false;
-        this.sms2 = false;
-    }
-
-    ResPWD(){
-        this.setState({
-            ResPWD: true,
-            NeedCode: false
-        })
-    }
-
-    sendsmsrp(){
-        if( this.sms1 == false ){
-            this.sms1 = true;
-            
-            this.setState({
-                //stage_1: false,
-                //stage_2: true, 
-                errPhone: '',
-                errSMS: '',
-                is_load_new: true
-            });
-            
-            let number = this.state.userLogin;
-            
-            number = number.split(' ').join('');
-            number = number.split('(').join('');
-            number = number.split(')').join('');
-            number = number.split('-').join('');
-            number = number.split('_').join('');
-            
-            number = number.slice(1);
-            
-            this.setState({
-                userLoginFormat: number
-            })
-            
-            grecaptcha.ready(() => {
-                grecaptcha.execute('6LdhWpIdAAAAAA4eceqTfNH242EGuIleuWAGQ2su', {action: 'submit'}).then( (token) => {
-                    fetch(config.urlApi, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type':'application/x-www-form-urlencoded'},
-                        body: queryString.stringify({
-                            type: 'sendsmsrp', 
-                            number: number,
-                            pwd: this.state.pwd,
-                            token: token 
-                        })
-                    }).then(res => res.json()).then(json => {
-                        if( json['st'] ){
-                            this.setState({ 
-                                errPhone: '',
-                                NeedCode: true,
-                                errPhone: '', 
-                                errSMS: ''
-                            })
-                        
-                            let timerId = setInterval(() => {
-                                this.setState({
-                                    timerSMS: this.state.timerSMS-1
-                                })
-                                if( this.state.timerSMS == 0 ){
-                                    clearInterval(timerId);
-                                }
-                            }, 1000);
-                        }else{
-                            this.setState({
-                              errPhone: json.text
-                            });
-                        }
-                        
-                        setTimeout( () => {
-                            this.sms1 = false;
-                            this.setState({
-                                is_load_new: false
-                            })
-                        }, 300 )
-                    });
-                });
-            });
-            
-        }
-    }
-
-    checkcoderp(){
-        fetch(config.urlApi, {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/x-www-form-urlencoded'},
-            body: queryString.stringify({
-                type: 'checkcoderp', 
-                number: this.state.userLoginFormat,
-                code: this.state.userCode
-            })
-        }).then(res => res.json()).then(json => {
-            if( json['st'] ){
-                this.setState({ 
-                    errPhone: '',
-                    NeedCode: true
-                })
-            
-                itemsStore.setToken( json.token, json.name ); 
-                itemsStore.setUserName(json.name);
-
-                this.is_load = false;
-
-                this.setState({
-                    userName: json.name,
-                    token: json.token,
-                    errPhone: '', 
-                    errSMS: ''
-                })
-
-                this.closeLogin();
-
-                //if (typeof window !== 'undefined') {
-                //    window.location.pathname = '/'+this.state.cityName+'/profile';
-                //}
-            }else{
-                this.setState({
-                  errPhone: json.text
-                });
-            }
-            
-            setTimeout( () => {
-                this.sms1 = false;
-            }, 300 )
-        });
-    }
-
-    render() {
+    render(){
         let link = this.props.this_link;
         link = link.split('/');
         let mainLink = '';
-        
+
         let check = link.find( (item) => item == 'menu');
         
         if( check && check.length > 0 ){
@@ -2662,547 +2629,73 @@ export class HeaderOld extends React.Component {
                 }
             }
         }
-        
-        if( this.state.is_load === false ){
-            return (
-                <AppBar position="fixed" className="header" style={{ zIndex: 2 }}>
-                    <Toolbar className="sub_header">
-                        
-                        <Grid>
-                            <Grid item style={{ marginRight: 15 }}>
-                                <Link to={"/"+this.state.cityName}>
-                                    <img alt="Жако доставка роллов и пиццы" src="https://jacochef.ru/src/img/Bely_fon_logo.png" />
-                                </Link> 
-                            </Grid>
-                            <>
-                                
-                                <Grid item className="CityProfileNav">
-                                    <Typography className="cat" variant="h5" component="span" onClick={this.openCity.bind(this)} style={{ display: 'flex', flexDirection: 'row' }}>{itemsStore.getCityRU()} <ArrowDropDownIcon /></Typography>
-                                    <Typography className="cat" variant="h5" component="span" onClick={this.openLogin.bind(this)}>Войти</Typography>
-                                </Grid>
-                                
-                                {this.state.categoryItemsNew.map((item, key) => 
-                                    <Grid item key={key}>
-                                        <Link 
-                                            style={{ padding: '4px 8px' }}
-                                            to={"/"+this.state.cityName+"/menu/"+item.link} 
-                                            className={"catLink"}
-                                        >
-                                            <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
-                                        </Link>    
-                                    </Grid>    
-                                )}
-                                
-                                <Grid item>
-                                    <Link 
-                                        style={{ padding: '4px 8px' }}
-                                        to={"/"+this.state.cityName+"/akcii"} 
-                                        className={ this.state.activePage == 'actii' ? "catLink activeCat" : "catLink"}
-                                    >
-                                        <Typography className="cat" variant="h5" component="span">Акции</Typography>
-                                    </Link>    
-                                </Grid>
-                                <Grid item>
-                                    <Link 
-                                        style={{ padding: '4px 8px' }}
-                                        to={"/"+this.state.cityName+"/contacts"} 
-                                        className={ this.state.activePage == 'contact' ? "catLink activeCat" : "catLink"}
-                                    >
-                                        <Typography className="cat" variant="h5" component="span">Контакты</Typography>
-                                    </Link>    
-                                </Grid>
-                                <Grid item>
-                                    <SimplePopover openLogin={this.openLogin.bind(this)} />
-                                </Grid>
-                            </>
-                        </Grid>
-                    
-                        <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
-                            <Typography variant="h5" component="span" className="thisCity" onClick={this.openCity.bind(this)}><FontAwesomeIcon icon={ faMapMarkerAlt } /> {itemsStore.getCityRU()}</Typography>
-                        </Box>
-                    </Toolbar>
-                    
-                    {this.state.activePage == 'home' ?
-                        <Grid className="scrollCat">
-                            <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
-                                {this.state.testData.map((item, key) => 
-                                    <Grid item key={key}>
-                                        <div style={{ width: 120, height: 28, marginRight: 12, backgroundColor: '#e5e5e5' }} />    
-                                    </Grid>)
-                                }
-                            </Box>
-                        </Grid>
-                            :
-                        null
-                    }
-                </AppBar>
-            )
-        }
-        
+
         return (
-            <div>
-                <AppBar position="fixed" className="header" style={{ zIndex: 2 }}>
-                    <Toolbar className="sub_header">
-                        
-                        <Grid style={{ width: '100%' }}>
-                            <Grid item style={{ marginRight: 15 }}>
-                                <Link to={"/"+this.state.cityName} onClick={ () => { window.scrollTo({ top: 0, behavior: 'smooth', }) } }>
-                                    <img alt="Жако доставка роллов и пиццы" src="https://jacochef.ru/src/img/Bely_fon_logo.png" />
-                                </Link> 
-                            </Grid>
-                            <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', width: '100%' }}>
-                                
-                                <Grid item className="CityProfileNav">
-                                    <Typography className="cat" variant="h5" component="span" onClick={this.openCity.bind(this)} style={{ display: 'flex', flexDirection: 'row' }}>{this.state.cityNameRu} <ArrowDropDownIcon /></Typography>
-                                    
-                                    {this.state.token.length > 0 ?
-                                        this.state.userName.length > 0 ?
-                                            <Link to={"/"+this.state.cityName+"/profile"} className="cat">{this.state.userName}</Link> 
-                                                :
-                                            <Link to={"/"+this.state.cityName+"/profile"}>
-                                                <Typography className="cat" variant="h5" component="span">Профиль</Typography>
-                                            </Link>
-                                            :
-                                        <Typography className="cat" variant="h5" component="span" onClick={this.openLogin.bind(this)}>Войти</Typography>
-                                    }
-                                </Grid>
-                                
-                                <div style={{ display: 'flex', alignItems: 'baseline', flexDirection: 'row', width: '100%' }}>
-                                    {this.state.categoryItemsNew.map((item, key) => 
-                                        <Grid item key={key}>
-                                            {this.state.activePage == 'home' && !check ?
-                                                item.cats.length > 0 ?
-                                                    <>
-                                                        <Link id={'link_'+item.id} name={item.main_link} to={"/"+this.state.cityName} className="catLink" style={{ padding: '4px 0.5vw' }} onClick={this.handleClick.bind(this)}>
-                                                            <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
-                                                        </Link> 
-                                                        
-                                                        <Menu
-                                                            id="simple-menu"
-                                                            anchorEl={this.state.anchorEl}
-                                                            keepMounted
-                                                            open={Boolean(this.state.anchorEl)}
-                                                            onClose={this.handleClose.bind(this)}
-                                                            
-                                                            elevation={2}
-                                                            getContentAnchorEl={null}
-                                                            anchorOrigin={{
-                                                              vertical: 'bottom',
-                                                              horizontal: 'center',
-                                                            }}
-                                                            transformOrigin={{
-                                                              vertical: 'top',
-                                                              horizontal: 'center',
-                                                            }}
-                                                        >
-                                                            {item.cats.map( (it, k) =>
-                                                                <MenuItem key={k} style={{ width: '100%' }}>
-                                                                    <ScrollLink 
-                                                                        onClick={this.handleClose.bind(this)}
-                                                                        to={"cat"+it.id} 
-                                                                        spy={true} 
-                                                                        isDynamic={true}
-                                                                        /*onSetActive={(el) => { 
-                                                                            if( document.querySelector('.activeCat') ){
-                                                                                document.querySelector('.activeCat').classList.remove('activeCat');
-                                                                            }
-                                                                            document.querySelector('#link_'+it.id).classList.add('activeCat');
-                                                                        }}*/
-                                                                        smooth={true} 
-                                                                        offset={-60} 
-                                                                        activeClass="activeCat" 
-                                                                        //id={'link_'+it.id} 
-                                                                        
-                                                                        style={{ width: 'max-content', display: 'flex', whiteSpace: 'nowrap', padding: '4px 0.5vw', width: '100%' }}
-                                                                    >
-                                                                        <Typography className="cat" variant="h5" component="span">{it.name}</Typography>
-                                                                    </ScrollLink>
-                                                                </MenuItem>
-                                                            )}
-                                                        </Menu>
-                                                    </>
-                                                        :
-                                                    <ScrollLink 
-                                                        key={key}
-                                                        to={"cat"+item.id} 
-                                                        spy={true} 
-                                                        isDynamic={true}
-                                                        onSetActive={(el) => { 
-                                                            if( document.querySelector('.activeCat') ){
-                                                                document.querySelector('.activeCat').classList.remove('activeCat');
-                                                            }
-                                                            document.querySelector('#link_'+item.id).classList.add('activeCat');
-                                                        }} 
-                                                        smooth={true} 
-                                                        offset={-60} 
-                                                        activeClass="activeCat" 
-                                                        id={'link_'+item.id} 
-                                                        name={item.main_link}
-                                                        style={{ width: 'max-content', display: 'flex', whiteSpace: 'nowrap', padding: '4px 0.5vw' }}
-                                                    >
-                                                        <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
-                                                    </ScrollLink>
-                                                    :
-                                                <Link to={"/"+this.state.cityName} name={item.main_link} className="catLink" style={{ padding: '4px 0.5vw' }} onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
-                                                    <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
-                                                </Link> 
+            <Box sx={{ flexGrow: 1 }}>
+                <AppBar position="fixed" className='headerNew' id='headerNew'>
+                    <Toolbar>
+                        <div style={{ width: '4.51%' }} />
+                        <Link to={"/"} style={{ width: '14.8%' }}>
+                            <img alt="Жако доставка роллов и пиццы" src={`/assets/jaco-logo.png`} style={{ width: '100%' }} />
+                        </Link> 
+                        <div style={{ width: '2.53%' }} />
+
+                        {this.state.categoryItemsNew.map((item, key) => 
+                            this.state.activePage == 'home' && !check ?
+                                <React.Fragment key={key}>
+                                    <ScrollLink 
+                                        to={"cat"+item.id} 
+                                        spy={true} 
+                                        isDynamic={true}
+                                        onSetActive={(el) => { 
+                                            if( document.querySelector('.activeCat') ){
+                                                document.querySelector('.activeCat').classList.remove('activeCat');
                                             }
-                                        </Grid>)
-                                    }
-                                    
-                                    
-                                    
-                                    <Grid item>
-                                        <Link 
-                                            style={{ padding: '4px 8px' }}
-                                            to={"/"+this.state.cityName+"/akcii"} 
-                                            className={ this.state.activePage == 'actii' ? "catLink activeCat" : "catLink"}
-                                        >
-                                            <Typography className="cat" variant="h5" component="span">Акции</Typography>
-                                        </Link>    
-                                    </Grid>
-                                    <Grid item>
-                                        <Link 
-                                            style={{ padding: '4px 8px' }}
-                                            to={"/"+this.state.cityName+"/contacts"} 
-                                            className={ this.state.activePage == 'contact' ? "catLink activeCat" : "catLink"}
-                                        >
-                                            <Typography className="cat" variant="h5" component="span">Контакты</Typography>
-                                        </Link>    
-                                    </Grid>
-                                
-                                </div>
-                                
-                                <Grid item style={{ marginLeft: 'auto' }}>
-                                    <SimplePopover openLogin={this.openLogin.bind(this)} />
-                                </Grid>
-                            </Box>
-                        </Grid>
-                    
-                        <Box sx={{ display: { md: 'none' } }}>
-                            <Typography variant="h5" component="span" className="thisCity" onClick={this.openCity.bind(this)}><FontAwesomeIcon icon={ faMapMarkerAlt } /> {itemsStore.getCityRU()}</Typography>
-                        </Box>
-                                
-                    </Toolbar>
-                    
-                    {this.state.activePage == 'home' ?
-                        <Grid className="scrollCat mobile">
-                            <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-                                {this.state.categoryItems.map((item, key) => 
-                                    check && check.length > 0 ?
-                                        <ScrollLink 
-                                            key={key}
-                                            to={"cat"+item.id} 
-                                            spy={true} 
-                                            onSetActive={(el) => { 
-                                                if( document.querySelector('.activeCat') ){
-                                                    document.querySelector('.activeCat').classList.remove('activeCat');
-                                                }
-                                                document.querySelector('#link_'+item.id).classList.add('activeCat');
-                                                
-                                                document.getElementById('link_'+item.id).scrollIntoView(true);
-                                                
-                                                /*if( document.querySelector('.scrollCat') ){
-                                                    document.querySelector('.scrollCat').animate({
-                                                        scrollLeft: 200
-                                                    }, 100);
-                                                }*/
-                                            }} 
-                                            smooth={true} 
-                                            offset={-100} 
-                                            activeClass="activeCat" 
-                                            id={'link_'+item.id} 
-                                            name={item.main_link}
-                                            style={{ padding: '3px 5px' }}
-                                        >
-                                            <Link to={"/"+this.state.cityName} style={{ padding: '3px 5px' }} className="catLink" onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
-                                                <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
-                                            </Link>
-                                        </ScrollLink>  
-                                            :                                        
-                                        <ScrollLink 
-                                            key={key}
-                                            to={"cat"+item.id} 
-                                            spy={true} 
-                                            onSetActive={(el) => { 
-                                                if( document.querySelector('.activeCat') ){
-                                                    document.querySelector('.activeCat').classList.remove('activeCat');
-                                                }
-                                                document.querySelector('#link_'+item.id).classList.add('activeCat');
-                                                
-                                                document.getElementById('link_'+item.id).scrollIntoView(true);
-                                                
-                                                /*if( document.querySelector('.scrollCat') ){
-                                                    document.querySelector('.scrollCat').animate({
-                                                        scrollLeft: 200
-                                                    }, 100);
-                                                }*/
-                                            }} 
-                                            smooth={true} 
-                                            offset={-100} 
-                                            activeClass="activeCat" 
-                                            id={'link_'+item.id} 
-                                        >
-                                            <Typography className="cat" variant="h5" component="span">{item.name}</Typography>
-                                        </ScrollLink>    
-                                        
-                                )}
-                            </Box>
-                        </Grid>
-                            :
-                        null
-                    }
-                </AppBar>
-                
-                <Dialog
-                    open={this.state.openCity}
-                    fullWidth={true}
-                    maxWidth={'xs'}
-                    onClose={this.closeCity.bind(this)}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                    className="ModalCity"
-                >
-                    <DialogTitle id="alert-dialog-title">Выберите город</DialogTitle>
-                    <DialogContent className="ModalContent_1_1" style={{ paddingBottom: 24, paddingTop: 0 }}>
-                        {this.state.cityList.map((item, key) => 
-                            <Link 
-                                key={key} 
-                                className={ this.state.cityName == item.link ? 'active' : '' } 
-                                to={{ pathname: this.getNewLink(item.link) }} 
-                                onClick={() => { setTimeout(()=>{ itemsStore.saveCartData([]); window.location.reload(); }, 300) }}
-                            >
-                                <Typography variant="h5" component="span" className={"ModalLabel"}>{item.name}</Typography>
-                            </Link> 
+                                            document.querySelector('#link_'+item.id).classList.add('activeCat');
+                                        }} 
+                                        smooth={true} 
+                                        offset={-120} 
+                                        style={{ width: '7.22%', minWidth: 'max-content' }}
+                                    >
+                                       <span className='headerCat' name={item.main_link} id={'link_'+item.id}>{item.name}</span>
+                                    </ScrollLink>
+                                    <div style={{ width: '0.36%' }} />
+                                </React.Fragment>
+                                    :
+                                <React.Fragment key={key}>
+                                    <Link to={"/"+this.state.cityName} name={item.main_link} style={{ width: '7.22%', minWidth: 'max-content', textDecoration: 'none' }} onClick={() => { typeof window !== 'undefined' ? localStorage.setItem('goTo', item.id) : {} }}>
+                                        <span className='headerCat'>{item.name}</span>
+                                    </Link> 
+                                    <div style={{ width: '0.36%' }} />
+                                </React.Fragment>
                         )}
-                    </DialogContent>
-                </Dialog>
-                
-                <Dialog
-                    open={this.state.openLogin}
-                    fullWidth={true}
-                    maxWidth={'xs'}
-                    onClose={this.closeLogin.bind(this)}
-                    className="ModalAuth"
-                >
-                    <DialogTitle id="alert-dialog-title">Вход на сайт</DialogTitle>
-                    <DialogContent className="ModalContent_1_1">
-                        <div className="ModalContent_1_2">
-                            <Typography variant="h5" component="span" className="ModalLabel">Номер телефона</Typography>
-                            <InputMask 
-                                className="InputMask"
-                                mask="8 (999) 999-99-99" 
-                                placeholder="8 (999) 999-99-99" 
-                                disabled={!this.state.stage_1}
-                                value={this.state.userLogin}
-                                //onKeyPress={this.handleKeyPress}
-                                onChange={ event => this.state.stage_1 ? this.setState({ userLogin: event.target.value }) : {} }
-                            />
-                            {this.state.stage_2 ?
-                                <Typography variant="h5" component="span" className="changeNumber" onClick={this.changeNumber.bind(this)}>Изменить номер</Typography>
-                                    :
-                                null
-                            }
-                            {this.state.errPhone.length > 0 ?
-                                <div style={{ marginTop: 10, padding: 16, backgroundColor: '#BB0025', borderRadius: 4 }}>
-                                    <Typography variant="h5" component="span" style={{ fontSize: '1.1rem', color: '#fff' }}>{this.state.errPhone}</Typography>
-                                </div>
-                                    :
-                                null
-                            }
-                        </div>
-                        {this.state.stage_2 ?
-                            <div className="ModalContent_1_3">
-                                <Typography variant="h5" component="span" className="ModalLabel">Код из смс</Typography>
-                                <div className="ModalContent_1_2">
-                                    <InputMask 
-                                        className="InputMask"
-                                        mask="9999" 
-                                        value={this.state.userCode}
-                                        //onChange={ (event) => { this.changeCode.bind(this, event.target.value) } }
-                                        onChange={ this.changeCode.bind(this) }
-                                    />
-                                    {this.state.timerSMS > 0 ?
-                                        <Typography variant="h5" component="span" style={{ fontSize: '0.8rem', paddingTop: 10 }}>{'Новое смс доступно через '+this.state.timerSMS+' сек.'}</Typography>
-                                            :
-                                        <Typography variant="h5" component="span" style={{ fontSize: '0.8rem', paddingTop: 10, cursor: 'pointer', width: 'fit-content' }} onClick={this.repeatSMS.bind(this)}>Получить новый код</Typography>
-                                    }
-                                </div>
-                                {this.state.errSMS.length > 0 ?
-                                    <div style={{ marginTop: 10, padding: 16, backgroundColor: '#BB0025', borderRadius: 4 }}>
-                                        <Typography variant="h5" component="span" style={{ fontSize: '1.1rem', color: '#fff' }}>{this.state.errSMS}</Typography>
-                                    </div>
-                                        :
-                                    null
-                                }
-                            </div>
-                                :
-                            null
-                        }
-                    </DialogContent>
-                    {this.state.stage_1 ?
-                        <DialogActions style={{ padding: '12px 24px' }}>
-                            <Button onClick={this.sendSMS.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Выслать код</Button>
-                        </DialogActions>
-                            :
-                        null
-                    }
-                    {this.state.stage_2 ?
-                        <DialogActions style={{ padding: '12px 24px' }}>
-                            <Button onClick={this.checkCode.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Подтвердить код</Button>
-                        </DialogActions>
-                            :
-                        null
-                    }
-                </Dialog>
 
-
-                
-
-
-                <Dialog
-                    open={this.state.openLoginNew}
-                    fullWidth={true}
-                    maxWidth={'xs'}
-                    onClose={this.closeLogin.bind(this)}
-                    className="ModalAuth"
-                >
-                    <DialogTitle style={{ display: 'none' }}>{this.state.ResPWD === false ? 'Авторизация' : 'Восстановление пароля'}</DialogTitle>
-                    <DialogContent className="ModalContent_1_1 newContent">
-
-                        <Backdrop open={this.state.is_load_new} style={{ zIndex: 999, color: '#fff' }}>
-                            <CircularProgress color="inherit" />
-                        </Backdrop>
-
-                        <Tabs
-                            value={this.state.typeLogin}
-                            onChange={ (event, value) => { this.setState({ typeLogin: value, ResPWD: value == 0 ? false : true, errPhone: '', errSMS: '' }) } }
-                            indicatorColor="primary"
-                            //textColor="primary"
-                            variant="fullWidth"
-                            style={{ backgroundColor: '#fff', color: '#000', marginBottom: 20 }}
-                        >
-                            <Tab style={{ color: '#000' }} label="Вход" {...a11yProps(0)} />
-                            <Tab style={{ color: '#000' }} label="Регистрация" {...a11yProps(1)} />
-                        </Tabs>
-
-                        <div className="ModalContent_1_2">
-                            { this.state.ResPWD === false ?
-                                <>
-                                    <Typography variant="h5" component="span" className="ModalLabel">Номер телефона</Typography>
-                                    <InputMask 
-                                        className="InputMask"
-                                        mask="8 (999) 999-99-99" 
-                                        placeholder="8 (999) 999-99-99" 
-                                        disabled={!this.state.stage_1}
-                                        value={this.state.userLogin}
-                                        //onKeyPress={this.handleKeyPress}
-                                        onChange={ event => this.state.stage_1 ? this.setState({ userLogin: event.target.value }) : {} }
-                                    />
-                                    <Typography variant="h5" component="span" className="ModalLabel" style={{ marginTop: 20 }}>Пароль</Typography>
-                                    <TextField 
-                                        size="small"
-                                        variant="outlined" 
-                                        type="password"
-                                        value={this.state.pwd} 
-                                        disabled={!this.state.stage_1}
-                                        onChange={ event => this.setState({ pwd: event.target.value }) }
-                                    />
-                                    <Typography variant="h5" component="span" className="changeNumberGray" onClick={this.LoginBySMS.bind(this)}>Войти по смс</Typography>
-                                    
-                                </>
-                                    :
-                                <>
-                                    { this.state.ResPWD === true && this.state.NeedCode === false ?
-                                        <>
-                                            <Typography variant="h5" component="span" className="ModalLabel">Номер телефона</Typography>
-                                            <InputMask 
-                                                className="InputMask"
-                                                mask="8 (999) 999-99-99" 
-                                                placeholder="8 (999) 999-99-99" 
-                                                disabled={!this.state.stage_1}
-                                                value={this.state.userLogin}
-                                                //onKeyPress={this.handleKeyPress}
-                                                onChange={ event => this.state.stage_1 ? this.setState({ userLogin: event.target.value }) : {} }
-                                            />
-
-                                            <Typography variant="h5" component="span" className="ModalLabel" style={{ marginTop: 20 }}>{ this.state.typeLogin == 0 ? 'Новый пароль' : 'Придумайте пароль' }</Typography>
-                                            <TextField 
-                                                size="small"
-                                                variant="outlined" 
-                                                type="password"
-                                                value={this.state.pwd} 
-                                                disabled={!this.state.stage_1}
-                                                onChange={ event => this.setState({ pwd: event.target.value }) }
-                                            />
-                                        </>
-                                            :
-                                        <div className="ModalContent_1_3">
-                                            <Typography variant="h5" component="span" className="ModalLabel">Номер телефона</Typography>
-                                            <InputMask 
-                                                className="InputMask"
-                                                mask="8 (999) 999-99-99" 
-                                                placeholder="8 (999) 999-99-99" 
-                                                disabled={true}
-                                                value={this.state.userLogin}
-                                            />
-
-                                            <div className="ModalContent_1_2">
-                                                <Typography variant="h5" component="span" className="ModalLabel" style={{ marginTop: 20 }}>Код из смс</Typography>
-                                                <InputMask 
-                                                    className="InputMask"
-                                                    mask="9999" 
-                                                    value={this.state.userCode}
-                                                    onChange={ this.changeCodeNew.bind(this) }
-                                                />
-                                                {this.state.timerSMS > 0 ?
-                                                    <Typography variant="h5" component="span" style={{ fontSize: '0.8rem', paddingTop: 10 }}>{'Новое смс доступно через '+this.state.timerSMS+' сек.'}</Typography>
-                                                        :
-                                                    <Typography variant="h5" component="span" style={{ fontSize: '0.8rem', paddingTop: 10, cursor: 'pointer', width: 'fit-content' }} onClick={this.repeatSMS.bind(this)}>Получить новый код</Typography>
-                                                }
-                                            </div>
-                                            {this.state.errSMS.length > 0 ?
-                                                <div style={{ marginTop: 10, padding: 16, backgroundColor: '#BB0025', borderRadius: 4 }}>
-                                                    <Typography variant="h5" component="span" style={{ fontSize: '1.1rem', color: '#fff' }}>{this.state.errSMS}</Typography>
-                                                </div>
-                                                    :
-                                                null
-                                            }
-                                        </div>
-                                        
-                                    }
-                                </>
-                            }
-                            {this.state.errPhone.length > 0 ?
-                                <div style={{ marginTop: 10, padding: 16, backgroundColor: '#BB0025', borderRadius: 4 }}>
-                                    <Typography variant="h5" component="span" style={{ fontSize: '1.1rem', color: '#fff' }}>{this.state.errPhone}</Typography>
-                                </div>
-                                    :
-                                null
-                            }
-                        </div>
                         
-                    </DialogContent>
-                    <DialogActions style={{ padding: '12px 24px' }}>
-                        { this.state.ResPWD === false ?
-                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', width: '100%', justifyContent: 'space-between' }}>
-                                <Typography variant="h5" component="span" className="changeNumber" onClick={this.ResPWD.bind(this)}>Восстановить пароль</Typography>
 
-                                <Button onClick={this.logIn.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Войти</Button>
-                            </div>
+                        
+                        <Link to={"/"+this.state.cityName+"/akcii"} style={{ width: '7.22%', minWidth: 'max-content', textDecoration: 'none' }}>
+                            <span className={this.state.activePage == 'actii' ? 'headerCat activeCat' : 'headerCat'}>Акции</span>
+                        </Link>
+                        <div style={{ width: '3.25%' }} />
 
-                            
+
+                        {this.state.token.length > 0 ?
+                            this.state.userName.length > 0 ?
+                                <Link to={"/"+this.state.cityName+"/profile"} style={{ width: '12.27%', minWidth: 'max-content', textDecoration: 'none' }} className='headerProfile'><span>{this.state.userName}</span></Link> 
+                                    :
+                                <Link to={"/"+this.state.cityName+"/profile"} style={{ width: '12.27%', minWidth: 'max-content', textDecoration: 'none' }} className='headerProfile'><span>Профиль</span></Link>
                                 :
-                                this.state.NeedCode === false ?
-                                    <Button onClick={this.sendsmsrp.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Подтвердить номер</Button>
-                                        :
-                                    <Button onClick={this.checkcoderp.bind(this)} style={{ backgroundColor: '#BB0025', color: '#fff', padding: '6px 30px' }}>Авторизоваться</Button>
+                            <div style={{ width: '12.27%', minWidth: 'max-content' }} className='headerProfile' onClick={this.openLogin.bind(this)}><span>Войти</span></div>
                         }
-                    </DialogActions>
-                </Dialog>
-                
+                        <div style={{ width: '0.72%' }} />
 
+                        <OpenBasket openLogin={this.openLogin.bind(this)} />
+                        <div style={{ width: '4.51%' }} />
+                    </Toolbar>
+                </AppBar>
 
+                <ModalCity isOpen={this.state.openCity} close={this.closeCity.bind(this)} cityList={this.state.cityList} cityName={this.state.cityName} />
+                <ModalLogin isOpen={this.state.openLoginNew} close={this.closeLogin.bind(this)} />
 
                 {this.state.activePage == 'home' ?
                     <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
@@ -3224,7 +2717,7 @@ export class HeaderOld extends React.Component {
                 <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
                     <CustomBottomNavigation login={ this.openLogin.bind(this) } />
                 </Box>
-            </div>
+            </Box>
         )
     }
 }
