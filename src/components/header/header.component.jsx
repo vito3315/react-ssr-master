@@ -816,8 +816,12 @@ class ModalCity extends React.Component{
     }
 
     getNewLink(city){
-        let this_addr = window.location.pathname;
-        return this_addr.replace(this.state.cityName, city);
+        if (typeof window !== 'undefined') {
+            let this_addr = window.location.pathname;
+            return this_addr.replace(this.state.cityName, city);
+        }else{
+            return '';
+        }
     }
 
     render(){
