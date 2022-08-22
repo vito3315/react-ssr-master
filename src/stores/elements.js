@@ -109,6 +109,35 @@ export function IconClose(props) {
     );
 }
 
+export function BurgerIcon(props) {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="23"
+            fill="none"
+            viewBox="0 0 30 23"
+            {...props}
+        >
+            <path
+                stroke="#B1B1B1"
+                strokeLinecap="round"
+                strokeWidth="3"
+                d="M1.5 1.5L28.5 1.5"></path>
+            <path
+                stroke="#B1B1B1"
+                strokeLinecap="round"
+                strokeWidth="3"
+                d="M1.5 11.5L28.5 11.5"></path>
+            <path
+                stroke="#B1B1B1"
+                strokeLinecap="round"
+                strokeWidth="3"
+                d="M1.5 21.5L28.5 21.5"></path>
+        </svg>
+    );
+}
+
 export class MiniActionsCartButton extends React.PureComponent{
     render(){
         return (

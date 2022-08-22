@@ -33,7 +33,7 @@ import Badge from '@mui/material/Badge';
 import itemsStore from '../../stores/items-store';
 import config from '../../stores/config';
 
-import { MiniActionsCartButton, MiniActionsCartButtonPrize, IconRuble, MyTextInput, IconClose } from '../../stores/elements';
+import { MiniActionsCartButton, MiniActionsCartButtonPrize, IconRuble, MyTextInput, IconClose, BurgerIcon } from '../../stores/elements';
 
 import { autorun } from "mobx"
 
@@ -54,6 +54,17 @@ import { styled } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreIcon from '@mui/icons-material/MoreVert';
+
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+import DraftsIcon from '@mui/icons-material/Drafts';
 
 const Fade = React.forwardRef(function Fade(props, ref) {
     const { in: open, children, onEnter, onExited, ...other } = props;
@@ -1797,7 +1808,7 @@ export class HeaderOld extends React.Component {
         
         if( this.props && this.props.data ){
             this.is_load = true;
-
+            
             itemsStore.setDops(this.props.data.all.other.cats.need_dop);
             itemsStore.setAllItems(this.props.data.all.other.cats.all_items);
             itemsStore.setAllItemsCat(this.props.data.all.other.cats.arr);
@@ -2413,7 +2424,7 @@ export class Header extends React.Component{
             token: '',
             
             soc_link: null,
-            
+            openDrawer: false,
             anchorEl: null,
             cityNameRu: this.props.data ? this.props.data.all.other.cats.this_city_name_ru && this.props.data.all.other.cats.this_city_name_ru.length > 0 ? this.props.data.all.other.cats.this_city_name_ru : 'Город' : 'Город'
         };
@@ -2603,6 +2614,12 @@ export class Header extends React.Component{
         })
     };
 
+    toggleDrawer(open){
+        this.setState({
+            openDrawer: open
+        })
+    };
+
     render(){
         let link = this.props.this_link;
         link = link.split('/');
@@ -2643,7 +2660,7 @@ export class Header extends React.Component{
 
         return (
             <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="fixed" className='headerNew' id='headerNew' elevation={2}>
+                <AppBar position="fixed" className='headerNew' id='headerNew' elevation={2} sx={{ display: { xs: 'none', md: 'block' } }}>
                     <Toolbar>
                         <div style={{ width: '4.51%' }} />
                         <Link to={"/"} style={{ width: '14.8%' }}>
@@ -2705,25 +2722,45 @@ export class Header extends React.Component{
                     </Toolbar>
                 </AppBar>
 
+                <AppBar position="fixed" className='headerNewMobile' id='headerNewMobile' elevation={2} sx={{ display: { xs: 'block', md: 'none' } }}>
+                    <Toolbar>
+                        <Link to={"/"}>
+                            <img alt="Жако доставка роллов и пиццы" src={`/assets/Logomini.png`} style={{ height: 40 }} />
+                        </Link> 
+
+                        <React.Fragment>
+                            <BurgerIcon onClick={this.toggleDrawer.bind(this, true)} />
+                            <SwipeableDrawer
+                                anchor={'right'}
+                                open={this.state.openDrawer}
+                                onClose={this.toggleDrawer.bind(this, false)}
+                                onOpen={this.toggleDrawer.bind(this, true)}
+                            >
+                                <List className='LinkList'>
+                                    <ListItem disablePadding>
+                                        <Link to={"/"+this.state.cityName}>Меню</Link> 
+                                    </ListItem>
+                                    <ListItem disablePadding>
+                                        <Link to={"/"+this.state.cityName+"/akcii"}>Акции</Link> 
+                                    </ListItem>
+                                    <ListItem disablePadding>
+                                        <Link to={"/"+this.state.cityName+"/profile"}>Профиль</Link> 
+                                    </ListItem>
+                                    <ListItem disablePadding>
+                                        <Link to={"/"+this.state.cityName+"/contacts"}>Контакты</Link> 
+                                    </ListItem>
+                                </List>
+                            </SwipeableDrawer>
+                        </React.Fragment>
+                    </Toolbar>
+                </AppBar>
+
+                
+
                 <ModalCity isOpen={this.state.openCity} close={this.closeCity.bind(this)} cityList={this.state.cityList} cityName={this.state.cityName} />
                 <ModalLogin isOpen={this.state.openLoginNew} close={this.closeLogin.bind(this)} />
 
-                {this.state.activePage == 'home' ?
-                    <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
-                        <div style={{ width: '100%', height: 3, position: 'fixed', top: 85, zIndex: 0, backgroundColor: '#bababa', opacity: 0.1 }} />
-                        <div style={{ width: '100%', height: 3, position: 'fixed', top: 88, zIndex: 0, backgroundColor: '#bababa', opacity: 0.09 }} />
-                        <div style={{ width: '100%', height: 3, position: 'fixed', top: 91, zIndex: 0, backgroundColor: '#bababa', opacity: 0.08 }} />
-                        <div style={{ width: '100%', height: 3, position: 'fixed', top: 94, zIndex: 0, backgroundColor: '#bababa', opacity: 0.07 }} />
-                        <div style={{ width: '100%', height: 3, position: 'fixed', top: 97, zIndex: 0, backgroundColor: '#bababa', opacity: 0.06 }} />
-                        <div style={{ width: '100%', height: 3, position: 'fixed', top: 100, zIndex: 0, backgroundColor: '#bababa', opacity: 0.05 }} />
-                        <div style={{ width: '100%', height: 3, position: 'fixed', top: 103, zIndex: 0, backgroundColor: '#bababa', opacity: 0.04 }} />
-                        <div style={{ width: '100%', height: 3, position: 'fixed', top: 106, zIndex: 0, backgroundColor: '#bababa', opacity: 0.03 }} />
-                        <div style={{ width: '100%', height: 3, position: 'fixed', top: 109, zIndex: 0, backgroundColor: '#bababa', opacity: 0.02 }} />
-                        <div style={{ width: '100%', height: 3, position: 'fixed', top: 112, zIndex: 0, backgroundColor: '#bababa', opacity: 0.01 }} />
-                    </Box>
-                        :
-                    null
-                }    
+                   
                 
                 <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
                     <CustomBottomNavigation login={ this.openLogin.bind(this) } />

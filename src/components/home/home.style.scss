@@ -2,6 +2,8 @@ $Ubuntu: 'Ubuntu';
 $Roboto: 'Roboto';
 $Futuris: 'FuturaFuturisC Bold';
 $colorMain: #CC0033;
+$colorText: #525252;
+
 @mixin fons($size: 1rem, $family: $Roboto) {
     font-size: $size;
     font-family: $family !important;
@@ -9,6 +11,109 @@ $colorMain: #CC0033;
 @mixin fons_new($size: 1rem, $family: $Roboto) {
     font-size: $size !important;
     font-family: $family, bold !important;
+}
+@mixin fonsNew($size: 1rem, $family: $Roboto) {
+    font-size: $size;
+    font-family: $family!important;
+    color: $colorText;
+}
+.HomeSubCatList{
+    height: 100%;
+    background-color: #fff;
+    position: sticky; 
+    top: 120px;
+    z-index: 1000;
+    //padding-top: 10px;
+    padding-bottom: 10px;
+    & > .subHeaderBlock{
+        height: 100%;
+        width: 100%;
+        margin-left: 20px;
+        overflow-x: auto;
+        //scroll-snap-type: x proximity;
+
+        //scroll-snap-type: x proximity;
+        //scroll-padding: 50%;
+
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        display: flex;
+        flex-direction: row;
+        &::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+        & > a:last-child > span{
+            margin-right: 20px;
+        }
+        & > a > span{
+            @include fonsNew(0.875rem, $Roboto);
+            text-align: center;
+            height: 40px;
+            border-radius: 10px;
+            margin-right: 5px;
+            padding-left: 18px;
+            padding-right: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        & > a > span:not(.activeCat){
+            background-color: rgba(#F9BC23, 0.6);
+            font-weight: 400;
+        }
+        & > a > span.activeCat{
+            background-color: #F9BC23;
+            font-weight: 700;
+        }
+    }
+}
+.HomeCatList{
+    height: 100%;
+    background-color: #fff;
+    position: sticky; 
+    top: 60px;
+    z-index: 1000;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    & > .subHeaderBlock{
+        margin-left: 20px;
+        overflow-x: auto;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        display: flex;
+        flex-direction: row;
+        &::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+        & > a:last-child > span{
+            margin-right: 20px;
+        }
+        & > a > span{
+            @include fonsNew(0.875rem, $Roboto);
+            text-align: center;
+            height: 40px;
+            border-radius: 10px;
+            margin-right: 5px;
+            padding-left: 18px;
+            padding-right: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        & > a > span:not(.activeCat){
+            background-color: rgba(#F9BC23, 0.6);
+            font-weight: 400;
+        }
+        & > a > span.activeCat{
+            background-color: #F9BC23;
+            font-weight: 700;
+        }
+    }
+    
 }
 
 .swiper-wrapper._h2_{
@@ -124,7 +229,7 @@ $colorMain: #CC0033;
 }
 
 .swiper_mobile{
-    padding-top: 85px!important;
+    padding-top: 60px!important;
     margin-bottom: 20px!important;
     & .swiper-slide-prev{
         //margin-right: 5vw!important;
@@ -143,7 +248,7 @@ $colorMain: #CC0033;
 }
 
 .swiper_pc{
-    margin-top: 64px!important;
+    margin-top: 60px!important;
     @media (min-width: 800px) {
         margin-top: 140px!important;
     }

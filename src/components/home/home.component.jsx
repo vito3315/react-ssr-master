@@ -41,6 +41,8 @@ import { autorun } from "mobx"
 import Slide from '@mui/material/Slide';
 import Box from '@mui/material/Box';
 
+import { Link as ScrollLink } from "react-scroll";
+
 //import LazyLoad from 'react-lazyload';
 
 import { ActionsCartButton, ActionsCartButtonStart, IconRuble, IconClose } from '../../stores/elements';
@@ -1048,7 +1050,11 @@ export class Home extends React.Component {
             page: this.props.data ? this.props.data.page : null,
             title: this.props.data ? this.props.data.title : null,
             description: this.props.data ? this.props.data.description : null,
-            mainLink: this.props.this_link
+            mainLink: this.props.this_link,
+            doubleCatList: [],
+
+            mainCatActive: 0,
+            doubleCatActive: 0,
         };
         
         if( this.props.data ){
@@ -1256,25 +1262,42 @@ export class Home extends React.Component {
                                 var top = elem.getBoundingClientRect().top + document.body.scrollTop - 200;
                                 
                                 if(top < 0){
-                                    arrMax.push({ name: item.name, Y: top, main_id: item.main_id })
+                                    arrMax.push({ name: item.name, Y: top, main_id: item.main_id, id: item.id })
                                 }
                             }
                         })
                         
+                        let is_find = false;
+
+
+
                         if( arrMax.length > 0 ){
                             let max = arrMax[ arrMax.length-1 ];
                             
                             arrMax = [];
                             
+                            let doubleCatList = AllItemsCat.filter( (item) => parseInt(item.main_id) == parseInt(max.main_id) )
+
                             if( max ){
                                 if( this.activeID != parseInt(max.main_id) && parseInt(max.main_id) != 0 ){
-                                    if( document.querySelector('.activeCat') ){
-                                        document.querySelector('.activeCat').classList.remove('activeCat');
-                                    }
+                                    is_find = true;
                                     if( document.querySelector('#link_'+max.main_id) ){
+                                        if( document.querySelector('.activeCat') ){
+                                            document.querySelector('.activeCat').classList.remove('activeCat');
+                                        }
                                         document.querySelector('#link_'+max.main_id).classList.add('activeCat');
                                     }
-                                    
+
+                                    if( doubleCatList.length > 1 ){
+                                        this.setState({
+                                            doubleCatList: doubleCatList
+                                        })
+                                    }else{
+                                        this.setState({
+                                            doubleCatList: []
+                                        })
+                                    }
+
                                     this.activeID = parseInt(max.main_id);
                                 }
                             }
@@ -1324,8 +1347,6 @@ export class Home extends React.Component {
             
             setTimeout(() => {
                 let search = window.location.search;
-                
-                //
                 
                 if( search.length > 0 ){
                     
@@ -1648,6 +1669,83 @@ export class Home extends React.Component {
                         }
                     </Box>
                     
+                    <Box sx={{ display: { xs: 'flex', md: 'none' } }} className="HomeCatList">
+                        <div className='subHeaderBlock' name='subHeaderBlock' id='subHeaderBlock'>
+                            {itemsStore.getAllItemsCatNew().map( (item, key) => 
+                                <ScrollLink 
+                                    key={key}
+                                    to={"cat"+item.id} 
+                                    id={"catSubCat"+item.id}
+                                    spy={true} 
+                                    isDynamic={true}
+                                    onSetActive={(el) => { 
+                                        if( parseInt(item.id) != parseInt(this.state.mainCatActive) ){
+                                            this.setState({
+                                                mainCatActive: item.id
+                                            })
+
+                                            if( document.querySelector("#catSubCat"+item.id) ){
+                                                let scrollContainer = document.querySelector("#subHeaderBlock");
+
+                                                let data = document.getElementById("catSubCat"+item.id).getBoundingClientRect()
+
+                                                scrollContainer.scroll({
+                                                    left: data['x'] + data['width'] - 150,
+                                                    behavior: 'smooth'
+                                                });
+                                            }
+                                        }
+                                    }} 
+                                    smooth={false} 
+                                    offset={-120}
+                                >
+                                    <span className={ parseInt(this.state.mainCatActive) == parseInt(item.id) ? 'headerCat activeCat' : 'headerCat'} name={item.main_link} id={'link2_'+item.id}>{item.name}</span>
+                                </ScrollLink>
+                            )}
+                        </div>
+                    </Box>
+
+                    {this.state.doubleCatList.length == 0 ? null :
+                        <Box sx={{ display: { xs: 'flex', md: 'none' } }} className="HomeSubCatList">
+                            <div className='subHeaderBlock' id='sub1HeaderBlock'>
+                                {this.state.doubleCatList.map( (item, key) => 
+                                    <ScrollLink 
+                                        key={key}
+                                        to={"cat"+item.id} 
+                                        id={"cat1SubCat"+item.id}
+                                        spy={true} 
+                                        isDynamic={true}
+                                        onSetActive={(el) => { 
+                                            if( parseInt(item.main_id) != parseInt(this.state.mainCatActive) || parseInt(item.id) != parseInt(this.state.doubleCatActive) ){
+                                                this.setState({
+                                                    mainCatActive: item.main_id,
+                                                    doubleCatActive: item.id
+                                                })
+
+                                                if( document.querySelector("#cat1SubCat"+item.id) ){
+                                                    let scrollContainer = document.querySelector("#sub1HeaderBlock");
+
+                                                    let data = document.getElementById("cat1SubCat"+item.id).getBoundingClientRect()
+
+                                                    scrollContainer.scroll({
+                                                        left: data['x'] + data['width'] - 150,
+                                                        behavior: 'smooth'
+                                                    });
+                                                }
+                                            }
+                                        }} 
+                                        smooth={false} 
+                                        offset={-170}
+                                    >
+                                        <span className={ parseInt(this.state.doubleCatActive) == parseInt(item.id) ? 'headerCat activeCat' : 'headerCat'} name={item.main_link} id={'link3_'+item.id}>{item.short_name}</span>
+                                    </ScrollLink>
+                                )}
+                            </div>
+                        </Box>
+                    }
+
+                    
+
                     {itemsStore.getAllItemsCat().map((cat, key) => 
                         cat.items.length > 0 ?
                             mainLink == '' || mainLink == cat.main_link || mainLink == cat.link ?

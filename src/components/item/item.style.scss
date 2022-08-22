@@ -323,22 +323,6 @@ $colorMain: #CC0033;
     background-color: #fff!important;
 }
 
-.blurBacground{
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-
-    -moz-backdrop-filter: blur(15px);
-    -o-backdrop-filter: blur(15px);
-    -ms-backdrop-filter: blur(15px);
-}
-
-@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
-    .blurBacground{
-        background-color: rgba(0, 0, 0, 0.9);
-    }
-}
-
 .MuiTooltip-popper{
     //left: -100px!important;
     pointer-events: auto!important;

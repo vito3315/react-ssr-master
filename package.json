@@ -6,7 +6,7 @@
     "start": "NODE_ENV=development webpack serve",
     "build": "NODE_ENV=production webpack",
     "start:ssr": "node server",
-    "bundle-report": "webpack-bundle-analyzer --port 5001 dist/stats.json"
+    "bundle-report": "webpack-bundle-analyzer --port 5002 dist/stats.json"
   },
   "dependencies": {
     "@emotion/react": "^11.10.0",
@@ -26,12 +26,12 @@
     "compression": "^1.7.4",
     "css-minimizer-webpack-plugin": "^4.0.0",
     "file-loader": "^6.2.0",
-    "firebase": "^9.9.2",
+    "firebase": "^9.9.3",
     "mobx": "^6.6.1",
     "mobx-react": "^7.5.2",
     "moment": "^2.29.4",
     "moment-locales-webpack-plugin": "^1.2.0",
-    "moment-timezone-data-webpack-plugin": "^1.5.0",
+    "moment-timezone-data-webpack-plugin": "^1.5.1",
     "path-browserify": "^1.0.1",
     "postcss-loader": "^7.0.1",
     "query-string": "^7.1.1",
@@ -75,7 +75,7 @@
     "sass-loader": "^13.0.2",
     "uglifyify": "^5.0.2",
     "webpack": "^5.74.0",
-    "webpack-bundle-analyzer": "^4.5.0",
+    "webpack-bundle-analyzer": "^4.6.1",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.10.0"
   }
