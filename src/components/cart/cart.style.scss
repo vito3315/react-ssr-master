@@ -303,7 +303,7 @@ div.boxItem .promoIcon{
     display: flex;
     flex-direction: column;
     padding-top: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 100px;
     & > .boxItem{
         position: relative;
     }
@@ -400,6 +400,9 @@ div.boxItem .promoIcon{
 }
 .Cart{
     margin-top: 64px!important;
+    @media (min-width: 800px) {
+        margin-top: 170px!important;
+    }
     & h1{
         @include fons_new(2rem, $Futuris);
         text-align: center;
@@ -419,10 +422,10 @@ div.boxItem .promoIcon{
         & .bottomOrder{
             width: calc(100% - 48px);
             padding: 12px 24px;
-            height: 100px;
+            height: 145px;
             background-color: #fff;
             position: fixed;
-            bottom: 45px;
+            bottom: 0px;
             left: 0;
             z-index: 1;
             display: flex;

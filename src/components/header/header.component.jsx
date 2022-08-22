@@ -50,22 +50,9 @@ import { useSpring, animated } from '@react-spring/web';
 
 import AuthCode from 'react-auth-code-input';
 
-import { styled } from '@mui/material/styles';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-import MoreIcon from '@mui/icons-material/MoreVert';
-
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import DraftsIcon from '@mui/icons-material/Drafts';
-import BottomNavigation from '@mui/material/BottomNavigation';
 
 const Fade = React.forwardRef(function Fade(props, ref) {
     const { in: open, children, onEnter, onExited, ...other } = props;
@@ -1051,7 +1038,7 @@ class CustomBottomNavigationNew extends React.Component{
     render(){
         let this_city = itemsStore.getCity();
         
-        if( parseInt(this.state.allCount) == 0 ){
+        if( parseInt(this.state.allCount) == 0 || this.state.thisPage == 'cart' ){
             return null;
         }
 
@@ -2860,16 +2847,16 @@ export class Header extends React.Component{
                                 onOpen={this.toggleDrawer.bind(this, true)}
                             >
                                 <List className='LinkList'>
-                                    <ListItem disablePadding>
+                                    <ListItem disablePadding onClick={this.toggleDrawer.bind(this, false)}>
                                         <Link to={"/"+this.state.cityName}>Меню</Link> 
                                     </ListItem>
-                                    <ListItem disablePadding>
+                                    <ListItem disablePadding onClick={this.toggleDrawer.bind(this, false)}>
                                         <Link to={"/"+this.state.cityName+"/akcii"}>Акции</Link> 
                                     </ListItem>
-                                    <ListItem disablePadding>
+                                    <ListItem disablePadding onClick={this.toggleDrawer.bind(this, false)}>
                                         <Link to={"/"+this.state.cityName+"/profile"}>Профиль</Link> 
                                     </ListItem>
-                                    <ListItem disablePadding>
+                                    <ListItem disablePadding onClick={this.toggleDrawer.bind(this, false)}>
                                         <Link to={"/"+this.state.cityName+"/contacts"}>Контакты</Link> 
                                     </ListItem>
                                 </List>
