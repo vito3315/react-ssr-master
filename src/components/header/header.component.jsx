@@ -1051,6 +1051,10 @@ class CustomBottomNavigationNew extends React.Component{
     render(){
         let this_city = itemsStore.getCity();
         
+        if( parseInt(this.state.allCount) == 0 ){
+            return null;
+        }
+
         return(
             <Paper className="bottomNavigateNew" sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
                 
