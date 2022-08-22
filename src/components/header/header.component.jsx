@@ -1063,7 +1063,7 @@ class CustomBottomNavigationNew extends React.Component{
 
                 {this.state.auth === true ?
                     <Link
-                        to={'/'+this_city+'/profile'}
+                        to={'/'+this_city+'/cart'}
                         exact={ true }
                         className="MuiButtonBase-root MuiBottomNavigationAction-root"
                     >
@@ -1073,7 +1073,7 @@ class CustomBottomNavigationNew extends React.Component{
                     <Typography 
                         component="span"
                         className="MuiButtonBase-root MuiBottomNavigationAction-root" 
-                        onClick={this.props.login}>
+                        onClick={this.props.openLogin}>
                             Оформить заказ
                     </Typography>
                 }
