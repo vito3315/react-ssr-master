@@ -65,6 +65,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import DraftsIcon from '@mui/icons-material/Drafts';
+import BottomNavigation from '@mui/material/BottomNavigation';
 
 const Fade = React.forwardRef(function Fade(props, ref) {
     const { in: open, children, onEnter, onExited, ...other } = props;
@@ -808,9 +809,10 @@ class ModalCity extends React.Component{
         }
     }
 
-    chooseCity(){
+    chooseCity(city){
         setTimeout(()=>{ 
             itemsStore.saveCartData([]); 
+            localStorage.setItem('myCity', city)
             window.location.reload(); 
         }, 300)
     }
@@ -861,7 +863,7 @@ class ModalCity extends React.Component{
                                 key={key} 
                                 className={ this.state.cityName == item.link ? 'active' : '' } 
                                 to={{ pathname: this.getNewLink(item.link) }} 
-                                onClick={this.chooseCity.bind(this)}
+                                onClick={this.chooseCity.bind(this, item.link)}
                             >
                                 <Typography variant="h5" component="span" className={"ModalLabel"}>{item.name}</Typography>
                             </Link> 
@@ -967,6 +969,111 @@ class CustomBottomNavigation extends React.Component{
                     </Typography>
                 }
             </div>
+        )
+    }
+}
+
+function getNoun(number, one, two, five) {
+    let n = Math.abs(number);
+    n %= 100;
+    if (n >= 5 && n <= 20) {
+      return five;
+    }
+
+    n %= 10;
+
+    if (n === 1) {
+      return one;
+    }
+
+    if (n >= 2 && n <= 4) {
+      return two;
+    }
+    
+    return five;
+}
+
+class CustomBottomNavigationNew extends React.Component{
+    constructor(props) {
+        super(props);
+        
+        this.state = {      
+            allPrice: 0,
+            allCount: 0,
+            thisPage: '',
+            auth: false
+        };
+    }
+    
+    componentDidMount = () => {
+        autorun(() => {
+            let cartItems = itemsStore.getItems();
+            let promoItems = itemsStore.getItemsPromo();
+            let newCart = [];
+            
+            cartItems.map((item) => {
+                if( item.count > 0 ){
+                    item.type == 'us';
+                    newCart.push(item)
+                }
+            })
+            
+            promoItems.map((item) => {
+                if( item.count > 0 ){
+                    item.type == 'promo';
+                    newCart.push(item)
+                }
+            })
+            
+            let allCount = 0;
+
+            newCart.map( (item) => {
+                allCount += parseInt(item.count);
+            } )
+
+            this.setState({
+                allCount: allCount,
+                allPrice: itemsStore.getSumDiv() + itemsStore.getAllPrice(),
+                thisPage: itemsStore.getPage(),
+                auth: itemsStore.getToken() ? true : false
+            })
+        })
+    }
+    
+    shouldComponentUpdate(nextProps, nextState) {
+        return (
+            this.state.allPrice !== nextState.allPrice ||
+            this.state.thisPage !== nextState.thisPage ||
+            this.state.auth !== nextState.auth
+        );
+    }
+    
+    render(){
+        let this_city = itemsStore.getCity();
+        
+        return(
+            <Paper className="bottomNavigateNew" sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+                
+                <span className='textPrice'>{this.state.allCount} {getNoun(this.state.allCount, 'товар', 'товара', 'товаров')} на { new Intl.NumberFormat('ru-RU').format(this.state.allPrice)} <IconRuble style={{ width: 14, height: 14, fill: '#525252', marginLeft: 5, paddingBottom: 1  }} /></span>
+
+
+                {this.state.auth === true ?
+                    <Link
+                        to={'/'+this_city+'/profile'}
+                        exact={ true }
+                        className="MuiButtonBase-root MuiBottomNavigationAction-root"
+                    >
+                        Оформить заказ
+                    </Link>
+                        :
+                    <Typography 
+                        component="span"
+                        className="MuiButtonBase-root MuiBottomNavigationAction-root" 
+                        onClick={this.props.login}>
+                            Оформить заказ
+                    </Typography>
+                }
+            </Paper>
         )
     }
 }
@@ -1870,6 +1977,8 @@ export class HeaderOld extends React.Component {
                 })
             } 
             
+            
+
             let cartData = itemsStore.getCartData();
 
             if( cartData.orderType || cartData.orderType == 0 ){
@@ -2455,6 +2564,12 @@ export class Header extends React.Component{
                 })
             } 
             
+            if( !localStorage.getItem('myCity') || localStorage.getItem('myCity').length == 0 ){
+                this.setState({
+                    openCity: true
+                })
+            }
+
             let cartData = itemsStore.getCartData();
 
             if( cartData.orderType || cartData.orderType == 0 ){
@@ -2767,7 +2882,7 @@ export class Header extends React.Component{
                    
                 
                 <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
-                    <CustomBottomNavigation login={ this.openLogin.bind(this) } />
+                    <CustomBottomNavigationNew openLogin={this.openLogin.bind(this)} />
                 </Box>
             </Box>
         )
