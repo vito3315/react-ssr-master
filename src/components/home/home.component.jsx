@@ -10,9 +10,6 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ButtonGroup from '@mui/material/ButtonGroup';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 import * as Scroll from 'react-scroll';
 
 var Element  = Scroll.Element;
@@ -29,9 +26,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
-
-import IconButton from '@mui/material/IconButton';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 import itemsStore from '../../stores/items-store';
 import config from '../../stores/config';
@@ -116,9 +110,6 @@ class CoverFlowCarousel extends React.Component {
                 nextEl: ".swiper-button-next", // arrows on the side of the slides
                 prevEl: ".swiper-button-prev", // arrows on the side of the slides
             } : {},
-            
-            //renderPrevButton: () => <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />,
-            //renderNextButton: () => <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
         });
     }
      
@@ -540,124 +531,6 @@ class CardItem extends React.Component {
                 </Grid>
             )
         }
-    }
-}
-
-class CardItemBot extends React.Component {
-    _isMounted = false;
-    
-    constructor(props) {
-        super(props);
-        
-        this.state = {   
-            city: this.props.city,   
-            item: this.props.data, 
-            count: 0 
-        };
-    }
-    
-    componentDidMount(){
-        this._isMounted = true; 
-        let my_cart = itemsStore.getItems();
-            
-        let item = my_cart.find( (item) => item.item_id == this.state.item['id'] );
-  
-        if( item ){
-            this.setState({ 
-              count: item.count,
-            })
-        }
-        
-        autorun(() => {
-            if( this._isMounted ){
-                let my_cart = itemsStore.getItems();
-                let item = my_cart.find( (item) => item.item_id == this.state.item['id'] );
-          
-                if( item ){
-                    this.setState({ 
-                      count: item.count,
-                    })
-                }else{
-                    this.setState({ 
-                      count: 0,
-                    })
-                }
-            }
-        })
-    }
-    
-    componentWillUnmount(){
-        this._isMounted = false;
-    }
-    
-    add(){
-        if(this._isMounted){
-            itemsStore.AddItem(this.state.item['id']);
-        }
-    }
-    
-    minus(){
-        if(this._isMounted){
-            itemsStore.MinusItem(this.state.item['id']);
-        }
-    }
-    
-    shouldComponentUpdate(nextProps, nextState) {
-        return (
-            this.state.count !== nextState.count ||
-            this.state.item.price !== nextState.item.price
-        );
-    }
-    
-    render() {
-        return (
-            <Card elevation={0} className="CardItem">
-                
-                <CardContent style={{ cursor: 'pointer', position: 'relative' }} onClick={ () => this.props.openItem(this.state.item.id)}>
-                    <a href={'/'+this.state.city+'/menu/item/'+this.state.item.link}>
-                        { parseInt(this.state.item.is_new) == 0 ? null :
-                            <img 
-                                src='/assets/is_new.png'
-                                alt="Новинка"
-                                style={{ position: 'absolute', width: 70, top: 0, right: 0 }}
-                            />
-                        }
-                        
-                        <CardContent style={{ padding: '1.2vw', paddingBottom: 0, paddingTop: 0 }}>
-                            <Typography className="CardNameItem" gutterBottom variant="h5" component="h3">{this.state.item.name}</Typography>
-                            <Typography gutterBottom className="CardInfoWeiItem" component="p">{this.state.item.info_weight}</Typography>
-                            <Typography className="CardInfoItem" component="p">{this.state.item.tmp_desc}</Typography>
-                        </CardContent>
-                    </a>
-                </CardContent>
-                    
-                <CardActions className="CardAction">
-                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginLeft: 0, width: '100%' }}>
-                        <div><Typography className="CardPriceItem" variant="h5" component="span">{this.state.item.price} <Ruble /></Typography></div>
-                        {this.state.count == 0 ?
-                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder fohover">
-                                <Button variant="contained" className="BtnCardMain CardInCardItem NONHOVERED" onClick={this.add.bind(this)}>
-                                    <ShoppingCartOutlinedIcon color='inherit'  />
-                                </Button>
-                                <Button variant="contained" className="BtnCardMain CardInCardItem HOVERED" onClick={this.add.bind(this)}>В корзину</Button>
-                            </ButtonGroup>
-                                :
-                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder count">
-                                <Button variant="contained" className="BtnCardMain" onClick={this.minus.bind(this)}>
-                                    <FontAwesomeIcon icon={faMinus} style={{ fontSize: '1rem' }} />
-                                </Button>
-                                <Button variant="contained" className="BtnCardMain" >
-                                    <Typography className="CardCountItem" component="span">{this.state.count}</Typography>
-                                </Button>
-                                <Button variant="contained" className="BtnCardMain" onClick={this.add.bind(this)}> 
-                                    <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1rem' }} />
-                                </Button>
-                            </ButtonGroup>
-                        }
-                    </div>
-                </CardActions>
-            </Card>
-        )
     }
 }
 

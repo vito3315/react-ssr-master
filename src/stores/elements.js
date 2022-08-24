@@ -229,4 +229,4 @@ export class MyTextInput extends React.PureComponent {
         />
       )
     }
-  }
+}
