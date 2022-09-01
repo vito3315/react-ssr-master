@@ -336,35 +336,35 @@ class CardItem extends React.Component {
                                 <source 
                                     type="image/webp" 
                                     srcset={`
-                                        https://storage.yandexcloud.net/site-img/${img_name}_138x138.webp 138w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_146x146.webp 146w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_183x183.webp 183w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_233x233.webp 233w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_292x292.webp 292w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_366x366.webp 366w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_584x584.webp 584w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_760x760.webp 760w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_1875x1875.webp 1875w`} 
+                                        https://storage.yandexcloud.net/site-img/${img_name}_276x276.webp 138w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_292x292.webp 146w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_366x366.webp 183w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_466x466.webp 233w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_585x585.webp 292w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_732x732.webp 366w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_1168x1168.webp 584w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_1420x1420.webp 760w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_2000x2000.webp 1875w`} 
                                     sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
                                 <source 
                                     type="image/jpeg" 
                                     srcset={`
-                                        https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg 138w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_146x146.jpg 146w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_183x183.jpg 183w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_233x233.jpg 233w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_292x292.jpg 292w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_366x366.jpg 366w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_584x584.jpg 584w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_760x760.jpg 760w,
-                                        https://storage.yandexcloud.net/site-img/${img_name}_1875x1875.jpg 1875w`} 
+                                        https://storage.yandexcloud.net/site-img/${img_name}_276x276.jpg 138w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_292x292.jpg 146w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_366x366.jpg 183w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_466x466.jpg 233w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_585x585.jpg 292w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_732x732.jpg 366w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_1168x1168.jpg 584w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_1420x1420.jpg 760w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_2000x2000.jpg 1875w`} 
                                     sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
 
                                 <img 
                                     alt={this.state.item.name} 
                                     title={this.state.item.name} 
                                     src={`https://storage.yandexcloud.net/site-img/${img_name}_292x292.jpg`} 
-                                    style={{ minHeight: GRID * 1.3 }}
+                                    style={{ minHeight: GRID * 1.125, minWidth: GRID * 1.125 }}
                                     loading="lazy"
                                 />
                             </picture>
@@ -707,15 +707,36 @@ class CardItemBotNew extends React.Component {
                                 :
                             <picture>
                                 <source 
-                                    srcSet={"https://storage.yandexcloud.net/site-img/"+img_name+"_138x138.webp"} 
                                     type="image/webp" 
-                                />
+                                    srcset={`
+                                        https://storage.yandexcloud.net/site-img/${img_name}_138x138.webp 138w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_146x146.webp 146w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_183x183.webp 183w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_233x233.webp 233w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_292x292.webp 292w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_366x366.webp 366w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_584x584.webp 584w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_760x760.webp 760w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_1875x1875.webp 1875w`} 
+                                    sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
+                                <source 
+                                    type="image/jpeg" 
+                                    srcset={`
+                                        https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg 138w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_146x146.jpg 146w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_183x183.jpg 183w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_233x233.jpg 233w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_292x292.jpg 292w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_366x366.jpg 366w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_584x584.jpg 584w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_760x760.jpg 760w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_1875x1875.jpg 1875w`} 
+                                    sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
                                 <img 
                                     alt={this.state.item.name} 
-                                    title={this.state.item.name} 
-                                    datasrc={`https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg`} 
+                                    title={this.state.item.name}
                                     loading="lazy"
-                                />
+                                    src={`https://storage.yandexcloud.net/site-img/${img_name}138x138.jpg`} />
                             </picture>
                         }
                         
@@ -797,16 +818,37 @@ class CardItemBotNew extends React.Component {
                                 :
                             <picture>
                                 <source 
-                                    srcSet={"https://storage.yandexcloud.net/site-img/"+img_name+"_138x138.webp"} 
                                     type="image/webp" 
-                                />
+                                    srcset={`
+                                        https://storage.yandexcloud.net/site-img/${img_name}_138x138.webp 138w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_146x146.webp 146w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_183x183.webp 183w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_233x233.webp 233w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_292x292.webp 292w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_366x366.webp 366w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_584x584.webp 584w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_760x760.webp 760w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_1875x1875.webp 1875w`} 
+                                    sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
+                                <source 
+                                    type="image/jpeg" 
+                                    srcset={`
+                                        https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg 138w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_146x146.jpg 146w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_183x183.jpg 183w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_233x233.jpg 233w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_292x292.jpg 292w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_366x366.jpg 366w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_584x584.jpg 584w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_760x760.jpg 760w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_1875x1875.jpg 1875w`} 
+                                    sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
                                 <img 
                                     alt={this.state.item.name} 
-                                    title={this.state.item.name} 
-                                    datasrc={`https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg`} 
-                                    style={{ width: ((GRID*3) + (2*20)), height: ((GRID*3) + (2*20))  }}
+                                    title={this.state.item.name}
                                     loading="lazy"
-                                />
+                                    style={{ width: ((GRID*3) + (2*20)), height: ((GRID*3) + (2*20))  }}
+                                    src={`https://storage.yandexcloud.net/site-img/${img_name}138x138.jpg`} />
                             </picture>
                         }
 
@@ -1838,15 +1880,37 @@ export class Home extends React.Component {
                                                             :
                                                         <picture>
                                                             <source 
-                                                                srcSet={"https://storage.yandexcloud.net/site-img/"+img_app+"_732x732.webp"} 
                                                                 type="image/webp" 
-                                                            />
+                                                                srcset={`
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_138x138.webp 138w,
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_146x146.webp 146w,
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_183x183.webp 183w,
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_233x233.webp 233w,
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_292x292.webp 292w,
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_366x366.webp 366w,
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_584x584.webp 584w,
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_760x760.webp 760w,
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_1875x1875.webp 1875w`} 
+                                                                sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
+                                                            <source 
+                                                                type="image/jpeg" 
+                                                                srcset={`
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_138x138.jpg 138w,
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_146x146.jpg 146w,
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_183x183.jpg 183w,
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_233x233.jpg 233w,
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_292x292.jpg 292w,
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_366x366.jpg 366w,
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_584x584.jpg 584w,
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_760x760.jpg 760w,
+                                                                    https://storage.yandexcloud.net/site-img/${item.img_app}_1875x1875.jpg 1875w`} 
+                                                                sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
                                                             <img 
                                                                 alt={item.name} 
                                                                 title={item.name} 
-                                                                style={{ width: '100%', height: 'auto' }}
-                                                                src={`https://storage.yandexcloud.net/site-img/${item.img_app}_732x732.jpg`} />
-                                                        </picture>
+                                                                style={{ width: '100%', height: 'auto' }} 
+                                                                src={`https://storage.yandexcloud.net/site-img/${item.img_app}138x138.jpg`} />
+                                                        </picture>   
                                                     }
                                                 </div>
                                                 <div style={{ width: '60%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>

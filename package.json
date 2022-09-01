@@ -9,18 +9,18 @@
     "bundle-report": "webpack-bundle-analyzer --port 5002 dist/stats.json"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.0",
-    "@emotion/styled": "^11.10.0",
-    "@fortawesome/fontawesome-svg-core": "^6.1.2",
-    "@fortawesome/free-brands-svg-icons": "^6.1.2",
-    "@fortawesome/free-regular-svg-icons": "^6.1.2",
-    "@fortawesome/free-solid-svg-icons": "^6.1.2",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@fortawesome/fontawesome-svg-core": "^6.2.0",
+    "@fortawesome/free-brands-svg-icons": "^6.2.0",
+    "@fortawesome/free-regular-svg-icons": "^6.2.0",
+    "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@loadable/component": "^5.15.2",
     "@loadable/server": "^5.15.2",
-    "@mui/icons-material": "^5.10.2",
-    "@mui/material": "^5.10.2",
-    "@mui/styled-engine-sc": "^5.10.1",
+    "@mui/icons-material": "^5.10.3",
+    "@mui/material": "^5.10.3",
+    "@mui/styled-engine-sc": "^5.10.3",
     "@react-spring/web": "^9.5.2",
     "axios": "^0.27.2",
     "compression": "^1.7.4",
@@ -44,7 +44,7 @@
     "react-transition-group": "^4.4.5",
     "styled-components": "^5.3.5",
     "url-loader": "^4.1.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^3.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.18.13",
@@ -77,6 +77,6 @@
     "webpack": "^5.74.0",
     "webpack-bundle-analyzer": "^4.6.1",
     "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.10.0"
+    "webpack-dev-server": "^4.10.1"
   }
 }

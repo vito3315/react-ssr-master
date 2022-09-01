@@ -353,12 +353,6 @@ export class Item extends React.Component {
                                     <source 
                                         type="image/webp" 
                                         srcset={`
-                                            https://storage.yandexcloud.net/site-img/${this.state.img_name}_276x276.webp 138w,
-                                            https://storage.yandexcloud.net/site-img/${this.state.img_name}_292x292.webp 146w,
-                                            https://storage.yandexcloud.net/site-img/${this.state.img_name}_366x366.webp 183w,
-                                            https://storage.yandexcloud.net/site-img/${this.state.img_name}_466x466.webp 233w,
-                                            https://storage.yandexcloud.net/site-img/${this.state.img_name}_585x585.webp 292w,
-                                            https://storage.yandexcloud.net/site-img/${this.state.img_name}_732x732.webp 366w,
                                             https://storage.yandexcloud.net/site-img/${this.state.img_name}_1168x1168.webp 584w,
                                             https://storage.yandexcloud.net/site-img/${this.state.img_name}_1420x1420.webp 760w,
                                             https://storage.yandexcloud.net/site-img/${this.state.img_name}_2000x2000.webp 1875w`} 
@@ -366,12 +360,6 @@ export class Item extends React.Component {
                                     <source 
                                         type="image/jpeg" 
                                         srcset={`
-                                            https://storage.yandexcloud.net/site-img/${this.state.img_name}_276x276.jpg 138w,
-                                            https://storage.yandexcloud.net/site-img/${this.state.img_name}_292x292.jpg 146w,
-                                            https://storage.yandexcloud.net/site-img/${this.state.img_name}_366x366.jpg 183w,
-                                            https://storage.yandexcloud.net/site-img/${this.state.img_name}_466x466.jpg 233w,
-                                            https://storage.yandexcloud.net/site-img/${this.state.img_name}_585x585.jpg 292w,
-                                            https://storage.yandexcloud.net/site-img/${this.state.img_name}_732x732.jpg 366w,
                                             https://storage.yandexcloud.net/site-img/${this.state.img_name}_1168x1168.jpg 584w,
                                             https://storage.yandexcloud.net/site-img/${this.state.img_name}_1420x1420.jpg 760w,
                                             https://storage.yandexcloud.net/site-img/${this.state.img_name}_2000x2000.jpg 1875w`} 
@@ -382,7 +370,7 @@ export class Item extends React.Component {
                                         alt={this.state.item.name} 
                                         title={this.state.item.name} 
                                         className="img" 
-                                        src={`https://storage.yandexcloud.net/site-img/${this.state.img_name}_1420x1420.jpg`} />
+                                        src={`https://storage.yandexcloud.net/site-img/${this.state.img_name}_1168x1168.jpg`} />
                                 </picture>
 
                                 { parseInt(this.state.item.is_new) == 0 ? 
