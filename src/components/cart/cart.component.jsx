@@ -177,6 +177,10 @@ class CartItem extends React.Component {
                 
                 let this_item = new_cartItems.find( (item) => item.item_id == this.state.item.id );
                 
+                if( !this_item ){
+                    this_item = promo_cartItems.find( (item) => item.item_id == this.state.item.id );
+                }
+
                 if( this.state.type != 'promo' ){
                     if( this_item ){
                         this.setState({
@@ -224,9 +228,9 @@ class CartItem extends React.Component {
     
     shouldComponentUpdate(nextProps, nextState) {
         return (
-            this.state.count !== nextState.count ||
+            (this.state.count) !== (nextState.count) ||
             this.state.onePrice !== nextState.onePrice ||
-            this.state.allPrice !== nextState.allPrice ||
+            (this.state.allPrice) !== (nextState.allPrice) ||
             this.state.item.name !== nextProps.item.name
         );
     }
@@ -390,6 +394,10 @@ class CartItemMobile extends React.Component {
                 
                 let this_item = new_cartItems.find( (item) => item.item_id == this.state.item.id );
                 
+                if( !this_item ){
+                    this_item = promo_cartItems.find( (item) => item.item_id == this.state.item.id );
+                }
+
                 if( this.state.type != 'promo' ){
                     if( this_item ){
                         this.setState({
@@ -1309,6 +1317,7 @@ export class Cart extends React.Component {
     }
     
     checkPromo(){
+        itemsStore.setItemsPromo([]);
         itemsStore.free_drive = 0;
         
         let promo_name = '';
