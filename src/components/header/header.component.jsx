@@ -935,8 +935,9 @@ class CustomBottomNavigationNew extends React.Component{
         return(
             <Paper className="bottomNavigateNew" sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
                 
-                <span className='textPrice'>{this.state.allCount} {getNoun(this.state.allCount, 'товар', 'товара', 'товаров')} на { new Intl.NumberFormat('ru-RU').format(this.state.allPrice)} <IconRuble style={{ width: 14, height: 14, fill: '#525252', marginLeft: 0, paddingBottom: 0  }} /></span>
-
+                { parseInt(this.state.allCount) == 0 ? null :
+                    <span className='textPrice'>{this.state.allCount} {getNoun(this.state.allCount, 'товар', 'товара', 'товаров')} на { new Intl.NumberFormat('ru-RU').format(this.state.allPrice)} <IconRuble style={{ width: 14, height: 14, fill: '#525252', marginLeft: 0, paddingBottom: 0  }} /></span>
+                }
 
                 {this.state.auth === true ?
                     <Link
