@@ -928,14 +928,14 @@ class CustomBottomNavigationNew extends React.Component{
     render(){
         let this_city = itemsStore.getCity();
         
-        if( parseInt(this.state.allCount) == 0 || this.state.thisPage == 'cart' ){
+        if( this.state.thisPage == 'cart' ){
             return null;
         }
 
         return(
             <Paper className="bottomNavigateNew" sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
                 
-                { parseInt(this.state.allCount) == 0 ? null :
+                { parseInt(this.state.allCount) == 0 ? <span className='textPrice'></span> :
                     <span className='textPrice'>{this.state.allCount} {getNoun(this.state.allCount, 'товар', 'товара', 'товаров')} на { new Intl.NumberFormat('ru-RU').format(this.state.allPrice)} <IconRuble style={{ width: 14, height: 14, fill: '#525252', marginLeft: 0, paddingBottom: 0  }} /></span>
                 }
 
@@ -1792,9 +1792,15 @@ export class Header extends React.Component{
                                     <ListItem disablePadding onClick={this.toggleDrawer.bind(this, false)}>
                                         <Link to={"/"+this.state.cityName+"/akcii"}>Акции</Link> 
                                     </ListItem>
-                                    <ListItem disablePadding onClick={this.toggleDrawer.bind(this, false)}>
-                                        <Link to={"/"+this.state.cityName+"/profile"}>Профиль</Link> 
-                                    </ListItem>
+                                    { this.state.token.length == 0 ? 
+                                        <ListItem disablePadding onClick={ () => { this.toggleDrawer(false); this.openLogin(); } }>
+                                            <a>Профиль</a> 
+                                        </ListItem>
+                                            :
+                                        <ListItem disablePadding onClick={this.toggleDrawer.bind(this, false)}>
+                                            <Link to={"/"+this.state.cityName+"/profile"}>Профиль</Link> 
+                                        </ListItem>
+                                    }
                                     <ListItem disablePadding onClick={this.toggleDrawer.bind(this, false)}>
                                         <Link to={"/"+this.state.cityName+"/contacts"}>Контакты</Link> 
                                     </ListItem>
