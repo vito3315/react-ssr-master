@@ -1778,7 +1778,7 @@ export class Header extends React.Component{
                         </Link> 
 
                         <React.Fragment>
-                            <BurgerIcon onClick={this.toggleDrawer.bind(this, true)} />
+                            <BurgerIcon onClick={this.toggleDrawer.bind(this, true)} style={{ padding: 20, marginRight: -20 }} />
                             <SwipeableDrawer
                                 anchor={'right'}
                                 open={this.state.openDrawer}
