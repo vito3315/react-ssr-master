@@ -1786,6 +1786,9 @@ export class Header extends React.Component{
                                 onOpen={this.toggleDrawer.bind(this, true)}
                             >
                                 <List className='LinkList'>
+                                    <ListItem disablePadding onClick={ () => { this.toggleDrawer(false); this.openCity(); } }>
+                                        <a>{this.state.cityNameRu}</a> 
+                                    </ListItem>
                                     <ListItem disablePadding onClick={this.toggleDrawer.bind(this, false)}>
                                         <Link to={"/"+this.state.cityName}>Меню</Link> 
                                     </ListItem>
