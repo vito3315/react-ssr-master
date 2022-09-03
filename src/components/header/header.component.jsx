@@ -1717,6 +1717,11 @@ export class Header extends React.Component{
                         </Link> 
                         <div style={{ width: '2.53%' }} />
 
+                        <a style={{ width: '7.22%', minWidth: 'max-content', textDecoration: 'none' }} onClick={this.openCity.bind(this)}>
+                            <span className={'headerCat'}>{this.state.cityNameRu}</span>
+                        </a>
+                        <div style={{ width: '0.36%' }} />
+
                         {this.state.categoryItemsNew.map((item, key) => 
                             this.state.activePage == 'home' && !check ?
                                 <React.Fragment key={key}>
@@ -1753,18 +1758,22 @@ export class Header extends React.Component{
                         <Link to={"/"+this.state.cityName+"/akcii"} style={{ width: '7.22%', minWidth: 'max-content', textDecoration: 'none' }}>
                             <span className={this.state.activePage == 'actii' ? 'headerCat activeCat' : 'headerCat'}>Акции</span>
                         </Link>
-                        <div style={{ width: '3.25%' }} />
+                        <div style={{ width: '0.36%' }} />
+
+                        
 
 
                         {this.state.token.length > 0 ?
-                            this.state.userName.length > 0 ?
-                                <Link to={"/"+this.state.cityName+"/profile"} style={{ width: '12.27%', minWidth: 'max-content', textDecoration: 'none' }} className='headerProfile'><span>{this.state.userName}</span></Link> 
+                            this.state.userName.length > 0 && false ?
+                                <Link to={"/"+this.state.cityName+"/profile"} style={{ width: '7.22%', minWidth: 'max-content', textDecoration: 'none' }}><span className='headerCat'>{this.state.userName}</span></Link> 
                                     :
-                                <Link to={"/"+this.state.cityName+"/profile"} style={{ width: '12.27%', minWidth: 'max-content', textDecoration: 'none' }} className='headerProfile'><span>Профиль</span></Link>
+                                <Link to={"/"+this.state.cityName+"/profile"} style={{ width: '7.22%', minWidth: 'max-content', textDecoration: 'none' }}><span className={this.state.activePage == 'profile' ? 'headerCat activeCat' : 'headerCat'}>Профиль</span></Link>
                                 :
-                            <div style={{ width: '12.27%', minWidth: 'max-content' }} className='headerProfile' onClick={this.openLogin.bind(this)}><span>Войти</span></div>
+                            <a style={{ width: '7.22%', minWidth: 'max-content', textDecoration: 'none' }} onClick={this.openLogin.bind(this)}><span className='headerCat'>Войти</span></a>
                         }
-                        <div style={{ width: '0.72%' }} />
+
+                        
+                        <div style={{ width: '3.25%' }} />
 
                         <OpenBasket openLogin={this.openLogin.bind(this)} />
                         <div style={{ width: '4.51%' }} />
