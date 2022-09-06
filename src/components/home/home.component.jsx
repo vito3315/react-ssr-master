@@ -1081,7 +1081,7 @@ export class Home extends React.Component {
             page: this.props.data ? this.props.data.page : null,
             title: this.props.data ? this.props.data.title : null,
             description: this.props.data ? this.props.data.description : null,
-            device: this.props.data ? this.props.data.device : null,
+            device: this.props.device ? this.props.device : null,
             mainLink: this.props.this_link,
             doubleCatList: [],
 
