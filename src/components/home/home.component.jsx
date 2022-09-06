@@ -172,6 +172,8 @@ function ItemHookAdaptive(props) {
 
     let device = props.device ? props.device : matches === true ? 'desktop' : 'mobile';
 
+    console.log( 'device', device, props.type )
+
     if( props.type == 'bot' ){
         if( device == 'desktop' ){
             return (
