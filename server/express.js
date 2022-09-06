@@ -146,7 +146,7 @@ app.use( '*', async ( req, res ) => {
         });*/
 
         const GLOBAL_STATE = {
-            deviceType: deviceType,
+            deviceType: GLOBAL_DEVICE,
             parser11: req.headers,
             data: componentData,
             city: city,
@@ -158,7 +158,7 @@ app.use( '*', async ( req, res ) => {
         }
         
         //console.log( 'ssrMatchMedia', ssrMatchMedia )
-        console.log( 'deviceType', deviceType )
+        console.log( 'deviceType', GLOBAL_DEVICE )
         console.log( 'parser', req.headers )
 
         let appHTML = ReactDOMServer.renderToString(
