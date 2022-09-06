@@ -736,7 +736,7 @@ class CardItemBotNew extends React.Component {
                                     alt={this.state.item.name} 
                                     title={this.state.item.name}
                                     loading="lazy"
-                                    src={`https://storage.yandexcloud.net/site-img/${img_name}138x138.jpg`} />
+                                    datasrc={`https://storage.yandexcloud.net/site-img/${img_name}138x138.jpg`} />
                             </picture>
                         }
                         
@@ -808,7 +808,7 @@ class CardItemBotNew extends React.Component {
                                     type="image/webp" 
                                 />
                                 <img 
-                                    src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.jpg?"+this.state.item.img_new_update} 
+                                    datasrc={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"300х200.jpg?"+this.state.item.img_new_update} 
                                     alt={this.state.item.name}
                                     title={this.state.item.name}
                                     style={{ width: ((GRID*3) + (2*20)), height: 'auto'  }}
@@ -848,7 +848,7 @@ class CardItemBotNew extends React.Component {
                                     title={this.state.item.name}
                                     loading="lazy"
                                     style={{ width: ((GRID*3) + (2*20)), height: ((GRID*3) + (2*20))  }}
-                                    src={`https://storage.yandexcloud.net/site-img/${img_name}138x138.jpg`} />
+                                    datasrc={`https://storage.yandexcloud.net/site-img/${img_name}138x138.jpg`} />
                             </picture>
                         }
 
