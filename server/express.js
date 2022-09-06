@@ -137,13 +137,13 @@ app.use( '*', async ( req, res ) => {
             })
         }
         
-        const deviceType = parser(req.headers['user-agent']).device.type || 'desktop';
-        const ssrMatchMedia = (query) => ({
+        const GLOBAL_DEVICE = parser(req.headers['user-agent']).device.type || 'desktop';
+        /*const ssrMatchMedia = (query) => ({
             matches: mediaQuery.match(query, {
             // The estimated CSS width of the browser.
             width: deviceType === 'mobile' ? '0px' : '600px',
             }),
-        });
+        });*/
 
         const GLOBAL_STATE = {
             deviceType: deviceType,
@@ -163,7 +163,7 @@ app.use( '*', async ( req, res ) => {
 
         let appHTML = ReactDOMServer.renderToString(
             <StaticRouter location={ req.originalUrl }>
-                <App globalState={GLOBAL_STATE} globalDevice={deviceType} />
+                <App globalState={GLOBAL_STATE} globalDevice={GLOBAL_DEVICE} />
             </StaticRouter>
         );
 
@@ -253,8 +253,8 @@ app.use( '*', async ( req, res ) => {
         );
 
         indexHTML = indexHTML.replace(
-            'var globalDevice = null;',
-            `globalDevice = ${deviceType.toString()};`
+            'var GLOBAL_DEVICE = null;',
+            `GLOBAL_DEVICE = ${JSON.stringify(GLOBAL_DEVICE.toString())};`
         );
 
         if( city == 'togliatti' ){
