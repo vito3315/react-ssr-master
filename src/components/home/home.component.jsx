@@ -165,21 +165,10 @@ function get_city(path){
 import { Item } from '../item';
 
 function ItemHookAdaptive(props) {
-    //const matches = useMediaQuery('(min-width:600px)', { noSsr: false });
+    const matches = useMediaQuery('(min-width:600px)', { noSsr: false });
   
-    //console.log( matches, 'matches' )
-
-    var isMatch = mediaQuery.match('screen and (min-width: 600px)', {
-        type : 'screen',
-        width: window.innerWidth+'px'
-    });
-
-    //console.log(isMatch);
-
-    console.log( 'MatchMedia', isMatch )
-
     if( props.type == 'bot' ){
-        if( isMatch ){
+        if( matches ){
             return (
                 <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '30px 16px', width: '100%' }}>
                     <CardItemBotNew data={props.data} type={'pc'} openItem={props.openItemPC} />
@@ -193,7 +182,7 @@ function ItemHookAdaptive(props) {
             </Grid>
         )
     }else{
-        if( isMatch ){
+        if( matches ){
             return (
                 <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '30px 16px', width: '100%' }}>
                     <CardItem data={props.data} type={'pc'} openItem={props.openItemPC} />
@@ -227,15 +216,6 @@ class CardItem extends React.Component {
         this._isMounted = true; 
         let my_cart = itemsStore.getItems();
           
-        var isMatch = mediaQuery.match('screen and (min-width: 40em)', {
-            type : 'screen',
-            width: window.innerWidth+'px'
-        });
-
-        //console.log(isMatch);
-
-        //console.log( 'MatchMedia', createMatchMedia(window.innerWidth) )
-
         let item = my_cart.find( (item) => item.item_id == this.state.item['id'] );
   
         if( item ){
@@ -359,9 +339,7 @@ class CardItem extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        //console.log( nextProps, nextState, this.state )
-
-        return !this.isEqual(nextState, this.state);
+        return !this.isEqual(nextState, this.state) || this.props.type !== nextProps.type;
     }
     
     render() {
@@ -376,8 +354,6 @@ class CardItem extends React.Component {
         let GRID = 0;
 
         //const GRID = (width- 7*20) / 6;
-
-        console.log( 'render user', img_name, this.props.type )
 
         if( this.props.type == 'pc' ){
 
@@ -767,8 +743,6 @@ class CardItemBotNew extends React.Component {
         let GRID = 0;
 
         //const GRID = (width- 7*20) / 6;
-
-        console.log( 'render bot', img_name, this.props.type )
 
         if( this.props.type == 'pc' ){
 
