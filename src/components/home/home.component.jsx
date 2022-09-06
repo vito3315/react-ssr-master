@@ -174,7 +174,7 @@ function ItemHookAdaptive(props) {
 
     console.log( 'device', device, props.type )
 
-    if( props.type == 'bot' ){
+    /*if( props.type == 'bot' ){
         if( device == 'desktop' ){
             console.log( 'render pc bot' )
             return (
@@ -190,8 +190,8 @@ function ItemHookAdaptive(props) {
                 <CardItemBotNew data={props.data} type={'mobile'} openItem={props.openItemMobile} />
             </Grid>
         )
-    }else{
-        if( device === 'mobile' ){
+    }else{*/
+        /*if( device === 'mobile' ){
             
             console.log( 'render mobile user' )
             return (
@@ -200,15 +200,15 @@ function ItemHookAdaptive(props) {
                 </Grid>
                 
             )
-        }
+        }*/
     
         console.log( 'render pc user' )
         return (
-            <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '30px 16px', width: '100%' }}>
-                <CardItem data={props.data} type={'pc'} openItem={props.openItemPC} />
+            <Grid item className={device === 'mobile' ? '_mobile_' : '_PC_'} xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '30px 16px', width: '100%' }}>
+                <CardItem data={props.data} type={ device === 'mobile' ? 'mobile' : 'pc'} openItem={props.openItemPC} />
             </Grid>
         )
-    }
+    //}
 }
 
 class CardItem extends React.Component {
