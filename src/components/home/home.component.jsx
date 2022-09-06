@@ -165,8 +165,10 @@ function get_city(path){
 import { Item } from '../item';
 
 function ItemHookAdaptive(props) {
-    const matches = useMediaQuery('(min-width:600px)', { noSsr: true });
+    const matches = useMediaQuery('(min-width:600px)', { noSsr: false });
   
+    console.log( matches, 'matches' )
+
     if( props.type == 'bot' ){
         if( matches ){
             return (
