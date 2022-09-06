@@ -182,7 +182,7 @@ class CardItem extends React.Component {
         
         this.state = {      
             item: this.props.data, 
-            type: this.props.type, 
+            //type: this.props.type, 
             count: 0,
             is_old_price: false,
             old_price: 0
@@ -316,7 +316,7 @@ class CardItem extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return !this.isEqual(nextState, this.state) || this.state.type !== nextProps.type;
+        return !this.isEqual(nextState, this.state) || this.props.type !== nextProps.type;
     }
     
     render() {
@@ -332,7 +332,7 @@ class CardItem extends React.Component {
 
         //const GRID = (width- 7*20) / 6;
 
-        if( this.state.type == 'pc' ){
+        if( this.props.type == 'pc' ){
 
             console.log( 'render item pc', this.props.type )
 
