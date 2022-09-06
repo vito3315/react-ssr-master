@@ -167,13 +167,13 @@ import { Item } from '../item';
 function ItemHookAdaptive(props) {
     let device = null;
 
-    if( !props.device || props.device === '' ){
+    //if( !props.device || props.device === '' ){
         const matches = useMediaQuery('(min-width:600px)', { noSsr: true });
 
         device = matches === true ? 'desktop' : 'mobile';
-    }else{
-        device = props.device;
-    }
+    //}else{
+    //    device = props.device;
+    //}
     
 
     //console.log( 'props.device', props.device )
@@ -181,7 +181,7 @@ function ItemHookAdaptive(props) {
 
     console.log( 'device', device, props.type )
 
-    if( props.type == 'bot' ){
+    /*if( props.type == 'bot' ){
         if( device == 'desktop' ){
             console.log( 'render pc bot' )
             return (
@@ -197,7 +197,7 @@ function ItemHookAdaptive(props) {
                 <CardItemBotNew data={props.data} type={'mobile'} openItem={props.openItemMobile} />
             </Grid>
         )
-    }else{
+    }else{*/
         if( device === 'mobile' ){
             
             console.log( 'render mobile user' )
@@ -215,7 +215,7 @@ function ItemHookAdaptive(props) {
                 <CardItem data={props.data} type={'pc'} openItem={props.openItemPC} />
             </Grid>
         )
-    }
+    //}
 }
 
 class CardItem extends React.Component {
