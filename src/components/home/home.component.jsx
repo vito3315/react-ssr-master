@@ -189,7 +189,7 @@ function ItemHookAdaptive(props) {
             </Grid>
         )
     }else{
-        if( device === 'desktop' ){
+        if( device !== 'mobile' ){
             return (
                 <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '30px 16px', width: '100%' }}>
                     <CardItem data={props.data} type={'pc'} openItem={props.openItemPC} />
