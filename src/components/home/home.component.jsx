@@ -165,57 +165,13 @@ function get_city(path){
 import { Item } from '../item';
 
 function ItemHookAdaptive(props) {
-    let device = null;
+    const matches = useMediaQuery('(min-width:600px)');
 
-    //if( !props.device || props.device === '' ){
-        const matches = useMediaQuery('(min-width:600px)', { noSsr: true });
-
-        device = matches === true ? 'desktop' : 'mobile';
-    //}else{
-    //    device = props.device;
-    //}
-    
-
-    //console.log( 'props.device', props.device )
-    //console.log( 'matches', matches )
-
-    console.log( 'device', device, props.type )
-
-    /*if( props.type == 'bot' ){
-        if( device == 'desktop' ){
-            console.log( 'render pc bot' )
-            return (
-                <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '30px 16px', width: '100%' }}>
-                    <CardItemBotNew data={props.data} type={'pc'} openItem={props.openItemPC} />
-                </Grid>
-            )
-        }
-    
-        console.log( 'render mobile bot' )
-        return (
-            <Grid item className='_mobile_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '10px 0px', borderBottom: props.isLast ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
-                <CardItemBotNew data={props.data} type={'mobile'} openItem={props.openItemMobile} />
-            </Grid>
-        )
-    }else{*/
-        if( device === 'mobile' ){
-            
-            console.log( 'render mobile user' )
-            return (
-                <Grid item className='_mobile_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '10px 0px', borderBottom: props.isLast ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
-                    <CardItem data={props.data} type={'mobile'} openItem={props.openItemMobile} />
-                </Grid>
-                
-            )
-        }
-    
-        console.log( 'render pc user' )
-        return (
-            <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '30px 16px', width: '100%' }}>
-                <CardItem data={props.data} type={'pc'} openItem={props.openItemPC} />
-            </Grid>
-        )
-    //}
+    return (
+        <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '30px 16px', width: '100%' }}>
+            <CardItem data={props.data} type={ matches === true ? 'pc' : 'mobile' } openItem={props.openItemPC} />
+        </Grid>
+    )
 }
 
 class CardItem extends React.Component {
