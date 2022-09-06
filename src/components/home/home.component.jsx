@@ -165,12 +165,21 @@ function get_city(path){
 import { Item } from '../item';
 
 function ItemHookAdaptive(props) {
-    const matches = useMediaQuery('(min-width:600px)', { noSsr: false });
+    //const matches = useMediaQuery('(min-width:600px)', { noSsr: false });
   
-    console.log( matches, 'matches' )
+    //console.log( matches, 'matches' )
+
+    var isMatch = mediaQuery.match('screen and (min-width: 600px)', {
+        type : 'screen',
+        width: window.innerWidth+'px'
+    });
+
+    //console.log(isMatch);
+
+    console.log( 'MatchMedia', isMatch )
 
     if( props.type == 'bot' ){
-        if( matches ){
+        if( isMatch ){
             return (
                 <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '30px 16px', width: '100%' }}>
                     <CardItemBotNew data={props.data} type={'pc'} openItem={props.openItemPC} />
@@ -184,7 +193,7 @@ function ItemHookAdaptive(props) {
             </Grid>
         )
     }else{
-        if( matches ){
+        if( isMatch ){
             return (
                 <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '30px 16px', width: '100%' }}>
                     <CardItem data={props.data} type={'pc'} openItem={props.openItemPC} />
