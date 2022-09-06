@@ -378,8 +378,8 @@ export class App extends React.Component {
     
     render() {
 
-        console.log( this.props.globalState )
-        console.log( this.state.globalState )
+        //console.log( this.props.globalState )
+        //console.log( this.state.globalState )
 
         if( !this.props.globalState ){
             if( this.state.globalState ){
@@ -664,7 +664,7 @@ export class App extends React.Component {
                                     data={this.props.globalState.data} 
                                     city={this.props.globalState.city} 
                                     this_link={this.props.globalState.this_link} />  
-                                <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link} device={this.state.globalState.deviceType ?? 'mobile'} />
+                                <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link} device={this.state.globalState.deviceType ? this.state.globalState.deviceType : 'mobile'} />
                             </Route>
                             <Route
                                 path='/:cityName'

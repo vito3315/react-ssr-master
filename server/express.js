@@ -146,16 +146,18 @@ app.use( '*', async ( req, res ) => {
         });
 
         const GLOBAL_STATE = {
+            deviceType: deviceType,
+            parser11: req.headers,
             data: componentData,
             city: city,
             this_link: req.originalUrl,
             linkItem: linkItem,
             Item: Item,
-            ssrMatchMedia: ssrMatchMedia(deviceType),
-            deviceType: deviceType
+            //ssrMatchMedia: ssrMatchMedia(deviceType),
+            
         }
         
-        console.log( 'ssrMatchMedia', ssrMatchMedia )
+        //console.log( 'ssrMatchMedia', ssrMatchMedia )
         console.log( 'deviceType', deviceType )
         console.log( 'parser', req.headers )
 
