@@ -204,8 +204,8 @@ function ItemHookAdaptive(props) {
     
         console.log( 'render pc user' )
         return (
-            <Grid item className={device === 'mobile' ? '_mobile_' : '_PC_'} xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '30px 16px', width: '100%' }}>
-                <CardItem data={props.data} type={ device === 'mobile' ? 'mobile' : 'pc'} openItem={props.openItemPC} />
+            <Grid item className={'_PC_'} xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '30px 16px', width: '100%' }}>
+                <CardItem data={props.data} type={ 'pc'} openItem={props.openItemPC} />
             </Grid>
         )
     //}
