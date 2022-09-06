@@ -165,7 +165,7 @@ function get_city(path){
 import { Item } from '../item';
 
 function ItemHookAdaptive(props) {
-    const matches = useMediaQuery('(min-width:600px)', { noSsr: false });
+    const matches = useMediaQuery('(min-width:600px)', { noSsr: true });
 
     //console.log( 'props.device', props.device )
     //console.log( 'matches', matches )
@@ -349,9 +349,9 @@ class CardItem extends React.Component {
         return true;
     }
 
-    /*shouldComponentUpdate(nextProps, nextState) {
-        return !this.isEqual(nextState, this.state);
-    }*/
+    shouldComponentUpdate(nextProps, nextState) {
+        return !this.isEqual(nextState, this.state) || this.props.type !== nextProps.type;
+    }
     
     render() {
         const img_name = this.state.item.img_app.length > 0 ? this.state.item.img_app : this.state.item.img_new;
