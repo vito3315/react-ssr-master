@@ -366,7 +366,7 @@ class CardItem extends React.Component {
 
         //const GRID = (width- 7*20) / 6;
 
-        console.log( 'render', img_name, img_type )
+        console.log( 'render user', img_name, this.props.type )
 
         if( this.props.type == 'pc' ){
 
@@ -756,6 +756,8 @@ class CardItemBotNew extends React.Component {
         let GRID = 0;
 
         //const GRID = (width- 7*20) / 6;
+
+        console.log( 'render bot', img_name, this.props.type )
 
         if( this.props.type == 'pc' ){
 
