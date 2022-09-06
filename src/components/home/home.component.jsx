@@ -176,7 +176,7 @@ function ItemHookAdaptive(props) {
 
     if( props.type == 'bot' ){
         if( device == 'desktop' ){
-            console.log( 'render pc user' )
+            console.log( 'render pc bot' )
             return (
                 <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '30px 16px', width: '100%' }}>
                     <CardItemBotNew data={props.data} type={'pc'} openItem={props.openItemPC} />
@@ -184,26 +184,28 @@ function ItemHookAdaptive(props) {
             )
         }
     
-        console.log( 'render mobile user' )
+        console.log( 'render mobile bot' )
         return (
             <Grid item className='_mobile_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '10px 0px', borderBottom: props.isLast ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
                 <CardItemBotNew data={props.data} type={'mobile'} openItem={props.openItemMobile} />
             </Grid>
         )
     }else{
-        if( device !== 'mobile' ){
-            console.log( 'render pc user' )
+        if( device === 'mobile' ){
+            
+            console.log( 'render mobile user' )
             return (
-                <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '30px 16px', width: '100%' }}>
-                    <CardItem data={props.data} type={'pc'} openItem={props.openItemPC} />
+                <Grid item className='_mobile_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '10px 0px', borderBottom: props.isLast ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
+                    <CardItem data={props.data} type={'mobile'} openItem={props.openItemMobile} />
                 </Grid>
+                
             )
         }
     
-        console.log( 'render mobile user' )
+        console.log( 'render pc user' )
         return (
-            <Grid item className='_mobile_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '10px 0px', borderBottom: props.isLast ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
-                <CardItem data={props.data} type={'mobile'} openItem={props.openItemMobile} />
+            <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '30px 16px', width: '100%' }}>
+                <CardItem data={props.data} type={'pc'} openItem={props.openItemPC} />
             </Grid>
         )
     }
