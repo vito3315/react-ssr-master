@@ -166,7 +166,10 @@ import { Item } from '../item';
 
 function ItemHookAdaptive(props) {
     const matches = useMediaQuery('(min-width:600px)', { noSsr: false });
-  
+
+    console.log( 'props.device', props.device )
+    console.log( 'matches', matches )
+
     let device = props.device ? props.device : matches === true ? 'desktop' : 'mobile';
 
     if( props.type == 'bot' ){
