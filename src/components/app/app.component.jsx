@@ -425,7 +425,7 @@ export class App extends React.Component {
                                         data={this.state.globalState.data} 
                                         city={this.state.globalState.city} 
                                         this_link={this.state.globalState.this_link} />  
-                                    <Home data={this.state.globalState.data} city={this.state.globalState.city} this_link={this.state.globalState.this_link}  />
+                                    <Home data={this.state.globalState.data} city={this.state.globalState.city} this_link={this.state.globalState.this_link} device={this.state.globalState.deviceType}  />
                                 </Route>
                                 <Route
                                     path='/:cityName'
@@ -435,7 +435,7 @@ export class App extends React.Component {
                                         data={this.state.globalState.data} 
                                         city={this.state.globalState.city} 
                                         this_link={this.state.globalState.this_link} />  
-                                    <Home data={this.state.globalState.data} city={this.state.globalState.city} this_link={this.state.globalState.this_link}  />
+                                    <Home data={this.state.globalState.data} city={this.state.globalState.city} this_link={this.state.globalState.this_link} device={this.state.globalState.deviceType} />
                                 </Route>
                                 <Route
                                     path='/:cityName/item/:id'
@@ -491,7 +491,7 @@ export class App extends React.Component {
                                         data={this.state.globalState.data} 
                                         city={this.state.globalState.city} 
                                         this_link={this.state.globalState.this_link} />  
-                                    <HomeCat data={this.state.globalState.data} city={this.state.globalState.city} this_link={this.state.globalState.this_link}  />
+                                    <HomeCat data={this.state.globalState.data} city={this.state.globalState.city} this_link={this.state.globalState.this_link} device={this.state.globalState.deviceType} />
                                 </Route>
                                 <Route
                                     path='/:cityName/cart'
@@ -664,7 +664,7 @@ export class App extends React.Component {
                                     data={this.props.globalState.data} 
                                     city={this.props.globalState.city} 
                                     this_link={this.props.globalState.this_link} />  
-                                <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                                <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link} device={this.state.globalState.deviceType} />
                             </Route>
                             <Route
                                 path='/:cityName'
@@ -674,7 +674,7 @@ export class App extends React.Component {
                                     data={this.props.globalState.data} 
                                     city={this.props.globalState.city} 
                                     this_link={this.props.globalState.this_link} />  
-                                <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                                <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link} device={this.state.globalState.deviceType} />
                             </Route>
                             <Route
                                 path='/:cityName/item/:id'
@@ -730,7 +730,7 @@ export class App extends React.Component {
                                     data={this.props.globalState.data} 
                                     city={this.props.globalState.city} 
                                     this_link={this.props.globalState.this_link} />  
-                                <HomeCat data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                                <HomeCat data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link} device={this.props.globalState.deviceType} />
                             </Route>
                             <Route
                                 path='/:cityName/cart'

@@ -167,8 +167,10 @@ import { Item } from '../item';
 function ItemHookAdaptive(props) {
     const matches = useMediaQuery('(min-width:600px)', { noSsr: false });
   
+    let device = props.device ? props.device : matches === true ? 'desktop' : 'mobile';
+
     if( props.type == 'bot' ){
-        if( matches ){
+        if( device == 'desktop' ){
             return (
                 <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '30px 16px', width: '100%' }}>
                     <CardItemBotNew data={props.data} type={'pc'} openItem={props.openItemPC} />
@@ -182,7 +184,7 @@ function ItemHookAdaptive(props) {
             </Grid>
         )
     }else{
-        if( matches ){
+        if( device == 'desktop' ){
             return (
                 <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '30px 16px', width: '100%' }}>
                     <CardItem data={props.data} type={'pc'} openItem={props.openItemPC} />
@@ -1047,7 +1049,7 @@ export class HomeCat extends React.Component{
     
     render(){
         return (
-            <Home data={this.props.data} city={this.props.city} this_link={this.props.this_link} />
+            <Home data={this.props.data} city={this.props.city} this_link={this.props.this_link} device={this.props.device} />
         )
     }
 }
@@ -1079,6 +1081,7 @@ export class Home extends React.Component {
             page: this.props.data ? this.props.data.page : null,
             title: this.props.data ? this.props.data.title : null,
             description: this.props.data ? this.props.data.description : null,
+            device: this.props.data ? this.props.data.device : null,
             mainLink: this.props.this_link,
             doubleCatList: [],
 
@@ -1775,7 +1778,7 @@ export class Home extends React.Component {
                                 <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
                                     <Grid container spacing={2} sx={{ padding: { xs: '0px 5%', sm: '0px 20px' } }} style={{ margin: 0, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
                                         {cat.items.map((it, k) => (
-                                            <ItemHookAdaptive openItemPC={this.openItemPC.bind(this)} openItemMobile={this.openItem.bind(this)} data={it} key={k} type={'user'} isLast={cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key} />
+                                            <ItemHookAdaptive openItemPC={this.openItemPC.bind(this)} openItemMobile={this.openItem.bind(this)} data={it} key={k} type={'user'} isLast={cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key} device={this.state.device} />
                                         ))}
                                     </Grid>
                                 </div>
