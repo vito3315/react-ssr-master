@@ -151,6 +151,7 @@ app.use( '*', async ( req, res ) => {
             this_link: req.originalUrl,
             linkItem: linkItem,
             Item: Item,
+            ssrMatchMedia: ssrMatchMedia(deviceType),
             deviceType: deviceType
         }
         
