@@ -155,6 +155,10 @@ app.use( '*', async ( req, res ) => {
             deviceType: deviceType
         }
         
+        console.log( 'ssrMatchMedia', ssrMatchMedia )
+        console.log( 'deviceType', deviceType )
+        console.log( 'parser', req.headers )
+
         let appHTML = ReactDOMServer.renderToString(
             <StaticRouter location={ req.originalUrl }>
                 <App globalState={GLOBAL_STATE} />
