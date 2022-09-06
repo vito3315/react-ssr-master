@@ -370,6 +370,8 @@ class CardItem extends React.Component {
 
         if( this.props.type == 'pc' ){
 
+            console.log( 'render item pc', this.props.type )
+
             if (typeof window !== 'undefined') {
                 width = window.innerWidth;
             }else{
@@ -484,6 +486,8 @@ class CardItem extends React.Component {
         }
         
         if( this.props.type == 'mobile' ){
+
+            console.log( 'render item mobile', this.props.type )
 
             if (typeof window !== 'undefined') {
                 width = window.innerWidth;
