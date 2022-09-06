@@ -1355,7 +1355,7 @@ export class Home extends React.Component {
             this.setState({
                 is_load: true
             })
-        }, 300 )
+        }, 50 )
         
         let data = {
             type: 'get_page_info', 
@@ -1651,7 +1651,7 @@ export class Home extends React.Component {
         }
         
         return (
-            this.state.is_load === false ?
+            this.state.is_load === false && false ?
                 <Element name="myScrollToElement" className="Category">
                     
                     <Typography variant="h5" component="h1" style={{ paddingBottom: 20 }}>{ this.state.page ? this.state.page.page_h : '' }</Typography>
