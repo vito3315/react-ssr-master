@@ -165,11 +165,11 @@ function get_city(path){
 import { Item } from '../item';
 
 function ItemHookAdaptive(props) {
-    const matches = useMediaQuery('(min-width:600px)');
+    //const matches = useMediaQuery('(min-width:600px)');
 
     return (
         <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '30px 16px', width: '100%' }}>
-            <CardItem data={props.data} type={ props.device === 'mobile' ? 'mobile' : 'pc' } type1={ matches === true ? 'pc' : 'mobile' } openItem={props.openItemPC} />
+            <CardItem data={props.data} type={ props.device === 'mobile' ? 'mobile' : 'pc' } openItem={props.openItemPC} />
         </Grid>
     )
 }
@@ -315,9 +315,9 @@ class CardItem extends React.Component {
         return true;
     }
 
-    /*shouldComponentUpdate(nextProps, nextState) {
+    shouldComponentUpdate(nextProps, nextState) {
         return !this.isEqual(nextState, this.state) || this.props.type !== nextProps.type;
-    }*/
+    }
     
     render() {
         const img_name = this.state.item.img_app.length > 0 ? this.state.item.img_app : this.state.item.img_new;
