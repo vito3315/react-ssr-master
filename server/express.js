@@ -6,6 +6,10 @@ const ReactDOMServer = require( 'react-dom/server' );
 const { StaticRouter, matchPath } = require( 'react-router-dom' );
 const {Helmet} = require("react-helmet");
 
+import parser from 'ua-parser-js';
+import mediaQuery from 'css-mediaquery';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 //const compression = require('compression');
 // create express application
 const app = express();
@@ -133,12 +137,22 @@ app.use( '*', async ( req, res ) => {
             })
         }
         
+        const deviceType = parser(req.headers['user-agent']).device.type || 'desktop';
+        const ssrMatchMedia = (query) => ({
+            matches: mediaQuery.match(query, {
+            // The estimated CSS width of the browser.
+            width: deviceType === 'mobile' ? '0px' : '600px',
+            }),
+        });
+
         const GLOBAL_STATE = {
             data: componentData,
             city: city,
             this_link: req.originalUrl,
             linkItem: linkItem,
-            Item: Item
+            Item: Item,
+            ssrMatchMedia: ssrMatchMedia,
+            deviceType: deviceType
         }
         
         let appHTML = ReactDOMServer.renderToString(
