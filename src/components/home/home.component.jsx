@@ -167,8 +167,8 @@ import { Item } from '../item';
 function ItemHookAdaptive(props) {
     const matches = useMediaQuery('(min-width:600px)', { noSsr: false });
 
-    console.log( 'props.device', props.device )
-    console.log( 'matches', matches )
+    //console.log( 'props.device', props.device )
+    //console.log( 'matches', matches )
 
     let device = props.device ? props.device : matches === true ? 'desktop' : 'mobile';
 
@@ -189,7 +189,7 @@ function ItemHookAdaptive(props) {
             </Grid>
         )
     }else{
-        if( device == 'desktop' ){
+        if( device === 'desktop' ){
             return (
                 <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '30px 16px', width: '100%' }}>
                     <CardItem data={props.data} type={'pc'} openItem={props.openItemPC} />
