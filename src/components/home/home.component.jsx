@@ -352,7 +352,7 @@ class CardItem extends React.Component {
 
         //const GRID = (width- 7*20) / 6;
 
-        //if( this.props.type == 'pc' ){
+        if( this.props.type === 'pc' ){
 
             console.log( 'render item pc', this.props.type )
 
@@ -467,7 +467,7 @@ class CardItem extends React.Component {
                     </CardActions>
                 </Card>
             )
-        //}
+        }
         
         
     }
