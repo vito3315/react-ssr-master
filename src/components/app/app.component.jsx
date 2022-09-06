@@ -664,7 +664,7 @@ export class App extends React.Component {
                                     data={this.props.globalState.data} 
                                     city={this.props.globalState.city} 
                                     this_link={this.props.globalState.this_link} />  
-                                <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link} device={this.state.globalState ? this.state.globalState.deviceType : 'mobile'} />
+                                <Home data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link} />
                             </Route>
                             <Route
                                 path='/:cityName'
