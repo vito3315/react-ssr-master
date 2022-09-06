@@ -254,7 +254,7 @@ app.use( '*', async ( req, res ) => {
 
         indexHTML = indexHTML.replace(
             'var globalDevice = null;',
-            `globalDevice = ${deviceType};`
+            `globalDevice = ${deviceType.toString()};`
         );
 
         if( city == 'togliatti' ){
