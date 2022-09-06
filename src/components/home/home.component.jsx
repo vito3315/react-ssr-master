@@ -350,7 +350,7 @@ class CardItem extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return !this.isEqual(nextState, this.state) || this.props.type !== nextProps.type;
+        return !this.isEqual(nextState, this.state);
     }
     
     render() {
