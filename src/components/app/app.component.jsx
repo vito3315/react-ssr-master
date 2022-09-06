@@ -352,7 +352,7 @@ export class App extends React.Component {
             const matchRoute = routes.find( route => matchPath( uri, route ) );
 
             if( matchRoute ){
-                //this.getData1(uri);
+                this.getData1(uri);
             }
         }
 
