@@ -165,16 +165,23 @@ function get_city(path){
 import { Item } from '../item';
 
 function ItemHookAdaptive(props) {
-    const matches = useMediaQuery('(min-width:600px)', { noSsr: true });
+    let device = null;
+
+    if( !props.device || props.device === '' ){
+        const matches = useMediaQuery('(min-width:600px)', { noSsr: true });
+
+        device = matches === true ? 'desktop' : 'mobile';
+    }else{
+        device = props.device;
+    }
+    
 
     //console.log( 'props.device', props.device )
     //console.log( 'matches', matches )
 
-    let device = props.device ? props.device : matches === true ? 'desktop' : 'mobile';
-
     console.log( 'device', device, props.type )
 
-    /*if( props.type == 'bot' ){
+    if( props.type == 'bot' ){
         if( device == 'desktop' ){
             console.log( 'render pc bot' )
             return (
@@ -190,8 +197,8 @@ function ItemHookAdaptive(props) {
                 <CardItemBotNew data={props.data} type={'mobile'} openItem={props.openItemMobile} />
             </Grid>
         )
-    }else{*/
-        /*if( device === 'mobile' ){
+    }else{
+        if( device === 'mobile' ){
             
             console.log( 'render mobile user' )
             return (
@@ -200,15 +207,15 @@ function ItemHookAdaptive(props) {
                 </Grid>
                 
             )
-        }*/
+        }
     
         console.log( 'render pc user' )
         return (
-            <Grid item className={'_PC_'} xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '30px 16px', width: '100%' }}>
-                <CardItem data={props.data} type={ 'pc'} openItem={props.openItemPC} />
+            <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '30px 16px', width: '100%' }}>
+                <CardItem data={props.data} type={'pc'} openItem={props.openItemPC} />
             </Grid>
         )
-    //}
+    }
 }
 
 class CardItem extends React.Component {
@@ -486,7 +493,7 @@ class CardItem extends React.Component {
             )
         }
         
-        if( this.state.type == 'mobile' ){
+        if( this.props.type == 'mobile' ){
 
             console.log( 'render item mobile', this.props.type )
 
