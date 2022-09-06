@@ -378,7 +378,7 @@ export class App extends React.Component {
     
     render() {
 
-        //console.log( this.props.globalState )
+        console.log( this.props )
         //console.log( this.state.globalState )
 
         if( !this.props.globalState ){
