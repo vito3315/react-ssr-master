@@ -349,9 +349,9 @@ class CardItem extends React.Component {
         return true;
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
+    /*shouldComponentUpdate(nextProps, nextState) {
         return !this.isEqual(nextState, this.state);
-    }
+    }*/
     
     render() {
         const img_name = this.state.item.img_app.length > 0 ? this.state.item.img_app : this.state.item.img_new;
