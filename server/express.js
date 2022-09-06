@@ -163,7 +163,7 @@ app.use( '*', async ( req, res ) => {
 
         let appHTML = ReactDOMServer.renderToString(
             <StaticRouter location={ req.originalUrl }>
-                <App globalState={GLOBAL_STATE} />
+                <App globalState={GLOBAL_STATE} globalDevice={deviceType} />
             </StaticRouter>
         );
 
@@ -250,6 +250,11 @@ app.use( '*', async ( req, res ) => {
         indexHTML = indexHTML.replace(
             'var initial_state = null;',
             `GLOBAL_STATE = ${JSON.stringify(GLOBAL_STATE)};`
+        );
+
+        indexHTML = indexHTML.replace(
+            'var globalDevice = null;',
+            `globalDevice = ${globalDevice};`
         );
 
         if( city == 'togliatti' ){
