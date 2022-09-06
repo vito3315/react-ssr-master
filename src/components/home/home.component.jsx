@@ -41,6 +41,9 @@ import { Link as ScrollLink } from "react-scroll";
 
 import { ActionsCartButton, ActionsCartButtonStart, IconRuble, IconClose } from '../../stores/elements';
 
+import useMediaQuery from '@mui/material/useMediaQuery';
+import mediaQuery from 'css-mediaquery';
+
 import { initializeApp } from "firebase/app";
 import { getAnalytics, logEvent } from "firebase/analytics";
 
@@ -161,6 +164,40 @@ function get_city(path){
 
 import { Item } from '../item';
 
+function ItemHookAdaptive(props) {
+    const matches = useMediaQuery('(min-width:600px)', { noSsr: true });
+  
+    if( props.type == 'bot' ){
+        if( matches ){
+            return (
+                <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '30px 16px', width: '100%' }}>
+                    <CardItemBotNew data={props.data} type={'pc'} openItem={props.openItemPC} />
+                </Grid>
+            )
+        }
+    
+        return (
+            <Grid item className='_mobile_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '10px 0px', borderBottom: props.isLast ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
+                <CardItemBotNew data={props.data} type={'mobile'} openItem={props.openItemMobile} />
+            </Grid>
+        )
+    }else{
+        if( matches ){
+            return (
+                <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '30px 16px', width: '100%' }}>
+                    <CardItem data={props.data} type={'pc'} openItem={props.openItemPC} />
+                </Grid>
+            )
+        }
+    
+        return (
+            <Grid item className='_mobile_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '10px 0px', borderBottom: props.isLast ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
+                <CardItem data={props.data} type={'mobile'} openItem={props.openItemMobile} />
+            </Grid>
+        )
+    }
+}
+
 class CardItem extends React.Component {
     _isMounted = false;
     
@@ -178,7 +215,16 @@ class CardItem extends React.Component {
     componentDidMount(){
         this._isMounted = true; 
         let my_cart = itemsStore.getItems();
-            
+          
+        var isMatch = mediaQuery.match('screen and (min-width: 40em)', {
+            type : 'screen',
+            width: window.innerWidth+'px'
+        });
+
+        //console.log(isMatch);
+
+        //console.log( 'MatchMedia', createMatchMedia(window.innerWidth) )
+
         let item = my_cart.find( (item) => item.item_id == this.state.item['id'] );
   
         if( item ){
@@ -282,12 +328,30 @@ class CardItem extends React.Component {
         }
     }
     
-    /*shouldComponentUpdate(nextProps, nextState) {
-        return (
-            this.state.count !== nextState.count ||
-            this.state.item.price !== nextState.item.price
-        );
-    }*/
+    isEqual(object1, object2) {
+        const props1 = Object.getOwnPropertyNames(object1);
+        const props2 = Object.getOwnPropertyNames(object2);
+      
+        if (props1.length !== props2.length) {
+            return false;
+        }
+      
+        for (let i = 0; i < props1.length; i += 1) {
+            const prop = props1[i];
+      
+            if (object1[prop] !== object2[prop]) {
+                return false;
+            }
+        }
+      
+        return true;
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        //console.log( nextProps, nextState, this.state )
+
+        return !this.isEqual(nextState, this.state);
+    }
     
     render() {
         const img_name = this.state.item.img_app.length > 0 ? this.state.item.img_app : this.state.item.img_new;
@@ -301,6 +365,8 @@ class CardItem extends React.Component {
         let GRID = 0;
 
         //const GRID = (width- 7*20) / 6;
+
+        console.log( 'render', img_name, img_type )
 
         if( this.props.type == 'pc' ){
 
@@ -655,12 +721,28 @@ class CardItemBotNew extends React.Component {
         }
     }
     
-    /*shouldComponentUpdate(nextProps, nextState) {
-        return (
-            this.state.count !== nextState.count ||
-            this.state.item.price !== nextState.item.price
-        );
-    }*/
+    isEqual(object1, object2) {
+        const props1 = Object.getOwnPropertyNames(object1);
+        const props2 = Object.getOwnPropertyNames(object2);
+      
+        if (props1.length !== props2.length) {
+            return false;
+        }
+      
+        for (let i = 0; i < props1.length; i += 1) {
+            const prop = props1[i];
+      
+            if (object1[prop] !== object2[prop]) {
+                return false;
+            }
+        }
+      
+        return true;
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return !this.isEqual(nextState, this.state);
+    }
     
     render() {
         const img_name = this.state.item.img_app.length > 0 ? this.state.item.img_app : this.state.item.img_new;
@@ -1580,15 +1662,7 @@ export class Home extends React.Component {
                                 </Grid>
                                 <Grid container spacing={2} style={{ margin: 0, padding: '0px 20px', flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
                                     {cat.items.map((it, k) => (
-                                        <React.Fragment key={k}>
-                                            <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'none', sm: 'flex' } }} style={{ padding: '30px 16px', width: '100%' }}>
-                                                <CardItemBotNew data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
-                                            </Grid>
-                                        
-                                            <Grid item className='_mobile_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'flex', sm: 'none' } }} style={{ padding: '10px 0px', borderBottom: cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
-                                                <CardItemBotNew data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
-                                            </Grid>
-                                        </React.Fragment>
+                                        <ItemHookAdaptive openItemPC={this.openItemPC.bind(this)} openItemMobile={this.openItem.bind(this)} data={it} key={k} type={'bot'} isLast={cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key} />
                                     ))}
                                 </Grid>
                             </div>
@@ -1629,6 +1703,8 @@ export class Home extends React.Component {
                         }
                     </Box>
                     
+                    
+
                     <Box sx={{ display: { xs: 'flex', md: 'none' } }} className="HomeCatList">
                         <div className='subHeaderBlock' name='subHeaderBlock' id='subHeaderBlock'>
                             {itemsStore.getAllItemsCatNew().map( (item, key) => 
@@ -1712,15 +1788,7 @@ export class Home extends React.Component {
                                 <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
                                     <Grid container spacing={2} sx={{ padding: { xs: '0px 5%', sm: '0px 20px' } }} style={{ margin: 0, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
                                         {cat.items.map((it, k) => (
-                                            <React.Fragment key={k}>
-                                                <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'none', sm: 'flex' } }} style={{ padding: '30px 16px', width: '100%' }}>
-                                                    <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
-                                                </Grid>
-                                            
-                                                <Grid item className='_mobile_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'flex', sm: 'none' } }} style={{ padding: '10px 0px', borderBottom: cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
-                                                    <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
-                                                </Grid>
-                                            </React.Fragment>
+                                            <ItemHookAdaptive openItemPC={this.openItemPC.bind(this)} openItemMobile={this.openItem.bind(this)} data={it} key={k} type={'user'} isLast={cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key} />
                                         ))}
                                     </Grid>
                                 </div>
