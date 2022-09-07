@@ -41,23 +41,10 @@ import { Link as ScrollLink } from "react-scroll";
 
 import { ActionsCartButton, ActionsCartButtonStart, IconRuble, IconClose } from '../../stores/elements';
 
-import useMediaQuery from '@mui/material/useMediaQuery';
-import mediaQuery from 'css-mediaquery';
-
 import { initializeApp } from "firebase/app";
 import { getAnalytics, logEvent } from "firebase/analytics";
 
 var firebaseAPP = null;
-
-function createMatchMedia(width) {
-    return (query) => ({
-        matches: mediaQuery.match(query, {
-            width,
-        }),
-        addListener: () => {},
-        removeListener: () => {},
-    });
-}
 
 class CoverFlowCarousel extends React.Component {
     swiper = null;
@@ -152,16 +139,6 @@ class CoverFlowCarousel extends React.Component {
     }
 }
 
-function Ruble(props){
-    return (
-        <svg width={ props.width ? props.width : "50"} height="20" viewBox={ props.viewBox ? props.viewBox : "0 0 1500 200"} xmlns="http://www.w3.org/2000/svg">
-            <g>
-                <path d="m219.27,252.76c63.98,-2.85 99.22,-39.48 99.22,-103.13c0,-37.42 -12.62,-65.49 -37.52,-83.44c-22.29,-16.07 -48.63,-19.21 -62.35,-19.65c-28.61,-0.92 -107.02,-0.04 -110.34,0c-5.75,0.07 -10.38,4.75 -10.38,10.5l0,174.95c-9.23,-0.11 -15.07,-0.2 -15.31,-0.21c-0.06,0 -0.11,0 -0.17,0c-5.72,0 -10.41,4.59 -10.5,10.34c-0.09,5.8 4.54,10.57 10.34,10.66c0.95,0.01 6.78,0.1 15.64,0.21l0,26.12l-15.48,0c-5.8,0 -10.5,4.7 -10.5,10.5s4.7,10.5 10.5,10.5l15.48,0l0,74.89c0,5.8 4.7,10.5 10.5,10.5s10.5,-4.7 10.5,-10.5l0,-74.9l109.39,0c5.8,0 10.5,-4.7 10.5,-10.5s-4.7,-10.5 -10.5,-10.5l-109.39,0l0,-25.88c32.67,0.31 78.53,0.51 100.37,-0.46zm-100.37,-185.33c22.81,-0.21 76.99,-0.61 99.05,0.1c23.92,0.77 79.55,10.31 79.55,82.1c0,52.17 -26.63,79.82 -79.16,82.16c-21.17,0.94 -66.91,0.74 -99.44,0.43l0,-164.79z"/>
-            </g>
-        </svg>
-    )
-}
-
 const handleDragStart = (e) => e.preventDefault();
 
 function get_city(path){
@@ -173,12 +150,6 @@ function get_city(path){
 }
 
 import { Item } from '../item';
-
-/*function SimpleMediaQuery() {
-    const matches = useMediaQuery('(min-width:600px)');
-  
-    return <span>{`(min-width:600px) matches: ${matches}`}</span>;
-}*/
 
 class CardItem extends React.Component {
     _isMounted = false;
@@ -198,15 +169,6 @@ class CardItem extends React.Component {
         this._isMounted = true; 
         let my_cart = itemsStore.getItems();
           
-        var isMatch = mediaQuery.match('screen and (min-width: 40em)', {
-            type : 'screen',
-            width: window.innerWidth+'px'
-        });
-
-        //console.log(isMatch);
-
-        //console.log( 'MatchMedia', createMatchMedia(window.innerWidth) )
-
         let item = my_cart.find( (item) => item.item_id == this.state.item['id'] );
   
         if( item ){
@@ -1634,7 +1596,7 @@ export class Home extends React.Component {
         }
         
         return (
-            this.state.is_load === false && false ?
+            this.state.is_load === false ?
                 <Element name="myScrollToElement" className="Category">
                     
                     <Typography variant="h5" component="h1" style={{ paddingBottom: 20 }}>{ this.state.page ? this.state.page.page_h : '' }</Typography>

@@ -936,7 +936,7 @@ body{
     position: fixed;
     bottom: 0px; 
     width: 100%;
-    height: 172px; 
+    height: 120px; 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -946,8 +946,8 @@ body{
     & > .textPrice{
         @include fonsNew(1.25rem, $Roboto);
         font-weight: 700;
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
     & > a, span:not(.textPrice){
         width: 75%;
