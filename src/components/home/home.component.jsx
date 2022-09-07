@@ -308,7 +308,7 @@ class CardItem extends React.Component {
 
         //const GRID = (width- 7*20) / 6;
 
-        console.log( 'render', img_name, this.props.type )
+        //console.log( 'render', img_name, this.props.type )
 
         if( this.props.type == 'pc' ){
 
