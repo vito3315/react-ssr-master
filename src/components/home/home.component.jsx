@@ -49,6 +49,16 @@ import { getAnalytics, logEvent } from "firebase/analytics";
 
 var firebaseAPP = null;
 
+function createMatchMedia(width) {
+    return (query) => ({
+        matches: mediaQuery.match(query, {
+            width,
+        }),
+        addListener: () => {},
+        removeListener: () => {},
+    });
+}
+
 class CoverFlowCarousel extends React.Component {
     swiper = null;
     
@@ -164,29 +174,13 @@ function get_city(path){
 
 import { Item } from '../item';
 
-function ItemHookAdaptive(props) {
-    //const matches = useMediaQuery('(min-width:600px)');
+/*function SimpleMediaQuery() {
+    const matches = useMediaQuery('(min-width:600px)');
+  
+    return <span>{`(min-width:600px) matches: ${matches}`}</span>;
+}*/
 
-    let device = props.device;
-
-    console.log( 'props.device', device )
-
-    if( !device ){
-        device = useMediaQuery('(min-width:600px)') === true ? 'pc' : 'mobile';
-    }
-
-    return (
-        <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '30px 16px', width: '100%' }}>
-            { device === 'mobile' ?
-                <CardItemMobile data={props.data} type={ 'mobile' } openItem={props.openItemPC} />
-                    :
-                <CardItemPC data={props.data} type={ 'pc' } openItem={props.openItemPC} />
-            }
-        </Grid>
-    )
-}
-
-class CardItemPC extends React.Component {
+class CardItem extends React.Component {
     _isMounted = false;
     
     constructor(props) {
@@ -194,7 +188,6 @@ class CardItemPC extends React.Component {
         
         this.state = {      
             item: this.props.data, 
-            //type: this.props.type, 
             count: 0,
             is_old_price: false,
             old_price: 0
@@ -205,6 +198,15 @@ class CardItemPC extends React.Component {
         this._isMounted = true; 
         let my_cart = itemsStore.getItems();
           
+        var isMatch = mediaQuery.match('screen and (min-width: 40em)', {
+            type : 'screen',
+            width: window.innerWidth+'px'
+        });
+
+        //console.log(isMatch);
+
+        //console.log( 'MatchMedia', createMatchMedia(window.innerWidth) )
+
         let item = my_cart.find( (item) => item.item_id == this.state.item['id'] );
   
         if( item ){
@@ -344,9 +346,9 @@ class CardItemPC extends React.Component {
 
         //const GRID = (width- 7*20) / 6;
 
-        
+        console.log( 'render', img_name, this.props.type )
 
-            console.log( 'render item pc', this.props.type )
+        if( this.props.type == 'pc' ){
 
             if (typeof window !== 'undefined') {
                 width = window.innerWidth;
@@ -361,8 +363,6 @@ class CardItemPC extends React.Component {
                     
                     <CardContent style={{ cursor: 'pointer', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative' }} onClick={ () => this.props.openItem(this.state.item.id)}>
                         
-                        {console.log( 'render pc' )}
-
                         {img_type == 'old' ?
                             <picture>
                                 <source 
@@ -461,286 +461,122 @@ class CardItemPC extends React.Component {
                     </CardActions>
                 </Card>
             )
-        
-    }
-}
-
-class CardItemMobile extends React.Component {
-    _isMounted = false;
-    
-    constructor(props) {
-        super(props);
-        
-        this.state = {      
-            item: this.props.data, 
-            //type: this.props.type, 
-            count: 0,
-            is_old_price: false,
-            old_price: 0
-        };
-    }
-    
-    componentDidMount(){
-        this._isMounted = true; 
-        let my_cart = itemsStore.getItems();
-          
-        let item = my_cart.find( (item) => item.item_id == this.state.item['id'] );
-  
-        if( item ){
-            this.setState({ 
-              count: item.count,
-            })
-            
-            let city = itemsStore.getCity();
-            
-            if( city == 'samara' && (parseInt(this.state.item['id']) == 70 || parseInt(this.state.item['id']) == 71 || parseInt(this.state.item['id']) == 7) ){
-                this.setState({
-                    //old_price: 205,
-                    //is_old_price: true
-                })
-            }
-
-            if( city == 'samara' && parseInt(this.state.item['id']) == 4 ){
-                this.setState({
-                    //old_price: 135,
-                    //is_old_price: true
-                })
-            }
-            
-            if( city == 'togliatti' && (parseInt(this.state.item['id']) == 70 || parseInt(this.state.item['id']) == 71 || parseInt(this.state.item['id']) == 7) ){
-                this.setState({
-                    //old_price: 195,
-                    //is_old_price: true
-                })
-            }
-
-            if( city == 'togliatti' && parseInt(this.state.item['id']) == 4 ){
-                this.setState({
-                    //old_price: 135,
-                    //is_old_price: true
-                })
-            }
         }
         
-        autorun(() => {
-            if( this._isMounted ){
-                
-                let city = itemsStore.getCity();
-            
-                if( city == 'samara' && (parseInt(this.state.item['id']) == 70 || parseInt(this.state.item['id']) == 71 || parseInt(this.state.item['id']) == 7) ){
-                    this.setState({
-                        //old_price: 205,
-                        //is_old_price: true
-                    })
-                }
-    
-                if( city == 'samara' && parseInt(this.state.item['id']) == 4 ){
-                    this.setState({
-                        //old_price: 135,
-                        //is_old_price: true
-                    })
-                }
-                
-                if( city == 'togliatti' && (parseInt(this.state.item['id']) == 70 || parseInt(this.state.item['id']) == 71 || parseInt(this.state.item['id']) == 7) ){
-                    this.setState({
-                        //old_price: 195,
-                        //is_old_price: true
-                    })
-                }
-    
-                if( city == 'togliatti' && parseInt(this.state.item['id']) == 4 ){
-                    this.setState({
-                        //old_price: 135,
-                        //is_old_price: true
-                    })
-                }
-                
-                let my_cart = itemsStore.getItems();
-                let item = my_cart.find( (item) => item.item_id == this.state.item['id'] );
-          
-                if( item ){
-                    this.setState({ 
-                      count: item.count,
-                    })
-                }else{
-                    this.setState({ 
-                      count: 0,
-                    })
-                }
+        if( this.props.type == 'mobile' ){
+
+            if (typeof window !== 'undefined') {
+                width = window.innerWidth;
+            }else{
+                width = 320;
             }
-        })
-    }
-    
-    componentWillUnmount(){
-        this._isMounted = false;
-    }
-    
-    add(){
-        if(this._isMounted){
-            itemsStore.AddItem(this.state.item['id']);
-        }
-    }
-    
-    minus(){
-        if(this._isMounted){
-            itemsStore.MinusItem(this.state.item['id']);
-        }
-    }
-    
-    isEqual(object1, object2) {
-        const props1 = Object.getOwnPropertyNames(object1);
-        const props2 = Object.getOwnPropertyNames(object2);
-      
-        if (props1.length !== props2.length) {
-            return false;
-        }
-      
-        for (let i = 0; i < props1.length; i += 1) {
-            const prop = props1[i];
-      
-            if (object1[prop] !== object2[prop]) {
-                return false;
-            }
-        }
-      
-        return true;
-    }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return !this.isEqual(nextState, this.state) || this.props.type !== nextProps.type;
-    }
-    
-    render() {
-        const img_name = this.state.item.img_app.length > 0 ? this.state.item.img_app : this.state.item.img_new;
-        const img_type = this.state.item.img_app.length > 0 ? 'new' : 'old';
+            GRID = (width- 7*20) / 6;
 
-        const desc = this.state.item.marc_desc.length > 0 ? this.state.item.marc_desc : this.state.item.tmp_desc;
-
-        //const width = window.innerWidth;
-
-        let width = 0;
-        let GRID = 0;
-
-        //const GRID = (width- 7*20) / 6;
-
-        
-
-        console.log( 'render item mobile', this.props.type )
-
-        if (typeof window !== 'undefined') {
-            width = window.innerWidth;
-        }else{
-            width = 320;
-        }
-
-        GRID = (width- 7*20) / 6;
-
-        return (
-            <Grid item container xs={12} className="CardItem_mobile" style={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap' }}>
-                <Grid style={{ position: 'relative', marginRight: '3%' }} item onClick={ () => this.props.openItem(this.state.item.id)}>
-                    
-                    {console.log( 'render mobile' )}
-
-                    {img_type == 'old' ?
-                        <picture>
-                            <source 
-                                srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
-                                type="image/webp" 
-                            />
-                            <img 
-                                src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
-                                alt={this.state.item.name}
-                                title={this.state.item.name}
-                                style={{ width: ((GRID*3) + (2*20)), height: 'auto'  }}
-                                loading="lazy"
-                            />
-                        </picture>
-                            :
-                        <picture>
-                            <source 
-                                type="image/webp" 
-                                srcset={`
-                                    https://storage.yandexcloud.net/site-img/${img_name}_138x138.webp 138w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_146x146.webp 146w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_183x183.webp 183w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_233x233.webp 233w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_292x292.webp 292w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_366x366.webp 366w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_584x584.webp 584w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_760x760.webp 760w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_1875x1875.webp 1875w`} 
-                                sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
-                            <source 
-                                type="image/jpeg" 
-                                srcset={`
-                                    https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg 138w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_146x146.jpg 146w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_183x183.jpg 183w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_233x233.jpg 233w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_292x292.jpg 292w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_366x366.jpg 366w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_584x584.jpg 584w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_760x760.jpg 760w,
-                                    https://storage.yandexcloud.net/site-img/${img_name}_1875x1875.jpg 1875w`} 
-                                sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
-                            <img 
-                                alt={this.state.item.name} 
-                                title={this.state.item.name} 
-                                src={`https://storage.yandexcloud.net/site-img/${img_name}_366x366.jpg`} 
-                                style={{ width: ((GRID*3) + (2*20)), height: ((GRID*3) + (2*20))  }}
-                                loading="lazy"
-                            />
-                        </picture>
-                    }
-
-                    { parseInt(this.state.item.is_new) == 0 ? 
-                        parseInt(this.state.item.is_hit) == 0 ? null :
-                        <Badge size={'small'} type={'hit'} view={'mobile'} />
-                            :
-                        <Badge size={'small'} type={'new'} view={'mobile'} />
-                    }
-                </Grid>
-                <Grid item className="SecondBox_" style={{ width: '100%', display: 'flex', flexDirection: 'column', position: 'relative', justifyContent: 'flex-end' }}>
-                    <Typography className="CardNameItem_" variant="h5" component="h3" style={{ fontFamily: 'Roboto', fontSize: '1.0625rem', fontWeight: '500', color: '#525252', marginBottom: 10 }} onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>
-
-                    {  parseInt( this.state.item.cat_id ) == 4 ?
-                        <div style={{ width: 148, height: 28, display: 'flex', flexDirection: 'row', alignItems: 'center', border: '1px solid #dadada', borderRadius: 10, marginBottom: 10, }}>
-                            <div style={{ flex: 3, textAlign: 'center', borderRight: '1px solid #dadada', height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <Typography style={{ fontFamily: 'Roboto', fontSize: '0.875rem', fontWeight: 400, color: '#525252', lineHeight: 0 }} component="span">{this.state.item.count_part_new}</Typography>
-                            </div>
-                            <div style={{ flex: 2, textAlign: 'center', height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <Typography style={{ fontFamily: 'Roboto', fontSize: '0.875rem', fontWeight: 400, color: '#525252', lineHeight: 0 }} component="span">{this.state.item.count_part} шт.</Typography>
-                            </div>
-                        </div>
-                            :
-                        null
-                    }
-
-                    <Typography className="CardInfoItem_ hidddenText3" style={{ marginBottom: 10, fontFamily: 'Roboto', fontSize: '0.875rem', fontWeight: 400, color: '#525252', maxHeight: 60, overflow: 'hidden' }} component="p" onClick={() => this.props.openItem(this.state.item.id)}>{desc}</Typography>
-                    
-                    <div style={{ marginBottom: 10 }}>
-                        { this.state.count == 0 ?
-                            <ButtonGroup disableElevation={true} disableRipple={true} variant="outlined" className='MobileActionsCartButtonStart'>
-                                <Button variant="outlined" onClick={this.add.bind(this)}>
-                                    В корзину за {new Intl.NumberFormat('ru-RU').format( parseInt(this.state.item.price))}
-                                    <IconRuble style={{ width: 11, height: 11, fill: '#525252', marginLeft: 3, paddingBottom: 1 }} />
-                                </Button>
-                            </ButtonGroup>
+            return (
+                <Grid item container xs={12} className="CardItem_mobile" style={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap' }}>
+                    <Grid style={{ position: 'relative', marginRight: '3%' }} item onClick={ () => this.props.openItem(this.state.item.id)}>
+                        
+                        {img_type == 'old' ?
+                            <picture>
+                                <source 
+                                    srcSet={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
+                                    type="image/webp" 
+                                />
+                                <img 
+                                    src={"https://storage.yandexcloud.net/site-img/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
+                                    alt={this.state.item.name}
+                                    title={this.state.item.name}
+                                    style={{ width: ((GRID*3) + (2*20)), height: 'auto'  }}
+                                    loading="lazy"
+                                />
+                            </picture>
                                 :
-                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className='MobileActionsCartButton'>
-                                <div variant="contained" className='ModalItemButtonCart OPEN' >
-                                    <span className='minus' onClick={this.minus.bind(this)}>–</span>
-                                    <span>{this.state.count}</span>
-                                    <span className='plus' onClick={this.add.bind(this)}>+</span>
-                                </div>
-                            </ButtonGroup>
+                            <picture>
+                                <source 
+                                    type="image/webp" 
+                                    srcset={`
+                                        https://storage.yandexcloud.net/site-img/${img_name}_138x138.webp 138w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_146x146.webp 146w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_183x183.webp 183w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_233x233.webp 233w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_292x292.webp 292w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_366x366.webp 366w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_584x584.webp 584w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_760x760.webp 760w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_1875x1875.webp 1875w`} 
+                                    sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
+                                <source 
+                                    type="image/jpeg" 
+                                    srcset={`
+                                        https://storage.yandexcloud.net/site-img/${img_name}_138x138.jpg 138w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_146x146.jpg 146w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_183x183.jpg 183w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_233x233.jpg 233w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_292x292.jpg 292w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_366x366.jpg 366w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_584x584.jpg 584w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_760x760.jpg 760w,
+                                        https://storage.yandexcloud.net/site-img/${img_name}_1875x1875.jpg 1875w`} 
+                                    sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
+                                <img 
+                                    alt={this.state.item.name} 
+                                    title={this.state.item.name} 
+                                    src={`https://storage.yandexcloud.net/site-img/${img_name}_366x366.jpg`} 
+                                    style={{ width: ((GRID*3) + (2*20)), height: ((GRID*3) + (2*20))  }}
+                                    loading="lazy"
+                                />
+                            </picture>
                         }
-                    </div>
+
+                        { parseInt(this.state.item.is_new) == 0 ? 
+                            parseInt(this.state.item.is_hit) == 0 ? null :
+                            <Badge size={'small'} type={'hit'} view={'mobile'} />
+                                :
+                            <Badge size={'small'} type={'new'} view={'mobile'} />
+                        }
+                    </Grid>
+                    <Grid item className="SecondBox_" style={{ width: '100%', display: 'flex', flexDirection: 'column', position: 'relative', justifyContent: 'flex-end' }}>
+                        <Typography className="CardNameItem_" variant="h5" component="h3" style={{ fontFamily: 'Roboto', fontSize: '1.0625rem', fontWeight: '500', color: '#525252', marginBottom: 10 }} onClick={ () => this.props.openItem(this.state.item.id)}>{this.state.item.name}</Typography>
+
+                        {  parseInt( this.state.item.cat_id ) == 4 ?
+                            <div style={{ width: 148, height: 28, display: 'flex', flexDirection: 'row', alignItems: 'center', border: '1px solid #dadada', borderRadius: 10, marginBottom: 10, }}>
+                                <div style={{ flex: 3, textAlign: 'center', borderRight: '1px solid #dadada', height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Typography style={{ fontFamily: 'Roboto', fontSize: '0.875rem', fontWeight: 400, color: '#525252', lineHeight: 0 }} component="span">{this.state.item.count_part_new}</Typography>
+                                </div>
+                                <div style={{ flex: 2, textAlign: 'center', height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Typography style={{ fontFamily: 'Roboto', fontSize: '0.875rem', fontWeight: 400, color: '#525252', lineHeight: 0 }} component="span">{this.state.item.count_part} шт.</Typography>
+                                </div>
+                            </div>
+                                :
+                            null
+                        }
+
+                        <Typography className="CardInfoItem_ hidddenText3" style={{ marginBottom: 10, fontFamily: 'Roboto', fontSize: '0.875rem', fontWeight: 400, color: '#525252', maxHeight: 60, overflow: 'hidden' }} component="p" onClick={() => this.props.openItem(this.state.item.id)}>{desc}</Typography>
+                        
+                        <div style={{ marginBottom: 10 }}>
+                            { this.state.count == 0 ?
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="outlined" className='MobileActionsCartButtonStart'>
+                                    <Button variant="outlined" onClick={this.add.bind(this)}>
+                                        В корзину за {new Intl.NumberFormat('ru-RU').format( parseInt(this.state.item.price))}
+                                        <IconRuble style={{ width: 11, height: 11, fill: '#525252', marginLeft: 3, paddingBottom: 1 }} />
+                                    </Button>
+                                </ButtonGroup>
+                                    :
+                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className='MobileActionsCartButton'>
+                                    <div variant="contained" className='ModalItemButtonCart OPEN' >
+                                        <span className='minus' onClick={this.minus.bind(this)}>–</span>
+                                        <span>{this.state.count}</span>
+                                        <span className='plus' onClick={this.add.bind(this)}>+</span>
+                                    </div>
+                                </ButtonGroup>
+                            }
+                        </div>
+                    </Grid>
+                    
                 </Grid>
-                
-            </Grid>
-        )
-        
+            )
+        }
     }
 }
 
@@ -900,6 +736,8 @@ class CardItemBotNew extends React.Component {
         let GRID = 0;
 
         //const GRID = (width- 7*20) / 6;
+
+        console.log( 'render', this.state.item.name, this.props.type )
 
         if( this.props.type == 'pc' ){
 
@@ -1204,7 +1042,7 @@ export class HomeCat extends React.Component{
     
     render(){
         return (
-            <Home data={this.props.data} city={this.props.city} this_link={this.props.this_link} device={this.props.device} />
+            <Home data={this.props.data} city={this.props.city} this_link={this.props.this_link} />
         )
     }
 }
@@ -1218,6 +1056,8 @@ export class Home extends React.Component {
     constructor(props) {
         super(props);
         
+        console.log( this.props )
+
         this.state = {      
             allItems: [],  
             is_load: false,
@@ -1236,9 +1076,9 @@ export class Home extends React.Component {
             page: this.props.data ? this.props.data.page : null,
             title: this.props.data ? this.props.data.title : null,
             description: this.props.data ? this.props.data.description : null,
-            device: this.props.device ? this.props.device : null,
             mainLink: this.props.this_link,
             doubleCatList: [],
+            device: this.props.device,
 
             mainCatActive: 0,
             doubleCatActive: 0,
@@ -1498,7 +1338,7 @@ export class Home extends React.Component {
             this.setState({
                 is_load: true
             })
-        }, 50 )
+        }, 300 )
         
         let data = {
             type: 'get_page_info', 
@@ -1807,7 +1647,15 @@ export class Home extends React.Component {
                                 </Grid>
                                 <Grid container spacing={2} style={{ margin: 0, padding: '0px 20px', flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
                                     {cat.items.map((it, k) => (
-                                        <ItemHookAdaptive openItemPC={this.openItemPC.bind(this)} openItemMobile={this.openItem.bind(this)} data={it} key={k} type={'bot'} isLast={cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key} />
+                                        <React.Fragment key={k}>
+                                            <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'none', sm: 'flex' } }} style={{ padding: '30px 16px', width: '100%' }}>
+                                                <CardItemBotNew data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
+                                            </Grid>
+                                        
+                                            <Grid item className='_mobile_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'flex', sm: 'none' } }} style={{ padding: '10px 0px', borderBottom: cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
+                                                <CardItemBotNew data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
+                                            </Grid>
+                                        </React.Fragment>
                                     ))}
                                 </Grid>
                             </div>
@@ -1848,8 +1696,6 @@ export class Home extends React.Component {
                         }
                     </Box>
                     
-                    
-
                     <Box sx={{ display: { xs: 'flex', md: 'none' } }} className="HomeCatList">
                         <div className='subHeaderBlock' name='subHeaderBlock' id='subHeaderBlock'>
                             {itemsStore.getAllItemsCatNew().map( (item, key) => 
@@ -1927,21 +1773,75 @@ export class Home extends React.Component {
 
                     
 
-                    {itemsStore.getAllItemsCat().map((cat, key) => 
-                        cat.items.length > 0 ?
-                            mainLink == '' || mainLink == cat.main_link || mainLink == cat.link ?
-                                <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
-                                    <Grid container spacing={2} sx={{ padding: { xs: '0px 5%', sm: '0px 20px' } }} style={{ margin: 0, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
-                                        {cat.items.map((it, k) => (
-                                            <ItemHookAdaptive openItemPC={this.openItemPC.bind(this)} openItemMobile={this.openItem.bind(this)} data={it} key={k} type={'user'} isLast={cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key} device={this.state.device} />
-                                        ))}
-                                    </Grid>
-                                </div>
+                    { this.state.device ?
+                        this.state.device === 'mobile' ?
+                            itemsStore.getAllItemsCat().map((cat, key) => 
+                                cat.items.length > 0 ?
+                                    mainLink == '' || mainLink == cat.main_link || mainLink == cat.link ?
+                                        <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
+                                            <Grid container spacing={2} sx={{ padding: { xs: '0px 5%', sm: '0px 20px' } }} style={{ margin: 0, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
+                                                {cat.items.map((it, k) => (
+                                                    <React.Fragment key={k}>
+                                                        <Grid item className='_mobile_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'flex', sm: 'none' } }} style={{ padding: '10px 0px', borderBottom: cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
+                                                            <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
+                                                        </Grid>
+                                                    </React.Fragment>
+                                                ))}
+                                            </Grid>
+                                        </div>
+                                            :
+                                        null
+                                        :
+                                    null
+                            )
+                                :
+                            itemsStore.getAllItemsCat().map((cat, key) => 
+                                cat.items.length > 0 ?
+                                    mainLink == '' || mainLink == cat.main_link || mainLink == cat.link ?
+                                        <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
+                                            <Grid container spacing={2} sx={{ padding: { xs: '0px 5%', sm: '0px 20px' } }} style={{ margin: 0, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
+                                                {cat.items.map((it, k) => (
+                                                    <React.Fragment key={k}>
+                                                        <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'none', sm: 'flex' } }} style={{ padding: '30px 16px', width: '100%' }}>
+                                                            <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
+                                                        </Grid>
+                                                    </React.Fragment>
+                                                ))}
+                                            </Grid>
+                                        </div>
+                                            :
+                                        null
+                                        :
+                                    null
+                            )
+                            :
+                        itemsStore.getAllItemsCat().map((cat, key) => 
+                            cat.items.length > 0 ?
+                                mainLink == '' || mainLink == cat.main_link || mainLink == cat.link ?
+                                    <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
+                                        <Grid container spacing={2} sx={{ padding: { xs: '0px 5%', sm: '0px 20px' } }} style={{ margin: 0, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
+                                            {cat.items.map((it, k) => (
+                                                <React.Fragment key={k}>
+                                                    <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'none', sm: 'flex' } }} style={{ padding: '30px 16px', width: '100%' }}>
+                                                        <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
+                                                    </Grid>
+                                                
+                                                    <Grid item className='_mobile_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'flex', sm: 'none' } }} style={{ padding: '10px 0px', borderBottom: cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
+                                                        <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
+                                                    </Grid>
+                                                </React.Fragment>
+                                            ))}
+                                        </Grid>
+                                    </div>
+                                        :
+                                    null
                                     :
                                 null
-                                :
-                            null
-                    )}
+                        )
+                    }
+
+
+                    
                     
                     {this.state.openItem ?
                         <Dialog disableElevation fullScreen open={this.state.openModal} className="ItemDialog" onClose={this.handleClose.bind(this)} TransitionComponent={Transition}>
