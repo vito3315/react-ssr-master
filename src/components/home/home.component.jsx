@@ -167,6 +167,8 @@ import { Item } from '../item';
 function ItemHookAdaptive(props) {
     //const matches = useMediaQuery('(min-width:600px)');
 
+    console.log( 'props.device', props.device )
+
     return (
         <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: 'flex' }} style={{ padding: '30px 16px', width: '100%' }}>
             <CardItem data={props.data} type={ props.device === 'mobile' ? 'mobile' : 'pc' } openItem={props.openItemPC} />
@@ -349,6 +351,8 @@ class CardItem extends React.Component {
                     
                     <CardContent style={{ cursor: 'pointer', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative' }} onClick={ () => this.props.openItem(this.state.item.id)}>
                         
+                        {console.log( 'render pc' )}
+
                         {img_type == 'old' ?
                             <picture>
                                 <source 
@@ -465,6 +469,8 @@ class CardItem extends React.Component {
                 <Grid item container xs={12} className="CardItem_mobile" style={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap' }}>
                     <Grid style={{ position: 'relative', marginRight: '3%' }} item onClick={ () => this.props.openItem(this.state.item.id)}>
                         
+                        {console.log( 'render mobile' )}
+
                         {img_type == 'old' ?
                             <picture>
                                 <source 
