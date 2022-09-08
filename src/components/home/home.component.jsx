@@ -308,8 +308,6 @@ class CardItem extends React.Component {
 
         //const GRID = (width- 7*20) / 6;
 
-        console.log( 'render USER', img_name, this.props.type )
-
         if( this.props.type == 'pc' ){
 
             if (typeof window !== 'undefined') {
@@ -699,8 +697,6 @@ class CardItemBotNew extends React.Component {
 
         //const GRID = (width- 7*20) / 6;
 
-        console.log( 'render BOT', img_name, this.props.type )
-
         if( this.props.type == 'pc' ){
 
             if (typeof window !== 'undefined') {
@@ -1018,8 +1014,6 @@ export class Home extends React.Component {
     constructor(props) {
         super(props);
         
-        console.log( this.props )
-
         this.state = {      
             allItems: [],  
             is_load: false,
