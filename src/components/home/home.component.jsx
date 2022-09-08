@@ -308,7 +308,7 @@ class CardItem extends React.Component {
 
         //const GRID = (width- 7*20) / 6;
 
-        //console.log( 'render', img_name, this.props.type )
+        console.log( 'render USER', img_name, this.props.type )
 
         if( this.props.type == 'pc' ){
 
@@ -699,7 +699,7 @@ class CardItemBotNew extends React.Component {
 
         //const GRID = (width- 7*20) / 6;
 
-        console.log( 'render', this.state.item.name, this.props.type )
+        console.log( 'render BOT', img_name, this.props.type )
 
         if( this.props.type == 'pc' ){
 
@@ -1601,31 +1601,89 @@ export class Home extends React.Component {
                     
                     <Typography variant="h5" component="h1" style={{ paddingBottom: 20 }}>{ this.state.page ? this.state.page.page_h : '' }</Typography>
                     
-                    {itemsStore.getAllItemsCat().map((cat, key) => 
-                        mainLink == '' || mainLink == cat.main_link ?
-                            <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
-                                <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%', paddingBottom: 40 }} className="MainItems mainContainer">
-                                    <Typography variant="h5" component="h2">{ cat.name }</Typography>
-                                </Grid>
-                                <Grid container spacing={2} style={{ margin: 0, padding: '0px 20px', flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
-                                    {cat.items.map((it, k) => (
-                                        <React.Fragment key={k}>
-                                            <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'none', sm: 'flex' } }} style={{ padding: '30px 16px', width: '100%' }}>
-                                                <CardItemBotNew data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
+                    { this.state.device ?
+                        this.state.device === 'mobile' ?
+                            itemsStore.getAllItemsCat().map((cat, key) => 
+                                cat.items.length > 0 ?
+                                    mainLink == '' || mainLink == cat.main_link || mainLink == cat.link ?
+                                        <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
+
+                                            <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%', paddingBottom: 40 }} className="MainItems mainContainer">
+                                                <Typography variant="h5" component="h2">{ cat.name }</Typography>
                                             </Grid>
-                                        
-                                            <Grid item className='_mobile_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'flex', sm: 'none' } }} style={{ padding: '10px 0px', borderBottom: cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
-                                                <CardItemBotNew data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
+
+                                            <Grid container spacing={2} sx={{ padding: { xs: '0px 5%', sm: '0px 20px' } }} style={{ margin: 0, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
+                                                {cat.items.map((it, k) => (
+                                                    <React.Fragment key={k}>
+                                                        <Grid item className='_mobile_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'flex', sm: 'none' } }} style={{ padding: '10px 0px', borderBottom: cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
+                                                            <CardItemBotNew data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
+                                                        </Grid>
+                                                    </React.Fragment>
+                                                ))}
                                             </Grid>
-                                        </React.Fragment>
-                                    ))}
-                                </Grid>
-                            </div>
+                                        </div>
+                                            :
+                                        null
+                                        :
+                                    null
+                            )
                                 :
-                            null
-                    )}
-                    
-                    
+                            itemsStore.getAllItemsCat().map((cat, key) => 
+                                cat.items.length > 0 ?
+                                    mainLink == '' || mainLink == cat.main_link || mainLink == cat.link ?
+                                        <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
+
+                                            <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%', paddingBottom: 40 }} className="MainItems mainContainer">
+                                                <Typography variant="h5" component="h2">{ cat.name }</Typography>
+                                            </Grid>
+
+                                            <Grid container spacing={2} sx={{ padding: { xs: '0px 5%', sm: '0px 20px' } }} style={{ margin: 0, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
+                                                {cat.items.map((it, k) => (
+                                                    <React.Fragment key={k}>
+                                                        <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'none', sm: 'flex' } }} style={{ padding: '30px 16px', width: '100%' }}>
+                                                            <CardItemBotNew data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
+                                                        </Grid>
+                                                    </React.Fragment>
+                                                ))}
+                                            </Grid>
+                                        </div>
+                                            :
+                                        null
+                                        :
+                                    null
+                            )
+                            :
+                        itemsStore.getAllItemsCat().map((cat, key) => 
+                            cat.items.length > 0 ?
+                                mainLink == '' || mainLink == cat.main_link || mainLink == cat.link ?
+                                    <div key={key} name={"cat"+cat.main_id} id={"cat"+cat.id}>
+
+                                        <Grid container spacing={2} style={{ margin: 0, padding: '0px 36px', flexWrap: 'wrap', width: '100%', paddingBottom: 40 }} className="MainItems mainContainer">
+                                            <Typography variant="h5" component="h2">{ cat.name }</Typography>
+                                        </Grid>
+
+                                        <Grid container spacing={2} sx={{ padding: { xs: '0px 5%', sm: '0px 20px' } }} style={{ margin: 0, flexWrap: 'wrap', width: '100%' }} className="MainItems mainContainer" >
+                                            {cat.items.map((it, k) => (
+                                                <React.Fragment key={k}>
+                                                    <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'none', sm: 'flex' } }} style={{ padding: '30px 16px', width: '100%' }}>
+                                                        <CardItemBotNew data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
+                                                    </Grid>
+                                                
+                                                    <Grid item className='_mobile_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'flex', sm: 'none' } }} style={{ padding: '10px 0px', borderBottom: cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
+                                                        <CardItemBotNew data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
+                                                    </Grid>
+                                                </React.Fragment>
+                                            ))}
+                                        </Grid>
+                                    </div>
+                                        :
+                                    null
+                                    :
+                                null
+                        )
+                    }
+
+
                     <Box sx={{ display: { xs: 'block', md: 'none' } }}>
                         <Backdrop style={{ zIndex: 4, color: '#fff' }} open={true}>
                             <CircularProgress color="inherit" />
