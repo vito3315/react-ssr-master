@@ -79,8 +79,8 @@ $colorText: #525252;
         padding: 0px!important;
         margin: 0px!important;
         @media (min-width: 0px){
-            height: 140px;
-            min-height: 140px;
+            height: 100px;
+            min-height: 100px;
         }
         & .headerCat:not(.activeCat){
             @include fonsNew(1.25rem, $Roboto);
