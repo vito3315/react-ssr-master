@@ -1750,18 +1750,12 @@ export class Header extends React.Component{
                                     </Link> 
                                     <div style={{ width: '0.36%' }} />
                                 </React.Fragment>
-                        )}
+                        )}                      
 
-                        
-
-                        
                         <Link to={"/"+this.state.cityName+"/akcii"} style={{ width: '7.22%', minWidth: 'max-content', textDecoration: 'none' }}>
                             <span className={this.state.activePage == 'actii' ? 'headerCat activeCat' : 'headerCat'}>Акции</span>
                         </Link>
                         <div style={{ width: '0.36%' }} />
-
-                        
-
 
                         {this.state.token.length > 0 ?
                             this.state.userName.length > 0 && false ?
@@ -1772,7 +1766,6 @@ export class Header extends React.Component{
                             <a style={{ width: '7.22%', minWidth: 'max-content', textDecoration: 'none' }} onClick={this.openLogin.bind(this)}><span className='headerCat'>Войти</span></a>
                         }
 
-                        
                         <div style={{ width: '3.25%' }} />
 
                         <OpenBasket openLogin={this.openLogin.bind(this)} />

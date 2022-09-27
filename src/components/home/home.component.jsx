@@ -387,7 +387,7 @@ class CardItem extends React.Component {
 
                         <CardContent style={{ padding: 0 }}>
                             <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: 10, marginBottom: 10 }}>
-                                <div style={{ width: parseInt( this.state.item.cat_id ) == 4 ? 230 : parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? 75 : 135, height: 34, border: '1px solid #dadada', borderRadius: 15, display: 'flex', flexDirection: 'row' }}>
+                                <div style={{ width: parseInt( this.state.item.cat_id ) == 4 ? 230 : parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 || parseInt( this.state.item.cat_id ) == 15 ? 75 : 135, height: 34, border: '1px solid #dadada', borderRadius: 15, display: 'flex', flexDirection: 'row' }}>
                                     { parseInt( this.state.item.cat_id ) == 4 ?
                                         <div style={{ height: 34, borderRight: '1px solid #dadada', flex: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                             <span style={{ fontFamily: 'Roboto', fontSize: '0.9rem', fontWeight: 400, color: '#525252' }}>{this.state.item.count_part_new}</span>
@@ -395,7 +395,7 @@ class CardItem extends React.Component {
                                             :
                                         null
                                     }
-                                    { parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? null :
+                                    { parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 || parseInt( this.state.item.cat_id ) == 15 ? null :
                                         <div style={{ height: 34, borderRight: '1px solid #dadada', flex: parseInt( this.state.item.cat_id ) == 4 ? 2 : 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                             <span style={{ fontFamily: 'Roboto', fontSize: '0.9rem', fontWeight: 400, color: '#525252' }}>{ parseInt( this.state.item.cat_id ) == 14 ? this.state.item.size_pizza : this.state.item.count_part } { parseInt( this.state.item.cat_id ) == 14 ? 'см' : parseInt( this.state.item.cat_id ) == 6 ? 'л' : 'шт.'} </span>
                                         </div>

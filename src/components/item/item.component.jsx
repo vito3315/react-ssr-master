@@ -387,7 +387,7 @@ export class Item extends React.Component {
                             
                             
                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: 300 }}>
-                                <div style={{ width: parseInt( this.state.item.cat_id ) == 4 ? 230 : parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? 80 : 150, height: 40, border: '1px solid #DADADA', borderRadius: 15, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginTop: 20, marginBottom: 20, marginRight: 25 }}>
+                                <div style={{ width: parseInt( this.state.item.cat_id ) == 4 ? 230 : parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 || parseInt( this.state.item.cat_id ) == 15 ? 80 : 150, height: 40, border: '1px solid #DADADA', borderRadius: 15, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginTop: 20, marginBottom: 20, marginRight: 25 }}>
                                     { parseInt( this.state.item.cat_id ) == 4 ?
                                         <>
                                             <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center' }}>{this.state.item.count_part_new}</Typography>
@@ -396,7 +396,7 @@ export class Item extends React.Component {
                                             :
                                         null
                                     }
-                                    { parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ?
+                                    { parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 || parseInt( this.state.item.cat_id ) == 15 ?
                                         null
                                             :
                                         <>
@@ -560,7 +560,7 @@ export class Item extends React.Component {
 
                         <Grid item xs={12}>
                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: '100%', position: 'relative' }}>
-                                <div style={{ width: parseInt( this.state.item.cat_id ) == 4 ? 238 : parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ? 78 : 148, height: 28, border: '1px solid #DADADA', borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginTop: 10, marginBottom: 20 }}>
+                                <div style={{ width: parseInt( this.state.item.cat_id ) == 4 ? 238 : parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 || parseInt( this.state.item.cat_id ) == 15 ? 78 : 148, height: 28, border: '1px solid #DADADA', borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginTop: 10, marginBottom: 20 }}>
                                     { parseInt( this.state.item.cat_id ) == 4 ?
                                         <>
                                             <Typography variant="h5" component="span" className='ModalItemOther' style={{ flex: 3, textAlign: 'center', fontFamily: 'Roboto', fontWeight: 400, fontSize: '0.87rem', color: '#525252' }}>{this.state.item.count_part_new}</Typography>
@@ -569,7 +569,7 @@ export class Item extends React.Component {
                                             :
                                         null
                                     }
-                                    { parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 ?
+                                    { parseInt( this.state.item.cat_id ) == 5 || parseInt( this.state.item.cat_id ) == 6 || parseInt( this.state.item.cat_id ) == 7 || parseInt( this.state.item.cat_id ) == 15 ?
                                         null
                                             :
                                         <>
