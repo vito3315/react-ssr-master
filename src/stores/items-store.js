@@ -917,6 +917,7 @@ class ItemsStore {
     
     let all_max_count = 0;
     let my_free_count = 0;
+    let this_my_free_count = 0;
     
     my_cart.forEach((item_cart, key) => {
       
@@ -931,6 +932,10 @@ class ItemsStore {
         my_free_count += parseInt(item_cart['count']);
       }
       
+      if( parseInt(item_info.id) == parseInt(item_id) ){
+        this_my_free_count += parseInt(item_cart['count']);
+      }
+
       free_items.forEach( (item) => {
         if( parseInt(item_cart['item_id']) == parseInt(item['this_item_id']) ){
           item['count_in_cart'] = parseInt(item_cart['count']);
@@ -954,6 +959,10 @@ class ItemsStore {
         my_free_count += parseInt(item_cart['count']);
       }
       
+      if( parseInt(item_info.id) == parseInt(item_id) ){
+        this_my_free_count += parseInt(item_cart['count']);
+      }
+
       free_items.forEach( (item) => {
         if( parseInt(item_cart['item_id']) == parseInt(item['this_item_id']) ){
           item['count_in_cart'] = parseInt(item_cart['count']);
@@ -995,8 +1004,20 @@ class ItemsStore {
     
     if( new_free_dop.length > 0 ){
       
-      max_count = new_free_dop.find( (item) => parseInt(item['item_id']) == 17 );
+      max_count = new_free_dop.find( (item) => parseInt(item['item_id']) == 17 || parseInt(item['item_id']) == 237 );
+      //max_count = new_free_dop.find( (item) => parseInt(item['item_id']) == parseInt(item_id) || parseInt(item['item_id']) == 17 );
       
+
+      /*console.log( {
+        item_id: parseInt(item_id),
+        max_count: max_count,
+        my_free_count: my_free_count,
+        this_my_free_count: this_my_free_count,
+        new_free_dop: new_free_dop
+      } )*/
+
+      //console.log( new_free_dop )
+
       if( max_count ){
         max_count = parseInt(max_count['count']);
         
