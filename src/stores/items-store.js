@@ -1004,13 +1004,14 @@ class ItemsStore {
     
     if( new_free_dop.length > 0 ){
       
-      max_count = new_free_dop.find( (item) => parseInt(item['item_id']) == 17 || parseInt(item['item_id']) == 237 );
-      //max_count = new_free_dop.find( (item) => parseInt(item['item_id']) == parseInt(item_id) || parseInt(item['item_id']) == 17 );
+      let max_count2 = new_free_dop.find( (item) => parseInt(item['item_id']) == 17 || parseInt(item['item_id']) == 237 );
+      max_count = new_free_dop.find( (item) => parseInt(item['item_id']) == parseInt(item_id) );
       
 
       /*console.log( {
         item_id: parseInt(item_id),
         max_count: max_count,
+        max_count2: max_count2,
         my_free_count: my_free_count,
         this_my_free_count: this_my_free_count,
         new_free_dop: new_free_dop
