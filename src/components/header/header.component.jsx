@@ -106,6 +106,8 @@ class ModalLogin extends React.Component{
             errTitle: '',
             errText1: '',
             errText2: '',
+
+            is_sms: true
         };
     }
 
@@ -304,6 +306,7 @@ class ModalLogin extends React.Component{
                 errTitle: '',
                 errText1: '',
                 errText2: '',
+                is_sms: res.is_sms
             })
         }else{
             if( res.type == 'modal' ){
@@ -329,6 +332,11 @@ class ModalLogin extends React.Component{
         if( this.sms1 == false ){
             this.sms1 = true;
             
+            this.setState({
+                timerSMS: 89,
+                timerSMSTime: this.toTime(89),
+            })
+
             let number = this.state.loginLogin;
             
             grecaptcha.ready(() => {
@@ -442,6 +450,7 @@ class ModalLogin extends React.Component{
                 errTitle: '',
                 errText1: '',
                 errText2: '',
+                is_sms: res.is_sms ?? false
             })
         }else{
             if( res.type == 'modal' ){
@@ -587,14 +596,18 @@ class ModalLogin extends React.Component{
                                 <Typography component="h2">Проверим телефон ?</Typography>
                             </div>
 
-                            <div className='loginSubHeader' style={{ display: 'none' }}>
-                                <Typography component="span">Сейчас мы вам позвоним.</Typography>
-                                <Typography component="span">Введите последние 4 цифры номера.</Typography>
-                            </div>
+                            { this.state.is_sms ? null :
+                                <div className='loginSubHeader'>
+                                    <Typography component="span">Сейчас мы вам позвоним.</Typography>
+                                    <Typography component="span">Введите последние 4 цифры номера.</Typography>
+                                </div>
+                            }
 
-                            <div className='loginSubHeader'>
-                                <Typography component="span">Введите 4 цифры из смс.</Typography>
-                            </div>
+                            { !this.state.is_sms ? null :
+                                <div className='loginSubHeader'>
+                                    <Typography component="span">Введите 4 цифры из смс.</Typography>
+                                </div>
+                            }
                             
                             <div className={this.state.timerSMS > 0 ? 'loginAutCode' : 'loginAutCodeOther'}>
                                 <AuthCode autoFocus={true} allowedCharacters='numeric' length="4" onChange={ this.changeCode.bind(this) } />
@@ -786,6 +799,7 @@ class ModalCity extends React.Component{
         setTimeout(()=>{ 
             itemsStore.saveCartData([]); 
             localStorage.setItem('myCity', city)
+            this.props.close();
             window.location.reload(); 
         }, 300)
     }
@@ -1651,7 +1665,6 @@ export class Header extends React.Component{
     }
     
     handleClick = (event) => {
-        console.log( 'anchorEl', event.currentTarget )
         this.setState({
             anchorEl: event.currentTarget
         })
