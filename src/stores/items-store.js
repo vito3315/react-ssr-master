@@ -270,7 +270,7 @@ class ItemsStore {
         }else{
           return {
             st: false,
-            text: 'Адрес указан некорректно'
+            text: 'По данному адресу промокод не работает'
           }
         }
       }
