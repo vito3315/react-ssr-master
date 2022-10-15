@@ -209,6 +209,10 @@ class ModalLogin extends React.Component{
                 data = data.slice(2);
                 data = '8' + data;
             }
+            if( parseInt(data[0]) == '7' ){
+                data = data.slice(1);
+                data = '8' + data;
+            }
 
             data = data.split(' ').join('');
             data = data.split('(').join('');
@@ -949,24 +953,28 @@ class CustomBottomNavigationNew extends React.Component{
         return(
             <Paper className="bottomNavigateNew" sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
                 
-                { parseInt(this.state.allCount) == 0 ? <span className='textPrice'></span> :
-                    <span className='textPrice'>{this.state.allCount} {getNoun(this.state.allCount, 'товар', 'товара', 'товаров')} на { new Intl.NumberFormat('ru-RU').format(this.state.allPrice)} <IconRuble style={{ width: 14, height: 14, fill: '#525252', marginLeft: 0, paddingBottom: 0  }} /></span>
-                }
-
                 {this.state.auth === true ?
                     <Link
                         to={'/'+this_city+'/cart'}
                         exact={ true }
                         className="MuiButtonBase-root MuiBottomNavigationAction-root"
                     >
-                        Оформить заказ
+                        { parseInt(this.state.allCount) > 0 ?
+                            <span className='textPrice'>{this.state.allCount} {getNoun(this.state.allCount, 'товар', 'товара', 'товаров')} на { new Intl.NumberFormat('ru-RU').format(this.state.allPrice)} <IconRuble style={{ width: 14, height: 14, fill: '#525252', marginLeft: 0, paddingBottom: 0  }} /></span>
+                                :
+                            'Оформить заказ'
+                        }
                     </Link>
                         :
                     <Typography 
                         component="span"
                         className="MuiButtonBase-root MuiBottomNavigationAction-root" 
                         onClick={this.props.openLogin}>
-                            Оформить заказ
+                            { parseInt(this.state.allCount) > 0 ?
+                                <span className='textPrice'>{this.state.allCount} {getNoun(this.state.allCount, 'товар', 'товара', 'товаров')} на { new Intl.NumberFormat('ru-RU').format(this.state.allPrice)} <IconRuble style={{ width: 14, height: 14, fill: '#525252', marginLeft: 0, paddingBottom: 0  }} /></span>
+                                    :
+                                'Оформить заказ'
+                            }
                     </Typography>
                 }
             </Paper>

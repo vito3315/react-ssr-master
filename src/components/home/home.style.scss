@@ -21,7 +21,7 @@ $colorText: #525252;
     height: 100%;
     background-color: #fff;
     position: sticky; 
-    top: 120px;
+    top: 110px;
     z-index: 1000;
     //padding-top: 10px;
     padding-bottom: 10px;
@@ -45,7 +45,7 @@ $colorText: #525252;
         & > a > span{
             @include fonsNew(0.875rem, $Roboto);
             text-align: center;
-            height: 40px;
+            height: 30px;
             border-radius: 10px;
             margin-right: 5px;
             padding-left: 18px;
@@ -90,7 +90,7 @@ $colorText: #525252;
         & > a > span{
             @include fonsNew(0.875rem, $Roboto);
             text-align: center;
-            height: 40px;
+            height: 30px;
             border-radius: 10px;
             margin-right: 5px;
             padding-left: 18px;
