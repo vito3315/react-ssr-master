@@ -187,6 +187,15 @@ class ItemsStore {
     let my_cart = this.getItems();  
     let allItems = this.getAllItems();
       
+    tmp = 0;
+    allPrice = 0;
+    
+    allPrice = my_cart.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
+
+    setTimeout( () => {
+      itemsStore.setAllPrice(allPrice, 1);
+    }, 10 )
+
     if( allItems.length == 0 || !allItems ){
       return ; 
     }
@@ -208,7 +217,7 @@ class ItemsStore {
     //this.setItems(my_cart);  
       
     let cart_new_promo = [];    
-    allPrice = my_cart.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
+    //allPrice = my_cart.reduce( (sum, item) => sum + parseInt(item['all_price']), tmp );
     
     let type_order = 0,
         point_id_dev = 0,
