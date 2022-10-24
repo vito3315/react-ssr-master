@@ -22,7 +22,7 @@ const { App } = require( '../src/components/app' );
 const routes = require( './routes' );
 
 // serve static assets
-app.get( /\.(js|css|map|ico|png|svg|htaccess|xml|txt)$/, express.static( path.resolve( __dirname, '../dist' ) ) );
+app.get( /\.(js|css|map|ico|png|svg|htaccess|xml|txt|html)$/, express.static( path.resolve( __dirname, '../dist' ) ) );
 
 app.get( /\.(eot|ttf|woff|woff2)$/, express.static( path.resolve( __dirname, '../dist/assets/fonts' ) ) );
 
