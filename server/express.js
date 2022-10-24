@@ -51,6 +51,10 @@ app.get('/robots.txt', function(req, res) {
     res.sendFile('../dist/robots.txt');
 });
 
+app.get('/mailru-domainTcSqotFIUFiXtpTX.html', function(req, res) {
+    res.sendFile('../dist/mailru-domainTcSqotFIUFiXtpTX.html');
+});
+
 // for any other requests, send `index.html` as a response
 app.use( '*', async ( req, res ) => {
 

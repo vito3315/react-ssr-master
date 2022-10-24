@@ -130,6 +130,10 @@ module.exports = {
                     from: path.resolve( __dirname, 'src/firebase-messaging-sw.js' ),
                     to: path.resolve( __dirname, 'dist/firebase-messaging-sw.js' )
                 },
+                {
+                    from: path.resolve( __dirname, 'src/mailru-domainTcSqotFIUFiXtpTX.html' ),
+                    to: path.resolve( __dirname, 'dist/mailru-domainTcSqotFIUFiXtpTX.html' )
+                },
             ]
         } ),
     ],
