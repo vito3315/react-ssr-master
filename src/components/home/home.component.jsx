@@ -55,6 +55,8 @@ class CoverFlowCarousel extends React.Component {
         this.state = {      
             data: this.props.data,
             type: this.props.type,
+
+            is_show: true
         };
     }
     
@@ -69,51 +71,69 @@ class CoverFlowCarousel extends React.Component {
         }*/
         
         
+        
+        try {
+            this.swiper = new Swiper(".swiper-container", {
+                //modules: [Navigation, Pagination, A11y, Autoplay],
+    
+                grabCursor: this_count == 1 ? false : true,
+                loop: this_count == 1 ? false : true,
+                centeredSlidesBounds: false,
+                setWrapperSize: this_count == 1 ? false : true,
+                autoHeight: true,
+                //spaceBetween: 100,
+                centeredSlides: true,
+                slidesPerView: count,
+                
+                //autoplay: this_count == 1 ? false : true,
+                autoplay: {
+                    delay: 5000,
+                },
+                
+                pagination: {
+                    el: '.swiper-pagination',
+                    type: 'bullets',
+                    //clickable: true,
+                    
+                },
+    
+                /*pagination: this_count == 1 ? false : this.state.type == 'pc' ? true : true,
+                pagination: this_count == 1 ? {} : this.state.type == 'pc' ? {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                    type: 'bullets',
+                    renderBullet: function (index, className) {
+                        return '<span class="' + className + '">' + (index + 1) + '</span>';
+                    },
+                } : {},*/
+                navigation: this_count == 1 ? {} : this.state.type == 'pc' ? {
+                    nextEl: ".swiper-button-next", // arrows on the side of the slides
+                    prevEl: ".swiper-button-prev", // arrows on the side of the slides
+                } : {},
+            });
 
+            this.setState({
+                is_show: true
+            })
+        } catch (err) {
+
+            this.setState({
+                is_show: false
+            })
+          
+        }
 
 
         
-        this.swiper = new Swiper(".swiper-container", {
-            //modules: [Navigation, Pagination, A11y, Autoplay],
-
-            grabCursor: this_count == 1 ? false : true,
-            loop: this_count == 1 ? false : true,
-            centeredSlidesBounds: false,
-            setWrapperSize: this_count == 1 ? false : true,
-            autoHeight: true,
-            //spaceBetween: 100,
-            centeredSlides: true,
-            slidesPerView: count,
-            
-            //autoplay: this_count == 1 ? false : true,
-            autoplay: {
-                delay: 5000,
-            },
-            
-            pagination: {
-                el: '.swiper-pagination',
-                type: 'bullets',
-                //clickable: true,
-                
-            },
-
-            /*pagination: this_count == 1 ? false : this.state.type == 'pc' ? true : true,
-            pagination: this_count == 1 ? {} : this.state.type == 'pc' ? {
-                el: ".swiper-pagination",
-                clickable: true,
-                type: 'bullets',
-                renderBullet: function (index, className) {
-                    return '<span class="' + className + '">' + (index + 1) + '</span>';
-                },
-            } : {},*/
-            navigation: this_count == 1 ? {} : this.state.type == 'pc' ? {
-                nextEl: ".swiper-button-next", // arrows on the side of the slides
-                prevEl: ".swiper-button-prev", // arrows on the side of the slides
-            } : {},
-        });
+        
     }
      
     render() {
+        if( !this.state.is_show ){
+            return (
+                <div style={{ marginTop: 100 }}></div>
+            );
+        }
 
         return (
             <div className={"swiper-container swiper_"+this.state.type+" _h1_"} style={{ overflow: 'hidden', position: 'relative' }}>
