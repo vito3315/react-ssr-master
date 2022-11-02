@@ -7,8 +7,8 @@ const { StaticRouter, matchPath } = require( 'react-router-dom' );
 const {Helmet} = require("react-helmet");
 
 import parser from 'ua-parser-js';
-import mediaQuery from 'css-mediaquery';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+//import mediaQuery from 'css-mediaquery';
+//import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 //const compression = require('compression');
 // create express application
@@ -93,6 +93,8 @@ app.use( '*', async ( req, res ) => {
     city = city.filter( (item) => item != '' ); 
     city = city[0];
     
+    console.log( req.originalUrl )
+
     const matchRoute = routes.find( route => matchPath( req.originalUrl, route ) );
 
     if( matchRoute ){
@@ -158,8 +160,8 @@ app.use( '*', async ( req, res ) => {
         }
         
         //console.log( 'ssrMatchMedia', ssrMatchMedia )
-        console.log( 'deviceType', GLOBAL_DEVICE )
-        console.log( 'parser', req.headers )
+        //console.log( 'deviceType', GLOBAL_DEVICE )
+        //console.log( 'parser', req.headers )
 
         let appHTML = ReactDOMServer.renderToString(
             <StaticRouter location={ req.originalUrl }>
