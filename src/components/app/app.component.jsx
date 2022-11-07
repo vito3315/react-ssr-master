@@ -268,6 +268,8 @@ export class App extends React.Component {
 
     async getData1(uri){
 
+        console.log( 'city', get_city(uri) )
+
         let data = {
             city_id: get_city(uri),
             page: '',
@@ -276,9 +278,13 @@ export class App extends React.Component {
 
         let res = await this.getData('get_page_info', data);
 
+        console.log( 'new res', res )
+
         let res_data = {
-            title: res.page.title,
-            description: res.page.description,
+            title: res.page ? res.page.title : '',
+            description: res.page ? res.page.description : '',
+            //title: res.page.title,
+            //description: res.page.description,
             page: res.page,
             cats: res.cats,
             allItems: res.allItems,
@@ -350,6 +356,9 @@ export class App extends React.Component {
             city = city[0];
 
             const matchRoute = routes.find( route => matchPath( uri, route ) );
+
+            console.log( 'matchRoute', matchRoute )
+            console.log( 'uri', uri )
 
             if( matchRoute ){
                 this.getData1(uri);

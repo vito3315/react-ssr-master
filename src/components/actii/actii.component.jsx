@@ -117,8 +117,8 @@ export class Actii extends React.Component {
                 let hash = window.location.search;
                 
                 if( hash.length > 0 && hash.indexOf('act_') > 0 ){
-                    let act_id = hash.split('act_')[1];
-                    
+                    let act = hash.split('&')[0];
+                    let act_id = act.split('act_')[1];
                     let this_item = json.actii.find( (item) => item.id == act_id );
                     
                     this.openDialog(this_item);
