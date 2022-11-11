@@ -342,11 +342,11 @@ export class Item extends React.Component {
                             <Grid item className='FirstMainItem'>
                                 <picture style={{ width: '100%' }}>
                                     <source 
-                                        srcSet={"https://site-img.hb.bizmrg.com/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
+                                        srcSet={"https://cdnimg.jacofood.ru/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
                                         type="image/webp" 
                                     />
                                     <img 
-                                        src={"https://site-img.hb.bizmrg.com/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
+                                        src={"https://cdnimg.jacofood.ru/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
                                         alt={this.state.item.name}
                                         title={this.state.item.name}
                                         style={{ minHeight: 150 }}
@@ -366,16 +366,16 @@ export class Item extends React.Component {
                                     <source 
                                         type="image/webp" 
                                         srcset={`
-                                            https://site-img.hb.bizmrg.com/${this.state.img_name}_1168x1168.webp 584w,
-                                            https://site-img.hb.bizmrg.com/${this.state.img_name}_1420x1420.webp 760w,
-                                            https://site-img.hb.bizmrg.com/${this.state.img_name}_2000x2000.webp 1875w`} 
+                                            https://cdnimg.jacofood.ru/${this.state.img_name}_1168x1168.webp 584w,
+                                            https://cdnimg.jacofood.ru/${this.state.img_name}_1420x1420.webp 760w,
+                                            https://cdnimg.jacofood.ru/${this.state.img_name}_2000x2000.webp 1875w`} 
                                         sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
                                     <source 
                                         type="image/jpeg" 
                                         srcset={`
-                                            https://site-img.hb.bizmrg.com/${this.state.img_name}_1168x1168.jpg 584w,
-                                            https://site-img.hb.bizmrg.com/${this.state.img_name}_1420x1420.jpg 760w,
-                                            https://site-img.hb.bizmrg.com/${this.state.img_name}_2000x2000.jpg 1875w`} 
+                                            https://cdnimg.jacofood.ru/${this.state.img_name}_1168x1168.jpg 584w,
+                                            https://cdnimg.jacofood.ru/${this.state.img_name}_1420x1420.jpg 760w,
+                                            https://cdnimg.jacofood.ru/${this.state.img_name}_2000x2000.jpg 1875w`} 
                                         sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
                                     
 
@@ -383,7 +383,7 @@ export class Item extends React.Component {
                                         alt={this.state.item.name} 
                                         title={this.state.item.name} 
                                         className="img" 
-                                        src={`https://site-img.hb.bizmrg.com/${this.state.img_name}_1168x1168.jpg`} />
+                                        src={`https://cdnimg.jacofood.ru/${this.state.img_name}_1168x1168.jpg`} />
                                 </picture>
 
                                 { parseInt(this.state.item.is_new) == 0 ? 
@@ -520,11 +520,11 @@ export class Item extends React.Component {
                             {this.state.img_type == 'old' ?
                                 <picture>
                                     <source 
-                                        srcSet={"https://site-img.hb.bizmrg.com/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
+                                        srcSet={"https://cdnimg.jacofood.ru/"+this.state.item.img_new+"600х400.webp?"+this.state.item.img_new_update} 
                                         type="image/webp" 
                                     />
                                     <img 
-                                        src={"https://site-img.hb.bizmrg.com/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
+                                        src={"https://cdnimg.jacofood.ru/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
                                         alt={this.state.item.name}
                                         title={this.state.item.name}
                                         style={{ width: '100%' }}
@@ -535,28 +535,28 @@ export class Item extends React.Component {
                                     <source 
                                         type="image/webp" 
                                         srcset={`
-                                            https://site-img.hb.bizmrg.com/${this.state.img_name}_276x276.webp 138w,
-                                            https://site-img.hb.bizmrg.com/${this.state.img_name}_292x292.webp 146w,
-                                            https://site-img.hb.bizmrg.com/${this.state.img_name}_366x366.webp 183w,
-                                            https://site-img.hb.bizmrg.com/${this.state.img_name}_466x466.webp 233w,
-                                            https://site-img.hb.bizmrg.com/${this.state.img_name}_585x585.webp 292w,
-                                            https://site-img.hb.bizmrg.com/${this.state.img_name}_732x732.webp 366w,
-                                            https://site-img.hb.bizmrg.com/${this.state.img_name}_1168x1168.webp 584w,
-                                            https://site-img.hb.bizmrg.com/${this.state.img_name}_1420x1420.webp 760w,
-                                            https://site-img.hb.bizmrg.com/${this.state.img_name}_2000x2000.webp 1875w`} 
+                                            https://cdnimg.jacofood.ru/${this.state.img_name}_276x276.webp 138w,
+                                            https://cdnimg.jacofood.ru/${this.state.img_name}_292x292.webp 146w,
+                                            https://cdnimg.jacofood.ru/${this.state.img_name}_366x366.webp 183w,
+                                            https://cdnimg.jacofood.ru/${this.state.img_name}_466x466.webp 233w,
+                                            https://cdnimg.jacofood.ru/${this.state.img_name}_585x585.webp 292w,
+                                            https://cdnimg.jacofood.ru/${this.state.img_name}_732x732.webp 366w,
+                                            https://cdnimg.jacofood.ru/${this.state.img_name}_1168x1168.webp 584w,
+                                            https://cdnimg.jacofood.ru/${this.state.img_name}_1420x1420.webp 760w,
+                                            https://cdnimg.jacofood.ru/${this.state.img_name}_2000x2000.webp 1875w`} 
                                         sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
                                     <source 
                                         type="image/jpeg" 
                                         srcset={`
-                                            https://site-img.hb.bizmrg.com/${this.state.img_name}_276x276.jpg 138w,
-                                            https://site-img.hb.bizmrg.com/${this.state.img_name}_292x292.jpg 146w,
-                                            https://site-img.hb.bizmrg.com/${this.state.img_name}_366x366.jpg 183w,
-                                            https://site-img.hb.bizmrg.com/${this.state.img_name}_466x466.jpg 233w,
-                                            https://site-img.hb.bizmrg.com/${this.state.img_name}_585x585.jpg 292w,
-                                            https://site-img.hb.bizmrg.com/${this.state.img_name}_732x732.jpg 366w,
-                                            https://site-img.hb.bizmrg.com/${this.state.img_name}_1168x1168.jpg 584w,
-                                            https://site-img.hb.bizmrg.com/${this.state.img_name}_1420x1420.jpg 760w,
-                                            https://site-img.hb.bizmrg.com/${this.state.img_name}_2000x2000.jpg 1875w`} 
+                                            https://cdnimg.jacofood.ru/${this.state.img_name}_276x276.jpg 138w,
+                                            https://cdnimg.jacofood.ru/${this.state.img_name}_292x292.jpg 146w,
+                                            https://cdnimg.jacofood.ru/${this.state.img_name}_366x366.jpg 183w,
+                                            https://cdnimg.jacofood.ru/${this.state.img_name}_466x466.jpg 233w,
+                                            https://cdnimg.jacofood.ru/${this.state.img_name}_585x585.jpg 292w,
+                                            https://cdnimg.jacofood.ru/${this.state.img_name}_732x732.jpg 366w,
+                                            https://cdnimg.jacofood.ru/${this.state.img_name}_1168x1168.jpg 584w,
+                                            https://cdnimg.jacofood.ru/${this.state.img_name}_1420x1420.jpg 760w,
+                                            https://cdnimg.jacofood.ru/${this.state.img_name}_2000x2000.jpg 1875w`} 
                                         sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
                                     
                                     
@@ -564,7 +564,7 @@ export class Item extends React.Component {
                                         alt={this.state.item.name} 
                                         title={this.state.item.name} 
                                         style={{ width: '80%' }}
-                                        src={`https://site-img.hb.bizmrg.com/${this.state.img_name}_366x366.jpg`} />
+                                        src={`https://cdnimg.jacofood.ru/${this.state.img_name}_366x366.jpg`} />
                                 </picture>
                             }
 

@@ -245,43 +245,43 @@ class CartItem extends React.Component {
                                 <source 
                                     type="image/webp" 
                                     srcset={`
-                                        https://site-img.hb.bizmrg.com/${this.state.item.img_app}_138x138.webp 138w,
-                                        https://site-img.hb.bizmrg.com/${this.state.item.img_app}_146x146.webp 146w,
-                                        https://site-img.hb.bizmrg.com/${this.state.item.img_app}_183x183.webp 183w,
-                                        https://site-img.hb.bizmrg.com/${this.state.item.img_app}_233x233.webp 233w,
-                                        https://site-img.hb.bizmrg.com/${this.state.item.img_app}_292x292.webp 292w,
-                                        https://site-img.hb.bizmrg.com/${this.state.item.img_app}_366x366.webp 366w,
-                                        https://site-img.hb.bizmrg.com/${this.state.item.img_app}_584x584.webp 584w,
-                                        https://site-img.hb.bizmrg.com/${this.state.item.img_app}_760x760.webp 760w,
-                                        https://site-img.hb.bizmrg.com/${this.state.item.img_app}_1875x1875.webp 1875w`} 
+                                        https://cdnimg.jacofood.ru/${this.state.item.img_app}_138x138.webp 138w,
+                                        https://cdnimg.jacofood.ru/${this.state.item.img_app}_146x146.webp 146w,
+                                        https://cdnimg.jacofood.ru/${this.state.item.img_app}_183x183.webp 183w,
+                                        https://cdnimg.jacofood.ru/${this.state.item.img_app}_233x233.webp 233w,
+                                        https://cdnimg.jacofood.ru/${this.state.item.img_app}_292x292.webp 292w,
+                                        https://cdnimg.jacofood.ru/${this.state.item.img_app}_366x366.webp 366w,
+                                        https://cdnimg.jacofood.ru/${this.state.item.img_app}_584x584.webp 584w,
+                                        https://cdnimg.jacofood.ru/${this.state.item.img_app}_760x760.webp 760w,
+                                        https://cdnimg.jacofood.ru/${this.state.item.img_app}_1875x1875.webp 1875w`} 
                                     sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
                                 <source 
                                     type="image/jpeg" 
                                     srcset={`
-                                        https://site-img.hb.bizmrg.com/${this.state.item.img_app}_138x138.jpg 138w,
-                                        https://site-img.hb.bizmrg.com/${this.state.item.img_app}_146x146.jpg 146w,
-                                        https://site-img.hb.bizmrg.com/${this.state.item.img_app}_183x183.jpg 183w,
-                                        https://site-img.hb.bizmrg.com/${this.state.item.img_app}_233x233.jpg 233w,
-                                        https://site-img.hb.bizmrg.com/${this.state.item.img_app}_292x292.jpg 292w,
-                                        https://site-img.hb.bizmrg.com/${this.state.item.img_app}_366x366.jpg 366w,
-                                        https://site-img.hb.bizmrg.com/${this.state.item.img_app}_584x584.jpg 584w,
-                                        https://site-img.hb.bizmrg.com/${this.state.item.img_app}_760x760.jpg 760w,
-                                        https://site-img.hb.bizmrg.com/${this.state.item.img_app}_1875x1875.jpg 1875w`} 
+                                        https://cdnimg.jacofood.ru/${this.state.item.img_app}_138x138.jpg 138w,
+                                        https://cdnimg.jacofood.ru/${this.state.item.img_app}_146x146.jpg 146w,
+                                        https://cdnimg.jacofood.ru/${this.state.item.img_app}_183x183.jpg 183w,
+                                        https://cdnimg.jacofood.ru/${this.state.item.img_app}_233x233.jpg 233w,
+                                        https://cdnimg.jacofood.ru/${this.state.item.img_app}_292x292.jpg 292w,
+                                        https://cdnimg.jacofood.ru/${this.state.item.img_app}_366x366.jpg 366w,
+                                        https://cdnimg.jacofood.ru/${this.state.item.img_app}_584x584.jpg 584w,
+                                        https://cdnimg.jacofood.ru/${this.state.item.img_app}_760x760.jpg 760w,
+                                        https://cdnimg.jacofood.ru/${this.state.item.img_app}_1875x1875.jpg 1875w`} 
                                     sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
                                 <img 
                                     alt={this.state.item.name} 
                                     title={this.state.item.name} 
-                                    src={`https://site-img.hb.bizmrg.com/${this.state.item.img_app}_138x138.jpg`} 
+                                    src={`https://cdnimg.jacofood.ru/${this.state.item.img_app}_138x138.jpg`} 
                                     loading="lazy" />
                             </picture>
                                 :
                             <picture>
                                 <source 
-                                    srcSet={"https://site-img.hb.bizmrg.com/"+this.state.item.img+"300х200.webp?"+this.state.item.imgUpdate} 
+                                    srcSet={"https://cdnimg.jacofood.ru/"+this.state.item.img+"300х200.webp?"+this.state.item.imgUpdate} 
                                     type="image/webp" 
                                 />
                                 <img 
-                                    src={"https://site-img.hb.bizmrg.com/"+this.state.item.img+"300х200.jpg?"+this.state.item.imgUpdate} 
+                                    src={"https://cdnimg.jacofood.ru/"+this.state.item.img+"300х200.jpg?"+this.state.item.imgUpdate} 
                                     alt={this.state.item.name}
                                     title={this.state.item.name}
                                     loading="lazy"
@@ -461,43 +461,43 @@ class CartItemMobile extends React.Component {
                             <source 
                                 type="image/webp" 
                                 srcset={`
-                                    https://site-img.hb.bizmrg.com/${this.state.item.img_app}_138x138.webp 138w,
-                                    https://site-img.hb.bizmrg.com/${this.state.item.img_app}_146x146.webp 146w,
-                                    https://site-img.hb.bizmrg.com/${this.state.item.img_app}_183x183.webp 183w,
-                                    https://site-img.hb.bizmrg.com/${this.state.item.img_app}_233x233.webp 233w,
-                                    https://site-img.hb.bizmrg.com/${this.state.item.img_app}_292x292.webp 292w,
-                                    https://site-img.hb.bizmrg.com/${this.state.item.img_app}_366x366.webp 366w,
-                                    https://site-img.hb.bizmrg.com/${this.state.item.img_app}_584x584.webp 584w,
-                                    https://site-img.hb.bizmrg.com/${this.state.item.img_app}_760x760.webp 760w,
-                                    https://site-img.hb.bizmrg.com/${this.state.item.img_app}_1875x1875.webp 1875w`} 
+                                    https://cdnimg.jacofood.ru/${this.state.item.img_app}_138x138.webp 138w,
+                                    https://cdnimg.jacofood.ru/${this.state.item.img_app}_146x146.webp 146w,
+                                    https://cdnimg.jacofood.ru/${this.state.item.img_app}_183x183.webp 183w,
+                                    https://cdnimg.jacofood.ru/${this.state.item.img_app}_233x233.webp 233w,
+                                    https://cdnimg.jacofood.ru/${this.state.item.img_app}_292x292.webp 292w,
+                                    https://cdnimg.jacofood.ru/${this.state.item.img_app}_366x366.webp 366w,
+                                    https://cdnimg.jacofood.ru/${this.state.item.img_app}_584x584.webp 584w,
+                                    https://cdnimg.jacofood.ru/${this.state.item.img_app}_760x760.webp 760w,
+                                    https://cdnimg.jacofood.ru/${this.state.item.img_app}_1875x1875.webp 1875w`} 
                                 sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
                             <source 
                                 type="image/jpeg" 
                                 srcset={`
-                                    https://site-img.hb.bizmrg.com/${this.state.item.img_app}_138x138.jpg 138w,
-                                    https://site-img.hb.bizmrg.com/${this.state.item.img_app}_146x146.jpg 146w,
-                                    https://site-img.hb.bizmrg.com/${this.state.item.img_app}_183x183.jpg 183w,
-                                    https://site-img.hb.bizmrg.com/${this.state.item.img_app}_233x233.jpg 233w,
-                                    https://site-img.hb.bizmrg.com/${this.state.item.img_app}_292x292.jpg 292w,
-                                    https://site-img.hb.bizmrg.com/${this.state.item.img_app}_366x366.jpg 366w,
-                                    https://site-img.hb.bizmrg.com/${this.state.item.img_app}_584x584.jpg 584w,
-                                    https://site-img.hb.bizmrg.com/${this.state.item.img_app}_760x760.jpg 760w,
-                                    https://site-img.hb.bizmrg.com/${this.state.item.img_app}_1875x1875.jpg 1875w`} 
+                                    https://cdnimg.jacofood.ru/${this.state.item.img_app}_138x138.jpg 138w,
+                                    https://cdnimg.jacofood.ru/${this.state.item.img_app}_146x146.jpg 146w,
+                                    https://cdnimg.jacofood.ru/${this.state.item.img_app}_183x183.jpg 183w,
+                                    https://cdnimg.jacofood.ru/${this.state.item.img_app}_233x233.jpg 233w,
+                                    https://cdnimg.jacofood.ru/${this.state.item.img_app}_292x292.jpg 292w,
+                                    https://cdnimg.jacofood.ru/${this.state.item.img_app}_366x366.jpg 366w,
+                                    https://cdnimg.jacofood.ru/${this.state.item.img_app}_584x584.jpg 584w,
+                                    https://cdnimg.jacofood.ru/${this.state.item.img_app}_760x760.jpg 760w,
+                                    https://cdnimg.jacofood.ru/${this.state.item.img_app}_1875x1875.jpg 1875w`} 
                                 sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
                             <img 
                                 alt={this.state.item.name} 
                                 title={this.state.item.name} 
-                                src={`https://site-img.hb.bizmrg.com/${this.state.item.img_app}_466x466.jpg`} 
+                                src={`https://cdnimg.jacofood.ru/${this.state.item.img_app}_466x466.jpg`} 
                                 loading="lazy" />
                         </picture>
                             :
                         <picture style={{ width: '40%' }}>
                             <source 
-                                srcSet={"https://site-img.hb.bizmrg.com/"+this.state.item.img+"300х200.webp?"+this.state.item.imgUpdate} 
+                                srcSet={"https://cdnimg.jacofood.ru/"+this.state.item.img+"300х200.webp?"+this.state.item.imgUpdate} 
                                 type="image/webp" 
                             />
                             <img 
-                                src={"https://site-img.hb.bizmrg.com/"+this.state.item.img+"300х200.jpg?"+this.state.item.imgUpdate} 
+                                src={"https://cdnimg.jacofood.ru/"+this.state.item.img+"300х200.jpg?"+this.state.item.imgUpdate} 
                                 alt={this.state.item.name}
                                 title={this.state.item.name}
                                 loading="lazy"

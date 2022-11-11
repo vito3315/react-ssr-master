@@ -93,7 +93,7 @@ app.use( '*', async ( req, res ) => {
     city = city.filter( (item) => item != '' ); 
     city = city[0];
     
-    console.log( req.originalUrl )
+    //console.log( req.originalUrl )
 
     const matchRoute = routes.find( route => matchPath( req.originalUrl, route ) );
 
@@ -217,7 +217,7 @@ app.use( '*', async ( req, res ) => {
                         tmp_desc = item.marc_desc_full.length > 0 ? item.marc_desc_full : item.tmp_desc;
 
                         meta = `
-                            <meta property="og:image" content="https://storage.yandexcloud.net/site-img/${item.img_new}300х200.jpg">
+                            <meta property="og:image" content="https://cdnimg.jacofood.ru/${item.img_new}300х200.jpg">
                             <meta property="og:image:width" content="300" />
                             
                             <meta property="og:title" content="${item.name}">
@@ -230,7 +230,7 @@ app.use( '*', async ( req, res ) => {
                             <meta name="twitter:card" content="summary_large_image" /> 
                             <meta name="twitter:title" content="${item.name}" /> 
                             <meta name="twitter:desсription" content="${tmp_desc}" /> 
-                            <meta name="twitter:image" content="https://storage.yandexcloud.net/site-img/${item.img_new}300х200.jpg" /> 
+                            <meta name="twitter:image" content="https://cdnimg.jacofood.ru/${item.img_new}300х200.jpg" /> 
                         `;
                         
                         if( !findItem ){
