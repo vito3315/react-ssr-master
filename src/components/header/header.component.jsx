@@ -1463,16 +1463,15 @@ export class Header extends React.Component{
         if( this.props && this.props.data ){
             this.is_load = true;
 
-            console.log( this.props.data.all.other )
+            try { itemsStore.setDops(this.props.data.all.other.cats.need_dop); } catch (err) { }
+            try { itemsStore.setAllItems(this.props.data.all.other.cats.all_items); } catch (err) { }
+            try { itemsStore.setAllItemsCat(this.props.data.all.other.cats.arr); } catch (err) { }
+            try { itemsStore.setAllItemsCatNew(this.props.data.all.other.cats.main_cat); } catch (err) { }
+            try { itemsStore.setFreeItems(this.props.data.all.other.cats.free_items); } catch (err) { }
+            try { itemsStore.setBanners(this.props.data.all.other.cats.baners) } catch (err) { }
+            try { itemsStore.setCityRU(this.props.data.all.other.cats.this_city_name_ru); } catch (err) { }
+            try { itemsStore.setCity(this.props.city) } catch (err) { }
 
-            itemsStore.setDops(this.props.data.all.other.cats.need_dop);
-            itemsStore.setAllItems(this.props.data.all.other.cats.all_items);
-            itemsStore.setAllItemsCat(this.props.data.all.other.cats.arr);
-            itemsStore.setAllItemsCatNew(this.props.data.all.other.cats.main_cat);
-            itemsStore.setFreeItems(this.props.data.all.other.cats.free_items);
-            itemsStore.setBanners(this.props.data.all.other.cats.baners)
-            itemsStore.setCityRU(this.props.data.all.other.cats.this_city_name_ru);
-            itemsStore.setCity(this.props.city)
         }
         
         this.state = {      
