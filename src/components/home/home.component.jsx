@@ -1061,7 +1061,8 @@ export class Home extends React.Component {
         };
         
         if( this.props.data ){
-            this.loadBanners( this.props.data.all.other.cats.baners );
+            try { this.loadBanners( this.props.data.all.other.cats.baners ); } catch (err) { }
+            
         }
         itemsStore.setCity(this.props.city);
     }

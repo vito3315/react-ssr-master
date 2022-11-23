@@ -198,14 +198,14 @@ app.use( '*', async ( req, res ) => {
             meta += `<meta name="robots" content="noindex" />`;
         }
         
-        if( matchRoute.type == 'home' ){
+        /*if( matchRoute.type == 'home' ){
             componentData.all.other.cats.baners.map( (item) => {
                 meta += `
                     <link rel="preload" as="image" href="https://storage.yandexcloud.net/site-home-img/${ item.img_new+"3700х1000.webp?"+item.img_new_update }" />
                     <link rel="preload" as="image" href="https://storage.yandexcloud.net/site-home-img/${ item.img_new+"3700х1000.jpg?"+item.img_new_update }" />
                 `;
             } )
-        }
+        }*/
         
         if( matchRoute.type == 'item' ){  
             let tmp_desc = '';
