@@ -1499,7 +1499,7 @@ export class Header extends React.Component{
             openCity: false,
             cityName: this.props.city ? this.props.city : '',
             testData: [1, 2, 3, 4],
-            cityList: this.props.data ? this.props.data.all.other.cats.city_list : [],
+            cityList: [],
             
             openLoginNew: false,
             
