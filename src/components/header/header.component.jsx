@@ -1460,25 +1460,38 @@ export class Header extends React.Component{
     constructor(props) {
         super(props);
         
+        let main_cat = [],
+            arr = [],
+            this_city_name_ru = '';
+
         if( this.props && this.props.data ){
             this.is_load = true;
 
             try { itemsStore.setDops(this.props.data.all.other.cats.need_dop); } catch (err) { }
             try { itemsStore.setAllItems(this.props.data.all.other.cats.all_items); } catch (err) { }
-            try { itemsStore.setAllItemsCat(this.props.data.all.other.cats.arr); } catch (err) { }
-            try { itemsStore.setAllItemsCatNew(this.props.data.all.other.cats.main_cat); } catch (err) { }
+            try { 
+                itemsStore.setAllItemsCat(this.props.data.all.other.cats.arr); 
+                arr = this.props.data.all.other.cats.arr;
+            } catch (err) { }
+            try { 
+                itemsStore.setAllItemsCatNew(this.props.data.all.other.cats.main_cat); 
+                main_cat = this.props.data.all.other.cats.main_cat 
+            } catch (err) { }
             try { itemsStore.setFreeItems(this.props.data.all.other.cats.free_items); } catch (err) { }
             try { itemsStore.setBanners(this.props.data.all.other.cats.baners) } catch (err) { }
-            try { itemsStore.setCityRU(this.props.data.all.other.cats.this_city_name_ru); } catch (err) { }
+            try { 
+                itemsStore.setCityRU(this.props.data.all.other.cats.this_city_name_ru); 
+                this_city_name_ru = this.props.data.all.other.cats.this_city_name_ru;
+            } catch (err) { }
             try { itemsStore.setCity(this.props.city) } catch (err) { }
 
         }
         
         this.state = {      
             this_link: this.props.this_link ? this.props.this_link : '',
-            categoryItemsNew: this.props.data ? this.props.data.all.other.cats.main_cat : [],
+            categoryItemsNew: main_cat,
             
-            categoryItems: this.props.data ? this.props.data.all.other.cats.arr : [],
+            categoryItems: arr,
             cartItems: [],
             activePage: '',
             is_load: false,
@@ -1496,7 +1509,7 @@ export class Header extends React.Component{
             soc_link: null,
             openDrawer: false,
             anchorEl: null,
-            cityNameRu: this.props.data ? this.props.data.all.other.cats.this_city_name_ru && this.props.data.all.other.cats.this_city_name_ru.length > 0 ? this.props.data.all.other.cats.this_city_name_ru : 'Город' : 'Город'
+            cityNameRu: this_city_name_ru.length > 0 ? this_city_name_ru : 'Город'
         };
     }
     
