@@ -1211,8 +1211,8 @@ export class Home extends React.Component {
                 var json = response['data'];
                 
                 return {
-                    title: json.page.hasOwnProperty("title") ? json.page.title : '',
-                    description: json.page.hasOwnProperty("description") ? json.page.description : '',
+                    title: json.page && json.page.title ? json.page.title : '',
+                    description: json.page && json.page.description ? json.page.description : '',
                     page: json.page,
                     cats: json.cats,
                     allItems: json.allItems,
@@ -1570,8 +1570,6 @@ export class Home extends React.Component {
     }
 
     render() {
-        //this.props.data.page.page_h
-        
         let link = this.state.mainLink;
         link = link.split('/');
         let mainLink = '';

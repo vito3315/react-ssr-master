@@ -343,11 +343,13 @@ class ModalLogin extends React.Component{
 
             let number = this.state.loginLogin;
             
-            grecaptcha.ready(() => {
-                grecaptcha.execute('6LdhWpIdAAAAAA4eceqTfNH242EGuIleuWAGQ2su', {action: 'submit'}).then( (token) => {
+            let token = '';
+
+            //grecaptcha.ready(() => {
+            //    grecaptcha.execute('6LdhWpIdAAAAAA4eceqTfNH242EGuIleuWAGQ2su', {action: 'submit'}).then( (token) => {
                     this.createProfileFetch(number, token);
-                });
-            });
+            //    });
+            //});
         }
     }
 
@@ -483,11 +485,13 @@ class ModalLogin extends React.Component{
         if( this.sms1 == false ){
             this.sms1 = true;
             
-            grecaptcha.ready(() => {
-                grecaptcha.execute('6LdhWpIdAAAAAA4eceqTfNH242EGuIleuWAGQ2su', {action: 'submit'}).then( (token) => {
+            let token = '';
+
+            //grecaptcha.ready(() => {
+            //    grecaptcha.execute('6LdhWpIdAAAAAA4eceqTfNH242EGuIleuWAGQ2su', {action: 'submit'}).then( (token) => {
                     this.sendsmsNewLoginFetch(token);
-                });
-            });
+            //    });
+            //});
         }
     }
 
