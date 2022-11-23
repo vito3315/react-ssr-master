@@ -120,8 +120,6 @@ export class Item extends React.Component {
     constructor(props) {
         super(props);
         
-        console.log( 'props item', this.props.item )
-
         this.state = {      
             item: this.props.item ? this.props.item : null,  
             is_load: false,
@@ -161,8 +159,6 @@ export class Item extends React.Component {
             if(response['status'] === 200){
                 var json = response['data'];
                 
-                console.log( 'json', json )
-
                 return {
                     title: json.page.title,
                     description: json.page.description,
@@ -201,10 +197,6 @@ export class Item extends React.Component {
             if( this._isMounted ){
                 let item = itemsStore.getAllItems().find( (item) => item.link == this.state.itemLink );
                 
-                console.log( 'item', item )
-                console.log( 'itemLink', this.state.itemLink )
-                console.log( 'props', this.props )
-
                 if( item ){
                     this.setState({
                         item: item,

@@ -96,8 +96,6 @@ export class Contact extends React.Component {
     dynamicallyLoadScript() {
         if( this.state.is_load_script === false ){
 
-            console.log( 'is_load_script' )
-
             var script = document.createElement("script");  // create a script DOM node
             script.src = 'https://api-maps.yandex.ru/2.1/?apikey=ae2bad1f-486e-442b-a9f7-d84fff6296db&lang=ru_RU';  // set its src to the provided URL
 
@@ -136,8 +134,6 @@ export class Contact extends React.Component {
         }).then(res => res.json()).then(json => {
             let points_zone = [];
             
-            console.log( json )
-
             json.map(function(point){
 				if(point['zone_origin'].length > 0){
 					points_zone.push( JSON.parse(point['zone_origin']) );
