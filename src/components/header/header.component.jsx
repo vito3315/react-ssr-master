@@ -1534,11 +1534,7 @@ export class Header extends React.Component{
                 })
             } 
             
-            if( !localStorage.getItem('myCity') || localStorage.getItem('myCity').length == 0 ){
-                this.setState({
-                    openCity: true
-                })
-            }
+            
 
             let cartData = itemsStore.getCartData();
 
@@ -1629,7 +1625,13 @@ export class Header extends React.Component{
                         cityNameRu: json.this_city_name_ru,
                         userName: json.user_name
                     });
-                    this.is_load = false
+                    this.is_load = false;
+
+                    if( !localStorage.getItem('myCity') || localStorage.getItem('myCity').length == 0 ){
+                        this.setState({
+                            openCity: true
+                        })
+                    }
                 })
                 .catch(err => { });
         //    }else{
