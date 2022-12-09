@@ -456,19 +456,19 @@ class ModalLogin extends React.Component{
                 errTitle: '',
                 errText1: '',
                 errText2: '',
-                is_sms: res.is_sms ?? false
+                is_sms: json.is_sms ?? false
             })
         }else{
-            if( res.type == 'modal' ){
+            if( json.type == 'modal' ){
                 this.setState({
                     typeLogin: 'error',
-                    errTitle: res.title,
-                    errText1: res.text1,
-                    errText2: res.text2,
+                    errTitle: json.title,
+                    errText1: json.text1,
+                    errText2: json.text2,
                 });
             }else{
                 this.setState({
-                    errPhone: res.text
+                    errPhone: json.text
                 });
             }
         }
