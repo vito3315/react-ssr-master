@@ -1509,7 +1509,9 @@ export class Header extends React.Component{
             soc_link: null,
             openDrawer: false,
             anchorEl: null,
-            cityNameRu: this_city_name_ru.length > 0 ? this_city_name_ru : 'Город'
+            cityNameRu: this_city_name_ru.length > 0 ? this_city_name_ru : 'Город',
+
+            is_open_text_msg: false
         };
     }
     
@@ -1559,6 +1561,13 @@ export class Header extends React.Component{
             })
             
             this.load();
+
+            if( this.state.cityName == 'samara' && !localStorage.getItem('msg_city') ){
+                this.setState({
+                    is_open_text_msg: true
+                })
+                localStorage.setItem('msg_city', 'true')
+            }
         }, 300)
         
         autorun(() => {
@@ -1709,6 +1718,12 @@ export class Header extends React.Component{
             openDrawer: open
         })
     };
+
+    close_text_msg(){
+        this.setState({
+            is_open_text_msg: false
+        })
+    }
 
     render(){
         let link = this.props.this_link;
@@ -1861,7 +1876,35 @@ export class Header extends React.Component{
                 <ModalCity isOpen={this.state.openCity} close={this.closeCity.bind(this)} cityList={this.state.cityList} cityName={this.state.cityName} />
                 <ModalLogin isOpen={this.state.openLoginNew} close={this.closeLogin.bind(this)} />
 
-                   
+                <Modal
+                    open={this.state.is_open_text_msg}
+                    onClose={this.close_text_msg.bind(this)}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                    className="class123"
+                    
+                >
+                    <Fade in={this.state.is_open_text_msg}>
+                        
+                        <Box className='modalCity'>
+
+                            <IconButton style={{ position: 'absolute', top: -40, left: 15, backgroundColor: 'transparent' }} onClick={this.close_text_msg.bind(this)}>
+                                <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
+                            </IconButton>
+
+                            <div className=''>
+                                <Typography component="h4">Уважаемые клиенты!</Typography>
+                                <Typography component="h5">23 и 24 января зал кафе на Победы 10 будет закрыт в связи с ремонтными работами. Принимаем заказы на доставку и самовывоз.</Typography>
+                                <Typography component="h5">Приносим извинения за временные неудобства.</Typography>
+                            </div>
+
+                        </Box>
+                        
+                    </Fade>
+                </Modal>
                 
                 <Box sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }}>
                     <CustomBottomNavigationNew openLogin={this.openLogin.bind(this)} />
