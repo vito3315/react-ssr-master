@@ -1562,12 +1562,12 @@ export class Header extends React.Component{
             
             this.load();
 
-            if( this.state.cityName == 'samara' && !localStorage.getItem('msg_city') ){
+            /*if( this.state.cityName == 'samara' && !localStorage.getItem('msg_city') ){
                 this.setState({
                     is_open_text_msg: true
                 })
                 localStorage.setItem('msg_city', 'true')
-            }
+            }*/
         }, 300)
         
         autorun(() => {
