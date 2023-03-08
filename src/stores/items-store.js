@@ -242,6 +242,10 @@ class ItemsStore {
       this_time = moment(by_time).format("HH:mm");
       this_dow = parseInt(moment(by_time).format("E"));
     }
+
+    console.log( 'this_date', this_date )
+    console.log( 'this_time', this_time )
+    console.log( 'this_dow', this_dow )
     
     if( promo_info ){
       if( !promo_info.status_promo ){

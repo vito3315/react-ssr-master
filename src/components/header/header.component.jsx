@@ -1568,6 +1568,10 @@ export class Header extends React.Component{
                 })
                 localStorage.setItem('msg_city', 'true')
             }*/
+
+            this.setState({
+                is_open_text_msg: true
+            })
         }, 300)
         
         autorun(() => {
@@ -1897,8 +1901,8 @@ export class Header extends React.Component{
 
                             <div className=''>
                                 <Typography component="h4">Уважаемые клиенты!</Typography>
-                                <Typography component="h5">23 и 24 января зал кафе на Победы 10 будет закрыт в связи с ремонтными работами. Принимаем заказы на доставку и самовывоз.</Typography>
-                                <Typography component="h5">Приносим извинения за временные неудобства.</Typography>
+                                <Typography component="h5">В связи с праздничным днем и большим объемом заказов, некоторые кафе могут временно не принимать новые.</Typography>
+                                <Typography component="h5">Приносим извинения за неудобства.</Typography>
                             </div>
 
                         </Box>
