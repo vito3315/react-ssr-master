@@ -1569,9 +1569,9 @@ export class Header extends React.Component{
                 localStorage.setItem('msg_city', 'true')
             }*/
 
-            this.setState({
+            /*this.setState({
                 is_open_text_msg: true
-            })
+            })*/
         }, 300)
         
         autorun(() => {
