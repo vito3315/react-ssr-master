@@ -1518,6 +1518,15 @@ export class Header extends React.Component{
     componentDidMount = () => {
         setTimeout(() => {
 
+            if(localStorage.getItem('myCity') && localStorage.getItem('myCity').length > 0){
+                console.log( localStorage.getItem('myCity'), this.state.cityName )
+
+                if( localStorage.getItem('myCity') !== this.state.cityName ){
+                    let this_addr = window.location.pathname;
+                    window.location.pathname = this_addr.replace(this.state.cityName, localStorage.getItem('myCity'));
+                }
+            }
+
             let userName = itemsStore.getUserName();
             let token = itemsStore.getToken();
 
