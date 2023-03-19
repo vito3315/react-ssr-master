@@ -181,7 +181,7 @@ class ItemsStore {
     
     let tmp = 0,
         allPrice = 0,
-        by_time = !orderInfo.orderTimes || parseInt( orderInfo.orderTimes ) == 1 ? 0 : orderInfo.orderPredDay + ' ' + orderInfo.orderPredTime;   
+        by_time = !orderInfo.orderTimes || parseInt( orderInfo.orderTimes ) == 0 ? 0 : orderInfo.orderPredDay + ' ' + orderInfo.orderPredTime;   
         
     let promo_info = this.getPromo();
     let my_cart = this.getItems();  
