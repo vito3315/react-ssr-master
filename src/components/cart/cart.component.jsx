@@ -1345,6 +1345,8 @@ export class Cart extends React.Component {
             itemsStore.setPromo( JSON.stringify(json), promo_name );
             let check_promo = itemsStore.checkPromo();
               
+            console.log( 'check_promo', promo_name, json )
+
             if( promo_name.length == 0 ){
                 this.setState({
                     orderPromoText: ''
