@@ -712,6 +712,8 @@ class ItemsStore {
           
         let max_count = itemsStore.check_max_count( parseInt(id) );    
         
+        console.log( 'max_count__', max_count )
+
         if( parseInt(max_count) >= count ){
           let check_in_cart = my_cart.some( (item) => item.item_id == id );
             if( !check_in_cart ){
@@ -1020,7 +1022,7 @@ class ItemsStore {
     if( new_free_dop.length > 0 ){
       
       let max_count2 = new_free_dop.find( (item) => parseInt(item['item_id']) == 17 || parseInt(item['item_id']) == 237 );
-      max_count = new_free_dop.find( (item) => parseInt(item['item_id']) == parseInt(item_id) );
+           max_count = new_free_dop.find( (item) => parseInt(item['item_id']) == parseInt(item_id) );
       
 
       /*console.log( {
@@ -1032,13 +1034,19 @@ class ItemsStore {
         new_free_dop: new_free_dop
       } )*/
 
-      //console.log( new_free_dop )
+      console.log( 'new_free_dop', new_free_dop )
+      console.log( 'max_count2', max_count2 )
+
+      console.log( 'max_count', max_count )
+      console.log( 'my_free_count', my_free_count )
 
       if( max_count ){
         max_count = parseInt(max_count['count']);
         
         if( my_free_count >= max_count ){
           return max_count - my_free_count;
+        }else{
+          return 2;
         }
         
       }
