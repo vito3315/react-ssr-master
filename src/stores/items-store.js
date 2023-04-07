@@ -712,7 +712,7 @@ class ItemsStore {
           
         let max_count = itemsStore.check_max_count( parseInt(id) );    
         
-        console.log( 'max_count__', max_count )
+        //console.log( 'max_count__', max_count )
 
         if( parseInt(max_count) >= count ){
           let check_in_cart = my_cart.some( (item) => item.item_id == id );
@@ -1034,11 +1034,11 @@ class ItemsStore {
         new_free_dop: new_free_dop
       } )*/
 
-      console.log( 'new_free_dop', new_free_dop )
-      console.log( 'max_count2', max_count2 )
+      //console.log( 'new_free_dop', new_free_dop )
+      //console.log( 'max_count2', max_count2 )
 
-      console.log( 'max_count', max_count )
-      console.log( 'my_free_count', my_free_count )
+      //console.log( 'max_count', max_count )
+      //console.log( 'my_free_count', my_free_count )
 
       if( max_count ){
         max_count = parseInt(max_count['count']);
@@ -1052,7 +1052,7 @@ class ItemsStore {
       }
     }
     
-    return max_count;
+    return 0;
   }
   
   constructor() {
