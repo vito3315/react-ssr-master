@@ -1046,7 +1046,7 @@ class ItemsStore {
         if( my_free_count >= max_count ){
           return max_count - my_free_count;
         }else{
-          return 2;
+          return max_count;
         }
         
       }
