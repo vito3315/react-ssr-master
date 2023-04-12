@@ -259,7 +259,7 @@ app.use( '*', async ( req, res ) => {
             `GLOBAL_DEVICE = ${JSON.stringify(GLOBAL_DEVICE.toString())};`
         );
 
-        if( city == 'togliatti' ){
+        if( city == 'togliatti' ){ 
             indexHTML = indexHTML.replace(
                 '<!-- city_script -->',
                 `<script type="text/javascript">!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src='https://vk.com/js/api/openapi.js?169',t.onload=function(){VK.Retargeting.Init("VK-RTRG-1473124-g35FP"),VK.Retargeting.Hit()},document.head.appendChild(t)}();</script><noscript><img src="https://vk.com/rtrg?p=VK-RTRG-1473124-g35FP" style="position:fixed; left:-999px;" alt=""/></noscript>`
@@ -272,6 +272,46 @@ app.use( '*', async ( req, res ) => {
                 `<script type="text/javascript">!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src='https://vk.com/js/api/openapi.js?169',t.onload=function(){VK.Retargeting.Init("VK-RTRG-1473143-e3HQT"),VK.Retargeting.Hit()},document.head.appendChild(t)}();</script><noscript><img src="https://vk.com/rtrg?p=VK-RTRG-1473143-e3HQT" style="position:fixed; left:-999px;" alt=""/></noscript>`
             );
         }
+
+
+
+        if( city == 'togliatti' ){ 
+            indexHTML = indexHTML.replace(
+                '<!-- city_script2 -->',
+                `<script type="text/javascript">
+                var _tmr = window._tmr || (window._tmr = []);
+                _tmr.push({id: "3321706", type: "pageView", start: (new Date()).getTime()});
+                (function (d, w, id) {
+                  if (d.getElementById(id)) return;
+                  var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true; ts.id = id;
+                  ts.src = "https://top-fwz1.mail.ru/js/code.js";
+                  var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
+                  if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
+                })(document, window, "tmr-code");
+                </script>
+                <noscript><div><img src="https://top-fwz1.mail.ru/counter?id=3321706;js=na" style="position:absolute;left:-9999px;" alt="Top.Mail.Ru" /></div></noscript>`
+            );
+        }
+
+        if( city == 'samara' ){
+            indexHTML = indexHTML.replace(
+                '<!-- city_script2 -->',
+                `<script type="text/javascript">
+                var _tmr = window._tmr || (window._tmr = []);
+                _tmr.push({id: "3321699", type: "pageView", start: (new Date()).getTime()});
+                (function (d, w, id) {
+                  if (d.getElementById(id)) return;
+                  var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true; ts.id = id;
+                  ts.src = "https://top-fwz1.mail.ru/js/code.js";
+                  var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
+                  if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
+                })(document, window, "tmr-code");
+                </script>
+                <noscript><div><img src="https://top-fwz1.mail.ru/counter?id=3321699;js=na" style="position:absolute;left:-9999px;" alt="Top.Mail.Ru" /></div></noscript>`
+            );
+        }
+
+
 
         res.set('Cache-Control', 'public, max-age=86400')
         res.set('Set-Cookie', 'SameSite=None')
