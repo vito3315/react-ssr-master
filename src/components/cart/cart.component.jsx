@@ -1152,17 +1152,12 @@ export class Cart extends React.Component {
             def_type = 'cash';
         
         if( type_order == 0 ){
-            //if( type == 1 ){
-                this.setState({
-                    renderPay: this.state.pays.dev,
-                })
-                def_type = this.state.orderPay == '' || this.state.orderPay == 'in' ? 'cash' : this.state.orderPay;
-            /*}else{
-                this.setState({
-                    renderPay: this.state.pays.dev_mini,
-                })
-                def_type = 'cash';
-            }*/
+            
+            this.setState({
+                renderPay: this.state.pays.dev,
+            })
+            //def_type = this.state.orderPay == '' || this.state.orderPay == 'in' ? 'cash' : this.state.orderPay;
+            def_type = '';
         }else{
             this.setState({
                 renderPay: this.state.pays.pic,
@@ -1171,7 +1166,7 @@ export class Cart extends React.Component {
         }
         
         this.setState({
-            //orderPay: def_type,
+            orderPay: def_type,
         })
         
         this.saveData();
