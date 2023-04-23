@@ -128,7 +128,7 @@ class StickyFooter extends React.Component{
             <footer className={"footer "+(this.state.page == 'cart' ? this.state.page : '')}>
                 <Grid container className="mainContainer">
                     <Grid item lg={3} md={3} sm={3} xl={3} xs={12} className="copy">
-                        <Typography variant="body1" component="h1">© Жако 2017 - {new Date().getFullYear()}</Typography>
+                        <Typography variant="body1" component="span">© Жако 2017 - {new Date().getFullYear()}</Typography>
                     </Grid>
                     <Grid item lg={3} md={3} sm={3} xl={3} xs={12}>
                         <Link

@@ -245,10 +245,6 @@ class ItemsStore {
       this_dow = parseInt(moment(by_time).format("E"));
     }
 
-    console.log( 'this_date', this_date )
-    console.log( 'this_time', this_time )
-    console.log( 'this_dow', this_dow )
-    
     if( promo_info ){
       if( !promo_info.status_promo ){
         return {
@@ -712,8 +708,6 @@ class ItemsStore {
           
         let max_count = itemsStore.check_max_count( parseInt(id) );    
         
-        //console.log( 'max_count__', max_count )
-
         if( parseInt(max_count) >= count ){
           let check_in_cart = my_cart.some( (item) => item.item_id == id );
             if( !check_in_cart ){

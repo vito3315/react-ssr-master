@@ -114,7 +114,7 @@ body{
     & .copy{
         align-content: flex-end;
         display: grid;
-        & > h1{
+        & > span{
             @include fonsNew(1rem, $Roboto);
             font-weight: 400;
             color: #fff!important;

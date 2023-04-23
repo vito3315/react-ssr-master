@@ -658,7 +658,9 @@ export class Cart extends React.Component {
             
             newOrderData: null,
 
-            CheckDomTrue: false
+            CheckDomTrue: false,
+
+            sberPayData: null,
         };
         
         itemsStore.setCity(this.props.city);
@@ -1340,8 +1342,6 @@ export class Cart extends React.Component {
             itemsStore.setPromo( JSON.stringify(json), promo_name );
             let check_promo = itemsStore.checkPromo();
               
-            console.log( 'check_promo', promo_name, json )
-
             if( promo_name.length == 0 ){
                 this.setState({
                     orderPromoText: ''
@@ -1634,7 +1634,8 @@ export class Cart extends React.Component {
             }
 
             this.setState({
-                spiner: true
+                spiner: true,
+                sberPayData: null
             })
             
             let new_cart = [];
@@ -1768,7 +1769,7 @@ export class Cart extends React.Component {
             this.setState({ 
                 orderCheckDop: false,
                 orderCheckDopTea: false,
-                spiner: true
+                spiner: true,
             })
             
             let payFull = this.state.renderPay.find( (item) => item.type == this.state.orderPay );
@@ -1863,9 +1864,18 @@ export class Cart extends React.Component {
                     if( json.st ){
                         this.setState({
                             orderCheck: true,
-                            newOrderData: json
+                            newOrderData: json,
+                            sberPayData: json.sberPay
                         })
                         
+                        if( json.sberPay ){
+                            json.sberPay.selector = '#sbol-pay-container';
+
+                            json.sberPay.rowView = true;
+
+                            var sbolWidget = new window.SbolPay(json.sberPay);
+                        }
+
                         this.startOrderIntervalTimer = setTimeout(()=>{
                             this.setState({
                                 orderCheck: false,
@@ -3027,16 +3037,20 @@ export class Cart extends React.Component {
                                 </tfoot>
                             </table>
                         </DialogContent>
-                        <DialogActions style={{ padding: '12px 24px', paddingBottom: 24 }}>
+                        <DialogActions style={{ padding: '12px 24px', paddingBottom: 24, display: 'flex', flexDirection: 'column' }}>
                             { this.state.orderPay == 'card' ? 
-                                <a
-                                    href={ this.state.newOrderData.pay.formUrl }
-                                    className="MuiButtonBase-root MuiBottomNavigationAction-root"
-                                >
-                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" style={{ width: '100%' }}>
-                                        <Button variant="contained" style={{ width: '100%', margin: '0px 10px' }} className="BtnCardMain CardInCardItem">Оплатить заказ</Button>
-                                    </ButtonGroup>
-                                </a>
+                                <>
+                                    <a
+                                        href={ this.state.newOrderData.pay.formUrl }
+                                        className="MuiButtonBase-root MuiBottomNavigationAction-root"
+                                        style={{ padding: 20 }}
+                                    >
+                                        <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" style={{ width: '100%' }}>
+                                            <Button variant="contained" style={{ width: '100%', margin: '0px 10px' }} className="BtnCardMain CardInCardItem">Оплатить заказ картой</Button>
+                                        </ButtonGroup>
+                                    </a>
+                                    <div id="sbol-pay-container"></div>
+                                </>
                                 
                                     :
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" style={{ width: '100%' }} onClick={ this.trueOrder.bind(this) }>
