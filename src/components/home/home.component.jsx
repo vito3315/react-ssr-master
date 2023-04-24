@@ -27,6 +27,10 @@ import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 
+import Modal from '@mui/material/Modal';
+import PropTypes from 'prop-types';
+import IconButton from '@mui/material/IconButton';
+
 import itemsStore from '../../stores/items-store';
 import config from '../../stores/config';
 
@@ -45,6 +49,38 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics, logEvent } from "firebase/analytics";
 
 var firebaseAPP = null;
+
+const Fade = React.forwardRef(function Fade(props, ref) {
+    const { in: open, children, onEnter, onExited, ...other } = props;
+    const style = useSpring({
+      from: { opacity: 0 },
+      to: { opacity: open ? 1 : 0 },
+      onStart: () => {
+        if (open && onEnter) {
+          onEnter();
+        }
+      },
+      onRest: () => {
+        if (!open && onExited) {
+          onExited();
+        }
+      },
+    });
+  
+    return (
+      <animated.div ref={ref} style={style} {...other}>
+        {children}
+      </animated.div>
+    );
+});
+
+Fade.propTypes = {
+    children: PropTypes.element,
+    in: PropTypes.bool.isRequired,
+    onEnter: PropTypes.func,
+    onExited: PropTypes.func,
+};
+
 
 class CoverFlowCarousel extends React.Component {
     swiper = null;
@@ -1058,6 +1094,9 @@ export class Home extends React.Component {
 
             mainCatActive: 0,
             doubleCatActive: 0,
+
+            is_open_text_err_auth: false,
+            open_text_err_auth: ''
         };
         
         if( this.props.data ){
@@ -1270,6 +1309,11 @@ export class Home extends React.Component {
         if( res.st === true ){
             itemsStore.setToken( res.token, res.name ); 
             itemsStore.setUserName(res.name);
+        }else{
+            this.setState({
+                is_open_text_err_auth: true,
+                open_text_err_auth: res.text
+            })
         }
     }
 
@@ -1489,6 +1533,10 @@ export class Home extends React.Component {
                 this.loadBanners(itemsStore.getBanners());
             }
         })
+    }
+
+    close_text_msg(){
+
     }
 
     openItem(id){
@@ -2256,6 +2304,36 @@ export class Home extends React.Component {
                         null
                     }
                     
+
+                    <Modal
+                        open={this.state.is_open_text_err_auth}
+                        onClose={this.close_text_msg.bind(this)}
+                        closeAfterTransition
+                        BackdropComponent={Backdrop}
+                        BackdropProps={{
+                            timeout: 500,
+                        }}
+                        className="class123"
+                        
+                    >
+                        <Fade in={this.state.is_open_text_err_auth}>
+                            
+                            <Box className='modalCity'>
+
+                                <IconButton style={{ position: 'absolute', top: -40, left: 15, backgroundColor: 'transparent' }} onClick={this.close_text_msg.bind(this)}>
+                                    <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
+                                </IconButton>
+
+                                <div className=''>
+                                    <Typography component="h5">{this.state.open_text_err_auth}</Typography>
+                                </div>
+
+                            </Box>
+                            
+                        </Fade>
+                    </Modal>
+
+
                 </Element>
         )
     }
