@@ -1233,6 +1233,46 @@ export class Home extends React.Component {
         window.removeEventListener('scroll');
     }
     
+    getData = (method, data = {}, is_load = true) => {
+        if( is_load == true ){
+            this.setState({
+                is_load: true
+            })
+        }
+        
+        data.type = method;
+
+        return fetch(config.urlApi, {
+          method: 'POST',
+          headers: {
+            'Content-Type':'application/x-www-form-urlencoded'},
+          body: queryString.stringify( data )
+        }).then(res => res.json()).then(json => {
+          return json;
+        })
+        .catch(err => { 
+          setTimeout( () => {
+            this.setState({
+              is_load: false
+            })
+          }, 300 )
+          console.log( err )
+        });
+    }  
+
+    async checkAuthYandex(token){
+        let data = {
+            token: token,
+        };
+
+        let res = await this.getData('checkAuthYandex', data);
+
+        if( res.st === true ){
+            itemsStore.setToken( res.token, res.name ); 
+            itemsStore.setUserName(res.name);
+        }
+    }
+
     componentDidMount = () => {
         this._isMounted = true; 
         var time = Date.now();
@@ -1356,22 +1396,31 @@ export class Home extends React.Component {
                     
                     let checkItem = search.split('?showItem=');
                     
-                    let allItems = itemsStore.getAllItems();
-                    let act_id = checkItem[1];
+                    if( checkItem[1] ){
+                        let allItems = itemsStore.getAllItems();
+                        let act_id = checkItem[1];
 
-                    act_id = act_id.split('&')[0];
-                    //let item = allItems.find( (item) => item.id == act_id );
-                    
-                    if( window.innerWidth <= 500 ){
-                        this.openItem(act_id);
-                    }else{
-                        this.openItemPC(act_id);
+                        act_id = act_id.split('&')[0];
+                        //let item = allItems.find( (item) => item.id == act_id );
+                        
+                        if( window.innerWidth <= 500 ){
+                            this.openItem(act_id);
+                        }else{
+                            this.openItemPC(act_id);
+                        }
                     }
                     
-                    //let str = window.location.pathname;
-                    //str.replace("/item/"+act_id, '');
+                    checkItem = search.split('?code=');
                     
-                    //this.props.history.replace({ pathname: checkItem[0] })
+                    if( checkItem[1] ){
+                        
+                        window.history.replaceState(null, null, window.location.pathname);
+
+                        this.checkAuthYandex(checkItem[1]);
+                    }
+
+
+                    
                 }
                 
                 

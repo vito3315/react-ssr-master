@@ -26,7 +26,7 @@ const queryString = require('query-string');
 import itemsStore from '../../stores/items-store';
 import config from '../../stores/config';
 
-import { MiniActionsCartButton, MiniActionsCartButtonPrize, IconRuble, MyTextInput, IconClose, BurgerIcon } from '../../stores/elements';
+import { MiniActionsCartButton, MiniActionsCartButtonPrize, IconRuble, MyTextInput, IconClose, BurgerIcon, YaBtn } from '../../stores/elements';
 
 import { autorun } from "mobx"
 
@@ -496,6 +496,8 @@ class ModalLogin extends React.Component{
     }
 
     render(){
+        //console.log( this.props.linkYaAuth )
+
         return (
             <Modal
                 open={this.props.isOpen}
@@ -540,6 +542,16 @@ class ModalLogin extends React.Component{
                             <div className='loginLosePWD'>
                                 <Typography component="span" onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'resetPWD' }) } }>Забыли пароль ?</Typography>
                             </div>
+
+                            { this.props.linkYaAuth.length == 0 ? null :
+                                <div className='loginYa'>
+                                    <a 
+                                        href={this.props.linkYaAuth }
+                                    >
+                                        <YaBtn />
+                                    </a>
+                                </div>
+                            }
 
                             <div className='loginLogin' onClick={this.logIn.bind(this)}>
                                 <Typography component="span">Войти</Typography>
@@ -1511,7 +1523,9 @@ export class Header extends React.Component{
             anchorEl: null,
             cityNameRu: this_city_name_ru.length > 0 ? this_city_name_ru : 'Город',
 
-            is_open_text_msg: false
+            is_open_text_msg: false,
+
+            linkYaAuth: ''
         };
     }
     
@@ -1521,7 +1535,13 @@ export class Header extends React.Component{
             if(localStorage.getItem('myCity') && localStorage.getItem('myCity').length > 0){
                 if( localStorage.getItem('myCity') !== this.state.cityName ){
                     let this_addr = window.location.pathname;
-                    window.location.pathname = this_addr.replace(this.state.cityName, localStorage.getItem('myCity'));
+
+                    if( this.state.cityName.length > 0 ){
+                        //console.log( '1'+this_addr, '2'+this.state.cityName, '3'+localStorage.getItem('myCity') )
+                        //console.log( this_addr.replace(this.state.cityName, localStorage.getItem('myCity')) )
+
+                        window.location.pathname = this_addr.replace(this.state.cityName, localStorage.getItem('myCity'));
+                    }
                 }
             }
 
@@ -1699,10 +1719,24 @@ export class Header extends React.Component{
             })
             .catch(err => { });
         }else{
-            this.setState({
-                openLoginNew: true
-                //openLogin: true
+            fetch(config.urlApi, {
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/x-www-form-urlencoded'},
+                body: queryString.stringify({
+                    city: this.state.cityName,
+                    type: 'getYaLinkAuth',
+                })
+            }).then(res => res.json()).then(json => {
+                this.setState({
+                    linkYaAuth: json,
+                    openLoginNew: true
+                    //openLogin: true
+                })
             })
+            .catch(err => { });
+
+            
         }
     }
     
@@ -1885,7 +1919,7 @@ export class Header extends React.Component{
                 
 
                 <ModalCity isOpen={this.state.openCity} close={this.closeCity.bind(this)} cityList={this.state.cityList} cityName={this.state.cityName} />
-                <ModalLogin isOpen={this.state.openLoginNew} close={this.closeLogin.bind(this)} />
+                <ModalLogin isOpen={this.state.openLoginNew} linkYaAuth={this.state.linkYaAuth} close={this.closeLogin.bind(this)} />
 
                 <Modal
                     open={this.state.is_open_text_msg}

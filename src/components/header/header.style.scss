@@ -1067,7 +1067,7 @@ $colorText: #525252;
     }
     & .loginHeader{
         height: 60px;
-        margin-bottom: 30px;
+        margin-bottom: 10px;
         display: flex;
         align-items: flex-end;
         & h2{
@@ -1076,7 +1076,7 @@ $colorText: #525252;
         }
     }
     & .loginLosePWD{
-        height: 80px;
+        height: 50px;
         display: flex;
         align-items: center;
         & span{
@@ -1153,5 +1153,13 @@ $colorText: #525252;
             font-weight: 300;
             color: $mainColor
         }
+    }
+    & .loginYa{
+        width: 75%;
+        height: 60px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
     }
 }
