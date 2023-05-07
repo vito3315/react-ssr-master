@@ -14,14 +14,17 @@ import { PageJob } from '../pageJob';
 import { PageInstPay } from '../pageInstPay';
 import { PageOferta } from '../pageOferta';
 import { PagePolitika } from '../pagePolitika';
+import { PageLegal } from '../pageLegal';
 
 import { HeaderCat } from '../header';
 import { Header } from '../header';
 
 import Grid from '@mui/material/Grid';
-
+import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+
+import CloseIcon from '@mui/icons-material/Close';
 
 const queryString = require('query-string');
 
@@ -32,7 +35,7 @@ const stores = { itemsStore };
 
 import { autorun } from "mobx"
 
-import { VKIcon, OdnIcon, TGIcon } from '../../stores/elements';
+import { VKIcon, OdnIcon, TGIcon, IconClose } from '../../stores/elements';
 
 const routes = require( '../../../server/routes' );
 
@@ -79,7 +82,9 @@ class StickyFooter extends React.Component{
             soc_link: null,
             cityName: this.props.cityName,
             is_load: false,
-            page: ''
+            page: '',
+
+            setCookie: true
         };
     }
     
@@ -121,11 +126,37 @@ class StickyFooter extends React.Component{
             
             this.loadPageInfo();
         })
+
+        if( localStorage.getItem('setCookie') && localStorage.getItem('setCookie').length > 0 ){
+            this.setState({
+                setCookie: false
+            })
+        }
     }
     
+    setCookie(){
+        localStorage.setItem('setCookie', true);
+
+        this.setState({
+            setCookie: false
+        })
+    }
+
     render(){
         return (
             <footer className={"footer "+(this.state.page == 'cart' ? this.state.page : '')}>
+
+                {this.state.setCookie ?
+                    <div className='footerLegal'>
+                        <Typography component="span" style={{ fontSize: '0.7rem' }}>Мы используем файлы «Cookie» для сбора и анализа данных о работе сайта, а также для улучшения и индивидуальной настройки предоставления информации. Продолжая пользоваться сайтом, вы принимаете <Link to={ '/'+this.state.cityName+'/legal' } style={{ textDecoration: 'none' }} >условия обработки персональных данных.</Link></Typography>
+                        
+                        <CloseIcon style={{ width: 25, height: 25, fill: '#000', color: '#000', overflow: 'visible', cursor: 'pointer' }} onClick={this.setCookie.bind(this)} />
+                        
+                    </div>
+                        :
+                    null
+                }
+
                 <Grid container className="mainContainer">
                     <Grid item lg={3} md={3} sm={3} xl={3} xs={12} className="copy">
                         <Typography variant="body1" component="span">© Жако 2017 - {new Date().getFullYear()}</Typography>
@@ -180,6 +211,12 @@ class StickyFooter extends React.Component{
                             style={{ textDecoration: 'none' }}
                         >
                             <Typography variant="body1">Правила оплаты товаров</Typography>
+                        </Link>
+                        <Link
+                            to={ '/'+this.state.cityName+'/legal' }
+                            style={{ textDecoration: 'none' }}
+                        >
+                            <Typography variant="body1">Согласие на обработку персональных данных</Typography>
                         </Link>
                     </Grid>
                     { this.state.is_load ?
@@ -553,6 +590,16 @@ export class App extends React.Component {
                                     <PagePolitika data={this.state.globalState.data} city={this.state.globalState.city} this_link={this.state.globalState.this_link}  />
                                 </Route>
                                 <Route
+                                    path='/:cityName/legal'
+                                    exact={ true }
+                                >
+                                    <Header 
+                                        data={this.state.globalState.data} 
+                                        city={this.state.globalState.city} 
+                                        this_link={this.state.globalState.this_link} />  
+                                    <PageLegal data={this.state.globalState.data} city={this.state.globalState.city} this_link={this.state.globalState.this_link}  />
+                                </Route>
+                                <Route
                                     path='/'
                                     exact={ true }
                                 >
@@ -790,6 +837,16 @@ export class App extends React.Component {
                                     city={this.props.globalState.city} 
                                     this_link={this.props.globalState.this_link} />  
                                 <PagePolitika data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                            </Route>
+                            <Route
+                                path='/:cityName/legal'
+                                exact={ true }
+                            >
+                                <Header 
+                                    data={this.props.globalState.data} 
+                                    city={this.props.globalState.city} 
+                                    this_link={this.props.globalState.this_link} />  
+                                <PageLegal data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
                             </Route>
                             <Route
                                 path='/'

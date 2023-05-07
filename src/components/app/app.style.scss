@@ -111,6 +111,30 @@ body{
     display: flex;
     flex-wrap: wrap;
     box-sizing: border-box;
+    & .footerLegal{
+        position: fixed;
+        
+        right: 10%;
+        left: 10%; 
+        text-align: center;
+        width: auto;
+        background-color: #fff;
+        padding: 10px 20px; 
+        border-radius: 10px; 
+        box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
+        display: flex;
+        flex-direction: row;
+
+        @media (max-width: 960px){
+            bottom: 100px;
+        }
+        @media (min-width: 961px){
+            bottom: 30px;
+        }
+        & svg{
+            padding: 0!important;
+        }
+    }
     & .copy{
         align-content: flex-end;
         display: grid;

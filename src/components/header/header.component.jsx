@@ -107,7 +107,9 @@ class ModalLogin extends React.Component{
             errText1: '',
             errText2: '',
 
-            is_sms: true
+            is_sms: true,
+
+            cityName: this.props.cityName
         };
     }
 
@@ -520,7 +522,7 @@ class ModalLogin extends React.Component{
                                 <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
                             </IconButton>
 
-                            <div className='loginIMG'>
+                            <div className='loginIMG' style={{ display: 'none' }}>
                                 <img 
                                     alt={'Login'} 
                                     title={'Login'} 
@@ -565,6 +567,9 @@ class ModalLogin extends React.Component{
                                 <Typography component="span" onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'loginSMS' }) } }>Войти по смс</Typography>
                             </div>
                             
+                            <div className='blockInfo'>
+                                <Typography component="span">Продолжая, вы соглашаетесь <Link to={'/'+this.state.cityName+'/legal'} exact={ true } onClick={ this.close.bind(this) }>со сбором и обработкой персональных данных и пользовательским соглашением</Link></Typography>
+                            </div>
                         </Box>
                     }
                     { this.state.typeLogin != 'loginSMS' ? null :
@@ -573,7 +578,7 @@ class ModalLogin extends React.Component{
                                 <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
                             </IconButton>
 
-                            <div className='loginIMG'>
+                            <div className='loginIMG' style={{ display: 'none' }}>
                                 <img 
                                     alt={'Login'} 
                                     title={'Login'} 
@@ -597,6 +602,10 @@ class ModalLogin extends React.Component{
                             <div className='loginCreate' onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'start' }) } }>
                                 <Typography component="span">У меня есть аккаунт</Typography>
                             </div>
+
+                            <div className='blockInfo'>
+                            <Typography component="span">Продолжая, вы соглашаетесь <Link to={'/'+this.state.cityName+'/legal'} exact={ true } onClick={ this.close.bind(this) }>со сбором и обработкой персональных данных и пользовательским соглашением</Link></Typography>
+                            </div>
                         </Box>
                     }
                     { this.state.typeLogin != 'loginSMSCode' ? null :
@@ -605,7 +614,7 @@ class ModalLogin extends React.Component{
                                 <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
                             </IconButton>
 
-                            <div className='loginIMG'>
+                            <div className='loginIMG' style={{ display: 'none' }}>
                                 <img 
                                     alt={'Login'} 
                                     title={'Login'} 
@@ -654,6 +663,10 @@ class ModalLogin extends React.Component{
                             <div className='loginPrev'>
                                 <Typography component="span" onClick={ () => { this.setState({ typeLogin: this.state.fromType }) } }>Изменить номер телефона</Typography>
                             </div>
+
+                            <div className='blockInfo'>
+                            <Typography component="span">Продолжая, вы соглашаетесь <Link to={'/'+this.state.cityName+'/legal'} exact={ true } onClick={ this.close.bind(this) }>со сбором и обработкой персональных данных и пользовательским соглашением</Link></Typography>
+                            </div>
                         </Box>
                     }
                     { this.state.typeLogin != 'resetPWD' ? null :
@@ -662,7 +675,7 @@ class ModalLogin extends React.Component{
                                 <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
                             </IconButton>
 
-                            <div className='loginIMG'>
+                            <div className='loginIMG' style={{ display: 'none' }}>
                                 <img 
                                     alt={'Login'} 
                                     title={'Login'} 
@@ -688,6 +701,10 @@ class ModalLogin extends React.Component{
                             <div className='loginCreate' onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'start' }) } }>
                                 <Typography component="span">У меня есть аккаунт</Typography>
                             </div>
+
+                            <div className='blockInfo'>
+                            <Typography component="span">Продолжая, вы соглашаетесь <Link to={'/'+this.state.cityName+'/legal'} exact={ true } onClick={ this.close.bind(this) }>со сбором и обработкой персональных данных и пользовательским соглашением</Link></Typography>
+                            </div>
                         </Box>
                     }
                     { this.state.typeLogin != 'create' ? null :
@@ -696,7 +713,7 @@ class ModalLogin extends React.Component{
                                 <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
                             </IconButton>
 
-                            <div className='loginIMG'>
+                            <div className='loginIMG' style={{ display: 'none' }}>
                                 <img 
                                     alt={'Login'} 
                                     title={'Login'} 
@@ -731,6 +748,10 @@ class ModalLogin extends React.Component{
                             <div className='loginCreate' onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'start' }) } }>
                                 <Typography component="span">У меня есть аккаунт</Typography>
                             </div>
+
+                            <div className='blockInfo'>
+                            <Typography component="span">Продолжая, вы соглашаетесь <Link to={'/'+this.state.cityName+'/legal'} exact={ true } onClick={ this.close.bind(this) }>со сбором и обработкой персональных данных и пользовательским соглашением</Link></Typography>
+                            </div>
                         </Box>
                     }
                     { this.state.typeLogin != 'finish' ? null :
@@ -739,7 +760,7 @@ class ModalLogin extends React.Component{
                                 <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
                             </IconButton>
 
-                            <div className='loginIMG'>
+                            <div className='loginIMG' style={{ display: 'none' }}>
                                 <img 
                                     alt={'Login'} 
                                     title={'Login'} 
@@ -755,16 +776,20 @@ class ModalLogin extends React.Component{
                             </div>
 
                             <div className='loginSubHeader2'>
-                                <Typography component="span"><Link to={'/samara/profile'} exact={ true } onClick={ this.close.bind(this) }>Укажите в профиле</Link> день рождения и мы заренее пришлём вам промокод на приятный подарок.</Typography>
+                                <Typography component="span"><Link to={'/'+this.state.cityName+'/profile'} exact={ true } onClick={ this.close.bind(this) }>Укажите в профиле</Link> день рождения и мы заренее пришлём вам промокод на приятный подарок.</Typography>
                             </div>
 
-                            <Link to={'/samara/'} exact={ true } className='loginLogin' onClick={ this.close.bind(this) }>
+                            <Link to={'/'+this.state.cityName+'/'} exact={ true } className='loginLogin' onClick={ this.close.bind(this) }>
                                 <Typography component="span">Перейти в меню</Typography>
                             </Link>
                             
-                            <Link to={'/samara/cart'} exact={ true } className='loginCreate' onClick={ this.close.bind(this) }>
+                            <Link to={'/'+this.state.cityName+'/cart'} exact={ true } className='loginCreate' onClick={ this.close.bind(this) }>
                                 <Typography component="span">Открыть корзину</Typography>
                             </Link>
+
+                            <div className='blockInfo'>
+                            <Typography component="span">Продолжая, вы соглашаетесь <Link to={'/'+this.state.cityName+'/legal'} exact={ true } onClick={ this.close.bind(this) }>со сбором и обработкой персональных данных и пользовательским соглашением</Link></Typography>
+                            </div>
                         </Box>
                     }
                     { this.state.typeLogin != 'error' ? null :
@@ -788,6 +813,8 @@ class ModalLogin extends React.Component{
                             </div>
                         </Box>
                     }
+
+                    
                 </Fade>
             </Modal>
         )
@@ -1919,7 +1946,7 @@ export class Header extends React.Component{
                 
 
                 <ModalCity isOpen={this.state.openCity} close={this.closeCity.bind(this)} cityList={this.state.cityList} cityName={this.state.cityName} />
-                <ModalLogin isOpen={this.state.openLoginNew} linkYaAuth={this.state.linkYaAuth} close={this.closeLogin.bind(this)} />
+                <ModalLogin isOpen={this.state.openLoginNew} linkYaAuth={this.state.linkYaAuth} cityName={this.state.cityName} close={this.closeLogin.bind(this)} />
 
                 <Modal
                     open={this.state.is_open_text_msg}

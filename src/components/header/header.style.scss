@@ -920,6 +920,18 @@ $colorText: #525252;
         border: 0 !important;
         outline: none !important;
     }
+    & .blockInfo{
+        text-align: center;
+        margin-top: 20px;
+        & span{
+            @include fonsNew(0.825rem, $Roboto);
+            font-weight: 300;
+        }
+        & a{
+            text-decoration: none;
+            color: $mainColor;
+        }
+    }
 }
 
 .modalCity{
