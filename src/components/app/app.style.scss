@@ -131,6 +131,9 @@ body{
         @media (min-width: 961px){
             bottom: 30px;
         }
+        & span{
+            color: $colorMain;
+        }
         & svg{
             padding: 0!important;
         }
