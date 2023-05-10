@@ -1829,6 +1829,11 @@ export class Cart extends React.Component {
                 }
             }
             
+            let promo_name = this.state.orderPromo;
+
+            if( localStorage.getItem('promo_name') && localStorage.getItem('promo_name').length > 0 && localStorage.getItem('promo_name') != promo_name ){
+                promo_name = localStorage.getItem('promo_name')
+            }
             
             fetch(config.urlApi, {
                 method: 'POST',
@@ -1848,7 +1853,7 @@ export class Cart extends React.Component {
                     sdacha: this.state.orderSdacha,
                     payFull: JSON.stringify(payFull), //
                     cart: JSON.stringify(new_cart),//
-                    promo_name: this.state.orderPromo//
+                    promo_name: promo_name//
                 })
             }).then(res => res.json()).then(json => {
                 
