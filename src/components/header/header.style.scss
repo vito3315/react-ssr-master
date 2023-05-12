@@ -792,6 +792,26 @@ $colorText: #525252;
         }
     }
 }
+
+.loginLogin.disable{
+    cursor: default!important;
+    opacity: 0.3!important;
+}
+
+.blockInfo2{
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    & span{
+        @include fonsNew(0.825rem, $Roboto);
+        font-weight: 300;
+    }
+    & a{
+        text-decoration: none;
+        color: $mainColor;
+    }
+}
+
 .modalLoginCreate{
     position: absolute;
     top: 50%;
@@ -902,7 +922,7 @@ $colorText: #525252;
     & .loginErr{
         height: 40px;
         margin-top: 10px;
-        margin-bottom: 60px;
+        margin-bottom: 10px;
         display: flex;
         justify-content: center;
         align-items: center;

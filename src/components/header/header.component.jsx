@@ -40,6 +40,11 @@ import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 
+
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+
 const Fade = React.forwardRef(function Fade(props, ref) {
     const { in: open, children, onEnter, onExited, ...other } = props;
     const style = useSpring({
@@ -109,7 +114,9 @@ class ModalLogin extends React.Component{
 
             is_sms: true,
 
-            cityName: this.props.cityName
+            cityName: this.props.cityName,
+
+            checkedModalLoginCreate: false
         };
     }
 
@@ -143,6 +150,8 @@ class ModalLogin extends React.Component{
                 errTitle: '',
                 errText1: '',
                 errText2: '',
+
+                checkedModalLoginCreate: false
             })
         }
     }
@@ -542,7 +551,7 @@ class ModalLogin extends React.Component{
                             <MyTextInput type={"password"} placeholder="Пароль" value={ this.state.pwdLogin } func={ this.changeData.bind(this, 'pwdLogin') } onKeyDown={this.checkLoginKey.bind(this, 1)} className="inputLogin" />
 
                             <div className='loginLosePWD'>
-                                <Typography component="span" onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'resetPWD' }) } }>Забыли пароль ?</Typography>
+                                <Typography component="span" onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'resetPWD', checkedModalLoginCreate: false }) } }>Забыли пароль ?</Typography>
                             </div>
 
                             { this.props.linkYaAuth.length == 0 ? null :
@@ -559,16 +568,16 @@ class ModalLogin extends React.Component{
                                 <Typography component="span">Войти</Typography>
                             </div>
 
-                            <div className='loginCreate' onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'create' }); this.gen_password(); } }>
+                            <div className='loginCreate' onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'create', checkedModalLoginCreate: false }); this.gen_password(); } }>
                                 <Typography component="span">Создать новый аккаунт</Typography>
                             </div>
 
                             <div className='loginSMS'>
-                                <Typography component="span" onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'loginSMS' }) } }>Войти по смс</Typography>
+                                <Typography component="span" onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'loginSMS', checkedModalLoginCreate: false }) } }>Войти по смс</Typography>
                             </div>
                             
                             <div className='blockInfo'>
-                                <Typography component="span">Продолжая, вы соглашаетесь <Link to={'/'+this.state.cityName+'/legal'} exact={ true } onClick={ this.close.bind(this) }>со сбором и обработкой персональных данных и пользовательским соглашением</Link></Typography>
+                                <Typography component="span">Продолжая, вы даете <Link to={'/'+this.state.cityName+'/legal'} exact={ true } onClick={ this.close.bind(this) }>Согласие</Link> на обработку моих персональных данных в соответствии с <Link to={'/'+this.state.cityName+'/politika-konfidencialnosti'} exact={ true } onClick={ this.close.bind(this) }>Политикой</Link>, а также даю согласие на рекламную рассылку, от которой можно отказаться в любой момент</Typography>
                             </div>
                         </Box>
                     }
@@ -591,21 +600,30 @@ class ModalLogin extends React.Component{
                             
                             <MyTextInput type={"phone"} placeholder="Телефон" value={ this.state.loginLogin } func={ this.changeData.bind(this, 'loginLogin') } onKeyDown={this.checkLoginKey.bind(this, 2)} className="inputLogin" style={{ marginBottom: 0 }} />
                             
+                            <div className='blockInfo2'>
+                                <FormControlLabel 
+                                    control={
+                                        <Checkbox color='primary' checked={this.state.checkedModalLoginCreate} onClick={ () => { this.setState({ checkedModalLoginCreate: !this.state.checkedModalLoginCreate }) } } />
+                                    } 
+                                    label={
+                                        <Typography component="span">Я даю <Link to={'/'+this.state.cityName+'/legal'} exact={ true } onClick={ this.close.bind(this) }>Согласие</Link> на обработку моих персональных данных в соответствии с <Link to={'/'+this.state.cityName+'/politika-konfidencialnosti'} exact={ true } onClick={ this.close.bind(this) }>Политикой</Link>, а также даю согласие на рекламную рассылку, от которой можно отказаться в любой момент</Typography>
+                                    } 
+                                />
+                            </div>
+
                             <div className='loginErr'>
                                 <Typography component="span">{this.state.errPhone}</Typography>
                             </div>
 
-                            <div className='loginLogin' onClick={this.sendSMS.bind(this)}>
+                            <div className={'loginLogin '+(!this.state.checkedModalLoginCreate ? 'disable' : '')} onClick={ !this.state.checkedModalLoginCreate ? () => {} : this.sendSMS.bind(this)}>
                                 <Typography component="span">Получить код</Typography>
                             </div>
                             
-                            <div className='loginCreate' onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'start' }) } }>
+                            <div className='loginCreate' onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'start', checkedModalLoginCreate: false }) } }>
                                 <Typography component="span">У меня есть аккаунт</Typography>
                             </div>
 
-                            <div className='blockInfo'>
-                            <Typography component="span">Продолжая, вы соглашаетесь <Link to={'/'+this.state.cityName+'/legal'} exact={ true } onClick={ this.close.bind(this) }>со сбором и обработкой персональных данных и пользовательским соглашением</Link></Typography>
-                            </div>
+                            
                         </Box>
                     }
                     { this.state.typeLogin != 'loginSMSCode' ? null :
@@ -664,9 +682,6 @@ class ModalLogin extends React.Component{
                                 <Typography component="span" onClick={ () => { this.setState({ typeLogin: this.state.fromType }) } }>Изменить номер телефона</Typography>
                             </div>
 
-                            <div className='blockInfo'>
-                            <Typography component="span">Продолжая, вы соглашаетесь <Link to={'/'+this.state.cityName+'/legal'} exact={ true } onClick={ this.close.bind(this) }>со сбором и обработкой персональных данных и пользовательским соглашением</Link></Typography>
-                            </div>
                         </Box>
                     }
                     { this.state.typeLogin != 'resetPWD' ? null :
@@ -694,16 +709,24 @@ class ModalLogin extends React.Component{
 
                             <MyTextInput type={"password"} placeholder="Придумай пароль" value={ this.state.newPassword } func={ this.changeData.bind(this, 'newPassword') } onKeyDown={this.checkLoginKey.bind(this, 4)} className="inputLogin" />
 
-                            <div className='loginLogin' onClick={this.sendsmsNewLogin.bind(this)}>
+                            <div className='blockInfo2'>
+                                <FormControlLabel 
+                                    control={
+                                        <Checkbox color='primary' checked={this.state.checkedModalLoginCreate} onClick={ () => { this.setState({ checkedModalLoginCreate: !this.state.checkedModalLoginCreate }) } } />
+                                    } 
+                                    label={
+                                        <Typography component="span">Я даю <Link to={'/'+this.state.cityName+'/legal'} exact={ true } onClick={ this.close.bind(this) }>Согласие</Link> на обработку моих персональных данных в соответствии с <Link to={'/'+this.state.cityName+'/politika-konfidencialnosti'} exact={ true } onClick={ this.close.bind(this) }>Политикой</Link>, а также даю согласие на рекламную рассылку, от которой можно отказаться в любой момент</Typography>
+                                    } 
+                                />
+                            </div>
+
+                            <div className={'loginLogin '+(!this.state.checkedModalLoginCreate ? 'disable' : '')} onClick={ !this.state.checkedModalLoginCreate ? () => {} : this.sendsmsNewLogin.bind(this)}>
+                            
                                 <Typography component="span">Сменить пароль</Typography>
                             </div>
                             
-                            <div className='loginCreate' onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'start' }) } }>
+                            <div className='loginCreate' onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'start', checkedModalLoginCreate: false }) } }>
                                 <Typography component="span">У меня есть аккаунт</Typography>
-                            </div>
-
-                            <div className='blockInfo'>
-                            <Typography component="span">Продолжая, вы соглашаетесь <Link to={'/'+this.state.cityName+'/legal'} exact={ true } onClick={ this.close.bind(this) }>со сбором и обработкой персональных данных и пользовательским соглашением</Link></Typography>
                             </div>
                         </Box>
                     }
@@ -737,21 +760,33 @@ class ModalLogin extends React.Component{
                                 <Typography component="span">Например: {this.state.genPwd}</Typography>
                             </div>
 
+
+                            <div className='blockInfo2'>
+                                <FormControlLabel 
+                                    control={
+                                        <Checkbox color='primary' checked={this.state.checkedModalLoginCreate} onClick={ () => { this.setState({ checkedModalLoginCreate: !this.state.checkedModalLoginCreate }) } } />
+                                    } 
+                                    label={
+                                        <Typography component="span">Я даю <Link to={'/'+this.state.cityName+'/legal'} exact={ true } onClick={ this.close.bind(this) }>Согласие</Link> на обработку моих персональных данных в соответствии с <Link to={'/'+this.state.cityName+'/politika-konfidencialnosti'} exact={ true } onClick={ this.close.bind(this) }>Политикой</Link>, а также даю согласие на рекламную рассылку, от которой можно отказаться в любой момент</Typography>
+                                    } 
+                                />
+                            </div>
+
+
                             <div className='loginErrText'>
                                 <Typography component="span"></Typography>
                             </div>
 
-                            <div className='loginLogin' onClick={this.sendsmsNewLogin.bind(this)}>
+                            <div className={'loginLogin '+(!this.state.checkedModalLoginCreate ? 'disable' : '')} onClick={ !this.state.checkedModalLoginCreate ? () => {} : this.sendsmsNewLogin.bind(this)}>
+                            
                                 <Typography component="span">Создать аккаунт</Typography>
                             </div>
                             
-                            <div className='loginCreate' onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'start' }) } }>
+                            <div className='loginCreate' onClick={ () => { this.setState({ fromType: this.state.typeLogin, typeLogin: 'start', checkedModalLoginCreate: false }) } }>
                                 <Typography component="span">У меня есть аккаунт</Typography>
                             </div>
 
-                            <div className='blockInfo'>
-                            <Typography component="span">Продолжая, вы соглашаетесь <Link to={'/'+this.state.cityName+'/legal'} exact={ true } onClick={ this.close.bind(this) }>со сбором и обработкой персональных данных и пользовательским соглашением</Link></Typography>
-                            </div>
+                            
                         </Box>
                     }
                     { this.state.typeLogin != 'finish' ? null :
@@ -787,9 +822,6 @@ class ModalLogin extends React.Component{
                                 <Typography component="span">Открыть корзину</Typography>
                             </Link>
 
-                            <div className='blockInfo'>
-                            <Typography component="span">Продолжая, вы соглашаетесь <Link to={'/'+this.state.cityName+'/legal'} exact={ true } onClick={ this.close.bind(this) }>со сбором и обработкой персональных данных и пользовательским соглашением</Link></Typography>
-                            </div>
                         </Box>
                     }
                     { this.state.typeLogin != 'error' ? null :

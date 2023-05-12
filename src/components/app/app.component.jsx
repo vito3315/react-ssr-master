@@ -15,12 +15,12 @@ import { PageInstPay } from '../pageInstPay';
 import { PageOferta } from '../pageOferta';
 import { PagePolitika } from '../pagePolitika';
 import { PageLegal } from '../pageLegal';
+import { PagePoliticLegal } from '../pagePoliticLegal';
 
 import { HeaderCat } from '../header';
 import { Header } from '../header';
 
 import Grid from '@mui/material/Grid';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
@@ -129,7 +129,7 @@ class StickyFooter extends React.Component{
 
         if( localStorage.getItem('setCookie') && localStorage.getItem('setCookie').length > 0 ){
             this.setState({
-                setCookie: false
+                //setCookie: false
             })
         }
     }
@@ -148,7 +148,7 @@ class StickyFooter extends React.Component{
 
                 {this.state.setCookie ?
                     <div className='footerLegal'>
-                        <Typography component="span" style={{ fontSize: '0.7rem' }}>Мы используем файлы «Cookie» для сбора и анализа данных о работе сайта, а также для улучшения и индивидуальной настройки предоставления информации. Продолжая пользоваться сайтом, вы принимаете <Link to={ '/'+this.state.cityName+'/legal' } style={{ textDecoration: 'none' }} >условия обработки персональных данных.</Link></Typography>
+                        <Typography component="span" style={{ fontSize: '0.7rem' }}>Мы используем файлы «Cookie» и метрическую систему «Яндекс.Метрика» для сбора и анализа информации о производительности и использовании сайта. Продолжая пользоваться сайтом, вы соглашаетесь на размещение файлов «Cookie» и <Link to={ '/'+this.state.cityName+'/politika-legal' } style={{ textDecoration: 'none' }} >обработку данных метрических систем.</Link></Typography>
                         
                         <CloseIcon style={{ width: 25, height: 25, fill: '#000', color: '#000', overflow: 'visible', cursor: 'pointer' }} onClick={this.setCookie.bind(this)} />
                         
@@ -600,6 +600,16 @@ export class App extends React.Component {
                                     <PageLegal data={this.state.globalState.data} city={this.state.globalState.city} this_link={this.state.globalState.this_link}  />
                                 </Route>
                                 <Route
+                                    path='/:cityName/politika-legal'
+                                    exact={ true }
+                                >
+                                    <Header 
+                                        data={this.state.globalState.data} 
+                                        city={this.state.globalState.city} 
+                                        this_link={this.state.globalState.this_link} />  
+                                    <PagePoliticLegal data={this.state.globalState.data} city={this.state.globalState.city} this_link={this.state.globalState.this_link}  />
+                                </Route>
+                                <Route
                                     path='/'
                                     exact={ true }
                                 >
@@ -847,6 +857,16 @@ export class App extends React.Component {
                                     city={this.props.globalState.city} 
                                     this_link={this.props.globalState.this_link} />  
                                 <PageLegal data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                            </Route>
+                            <Route
+                                path='/:cityName/politika-legal'
+                                exact={ true }
+                            >
+                                <Header 
+                                    data={this.props.globalState.data} 
+                                    city={this.props.globalState.city} 
+                                    this_link={this.props.globalState.this_link} />  
+                                <PagePoliticLegal data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
                             </Route>
                             <Route
                                 path='/'
