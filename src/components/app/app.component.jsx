@@ -129,7 +129,7 @@ class StickyFooter extends React.Component{
 
         if( localStorage.getItem('setCookie') && localStorage.getItem('setCookie').length > 0 ){
             this.setState({
-                //setCookie: false
+                setCookie: false
             })
         }
     }
