@@ -71,7 +71,7 @@ app.use( '*', async ( req, res ) => {
     let ckeck_no_index = false;
     
     if( req.originalUrl.split('?')[1] ){
-        ckeck_no_index = true;
+        //ckeck_no_index = true;
     }
     
     req.originalUrl = req.originalUrl.split('?')[0];
