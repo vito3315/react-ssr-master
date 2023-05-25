@@ -910,7 +910,7 @@ export class Profile extends React.Component {
                                                     </div>
                                                     { item.time_to_client == 0 ? null :
                                                         <div>
-                                                            <Typography variant="h5" component="span">Заказ { parseInt(item.type_order) == 1 ? 'привезут до: ' : 'будет готов до: ' }{item.time_to_client}</Typography>
+                                                            <Typography variant="h5" component="span">{ parseInt(item.type_order) == 1 ? 'Заказ привезут до: ' : 'Ориентировочное время готовности заказа: ' }{item.time_to_client}</Typography>
                                                         </div>
                                                     }
                                                 </div> 
