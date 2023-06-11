@@ -84,10 +84,10 @@ app.use( '*', async ( req, res ) => {
     
     let lastChar = req.originalUrl.substr(req.originalUrl.length - 1);
     
-    if( lastChar == '/' ){
-        res.status( 301 );
-        return res.redirect( req.originalUrl.substring(0, req.originalUrl.length - 1) )
-    }
+    //if( lastChar == '/' ){
+    //    res.status( 301 );
+    //    return res.redirect( req.originalUrl.substring(0, req.originalUrl.length - 1) )
+    //}
     
     let city = req.originalUrl.split('/');
     city = city.filter( (item) => item != '' ); 

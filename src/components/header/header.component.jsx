@@ -31,7 +31,6 @@ import { MiniActionsCartButton, MiniActionsCartButtonPrize, IconRuble, MyTextInp
 import { autorun } from "mobx"
 
 import Modal from '@mui/material/Modal';
-// web.cjs is required for IE11 support
 import { useSpring, animated } from '@react-spring/web';
 
 import AuthCode from 'react-auth-code-input';
@@ -40,8 +39,6 @@ import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 
-
-import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 

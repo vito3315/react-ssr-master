@@ -49,6 +49,8 @@ export class Actii extends React.Component {
             openMSG: false,
             statusMSG: false,
             textMSG: '',
+
+            items: []
         };
         
         itemsStore.setCity(this.props.city);
@@ -108,9 +110,11 @@ export class Actii extends React.Component {
             })
         }).then(res => res.json()).then(json => {
             
+            
+
             this.setState({ 
                 actii: json.actii,  
-                is_load: true,
+                is_load: true
             });
             
             setTimeout(() => {
@@ -191,101 +195,109 @@ export class Actii extends React.Component {
     
     render() {
         return (
-            <Grid container className="Actii mainContainer MuiGrid-spacing-xs-3">
-                
-                <Helmet>
-                    <title>{this.state.title}</title>
-                    <meta name="description" content={this.state.description} />
-                </Helmet>
-                
-                <Snackbar
-                    anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'center',
-                    }}
-                    open={this.state.openMSG}
-                    autoHideDuration={3000}
-                    onClose={this.closeAlert.bind(this)}
-                    message={this.state.textMSG}
-                    style={{ backgroundColor: this.state.statusMSG ? 'green' : '#BB0025', borderRadius: 4 }}
+            <>
+                <Grid container className="Actii mainContainer MuiGrid-spacing-xs-3">
                     
-                />
-                
-                <Grid item xs={12}>
-                    <Typography variant="h5" component="h1">Акции</Typography>
-                </Grid>
-                <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer">
+                    <Helmet>
+                        <title>{this.state.title}</title>
+                        <meta name="description" content={this.state.description} />
+                    </Helmet>
                     
-                    {this.state.is_load === false ?
-                        this.state.pre_actii.map((item, key) =>
-                            <Grid item xs={12} sm={6} md={3} xl={3} key={key} style={{ padding: 12}}>
-                                <div style={{ width: '100%', height: 300, backgroundColor: '#e5e5e5' }} />
-                            </Grid>
-                        )
+                    <Snackbar
+                        anchorOrigin={{
+                            vertical: 'top',
+                            horizontal: 'center',
+                        }}
+                        open={this.state.openMSG}
+                        autoHideDuration={3000}
+                        onClose={this.closeAlert.bind(this)}
+                        message={this.state.textMSG}
+                        style={{ backgroundColor: this.state.statusMSG ? 'green' : '#BB0025', borderRadius: 4 }}
+                        
+                    />
+                    
+                    <Grid item xs={12}>
+                        <Typography variant="h5" component="h1">Акции</Typography>
+                    </Grid>
+                    <Grid container spacing={3} md={10} sm={12} xs={12} xl={10} className="" style={{ width: '100%', maxWidth: '100%', flexBasis: '100%', paddingBottom: 30 }}>
+                        
+                        {this.state.is_load === false ?
+                            this.state.pre_actii.map((item, key) =>
+                                <Grid item xs={12} sm={6} md={3} xl={3} key={key} style={{ padding: 12}}>
+                                    <div style={{ width: '100%', height: 300, backgroundColor: '#e5e5e5' }} />
+                                </Grid>
+                            )
+                                :
+                            this.state.actii.map((item, key) =>
+                                <Grid item xs={12} sm={6} md={4} xl={3} key={key}>
+                                    <picture>
+                                        <source 
+                                            srcSet={"https://storage.yandexcloud.net/site-aktii/"+item.img_new+"750х750.webp?"+item.img_new_update} 
+                                            type="image/webp" 
+                                        />
+                                        <img 
+                                            src={"https://storage.yandexcloud.net/site-aktii/"+item.img_new+"750х750.jpg?"+item.img_new_update} 
+                                            alt={item.promo_title}
+                                            title={item.promo_title}
+                                            style={{ width: '100%' }}
+                                            onClick={this.openDialog.bind(this, item)}
+                                        />
+                                    </picture>
+                                </Grid>
+                            )
+                        }
+                        
+                        
+                    </Grid>
+
+                    
+
+                    
+
+                    { this.state.page && this.state.page.content && false ?
+                        <Grid item xs={12}>
+                            <Typography variant="h5" component="h2">{ this.state.page && this.state.page.page_h ? this.state.page.page_h : '' }</Typography>
+                        </Grid>
                             :
-                        this.state.actii.map((item, key) =>
-                            <Grid item xs={12} sm={6} md={4} xl={3} key={key}>
-                                <picture>
-                                    <source 
-                                        srcSet={"https://storage.yandexcloud.net/site-aktii/"+item.img_new+"750х750.webp?"+item.img_new_update} 
-                                        type="image/webp" 
-                                    />
-                                    <img 
-                                        src={"https://storage.yandexcloud.net/site-aktii/"+item.img_new+"750х750.jpg?"+item.img_new_update} 
-                                        alt={item.promo_title}
-                                        title={item.promo_title}
-                                        style={{ width: '100%' }}
-                                        onClick={this.openDialog.bind(this, item)}
-                                    />
-                                </picture>
-                            </Grid>
-                        )
+                        null
                     }
                     
+                    { this.state.page && this.state.page.content && false ?
+                        <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer dopText" dangerouslySetInnerHTML={{__html: this.state.page.content}} />
+                            :
+                        null
+                    }
                     
+                    { this.state.showItem ?
+                        <Dialog onClose={this.closeDialog.bind(this)} aria-labelledby="customized-dialog-title" className="modalActii" open={this.state.openDialog}>
+                            <DialogTitle disableTypography style={{ margin: 0, padding: 8 }}>
+                                <Typography variant="h6" component="span">{this.state.showItem.promo_title}</Typography>
+                            
+                                <IconButton aria-label="close" style={{ position: 'absolute', top: 0, right: 0 }} onClick={this.closeDialog.bind(this)}>
+                                    <FontAwesomeIcon icon={faTimes} style={{ fontSize: '1.8rem', color: '#e5e5e5' }} />
+                                </IconButton>
+                            </DialogTitle>
+                            
+                            <DialogContent className="modalActiiContent">
+                                <div dangerouslySetInnerHTML={{__html: this.state.showItem.text}} />
+                            </DialogContent>
+                            {this.state.showItem.promo.length > 0 ?
+                                <DialogActions style={{ justifyContent: 'center', padding: '15px 0px' }}>
+                                    <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderOther" onClick={this.activePromo.bind(this, this.state.showItem.info, this.state.showItem.promo)}>
+                                        <Button variant="contained" className="BtnCardMain CardInCardItem">Применить промокод</Button>
+                                    </ButtonGroup>
+                                </DialogActions>
+                                    :
+                                null
+                            }
+                        </Dialog>
+                            :
+                        null
+                    }
                 </Grid>
+
                 
-                { this.state.page && this.state.page.content && false ?
-                    <Grid item xs={12}>
-                        <Typography variant="h5" component="h2">{ this.state.page && this.state.page.page_h ? this.state.page.page_h : '' }</Typography>
-                    </Grid>
-                        :
-                    null
-                }
-                
-                { this.state.page && this.state.page.content && false ?
-                    <Grid item container spacing={3} md={10} sm={12} xs={12} xl={10} className="mainContainer dopText" dangerouslySetInnerHTML={{__html: this.state.page.content}} />
-                        :
-                    null
-                }
-                
-                { this.state.showItem ?
-                    <Dialog onClose={this.closeDialog.bind(this)} aria-labelledby="customized-dialog-title" className="modalActii" open={this.state.openDialog}>
-                        <DialogTitle disableTypography style={{ margin: 0, padding: 8 }}>
-                            <Typography variant="h6" component="span">{this.state.showItem.promo_title}</Typography>
-                          
-                            <IconButton aria-label="close" style={{ position: 'absolute', top: 0, right: 0 }} onClick={this.closeDialog.bind(this)}>
-                                <FontAwesomeIcon icon={faTimes} style={{ fontSize: '1.8rem', color: '#e5e5e5' }} />
-                            </IconButton>
-                        </DialogTitle>
-                        
-                        <DialogContent className="modalActiiContent">
-                            <div dangerouslySetInnerHTML={{__html: this.state.showItem.text}} />
-                        </DialogContent>
-                        {this.state.showItem.promo.length > 0 ?
-                            <DialogActions style={{ justifyContent: 'center', padding: '15px 0px' }}>
-                                <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorderOther" onClick={this.activePromo.bind(this, this.state.showItem.info, this.state.showItem.promo)}>
-                                    <Button variant="contained" className="BtnCardMain CardInCardItem">Применить промокод</Button>
-                                </ButtonGroup>
-                            </DialogActions>
-                                :
-                            null
-                        }
-                    </Dialog>
-                        :
-                    null
-                }
-            </Grid>
+            </>
         )
     }
 }

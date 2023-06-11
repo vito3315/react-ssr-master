@@ -166,6 +166,22 @@ $colorText: #525252;
         text-transform: none;
     }
 }
+#simple-tab-3{
+    color: #CC0033!important;
+}
+.btnMyPrize{
+    border-radius: 120px!important;
+    height: 60px!important;
+    width: 200px!important;
+    color: #525252!important;
+    background-color: #F9BC23!important;
+    margin-left: calc(calc(100% - 200px) / 2)!important;
+}
+.modalMyPr{
+    & td{
+        @include fons(1rem, $Ubuntu);
+    }
+}
 .MuiTabs-indicator{
     background-color: $mainColor !important;
 }
@@ -352,3 +368,305 @@ $colorText: #525252;
 .PrivateTabIndicator-colorSecondary-3{
     background-color: $mainColor!important;
 }
+
+.abv{
+    
+    
+    position: relative;
+    
+    padding: 0;
+    
+    @media (min-width: 800px) {
+        margin: 0 auto!important;
+        height: 600px;
+        width: 1300px;
+        max-width: 1300px!important;
+        //padding-left: 24px;
+    }
+
+    @media (max-width: 800px) {
+        height: 300px;
+        width: 400px;
+        margin-left: 0px! important;
+    }
+
+    & > img.fon{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    & .fon_static{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        visibility: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    & > img.fonBus{
+        position: absolute;
+        z-index: 3;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        overflow: hidden;
+    }
+    & .shadowleft{
+        position: absolute;
+        width: 185px;
+        height: 95px;
+        top: 171px;
+        left: 399px;
+        z-index: 2;
+        background-color: rgba(211, 118, 70, 0.55);
+
+        @media (max-width: 800px) {
+            width: 90px;
+            height: 40px;
+            top: 95px;
+            left: 90px!important;
+        }
+    }
+    & .shadowright{
+        position: absolute;
+        width: 185px;
+        height: 95px;
+        top: 178px;
+        right: 306px;
+        z-index: 2;
+        background-color: rgba(211, 118, 70, 0.55);
+
+        @media (max-width: 800px) {
+            width: 82px;
+            height: 50px;
+            top: 97px;
+            left: 259px;
+        }
+    }
+    & > .otherDiv{
+        width: 600px;
+        position: absolute;
+        left: 394px;
+        bottom: 347px;
+        
+        @media (max-width: 800px) {
+            width: 247px;
+            left: 92px;
+            bottom: 126px;
+        }
+
+        & .roulette-pro-regular-prize-item-image{
+            width: 75px!important;
+            height: 75px!important;
+            border-radius: 10px;
+
+            @media (max-width: 800px) {
+                width: 30px!important;
+                height: 30px!important;
+                border-radius: 5px;
+            }
+        }
+        & .roulette-pro-regular-prize-item-wrapper{
+            background: transparent!important;
+        }
+        & .roulette-pro-regular-prize-item-wrapper{
+            border-color: transparent!important;
+        }
+        
+        & .START{
+            position: absolute;
+            left: 167px;
+            bottom: -295px;
+            background-color: #F9BC23;
+            border: 1px solid #F9BC23;
+            border-radius: 40px;
+            padding: 10px 50px;
+            font-size: 2rem;
+            font-family: "Roboto" !important;
+            color: #525252;
+            font-weight: 400;
+            z-index: 6;
+            cursor: pointer;
+
+            @media (max-width: 800px) {
+                left: 31px;
+                bottom: -112px;
+                font-size: 1rem;
+            }
+        }
+    }
+    
+}
+
+#simple-tabpanel-3 > div{
+    width: 100%;
+    height: 800px;
+    position: absolute;
+    left: 0;
+    overflow: auto;
+}
+
+
+/*!***********************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/designs/Regular/Regular.css ***!
+  \***********************************************************************************/
+/* Top */
+.roulette-pro-regular-design-top {
+    position: absolute;
+    z-index: 10;
+    background: #ff7524 linear-gradient(0deg, #ef3a28, #ff9305);
+    border-radius: 2px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.50);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+  
+  .roulette-pro-regular-design-top.horizontal {
+    width: 0px;
+    height: 100%;
+  }
+  
+  .roulette-pro-regular-design-top.vertical {
+    width: 100%;
+    height: 4px;
+  }
+  
+  /* Prize item */
+  .roulette-pro-regular-prize-item {
+    text-align: center;
+  }
+  
+  /* .roulette-pro-regular-prize-item:first-child .roulette-pro-regular-prize-item-wrapper {
+    border-left: none;
+  } */
+  
+  .roulette-pro-regular-prize-item-wrapper {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    /* height: 215px; */
+    /* height: calc(100% - 10px); */
+    /* height: 100%; */
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #383f48;
+    background-color: #2e3640;
+    background: radial-gradient(farthest-corner, #2e3640 0, #13161a 100%);
+  }
+  
+  .roulette-pro-regular-prize-item-wrapper.center {
+    justify-content: center;
+  }
+  
+  .roulette-pro-regular-image-wrapper {
+    //height: 170px;
+    //overflow: hidden;
+  }
+  
+  .roulette-pro-regular-prize-item-image {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  
+  .roulette-pro-regular-prize-item-text {
+    box-sizing: border-box;
+    display: block;
+    padding: 16px;
+    margin: auto 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.25);
+    color: #fff;
+    font-weight: 700;
+    line-height: 1.2;
+    white-space: break-spaces;
+  }
+  
+  .roulette-pro-regular-design-prize-item-horizontal:first-child .roulette-pro-regular-prize-item-wrapper {
+    border-left: 0px;
+  }
+  
+  .roulette-pro-regular-design-prize-item-vertical .roulette-pro-regular-prize-item-wrapper {
+    border-bottom: 0px;
+  }
+  
+  /*!**************************************************************************************!*\
+    !*** css ./node_modules/css-loader/dist/cjs.js!./src/components/Wrapper/Wrapper.css ***!
+    \**************************************************************************************/
+  .roulette-pro-wrapper {
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    color: #fff;
+    overflow: hidden;
+    height: 75px;
+    width: 600px;
+
+    @media (max-width: 800px) {
+        width: 247px;
+    }
+  }
+  /*!**************************************************************************************************!*\
+    !*** css ./node_modules/css-loader/dist/cjs.js!./src/components/PrizesWrapper/PrizesWrapper.css ***!
+    \**************************************************************************************************/
+  .roulette-pro-prize-list {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .roulette-pro-prize-list.horizontal {
+    width: max-content;
+  }
+  
+  .roulette-pro-prize-list.vertical {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .roulette-pro-prize-list.with-animation.horizontal {
+    animation: roulette-horizontal-animation 100s linear infinite;
+  }
+  
+  .roulette-pro-prize-list.with-animation.vertical {
+    animation: roulette-vertical-animation 100s linear infinite;
+  }
+  
+  @keyframes roulette-horizontal-animation {
+    0% {
+      /* transform: translateX(0); */
+      /* left: 0; */
+      transform: translate3d(0);
+    }
+  
+    100% {
+      /* transform: translateX(-3000px); */
+      /* left: -3000px; */
+      transform: translate3d(-3000px, 0, 0);
+    }
+  }
+  
+  @keyframes roulette-vertical-animation {
+    0% {
+      transform: translateY(0);
+    }
+  
+    100% {
+      transform: translate3d(0, -3000px, 0);
+    }
+  }

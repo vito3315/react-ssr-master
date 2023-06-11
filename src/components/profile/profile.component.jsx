@@ -53,6 +53,8 @@ import InputLabel from '@mui/material/InputLabel';
 import Snackbar from '@mui/material/Snackbar';
 import Box from '@mui/material/Box';
 
+import Modal from '@mui/material/Modal';
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -103,6 +105,194 @@ function Ruble(props){
         </svg>
     )
 }
+
+import RoulettePro from 'react-roulette-pro';
+import { useState } from 'react';
+
+import { IconClose } from '../../stores/elements';
+
+import { useSpring, animated } from '@react-spring/web';
+
+const Fade = React.forwardRef(function Fade(props, ref) {
+    const { in: open, children, onEnter, onExited, ...other } = props;
+    const style = useSpring({
+      from: { opacity: 0 },
+      to: { opacity: open ? 1 : 0 },
+      onStart: () => {
+        if (open && onEnter) {
+          onEnter();
+        }
+      },
+      onRest: () => {
+        if (!open && onExited) {
+          onExited();
+        }
+      },
+    });
+  
+    return (
+      <animated.div ref={ref} style={style} {...other}>
+        {children}
+      </animated.div>
+    );
+});
+
+Fade.propTypes = {
+    children: PropTypes.element,
+    in: PropTypes.bool.isRequired,
+    onEnter: PropTypes.func,
+    onExited: PropTypes.func,
+};
+
+const TestApp = ({items, city_name}) => {
+
+    const [start, setStart] = useState(false);
+    const [start2, setStart2] = useState(false);
+    const [prizeIndex, setPrizeIndex] = useState(0);
+
+    const [doubleCLick, setDoubleCLick] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [modalText, setModalText] = useState('');
+    const [modalImg, setModalImg] = useState(null);
+  
+    const testStart = () => {
+        const square = document.querySelector('.fon');
+        square.style.visibility = 'hidden';
+
+        const square1 = document.querySelector('.fon_static');
+        square1.style.visibility = 'visible';
+
+        if( doubleCLick ){
+            return;
+        }
+
+        setDoubleCLick(true);
+        fetch(config.urlApi, {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'},
+            body: queryString.stringify({
+                type: 'get_my_prize', 
+                city_name: city_name,
+                token: localStorage.getItem('token')
+            })
+        }).then(res => res.json()).then(json => {
+
+            if( json.st === true ){
+
+                let prizeIndex2 = items.findIndex( item => parseInt(item.test_id) == parseInt(json.prize) );
+
+                setPrizeIndex( prizeIndex2 )
+
+                handleStart();
+            }else{
+                const square = document.querySelector('.fon');
+                square.style.visibility = 'visible';
+
+                const square1 = document.querySelector('.fon_static');
+                square1.style.visibility = 'hidden';
+
+                setModalText(json.text);
+                setShowModal(true);
+                
+                setModalImg(null);
+                setDoubleCLick(false);
+            }
+        })
+        .catch(err => { });
+    }
+
+    const handleStart = () => {
+        const square = document.querySelector('.fon');
+        square.style.visibility = 'hidden';
+
+        const square1 = document.querySelector('.fon_static');
+        square1.style.visibility = 'visible';
+
+        setTimeout( () => {
+            setStart((prevState) => !prevState);
+            setTimeout( () => {
+                setStart2((prevState) => !prevState);
+            }, 500 )
+        }, 300 )
+    };
+  
+    const handlePrizeDefined = () => {
+        const square = document.querySelector('.fon');
+        square.style.visibility = 'visible';
+
+        const square1 = document.querySelector('.fon_static');
+        square1.style.visibility = 'hidden';
+
+        setTimeout( () => {
+            setShowModal(true);
+            setModalImg(items[ prizeIndex ])
+            setDoubleCLick(false);
+
+            setStart2((prevState) => !prevState);
+            setStart((prevState) => !prevState);
+        }, 300 )
+    };
+  
+    return (
+      <>
+        {start === true ?
+            <RoulettePro
+                prizes={items}
+                prizeIndex={prizeIndex}
+                start={start2}
+                onPrizeDefined={handlePrizeDefined}
+                spinningTime={5}
+                designOptions={{hideCenterDelimiter: true}}
+            />
+                :
+            false
+        }
+
+        <Modal
+            open={showModal}
+            onClose={ () => { setShowModal(false) } }
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+                timeout: 500,
+            }}
+            className="class123"
+            
+        >
+            <Fade in={showModal}>
+                
+                <Box className='modalCity'>
+
+                    <IconButton style={{ position: 'absolute', top: -40, left: 15, backgroundColor: 'transparent' }} onClick={ () => { setShowModal(false) } }>
+                        <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
+                    </IconButton>
+
+                    <div style={{ display: 'grid' }}>
+                        { modalImg ? <Typography component="h5" style={{ textAlign: 'center' }}>Мы приехали — ура!<br />Получите приз, друзья:</Typography> : false }
+                        
+                        { modalImg ? <Typography component="h4" style={{ color: '#c03', textAlign: 'center' }}><br />Сертификат {modalImg.about}<br />{modalImg.company}</Typography> : false }
+                        
+                        { modalImg ? <img style={{ width: 100, height: 100, margin: '0 auto', borderRadius: 10 }} src={modalImg.image} /> : false }
+
+                        { modalImg ? <Typography component="h4" style={{ textAlign: 'center' }}><br />Дождитесь получения заказа и скорее в личный кабинет – призовой сертификат будет ждать вас в разделе «Жакобус»!<br />Счастливого пути!</Typography> : false }
+
+                        
+
+                        { !modalImg ? <Typography component="h4" style={{ textAlign: 'center' }}>Жакобус скоро выезжает, — занимайте места поскорей!</Typography> : false }
+                        { !modalImg ? <Typography component="h4" style={{ textAlign: 'center' }}>Участвовать в поездке может каждый, оформив заказ на 1300 рублей.</Typography> : false }
+                        { !modalImg ? <Typography component="h4" style={{ textAlign: 'center' }}><a style={{ color: '#c03', border: 0 }} href='https://drive.google.com/file/d/1BY0hUpA5kXhvQIlSNnV6bAYXoQ2MdZBJ/view' target='_blank'>Подробности о конкурсе</a></Typography> : false }
+                    </div>
+
+                </Box>
+                
+            </Fade>
+        </Modal>
+
+        <button className='START' onClick={testStart}>ПОЕХАЛИ</button>
+      </>
+    );
+  };
 
 export class Profile extends React.Component {
     constructor(props) {
@@ -164,7 +354,11 @@ export class Profile extends React.Component {
             userName: '',
             
             spiner: false,
-            showOrder: null
+            showOrder: null,
+
+            items: [],
+            modalMyPr: false,
+            MyPr: []
         };
         
         if( typeof window !== 'undefined' ){
@@ -262,9 +456,11 @@ export class Profile extends React.Component {
                     userName: json.user.name
                 });
                 
+                this.generatePrize(json.items)
+
                 if( check_reload.length > 0 ){
                     setTimeout(()=>{
-                        this.loadData();
+                        this.loadData(json.items);
                     }, 6000)
                 }
                 
@@ -273,6 +469,37 @@ export class Profile extends React.Component {
         }, 300 )
     }
     
+    generatePrize(items){
+        items.map( (item, key) => {
+            items[ key ]['image'] = "https://storage.yandexcloud.net/site-other-data/"+item.logo_src+"_512x512.webp";
+        } )
+
+        const reproductionArray = (array = [], length = 0) => [
+            ...Array(length)
+              .fill('_')
+              .map(() => array[Math.floor(Math.random() * array.length)]),
+          ];
+          
+          const reproducedPrizeList = [
+            ...items,
+            ...reproductionArray(items, items.length),
+          ];
+          
+          const generateId = () =>
+            `${Date.now().toString(36)}-${Math.random().toString(36).substring(2)}`;
+          
+          const prizeList = reproducedPrizeList.map((prize) => ({
+            ...prize,
+            id: typeof crypto.randomUUID === 'function' ? crypto.randomUUID() : generateId(),
+          }));
+
+        if( this.state.items.length == 0 ){
+            this.setState({
+                items: prizeList
+            })
+        }
+    }
+
     static fetchData(propsData) {
         let data = {
             type: 'get_page_info', 
@@ -751,6 +978,26 @@ export class Profile extends React.Component {
         window.location.pathname = '/'+this.state.city_name;
     }
     
+    getMyPrize(){
+        fetch(config.urlApi, {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'},
+            body: queryString.stringify({
+                type: 'getMyPrize', 
+                token: itemsStore.getToken()
+            })
+        }).then(res => res.json()).then(json => {
+            
+            this.setState({
+                MyPr: json,
+                modalMyPr: true
+            })
+            
+        })
+        .catch(err => { });
+    }
+
     render() {
         return (
             <Grid container className="Profile mainContainer MuiGrid-spacing-xs-3">
@@ -810,6 +1057,7 @@ export class Profile extends React.Component {
                             <Tab label="Промокоды" {...a11yProps(0)} disableRipple={true} />
                             <Tab label="Заказы" {...a11yProps(1)} disableRipple={true} />
                             <Tab label="Редактирование" {...a11yProps(2)} disableRipple={true} />
+                            <Tab label="Сесть в Жакобус" {...a11yProps(3)} disableRipple={true} />
                         </Tabs>
                     </AppBar>
                     <TabPanel value={this.state.valueTab} index={0} style={{ width: '100%' }}>
@@ -874,6 +1122,11 @@ export class Profile extends React.Component {
                         </div>
                     </TabPanel>
                     <TabPanel value={this.state.valueTab} index={1} style={{ width: '100%' }}>
+
+                        <div style={{ marginTop: 20, marginBottom: 20 }}>
+                            <Button variant="contained" className='btnMyPrize' onClick={ () => { this.setState({ valueTab: 3 }) } }>Прокатиться в Жакобусе</Button>
+                        </div>
+
                         {this.state.info.orders ?
                             <div className="TableOrders">
                                 <div className="thead">
@@ -1025,6 +1278,27 @@ export class Profile extends React.Component {
                             null
                         }
                     </TabPanel>
+                    <TabPanel value={this.state.valueTab} index={3} style={{ width: '100%', height: 800 }}>
+
+                        <div style={{ marginTop: 20, marginBottom: 20 }}>
+                            <Button variant="contained" className='btnMyPrize' onClick={ this.getMyPrize.bind(this) }>Мои призы</Button>
+                        </div>
+
+                        <div className={'abv'}>
+                            <img className='fon' src='https://jacochef.ru/src/img/test/test35464.png' />
+                            <img className='fon_static' src='https://jacochef.ru/src/img/test/test.gif' />
+                            <img className='fonBus' src='https://jacochef.ru/src/img/test/test3.png' />
+                            
+                            <div className='shadowright' />
+                            <div className='shadowleft' />
+
+                            <div className='otherDiv'>
+                            { this.state.items.length == 0 ? false :
+                                <TestApp items={this.state.items} city_name={this.state.city_name} />
+                            }
+                            </div>
+                        </div>
+                    </TabPanel>
                 </Grid>
                 
                 { this.state.showOrder ?
@@ -1145,6 +1419,49 @@ export class Profile extends React.Component {
                         </ButtonGroup>
                     </DialogActions>
                 </Dialog>
+
+
+                <Modal
+                    open={this.state.modalMyPr}
+                    onClose={() => { this.setState({modalMyPr: false}) }}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                    className="class123 modalMyPr"
+                    maxWidth={'md'}
+                    fullWidth={true}
+                >
+                    
+                    <Fade in={this.state.modalMyPr}>
+                        
+                        <Box className='modalCity'>
+                            <DialogTitle>Список выигранных призов</DialogTitle>
+
+                            <IconButton style={{ position: 'absolute', top: -40, left: 15, backgroundColor: 'transparent' }} onClick={() => { this.setState({modalMyPr: false}) }}>
+                                <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
+                            </IconButton>
+
+                            <table>
+                                <tbody>
+                                    { this.state.MyPr.map( (item, key) =>
+                                        <tr key={key} style={{ minHeight: 60 }}>
+                                            <td style={{ padding: 10 }}>{item.company} Сертификат {item.about}</td>
+                                            
+                                            <td style={{ padding: 10 }}>{item.cert_img.length > 0 ? <a href={'https://storage.yandexcloud.net/site-prize/'+item.cert_img} target='_blank' style={{ borderWidth: 0, color: '#c03' }}>скачать</a> : 'Будет доступен после завершения заказа'}</td>
+                                        </tr>
+                                    ) }
+                                    
+                                </tbody>
+                            </table>
+
+                        </Box>
+                        
+                    </Fade>
+                </Modal>
+
+                
             </Grid>
         )
     }
