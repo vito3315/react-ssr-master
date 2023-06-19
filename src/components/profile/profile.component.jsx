@@ -281,7 +281,7 @@ const TestApp = ({items, city_name}) => {
 
                         { !modalImg ? <Typography component="h4" style={{ textAlign: 'center' }}>Жакобус скоро выезжает, — занимайте места поскорей!</Typography> : false }
                         { !modalImg ? <Typography component="h4" style={{ textAlign: 'center' }}>Участвовать в поездке может каждый, оформив заказ на 1300 рублей.</Typography> : false }
-                        { !modalImg ? <Typography component="h4" style={{ textAlign: 'center' }}><a style={{ color: '#c03', border: 0 }} href='https://drive.google.com/file/d/1BY0hUpA5kXhvQIlSNnV6bAYXoQ2MdZBJ/view' target='_blank'>Подробности о конкурсе</a></Typography> : false }
+                        { !modalImg ? <Typography component="h4" style={{ textAlign: 'center' }}><a style={{ color: '#c03', border: 0 }} href='https://drive.google.com/file/d/1kuC_z3n349NBFNPSyz5qaBHOIE2STlYA/view' target='_blank'>Подробности о конкурсе</a></Typography> : false }
                     </div>
 
                 </Box>
