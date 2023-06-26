@@ -159,6 +159,9 @@ $colorText: #525252;
         }
     }
 } 
+.MuiTabs-scroller{
+    //overflow: auto!important;
+}
 .MuiTabs-scroller.MuiTabs-fixed > div{
     justify-content: center;
     & span{
