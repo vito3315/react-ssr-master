@@ -159,6 +159,11 @@ $colorText: #525252;
         }
     }
 } 
+.abv3334 .MuiTabs-scroller > div{
+    @media (min-width: 800px) {
+        justify-content: center;
+    }
+}
 .MuiTabs-scroller{
     //overflow: auto!important;
 }
