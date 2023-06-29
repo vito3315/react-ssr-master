@@ -156,11 +156,11 @@ const TestApp = ({items, city_name}) => {
     const [modalImg, setModalImg] = useState(null);
   
     const testStart = () => {
-        const square = document.querySelector('.fon');
-        square.style.visibility = 'hidden';
+        //const square = document.querySelector('.fon');
+        //square.style.visibility = 'hidden';
 
-        const square1 = document.querySelector('.fon_static');
-        square1.style.visibility = 'visible';
+        //const square1 = document.querySelector('.fon_static');
+        //square1.style.visibility = 'visible';
 
         if( doubleCLick ){
             return;
@@ -184,13 +184,13 @@ const TestApp = ({items, city_name}) => {
 
                 setPrizeIndex( prizeIndex2 )
 
-                handleStart();
+                //handleStart();
             }else{
-                const square = document.querySelector('.fon');
-                square.style.visibility = 'visible';
+                //const square = document.querySelector('.fon');
+                //square.style.visibility = 'visible';
 
-                const square1 = document.querySelector('.fon_static');
-                square1.style.visibility = 'hidden';
+                //const square1 = document.querySelector('.fon_static');
+                //square1.style.visibility = 'hidden';
 
                 setModalText(json.text);
                 setShowModal(true);
@@ -1057,7 +1057,7 @@ export class Profile extends React.Component {
                             <Tab label="Промокоды" {...a11yProps(0)} disableRipple={true} />
                             <Tab label="Заказы" {...a11yProps(1)} disableRipple={true} />
                             <Tab label="Редактирование" {...a11yProps(2)} disableRipple={true} />
-                            <Tab label="Сесть в Жакобус" {...a11yProps(3)} disableRipple={true} />
+                            <Tab label="Мои призы" {...a11yProps(3)} disableRipple={true} />
                         </Tabs>
                     </AppBar>
                     <TabPanel value={this.state.valueTab} index={0} style={{ width: '100%' }}>
@@ -1123,7 +1123,7 @@ export class Profile extends React.Component {
                     </TabPanel>
                     <TabPanel value={this.state.valueTab} index={1} style={{ width: '100%' }}>
 
-                        <div style={{ marginTop: 20, marginBottom: 20 }}>
+                        <div style={{ marginTop: 20, marginBottom: 20 }} className='dis_none'>
                             <Button variant="contained" className='btnMyPrize' onClick={ () => { this.setState({ valueTab: 3 }) } }>Прокатиться в Жакобусе</Button>
                         </div>
 
@@ -1292,10 +1292,10 @@ export class Profile extends React.Component {
                             <div className='shadowright' />
                             <div className='shadowleft' />
 
-                            <div className='otherDiv'>
-                            { this.state.items.length == 0 ? false :
-                                <TestApp items={this.state.items} city_name={this.state.city_name} />
-                            }
+                            <div className='otherDiv dis_none'>
+                                { this.state.items.length == 0 ? false :
+                                    <TestApp items={this.state.items} city_name={this.state.city_name} />
+                                }
                             </div>
                         </div>
                     </TabPanel>
@@ -1453,6 +1453,9 @@ export class Profile extends React.Component {
                                         </tr>
                                     ) }
                                     
+                                    <tr style={{ minHeight: 60 }}>
+                                        <td style={{ padding: 10, paddingTop: 50 }}><a href={'https://drive.google.com/file/d/1kuC_z3n349NBFNPSyz5qaBHOIE2STlYA/view'} target='_blank' style={{ borderWidth: 0, color: '#c03' }}>Полные правила розыгрыша</a></td>
+                                    </tr>
                                 </tbody>
                             </table>
 

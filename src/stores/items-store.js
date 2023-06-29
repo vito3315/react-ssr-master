@@ -143,7 +143,7 @@ class ItemsStore {
           city_id: itemsStore.getCity(),
           promo_name: promoName
       })
-  }).then(res => res.json()).then(json => {
+    }).then(res => res.json()).then(json => {
       itemsStore.setPromo( JSON.stringify(json), promoName );
       let check_promo = itemsStore.checkPromo();
               

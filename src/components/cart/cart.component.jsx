@@ -895,6 +895,9 @@ export class Cart extends React.Component {
         firebaseAPP = initializeApp(firebaseConfig);
         this.firebaseAnalitic = getAnalytics(firebaseAPP);
 
+
+        
+
         try{
 
             if( document.querySelector('.activeCat') ){
@@ -1867,6 +1870,32 @@ export class Cart extends React.Component {
                     })
                     
                     if( json.st ){
+
+                        /*const checkout = new window.YooMoneyCheckoutWidget({
+                            confirmation_token: json.test_pay_res.confirmation.confirmation_token, //Токен, который перед проведением оплаты нужно получить от ЮKassa
+                            return_url: 'https://jacofood.ru/', //Ссылка на страницу завершения оплаты, это может быть любая ваша страница
+                      
+                            //При необходимости можно изменить цвета виджета, подробные настройки см. в документации
+                             //customization: {
+                              //Настройка цветовой схемы, минимум один параметр, значения цветов в HEX
+                              //colors: {
+                                  //Цвет акцентных элементов: кнопка Заплатить, выбранные переключатели, опции и текстовые поля
+                                  //control_primary: '#00BF96', //Значение цвета в HEX
+                      
+                                  //Цвет платежной формы и ее элементов
+                                  //background: '#F2F3F5' //Значение цвета в HEX
+                              //}
+                            //},
+                            error_callback: function(error) {
+                                console.log(error)
+                            }
+                        });
+                
+                        setTimeout( () => {
+                            checkout.render('payment-form');
+                        }, 300 )*/
+                        
+
                         this.setState({
                             orderCheck: true,
                             newOrderData: json,
@@ -3054,7 +3083,8 @@ export class Cart extends React.Component {
                                             <Button variant="contained" style={{ width: '100%', margin: '0px 10px' }} className="BtnCardMain CardInCardItem">Оплатить заказ картой</Button>
                                         </ButtonGroup>
                                     </a>
-                                    <div id="sbol-pay-container"></div>
+                                    <div id="sbol-pay-container" className=''></div>
+                                    <div id="payment-form" className='dis_none'></div>
                                 </>
                                 
                                     :
