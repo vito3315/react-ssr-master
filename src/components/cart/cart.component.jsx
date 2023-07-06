@@ -1768,6 +1768,7 @@ export class Cart extends React.Component {
             this.clickOrderStart = true;
             
             clearTimeout(this.startOrderIntervalTimer);
+            this.startOrderInterval = 90;
             
             this.setState({ 
                 orderCheckDop: false,
@@ -1871,29 +1872,46 @@ export class Cart extends React.Component {
                     
                     if( json.st ){
 
-                        /*const checkout = new window.YooMoneyCheckoutWidget({
-                            confirmation_token: json.test_pay_res.confirmation.confirmation_token, //Токен, который перед проведением оплаты нужно получить от ЮKassa
-                            return_url: 'https://jacofood.ru/', //Ссылка на страницу завершения оплаты, это может быть любая ваша страница
-                      
-                            //При необходимости можно изменить цвета виджета, подробные настройки см. в документации
-                             //customization: {
-                              //Настройка цветовой схемы, минимум один параметр, значения цветов в HEX
-                              //colors: {
-                                  //Цвет акцентных элементов: кнопка Заплатить, выбранные переключатели, опции и текстовые поля
-                                  //control_primary: '#00BF96', //Значение цвета в HEX
-                      
-                                  //Цвет платежной формы и ее элементов
-                                  //background: '#F2F3F5' //Значение цвета в HEX
-                              //}
-                            //},
-                            error_callback: function(error) {
-                                console.log(error)
-                            }
-                        });
-                
-                        setTimeout( () => {
-                            checkout.render('payment-form');
-                        }, 300 )*/
+                        //json.test_pay_res.confirmation.confirmation_url
+
+                        if( json?.test_pay_res?.confirmation?.confirmation_token ){
+                            this.startOrderInterval = json?.test_pay_res?.confirmation?.time_wait_pay;
+
+                            const checkout = new window.YooMoneyCheckoutWidget({
+                                confirmation_token: json.test_pay_res.confirmation.confirmation_token, //Токен, который перед проведением оплаты нужно получить от ЮKassa
+                                return_url: 'https://jacofood.ru/'+this.state.city_name+'/profile', //Ссылка на страницу завершения оплаты, это может быть любая ваша страница
+                        
+                                //При необходимости можно изменить цвета виджета, подробные настройки см. в документации
+                                //customization: {
+                                //Настройка цветовой схемы, минимум один параметр, значения цветов в HEX
+                                //colors: {
+                                    //Цвет акцентных элементов: кнопка Заплатить, выбранные переключатели, опции и текстовые поля
+                                    //control_primary: '#00BF96', //Значение цвета в HEX
+                        
+                                    //Цвет платежной формы и ее элементов
+                                    //background: '#F2F3F5' //Значение цвета в HEX
+                                //}
+                                //},
+                                
+                                //bank_card
+                                //sberbank
+                                //sbp
+
+                                customization: {
+                                    //payment_methods: ['bank_card']
+                                },
+                                error_callback: function(error) {
+                                    console.log(error)
+                                }
+                            });
+                    
+                            
+
+                            setTimeout( () => {
+                                checkout.render('payment-form');
+                            }, 300 )
+
+                        }
                         
 
                         this.setState({
@@ -3070,22 +3088,26 @@ export class Cart extends React.Component {
                                     </tr>
                                 </tfoot>
                             </table>
+                            <div id="payment-form" style={{ marginTop: 50 }}></div>
                         </DialogContent>
-                        <DialogActions style={{ padding: '12px 24px', paddingBottom: 24, display: 'flex', flexDirection: 'column' }}>
+                        <DialogActions id="other-payment-form" style={{ padding: '12px 24px', paddingBottom: 24, display: 'flex', flexDirection: 'column' }}>
                             { this.state.orderPay == 'card' ? 
-                                <>
-                                    <a
-                                        href={ this.state.newOrderData.pay.formUrl }
-                                        className="MuiButtonBase-root MuiBottomNavigationAction-root"
-                                        style={{ padding: 20 }}
-                                    >
-                                        <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" style={{ width: '100%' }}>
-                                            <Button variant="contained" style={{ width: '100%', margin: '0px 10px' }} className="BtnCardMain CardInCardItem">Оплатить заказ картой</Button>
-                                        </ButtonGroup>
-                                    </a>
-                                    <div id="sbol-pay-container" className=''></div>
-                                    <div id="payment-form" className='dis_none'></div>
-                                </>
+                                this.state.newOrderData.pay.formUrl.length > 0 ?
+                                    <>
+                                        <a
+                                            href={ this.state.newOrderData.pay.formUrl }
+                                            className="MuiButtonBase-root MuiBottomNavigationAction-root"
+                                            style={{ padding: 20 }}
+                                        >
+                                            <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" style={{ width: '100%' }}>
+                                                <Button variant="contained" style={{ width: '100%', margin: '0px 10px' }} className="BtnCardMain CardInCardItem">Оплатить заказ картой</Button>
+                                            </ButtonGroup>
+                                        </a>
+                                        <div id="sbol-pay-container" className=''></div>
+                                        
+                                    </>
+                                        :
+                                    false
                                 
                                     :
                                 <ButtonGroup disableElevation={true} disableRipple={true} variant="contained" className="BtnBorder" style={{ width: '100%' }} onClick={ this.trueOrder.bind(this) }>
