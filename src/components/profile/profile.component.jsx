@@ -1057,7 +1057,7 @@ export class Profile extends React.Component {
                             <Tab label="Промокоды" {...a11yProps(0)} disableRipple={true} />
                             <Tab label="Заказы" {...a11yProps(1)} disableRipple={true} />
                             <Tab label="Редактирование" {...a11yProps(2)} disableRipple={true} />
-                            <Tab label="Мои призы" {...a11yProps(3)} disableRipple={true} />
+                            
                         </Tabs>
                     </AppBar>
                     <TabPanel value={this.state.valueTab} index={0} style={{ width: '100%' }}>
