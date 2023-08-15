@@ -33,7 +33,12 @@ function ControlledAccordions(props) {
                         aria-controls={"panel"+key+"bh-content"}
                         id={"panel"+key+"bh-header"}
                     >
-                        <Typography variant="h5" component="span">{item.raion}: {item.addr}</Typography>
+                        <div>
+                            <Typography variant="h5" component="b">{item.addr} </Typography>
+                            <Typography variant="h5" component="span">({item.raion})</Typography>
+                        </div>
+                        <Typography variant="h5" component="span" className='ur_info'>Юридическая информация</Typography>
+                        
                     </AccordionSummary>
                     <AccordionDetails className="AccordionDesc" style={{ flexDirection: 'column', padding: 0 }}>
                         <div>
@@ -261,20 +266,20 @@ export class Contact extends React.Component {
                     <meta name="description" content={this.state.description} />
                 </Helmet>
                 
-                <Grid item xs={12}>
-                    <Typography variant="h5" component="h1">Контакты</Typography>
-                </Grid>
+                
                 <Grid item lg={4} md={4} xl={4} sm={12} xs={12} className="mainContainer">
-                    <Typography variant="h5" component="h2">Режим работы</Typography>
+                    <Typography variant="h5" component="h1">Контакты</Typography>
+
+                    <Typography variant="h5" component="h2" style={{ marginTop: 20 }}>Режим работы</Typography>
                     <Typography variant="h5" component="span" className="p20">Работаем ежедневно с 10:00 до 21:30</Typography>
-                    <Typography variant="h5" component="h2">Телефон контакт-центра:</Typography>
+                    <Typography variant="h5" component="h2" style={{ marginTop: 20 }}>Телефон контакт-центра:</Typography>
                     {this.state.points[0] ?
                         <Typography variant="h5" component="a" className="p20" href={'tel:'+this.state.points[0].phone_new}>{this.state.points[0].phone}</Typography>
                             :
                         null
                     }
 
-                    <Typography variant="h5" component="h2">Адреса кафе:</Typography>
+                    <Typography variant="h5" component="h2" style={{ marginTop: 20 }}>Адреса кафе:</Typography>
                     <ControlledAccordions points={this.state.unic_point}/>
                 </Grid>
                 <Grid item lg={8} md={8} xl={8} sm={12} xs={12} id="ForMap">

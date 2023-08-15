@@ -1,5 +1,6 @@
 $Ubuntu: 'Ubuntu';
 $Futuris: 'FuturaFuturisC Bold';
+$colorMain: #CC0033;
 @mixin fons($size: 1rem, $family: $Ubuntu) {
     font-size: $size;
     font-family: $family !important;
@@ -22,10 +23,11 @@ $Futuris: 'FuturaFuturisC Bold';
     & h2{
         @include fons_new(1.3rem, $Futuris);
     }
-    & span, h2, a{
+    & span, h1, h2, a{
         padding-left: 12px;
         padding-right: 12px;
     }
+    
     & span, a{
         @include fons(0.9rem, $Ubuntu);
         width: max-content;
@@ -38,9 +40,7 @@ $Futuris: 'FuturaFuturisC Bold';
     & .p20{
         padding-bottom: 20px;
     }
-    & > div:first-child{
-        text-align: center;
-    }
+    
     & > div:not(:first-child):not(:last-child){
         display: flex;
         flex-direction: column;
@@ -51,6 +51,13 @@ $Futuris: 'FuturaFuturisC Bold';
         & .MuiAccordionSummary-content{
             width: 100%;
             display: block;
+            & b {
+                @include fons(0.9rem, $Futuris);
+            }
+            & .ur_info{
+                color: $colorMain;
+                text-decoration: underline;
+            }
         }
         & > div{
             box-shadow: none!important;

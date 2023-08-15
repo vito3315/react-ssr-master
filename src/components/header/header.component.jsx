@@ -1923,7 +1923,14 @@ export class Header extends React.Component{
                             <a style={{ width: '7.22%', minWidth: 'max-content', textDecoration: 'none' }} onClick={this.openLogin.bind(this)}><span className='headerCat'>Войти</span></a>
                         }
 
+                        <div style={{ width: '0.36%' }} />
+
+
+                        <Link to={"/"+this.state.cityName+"/contacts"} style={{ width: '7.22%', minWidth: 'max-content', textDecoration: 'none' }}>
+                            <span className={this.state.activePage == 'contacts' ? 'headerCat activeCat' : 'headerCat'}>Контакты</span>
+                        </Link>
                         <div style={{ width: '3.25%' }} />
+
 
                         <OpenBasket openLogin={this.openLogin.bind(this)} />
                         <div style={{ width: '4.51%' }} />
