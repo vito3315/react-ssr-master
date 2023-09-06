@@ -3,6 +3,40 @@ RewriteEngine On
 RewriteCond %{SERVER_PORT} !^443$
 RewriteRule .* https://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]
 
+RewriteCond %{REMOTE_ADDR} ^109\.248\. [OR]
+RewriteCond %{REMOTE_ADDR} ^176\.53\.186\. [OR]
+RewriteCond %{REMOTE_ADDR} ^185\.181\. [OR]
+RewriteCond %{REMOTE_ADDR} ^188\.130\. [OR]
+RewriteCond %{REMOTE_ADDR} ^193\.53\. [OR]
+RewriteCond %{REMOTE_ADDR} ^194\.32\. [OR]
+RewriteCond %{REMOTE_ADDR} ^194\.34\. [OR]
+RewriteCond %{REMOTE_ADDR} ^194\.35\. [OR]
+RewriteCond %{REMOTE_ADDR} ^194\.156\. [OR]
+RewriteCond %{REMOTE_ADDR} ^212\.115\.49\. [OR]
+RewriteCond %{REMOTE_ADDR} ^213\.226\.101\. [OR]
+RewriteCond %{REMOTE_ADDR} ^45\.11\. [OR]
+RewriteCond %{REMOTE_ADDR} ^45\.134\. [OR]
+RewriteCond %{REMOTE_ADDR} ^45\.135\. [OR]
+RewriteCond %{REMOTE_ADDR} ^45\.139\. [OR]
+RewriteCond %{REMOTE_ADDR} ^45\.140\. [OR]
+RewriteCond %{REMOTE_ADDR} ^45\.142\. [OR]
+RewriteCond %{REMOTE_ADDR} ^45\.144\. [OR]
+RewriteCond %{REMOTE_ADDR} ^45\.145\. [OR]
+RewriteCond %{REMOTE_ADDR} ^45\.15\. [OR]
+RewriteCond %{REMOTE_ADDR} ^45\.81\. [OR]
+RewriteCond %{REMOTE_ADDR} ^45\.84\. [OR]
+RewriteCond %{REMOTE_ADDR} ^45\.86\. [OR]
+RewriteCond %{REMOTE_ADDR} ^45\.87\. [OR]
+RewriteCond %{REMOTE_ADDR} ^45\.90\. [OR]
+RewriteCond %{REMOTE_ADDR} ^46\.8\. [OR]
+RewriteCond %{REMOTE_ADDR} ^77\.83\. [OR]
+RewriteCond %{REMOTE_ADDR} ^77\.94\. [OR]
+RewriteCond %{REMOTE_ADDR} ^92\.119\.193\. [OR]
+RewriteCond %{REMOTE_ADDR} ^94\.158\.190\. [OR]
+RewriteCond %{REMOTE_ADDR} ^95\.182\. [OR]
+RewriteCond %{REMOTE_ADDR} ^31\.40\.203\.
+RewriteRule . - [F]
+
 Header always edit Set-Cookie ^(.*)$ "$1; HttpOnly; Secure; SameSite=lax"
 
 AddHandler application/x-httpd-php .html 
