@@ -12,6 +12,9 @@ const { PageInstPay } = require( '../src/components/pageInstPay' );
 const { PageOferta } = require( '../src/components/pageOferta' );
 const { PagePolitika } = require( '../src/components/pagePolitika' );
 
+const { PageLegal } = require( '../src/components/pageLegal' );
+const { PagePoliticLegal } = require( '../src/components/pagePoliticLegal' );
+
 module.exports = [
     {
         path: '/:cityName',
@@ -131,6 +134,20 @@ module.exports = [
         path: '/:cityName/politika-konfidencialnosti',
         exact: true,
         component: PagePolitika,
+        type: '',
+        code: 200
+    },
+    {
+        path: '/:cityName/legal',
+        exact: true,
+        component: PageLegal,
+        type: '',
+        code: 200
+    },
+    {
+        path: '/:cityName/politika-legal',
+        exact: true,
+        component: PagePoliticLegal,
         type: '',
         code: 200
     },

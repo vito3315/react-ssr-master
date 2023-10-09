@@ -148,7 +148,7 @@ class StickyFooter extends React.Component{
 
                 {this.state.setCookie ?
                     <div className='footerLegal'>
-                        <Typography component="span" style={{ fontSize: '0.7rem' }}>Мы используем файлы «Cookie» и метрическую систему «Яндекс.Метрика» для сбора и анализа информации о производительности и использовании сайта. Продолжая пользоваться сайтом, вы соглашаетесь на размещение файлов «Cookie» и <Link to={ '/'+this.state.cityName+'/politika-legal' } style={{ textDecoration: 'none' }} >обработку данных метрических систем.</Link></Typography>
+                        <Typography component="span" style={{ fontSize: '0.7rem' }}>Мы используем файлы «Cookie» и систему «Яндекс.Метрика» для сбора и анализа информации о производительности и использовании сайта. Продолжая пользоваться сайтом, вы соглашаетесь на размещение файлов «Cookie» и <Link to={ '/'+this.state.cityName+'/politika-legal' } style={{ textDecoration: 'none' }} >обработку данных.</Link></Typography>
                         
                         <CloseIcon style={{ width: 25, height: 25, fill: '#000', color: '#000', overflow: 'visible', cursor: 'pointer' }} onClick={this.setCookie.bind(this)} />
                         
