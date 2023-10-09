@@ -364,6 +364,20 @@ class CardItem extends React.Component {
 
         //const GRID = (width- 7*20) / 6;
 
+        let item_name = '';
+
+        if( parseInt(this.props.datatype) == 1 || parseInt(this.props.datatype) == 2 || parseInt(this.props.datatype) == 3 || parseInt(this.props.datatype) == 4 ){
+            item_name = parseInt( this.state.item.cat_id ) == 14 ? 'Пицца '+this.state.item.name : 
+                parseInt( this.state.item.cat_id ) == 9 ||
+                parseInt( this.state.item.cat_id ) == 10 ||
+                parseInt( this.state.item.cat_id ) == 12 ||
+                parseInt( this.state.item.cat_id ) == 13 ? 'Ролл '+this.state.item.name : this.state.item.name;
+        }else{
+            item_name = this.state.item.name;
+        }
+
+        
+
         if( this.props.type == 'pc' ){
 
             if (typeof window !== 'undefined') {
@@ -387,8 +401,8 @@ class CardItem extends React.Component {
                                 />
                                 <img 
                                     src={"https://cdnimg.jacofood.ru/"+this.state.item.img_new+"600х400.jpg?"+this.state.item.img_new_update} 
-                                    alt={this.state.item.name}
-                                    title={this.state.item.name}
+                                    alt={item_name}
+                                    title={item_name}
                                     style={{ minHeight: 150 }}
                                     loading="lazy"
                                 />
@@ -423,8 +437,8 @@ class CardItem extends React.Component {
                                     sizes="(max-width=1439px) 233px, (max-width=1279px) 218px, 292px" />
 
                                 <img 
-                                    alt={this.state.item.name} 
-                                    title={this.state.item.name} 
+                                    alt={item_name} 
+                                    title={item_name} 
                                     src={`https://cdnimg.jacofood.ru/${img_name}_292x292.jpg`} 
                                     style={{ minHeight: GRID * 1.125, minWidth: GRID * 1.125 }}
                                     loading="lazy"
@@ -439,7 +453,7 @@ class CardItem extends React.Component {
                             <Badge size={'small'} type={'new'} view={'pc'} />
                         }
 
-                        <Typography className="CardNameItem" variant="h5" component="h3" style={{ flex: 1 }}>{this.state.item.name}</Typography>
+                        <Typography className="CardNameItem" variant="h5" component="h3" style={{ flex: 1 }}>{item_name}</Typography>
 
                         <CardContent style={{ padding: 0 }}>
                             <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: 10, marginBottom: 10 }}>
@@ -1726,7 +1740,7 @@ export class Home extends React.Component {
                                                 {cat.items.map((it, k) => (
                                                     <React.Fragment key={k}>
                                                         <Grid item className='_mobile_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'flex', sm: 'none' } }} style={{ padding: '10px 0px', borderBottom: cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
-                                                            <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
+                                                            <CardItem datatype={1} data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
                                                         </Grid>
                                                     </React.Fragment>
                                                 ))}
@@ -1751,7 +1765,7 @@ export class Home extends React.Component {
                                                 {cat.items.map((it, k) => (
                                                     <React.Fragment key={k}>
                                                         <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'none', sm: 'flex' } }} style={{ padding: '30px 16px', width: '100%' }}>
-                                                            <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
+                                                            <CardItem datatype={2} data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
                                                         </Grid>
                                                     </React.Fragment>
                                                 ))}
@@ -1776,11 +1790,11 @@ export class Home extends React.Component {
                                             {cat.items.map((it, k) => (
                                                 <React.Fragment key={k}>
                                                     <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'none', sm: 'flex' } }} style={{ padding: '30px 16px', width: '100%' }}>
-                                                        <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
+                                                        <CardItem datatype={3} data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
                                                     </Grid>
                                                 
                                                     <Grid item className='_mobile_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'flex', sm: 'none' } }} style={{ padding: '10px 0px', borderBottom: cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
-                                                        <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
+                                                        <CardItem datatype={4} data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
                                                     </Grid>
                                                 </React.Fragment>
                                             ))}
@@ -1913,7 +1927,7 @@ export class Home extends React.Component {
                                                 {cat.items.map((it, k) => (
                                                     <React.Fragment key={k}>
                                                         <Grid item className='_mobile_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'flex', sm: 'none' } }} style={{ padding: '10px 0px', borderBottom: cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
-                                                            <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
+                                                            <CardItem datatype={5} data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
                                                         </Grid>
                                                     </React.Fragment>
                                                 ))}
@@ -1933,7 +1947,7 @@ export class Home extends React.Component {
                                                 {cat.items.map((it, k) => (
                                                     <React.Fragment key={k}>
                                                         <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'none', sm: 'flex' } }} style={{ padding: '30px 16px', width: '100%' }}>
-                                                            <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
+                                                            <CardItem datatype={6} data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
                                                         </Grid>
                                                     </React.Fragment>
                                                 ))}
@@ -1953,11 +1967,11 @@ export class Home extends React.Component {
                                             {cat.items.map((it, k) => (
                                                 <React.Fragment key={k}>
                                                     <Grid item className='_PC_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'none', sm: 'flex' } }} style={{ padding: '30px 16px', width: '100%' }}>
-                                                        <CardItem data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
+                                                        <CardItem datatype={7} data={it} type={'pc'} openItem={this.openItemPC.bind(this)} />
                                                     </Grid>
                                                 
                                                     <Grid item className='_mobile_' xs={12} sm={6} md={4} lg={3} xl={3} sx={{ display: { xs: 'flex', sm: 'none' } }} style={{ padding: '10px 0px', borderBottom: cat.items.length-1 == k && itemsStore.getAllItemsCat().length-1 == key ? 'none' : '1px solid rgba(27, 27, 31, 0.1)' }}>
-                                                        <CardItem data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
+                                                        <CardItem datatype={8} data={it} type={'mobile'} openItem={this.openItem.bind(this)} />
                                                     </Grid>
                                                 </React.Fragment>
                                             ))}
