@@ -169,6 +169,13 @@ class StickyFooter extends React.Component{
                             <Typography variant="body1">О Компании</Typography>
                         </Link>
                         <Link
+                            to={{ pathname: 'https://franchise.jacofood.ru/' }}
+                            target="_blank"
+                            style={{ textDecoration: 'none' }}
+                        >
+                            <Typography variant="body1">Франшиза Жако</Typography>
+                        </Link>
+                        <Link
                             to={ '/'+this.state.cityName+'/jobs' }
                             style={{ textDecoration: 'none' }}
                         >
