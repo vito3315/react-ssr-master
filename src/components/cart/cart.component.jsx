@@ -762,7 +762,7 @@ export class Cart extends React.Component {
             }).then(res => res.json()).then(json => {
                 this.setState({
                     pic_point: json.get_addr_pic.points,
-                    my_addr: json.get_my_addr,
+                    my_addr: json.get_my_addr,//
                     all_addr: json.get_addr,
                     date_pred: json.date_pred
                 })
@@ -772,6 +772,10 @@ export class Cart extends React.Component {
         
                     if( cartData.orderType || cartData.orderType == 0 ){
                         
+                        let find_choose_addr = json.get_my_addr.find( addr => parseInt(addr.id) == parseInt(cartData.orderAddr.id) )
+
+                        cartData.orderAddr = find_choose_addr;
+
                         this.setState({
                             orderType: cartData.orderType,
                             orderAddr: cartData.orderAddr && cartData.orderAddr.id == -1 ? null : cartData.orderAddr,
@@ -785,6 +789,20 @@ export class Cart extends React.Component {
                             orderPay: cartData.orderPay,
                             orderSdacha: cartData.orderSdacha
                         })
+
+                        itemsStore.saveCartData({
+                            orderType: cartData.orderType,
+                            orderAddr: cartData.orderAddr && cartData.orderAddr.id == -1 ? null : cartData.orderAddr,
+                            orderPic: cartData.orderPic,
+                            orderComment: cartData.orderComment,
+                            
+                            orderTimes: cartData.orderTimes,
+                            orderPredDay: cartData.orderPredDay,
+                            orderPredTime: cartData.orderPredTime,                
+                            
+                            orderPay: cartData.orderPay,
+                            orderSdacha: cartData.orderSdacha
+                        });
                         
                         if( parseInt(cartData.orderTimes) == 2 && cartData.orderPredDay != '' && ((cartData.orderAddr && cartData.orderAddr.id !== -1) || parseInt( cartData.orderPic ) > 0) ){
                             setTimeout(() => {
