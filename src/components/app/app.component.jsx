@@ -159,7 +159,7 @@ class StickyFooter extends React.Component{
 
                 <Grid container className="mainContainer">
                     <Grid item lg={3} md={3} sm={3} xl={3} xs={12} className="copy">
-                        <Typography variant="body1" component="span">© Жако 2017 - {new Date().getFullYear()}</Typography>
+                        <Typography variant="body1" component="span">2017 - {new Date().getFullYear()} © ООО «Мистер Жако», ИНН: 6321390811</Typography>
                     </Grid>
                     <Grid item lg={3} md={3} sm={3} xl={3} xs={12}>
                         <Link
