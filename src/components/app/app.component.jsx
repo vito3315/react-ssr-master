@@ -158,9 +158,6 @@ class StickyFooter extends React.Component{
                 }
 
                 <Grid container className="mainContainer">
-                    <Grid item lg={3} md={3} sm={3} xl={3} xs={12} className="copy">
-                        <Typography variant="body1" component="span">2017 - {new Date().getFullYear()} © ООО «Мистер Жако», ИНН: 6321390811</Typography>
-                    </Grid>
                     <Grid item lg={3} md={3} sm={3} xl={3} xs={12}>
                         <Link
                             to={ '/'+this.state.cityName+'/about' }
@@ -200,7 +197,7 @@ class StickyFooter extends React.Component{
                             null
                         }
                     </Grid>
-                    <Grid item lg={3} md={3} sm={3} xl={3} xs={12}>
+                    <Grid item lg={6} md={6} sm={6} xl={6} xs={12}>
                         <Link
                             to={ '/'+this.state.cityName+'/politika-konfidencialnosti' }
                             style={{ textDecoration: 'none' }}
@@ -263,7 +260,12 @@ class StickyFooter extends React.Component{
                             :
                         null
                     }
+
+                    <Grid item lg={12} md={12} sm={12} xl={12} xs={12} className="copy">
+                        <Typography variant="body1" component="span">2017 - {new Date().getFullYear()} © ООО «Мистер Жако», ИНН: 6321390811</Typography>
+                    </Grid>
                 </Grid>
+                
             </footer>
         );
     }
