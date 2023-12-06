@@ -259,7 +259,7 @@ class ItemsStore {
         }else{
           return {
             st: false,
-            text: promo_info.promo_text.false
+            text: '1'+promo_info.promo_text.false
           }
         }
       }
@@ -270,7 +270,7 @@ class ItemsStore {
         }else{
           return {
             st: false,
-            text: promo_info.promo_text.false
+            text: '2'+promo_info.promo_text.false
           }
         }
       }
@@ -371,7 +371,7 @@ class ItemsStore {
         if( promo_info.limits.items.length != check ){
           return {
             st: false,
-            text: promo_info.promo_text.false
+            text: '3'+promo_info.promo_text.false
           }
         }
       }
@@ -571,7 +571,7 @@ class ItemsStore {
     }else{
       return {
         st: false,
-        text: promo_info.promo_text.false,
+        text: '4'+promo_info.promo_text.false,
         test: promo_info
       }
     }
