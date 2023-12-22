@@ -988,8 +988,16 @@ $colorText: #525252;
             @include fonsNew(2rem, $Roboto);
             font-weight: 500;
         }
+        & span{
+            @include fonsNew(1rem, $Roboto);
+            font-weight: 400;
+            & span{
+                @include fonsNew(1rem, $Roboto);
+                font-weight: 400;
+            }
+        }
     }
-    & a:not(.active){
+    & a:not(.active):not(.link){
         width: 75%;
         height: 60px;
         border-radius: 120px;

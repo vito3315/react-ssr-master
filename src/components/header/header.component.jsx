@@ -940,6 +940,77 @@ class ModalCity extends React.Component{
     }
 }
 
+class ModalVKBanner extends React.Component{
+    constructor(props) {
+        super(props);
+        
+        this.state = {      
+            open: false,
+            cityName: this.props.cityName ?? '',
+            link: ''
+        };
+    }
+
+    componentDidUpdate(){
+        if( this.props.isOpen === true ){
+            localStorage.setItem('vkBanner', 345)
+        }
+
+        //console.log( 'city', this.props.cityName )
+
+        if( this.props.isOpen != this.state.open ){
+            this.setState({
+                open: this.props.isOpen,
+                cityName: this.props.cityName ?? '',
+                link: this.props.cityName === 'samara' ? 'https://vk.com/jacofood_smr' : 'https://vk.com/jacofood_tlt'
+            })
+        }
+    }
+
+    render(){
+        return (
+            <Modal
+                open={this.props.isOpen}
+                onClose={this.props.close}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}
+                className="class123"
+                
+            >
+                <Fade in={this.props.isOpen}>
+                    
+                    <Box className='modalCity'>
+
+                        <IconButton style={{ position: 'absolute', top: -40, left: 15, backgroundColor: 'transparent' }} onClick={this.props.close}>
+                            <IconClose style={{ width: 25, height: 25, fill: '#fff', color: '#fff', overflow: 'visible' }} />
+                        </IconButton>
+
+                        <div className='loginIMG' style={{ marginTop: 30 }}>
+                            <img 
+                                alt={'Login'} 
+                                title={'Login'} 
+                                src={`/assets/VKLogo.png`} />
+                        </div>
+
+                        <div className='loginHeader' style={{ height: 'auto', marginTop: 30, textAlign: 'center' }}>
+                            <Typography component="span" style={{ fontSize: '1.2rem' }}>Подпишитесь на <a className='link' style={{ fontSize: '1.2rem', textDecoration: 'underline', cursor: 'pointer', color: '#525252' }} href={this.state.link} target='_blank'>нашу группу Вконтакте</a>, где мы рассказываем о новинках, проводим конкурсы и разыгрываем вкусные призы.</Typography>
+                        </div>
+
+                        <a className='loginHeader' style={{ backgroundColor: '#0077FF', color: '#fff', width: '80%', borderRadius: '30px', display: 'flex', justifyContent: 'center', alignItems: 'center', borderColor: '#0077FF', marginBottom: 50 }} href={this.state.link} target='_blank'>
+                            <Typography component="span" style={{ fontSize: '1.3rem', color: '#fff' }}>Жако Вконтакте</Typography>
+                        </a>
+                        
+                    </Box>
+                    
+                </Fade>
+            </Modal>
+        )
+    }
+}
+
 function getNoun(number, one, two, five) {
     let n = Math.abs(number);
     n %= 100;
@@ -1581,7 +1652,8 @@ export class Header extends React.Component{
 
             is_open_text_msg: false,
 
-            linkYaAuth: ''
+            linkYaAuth: '',
+            modalbannerVK: false
         };
     }
     
@@ -1728,6 +1800,14 @@ export class Header extends React.Component{
                             openCity: true
                         })
                     }
+
+                    if( localStorage.getItem('myCity') && localStorage.getItem('myCity').length > 0 ){
+                        if( !localStorage.getItem('vkBanner') || localStorage.getItem('vkBanner').length == 0 ){
+                            this.setState({
+                                modalbannerVK: true
+                            })
+                        }
+                    }
                 })
                 .catch(err => { });
         //    }else{
@@ -1745,6 +1825,12 @@ export class Header extends React.Component{
     closeCity(){
         this.setState({
             openCity: false
+        })
+    }
+
+    closeVKBanner(){
+        this.setState({
+            modalbannerVK: false
         })
     }
 
@@ -1983,6 +2069,8 @@ export class Header extends React.Component{
 
                 <ModalCity isOpen={this.state.openCity} close={this.closeCity.bind(this)} cityList={this.state.cityList} cityName={this.state.cityName} />
                 <ModalLogin isOpen={this.state.openLoginNew} linkYaAuth={this.state.linkYaAuth} cityName={this.state.cityName} close={this.closeLogin.bind(this)} />
+
+                <ModalVKBanner isOpen={this.state.modalbannerVK} close={this.closeVKBanner.bind(this)} cityName={this.state.cityName} />
 
                 <Modal
                     open={this.state.is_open_text_msg}
