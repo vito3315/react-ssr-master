@@ -78,7 +78,7 @@ app.use( '*', async ( req, res ) => {
     req.originalUrl = req.originalUrl.split('#')[0];
     
     if( req.originalUrl == '/' || req.originalUrl == '' ){
-        res.status( 302 );
+        res.status( 301 );
         return res.redirect("/togliatti")
     }
     
