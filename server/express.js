@@ -37,6 +37,16 @@ app.get( /\.(eot|ttf|woff|woff2)$/, express.static( path.resolve( __dirname, '..
 //app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
+    if (req.path.slice(-1) === '/' && req.path.length > 1) {
+      const query = req.url.slice(req.path.length)
+      const safepath = req.path.slice(0, -1).replace(/\/+/g, '/')
+      res.redirect(301, safepath + query)
+    } else {
+      next()
+    }
+  })
+
+/*app.use((req, res, next) => {
     const test = /\?[^]*\//.test(req.url);
 
     if (req.url.substr(-1) === '/' && req.url.length > 1 && !test){
@@ -45,7 +55,7 @@ app.use((req, res, next) => {
         next();
     }
     
-});
+});*/
 
 app.use((req, res, next) => {
     res.set('Cache-Control', 'public, max-age=86400')
