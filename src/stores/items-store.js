@@ -259,7 +259,7 @@ class ItemsStore {
         }else{
           return {
             st: false,
-            text: '1'+promo_info.promo_text.false
+            text: this_date+' 1'+promo_info.promo_text.false
           }
         }
       }
@@ -270,7 +270,7 @@ class ItemsStore {
         }else{
           return {
             st: false,
-            text: '2'+promo_info.promo_text.false
+            text: this_time+' 2'+promo_info.promo_text.false
           }
         }
       }
