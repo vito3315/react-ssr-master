@@ -36,23 +36,8 @@ app.get( /\.(eot|ttf|woff|woff2)$/, express.static( path.resolve( __dirname, '..
 
 //app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(function(req, res, next){
-    // Find the query string
-    var qsi = req.originalUrl.indexOf('?');
-    // Get the path
-    var path = req.originalUrl;
-    if(qsi > -1) path = path.substr(0, qsi);
-    // Continue if the path is good or it's a static resource
-    if(path.substr(-1) === '/' || ~path.indexOf('.')) return next();
-    // Save just the query string
-    var qs = '';
-    if(qsi > -1) qs = req.originalUrl.substr(qsi);
-    // Save redirect path
-    var redirect = path + '/' + qs;
-    // Redirect client
-    res.redirect(301, redirect);
-
-    //console.log('301 redirected ' + req.originalUrl + ' to ' + redirect);
+app.get('\\S+\/$', function (req, res) {
+    return res.redirect(301, req.path.slice(0, -1) + req.url.slice(req.path.length));
 });
 
 /*app.use((req, res, next) => {
