@@ -896,6 +896,21 @@ export class App extends React.Component {
                                     this_link={this.props.globalState.this_link} />  
                                 <PagePoliticLegal data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
                             </Route>
+
+                            <Route
+                                path='/:cityName/company-details'
+                                exact={ true }
+                            >
+                                <Header 
+                                    data={this.props.globalState.data} 
+                                    city={this.props.globalState.city} 
+                                    this_link={this.props.globalState.this_link} />  
+                                <PageCompanyDetails data={this.props.globalState.data} city={this.props.globalState.city} this_link={this.props.globalState.this_link}  />
+                            </Route>
+
+
+                            
+
                             <Route
                                 path='/'
                                 exact={ true }
