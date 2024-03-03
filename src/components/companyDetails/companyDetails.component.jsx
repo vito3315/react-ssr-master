@@ -37,7 +37,7 @@ export class PageCompanyDetails extends React.Component {
         let data = {
             type: 'get_page_info', 
             city_id: get_city(propsData),
-            page: 'company_details' 
+            page: 'company-details' 
         };
         
         return axios({
