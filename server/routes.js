@@ -155,7 +155,7 @@ module.exports = [
         code: 200
     },
     {
-        path: '/:cityName/company_details',
+        path: '/:cityName/company-details',
         exact: true,
         component: PageCompanyDetails,
         type: '',

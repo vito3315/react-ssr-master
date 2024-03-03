@@ -186,7 +186,7 @@ class StickyFooter extends React.Component{
                             <Typography variant="body1">Публичная оферта</Typography>
                         </Link>
                         <Link
-                            to={ '/'+this.state.cityName+'/company_details' }
+                            to={ '/'+this.state.cityName+'/company-details' }
                             style={{ textDecoration: 'none' }}
                         >
                             <Typography variant="body1">Реквизиты</Typography>
@@ -627,7 +627,7 @@ export class App extends React.Component {
                                 </Route>
 
                                 <Route
-                                    path='/:cityName/company_details'
+                                    path='/:cityName/company-details'
                                     exact={ true }
                                 >
                                     <Header 
