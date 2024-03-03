@@ -16,6 +16,7 @@ import { PageOferta } from '../pageOferta';
 import { PagePolitika } from '../pagePolitika';
 import { PageLegal } from '../pageLegal';
 import { PagePoliticLegal } from '../pagePoliticLegal';
+import { PageCompanyDetails } from '../companyDetails';
 
 import { HeaderCat } from '../header';
 import { Header } from '../header';
@@ -184,6 +185,12 @@ class StickyFooter extends React.Component{
                         >
                             <Typography variant="body1">Публичная оферта</Typography>
                         </Link>
+                        <Link
+                            to={ '/'+this.state.cityName+'/company_details' }
+                            style={{ textDecoration: 'none' }}
+                        >
+                            <Typography variant="body1">Реквизиты</Typography>
+                        </Link>
 
                         { this.state.is_load && this.state.soc_link && this.state.soc_link.link_allergens.length ?
                             <Link
@@ -262,7 +269,7 @@ class StickyFooter extends React.Component{
                     }
 
                     <Grid item lg={12} md={12} sm={12} xl={12} xs={12} className="copy" style={{ marginTop: 50 }}>
-                        <Typography variant="body1" component="span">2017 - {new Date().getFullYear()} © ООО «Мистер Жако», ИНН: 6321390811</Typography>
+                        <Typography variant="body1" component="span">2017 - {new Date().getFullYear()} © Жако</Typography>
                     </Grid>
                 </Grid>
                 
@@ -618,6 +625,18 @@ export class App extends React.Component {
                                         this_link={this.state.globalState.this_link} />  
                                     <PagePoliticLegal data={this.state.globalState.data} city={this.state.globalState.city} this_link={this.state.globalState.this_link}  />
                                 </Route>
+
+                                <Route
+                                    path='/:cityName/company_details'
+                                    exact={ true }
+                                >
+                                    <Header 
+                                        data={this.state.globalState.data} 
+                                        city={this.state.globalState.city} 
+                                        this_link={this.state.globalState.this_link} />  
+                                    <PageCompanyDetails data={this.state.globalState.data} city={this.state.globalState.city} this_link={this.state.globalState.this_link}  />
+                                </Route>
+
                                 <Route
                                     path='/'
                                     exact={ true }
