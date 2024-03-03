@@ -14,6 +14,9 @@ const { PagePolitika } = require( '../src/components/pagePolitika' );
 
 const { PageLegal } = require( '../src/components/pageLegal' );
 const { PagePoliticLegal } = require( '../src/components/pagePoliticLegal' );
+const { PageCompanyDetails } = require( '../src/components/companyDetails' );
+
+//company_details
 
 module.exports = [
     {
@@ -151,7 +154,13 @@ module.exports = [
         type: '',
         code: 200
     },
-    
+    {
+        path: '/:cityName/company_details',
+        exact: true,
+        component: PageCompanyDetails,
+        type: '',
+        code: 200
+    },
     {
         path: '/sitemap.xml',
         exact: true,
