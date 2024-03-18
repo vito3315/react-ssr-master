@@ -88,6 +88,14 @@ app.use( '*', async ( req, res ) => {
     if( req.originalUrl.split('?')[1] ){
         //ckeck_no_index = true;
     }
+
+    if( req.originalUrl.split('?text')[1] ){
+        req.originalUrl = req.originalUrl.split('?')[0];
+        req.originalUrl = req.originalUrl.split('#')[0];
+
+        res.status( 301 );
+        return res.redirect(req.originalUrl)
+    }
     
     req.originalUrl = req.originalUrl.split('?')[0];
     req.originalUrl = req.originalUrl.split('#')[0];

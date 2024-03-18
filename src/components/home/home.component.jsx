@@ -1477,7 +1477,6 @@ export class Home extends React.Component {
                         this.checkAuthYandex(checkItem[1]);
                     }
 
-
                     
                 }
                 
