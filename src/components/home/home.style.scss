@@ -21,7 +21,7 @@ $colorText: #525252;
     height: 100%;
     background-color: #fff;
     position: sticky; 
-    top: 110px;
+    top: 145px;
     z-index: 1000;
     //padding-top: 10px;
     padding-bottom: 10px;
@@ -69,7 +69,7 @@ $colorText: #525252;
     height: 100%;
     background-color: #fff;
     position: sticky; 
-    top: 60px;
+    top: 95px;
     z-index: 1000;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -225,7 +225,7 @@ $colorText: #525252;
 }
 
 .swiper_mobile{
-    padding-top: 60px!important;
+    padding-top: 95px!important;
     margin-bottom: 20px!important;
     & .swiper-slide-prev{
         //margin-right: 5vw!important;
@@ -244,9 +244,9 @@ $colorText: #525252;
 }
 
 .swiper_pc{
-    margin-top: 60px!important;
+    margin-top: 135px!important;
     @media (min-width: 800px) {
-        margin-top: 100px!important;
+        margin-top: 135px!important;
     }
     margin-bottom: 20px!important;
     & .swiper-slide-prev{

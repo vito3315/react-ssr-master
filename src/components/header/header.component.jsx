@@ -2021,6 +2021,10 @@ export class Header extends React.Component{
                         <OpenBasket openLogin={this.openLogin.bind(this)} />
                         <div style={{ width: '4.51%' }} />
                     </Toolbar>
+
+                    <div className='SubHeaderInvoice'>
+                        <a href={'https://new.jacofood.ru/'}>Попробуйте улучшенную версию сайта</a>
+                    </div>
                 </AppBar>
 
                 <AppBar position="fixed" className='headerNewMobile' id='headerNewMobile' elevation={2} sx={{ display: { xs: 'block', md: 'none' } }}>
@@ -2063,6 +2067,9 @@ export class Header extends React.Component{
                             </SwipeableDrawer>
                         </React.Fragment>
                     </Toolbar>
+                    <div className='SubHeaderInvoiceMobile'>
+                        <a href={'https://new.jacofood.ru/'}>Попробуйте улучшенную версию сайта</a>
+                    </div>
                 </AppBar>
 
                 

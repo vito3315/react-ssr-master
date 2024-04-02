@@ -26,6 +26,48 @@ $colorText: #525252;
         background-color: rgba(0, 0, 0, 0.9);
     }
 }
+
+.SubHeaderInvoiceMobile{
+    height: 35px!important;
+    min-height: 35px!important;
+    width: 100%;
+    background-color: #F9BC23;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 !important;
+    & a{
+        @include fonsNew(1.25rem, $Roboto);
+        font-weight: 400;
+        text-decoration: none;
+        width: 100%;
+        height: 35px;
+        text-align: center;
+        line-height: 35px;
+    }
+}
+
+.SubHeaderInvoice{
+    height: 35px!important;
+    min-height: 35px!important;
+    width: 100%;
+    background-color: #F9BC23;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    & a{
+        @include fonsNew(1.25rem, $Roboto);
+        font-weight: 400;
+        text-decoration: none;
+        width: 100%;
+        height: 35px;
+        text-align: center;
+        line-height: 35px;
+    }
+}
+
 .MuiDrawer-root.MuiDrawer-modal{
     & .MuiDrawer-paper{
         min-width: 80%;
@@ -57,7 +99,7 @@ $colorText: #525252;
 .headerNewMobile{
     z-index: 1200!important;
     background-color: #fff!important;
-    & > div{
+    & > div:not(.SubHeaderInvoiceMobile){
         padding: 0px!important;
         margin: 0px 20px 0px 20px !important;
         display: flex;
