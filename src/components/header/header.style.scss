@@ -38,7 +38,7 @@ $colorText: #525252;
     align-items: center;
     margin: 0 !important;
     & a{
-        @include fonsNew(1.25rem, $Roboto);
+        @include fonsNew(0.85rem, $Roboto);
         font-weight: 400;
         text-decoration: none;
         width: 100%;
