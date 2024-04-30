@@ -1853,7 +1853,7 @@ export class Cart extends React.Component {
             
             let promo_name = this.state.orderPromo;
 
-            if( localStorage.getItem('promo_name') && localStorage.getItem('promo_name').length > 0 && localStorage.getItem('promo_name') != promo_name ){
+            if( localStorage.getItem('promo_name') && localStorage.getItem('promo_name').length > 0 ){
                 promo_name = localStorage.getItem('promo_name')
             }
             
