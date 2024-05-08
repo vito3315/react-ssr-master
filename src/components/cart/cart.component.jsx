@@ -2447,6 +2447,12 @@ export class Cart extends React.Component {
                     <div>
                         <table className="tableCart">
                             <tbody>
+                                <tr className="rowAboutDop">
+                                    <td colSpan='3'>
+                                        <Typography gutterBottom variant="h5" component="span" className="">Блюда могут содержать ингредиенты, обладающие аллергенными свойствами. Если у вас есть аллергия на какой-либо продукт, пожалуйста, уточняйте состав в меню или на кассе. Обратите внимание, что мы не можем исключить или заменить ингредиенты, но с удовольствием поможем выбрать блюдо с подходящим составом.</Typography>
+                                    </td>
+                                </tr>
+
                                 {this.state.cartItems_main.map((item, key) =>
                                     <CartItem key={key} item={item} type="item" firebaseAnalitic={this.firebaseAnalitic} />
                                 )}
